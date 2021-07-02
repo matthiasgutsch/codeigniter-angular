@@ -1,0 +1,41 @@
+
+<div class="sidebar">
+  <div class="openbtn" (click)="flag = !flag">
+    <i class="pi pi-inbox"></i>
+  </div>
+
+  <ul class="user-menu">
+    <li>
+      <span title="{{utente?.username}}" class="profile-name">{{iniziale}}</span>
+    </li>
+
+    <li role="menuitem" class="logout">
+      <strong><i class="pi pi-sign-in" (click)="logout()"></i></strong>
+    </li>
+  </ul>
+</div>
+
+<div class="sidebar-main"  id="mySidebar open" >
+
+  <div class="title-wrapper">
+    <h3 routerLink="/">PhisioLab</h3>
+  </div>
+
+  <ul>
+    <li><a routerLink="./" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
+    </li>
+    <li><a routerLink="./blogs" routerLinkActive="active">Blogs</a></li>
+    <li><a routerLink="./categories" routerLinkActive="active">Categories</a></li>
+    <li><a routerLink="./pages" routerLinkActive="active">Pages</a></li>
+    <li><a [routerLink]="['/login']">Logout</a></li>
+  </ul>
+</div>
+
+
+
+      <div class="main close">
+
+          <router-outlet></router-outlet>
+      </div>
+
+ 
