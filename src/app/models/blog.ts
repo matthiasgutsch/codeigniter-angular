@@ -8,4 +8,6 @@ export class Blog {
     is_featured: boolean;
     is_active: boolean;
     created_at: Date;
+    date: string;
+
 }

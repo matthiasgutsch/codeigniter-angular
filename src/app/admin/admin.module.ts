@@ -21,6 +21,12 @@ import {DropdownModule} from 'primeng/dropdown';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {CheckboxModule} from 'primeng/checkbox';
 import {InputSwitchModule} from 'primeng/inputswitch';
+import {RadioButtonModule} from 'primeng/radiobutton';
+import {FileUploadModule} from 'primeng/fileupload';
+import {HttpClientModule} from '@angular/common/http';
+import {FullCalendarModule} from 'primeng/fullcalendar';
+import {CalendarModule} from 'primeng/calendar';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +48,12 @@ import {InputSwitchModule} from 'primeng/inputswitch';
     InputTextModule,
     AdminRoutingModule,
     DialogModule,
+    RadioButtonModule,
+    CalendarModule,
     DropdownModule,
+    HttpClientModule,
+    FileUploadModule,
+    FullCalendarModule,
     ButtonModule,
     InputSwitchModule,
     AutoCompleteModule,

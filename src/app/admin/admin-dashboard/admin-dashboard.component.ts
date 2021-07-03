@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import {FullCalendar} from 'primeng/fullcalendar';
+import { BlogService } from '../../services/blog.service';
+import { Blog } from '../../models/blog';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -7,9 +13,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminDashboardComponent implements OnInit {
 
-  constructor() { }
+  options: any;
+  events: any;
+  blogs: Blog;
+  error: string;
+
+
+  constructor(private blogService: BlogService) {
+
+    this.events = this.blogs;
+
+   }
 
   ngOnInit() {
+
+    this.blogService.getBlogs().subscribe(
+      (data: Blog) => this.blogs = data,
+      error => this.error = error
+    );
+
+
+    this.options = {
+      plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+      defaultDate: '2021-02-01',
+      header: {
+          left: 'prev,next',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      },
+      editable: true
+  };
+   
   }
 
 }

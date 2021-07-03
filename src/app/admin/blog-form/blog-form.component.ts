@@ -27,6 +27,7 @@ export class BlogFormComponent implements OnInit {
   categories: Category;
   category: Category;
   checked: boolean = true;
+  selectedValue: string;
 
   blogForm: FormGroup;
 
@@ -73,6 +74,8 @@ export class BlogFormComponent implements OnInit {
             category_id: res.category_id,
             is_featured: res.is_featured,
             is_active: res.is_active,
+            date: res.date,
+
             id: res.id
           });
           this.imagePath = res.image;
@@ -130,6 +133,7 @@ export class BlogFormComponent implements OnInit {
     formData.append('category_id', this.blogForm.get('category_id').value);
     formData.append('is_active', this.blogForm.get('is_active').value);
     formData.append('image', this.blogForm.get('image').value);
+    formData.append('date', this.blogForm.get('date').value);
 
     const id = this.blogForm.get('id').value;
 

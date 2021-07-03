@@ -9,6 +9,9 @@
           </div>
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
+              <input type="text" [style]="{ width: '100%' }" pInputText formControlName="title" placeholder="Title" required />
+
+              
               <input type="text" formControlName="username" class="form-control" placeholder="Username" required>
               <div *ngIf="username.invalid && (username.dirty || username.touched)" class="error">
                 <div *ngIf="username.errors">
