@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from '../../services/blog.service';
 import { Blog } from '../../models/blog';
+import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'app-manage-blogs',
@@ -18,7 +19,7 @@ export class ManageBlogsComponent implements OnInit {
     this.productDialog = true;
 }
 
-  constructor(private blogService: BlogService) { }
+  constructor(private blogService: BlogService, private confirmationService: ConfirmationService,) { }
 
   ngOnInit() {
     this.blogService.getBlogs().subscribe(
@@ -37,16 +38,25 @@ hideDialog() {
   this.productDialog = false;
 }
 
-  onDelete(id: number) {
-    if (confirm('Are you sure want to delete it = ' + id)) {
-      this.blogService.deleteBlog(+id).subscribe(
-        res => {
-          console.log(res);
-          this.ngOnInit();
-        },
-        error => this.error = error
-      );
-    }
+  onDelete(id: number, title: string) {
+
+    this.confirmationService.confirm({
+      message: 'Are you sure want to delete it = ' + id,
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.blogService.deleteBlog(+id).subscribe(
+          res => {
+            console.log(res);
+            this.ngOnInit();
+          },
+          error => this.error = error
+        );
+      },
+     
+  });
+
+   
   }
 
 }

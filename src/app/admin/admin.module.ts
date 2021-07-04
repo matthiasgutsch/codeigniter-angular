@@ -29,8 +29,8 @@ import {CalendarModule} from 'primeng/calendar';
 import { MomentPipe } from './pipe/moment.pipe';
 import {InputMaskModule} from 'primeng/inputmask';
 import { CategoryFormComponent } from './category-form/category-form.component';
-
-
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 @NgModule({
   declarations: [
     AdminDashboardComponent,
@@ -52,6 +52,7 @@ import { CategoryFormComponent } from './category-form/category-form.component';
     CheckboxModule,
     EditorModule,
     InputMaskModule,
+    ConfirmDialogModule,
     InputTextModule,
     AdminRoutingModule,
     DialogModule,
@@ -65,6 +66,7 @@ import { CategoryFormComponent } from './category-form/category-form.component';
     InputSwitchModule,
     AutoCompleteModule,
     SidebarModule
-  ]
+  ],
+  providers: [ConfirmationService]
 })
 export class AdminModule { }

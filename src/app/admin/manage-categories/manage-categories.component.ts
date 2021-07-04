@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../../services/categories.service';
 import { Category } from '../../models/category';
+import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'app-manage-categories',
@@ -14,7 +15,7 @@ export class ManageCategoriesComponent implements OnInit {
   error: string;
 
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService, private confirmationService: ConfirmationService,) { }
 
   ngOnInit() {
     this.categoryService.getCategories().subscribe(
@@ -30,15 +31,24 @@ export class ManageCategoriesComponent implements OnInit {
 
 
 onDelete(id: number) {
-  if (confirm('Are you sure want to delete it = ' + id)) {
-    this.categoryService.deleteCategory(+id).subscribe(
-      res => {
-        console.log(res);
-        this.ngOnInit();
+
+  this.confirmationService.confirm({
+    message: 'Are you sure want to delete it = ' + id,
+    header: 'Confirmation',
+    icon: 'pi pi-exclamation-triangle',
+    accept: () => {
+      this.categoryService.deleteCategory(+id).subscribe(
+        res => {
+          console.log(res);
+          this.ngOnInit();
+        },
+        error => this.error = error
+        );
       },
-      error => this.error = error
-    );
+     
+  });
+
+   
   }
-}
 
 }
