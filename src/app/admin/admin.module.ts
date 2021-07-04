@@ -27,6 +27,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {FullCalendarModule} from 'primeng/fullcalendar';
 import {CalendarModule} from 'primeng/calendar';
 import { MomentPipe } from './pipe/moment.pipe';
+import {InputMaskModule} from 'primeng/inputmask';
+import { CategoryFormComponent } from './category-form/category-form.component';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { MomentPipe } from './pipe/moment.pipe';
     ManageCategoriesComponent,
     ManagePagesComponent,
     MomentPipe,
-    BlogFormComponent
+    BlogFormComponent,
+    CategoryFormComponent
+
   ],
   imports: [
     CommonModule,
@@ -47,6 +51,7 @@ import { MomentPipe } from './pipe/moment.pipe';
     FormsModule,
     CheckboxModule,
     EditorModule,
+    InputMaskModule,
     InputTextModule,
     AdminRoutingModule,
     DialogModule,

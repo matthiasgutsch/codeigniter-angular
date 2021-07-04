@@ -21,26 +21,26 @@ export class CategoryService {
     );
   }
 
-  getBlog(id: number) {
-    return this.http.get<Blog>(this.serverUrl + 'api/adminBlog/' + id).pipe(
+  getCategory(id: number) {
+    return this.http.get<Category>(this.serverUrl + 'api/adminCategory/' + id).pipe(
       catchError(this.handleError)
     );
   }
 
-  createBlog(blog) {
-    return this.http.post<any>(this.serverUrl + 'api/createBlog', blog).pipe(
+  createCategory(category) {
+    return this.http.post<any>(this.serverUrl + 'api/createCategory', category).pipe(
       catchError(this.handleError)
     );
   }
 
-  updateBlog(blog, id: number) {
-    return this.http.post<any>(this.serverUrl + 'api/updateBlog/' + id, blog).pipe(
+  updateCategory(category, id: number) {
+    return this.http.post<any>(this.serverUrl + 'api/updateCategory/' + id, category).pipe(
       catchError(this.handleError)
     );
   }
 
-  deleteBlog(id: number) {
-    return this.http.delete(this.serverUrl + 'api/deleteBlog/' + id).pipe(
+  deleteCategory(id: number) {
+    return this.http.delete(this.serverUrl + 'api/deleteCategory/' + id).pipe(
       catchError(this.handleError)
     );
   }

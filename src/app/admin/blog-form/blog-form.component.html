@@ -29,6 +29,7 @@
       <div class="p-field p-grid">
         <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Date <span class="required">*</span></label>
         <div class="p-col-12 p-md-10">
+          
           <p-calendar formControlName="date" [(ngModel)]="selectedDate" dateFormat="yy-mm-dd" appendTo="body"
            [locale]="lang_it"
           ></p-calendar>
@@ -38,70 +39,100 @@
 
 
 
-    
-    <div class="form-group form-row">
-      <label class="col-md-3">Is Featured</label>
-      <div class="col-md-9">
-        <input type="radio" formControlName="is_featured" value="1" /> Yes
-        <input type="radio" formControlName="is_featured" value="0" /> No
-      </div>
-    </div>
-    <div class="form-group form-row">
-      <label class="col-md-3">Is Active</label>
-      <div class="col-md-9">
-        
-        <input type="radio" formControlName="is_active" value="1" /> Yes
-        <input type="radio" formControlName="is_active" value="0" /> No
-      </div>
-    </div>
-    <div class="form-group form-row">
-      <label class="col-md-3">Upload Image</label>
-      <div class="col-md-9">
-        <input #myInput type="file" id="image" (change)="onSelectedFile($event)" />
-        <div [innerHTML]="uploadError" class="error"></div>
-        <div *ngIf="imagePath">
-          <br />
-          <span class="image-container">
-            <img [src]="imagePath" width="300px">
-            <button type="button" class="imgcancel" (click)="removeImageFile($event)">
-                X
-            </button>
-          </span>
+    <div class="p-fluid">
+      <div class="p-field p-grid">
+        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Is Featured <span class="required">*</span></label>
+        <div class="p-col-12 p-md-10">
+          <input type="radio" formControlName="is_featured" value="1" /> Yes
+          <input type="radio" formControlName="is_featured" value="0" /> No
         </div>
       </div>
     </div>
 
-    
-    
-    <div class="form-group form-row">
-      <label class="col-md-3">Categoria <span class="required">*</span></label>
-      <div class="col-md-9">
 
-        <p-dropdown [options]="categories"    [style]="{ width: '100%' }"  [(ngModel)]="selectedCategories" formControlName="category_id" optionLabel="name" optionValue="name"></p-dropdown>
 
+
+    <div class="p-fluid">
+      <div class="p-field p-grid">
+        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Is Active <span class="required">*</span></label>
+        <div class="p-col-12 p-md-10">
+          <input type="radio" formControlName="is_active" value="1" /> Yes
+          <input type="radio" formControlName="is_active" value="0" /> No
+        </div>
       </div>
     </div>
 
 
-    <div class="form-group form-row">
-      <label class="col-md-3">Description <span class="required">*</span></label>
-      <div class="col-md-9">
+    <div class="p-fluid">
+      <div class="p-field p-grid">
+        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Upload Image <span class="required">*</span></label>
+        <div class="p-col-12 p-md-10">
+          <input #myInput type="file" id="image" (change)="onSelectedFile($event)" />
+          <div [innerHTML]="uploadError" class="error"></div>
+          <div *ngIf="imagePath">
+            <br />
+            <span class="image-container">
+              <img [src]="imagePath" width="300px">
 
-        <p-editor formControlName="description" [style]="{'height':'320px'}">
-          
-        </p-editor>
-        <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error">
-          <div *ngIf="description.errors">
-            Description is required.
+              <button
+        pButton
+        pRipple
+        icon="pi pi-trash"
+        class="imgcancel p-button p-button-primary p-mr-2"
+        (click)="removeImageFile($event)"
+      ></button>
+            </span>
           </div>
         </div>
       </div>
     </div>
+
+
+    
+    
+
+
+    <div class="p-fluid">
+      <div class="p-field p-grid">
+        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Categoria <span class="required">*</span></label>
+        <div class="p-col-12 p-md-10">
+          <p-dropdown [options]="categories" [style]="{ width: '100%' }"  [(ngModel)]="selectedCategories" formControlName="category_id" optionLabel="name" optionValue="name"></p-dropdown>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="p-fluid">
+      <div class="p-field p-grid">
+        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Description <span class="required">*</span></label>
+        <div class="p-col-12 p-md-10">
+          <p-editor formControlName="description" [style]="{'height':'320px'}">
+          
+          </p-editor>
+          <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error">
+            <div *ngIf="description.errors">
+              Description is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  
     <div class="form-group form-row">
       <label class="col-md-3"></label>
       <div class="col-md-9">
         <input type="hidden" formControlName="id">
-        <button type="submit" [disabled]="!blogForm.valid" class="btn btn-primary">Save</button>
+        <button
+        pButton
+        pRipple
+        label="save"
+        class="p-button p-button-success p-mr-2"
+        [disabled]="!blogForm.valid" 
+        ></button>
+
       </div>
     </div>
   </form>

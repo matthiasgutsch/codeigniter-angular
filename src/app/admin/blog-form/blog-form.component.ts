@@ -29,16 +29,16 @@ export class BlogFormComponent implements OnInit {
   category: Category;
   checked: boolean = true;
   selectedValue: string;
-  selectedDate;
 
   blogForm: FormGroup;
 
   cities: Blog[];
   format1: string = "";
   format2: string = "";
-  date: Date;
   selectedCity: Blog;
-  selectedCategories: string;
+  selectedCategories: Category;
+  selectedDate: Date;
+  date: Date;
 
   constructor(
     private fb: FormBuilder,
@@ -48,9 +48,9 @@ export class BlogFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) { 
-
-
-     this.selectedDate = new Date();
+    if (this.date) {
+      this.selectedDate = new Date(this.date);
+    }
   }
 
   ngOnInit() {

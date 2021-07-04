@@ -13,7 +13,7 @@ export class ManageCategoriesComponent implements OnInit {
   category: Category;
   error: string;
 
-  
+
   constructor(private categoryService: CategoryService) { }
 
   ngOnInit() {
@@ -22,5 +22,23 @@ export class ManageCategoriesComponent implements OnInit {
       error => this.error = error
     );
   }
+
+
+  editProduct(category: Category) {
+    this.category = {...category};
+}
+
+
+onDelete(id: number) {
+  if (confirm('Are you sure want to delete it = ' + id)) {
+    this.categoryService.deleteCategory(+id).subscribe(
+      res => {
+        console.log(res);
+        this.ngOnInit();
+      },
+      error => this.error = error
+    );
+  }
+}
 
 }

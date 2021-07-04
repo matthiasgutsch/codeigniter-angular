@@ -3,7 +3,7 @@
     <h1>{{title}}</h1>
   </div>
   <div class="dash-nav">
-    <a [routerLink]="['/admin/blogs/create']" class="btn btn-success">Add Post</a>
+    <a [routerLink]="['/admin/categories/create']" class="btn btn-success">Add Post</a>
   </div>
 </div>
 
@@ -43,7 +43,7 @@
       pRipple
       icon="pi pi-trash"
       class="p-button p-button-danger p-mr-2"
-      (click)="onDelete(blog.id)"
+      (click)="onDelete(category.id)"
     ></button>
          
 

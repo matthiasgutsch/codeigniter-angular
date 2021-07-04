@@ -35,13 +35,11 @@ export class AdminDashboardComponent implements OnInit {
 
     this.options = {
       plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-      defaultDate: '2021-02-01',
       header: {
-          left: 'prev,next',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        left: 'title',
+          right: 'prev,next',
       },
-      editable: true
+      editable: false
   };
    
   }
