@@ -16,31 +16,31 @@ export class CategoryService {
   constructor(private http: HttpClient) { }
 
   getCategories() {
-    return this.http.get<Category>(this.serverUrl + 'api/adminCategories').pipe(
+    return this.http.get<Category>(this.serverUrl + 'category/adminCategories').pipe(
       catchError(this.handleError)
     );
   }
 
   getCategory(id: number) {
-    return this.http.get<Category>(this.serverUrl + 'api/adminCategory/' + id).pipe(
+    return this.http.get<Category>(this.serverUrl + 'category/adminCategory/' + id).pipe(
       catchError(this.handleError)
     );
   }
 
   createCategory(category) {
-    return this.http.post<any>(this.serverUrl + 'api/createCategory', category).pipe(
+    return this.http.post<any>(this.serverUrl + 'category/createCategory', category).pipe(
       catchError(this.handleError)
     );
   }
 
   updateCategory(category, id: number) {
-    return this.http.post<any>(this.serverUrl + 'api/updateCategory/' + id, category).pipe(
+    return this.http.post<any>(this.serverUrl + 'category/updateCategory/' + id, category).pipe(
       catchError(this.handleError)
     );
   }
 
   deleteCategory(id: number) {
-    return this.http.delete(this.serverUrl + 'api/deleteCategory/' + id).pipe(
+    return this.http.delete(this.serverUrl + 'category/deleteCategory/' + id).pipe(
       catchError(this.handleError)
     );
   }

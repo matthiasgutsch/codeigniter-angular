@@ -10,7 +10,7 @@
 
 
 
-<p-table [value]="blogs" [paginator]="true" [rows]="6" [showCurrentPageReport]="true">
+<p-table [value]="blogs" [paginator]="true" [rows]="6" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
   <ng-template pTemplate="header">
     <tr>
       <th>#ID</th>

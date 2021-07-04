@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://api.typopress.it/index.php/'
+  baseUrl: 'https://api.typopress.it/'
 };
 
 /*

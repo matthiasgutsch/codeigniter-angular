@@ -26,7 +26,10 @@
       <label class="col-md-3"></label>
       <div class="col-md-9">
         <input type="hidden" formControlName="id">
-        <button type="submit" [disabled]="!categoryForm.valid" class="btn btn-primary">Save</button>
+        <button  pButton
+        pRipple
+        label="salva"
+        class="p-button p-button-success p-mr-2" type="submit" [disabled]="!categoryForm.valid"></button>
       </div>
     </div>
   </form>
