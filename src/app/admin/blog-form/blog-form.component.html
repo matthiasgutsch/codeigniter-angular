@@ -71,7 +71,7 @@
           <div [innerHTML]="uploadError" class="error"></div>
           <div *ngIf="imagePath">
             <br />
-            <span class="image-container">
+            <span class="image-container" *ngIf="!image">
               <img [src]="imagePath" width="300px">
 
               <button
