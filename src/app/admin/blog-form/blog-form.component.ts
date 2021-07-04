@@ -8,6 +8,7 @@ import { Category } from '../../models/category';
 import {FormControl} from '@angular/forms';
 import { CategoryService } from '../../services/categories.service';
 import { SelectItem } from "primeng/api";
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-blog-form',
@@ -28,11 +29,14 @@ export class BlogFormComponent implements OnInit {
   category: Category;
   checked: boolean = true;
   selectedValue: string;
+  selectedDate;
 
   blogForm: FormGroup;
 
   cities: Blog[];
-
+  format1: string = "";
+  format2: string = "";
+  date: Date;
   selectedCity: Blog;
   selectedCategories: string;
 
@@ -43,10 +47,13 @@ export class BlogFormComponent implements OnInit {
 
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) { 
+
+
+     this.selectedDate = new Date();
+  }
 
   ngOnInit() {
-
 
     this.blogService.getBlogs().subscribe(
       (data: Blog) => this.blogs = data,
@@ -75,7 +82,6 @@ export class BlogFormComponent implements OnInit {
             is_featured: res.is_featured,
             is_active: res.is_active,
             date: res.date,
-
             id: res.id
           });
           this.imagePath = res.image;
@@ -92,7 +98,8 @@ export class BlogFormComponent implements OnInit {
       is_featured: ['0'],
       category_id: [''],
       is_active: ['0'],
-      image: ['']
+      image: [''],
+      date: ['']
     });
   }
 

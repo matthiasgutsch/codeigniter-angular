@@ -26,6 +26,7 @@ import {FileUploadModule} from 'primeng/fileupload';
 import {HttpClientModule} from '@angular/common/http';
 import {FullCalendarModule} from 'primeng/fullcalendar';
 import {CalendarModule} from 'primeng/calendar';
+import { MomentPipe } from './pipe/moment.pipe';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import {CalendarModule} from 'primeng/calendar';
     ManageBlogsComponent,
     ManageCategoriesComponent,
     ManagePagesComponent,
+    MomentPipe,
     BlogFormComponent
   ],
   imports: [

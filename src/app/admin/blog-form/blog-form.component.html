@@ -29,7 +29,9 @@
       <div class="p-field p-grid">
         <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Date <span class="required">*</span></label>
         <div class="p-col-12 p-md-10">
-          <p-calendar formControlName="date" dateFormat="yy-mm-dd"></p-calendar>
+          <p-calendar formControlName="date" [(ngModel)]="selectedDate" dateFormat="yy-mm-dd" appendTo="body"
+           [locale]="lang_it"
+          ></p-calendar>
         </div>
       </div>
     </div>
