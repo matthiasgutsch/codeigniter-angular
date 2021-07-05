@@ -6,7 +6,7 @@
 
   <ul class="user-menu">
     <li>
-      <span title="{{utente?.username}}" class="profile-name">{{iniziale}}</span>
+      <span title="{{utente?.username}}" class="profile-name">{{currentUser}}</span>
     </li>
 
     <li role="menuitem" class="logout">
@@ -16,7 +16,7 @@
 </div>
 
 <div class="sidebar-main"  id="mySidebar open" >
-
+  {{currentUser}}
   <div class="title-wrapper">
     <h3 routerLink="/">CMS</h3>
   </div>
