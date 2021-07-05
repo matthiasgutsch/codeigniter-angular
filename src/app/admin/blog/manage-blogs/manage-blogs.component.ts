@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogService } from '../../services/blog.service';
-import { Blog } from '../../models/blog';
+import { BlogService } from '../../../services/blog.service';
+import { Blog } from '../../../models/blog';
 import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'app-manage-blogs',
-  templateUrl: './manage-blogs.component.html',
-  styleUrls: ['./manage-blogs.component.css']
+  templateUrl: './manage-blogs.component.html'
 })
 export class ManageBlogsComponent implements OnInit {
   title = 'Manage Blogs';

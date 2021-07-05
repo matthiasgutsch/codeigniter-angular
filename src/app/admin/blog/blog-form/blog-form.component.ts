@@ -1,19 +1,18 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { BlogService } from '../../services/blog.service';
+import { BlogService } from '../../../services/blog.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
-import { Blog } from '../../models/blog';
-import { Category } from '../../models/category';
+import { Blog } from '../../../models/blog';
+import { Category } from '../../../models/category';
 import {FormControl} from '@angular/forms';
-import { CategoryService } from '../../services/categories.service';
+import { CategoryService } from '../../../services/categories.service';
 import { SelectItem } from "primeng/api";
 import * as moment from 'moment';
 
 @Component({
   selector: 'app-blog-form',
-  templateUrl: './blog-form.component.html',
-  styleUrls: ['./blog-form.component.css']
+  templateUrl: './blog-form.component.html'
 })
 export class BlogFormComponent implements OnInit {
   @ViewChild("myInput",{static:false}) myInputVariable: ElementRef;
