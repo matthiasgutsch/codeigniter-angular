@@ -70,7 +70,7 @@
                     <div [innerHTML]="uploadError" class="error"></div>
                     <div *ngIf="imagePath">
                         <br />
-                        <span class="image-container" *ngIf="imagePath === '0'">
+                        <span class="image-container" *ngIf="!imagePath == ''">
               <img [src]="imagePath" width="300px">
 
               <button pButton pRipple icon="pi pi-trash" class="imgcancel p-button p-button-primary p-mr-2"
