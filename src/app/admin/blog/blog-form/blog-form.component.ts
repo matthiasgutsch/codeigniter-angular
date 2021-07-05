@@ -95,7 +95,7 @@ export class BlogFormComponent implements OnInit {
       title: ['', Validators.required],
       description: ['', Validators.required],
       is_featured: ['0'],
-      category_id: [''],
+      category_id: ['', Validators.required],
       is_active: ['0'],
       image: [''],
       date: ['']

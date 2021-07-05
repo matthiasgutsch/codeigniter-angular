@@ -70,7 +70,7 @@
                     <div [innerHTML]="uploadError" class="error"></div>
                     <div *ngIf="imagePath">
                         <br />
-                        <span class="image-container" *ngIf="!image">
+                        <span class="image-container" *ngIf="imagePath === '0'">
               <img [src]="imagePath" width="300px">
 
               <button pButton pRipple icon="pi pi-trash" class="imgcancel p-button p-button-primary p-mr-2"
@@ -90,7 +90,13 @@
             <div class="p-field p-grid">
                 <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Categoria <span class="required">*</span></label>
                 <div class="p-col-12 p-md-10">
-                    <p-dropdown [options]="categories" [style]="{ width: '100%' }" [(ngModel)]="selectedCategories" formControlName="category_id" optionLabel="name" optionValue="name"></p-dropdown>
+                    <p-dropdown [options]="categories" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedCategories" formControlName="category_id" optionLabel="name" optionValue="name"></p-dropdown>
+
+                    <div *ngIf="categories.invalid && (categories.dirty || categories.touched)" class="error">
+                      <div *ngIf="categories.errors">
+                          Title is required.
+                      </div>
+                  </div>
 
                 </div>
             </div>
