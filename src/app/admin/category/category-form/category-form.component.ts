@@ -58,6 +58,7 @@ export class CategoryFormComponent implements OnInit {
         res => {
           this.categoryForm.patchValue({
             category_name: res.category_name,
+            category_description: res.category_description,
             id: res.id
           });
           
@@ -69,19 +70,25 @@ export class CategoryFormComponent implements OnInit {
 
     this.categoryForm = this.fb.group({
       id: [''],
-      category_name: ['', Validators.required]
+      category_name: ['', Validators.required],
+      category_description: ['', Validators.required]
+
     });
   }
 
 
   get category_name() {
     return this.categoryForm.get('category_name');
+    return this.categoryForm.get('category_description');
+
   }
 
 
   onSubmit() {
     const formData = new FormData();
     formData.append('category_name', this.categoryForm.get('category_name').value);
+    formData.append('category_description', this.categoryForm.get('category_description').value);
+
     const id = this.categoryForm.get('id').value;
 
     if (id) {
