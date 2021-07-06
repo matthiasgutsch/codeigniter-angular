@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
 import { Blog } from '../../../models/blog';
 import { Category } from '../../../models/category';
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { CategoryService } from '../../../services/categories.service';
 import { SelectItem } from "primeng/api";
 import * as moment from 'moment';
@@ -14,7 +14,7 @@ import * as moment from 'moment';
   templateUrl: './category-form.component.html'
 })
 export class CategoryFormComponent implements OnInit {
-  @ViewChild("myInput",{static:false}) myInputVariable: ElementRef;
+  @ViewChild("myInput", { static: false }) myInputVariable: ElementRef;
 
   pageTitle: string;
   error: string;
@@ -42,7 +42,7 @@ export class CategoryFormComponent implements OnInit {
 
     private router: Router,
     private route: ActivatedRoute
-  ) { 
+  ) {
     if (this.date) {
       this.selectedDate = new Date(this.date);
     }
@@ -61,7 +61,7 @@ export class CategoryFormComponent implements OnInit {
             category_description: res.category_description,
             id: res.id
           });
-          
+
         }
       );
     } else {
