@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BlogService } from '../../../services/blog.service';
 import { Blog } from '../../../models/blog';
 import {ConfirmationService} from 'primeng/api';
+import { CategoryService } from '../../../services/categories.service';
+import { Category } from '../../../models/category';
 
 @Component({
   selector: 'app-manage-blogs',
@@ -11,20 +13,28 @@ export class ManageBlogsComponent implements OnInit {
   title = 'Manage Blogs';
   blogs: Blog;
   blog: Blog;
-
+  categories: Category;
+  category: Category;
   error: string;
   productDialog:boolean = false;
   showDialog() {
     this.productDialog = true;
 }
 
-  constructor(private blogService: BlogService, private confirmationService: ConfirmationService,) { }
+  constructor(private blogService: BlogService, private categoryService: CategoryService, private confirmationService: ConfirmationService,) { }
 
   ngOnInit() {
     this.blogService.getBlogs().subscribe(
       (data: Blog) => this.blogs = data,
       error => this.error = error
     );
+
+
+    this.categoryService.getCategories().subscribe(
+      (data: Category) => this.categories = data,
+      error => this.error = error
+    );
+
   }
 
   editProduct(blog: Blog) {

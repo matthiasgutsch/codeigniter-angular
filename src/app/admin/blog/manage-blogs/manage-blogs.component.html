@@ -37,7 +37,9 @@
     <ng-template pTemplate="body" let-blog>
         <tr>
             <td>{{blog.id}}</td>
-            <td>{{blog.category_id}}</td>
+            <td><div *ngFor="let data of categories; let i = index"> 
+               {{data.name}} {{blog.category_id}}
+            </div> </td>
             <td>{{blog.title}}</td>
 
             <td>{{blog.date}}</td>

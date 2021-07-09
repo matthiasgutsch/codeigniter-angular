@@ -90,7 +90,7 @@
             <div class="p-field p-grid">
                 <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Categoria <span class="required">*</span></label>
                 <div class="p-col-12 p-md-10">
-                    <p-dropdown [options]="categories" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedCategories" formControlName="category_id" optionLabel="name" optionValue="name"></p-dropdown>
+                    <p-dropdown [options]="categories" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedCategories" formControlName="category_id" optionLabel="name" optionValue="id"></p-dropdown>
 
                     <div *ngIf="categories.invalid && (categories.dirty || categories.touched)" class="error">
                       <div *ngIf="categories.errors">
