@@ -3,6 +3,7 @@ export class Category {
     category_name: string;
     category_description: string;
     category_address: string;
+    category_region: string;
 
   constructor() {
 

@@ -13,7 +13,7 @@
 
 
 
-<p-table #dt1 [value]="categories"  [globalFilterFields]="['name','address','category.name']" [paginator]="true" [rows]="6" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+<p-table #dt1 [value]="categories"  [globalFilterFields]="['name','address','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
     <ng-template pTemplate="caption">
         <div class="p-d-flex">
             <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/categories/create']" label="Add Post" class="p-button p-button-danger p-mr-2"></button> <span class="p-input-icon-left p-ml-auto">
@@ -29,6 +29,7 @@
             <th>#ID</th>
             <th>Name</th>
             <th>Address</th>
+            <th>Regione</th>
 
             <th></th>
         </tr>
@@ -38,6 +39,7 @@
             <td>{{category.id}}</td>
             <td>{{category.name}}</td>
             <td>{{category.address}}</td>
+            <td>{{category.region}}</td>
 
             <td class="action">
                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/categories/edit', category.id]"></button>
