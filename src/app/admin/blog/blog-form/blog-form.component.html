@@ -11,14 +11,10 @@
             <div class="p-field p-grid">
                 <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Title <span class="required">*</span></label>
                 <div class="p-col-12 p-md-10">
-                    <input type="text" [style]="{ width: '100%' }" pInputText formControlName="title" placeholder="Title" required />
-
-
-                    <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
-                        <div *ngIf="title.errors">
-                            Title is required.
-                        </div>
-                    </div>
+                    <p-dropdown [options]="typeList" filter="true"  placeholder="Tipo Intervento" inputStyleClass="selectpicker"
+                     formControlName="title" [style]="{ width: '100%' }">
+                    </p-dropdown>
+                 
                 </div>
             </div>
         </div>

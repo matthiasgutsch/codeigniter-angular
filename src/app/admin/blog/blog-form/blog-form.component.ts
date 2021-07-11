@@ -9,6 +9,7 @@ import {FormControl} from '@angular/forms';
 import { CategoryService } from '../../../services/categories.service';
 import { SelectItem } from "primeng/api";
 import * as moment from 'moment';
+import { TYPE_LIST } from '../../constants/constants';
 
 @Component({
   selector: 'app-blog-form',
@@ -30,6 +31,7 @@ export class BlogFormComponent implements OnInit {
   selectedValue: string;
 
   blogForm: FormGroup;
+  typeList: any[];
 
   cities: Blog[];
   format1: string = "";
@@ -50,6 +52,9 @@ export class BlogFormComponent implements OnInit {
     if (this.date) {
       this.selectedDate = new Date(this.date);
     }
+
+    this.typeList = TYPE_LIST;
+
   }
 
   ngOnInit() {

@@ -25,6 +25,17 @@ export const LINGUE_ITEMS: SelectItem[] = [
 
 ];
 
+
+
+export const TYPE_LIST: SelectItem[] = [
+  { label: "Tutte", value: null },
+  { label: "Visita", value: "Visita" },
+  { label: "Intervento", value: "Intervento" },
+  { label: "Visita di controllo", value: "Visita di controllo" }
+];
+
+
+
 export const PAESI_IT: SelectItem[] = [
   { label: "paese", value: null },
   { label: "Italia", value: "Italia" },

@@ -18,6 +18,7 @@ export class ManageBlogsComponent implements OnInit {
   error: string;
   private category_id: number;
   private id: number;
+
   productDialog:boolean = false;
   showDialog() {
     this.productDialog = true;
