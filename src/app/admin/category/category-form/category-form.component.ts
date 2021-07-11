@@ -8,6 +8,7 @@ import { FormControl } from '@angular/forms';
 import { CategoryService } from '../../../services/categories.service';
 import { SelectItem } from "primeng/api";
 import * as moment from 'moment';
+import { COLORI_ITEMS, LINGUE_ITEMS } from 'src/app/admin/constants/constants';
 
 @Component({
   selector: 'app-category-form',
@@ -27,6 +28,7 @@ export class CategoryFormComponent implements OnInit {
   selectedValue: string;
 
   categoryForm: FormGroup;
+  lingueItems: any[];
 
   cities: Blog[];
   format1: string = "";
@@ -46,6 +48,9 @@ export class CategoryFormComponent implements OnInit {
     if (this.date) {
       this.selectedDate = new Date(this.date);
     }
+
+    this.lingueItems = LINGUE_ITEMS;
+
   }
 
   ngOnInit() {
@@ -58,6 +63,7 @@ export class CategoryFormComponent implements OnInit {
         res => {
           this.categoryForm.patchValue({
             category_name: res.category_name,
+            category_address: res.category_address,
             category_description: res.category_description,
             id: res.id
           });
@@ -71,7 +77,8 @@ export class CategoryFormComponent implements OnInit {
     this.categoryForm = this.fb.group({
       id: [''],
       category_name: ['', Validators.required],
-      category_description: ['', Validators.required]
+      category_address: ['', Validators.required],
+      category_description: ['']
 
     });
   }
@@ -87,6 +94,7 @@ export class CategoryFormComponent implements OnInit {
   onSubmit() {
     const formData = new FormData();
     formData.append('category_name', this.categoryForm.get('category_name').value);
+    formData.append('category_address', this.categoryForm.get('category_address').value);
     formData.append('category_description', this.categoryForm.get('category_description').value);
 
     const id = this.categoryForm.get('id').value;

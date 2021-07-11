@@ -28,6 +28,8 @@
         <tr>
             <th>#ID</th>
             <th>Name</th>
+            <th>Address</th>
+
             <th></th>
         </tr>
     </ng-template>
@@ -35,6 +37,7 @@
         <tr>
             <td>{{category.id}}</td>
             <td>{{category.name}}</td>
+            <td>{{category.address}}</td>
 
             <td class="action">
                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/categories/edit', category.id]"></button>

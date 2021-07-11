@@ -37,7 +37,7 @@
     <ng-template pTemplate="body" let-blog>
         <tr>
             <td>{{blog.id}}</td>
-            <td>{{ getCategoryItem(blog.category_id)?.name }}</td>
+            <td><a [routerLink]="['/admin/categories/edit', getCategoryItem(blog.category_id)?.id]"> {{ getCategoryItem(blog.category_id)?.name }}</a><br>{{ getCategoryItem(blog.category_id)?.address }}</td>
             <td>{{blog.title}}</td>
 
             <td>{{blog.date}}</td>
@@ -64,6 +64,7 @@
         <hr>
         <img src="{{blog.image}}" width="100px">
         <p>{{ getCategoryItem(blog.category_id)?.name }}
+            {{ getCategoryItem(blog.category_id)?.address }}
            {{ getCategoryItem(blog.category_id)?.description }}
         </p>
         <p>{{blog.is_featured}}</p>
