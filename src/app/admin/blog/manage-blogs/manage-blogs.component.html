@@ -37,9 +37,7 @@
     <ng-template pTemplate="body" let-blog>
         <tr>
             <td>{{blog.id}}</td>
-            <td><div *ngFor="let data of categories; let i = index"> 
-               {{data.name}} {{blog.category_id}}
-            </div> </td>
+            <td>{{ getSecondArrayItem(blog.category_id)?.name }}</td>
             <td>{{blog.title}}</td>
 
             <td>{{blog.date}}</td>
@@ -53,7 +51,6 @@
         </tr>
     </ng-template>
 </p-table>
-
 
 
 

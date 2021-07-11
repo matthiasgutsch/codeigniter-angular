@@ -19,6 +19,12 @@ export class BlogService {
     );
   }
 
+  find(id: number) {
+    return this.http.get<Blog>(this.serverUrl + 'blog/adminBlog/' + id).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   getBlog(id: number) {
     return this.http.get<Blog>(this.serverUrl + 'blog/adminBlog/' + id).pipe(
       catchError(this.handleError)

@@ -27,6 +27,12 @@ export class CategoryService {
     );
   }
 
+  find(id: number) {
+    return this.http.get<Category>(this.serverUrl + 'category/adminCategory/' + id).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   createCategory(category) {
     return this.http.post<any>(this.serverUrl + 'category/createCategory', category).pipe(
       catchError(this.handleError)
