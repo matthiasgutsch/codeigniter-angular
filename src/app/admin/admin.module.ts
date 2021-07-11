@@ -32,6 +32,8 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { CategoryFormComponent } from './category/category-form/category-form.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import {CardModule} from 'primeng/card';
+
 @NgModule({
   declarations: [
     AdminDashboardComponent,
@@ -53,6 +55,7 @@ import { ConfirmationService } from 'primeng/api';
     CheckboxModule,
     EditorModule,
     InputMaskModule,
+    CardModule,
     ChipsModule,
     ConfirmDialogModule,
     InputTextModule,

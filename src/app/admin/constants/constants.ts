@@ -11,13 +11,17 @@ export const LINGUE_ITEMS: SelectItem[] = [
   { label: "Aosta", value: "Aosta" },
   { label: "Arezzo", value: "Arezzo" },
   { label: "Ascoli Piceno", value: "Ascoli Piceno" },
-  { label: "Ancona", value: "Ancona" },
-  { label: "Ancona", value: "Ancona" },
-  { label: "Ancona", value: "Ancona" },
-  { label: "Ancona", value: "Ancona" },
-  { label: "Ancona", value: "Ancona" },
-  { label: "Ancona", value: "Ancona" },
-  { label: "Ancona", value: "Ancona" },
+  { label: "Asti", value: "Asti" },
+  { label: "Avellino", value: "Avellino" },
+  { label: "Bari", value: "Bari" },
+  { label: "Barletta-Andria-Trani", value: "Barletta-Andria-Trani" },
+  { label: "Belluno", value: "Belluno" },
+  { label: "Benevento", value: "Benevento" },
+  { label: "Bergamo", value: "Bergamo" },
+  { label: "Biella", value: "Biella" },
+  { label: "Bologna", value: "Bologna" },
+  { label: "Bolzano", value: "Bolzano" },
+ 
 
 ];
 

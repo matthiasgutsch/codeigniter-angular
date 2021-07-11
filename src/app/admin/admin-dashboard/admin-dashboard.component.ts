@@ -37,7 +37,7 @@ export class AdminDashboardComponent implements OnInit {
       plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
       header: {
         left: 'title',
-          right: 'prev,next',
+        right: 'prev,next',
       },
       editable: false
   };

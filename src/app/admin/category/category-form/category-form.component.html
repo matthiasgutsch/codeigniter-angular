@@ -23,8 +23,11 @@
             <div class="p-field p-grid">
                 <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Address <span class="required">*</span></label>
                 <div class="p-col-12 p-md-10">
-                    <p-dropdown [options]="lingueItems" placeholder="Lingua" inputStyleClass="selectpicker"
-                    [(ngModel)]="category_address" formControlName="category_address" [style]="{ width: '100%' }"></p-dropdown>
+                    <p-dropdown [options]="lingueItems" filter="true"  placeholder="Provincia" inputStyleClass="selectpicker"
+                    [(ngModel)]="category_address" formControlName="category_address" [style]="{ width: '100%' }">
+            
+
+                </p-dropdown>
 
                 </div>
             </div>
