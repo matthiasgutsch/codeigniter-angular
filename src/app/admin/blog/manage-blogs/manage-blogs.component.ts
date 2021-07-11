@@ -10,7 +10,7 @@ import { Category } from '../../../models/category';
   templateUrl: './manage-blogs.component.html'
 })
 export class ManageBlogsComponent implements OnInit {
-  title = 'Manage Blogs';
+  title = 'Interventi';
   blogs: Blog;
   blog: Blog;
   categories: any = [];

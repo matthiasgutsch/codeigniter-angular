@@ -33,6 +33,8 @@ import { CategoryFormComponent } from './category/category-form/category-form.co
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import {CardModule} from 'primeng/card';
+import { ManageTypesComponent } from './type/type-categories/manage-types.component';
+import { TypeFormComponent } from './type/type-form/type-form.component';
 
 @NgModule({
   declarations: [
@@ -43,8 +45,9 @@ import {CardModule} from 'primeng/card';
     ManagePagesComponent,
     MomentPipe,
     BlogFormComponent,
-    CategoryFormComponent
-
+    CategoryFormComponent,
+    ManageTypesComponent,
+    TypeFormComponent
   ],
   imports: [
     CommonModule,

@@ -10,6 +10,8 @@ import { BlogFormComponent } from './blog/blog-form/blog-form.component';
 
 import { AuthGuard } from '../auth/auth.guard';
 import { CategoryFormComponent } from './category/category-form/category-form.component';
+import { ManageTypesComponent } from './type/type-categories/manage-types.component';
+import { TypeFormComponent } from './type/type-form/type-form.component';
 
 const routes: Routes = [
   {
@@ -26,6 +28,12 @@ const routes: Routes = [
           { path: 'categories', component: ManageCategoriesComponent },
           { path: 'categories/edit/:id', component: CategoryFormComponent },
           { path: 'categories/create', component: CategoryFormComponent },
+
+
+          { path: 'types', component: ManageTypesComponent },
+          { path: 'types/edit/:id', component: TypeFormComponent },
+          { path: 'types/create', component: TypeFormComponent },
+
 
           { path: 'pages', component: ManagePagesComponent },
           { path: '', component: AdminDashboardComponent }
