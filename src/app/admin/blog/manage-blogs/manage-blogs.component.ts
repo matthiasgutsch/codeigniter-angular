@@ -27,7 +27,7 @@ export class ManageBlogsComponent implements OnInit {
 trackByFn(index, item) {
   return item.id;
 }
-  
+
 
   constructor(private blogService: BlogService, private categoryService: CategoryService, private confirmationService: ConfirmationService,) { 
 
@@ -46,7 +46,7 @@ trackByFn(index, item) {
     );
   }
 
-  getSecondArrayItem(category_id: string, id: string) {
+  getCategoryItem(category_id: string, id: string) {
     return this.categories.find(item => item.id === category_id);
   }
   

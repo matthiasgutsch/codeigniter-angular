@@ -37,7 +37,7 @@
     <ng-template pTemplate="body" let-blog>
         <tr>
             <td>{{blog.id}}</td>
-            <td>{{ getSecondArrayItem(blog.category_id)?.name }}</td>
+            <td>{{ getCategoryItem(blog.category_id)?.name }}</td>
             <td>{{blog.title}}</td>
 
             <td>{{blog.date}}</td>
@@ -63,7 +63,9 @@
         <p [innerHTML]="blog.description"></p>
         <hr>
         <img src="{{blog.image}}" width="100px">
-        <p>{{blog.category_id}}</p>
+        <p>{{ getCategoryItem(blog.category_id)?.name }}
+           {{ getCategoryItem(blog.category_id)?.description }}
+        </p>
         <p>{{blog.is_featured}}</p>
         <p>{{blog.is_active}}</p>
 
