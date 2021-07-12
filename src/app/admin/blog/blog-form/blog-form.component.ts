@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
 import { Blog } from '../../../models/blog';
 import { Category } from '../../../models/category';
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { CategoryService } from '../../../services/categories.service';
 import { SelectItem } from "primeng/api";
 import * as moment from 'moment';
@@ -16,7 +16,7 @@ import { TYPE_LIST } from '../../constants/constants';
   templateUrl: './blog-form.component.html'
 })
 export class BlogFormComponent implements OnInit {
-  @ViewChild("myInput",{static:false}) myInputVariable: ElementRef;
+  @ViewChild("myInput", { static: false }) myInputVariable: ElementRef;
 
   pageTitle: string;
   error: string;
@@ -48,7 +48,7 @@ export class BlogFormComponent implements OnInit {
 
     private router: Router,
     private route: ActivatedRoute
-  ) { 
+  ) {
     if (this.date) {
       this.selectedDate = new Date(this.date);
     }
@@ -71,7 +71,7 @@ export class BlogFormComponent implements OnInit {
     );
 
 
-  
+
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.pageTitle = 'Edit Blog';
@@ -111,9 +111,9 @@ export class BlogFormComponent implements OnInit {
       this.blogForm.get('image').setValue(file);
 
       let reader = new FileReader();
-      reader.readAsDataURL(file); 
+      reader.readAsDataURL(file);
       reader.onload = (_event) => {
-        this.imagePath = reader.result; 
+        this.imagePath = reader.result;
       }
 
     }

@@ -22,24 +22,34 @@
 
         <div class="p-fluid">
             <div class="p-field p-grid">
-                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Name <span class="required">*</span></label>
+                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Indirizzo <span class="required">*</span></label>
                 <div class="p-col-12 p-md-10">
                     <input type="text" [style]="{ width: '100%' }" pInputText formControlName="category_address" placeholder="Indrizzo" required />
-                  
+
                 </div>
             </div>
         </div>
 
         <div class="p-fluid">
             <div class="p-field p-grid">
-                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Address <span class="required">*</span></label>
+                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Provincia <span class="required">*</span></label>
                 <div class="p-col-12 p-md-10">
-                    <p-dropdown [options]="lingueItems" filter="true"  placeholder="Provincia" inputStyleClass="selectpicker"
-                   formControlName="category_region" [style]="{ width: '100%' }">
-            
+                    <div class="p-fluid">
+                        <div class="p-field p-grid">
+                            <div class="p-col-6 p-md-6">
+                                <p-dropdown [options]="lingueItems" filter="true" placeholder="Provincia" inputStyleClass="selectpicker" formControlName="category_region" [style]="{ width: '100%' }">
 
-                </p-dropdown>
 
+                                </p-dropdown>
+                            </div>
+                            <div class="p-col-6 p-md-6">
+
+                                <p-dropdown [options]="lingueItems" filter="true" placeholder="Provincia" inputStyleClass="selectpicker" formControlName="category_region" [style]="{ width: '100%' }">
+                                </p-dropdown>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
