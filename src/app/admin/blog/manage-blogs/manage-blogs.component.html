@@ -21,33 +21,34 @@
             <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/blogs/create']" label="Add Post" class="p-button p-button-danger p-mr-2"></button> <span class="p-input-icon-left p-ml-auto">
                 <i class="pi pi-search"></i>
 
-                
+
                 <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')"
                     placeholder="Search keyword" />
-                  
+
             </span>
         </div>
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th>#ID</th>
 
-            <th>Nome
+            <th>Data Intervento
 
-    
-        </th>
-            <th>Title</th>
-            <th>Created At</th>
+
+            </th>
+            <th>Utente</th>
+            <th>Tipo di Intervento</th>
             <th>Action</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-blog>
         <tr>
-            <td>{{blog.id}}</td>
-            <td><a [routerLink]="['/admin/categories/edit', getCategoryItem(blog.category_id)?.id]"> {{ getCategoryItem(blog.category_id)?.name }}</a><br>{{ getCategoryItem(blog.category_id)?.address }}</td>
+            <td>{{blog.date}}</td>
+
+            <td><a [routerLink]="['/admin/categories/edit', getCategoryItem(blog.category_id)?.id]"> {{
+                    getCategoryItem(blog.category_id)?.name }}</a><br>{{ getCategoryItem(blog.category_id)?.address }}
+            </td>
             <td>{{blog.title}}</td>
 
-            <td>{{blog.date}}</td>
             <td class="action">
                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/blogs/edit', blog.id]"></button>
                 <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2" (click)="editProduct(blog)"></button>
@@ -70,9 +71,7 @@
         <p [innerHTML]="blog.description"></p>
         <hr>
         <img src="{{blog.image}}" width="100px">
-        <p>{{ getCategoryItem(blog.category_id)?.name }}
-            {{ getCategoryItem(blog.category_id)?.address }}
-           {{ getCategoryItem(blog.category_id)?.description }}
+        <p>{{ getCategoryItem(blog.category_id)?.name }} {{ getCategoryItem(blog.category_id)?.address }} {{ getCategoryItem(blog.category_id)?.description }}
         </p>
         <p>{{blog.is_featured}}</p>
         <p>{{blog.is_active}}</p>

@@ -13,20 +13,19 @@
 
 
 
-<p-table #dt1 [value]="categories"  [globalFilterFields]="['name','address','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+<p-table #dt1 [value]="categories" [globalFilterFields]="['name','address','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
     <ng-template pTemplate="caption">
         <div class="p-d-flex">
             <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/categories/create']" label="Add Post" class="p-button p-button-danger p-mr-2"></button> <span class="p-input-icon-left p-ml-auto">
-        <i class="pi pi-search"></i>
-        <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')"
-          placeholder="Search keyword" />
-      </span>
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Search keyword" />
+            </span>
         </div>
     </ng-template>
 
     <ng-template pTemplate="header">
         <tr>
-            <th>#ID</th>
             <th>Name</th>
             <th>Address</th>
             <th>Regione</th>
@@ -36,7 +35,6 @@
     </ng-template>
     <ng-template pTemplate="body" let-category>
         <tr>
-            <td>{{category.id}}</td>
             <td>{{category.name}}</td>
             <td>{{category.address}}</td>
             <td>{{category.region}}</td>
