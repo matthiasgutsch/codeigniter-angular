@@ -25,7 +25,7 @@ export class BlogFormComponent implements OnInit {
   blogs: Blog;
   blog: Blog;
 
-  categories: Category;
+  categories: any = [];
   category: Category;
   checked: boolean = true;
   selectedValue: string;
@@ -41,6 +41,11 @@ export class BlogFormComponent implements OnInit {
   selectedDate: Date;
   date: Date;
 
+  trackByFn(index, item) {
+    return item.id;
+  }
+
+  
   constructor(
     private fb: FormBuilder,
     private blogService: BlogService,
@@ -117,6 +122,10 @@ export class BlogFormComponent implements OnInit {
       }
 
     }
+  }
+
+  getCategoryItem(category_id: string, id: string) {
+    return this.categories.find(item => item.id === category_id);
   }
 
   removeImageFile() {
