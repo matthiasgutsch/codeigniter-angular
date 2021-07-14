@@ -15,18 +15,18 @@ export class TypeService {
 
   constructor(private http: HttpClient) { }
 
-  getCategories() {
-    return this.http.get<Category>(this.serverUrl + 'category/adminCategories').pipe(
+  getAllList() {
+    return this.http.get<Category>(this.serverUrl + 'category').pipe(
       catchError(this.handleError)
     );
   }
 
-  getCategory(id: number) {
-    return this.http.get<Category>(this.serverUrl + 'category/adminCategory/' + id).pipe(
+  getId(id: number) {
+    return this.http.get<Category>(this.serverUrl + 'category/id/' + id).pipe(
       catchError(this.handleError)
     );
   }
-
+  
   find(id: number) {
     return this.http.get<Category>(this.serverUrl + 'category/adminCategory/' + id).pipe(
       catchError(this.handleError)

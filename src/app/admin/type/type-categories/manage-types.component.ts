@@ -17,7 +17,7 @@ export class ManageTypesComponent implements OnInit {
   constructor(private typeService: TypeService, private confirmationService: ConfirmationService,) { }
 
   ngOnInit() {
-    this.typeService.getCategories().subscribe(
+    this.typeService.getAllList().subscribe(
       (data: Category) => this.categories = data,
       error => this.error = error
     );
