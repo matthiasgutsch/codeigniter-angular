@@ -41,7 +41,7 @@ trackByFn(index, item) {
     );
 
 
-    this.categoryService.getCategories().subscribe(
+    this.categoryService.getAllList().subscribe(
       (data: Category) => this.categories = data,
       error => this.error = error
     );

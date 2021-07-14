@@ -61,7 +61,7 @@ export class CategoryFormComponent implements OnInit {
 
       
       this.pageTitle = 'Edit Category';
-      this.categoryService.getCategory(+id).subscribe(
+      this.categoryService.getId(+id).subscribe(
         res => {
           this.categoryForm.patchValue({
             category_name: res.category_name,

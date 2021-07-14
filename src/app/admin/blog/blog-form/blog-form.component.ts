@@ -70,7 +70,7 @@ export class BlogFormComponent implements OnInit {
     );
 
 
-    this.categoryService.getCategories().subscribe(
+    this.categoryService.getAllList().subscribe(
       (data: Category) => this.categories = data,
       error => this.error = error
     );
