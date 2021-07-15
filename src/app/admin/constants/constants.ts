@@ -3,29 +3,6 @@ import { SelectItem } from "primeng/api";
 
 
 
-export const LINGUE_ITEMS: SelectItem[] = [
-  { label: "Tutte", value: null },
-  { label: "Agrigento", value: "Agrigento" },
-  { label: "Alessandria", value: "Alessandria" },
-  { label: "Ancona", value: "Ancona" },
-  { label: "Aosta", value: "Aosta" },
-  { label: "Arezzo", value: "Arezzo" },
-  { label: "Ascoli Piceno", value: "Ascoli Piceno" },
-  { label: "Asti", value: "Asti" },
-  { label: "Avellino", value: "Avellino" },
-  { label: "Bari", value: "Bari" },
-  { label: "Barletta-Andria-Trani", value: "Barletta-Andria-Trani" },
-  { label: "Belluno", value: "Belluno" },
-  { label: "Benevento", value: "Benevento" },
-  { label: "Bergamo", value: "Bergamo" },
-  { label: "Biella", value: "Biella" },
-  { label: "Bologna", value: "Bologna" },
-  { label: "Bolzano", value: "Bolzano" },
- 
-
-];
-
-
 
 export const TYPE_LIST: SelectItem[] = [
   { label: "Tutte", value: null },
@@ -34,51 +11,6 @@ export const TYPE_LIST: SelectItem[] = [
   { label: "Visita di controllo", value: "Visita di controllo" }
 ];
 
-
-
-export const PAESI_IT: SelectItem[] = [
-  { label: "paese", value: null },
-  { label: "Italia", value: "Italia" },
-  { label: "Europa", value: "Europa" },
-  { label: "Asia", value: "Asia" },
-  { label: "Sud America", value: "Sud America" },
-  { label: "Nord America", value: "Nord America" },
-  { label: "Africa", value: "Africa" },
-];
-
-export const PAESI_EN: SelectItem[] = [
-  { label: "paese", value: null },
-  { label: "Italy", value: "Italy" },
-  { label: "Europe", value: "Europe" },
-  { label: "Asia", value: "Asia" },
-  { label: "South America", value: "South America" },
-  { label: "North America", value: "North America" },
-  { label: "Africa", value: "Africa" },
-];
-
-export const POSIZIONI_ITEMS: SelectItem[] = [
-  { label: "Nessuna posizione", value: null },
-  { label: "Header", value: "header" },
-  { label: "Banner", value: "banner" },
-  { label: "Top", value: "top" },
-  { label: "Middle", value: "middle" },
-  { label: "Bottom", value: "bottom" },
-];
-
-export const TEMPLATE_ITEMS: SelectItem[] = [
-  { label: "Nessuno", value: null },
-  { label: "Default", value: "default" },
-  { label: "Allegato Con Tab", value: "with-tabs" },
-  { label: "Allegato Con Tab / Ora", value: "with-tabs-time" },
-  { label: "Allegato Con Tab senza Data", value: "with-tabs-without-date" },
-  { label: "Galleria Fotografica", value: "picture-gallery" },
-  { label: "Con Allegati", value: "with-uploads" },
-  { label: "Societa Trasparente", value: "societa-trasparente" },
-  { label: "Storia", value: "story" },
-  { label: "Full Width", value: "full-width" },
-  { label: "Titoli SRI", value: "titoli-sri" },
-  { label: "Disclaimer", value: "disclaimer " },
-];
 
 export const ANNO_ITEMS: SelectItem[] = [
   { label: "nessuno", value: "" },
