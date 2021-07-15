@@ -80,7 +80,7 @@ export class AdminDashboardComponent implements OnInit {
     category_id: ['', Validators.required],
     is_active: ['0'],
     image: [''],
-    date: ['']
+    date: ['', Validators.required]
   });
 
 } 
