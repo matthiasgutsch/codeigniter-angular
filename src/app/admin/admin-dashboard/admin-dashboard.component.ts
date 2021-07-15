@@ -33,6 +33,7 @@ export class AdminDashboardComponent implements OnInit {
   selectedDate: Date;
   date: Date;
   categories: Category;
+  productDialog:boolean = false;
 
   constructor(private blogService: BlogService,     
     private categoryService: CategoryService,
@@ -83,6 +84,11 @@ export class AdminDashboardComponent implements OnInit {
   });
 
 } 
+
+showDialog() {
+  this.productDialog = true;
+}
+
 onSubmit() {
   const formData = new FormData();
   formData.append('title', this.blogForm.get('title').value);
@@ -113,6 +119,7 @@ onSubmit() {
           this.uploadError = res.message;
         } else {
           this.blogForm.reset();
+          this.productDialog = false;
           this.blogService.getBlogs().subscribe(
             (data: Blog) => this.blogs = data,
             error => this.error = error
