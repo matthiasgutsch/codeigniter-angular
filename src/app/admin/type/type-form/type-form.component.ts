@@ -8,7 +8,7 @@ import { FormControl } from '@angular/forms';
 import { CategoryService } from '../../../services/categories.service';
 import { SelectItem } from "primeng/api";
 import * as moment from 'moment';
-import { COLORI_ITEMS, LINGUE_ITEMS } from 'src/app/admin/constants/constants';
+import { COLORI_ITEMS } from 'src/app/admin/constants/constants';
 
 @Component({
   selector: 'app-type-form',
@@ -49,7 +49,6 @@ export class TypeFormComponent implements OnInit {
       this.selectedDate = new Date(this.date);
     }
 
-    this.lingueItems = LINGUE_ITEMS;
 
   }
 

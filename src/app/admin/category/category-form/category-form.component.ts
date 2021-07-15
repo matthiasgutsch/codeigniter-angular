@@ -10,7 +10,7 @@ import { ComuniService } from '../../../services/comuni.service';
 
 import { SelectItem } from "primeng/api";
 import * as moment from 'moment';
-import { COLORI_ITEMS, LINGUE_ITEMS } from 'src/app/admin/constants/constants';
+import { COLORI_ITEMS } from 'src/app/admin/constants/constants';
 import { Comuni } from 'src/app/models/comuni';
 
 @Component({
@@ -33,7 +33,6 @@ export class CategoryFormComponent implements OnInit {
   selectedValue: string;
 
   categoryForm: FormGroup;
-  lingueItems: any[];
 
   cities: Blog[];
   format1: string = "";
@@ -55,7 +54,6 @@ export class CategoryFormComponent implements OnInit {
       this.selectedDate = new Date(this.date);
     }
 
-    this.lingueItems = LINGUE_ITEMS;
 
   }
 
@@ -71,7 +69,7 @@ export class CategoryFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
 
-      
+
       this.pageTitle = 'Edit Category';
       this.categoryService.getId(+id).subscribe(
         res => {
@@ -110,9 +108,9 @@ export class CategoryFormComponent implements OnInit {
 
 
   onSubmit() {
-    
+
     const formData = new FormData();
-    
+
     formData.append('category_name', this.categoryForm.get('category_name').value);
     formData.append('category_address', this.categoryForm.get('category_address').value);
     formData.append('category_region', this.categoryForm.get('category_region').value);
