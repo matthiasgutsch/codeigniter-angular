@@ -6,9 +6,12 @@ import { Blog } from '../../../models/blog';
 import { Category } from '../../../models/category';
 import { FormControl } from '@angular/forms';
 import { CategoryService } from '../../../services/categories.service';
+import { ComuniService } from '../../../services/comuni.service';
+
 import { SelectItem } from "primeng/api";
 import * as moment from 'moment';
 import { COLORI_ITEMS, LINGUE_ITEMS } from 'src/app/admin/constants/constants';
+import { Comuni } from 'src/app/models/comuni';
 
 @Component({
   selector: 'app-category-form',
@@ -23,6 +26,8 @@ export class CategoryFormComponent implements OnInit {
   imagePath: any;
   categories: Category;
   category: Category;
+
+  comuni: Comuni;
 
   checked: boolean = true;
   selectedValue: string;
@@ -41,6 +46,7 @@ export class CategoryFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private categoryService: CategoryService,
+    private comuniService: ComuniService,
 
     private router: Router,
     private route: ActivatedRoute
@@ -54,6 +60,12 @@ export class CategoryFormComponent implements OnInit {
   }
 
   ngOnInit() {
+
+
+    this.comuniService.getAllList().subscribe(
+      (data: Comuni) => this.comuni = data,
+      error => this.error = error
+    );
 
 
     const id = this.route.snapshot.paramMap.get('id');

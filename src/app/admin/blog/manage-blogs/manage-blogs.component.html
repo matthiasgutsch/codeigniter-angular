@@ -36,6 +36,8 @@
 
             </th>
             <th>Utente</th>
+            <th>Indirizzo</th>
+
             <th>Tipo di Intervento</th>
             <th>Action</th>
         </tr>
@@ -44,8 +46,11 @@
         <tr>
             <td>{{blog.date}}</td>
 
-            <td><a [routerLink]="['/admin/categories/edit', getCategoryItem(blog.category_id)?.id]"> {{
-                    getCategoryItem(blog.category_id)?.name }}</a><br>{{ getCategoryItem(blog.category_id)?.address }}
+            <td><a [routerLink]="['/admin/categories/edit', getCategoryItem(blog.category_id)?.id]"> <i class="pi pi-user"></i>  {{
+               getCategoryItem(blog.category_id)?.name }}</a>
+        </td>
+
+            <td>{{ getCategoryItem(blog.category_id)?.address }} - {{ getCategoryItem(blog.category_id)?.region }}
             </td>
             <td>{{blog.title}}</td>
 
