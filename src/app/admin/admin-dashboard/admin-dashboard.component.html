@@ -2,9 +2,133 @@
       <div class="p-grid">
          
           <div class="p-col-12">
-              <p-fullCalendar #calendar [events]="blogs"  [options]="options"></p-fullCalendar>
+              <p-fullCalendar #calendar [events]="blogs" [options]="options"></p-fullCalendar>
 
           </div>
 
+
+          <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+
+            <div class="p-fluid">
+    
+                <div class="p-field p-grid">
+                    <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Title <span class="required">*</span></label>
+                    <div class="p-col-12 p-md-10">
+                        <p-dropdown [virtualScroll]="true" filter="true" [required]="true" [showClear]="true"  [options]="typeList" filter="true"  placeholder="Tipo Intervento" inputStyleClass="selectpicker"
+                         formControlName="title" [style]="{ width: '100%' }">
+                        </p-dropdown>
+                     
+                    </div>
+                </div>
+            </div>
+    
+    
+            <div class="p-fluid">
+    
+                <div class="p-field p-grid">
+                    <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Date <span class="required">*</span></label>
+                    <div class="p-col-12 p-md-10">
+    
+                        <p-calendar formControlName="date" dataType="string" [(ngModel)]="selectedDate" dateFormat="yy-mm-dd" appendTo="body" [locale]="lang_it"></p-calendar>
+    
+                    </div>
+                </div>
+            </div>
+    
+    
+    
+            <div class="p-fluid">
+                <div class="p-field p-grid">
+                    <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Is Featured <span class="required">*</span></label>
+                    <div class="p-col-12 p-md-10">
+                        <input type="radio" formControlName="is_featured" value="1" /> Yes
+                        <input type="radio" formControlName="is_featured" value="0" /> No
+                    </div>
+                </div>
+            </div>
+    
+    
+    
+    
+            <div class="p-fluid">
+                <div class="p-field p-grid">
+                    <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Is Active <span class="required">*</span></label>
+                    <div class="p-col-12 p-md-10">
+                        <input type="radio" formControlName="is_active" value="1" /> Yes
+                        <input type="radio" formControlName="is_active" value="0" /> No
+                    </div>
+                </div>
+            </div>
+    
+    
+            <div class="p-fluid">
+                <div class="p-field p-grid">
+                    <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Upload Image <span class="required">*</span></label>
+                    <div class="p-col-12 p-md-10">
+                        <input #myInput type="file" id="image" (change)="onSelectedFile($event)" />
+                        <div [innerHTML]="uploadError" class="error"></div>
+                        <div *ngIf="imagePath">
+                            <br />
+                            <span class="image-container" *ngIf="!imagePath == ''">
+                  <img [src]="imagePath" width="300px">
+    
+                  <button pButton pRipple icon="pi pi-trash" class="imgcancel p-button p-button-primary p-mr-2"
+                    (click)="removeImageFile($event)"></button>
+                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+    
+    
+    
+    
+    
+            <div class="p-fluid">
+                <div class="p-field p-grid">
+                    <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Categoria <span class="required">*</span></label>
+                    <div class="p-col-12 p-md-10">
+                        <p-dropdown [options]="categories" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedCategories" formControlName="category_id" optionLabel="name" optionValue="id">
+                            <ng-template let-option pTemplate="item">
+                         
+                                    <strong>{{option.name}}</strong><br>
+                                    <span>{{option.address}} - {{option.region}}</span>
+                                    
+                   
+                            </ng-template>
+    
+    
+                        </p-dropdown>
+    
+       
+                    </div>
+                </div>
+            </div>
+    
+    
+            <div class="p-fluid">
+                <div class="p-field p-grid">
+                    <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Description <span class="required">*</span></label>
+                    <div class="p-col-12 p-md-10">
+                        <p-editor formControlName="description" [style]="{'height':'320px'}">
+    
+                        </p-editor>
+                      
+                    </div>
+                </div>
+            </div>
+    
+    
+    
+            <div class="form-group form-row">
+                <label class="col-md-3"></label>
+                <div class="col-md-9">
+                    <input type="hidden" formControlName="id">
+                    <button pButton pRipple label="save" class="p-button p-button-success p-mr-2" [disabled]="!blogForm.valid"></button>
+    
+                </div>
+            </div>
+        </form>
       {{first_name}}
       </div>
