@@ -10,6 +10,7 @@ import { TYPE_LIST } from '../constants/constants';
 import { CategoryService } from 'src/app/services/categories.service';
 import { Category } from 'src/app/models/category';
 import { Router, ActivatedRoute } from '@angular/router';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -39,6 +40,7 @@ export class AdminDashboardComponent implements OnInit {
     private categoryService: CategoryService,
     private fb: FormBuilder,
     private router: Router,
+    private messageService: MessageService,
     private route: ActivatedRoute
     ) {
       this.typeList = TYPE_LIST;
@@ -120,6 +122,7 @@ onSubmit() {
         } else {
           this.blogForm.reset();
           this.productDialog = false;
+          this.messageService.add({key: 'myKey1', severity:'success', summary: 'Summary Text', detail: 'Detail Text'});
           this.blogService.getBlogs().subscribe(
             (data: Blog) => this.blogs = data,
             error => this.error = error

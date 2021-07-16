@@ -31,10 +31,13 @@ import { MomentPipe } from './pipe/moment.pipe';
 import { InputMaskModule } from 'primeng/inputmask';
 import { CategoryFormComponent } from './category/category-form/category-form.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { ManageTypesComponent } from './type/type-categories/manage-types.component';
 import { TypeFormComponent } from './type/type-form/type-form.component';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,9 @@ import { TypeFormComponent } from './type/type-form/type-form.component';
   imports: [
     CommonModule,
     TableModule,
+    MessagesModule,
+    ToastModule,
+    MessageModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
@@ -75,6 +81,6 @@ import { TypeFormComponent } from './type/type-form/type-form.component';
     AutoCompleteModule,
     SidebarModule
   ],
-  providers: [ConfirmationService]
+  providers: [ConfirmationService, MessageService]
 })
 export class AdminModule { }
