@@ -1,15 +1,16 @@
 
       <div class="p-grid">
-        <button pButton pRipple icon="pi pi-plus" (click)="productDialog = true" label="Add Post" class="p-button p-button-danger p-mr-2"></button> 
 
-          <div class="p-col-12">
+          <div class="p-col-8">
+              <p-card>
+                <button pButton pRipple icon="pi pi-plus" (click)="productDialog = true" label="Add Post" class="p-button p-button-danger p-mr-2"></button> 
+
               <p-fullCalendar #calendar [events]="blogs" [options]="options"></p-fullCalendar>
-
+            </p-card>
           </div>
 
 
           
-      {{first_name}}
       </div>
 
       <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'50%'}">
@@ -36,8 +37,8 @@
                         <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Date <span class="required">*</span></label>
                         <div class="p-col-12 p-md-10">
         
-                            <p-calendar formControlName="date" dataType="string" [showTime]="true" [(ngModel)]="selectedDate" dateFormat="yy-mm-dd " appendTo="body" [locale]="lang_it"></p-calendar>
-
+                            <p-calendar formControlName="date" dataType="string" showTime="true" [(ngModel)]="selectedDate" hourFormat="24" dateFormat="yy-mm-dd" appendTo="body" [locale]="lang_it"></p-calendar>
+        
                         </div>
                     </div>
                 </div>
@@ -146,3 +147,4 @@
     <p-toast key="myKey1"></p-toast>
 
 
+    

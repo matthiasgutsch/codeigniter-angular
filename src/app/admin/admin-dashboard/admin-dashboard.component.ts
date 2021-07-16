@@ -122,7 +122,7 @@ onSubmit() {
         } else {
           this.blogForm.reset();
           this.productDialog = false;
-          this.messageService.add({key: 'myKey1', severity:'success', summary: 'Summary Text', detail: 'Detail Text'});
+          this.messageService.add({key: 'myKey1', severity:'success', summary: 'Congratulazione', detail: 'Aggiunto con successo'});
           this.blogService.getBlogs().subscribe(
             (data: Blog) => this.blogs = data,
             error => this.error = error

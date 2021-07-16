@@ -13,8 +13,12 @@
     </div>
 </div>
 
+<div class="p-fluid">
+    <div class="p-field p-grid">
+        <div class="p-col-12 p-md-12">
 
-
+     
+<p-card>
 <p-table #dt1 [value]="blogs" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
     <ng-template pTemplate="caption">
         <div class="p-d-flex">
@@ -65,9 +69,13 @@
     </ng-template>
 </p-table>
 
+</p-card>
+
+</div>
 
 
-
+</div>
+</div>
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'30em'}">
     <ng-template pTemplate="content">
         {{blog.id}}

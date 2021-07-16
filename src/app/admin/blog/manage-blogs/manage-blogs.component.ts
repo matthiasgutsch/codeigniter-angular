@@ -4,6 +4,7 @@ import { Blog } from '../../../models/blog';
 import {ConfirmationService} from 'primeng/api';
 import { CategoryService } from '../../../services/categories.service';
 import { Category } from '../../../models/category';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-manage-blogs',
@@ -30,7 +31,11 @@ trackByFn(index, item) {
 }
 
 
-  constructor(private blogService: BlogService, private categoryService: CategoryService, private confirmationService: ConfirmationService,) { 
+  constructor(
+    private blogService: BlogService,
+    private messageService: MessageService,
+    private categoryService: CategoryService, 
+    private confirmationService: ConfirmationService,) { 
 
   }
 
@@ -72,6 +77,8 @@ hideDialog() {
           res => {
             console.log(res);
             this.ngOnInit();
+            this.messageService.add({key: 'myKey1', severity:'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo'});
+
           },
           error => this.error = error
         );
