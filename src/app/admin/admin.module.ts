@@ -38,6 +38,7 @@ import { TypeFormComponent } from './type/type-form/type-form.component';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
+import {TooltipModule} from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import {ToastModule} from 'primeng/toast';
     CommonModule,
     TableModule,
     MessagesModule,
+    TooltipModule,
     ToastModule,
     MessageModule,
     BrowserAnimationsModule,

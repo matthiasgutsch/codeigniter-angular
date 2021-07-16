@@ -4,20 +4,22 @@
     <i class="pi pi-inbox"></i>
   </div>
 
-  <ul class="user-menu">
 
-    <li><a routerLink="./" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><i class="pi pi-inbox"></i></a>
+  <ul class="nav-menu">
+
+    <li><a routerLink="./" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ><i class="pi pi-inbox" pTooltip="Dashboard" tooltipPosition="right"></i></a>
     </li>
-    <li><a routerLink="./blogs" routerLinkActive="active"><i class="pi pi-inbox"></i></a></li>
-    <li><a routerLink="./categories" routerLinkActive="active"><i class="pi pi-inbox"></i></a></li>
+    <li><a routerLink="./blogs" routerLinkActive="active" ><i class="pi pi-inbox" pTooltip="Blogs" tooltipPosition="right"></i></a></li>
+    <li><a routerLink="./categories" routerLinkActive="active"><i class="pi pi-inbox" pTooltip="Categorie" tooltipPosition="right"></i></a></li>
     <li><a routerLink="./types" routerLinkActive="active"><i class="pi pi-inbox"></i></a></li>
 
     <li><a routerLink="./pages" routerLinkActive="active"><i class="pi pi-inbox"></i></a></li>
-    <li><a [routerLink]="['/login']"><i class="pi pi-inbox"></i></a></li>
+  </ul>
+  <ul class="user-menu">
 
-    <li>
-      <span title="{{utente?.username}}" class="profile-name">{{currentUser}}</span>
-    </li>
+    
+
+  
 
     <li role="menuitem" class="logout">
       <strong><i class="pi pi-sign-in" [routerLink]="['/login']"></i></strong>

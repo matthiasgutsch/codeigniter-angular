@@ -147,6 +147,11 @@ body {
   padding: 5px 10px !important;
   border-radius: @radius;
   color: @ness_color_2;
+
+  &:hover {
+    background-color: darken(@green,20%);
+  
+  }
 }
 
 .p-datatable .p-sortable-column.p-highlight {
@@ -170,6 +175,15 @@ body {
 
   border: 1px solid @red !important;
 }
+
+.p-button.p-button-success, .p-buttonset.p-button-success > .p-button, .p-splitbutton.p-button-success > .p-button {
+  color: @ness_color_2;
+  background: darken(@green,10%);
+  border-radius: @radius;
+
+  border: 1px solid @green !important;
+}
+
 
 .p-button.p-button-primary, .p-buttonset.p-button-primary > .p-button, .p-splitbutton.p-button-primary > .p-button {
   color: @white;
@@ -262,7 +276,7 @@ body {
 
 .sidebar {
   height: 100%;
-  width: 64px;
+  width: 70px;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -290,7 +304,7 @@ body {
   }
 
 
-  ul {
+  ul.nav-menu {
     list-style: none;
     padding: 0px;
     margin: 0px;
@@ -300,9 +314,11 @@ body {
       width: 100%;
       padding: 0px;
       text-align: center;
+      height: 60px;
+      line-height: 40px;
 
       a {
-        padding: 8px 8px 8px 8px;
+        padding: 8px 14px;
         text-decoration: none;
         font-size: 15px;
         color: @ness_color_2;
@@ -323,8 +339,35 @@ body {
           float: left;
           font-size: 20px;
           width: 40px;
-          height: 30px;
+          line-height: 40px;
+          height: 40px;
           text-align: center;
+        }
+
+        &:hover {
+          i {
+            float: left;
+            font-size: 20px;
+            width: 40px;
+            height: 40px;
+            color: @white;
+            background-color: @ness_color_2;
+            border-radius: @radius;
+            text-align: center;
+          }
+        }
+
+        &.active {
+          i {
+            float: left;
+            font-size: 20px;
+            width: 40px;
+            height: 40px;
+            color: @white;
+            background-color: @ness_color_3;
+            border-radius: @radius;
+            text-align: center;
+          }
         }
       }
     }
@@ -370,26 +413,28 @@ body {
 .user-menu {
   position: absolute;
   list-style-type: none;
+  margin: 0px;
   margin-top: 20px;
+  padding: 0px !important;
   margin-right: 0px;
-  top: 0px;
-  left: 12px;
+  bottom: 0px;
+  left: 15px;
   li {
     float: left;
     list-style: none;
     font-size: 14px;
     width: 40px !important;
     height: 40px;
-    border-radius: 25px;
+    border-radius: @radius;
     margin-bottom: 10px;
     padding: 0px;
     line-height: 40px;
-    color: @white;
+    color: @ness_color_2;
     text-align: center;
     &.logout {
-      background-color: fade(@white, 20%);
+      background-color: fade(@ness_color_2, 20%);
       margin-bottom: 10px;
-      color: @white;
+      color: @ness_color_2;
     }
   }
 }

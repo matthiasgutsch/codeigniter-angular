@@ -29,10 +29,10 @@ export class ManageCategoriesComponent implements OnInit {
 }
 
 
-onDelete(id: number) {
+onDelete(id: number, category_name: string) {
 
   this.confirmationService.confirm({
-    message: 'Are you sure want to delete it = ' + id,
+    message: 'Are you sure want to delete it = ' + category_name,
     header: 'Confirmation',
     icon: 'pi pi-exclamation-triangle',
     accept: () => {

@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import {InputTextModule} from 'primeng/inputtext';
 import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -16,6 +17,7 @@ import {ButtonModule} from 'primeng/button';
     AuthRoutingModule,
     InputTextModule,
     ButtonModule,
+    CardModule,
     DialogModule
   ]
 })

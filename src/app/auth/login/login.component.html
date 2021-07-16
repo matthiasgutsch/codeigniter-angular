@@ -1,7 +1,10 @@
 <section class="login-wrap mtb-40">
   <div class="container">
     <div class="row justify-content-center" *ngIf="!error">
-      <div class="col-md-6">
+      <p-card>  <div class="p-grid">
+
+        <div class="p-col-8">
+       
         <div class="login-box">
           <h1>Administrator Login</h1>
           <div class="alert alert-danger" *ngIf="loginError">
@@ -31,17 +34,24 @@
               pButton
               pRipple
               label="login"
-              class="p-button p-button-success p-mr-2"
+              class="p-button p-button-primary p-mr-2"
               [disabled]="!loginForm.valid"
               ></button>
             </div>
           </form>
         </div>
-      </div>
-    </div>
+     
+
     <div class="service-error" *ngIf="error">
       <h1>{{error.errorTitle}}</h1>
       <h3>{{error.errorDesc}}</h3>
+    </div>
+
+       
+
+  </div>
+      </div>
+    </p-card>
     </div>
   </div>
 </section>
