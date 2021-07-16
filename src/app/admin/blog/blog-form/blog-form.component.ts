@@ -7,7 +7,7 @@ import { Blog } from '../../../models/blog';
 import { Category } from '../../../models/category';
 import { FormControl } from '@angular/forms';
 import { CategoryService } from '../../../services/categories.service';
-import { SelectItem } from "primeng/api";
+import { ConfirmationService, MessageService, SelectItem } from "primeng/api";
 import * as moment from 'moment';
 import { TYPE_LIST } from '../../constants/constants';
 
@@ -49,8 +49,9 @@ export class BlogFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private blogService: BlogService,
-    private categoryService: CategoryService,
-
+    private messageService: MessageService,
+    private categoryService: CategoryService, 
+    private confirmationService: ConfirmationService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -142,6 +143,10 @@ export class BlogFormComponent implements OnInit {
   get description() {
     return this.blogForm.get('description');
   }
+
+
+ 
+
 
   onSubmit() {
     const formData = new FormData();
