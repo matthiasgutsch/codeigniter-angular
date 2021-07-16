@@ -79,6 +79,16 @@ h3 {
 
 }
 
+a {
+  color: @ness_color_3;
+  text-decoration: none;
+}
+
+a:hover {
+  color: @ness_color_2;
+  text-decoration: none;
+}
+
 body {
   font-family: "AvenirNextLTW01Regular", sans-serif;
   padding: 0px;
@@ -561,4 +571,29 @@ body {
     font-family: "Circular";
     font-weight: 500;
   }
+}
+
+
+
+.fc .fc-view-container .fc-event {
+  background: @ness_color_3;
+  border: 1px solid @ness_color_3;
+  color: @white;
+}
+
+.fc .fc-toolbar .fc-button {
+  color: #ffffff;
+  background: @ness_color_2;
+  border: 1px solid @ness_color_2;
+  font-size: 1rem;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+}
+
+.fc .fc-toolbar .fc-button.fc-dayGridMonth-button.fc-button-active, .fc .fc-toolbar .fc-button.fc-timeGridWeek-button.fc-button-active, .fc .fc-toolbar .fc-button.fc-timeGridDay-button.fc-button-active {
+  background: @ness_color_2;
+  border-color: @ness_color_2;
+  color: #ffffff;
 }
