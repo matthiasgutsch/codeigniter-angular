@@ -5,6 +5,16 @@
   </div>
 
   <ul class="user-menu">
+
+    <li><a routerLink="./" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><i class="pi pi-inbox"></i></a>
+    </li>
+    <li><a routerLink="./blogs" routerLinkActive="active"><i class="pi pi-inbox"></i></a></li>
+    <li><a routerLink="./categories" routerLinkActive="active"><i class="pi pi-inbox"></i></a></li>
+    <li><a routerLink="./types" routerLinkActive="active"><i class="pi pi-inbox"></i></a></li>
+
+    <li><a routerLink="./pages" routerLinkActive="active"><i class="pi pi-inbox"></i></a></li>
+    <li><a [routerLink]="['/login']"><i class="pi pi-inbox"></i></a></li>
+
     <li>
       <span title="{{utente?.username}}" class="profile-name">{{currentUser}}</span>
     </li>
@@ -15,24 +25,9 @@
   </ul>
 </div>
 
-<div class="sidebar-main"  id="mySidebar open" >
-  {{currentUser}}
-  <div class="title-wrapper">
-    <h3 routerLink="/">CMS</h3>
-  </div>
+<div class="navbar-top">
 
-  <ul>
-    <li><a routerLink="./" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
-    </li>
-    <li><a routerLink="./blogs" routerLinkActive="active">Interventi</a></li>
-    <li><a routerLink="./categories" routerLinkActive="active">Clienti</a></li>
-    <li><a routerLink="./types" routerLinkActive="active">Configurazione</a></li>
-
-    <li><a routerLink="./pages" routerLinkActive="active">Pages</a></li>
-    <li><a [routerLink]="['/login']">Logout</a></li>
-  </ul>
 </div>
-
 
 
       <div class="main close">

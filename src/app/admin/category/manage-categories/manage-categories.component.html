@@ -1,24 +1,26 @@
 <div class="dash-header">
     <div class="p-fluid">
-        <div class="p-field p-grid">
-            <div class="p-col-12 p-md-10">
-                <div class="dash-title">
-
-                    <h3>{{title}}</h3>
-
-                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/categories/create']" label="Add Post" class="p-button p-button-danger p-mr-2"></button> 
-                </div>
-            </div>
-        </div>
+  
     </div>
 </div>
 
 <div class="p-fluid">
     <div class="p-field p-grid">
-        <div class="p-col-12 p-md-12">
+        <div class="p-col-8 p-md-8">
 
      
 <p-card>
+    <div class="p-field p-grid">
+        <div class="p-col-10 p-md-10">
+    <h3>{{title}}</h3>
+        </div>
+        <div class="p-col-2 p-md-2">
+
+            <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/categories/create']" label="Add Post" class="p-button p-button-primary p-mr-2"></button> 
+
+</div>
+    </div>
+
 
 <p-table #dt1 [value]="categories" [globalFilterFields]="['name','address','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
     <ng-template pTemplate="caption">
