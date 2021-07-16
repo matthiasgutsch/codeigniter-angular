@@ -6,9 +6,24 @@
 <div class="p-grid">
 
     <div class="p-col-12 p-md-8">
+
+       
+
         <p-card>
-            <button pButton pRipple icon="pi pi-plus" (click)="productDialog = true" label="Add Post"
-                class="p-button p-button-danger p-mr-2"></button>
+
+            <div class="p-field p-grid">
+                <div class="p-col-10 p-md-10">
+                    <h3>Calendario</h3>
+                </div>
+                <div class="p-col-2 p-md-2">
+    
+                    <button pButton pRipple icon="pi pi-plus" (click)="productDialog = true" label="Add Post"
+                    class="p-button p-button-primary pull-right"></button>
+                </div>
+            </div>
+<hr class="full">
+
+        
 
             <p-fullCalendar #calendar [events]="blogs" [options]="options"></p-fullCalendar>
         </p-card>
@@ -17,6 +32,8 @@
 
     <div class="p-col-12 p-md-4">
         <p-card>
+
+            
             <div class="p-field p-grid">
                 <div class="p-col-12 p-md-8">
                     <h3>Clienti</h3>
@@ -27,6 +44,7 @@
 
                 </div>
             </div>
+            <hr class="full">
 
             <p-table #dt1 [value]="categories" [globalFilterFields]="['name','address','category.name']"
                 [paginator]="false" [rows]="10" [showCurrentPageReport]="true"

@@ -225,7 +225,39 @@ body {
   }
 
 
+  .user-menu {
+    position: absolute;
+    list-style-type: none;
+    margin: 0px;
+    margin-top: 20px;
+    padding: 0px !important;
+    margin-right: 0px;
+    bottom: 0px;
+    left: 15px;
+    li {
+      float: left;
+      list-style: none;
+      font-size: 14px;
+      width: 40px !important;
+      height: 40px;
+      border-radius: @radius;
+      margin-bottom: 10px;
+      padding: 0px;
+      line-height: 40px;
+      color: @ness_color_2;
+      text-align: center;
+      &.logout {
+        background-color: fade(@ness_color_2, 20%);
+        margin-bottom: 10px;
+        color: @ness_color_2;
+      }
 
+      a {
+        color: @ness_color_2;
+
+      }
+    }
+  }
 
      
   
@@ -337,33 +369,11 @@ body {
   padding: 0px;
 }
 
-.user-menu {
-  position: absolute;
-  list-style-type: none;
-  margin: 0px;
-  margin-top: 20px;
-  padding: 0px !important;
-  margin-right: 0px;
-  bottom: 0px;
-  left: 15px;
-  li {
-    float: left;
-    list-style: none;
-    font-size: 14px;
-    width: 40px !important;
-    height: 40px;
-    border-radius: @radius;
-    margin-bottom: 10px;
-    padding: 0px;
-    line-height: 40px;
-    color: @ness_color_2;
-    text-align: center;
-    &.logout {
-      background-color: fade(@ness_color_2, 20%);
-      margin-bottom: 10px;
-      color: @ness_color_2;
-    }
-  }
+
+hr.full {
+border: 0px;
+border-bottom: 1px solid #ccc;
+margin-bottom: 20px;
 }
 
 .navbar-top {
@@ -383,6 +393,24 @@ body {
     border-right: 1px solid #ccc;
     img {
       height: 20px;
+    }
+  }
+
+  .user-menu {
+    list-style: none;
+    float: right;
+    margin-right: 40px;
+    margin-top: 5px;
+
+    li {
+      list-style-type: none;
+      font-size: 16px;
+      float: left;
+      margin-left: 10px;
+
+        i {
+          color: fade(@ness_color_2, 40%);
+        }
     }
   }
 }

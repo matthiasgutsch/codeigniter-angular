@@ -65,10 +65,9 @@ export class AdminDashboardComponent implements OnInit {
     this.options = {
       plugins:[ dayGridPlugin, timeGridPlugin, interactionPlugin ],
       header: {
-          left: 'prev,next',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay'
-      },
+          right: 'prev,next',
+          left: 'title',
+        },
       editable: true
   };
 

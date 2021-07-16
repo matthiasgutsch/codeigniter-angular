@@ -19,6 +19,7 @@
                             label="Aggiungi" class="p-button p-button-primary"></button>
                     </div>
                 </div>
+                <hr class="full">
 
                 <p-table #dt1 [value]="blogs" [globalFilterFields]="['title','status','category.name']"
                     [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
@@ -51,7 +52,8 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-blog>
                         <tr>
-                            <td>{{blog.date}}</td>
+                            <td><i class="pi pi-calendar"></i>
+                                 {{blog.date}}</td>
 
                             <td><a [routerLink]="['/admin/categories/edit', getCategoryItem(blog.category_id)?.id]">
                                     <span class="user"><i class="pi pi-user"></i> {{
