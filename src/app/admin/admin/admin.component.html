@@ -4,7 +4,6 @@
     <i class="pi pi-inbox"></i>
   </div>
 
-
   <ul class="nav-menu">
 
     <li><a routerLink="./" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ><i class="pi pi-inbox" pTooltip="Dashboard" tooltipPosition="right"></i></a>
@@ -33,7 +32,7 @@
 
 
       <div class="main close">
-
+        {{currentUser.first_name}}
           <router-outlet></router-outlet>
       </div>
 
