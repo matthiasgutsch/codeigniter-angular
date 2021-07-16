@@ -39,6 +39,7 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
 import {TooltipModule} from 'primeng/tooltip';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import {TooltipModule} from 'primeng/tooltip';
     MessagesModule,
     TooltipModule,
     ToastModule,
+    OverlayPanelModule,
     MessageModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
