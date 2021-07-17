@@ -14,7 +14,7 @@ export class ContactFormComponent implements OnInit {
   model = new Contact();
   submitted = false;
   error = {};
-  success = {};
+  success: any;
 
   constructor(
     private router: Router,

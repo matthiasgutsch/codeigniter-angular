@@ -10,6 +10,7 @@ import { BlogFormComponent } from './blog/blog-form/blog-form.component';
 
 import { AuthGuard } from '../auth/auth.guard';
 import { CategoryFormComponent } from './category/category-form/category-form.component';
+import { AdminCalendarComponent } from './admin-calendar/admin-calendar.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
         children: [
           { path: 'blogs', component: ManageBlogsComponent },
           { path: 'blogs/create', component: BlogFormComponent },
+          { path: 'calendar', component: AdminCalendarComponent },
           { path: 'blogs/edit/:id', component: BlogFormComponent },
           { path: 'categories', component: ManageCategoriesComponent },
           { path: 'categories/edit/:id', component: CategoryFormComponent },

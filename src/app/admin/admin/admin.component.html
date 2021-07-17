@@ -1,13 +1,14 @@
 
 <div class="sidebar">
-  <div class="openbtn" (click)="flag = !flag">
+  <div class="openbtn">
     <i class="pi pi-inbox"></i>
   </div>
 
   <ul class="nav-menu">
-
     <li><a routerLink="./" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ><i class="pi pi-inbox" pTooltip="Dashboard" tooltipPosition="right"></i></a></li>
     <li><a routerLink="./blogs" routerLinkActive="active" ><i class="pi pi-user" pTooltip="User" tooltipPosition="right"></i></a></li>
+    <li><a routerLink="./calendar" routerLinkActive="active" ><i class="pi pi-calendar" pTooltip="Calendar" tooltipPosition="right"></i></a></li>
+
     <li><a routerLink="./categories" routerLinkActive="active"><i class="pi pi-user" pTooltip="Clienti" tooltipPosition="right"></i></a></li>
     <li><a routerLink="./types" routerLinkActive="active"><i class="pi pi-inbox"  pTooltip="Blogs" tooltipPosition="right"></i></a></li>
     <li><a routerLink="./pages" routerLinkActive="active"><i class="pi pi-inbox"  pTooltip="Blogs" tooltipPosition="right"></i></a></li>

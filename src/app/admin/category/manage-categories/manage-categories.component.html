@@ -64,23 +64,6 @@
 
 
 
-<p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'30em'}">
-    <ng-template pTemplate="content">
-        {{blog.id}}
-        <h3>{{blog.title}}</h3>
-        <hr>
-        <p [innerHTML]="blog.description"></p>
-        <hr>
-        <img src="{{blog.image}}" width="100px">
-        <p>{{blog.category_id}}</p>
-        <p>{{blog.is_featured}}</p>
-        <p>{{blog.is_active}}</p>
-
-    </ng-template>
-
-
-</p-sidebar>
-
 
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
 </p-confirmDialog>
