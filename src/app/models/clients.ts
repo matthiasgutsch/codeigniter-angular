@@ -1,6 +1,7 @@
 export class Clients {
     id: number;
-    title: string;
+    name: string;
+    surname: string;
     address: string;
     user_id: number;
     description: string;

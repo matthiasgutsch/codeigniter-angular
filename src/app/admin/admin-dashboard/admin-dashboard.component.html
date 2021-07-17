@@ -54,7 +54,7 @@
            
                 <ng-template pTemplate="body" let-client>
                     <tr>
-                        <td><strong>{{client.title}}</strong><br>{{client.category_id}}</td>
+                        <td><strong>{{client.name}} {{client.surname}}</strong><br>{{client.category_id}}</td>
                         <td class="action">
                             <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2 pull-right"
                                 [routerLink]="['/admin/clients/edit', client.id]"></button>
