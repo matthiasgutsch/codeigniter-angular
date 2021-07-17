@@ -1,4 +1,16 @@
 {
-  "calendario": "Calendario",
-  "compB": "Компонент Б работает"
+
+
+  "yes": "Si",
+  "no": "No",
+  "form.appointment.type": "Tipo",
+  "form.appointment.date": "Data",
+  "form.appointment.featured": "Importante",
+  "form.appointment.active": "Attivo",
+  "form.appointment.category": "Categoria",
+  "form.appointment.description": "Descrizione",
+
+
+
+  "calendar.main.title": "Calendario"
   }

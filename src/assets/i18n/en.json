@@ -1,4 +1,15 @@
 {
-    "calendario": "Calendar",
-    "compB": "Компонент Б работает"
+  
+  "yes": "Yes",
+  "no": "No",
+
+  "form.appointment.type": "Type",
+  "form.appointment.date": "Date",
+  "form.appointment.featured": "Featured",
+  "form.appointment.active": "Active",
+  "form.appointment.category": "Category",
+  "form.appointment.description": "Description",
+
+
+  "calendar.main.title": "Calendar"
   }
