@@ -46,21 +46,21 @@
             </div>
             <hr class="full">
 
-            <p-table #dt1 [value]="categories" [globalFilterFields]="['name','address','category.name']"
+            <p-table #dt1 [value]="clients" [globalFilterFields]="['name','address','category.name']"
                 [paginator]="false" [rows]="10" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
         
 
            
-                <ng-template pTemplate="body" let-category>
+                <ng-template pTemplate="body" let-client>
                     <tr>
-                        <td><strong>{{category.name}}</strong><br>{{category.region}}</td>
+                        <td><strong>{{client.title}}</strong><br>{{client.category_id}}</td>
                         <td class="action">
                             <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2 pull-right"
-                                [routerLink]="['/admin/categories/edit', category.id]"></button>
+                                [routerLink]="['/admin/clients/edit', client.id]"></button>
 
                             <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2 pull-right"
-                                (click)="onDelete(category.id)"></button>
+                                (click)="onDelete(client.id)"></button>
 
                         </td>
                     </tr>

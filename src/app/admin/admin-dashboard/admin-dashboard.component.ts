@@ -11,6 +11,8 @@ import { CategoryService } from 'src/app/services/categories.service';
 import { Category } from 'src/app/models/category';
 import { Router, ActivatedRoute } from '@angular/router';
 import {MessageService} from 'primeng/api';
+import { ClientsService } from 'src/app/services/clients.service';
+import { Clients } from 'src/app/models/clients';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -35,9 +37,11 @@ export class AdminDashboardComponent implements OnInit {
   date: Date;
   categories: Category;
   productDialog:boolean = false;
-
+  clients: Clients;
+  client: Clients;
+  
   constructor(private blogService: BlogService,     
-    private categoryService: CategoryService,
+    private clientsService: ClientsService,
     private fb: FormBuilder,
     private router: Router,
     private messageService: MessageService,
@@ -55,8 +59,8 @@ export class AdminDashboardComponent implements OnInit {
       error => this.error = error
     );
 
-    this.categoryService.getAllList().subscribe(
-      (data: Category) => this.categories = data,
+    this.clientsService.getAllList().subscribe(
+      (data: Clients) => this.clients = data,
       error => this.error = error
     );
 
