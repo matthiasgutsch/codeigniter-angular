@@ -19,7 +19,7 @@ export class AdminComponent implements OnInit {
   
   constructor(  public translate: TranslateService) { 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-    console.log(this.currentUser);
+    //console.log(this.currentUser);
 
     translate.addLangs(['it', 'en']);
     translate.setDefaultLang('it');
@@ -29,7 +29,7 @@ export class AdminComponent implements OnInit {
   switchLang(lang: string) {
     this.translate.use(lang);
   }
-  
+
   ngOnInit() {
 
   

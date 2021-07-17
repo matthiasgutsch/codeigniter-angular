@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { BlogService } from '../../../services/blog.service';
+import { ClientsService } from '../../../services/clients.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
@@ -48,7 +48,7 @@ export class ClientsFormComponent implements OnInit {
   
   constructor(
     private fb: FormBuilder,
-    private blogService: BlogService,
+    private clientsService: ClientsService,
     private messageService: MessageService,
     private categoryService: CategoryService, 
     private confirmationService: ConfirmationService,
@@ -65,7 +65,7 @@ export class ClientsFormComponent implements OnInit {
 
   ngOnInit() {
 
-    this.blogService.getBlogs().subscribe(
+    this.clientsService.getAllList().subscribe(
       (data: Clients) => this.clients = data,
       error => this.error = error
     );
@@ -81,7 +81,7 @@ export class ClientsFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.pageTitle = 'Edit Blog';
-      this.blogService.getBlog(+id).subscribe(
+      this.clientsService.getId(+id).subscribe(
         res => {
           this.blogForm.patchValue({
             title: res.title,
@@ -161,23 +161,23 @@ export class ClientsFormComponent implements OnInit {
     const id = this.blogForm.get('id').value;
 
     if (id) {
-      this.blogService.updateBlog(formData, +id).subscribe(
+      this.clientsService.update(formData, +id).subscribe(
         res => {
           if (res.status == 'error') {
             this.uploadError = res.message;
           } else {
-            this.router.navigate(['/admin/blogs']);
+            this.router.navigate(['/admin/clients']);
           }
         },
         error => this.error = error
       );
     } else {
-      this.blogService.createBlog(formData).subscribe(
+      this.clientsService.create(formData).subscribe(
         res => {
           if (res.status === 'error') {
             this.uploadError = res.message;
           } else {
-            this.router.navigate(['/admin/blogs']);
+            this.router.navigate(['/admin/clients']);
           }
         },
         error => this.error = error

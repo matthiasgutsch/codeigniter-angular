@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogService } from '../../../services/blog.service';
+import { ClientsService } from '../../../services/clients.service';
 import { Blog } from '../../../models/blog';
+import { Clients } from '../../../models/clients';
+
 import {ConfirmationService} from 'primeng/api';
 import { CategoryService } from '../../../services/categories.service';
 import { Category } from '../../../models/category';
@@ -11,8 +13,8 @@ import {MessageService} from 'primeng/api';
   templateUrl: './manage-clients.component.html'
 })
 export class ManageClientsComponent implements OnInit {
-  blogs: Blog;
-  blog: Blog;
+  clients: Clients;
+  client: Clients;
   categories: any = [];
   category: Category;
   error: string;
@@ -31,7 +33,7 @@ trackByFn(index, item) {
 
 
   constructor(
-    private blogService: BlogService,
+    private clientsService: ClientsService,
     private messageService: MessageService,
     private categoryService: CategoryService, 
     private confirmationService: ConfirmationService,) { 
@@ -39,8 +41,8 @@ trackByFn(index, item) {
   }
 
   ngOnInit() {
-    this.blogService.getBlogs().subscribe(
-      (data: Blog) => this.blogs = data,
+    this.clientsService.getAllList().subscribe(
+      (data: Blog) => this.clients = data,
       error => this.error = error
     );
 
@@ -55,8 +57,8 @@ trackByFn(index, item) {
     return this.categories.find(item => item.id === category_id);
   }
   
-  editProduct(blog: Blog) {
-    this.blog = {...blog};
+  edit(client: Clients) {
+    this.client = {...client};
     this.productDialog = true;
 }
 
@@ -72,15 +74,17 @@ hideDialog() {
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.blogService.deleteBlog(+id).subscribe(
+        this.clientsService.delete(+id).subscribe(
           res => {
             console.log(res);
             this.ngOnInit();
-            this.messageService.add({key: 'myKey1', severity:'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo'});
+            this.messageService.add({key: 'myKey1', severity:'success', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo'});
 
           },
-          error => this.error = error
-        );
+          error => {
+            this.error = error;
+            this.messageService.add({key: 'myKey2', severity:'warn', summary: 'Attenzione', detail: 'Errore backend'});
+          });
       },
      
   });

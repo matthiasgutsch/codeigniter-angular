@@ -3,6 +3,8 @@
     </div>
 </div>
 
+
+
 <div class="p-fluid">
     <div class="p-field p-grid">
         <div class="p-col-8 p-md-8">
@@ -15,13 +17,13 @@
                     </div>
                     <div class="p-col-2 p-md-2">
 
-                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/blogs/create']"
+                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']"
                             label="Aggiungi" class="p-button p-button-primary"></button>
                     </div>
                 </div>
                 <hr class="full">
 
-                <p-table #dt1 [value]="blogs" [globalFilterFields]="['title','status','category.name']"
+                <p-table #dt1 [value]="clients" [globalFilterFields]="['title','status','category.name']"
                     [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                     [totalRecords]="true">
@@ -50,28 +52,28 @@
                             <th>Action</th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-blog>
+                    <ng-template pTemplate="body" let-client>
                         <tr>
                             <td><i class="pi pi-calendar"></i>
-                                 {{blog.date}}</td>
+                                 {{client.date}}</td>
 
-                            <td><a [routerLink]="['/admin/categories/edit', getCategoryItem(blog.category_id)?.id]">
+                            <td><a [routerLink]="['/admin/categories/edit', getCategoryItem(client.category_id)?.id]">
                                     <span class="user"><i class="pi pi-user"></i> {{
-               getCategoryItem(blog.category_id)?.name }}</span></a>
+               getCategoryItem(client.category_id)?.name }}</span></a>
                             </td>
 
-                            <td>{{ getCategoryItem(blog.category_id)?.address }} -
-                                {{ getCategoryItem(blog.category_id)?.region }}
+                            <td>{{ getCategoryItem(client.category_id)?.address }} -
+                                {{ getCategoryItem(client.category_id)?.region }}
                             </td>
-                            <td>{{blog.title}}</td>
+                            <td>{{client.title}}</td>
 
                             <td class="action">
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
-                                    [routerLink]="['/admin/blogs/edit', blog.id]"></button>
+                                    [routerLink]="['/admin/clients/edit', client.id]"></button>
                                 <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
-                                    (click)="editProduct(blog)"></button>
+                                    (click)="edit(client)"></button>
                                 <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
-                                    (click)="onDelete(blog.id)"></button>
+                                    (click)="onDelete(client.id)"></button>
 
                             </td>
                         </tr>
@@ -88,7 +90,7 @@
                     </div>
                     <div class="p-col-4 p-md-4">
 
-                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/categories/create']"
+                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']"
                             label="Aggiungi" class="p-button p-button-primary p-mr-2"></button>
 
                     </div>
@@ -105,7 +107,7 @@
                         <td><strong>{{category.name}}</strong><br>{{category.region}}</td>
                         <td class="action">
                             <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2 pull-right"
-                                [routerLink]="['/admin/categories/edit', category.id]"></button>
+                                [routerLink]="['/admin/clients/edit', category.id]"></button>
 
                             <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2 pull-right"
                                 (click)="onDelete(category.id)"></button>
@@ -120,17 +122,17 @@
 </div>
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'30em'}">
     <ng-template pTemplate="content">
-        {{blog.id}}
-        <h3>{{blog.title}}</h3>
+        {{client.id}}
+        <h3>{{client.title}}</h3>
         <hr>
-        <p [innerHTML]="blog.description"></p>
+        <p [innerHTML]="client.description"></p>
         <hr>
-        <img src="{{blog.image}}" width="100px">
-        <p>{{ getCategoryItem(blog.category_id)?.name }} {{ getCategoryItem(blog.category_id)?.address }}
-            {{ getCategoryItem(blog.category_id)?.description }}
+        <img src="{{client.image}}" width="100px">
+        <p>{{ getCategoryItem(client.category_id)?.name }} {{ getCategoryItem(client.category_id)?.address }}
+            {{ getCategoryItem(client.category_id)?.description }}
         </p>
-        <p>{{blog.is_featured}}</p>
-        <p>{{blog.is_active}}</p>
+        <p>{{client.is_featured}}</p>
+        <p>{{client.is_active}}</p>
 
     </ng-template>
 
@@ -138,9 +140,13 @@
 
 
 
-{{error}}
 
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
 </p-confirmDialog>
 
 <p-toast key="myKey1"></p-toast>
+
+<p-toast key="myKey2">{{error}}</p-toast>
+
+
+
