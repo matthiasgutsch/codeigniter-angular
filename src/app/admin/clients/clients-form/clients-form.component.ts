@@ -12,6 +12,7 @@ import * as moment from 'moment';
 import { SEX_LIST } from '../../constants/constants';
 import { ComuniService } from 'src/app/services/comuni.service';
 import { Comuni } from 'src/app/models/comuni';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-clients-form',
@@ -55,6 +56,7 @@ export class ClientsFormComponent implements OnInit {
     private messageService: MessageService,
     private categoryService: CategoryService, 
     private comuniService: ComuniService,
+    private _location: Location,
     private confirmationService: ConfirmationService,
     private router: Router,
     private route: ActivatedRoute
@@ -177,7 +179,7 @@ export class ClientsFormComponent implements OnInit {
           if (res.status == 'error') {
             this.uploadError = res.message;
           } else {
-            this.router.navigate(['/admin/clients']);
+            this._location.back();
           }
         },
         error => this.error = error
@@ -188,7 +190,7 @@ export class ClientsFormComponent implements OnInit {
           if (res.status === 'error') {
             this.uploadError = res.message;
           } else {
-            this.router.navigate(['/admin/clients']);
+            this._location.back();
           }
         },
         error => this.error = error
