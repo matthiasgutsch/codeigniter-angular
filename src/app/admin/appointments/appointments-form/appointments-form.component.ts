@@ -91,7 +91,7 @@ export class AppointmentsFormComponent implements OnInit {
 
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.pageTitle = 'Edit Blog';
+      this.pageTitle = 'Modifica Appuntamento';
       this.blogService.getBlog(+id).subscribe(
         res => {
           this.blogForm.patchValue({
@@ -107,7 +107,7 @@ export class AppointmentsFormComponent implements OnInit {
         }
       );
     } else {
-      this.pageTitle = 'Create Blog';
+      this.pageTitle = 'Aggiungi Appuntamento';
     }
 
     this.blogForm = this.fb.group({

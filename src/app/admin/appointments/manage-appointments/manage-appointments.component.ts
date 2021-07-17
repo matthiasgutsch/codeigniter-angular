@@ -13,7 +13,7 @@ import { ClientsService } from 'src/app/services/clients.service';
   templateUrl: './manage-appointments.component.html'
 })
 export class ManageAppointmentsComponent implements OnInit {
-  title = 'Interventi';
+  title = 'Appuntamenti';
   blogs: Blog;
   blog: Blog;
   categories: any = [];
