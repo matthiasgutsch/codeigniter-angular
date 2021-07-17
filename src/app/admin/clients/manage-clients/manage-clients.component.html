@@ -1,0 +1,146 @@
+<div class="dash-header">
+    <div class="dash-title">
+    </div>
+</div>
+
+<div class="p-fluid">
+    <div class="p-field p-grid">
+        <div class="p-col-8 p-md-8">
+
+            <p-card>
+
+                <div class="p-field p-grid">
+                    <div class="p-col-10 p-md-10">
+                        <h3>{{title}}</h3>
+                    </div>
+                    <div class="p-col-2 p-md-2">
+
+                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/blogs/create']"
+                            label="Aggiungi" class="p-button p-button-primary"></button>
+                    </div>
+                </div>
+                <hr class="full">
+
+                <p-table #dt1 [value]="blogs" [globalFilterFields]="['title','status','category.name']"
+                    [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [totalRecords]="true">
+                    <ng-template pTemplate="caption">
+                        <div class="p-d-flex">
+                            <span class="p-input-icon-left p-ml-auto">
+                                <i class="pi pi-search"></i>
+
+                                <input pInputText type="text"
+                                    (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                    placeholder="Search keyword" />
+
+                            </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+
+                            <th>Data Intervento
+
+                            </th>
+                            <th>Utente</th>
+                            <th>Indirizzo</th>
+
+                            <th>Tipo di Intervento</th>
+                            <th>Action</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-blog>
+                        <tr>
+                            <td><i class="pi pi-calendar"></i>
+                                 {{blog.date}}</td>
+
+                            <td><a [routerLink]="['/admin/categories/edit', getCategoryItem(blog.category_id)?.id]">
+                                    <span class="user"><i class="pi pi-user"></i> {{
+               getCategoryItem(blog.category_id)?.name }}</span></a>
+                            </td>
+
+                            <td>{{ getCategoryItem(blog.category_id)?.address }} -
+                                {{ getCategoryItem(blog.category_id)?.region }}
+                            </td>
+                            <td>{{blog.title}}</td>
+
+                            <td class="action">
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
+                                    [routerLink]="['/admin/blogs/edit', blog.id]"></button>
+                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
+                                    (click)="editProduct(blog)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
+                                    (click)="onDelete(blog.id)"></button>
+
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-card>
+        </div>
+
+        <div class="p-col-4 p-md-4">
+            <p-card>
+                <div class="p-field p-grid">
+                    <div class="p-col-8 p-md-8">
+                        <h3>Clienti</h3>
+                    </div>
+                    <div class="p-col-4 p-md-4">
+
+                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/categories/create']"
+                            label="Aggiungi" class="p-button p-button-primary p-mr-2"></button>
+
+                    </div>
+                </div>
+
+                <p-table #dt1 [value]="categories" [globalFilterFields]="['name','address','category.name']"
+                [paginator]="false" [rows]="10" [showCurrentPageReport]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+        
+
+           
+                <ng-template pTemplate="body" let-category>
+                    <tr>
+                        <td><strong>{{category.name}}</strong><br>{{category.region}}</td>
+                        <td class="action">
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2 pull-right"
+                                [routerLink]="['/admin/categories/edit', category.id]"></button>
+
+                            <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2 pull-right"
+                                (click)="onDelete(category.id)"></button>
+
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            </p-card>
+        </div>
+    </div>
+</div>
+<p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'30em'}">
+    <ng-template pTemplate="content">
+        {{blog.id}}
+        <h3>{{blog.title}}</h3>
+        <hr>
+        <p [innerHTML]="blog.description"></p>
+        <hr>
+        <img src="{{blog.image}}" width="100px">
+        <p>{{ getCategoryItem(blog.category_id)?.name }} {{ getCategoryItem(blog.category_id)?.address }}
+            {{ getCategoryItem(blog.category_id)?.description }}
+        </p>
+        <p>{{blog.is_featured}}</p>
+        <p>{{blog.is_active}}</p>
+
+    </ng-template>
+
+</p-sidebar>
+
+
+
+{{error}}
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
+
+<p-toast key="myKey1"></p-toast>

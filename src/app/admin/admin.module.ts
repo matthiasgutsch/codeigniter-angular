@@ -10,6 +10,10 @@ import { AdminCalendarComponent } from './admin-calendar/admin-calendar.componen
 import { AdminComponent } from './admin/admin.component';
 import { ManageBlogsComponent } from './blog/manage-blogs/manage-blogs.component';
 import { ManageCategoriesComponent } from './category/manage-categories/manage-categories.component';
+
+import { ManageClientsComponent } from './clients/manage-clients/manage-clients.component';
+import { ClientsFormComponent } from './clients/clients-form/clients-form.component';
+
 import { ManagePagesComponent } from './manage-pages/manage-pages.component';
 import { BlogFormComponent } from './blog/blog-form/blog-form.component';
 import { TableModule } from 'primeng/table';
@@ -57,6 +61,8 @@ export class I18nModule {
     AdminComponent,
     ManageBlogsComponent,
     ManageCategoriesComponent,
+    ManageClientsComponent,
+    ClientsFormComponent,
     ManagePagesComponent,
     MomentPipe,
     BlogFormComponent,
