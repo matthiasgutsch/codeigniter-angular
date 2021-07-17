@@ -13,6 +13,12 @@ export const TYPE_LIST: SelectItem[] = [
   { label: "Altro", value: "Altro" }
 ];
 
+export const SEX_LIST: SelectItem[] = [
+  { label: "Tutte", value: null },
+  { label: "Uomo", value: "Uomo" },
+  { label: "Donna", value: "Donna" },
+];
+
 
 export const ANNO_ITEMS: SelectItem[] = [
   { label: "nessuno", value: "" },

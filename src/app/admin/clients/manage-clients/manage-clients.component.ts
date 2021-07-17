@@ -42,7 +42,7 @@ trackByFn(index, item) {
 
   ngOnInit() {
     this.clientsService.getAllList().subscribe(
-      (data: Blog) => this.clients = data,
+      (data: Clients) => this.clients = data,
       error => this.error = error
     );
 

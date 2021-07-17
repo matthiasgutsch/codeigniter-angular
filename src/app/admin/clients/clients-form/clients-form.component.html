@@ -28,14 +28,12 @@
                         <div class="p-fluid">
 
                             <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Title <span
+                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Nome <span
                                         class="required">*</span></label>
                                 <div class="p-col-12 p-md-10">
-                                    <p-dropdown [virtualScroll]="true" filter="true" [required]="true"
-                                        [showClear]="true" [options]="typeList" filter="true"
-                                        placeholder="Tipo Intervento" inputStyleClass="selectpicker"
-                                        formControlName="title" [style]="{ width: '100%' }">
-                                    </p-dropdown>
+                                    <input type="text" pInputText  formControlName="title"/>
+
+                 
 
                                 </div>
                             </div>
@@ -44,20 +42,54 @@
                         <div class="p-fluid">
 
                             <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Date <span
+                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Data di nascita <span
                                         class="required">*</span></label>
                                 <div class="p-col-12 p-md-10">
 
                                     <p-calendar formControlName="date" dataType="string" [(ngModel)]="selectedDate"
-                                        hourFormat="24" dateFormat="yy-mm-dd" showTime="true" appendTo="body"></p-calendar>
+                                        hourFormat="24" dateFormat="yy-mm-dd"  appendTo="body"></p-calendar>
 
                                 </div>
                             </div>
                         </div>
 
+
                         <div class="p-fluid">
                             <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Is Featured <span
+                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Comune di nascita</label>
+                                <div class="p-col-12 p-md-10">
+                                    <p-dropdown [options]="comuni" [virtualScroll]="true" filter="true"
+                                    [required]="true" [showClear]="true" placeholder="Scegli"
+                                    [style]="{ width: '100%' }"
+                                    formControlName="category_id" optionLabel="nome"
+                                    optionValue="nome">
+                                    <ng-template let-option pTemplate="item">
+                                        {{option.nome}}
+                                    </ng-template>
+                                </p-dropdown>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="p-fluid">
+
+                            <div class="p-field p-grid">
+                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Indirizzo <span
+                                        class="required">*</span></label>
+                                <div class="p-col-12 p-md-10">
+                                    <input type="text" pInputText formControlName="address"/>
+
+                 
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="p-fluid">
+                            <div class="p-field p-grid">
+                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Sposata <span
                                         class="required">*</span></label>
                                 <div class="p-col-12 p-md-10">
                                     <input type="radio" formControlName="is_featured" value="1" /> Yes
@@ -98,27 +130,7 @@
                             </div>
                         </div>
 
-                        <div class="p-fluid">
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Categoria <span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-10">
-                                    <p-dropdown [options]="categories" [virtualScroll]="true" filter="true"
-                                        [required]="true" [showClear]="true" placeholder="Scegli"
-                                        [style]="{ width: '100%' }" [(ngModel)]="selectedCategories"
-                                        formControlName="category_id" optionLabel="name" optionValue="id">
-                                        <ng-template let-option pTemplate="item">
-
-                                            <strong>{{option.name}}</strong><br>
-                                            <span>{{option.address}} - {{option.region}}</span>
-
-                                        </ng-template>
-
-                                    </p-dropdown>
-
-                                </div>
-                            </div>
-                        </div>
+                       
 
                         <div class="p-fluid">
                             <div class="p-field p-grid">

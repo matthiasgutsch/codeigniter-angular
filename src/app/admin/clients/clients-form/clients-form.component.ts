@@ -9,7 +9,9 @@ import { FormControl } from '@angular/forms';
 import { CategoryService } from '../../../services/categories.service';
 import { ConfirmationService, MessageService, SelectItem } from "primeng/api";
 import * as moment from 'moment';
-import { TYPE_LIST } from '../../constants/constants';
+import { SEX_LIST } from '../../constants/constants';
+import { ComuniService } from 'src/app/services/comuni.service';
+import { Comuni } from 'src/app/models/comuni';
 
 @Component({
   selector: 'app-clients-form',
@@ -29,6 +31,7 @@ export class ClientsFormComponent implements OnInit {
   category: Category;
   checked: boolean = true;
   selectedValue: string;
+  comuni: Comuni;
 
   blogForm: FormGroup;
   typeList: any[];
@@ -51,6 +54,7 @@ export class ClientsFormComponent implements OnInit {
     private clientsService: ClientsService,
     private messageService: MessageService,
     private categoryService: CategoryService, 
+    private comuniService: ComuniService,
     private confirmationService: ConfirmationService,
     private router: Router,
     private route: ActivatedRoute
@@ -59,7 +63,7 @@ export class ClientsFormComponent implements OnInit {
       this.selectedDate = new Date(this.date);
     }
 
-    this.typeList = TYPE_LIST;
+    this.typeList = SEX_LIST;
 
   }
 
@@ -77,14 +81,19 @@ export class ClientsFormComponent implements OnInit {
     );
 
 
+    this.comuniService.getAllList().subscribe(
+      (data: Comuni) => this.comuni = data,
+      error => this.error = error
+    );
 
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.pageTitle = 'Edit Blog';
+      this.pageTitle = 'Modifica Cliente';
       this.clientsService.getId(+id).subscribe(
         res => {
           this.blogForm.patchValue({
             title: res.title,
+            address: res.address,
             description: res.description,
             category_id: res.category_id,
             is_featured: res.is_featured,
@@ -96,12 +105,13 @@ export class ClientsFormComponent implements OnInit {
         }
       );
     } else {
-      this.pageTitle = 'Create Blog';
+      this.pageTitle = 'Aggiungi Cliente';
     }
 
     this.blogForm = this.fb.group({
       id: [''],
       title: ['', Validators.required],
+      address: ['', Validators.required],
       description: ['', Validators.required],
       is_featured: ['0'],
       category_id: ['', Validators.required],
@@ -151,6 +161,7 @@ export class ClientsFormComponent implements OnInit {
   onSubmit() {
     const formData = new FormData();
     formData.append('title', this.blogForm.get('title').value);
+    formData.append('address', this.blogForm.get('address').value);
     formData.append('description', this.blogForm.get('description').value);
     formData.append('is_featured', this.blogForm.get('is_featured').value);
     formData.append('category_id', this.blogForm.get('category_id').value);

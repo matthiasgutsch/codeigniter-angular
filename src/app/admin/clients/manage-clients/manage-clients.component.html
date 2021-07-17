@@ -42,10 +42,9 @@
                     <ng-template pTemplate="header">
                         <tr>
 
-                            <th>Data Intervento
-
-                            </th>
+                          
                             <th>Utente</th>
+                            <th>Data nascita</th>
                             <th>Indirizzo</th>
 
                             <th>Tipo di Intervento</th>
@@ -54,18 +53,18 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-client>
                         <tr>
-                            <td><i class="pi pi-calendar"></i>
-                                 {{client.date}}</td>
+                  
 
                             <td><a [routerLink]="['/admin/categories/edit', getCategoryItem(client.category_id)?.id]">
-                                    <span class="user"><i class="pi pi-user"></i> {{
-               getCategoryItem(client.category_id)?.name }}</span></a>
+                                    <span class="user"><i class="pi pi-user"></i>{{client.title}}</span></a>
                             </td>
 
-                            <td>{{ getCategoryItem(client.category_id)?.address }} -
-                                {{ getCategoryItem(client.category_id)?.region }}
+                            <td><i class="pi pi-calendar"></i>
+                                {{client.date}}</td>
+
+                            <td>{{client.address}}
                             </td>
-                            <td>{{client.title}}</td>
+                            <td>{{client.category_id}}</td>
 
                             <td class="action">
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
