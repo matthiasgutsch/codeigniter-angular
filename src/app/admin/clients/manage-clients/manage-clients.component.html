@@ -47,7 +47,6 @@
                             <th>Data nascita</th>
                             <th>Indirizzo</th>
 
-                            <th>Tipo di Intervento</th>
                             <th>Action</th>
                         </tr>
                     </ng-template>
@@ -62,9 +61,8 @@
                             <td><i class="pi pi-calendar"></i>
                                 {{client.date}}</td>
 
-                            <td>{{client.address}}
-                            </td>
-                            <td>{{client.category_id}}</td>
+                           
+                            <td>  {{ getCategoryItem(client.category_id)?.nome }}</td>
 
                             <td class="action">
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
@@ -103,7 +101,7 @@
            
                 <ng-template pTemplate="body" let-client>
                     <tr>
-                        <td><strong>{{client.name}}</strong><br>{{client.category_id}}</td>
+                        <td><strong>{{client.name}}</strong><br>  {{ getCategoryItem(client.category_id)?.nome }}</td>
                         <td class="action">
                             <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2 pull-right"
                                 [routerLink]="['/admin/clients/edit', client.id]"></button>

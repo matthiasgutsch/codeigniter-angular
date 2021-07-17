@@ -7,6 +7,8 @@ import {ConfirmationService} from 'primeng/api';
 import { CategoryService } from '../../../services/categories.service';
 import { Category } from '../../../models/category';
 import {MessageService} from 'primeng/api';
+import { ComuniService } from 'src/app/services/comuni.service';
+import { Comuni } from 'src/app/models/comuni';
 
 @Component({
   selector: 'app-manage-clients',
@@ -18,6 +20,8 @@ export class ManageClientsComponent implements OnInit {
   categories: any = [];
   category: Category;
   error: string;
+  comuni: any = [];
+
   private category_id: number;
   private id: number;
 
@@ -35,6 +39,7 @@ trackByFn(index, item) {
   constructor(
     private clientsService: ClientsService,
     private messageService: MessageService,
+    private comuniService: ComuniService,
     private categoryService: CategoryService, 
     private confirmationService: ConfirmationService,) { 
 
@@ -47,6 +52,12 @@ trackByFn(index, item) {
     );
 
 
+    this.comuniService.getAllList().subscribe(
+      (data: Comuni) => this.comuni = data,
+      error => this.error = error
+    );
+
+    
     this.categoryService.getAllList().subscribe(
       (data: Category) => this.categories = data,
       error => this.error = error
@@ -54,7 +65,7 @@ trackByFn(index, item) {
   }
 
   getCategoryItem(category_id: string, id: string) {
-    return this.categories.find(item => item.id === category_id);
+    return this.comuni.find(item => item.id === category_id);
   }
   
   edit(client: Clients) {

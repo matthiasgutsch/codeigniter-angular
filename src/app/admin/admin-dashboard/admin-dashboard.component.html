@@ -39,7 +39,7 @@
                     <h3>Clienti</h3>
                 </div>
                 <div class="p-col-12 p-md-4">
-                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/categories/create']"
+                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']"
                        class="p-button p-button-primary p-mr-2 pull-right"></button>
 
                 </div>
@@ -54,7 +54,11 @@
            
                 <ng-template pTemplate="body" let-client>
                     <tr>
-                        <td><strong>{{client.name}} {{client.surname}}</strong><br>{{client.category_id}}</td>
+                        <td><strong>{{client.name}} {{client.surname}}</strong><br>
+                            
+                            {{ getCategoryItem(client.category_id)?.nome }}
+                            
+                       </td>
                         <td class="action">
                             <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2 pull-right"
                                 [routerLink]="['/admin/clients/edit', client.id]"></button>

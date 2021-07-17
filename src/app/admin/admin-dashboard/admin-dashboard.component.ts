@@ -13,6 +13,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {MessageService} from 'primeng/api';
 import { ClientsService } from 'src/app/services/clients.service';
 import { Clients } from 'src/app/models/clients';
+import { ComuniService } from 'src/app/services/comuni.service';
+import { Comuni } from 'src/app/models/comuni';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -35,14 +37,23 @@ export class AdminDashboardComponent implements OnInit {
   selectedCategories: Category;
   selectedDate: Date;
   date: Date;
-  categories: Category;
+  categories: any = [];
+  category: Category;
   productDialog:boolean = false;
   clients: Clients;
   client: Clients;
-  
+  comuni: any = [];
+
+trackByFn(index, item) {
+  return item.id;
+}
+
+
   constructor(private blogService: BlogService,     
     private clientsService: ClientsService,
     private fb: FormBuilder,
+    private comuniService: ComuniService,
+
     private router: Router,
     private messageService: MessageService,
     private route: ActivatedRoute
@@ -64,6 +75,10 @@ export class AdminDashboardComponent implements OnInit {
       error => this.error = error
     );
 
+    this.comuniService.getAllList().subscribe(
+      (data: Comuni) => this.comuni = data,
+      error => this.error = error
+    );
 
 
     this.options = {
@@ -89,6 +104,15 @@ export class AdminDashboardComponent implements OnInit {
   });
 
 } 
+
+
+
+
+getCategoryItem(category_id: string, id: string) {
+  return this.comuni.find(item => item.id === category_id);
+}
+
+
 
 showDialog() {
   this.productDialog = true;
