@@ -13,6 +13,8 @@ import { CategoryFormComponent } from './category/category-form/category-form.co
 import { AdminCalendarComponent } from './admin-calendar/admin-calendar.component';
 import { ManageClientsComponent } from './clients/manage-clients/manage-clients.component';
 import { ClientsFormComponent } from './clients/clients-form/clients-form.component';
+import { ManageAppointmentsComponent } from './appointments/manage-appointments/manage-appointments.component';
+import { AppointmentsFormComponent } from './appointments/appointments-form/appointments-form.component';
 
 const routes: Routes = [
   {
@@ -26,6 +28,12 @@ const routes: Routes = [
           { path: 'blogs', component: ManageBlogsComponent },
           { path: 'blogs/create', component: BlogFormComponent },
           { path: 'blogs/edit/:id', component: BlogFormComponent },
+
+
+          { path: 'appointments', component: ManageAppointmentsComponent },
+          { path: 'appointments/create', component: AppointmentsFormComponent },
+          { path: 'appointments/edit/:id', component: AppointmentsFormComponent },
+
 
           { path: 'clients', component: ManageClientsComponent },
           { path: 'clients/create', component: ClientsFormComponent },

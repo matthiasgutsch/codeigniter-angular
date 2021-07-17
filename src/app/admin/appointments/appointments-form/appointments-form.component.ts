@@ -14,10 +14,10 @@ import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
 
 @Component({
-  selector: 'app-blog-form',
-  templateUrl: './blog-form.component.html'
+  selector: 'app-appointments-form',
+  templateUrl: './appointments-form.component.html'
 })
-export class BlogFormComponent implements OnInit {
+export class AppointmentsFormComponent implements OnInit {
   @ViewChild("myInput", { static: false }) myInputVariable: ElementRef;
 
   pageTitle: string;

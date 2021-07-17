@@ -45,7 +45,8 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
 
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
+import { ManageAppointmentsComponent } from './appointments/manage-appointments/manage-appointments.component';
+import { AppointmentsFormComponent } from './appointments/appointments-form/appointments-form.component';
 export class I18nModule {
   constructor(translate: TranslateService) {
     translate.addLangs(['it', 'en']);
@@ -65,6 +66,8 @@ export class I18nModule {
     ClientsFormComponent,
     ManagePagesComponent,
     MomentPipe,
+    ManageAppointmentsComponent,
+    AppointmentsFormComponent,
     BlogFormComponent,
     AdminCalendarComponent,
     CategoryFormComponent
