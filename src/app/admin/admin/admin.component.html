@@ -27,7 +27,15 @@
 
 <div class="navbar-top">
   <div class="user-menu"><ul><li><i class="pi pi-user"></i> {{currentUser.first_name}} {{currentUser.last_name}}
-    </li></ul></div>
+    </li><li> <select class="form-control" #selectedLang (change)="switchLang(selectedLang.value)">
+      <option *ngFor="let language of translate.getLangs()" [value]="language"
+        [selected]="language === translate.currentLang">
+        {{ language }}
+      </option>
+    </select></li></ul></div>
+
+   
+
 </div>
 
 

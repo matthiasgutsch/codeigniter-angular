@@ -24,7 +24,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { FileUploadModule } from 'primeng/fileupload';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient} from '@angular/common/http';
 import { FullCalendarModule } from 'primeng/fullcalendar';
 import { CalendarModule } from 'primeng/calendar';
 import { MomentPipe } from './pipe/moment.pipe';
@@ -38,6 +38,18 @@ import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
 import {TooltipModule} from 'primeng/tooltip';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
+
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export class I18nModule {
+  constructor(translate: TranslateService) {
+    translate.addLangs(['it', 'en']);
+    const browserLang = translate.getBrowserLang();
+    translate.use(browserLang.match(/it|en/) ? browserLang : 'it');
+  }
+}
+
 
 @NgModule({
   declarations: [
@@ -80,8 +92,20 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
     ButtonModule,
     InputSwitchModule,
     AutoCompleteModule,
-    SidebarModule
+    SidebarModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: translateLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
   ],
   providers: [ConfirmationService, MessageService]
 })
 export class AdminModule { }
+
+
+export function translateLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient);
+}
