@@ -10,7 +10,7 @@ import { BlogFormComponent } from './blog/blog-form/blog-form.component';
 
 import { AuthGuard } from '../auth/auth.guard';
 import { CategoryFormComponent } from './category/category-form/category-form.component';
-import { AdminCalendarComponent } from './admin-calendar/admin-calendar.component';
+import { AdminCalendarComponent } from './calendar/calendar.component';
 import { ManageClientsComponent } from './clients/manage-clients/manage-clients.component';
 import { ClientsFormComponent } from './clients/clients-form/clients-form.component';
 import { ManageAppointmentsComponent } from './appointments/manage-appointments/manage-appointments.component';

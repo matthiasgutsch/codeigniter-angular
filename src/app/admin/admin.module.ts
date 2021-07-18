@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ChipsModule } from "primeng/chips";
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { AdminCalendarComponent } from './admin-calendar/admin-calendar.component';
+import { AdminCalendarComponent } from './calendar/calendar.component';
 import { AdminComponent } from './admin/admin.component';
 import { ManageBlogsComponent } from './blog/manage-blogs/manage-blogs.component';
 import { ManageCategoriesComponent } from './category/manage-categories/manage-categories.component';

@@ -13,8 +13,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {MessageService} from 'primeng/api';
 
 @Component({
-  selector: 'app-admin-calendar',
-  templateUrl: './admin-calendar.component.html'
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html'
 })
 export class AdminCalendarComponent implements OnInit {
 
