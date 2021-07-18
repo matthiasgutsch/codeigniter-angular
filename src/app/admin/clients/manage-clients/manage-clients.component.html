@@ -55,14 +55,14 @@
                   
 
                             <td>
-                                <span class="user"> <i class="pi pi-user"></i></span>{{client.name}} {{client.surname}}
+                                <span class="user"> <i class="pi pi-user"></i></span>{{client.name}}
                             </td>
 
                             <td><i class="pi pi-calendar"></i>
                                 {{client.date}}</td>
 
                            
-                            <td>  {{ getCategoryItem(client.category_id)?.nome }}</td>
+                            <td>  {{client.city}}<br>{{ getCategoryItem(client.category_id)?.nome }}</td>
 
                             <td class="action">
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"

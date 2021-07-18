@@ -95,7 +95,7 @@ export class ClientsFormComponent implements OnInit {
         res => {
           this.blogForm.patchValue({
             name: res.name,
-            surname: res.surname,
+            city: res.city,
             address: res.address,
             description: res.description,
             category_id: res.category_id,
@@ -114,7 +114,7 @@ export class ClientsFormComponent implements OnInit {
     this.blogForm = this.fb.group({
       id: [''],
       name: ['', Validators.required],
-      surname: ['', Validators.required],
+      city: ['', Validators.required],
       address: ['', Validators.required],
       description: ['', Validators.required],
       is_featured: ['0'],
@@ -165,7 +165,7 @@ export class ClientsFormComponent implements OnInit {
   onSubmit() {
     const formData = new FormData();
     formData.append('name', this.blogForm.get('name').value);
-    formData.append('surname', this.blogForm.get('surname').value);
+    formData.append('city', this.blogForm.get('city').value);
     formData.append('address', this.blogForm.get('address').value);
     formData.append('description', this.blogForm.get('description').value);
     formData.append('is_featured', this.blogForm.get('is_featured').value);

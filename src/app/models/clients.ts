@@ -1,7 +1,7 @@
 export class Clients {
     id: number;
     name: string;
-    surname: string;
+    city: string;
     address: string;
     user_id: number;
     description: string;
