@@ -4,6 +4,8 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import {FullCalendar} from 'primeng/fullcalendar';
 import { BlogService } from '../../services/blog.service';
+import { AppointmentsService } from '../../services/appointments.service';
+
 import { Blog } from '../../models/blog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TYPE_LIST } from '../constants/constants';
@@ -11,6 +13,7 @@ import { CategoryService } from 'src/app/services/categories.service';
 import { Category } from 'src/app/models/category';
 import { Router, ActivatedRoute } from '@angular/router';
 import {MessageService} from 'primeng/api';
+import { Appointments } from 'src/app/models/appointments';
 
 @Component({
   selector: 'app-calendar',
@@ -26,6 +29,8 @@ export class AdminCalendarComponent implements OnInit {
   typeList: any;
   cities: Blog[];
   format1: string = "";
+  appointments: Appointments;
+
   format2: string = "";
   selectedCity: Blog;
   uploadError: string;
@@ -39,18 +44,19 @@ export class AdminCalendarComponent implements OnInit {
     private categoryService: CategoryService,
     private fb: FormBuilder,
     private router: Router,
+    private appointmentsService: AppointmentsService,
     private messageService: MessageService,
     private route: ActivatedRoute
     ) {
       this.typeList = TYPE_LIST;
 
-    this.events = this.blogs;
+    this.events = this.appointments;
 
    }
 
   ngOnInit() {
-    this.blogService.getBlogs().subscribe(
-      (data: Blog) => this.blogs = data,
+    this.appointmentsService.getAllList().subscribe(
+      (data: Appointments) => this.appointments = data,
       error => this.error = error
     );
 
@@ -102,7 +108,7 @@ onSubmit() {
   const id = this.blogForm.get('id').value;
 
   if (id) {
-    this.blogService.updateBlog(formData, +id).subscribe(
+    this.appointmentsService.update(formData, +id).subscribe(
       res => {
         if (res.status == 'error') {
           this.uploadError = res.message;
@@ -113,7 +119,7 @@ onSubmit() {
       error => this.error = error
     );
   } else {
-    this.blogService.createBlog(formData).subscribe(
+    this.appointmentsService.create(formData).subscribe(
       res => {
         if (res.status === 'error') {
           this.uploadError = res.message;

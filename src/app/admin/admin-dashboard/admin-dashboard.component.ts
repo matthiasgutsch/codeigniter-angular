@@ -27,7 +27,7 @@ export class AdminDashboardComponent implements OnInit {
 
   options: any;
   events: any;
-  appointements: Appointments;
+  appointments: Appointments;
   error: string;
   blogForm: FormGroup;
   typeList: any;
@@ -63,13 +63,13 @@ trackByFn(index, item) {
     ) {
       this.typeList = TYPE_LIST;
 
-    this.events = this.appointements;
+    this.events = this.appointments;
 
    }
 
   ngOnInit() {
     this.appointmentsService.getAllList().subscribe(
-      (data: Appointments) => this.appointements = data,
+      (data: Appointments) => this.appointments = data,
       error => this.error = error
     );
 
@@ -154,7 +154,7 @@ onSubmit() {
           this.productDialog = false;
           this.messageService.add({key: 'myKey1', severity:'success', summary: 'Congratulazione', detail: 'Aggiunto con successo'});
           this.blogService.getBlogs().subscribe(
-            (data: Blog) => this.appointements = data,
+            (data: Blog) => this.appointments = data,
             error => this.error = error
           );
         }
