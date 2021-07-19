@@ -13,38 +13,38 @@ export class AppointmentsService {
 
   constructor(private http: HttpClient) { }
 
-  getBlogs() {
-    return this.http.get<Blog>(this.serverUrl + 'blog/adminBlogs').pipe(
+  getAllList() {
+    return this.http.get<Blog>(this.serverUrl + 'appointments/').pipe(
       catchError(this.handleError)
     );
   }
 
   find(id: number) {
-    return this.http.get<Blog>(this.serverUrl + 'blog/adminBlog/' + id).pipe(
+    return this.http.get<Blog>(this.serverUrl + 'appointments/' + id).pipe(
       catchError(this.handleError)
     );
   }
 
-  getBlog(id: number) {
-    return this.http.get<Blog>(this.serverUrl + 'blog/adminBlog/' + id).pipe(
+  getId(id: number) {
+    return this.http.get<Blog>(this.serverUrl + 'appointments/id/' + id).pipe(
       catchError(this.handleError)
     );
   }
 
-  createBlog(blog) {
-    return this.http.post<any>(this.serverUrl + 'blog/createBlog', blog).pipe(
+  create(blog) {
+    return this.http.post<any>(this.serverUrl + 'appointments/create', blog).pipe(
       catchError(this.handleError)
     );
   }
 
-  updateBlog(blog, id: number) {
-    return this.http.post<any>(this.serverUrl + 'blog/updateBlog/' + id, blog).pipe(
+  update(blog, id: number) {
+    return this.http.post<any>(this.serverUrl + 'appointments/update/' + id, blog).pipe(
       catchError(this.handleError)
     );
   }
 
-  deleteBlog(id: number) {
-    return this.http.delete(this.serverUrl + 'blog/deleteBlog/' + id).pipe(
+  delete(id: number) {
+    return this.http.delete(this.serverUrl + 'appointments/delete/' + id).pipe(
       catchError(this.handleError)
     );
   }

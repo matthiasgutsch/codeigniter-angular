@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { BlogService } from '../../../services/blog.service';
+import { AppointmentsService } from '../../../services/appointments.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
@@ -52,7 +52,7 @@ export class AppointmentsFormComponent implements OnInit {
   
   constructor(
     private fb: FormBuilder,
-    private blogService: BlogService,
+    private appointmentsService: AppointmentsService,
     private messageService: MessageService,
     private clientsService: ClientsService,
     private categoryService: CategoryService, 
@@ -70,7 +70,7 @@ export class AppointmentsFormComponent implements OnInit {
 
   ngOnInit() {
 
-    this.blogService.getBlogs().subscribe(
+    this.appointmentsService.getAllList().subscribe(
       (data: Blog) => this.blogs = data,
       error => this.error = error
     );
@@ -92,7 +92,7 @@ export class AppointmentsFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.pageTitle = 'Modifica Appuntamento';
-      this.blogService.getBlog(+id).subscribe(
+      this.appointmentsService.getId(+id).subscribe(
         res => {
           this.blogForm.patchValue({
             title: res.title,
@@ -172,23 +172,23 @@ export class AppointmentsFormComponent implements OnInit {
     const id = this.blogForm.get('id').value;
 
     if (id) {
-      this.blogService.updateBlog(formData, +id).subscribe(
+      this.appointmentsService.update(formData, +id).subscribe(
         res => {
           if (res.status == 'error') {
             this.uploadError = res.message;
           } else {
-            this.router.navigate(['/admin/blogs']);
+            this.router.navigate(['/admin/appointments']);
           }
         },
         error => this.error = error
       );
     } else {
-      this.blogService.createBlog(formData).subscribe(
+      this.appointmentsService.create(formData).subscribe(
         res => {
           if (res.status === 'error') {
             this.uploadError = res.message;
           } else {
-            this.router.navigate(['/admin/blogs']);
+            this.router.navigate(['/admin/appointments']);
           }
         },
         error => this.error = error

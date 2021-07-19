@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogService } from '../../../services/blog.service';
+import { AppointmentsService } from '../../../services/appointments.service';
 import { Blog } from '../../../models/blog';
 import {ConfirmationService} from 'primeng/api';
 import { CategoryService } from '../../../services/categories.service';
@@ -37,7 +37,7 @@ trackByFn(index, item) {
 
   constructor(
     private clientsService: ClientsService,
-    private blogService: BlogService,
+    private appointmentsService: AppointmentsService,
     private messageService: MessageService,
     private categoryService: CategoryService, 
     private confirmationService: ConfirmationService,) { 
@@ -45,7 +45,7 @@ trackByFn(index, item) {
   }
 
   ngOnInit() {
-    this.blogService.getBlogs().subscribe(
+    this.appointmentsService.getAllList().subscribe(
       (data: Blog) => this.blogs = data,
       error => this.error = error
     );
@@ -85,7 +85,7 @@ hideDialog() {
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.blogService.deleteBlog(+id).subscribe(
+        this.appointmentsService.delete(+id).subscribe(
           res => {
             console.log(res);
             this.ngOnInit();
