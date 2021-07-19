@@ -15,6 +15,8 @@ import { ClientsService } from 'src/app/services/clients.service';
 import { Clients } from 'src/app/models/clients';
 import { ComuniService } from 'src/app/services/comuni.service';
 import { Comuni } from 'src/app/models/comuni';
+import { Appointments } from 'src/app/models/appointments';
+import { AppointmentsService } from 'src/app/services/appointments.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -25,7 +27,7 @@ export class AdminDashboardComponent implements OnInit {
 
   options: any;
   events: any;
-  blogs: Blog;
+  appointements: Appointments;
   error: string;
   blogForm: FormGroup;
   typeList: any;
@@ -51,6 +53,7 @@ trackByFn(index, item) {
 
   constructor(private blogService: BlogService,     
     private clientsService: ClientsService,
+    private appointmentsService: AppointmentsService,
     private fb: FormBuilder,
     private comuniService: ComuniService,
 
@@ -60,13 +63,13 @@ trackByFn(index, item) {
     ) {
       this.typeList = TYPE_LIST;
 
-    this.events = this.blogs;
+    this.events = this.appointements;
 
    }
 
   ngOnInit() {
-    this.blogService.getBlogs().subscribe(
-      (data: Blog) => this.blogs = data,
+    this.appointmentsService.getAllList().subscribe(
+      (data: Appointments) => this.appointements = data,
       error => this.error = error
     );
 
@@ -151,7 +154,7 @@ onSubmit() {
           this.productDialog = false;
           this.messageService.add({key: 'myKey1', severity:'success', summary: 'Congratulazione', detail: 'Aggiunto con successo'});
           this.blogService.getBlogs().subscribe(
-            (data: Blog) => this.blogs = data,
+            (data: Blog) => this.appointements = data,
             error => this.error = error
           );
         }
