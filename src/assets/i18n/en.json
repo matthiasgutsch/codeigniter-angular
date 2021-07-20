@@ -2,6 +2,7 @@
   
   "yes": "Yes",
   "no": "No",
+  "add": "Add",
 
   "form.appointment.type": "Type",
   "form.appointment.date": "Date",
@@ -11,5 +12,9 @@
   "form.appointment.description": "Description",
 
 
-  "calendar.main.title": "Calendar"
+  "calendar.main.title": "Calendar",
+  "appointments.main.title": "Appointments",
+  "clients.main.title": "Clients"
+
+
   }

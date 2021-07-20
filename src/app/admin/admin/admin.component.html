@@ -6,9 +6,9 @@
 
   <ul class="nav-menu">
     <li><a routerLink="./" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ><i class="pi pi-inbox" pTooltip="Dashboard" tooltipPosition="right"></i></a></li>
-    <li><a routerLink="./appointments" routerLinkActive="active" ><i class="pi pi-book" pTooltip="Appuntamenti" tooltipPosition="right"></i></a></li>
-    <li><a routerLink="./calendar" routerLinkActive="active" ><i class="pi pi-calendar" pTooltip="Calendario" tooltipPosition="right"></i></a></li>
-    <li><a routerLink="./clients" routerLinkActive="active"><i class="pi pi-user" pTooltip="Clienti" tooltipPosition="right"></i></a></li>
+    <li><a routerLink="./appointments" routerLinkActive="active" ><i class="pi pi-book" pTooltip="{{'appointments.main.title' | translate}}" tooltipPosition="right"></i></a></li>
+    <li><a routerLink="./calendar" routerLinkActive="active" ><i class="pi pi-calendar" pTooltip="{{'calendar.main.title' | translate}}" tooltipPosition="right"></i></a></li>
+    <li><a routerLink="./clients" routerLinkActive="active"><i class="pi pi-user" pTooltip="{{'clients.main.title' | translate}}" tooltipPosition="right"></i></a></li>
     <li><a routerLink="./blogs" routerLinkActive="active" ><i class="pi pi-book" pTooltip="Blog" tooltipPosition="right"></i></a></li>
 
   </ul>

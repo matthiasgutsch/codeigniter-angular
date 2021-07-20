@@ -3,6 +3,8 @@
 
   "yes": "Si",
   "no": "No",
+  "add": "Aggiungi",
+
   "form.appointment.type": "Tipo",
   "form.appointment.date": "Data",
   "form.appointment.featured": "Importante",
@@ -12,5 +14,12 @@
 
 
 
-  "calendar.main.title": "Calendario"
+  "calendar.main.title": "Calendario",
+
+  "appointments.main.title": "Apppuntamenti",
+
+
+  "clients.main.title": "Clienti"
+
+
   }
