@@ -10,21 +10,17 @@
             <p-card>
 
                 <div class="p-field p-grid">
-                    <div class="p-col-10 p-md-10">
+                    <div class="p-col-10 p-md-9">
                         <h3>{{'appointments.main.title' | translate}}</h3>
                     </div>
-                    <div class="p-col-2 p-md-2">
+                    <div class="p-col-2 p-md-3">
 
-                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']"
-                            label="Aggiungi" class="p-button p-button-primary"></button>
+                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']" label="Aggiungi" class="p-button p-button-primary"></button>
                     </div>
                 </div>
                 <hr class="full">
 
-                <p-table #dt1 [value]="blogs" [globalFilterFields]="['title','status','category.name']"
-                    [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
-                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                    [totalRecords]="true">
+                <p-table #dt1 [value]="blogs" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
                     <ng-template pTemplate="caption">
                         <div class="p-d-flex">
                             <span class="p-input-icon-left p-ml-auto">
@@ -51,23 +47,22 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-blog>
                         <tr>
-                            <td><i class="pi pi-calendar"></i>
-                                 {{blog.date}}</td>
+                            <td><i class="pi pi-calendar"></i> {{blog.date}}
+                            </td>
 
-                            <td><a [routerLink]="['/admin/clients/edit', getCategoryItem(blog.category_id)?.id]">
-                                    <span class="user"><i class="pi pi-user"></i> {{ getCategoryItem(blog.category_id)?.name }}</span></a>
+                            <td>
+                                <a [routerLink]="['/admin/clients/edit', getCategoryItem(blog.category_id)?.id]">
+                                    <span class="user"><i class="pi pi-user"></i> {{
+                                        getCategoryItem(blog.category_id)?.name }}</span></a>
                             </td>
 
 
                             <td>{{blog.title}}</td>
 
                             <td class="action">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
-                                    [routerLink]="['/admin/appointments/edit', blog.id]"></button>
-                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
-                                    (click)="editProduct(blog)"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
-                                    (click)="onDelete(blog.id)"></button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', blog.id]"></button>
+                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2" (click)="editProduct(blog)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(blog.id)"></button>
 
                             </td>
                         </tr>
@@ -78,43 +73,37 @@
 
         <div class="p-col-12 p-md-4">
             <p-card>
-    
-                
+
+
                 <div class="p-field p-grid">
                     <div class="p-col-12 p-md-8">
                         <h3>Clienti</h3>
                     </div>
                     <div class="p-col-12 p-md-4">
-                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']"
-                           class="p-button p-button-primary p-mr-2 pull-right"></button>
-    
+                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']" class="p-button p-button-primary p-mr-2 pull-right"></button>
+
                     </div>
                 </div>
                 <hr class="full">
-    
-                <p-table #dt1 [value]="clients" [globalFilterFields]="['name','address','category.name']"
-                    [paginator]="false" [rows]="10" [showCurrentPageReport]="true"
-                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-            
-    
-               
+
+                <p-table #dt1 [value]="clients" [globalFilterFields]="['name','address','category.name']" [paginator]="false" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+
+
+
                     <ng-template pTemplate="body" let-client>
                         <tr>
-                            <td><strong>{{client.name}}</strong><br>
-                                
-                                {{ getCategoryItem(client.category_id)?.nome }}
+                            <td><strong>{{client.name}}</strong><br> {{ getCategoryItem(client.category_id)?.nome }}
 
-                     
-                           </td>
+
+                            </td>
                             <td class="action">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2 pull-right"
-                                    [routerLink]="['/admin/clients/edit', client.id]"></button>
-    
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2 pull-right" [routerLink]="['/admin/clients/edit', client.id]"></button>
+
                             </td>
                         </tr>
                     </ng-template>
                 </p-table>
-    
+
             </p-card>
         </div>
     </div>
@@ -127,7 +116,7 @@
         <p [innerHTML]="blog.description"></p>
         <hr>
         <img src="{{blog.image}}" width="100px">
-      
+
         <p [innerHTML]="getCategoryItem(blog.category_id)?.description"></p>
 
         <p>{{blog.is_featured}}</p>
