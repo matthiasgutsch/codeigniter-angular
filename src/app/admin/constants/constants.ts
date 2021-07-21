@@ -1,8 +1,13 @@
 import { SelectItem } from "primeng/api";
 
-
-
-
+export const PAGES: SelectItem[] = [
+  { label: "{{'calendar.main.title' | translate}}", value: "./", icon: "" },
+  { label: "Visita", value: "./appointments" },
+  { label: "Intervento", value: "{{'calendar.main.title' | translate}}" },
+  { label: "Visita di controllo", value: "Visita di controllo" },
+  { label: "Amministrazione", value: "Amministrazione" },
+  { label: "Altro", value: "Altro" }
+];
 
 export const TYPE_LIST: SelectItem[] = [
   { label: "Tutte", value: null },
