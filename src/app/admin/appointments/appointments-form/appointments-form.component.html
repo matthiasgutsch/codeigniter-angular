@@ -2,6 +2,7 @@
     <div class="dash-title">
     </div>
 </div>
+<form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
 
 <div class="p-fluid">
     <div class="p-field p-grid">
@@ -11,7 +12,6 @@
 
                 <div class="blog-form">
 
-                    <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
                         <div class="p-field p-grid">
                             <div class="p-col-10 p-md-10">
                                 <h3>{{pageTitle}}</h3>
@@ -77,30 +77,11 @@
                             </div>
                         </div>
 
-                        <div class="p-fluid">
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Upload Image <span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-10">
-                                    <input #myInput type="file" id="image" (change)="onSelectedFile($event)" />
-                                    <div [innerHTML]="uploadError" class="error"></div>
-                                    <div *ngIf="imagePath">
-                                        <br />
-                                        <span class="image-container" *ngIf="!imagePath == ''">
-                                            <img [src]="imagePath" width="300px">
-
-                                            <button pButton pRipple icon="pi pi-trash"
-                                                class="imgcancel p-button p-button-primary p-mr-2"
-                                                (click)="removeImageFile($event)"></button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
 
                         <div class="p-fluid">
                             <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Categoria <span
+                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Cliente <span
                                         class="required">*</span></label>
                                 <div class="p-col-12 p-md-10">
                                     <p-dropdown [options]="clients" [virtualScroll]="true" filter="true"
@@ -141,11 +122,36 @@
 
                             </div>
                         </div>
-                    </form>
 
                 </div>
+            </p-card>
+        </div>
+
+        <div class="p-col-4 p-md-4">
+            <p-card>
+
+            <div class="p-fluid">
+                <div class="p-field p-grid">
+                  
+                    <div class="p-col-12 p-md-12">
+                        <input #myInput type="file" id="image" (change)="onSelectedFile($event)" />
+                        <div [innerHTML]="uploadError" class="error"></div>
+                        <div *ngIf="imagePath">
+                            <br />
+                            <span class="image-container" *ngIf="!imagePath == ''">
+                                <img [src]="imagePath" width="300px">
+
+                                <button pButton pRipple icon="pi pi-trash"
+                                    class="imgcancel p-button p-button-primary p-mr-2"
+                                    (click)="removeImageFile($event)"></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </p-card>
         </div>
     </div>
 
 </div>
+</form>
