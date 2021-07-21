@@ -66,6 +66,8 @@ trackByFn(index, item) {
   getCategoryItem(category_id: string, id: string) {
     return this.clients.find(item => item.id === category_id);
   }
+
+  
   
   editProduct(blog: Blog) {
     this.blog = {...blog};
