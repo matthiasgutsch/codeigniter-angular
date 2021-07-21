@@ -122,9 +122,14 @@
         <p [innerHTML]="blog.description"></p>
         <hr>
         <img src="{{blog.image}}" width="100px">
-        <p>{{ getCategoryItem(blog.category_id)?.name }} {{ getCategoryItem(blog.category_id)?.address }}
-            {{ getCategoryItem(blog.category_id)?.description }}
+        <p>{{ getCategoryItem(blog.category_id)?.name }}<br>
+            {{ getCategoryItem(blog.category_id)?.address }}<br>
+            <br>
+            {{ getCategoryItem(blog.category_id)?.date }}
+
         </p>
+        <p [innerHTML]="getCategoryItem(blog.category_id)?.description"></p>
+
         <p>{{blog.is_featured}}</p>
         <p>{{blog.is_active}}</p>
 
