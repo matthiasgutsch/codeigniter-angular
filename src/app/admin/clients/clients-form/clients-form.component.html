@@ -8,7 +8,7 @@
         <div class="p-col-8 p-md-8">
 
             <p-card>
-
+             
                 <div class="blog-form">
 
                     <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
@@ -25,104 +25,124 @@
                         </div>
                         <hr class="full">
 
-                        <div class="p-fluid">
+                        <p-tabView>
+                            <p-tabPanel header="Informazioni">
+                                <div class="p-fluid">
 
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Nome <span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-10">
-                                    <input type="text" pInputText  formControlName="name"/>
-
-                 
-
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Nome <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+                                            <input type="text" pInputText  formControlName="name"/>
+        
+                         
+        
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-
-                     
-
-
-                        <div class="p-fluid">
-
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Data di nascita <span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-10">
-
-                                    <p-calendar formControlName="date" dataType="string" [(ngModel)]="selectedDate"
-                                        hourFormat="24" dateFormat="yy-mm-dd"  appendTo="body"></p-calendar>
-
+        
+                             
+        
+        
+                                <div class="p-fluid">
+        
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Data di nascita <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+        
+                                            <p-calendar formControlName="date" dataType="string" [(ngModel)]="selectedDate"
+                                                hourFormat="24" dateFormat="yy-mm-dd"  appendTo="body"></p-calendar>
+        
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-
-
-                        <div class="p-fluid">
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Comune di nascita</label>
-                                <div class="p-col-12 p-md-10">
-                                    <p-dropdown [options]="comuni" [virtualScroll]="true" filter="true"
-                                    [required]="true" [showClear]="true" placeholder="Scegli"
-                                    [style]="{ width: '100%' }"
-                                    formControlName="category_id" optionLabel="nome"
-                                    optionValue="id">
-                                    <ng-template let-option pTemplate="item">
-                                        {{option.nome}}
-                                    </ng-template>
-                                </p-dropdown>
+        
+        
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Comune di nascita</label>
+                                        <div class="p-col-12 p-md-10">
+                                            <p-dropdown [options]="comuni" [virtualScroll]="true" filter="true"
+                                            [required]="true" [showClear]="true" placeholder="Scegli"
+                                            [style]="{ width: '100%' }"
+                                            formControlName="category_id" optionLabel="nome"
+                                            optionValue="id">
+                                            <ng-template let-option pTemplate="item">
+                                                {{option.nome}}
+                                            </ng-template>
+                                        </p-dropdown>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-
-
-                        <div class="p-fluid">
-
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Indirizzo <span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-10">
-                                    <input type="text" pInputText formControlName="address"/>
-
-                 
-
+        
+        
+                                <div class="p-fluid">
+        
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Indirizzo <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+                                            <input type="text" pInputText formControlName="address"/>
+        
+                         
+        
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="p-fluid">
-
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Città <span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-10">
-                                    <input type="text" pInputText  formControlName="city"/>
-
-                 
-
+                                <div class="p-fluid">
+        
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Città <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+                                            <input type="text" pInputText  formControlName="city"/>
+        
+                         
+        
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="p-fluid">
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Sposata <span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-10">
-                                    <input type="radio" formControlName="is_featured" value="1" /> Yes
-                                    <input type="radio" formControlName="is_featured" value="0" /> No
+        
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Sposata <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+                                            <input type="radio" formControlName="is_featured" value="1" /> Yes
+                                            <input type="radio" formControlName="is_featured" value="0" /> No
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="p-fluid">
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Is Active <span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-10">
-                                    <input type="radio" formControlName="is_active" value="1" /> Yes
-                                    <input type="radio" formControlName="is_active" value="0" /> No
+        
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Is Active <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+                                            <input type="radio" formControlName="is_active" value="1" /> Yes
+                                            <input type="radio" formControlName="is_active" value="0" /> No
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+
+
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Description <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+                                            <p-editor formControlName="description" [style]="{'height':'320px'}">
+        
+                                            </p-editor>
+        
+                                        </div>
+                                    </div>
+                                </div>
+                            </p-tabPanel>
+                            <p-tabPanel header="Documenti">
+                             
+                        
 
                         <div class="p-fluid">
                             <div class="p-field p-grid">
@@ -146,19 +166,12 @@
                         </div>
 
                        
+             
+                    </p-tabPanel>
+             
+                </p-tabView>
 
-                        <div class="p-fluid">
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Description <span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-10">
-                                    <p-editor formControlName="description" [style]="{'height':'320px'}">
-
-                                    </p-editor>
-
-                                </div>
-                            </div>
-                        </div>
+                       
 
                         <div class="form-group form-row">
                             <label class="col-md-3"></label>
