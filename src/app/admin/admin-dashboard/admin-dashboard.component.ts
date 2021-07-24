@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import {FullCalendar} from 'primeng/fullcalendar';
 import { BlogService } from '../../services/blog.service';
 import { Blog } from '../../models/blog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -17,6 +16,8 @@ import { ComuniService } from 'src/app/services/comuni.service';
 import { Comuni } from 'src/app/models/comuni';
 import { Appointments } from 'src/app/models/appointments';
 import { AppointmentsService } from 'src/app/services/appointments.service';
+import { CalendarComponent } from 'ng-fullcalendar';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -24,7 +25,7 @@ import { AppointmentsService } from 'src/app/services/appointments.service';
 })
 export class AdminDashboardComponent implements OnInit {
 
-  options: any;
+  calendarOptions: any;
   events: any;
   appointments: Appointments;
   error: string;
@@ -44,11 +45,13 @@ export class AdminDashboardComponent implements OnInit {
   clients: Clients;
   client: Clients;
   comuni: any = [];
+  displayEvent: any;
 
 trackByFn(index, item) {
   return item.id;
 }
 
+@ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
   constructor(private blogService: BlogService,     
     private clientsService: ClientsService,
@@ -67,10 +70,21 @@ trackByFn(index, item) {
    }
 
   ngOnInit() {
-    this.appointmentsService.getAllList().subscribe(
-      (data: Appointments) => this.appointments = data,
-      error => this.error = error
-    );
+    
+    
+    this.appointmentsService.getAllList().subscribe(data => {
+      this.calendarOptions = {
+        editable: true,
+        eventLimit: false,
+        header: {
+          right: 'prev,next',
+          left: 'title',
+        },
+        events: data,
+        timezone: 'UTC',
+        selectable: true,
+      };
+    });
 
     this.clientsService.getAllList().subscribe(
       (data: Clients) => this.clients = data,
@@ -81,16 +95,6 @@ trackByFn(index, item) {
       (data: Comuni) => this.comuni = data,
       error => this.error = error
     );
-
-
-    this.options = {
-      plugins:[ dayGridPlugin, timeGridPlugin, interactionPlugin ],
-      header: {
-          right: 'prev,next',
-          left: 'title',
-        },
-      editable: true
-  };
 
 
 
@@ -115,10 +119,34 @@ getCategoryItem(category_id: string, id: string) {
 }
 
 
-
 showDialog() {
   this.productDialog = true;
 }
+
+clickButton(model: any) {
+  this.displayEvent = model;
+  
+}
+eventClick(model: any) {
+  model = {
+    event: {
+      id: model.event.id,
+      start: model.event.start,
+      title: model.event.title,
+      allDay: model.event.allDay
+      // other params
+    },
+    duration: {}
+  }
+  this.displayEvent = model;
+  this.productDialog = true;
+
+}
+
+dayClick(event) {
+  console.log('dayClick', event);
+}
+
 
 onSubmit() {
   const formData = new FormData();

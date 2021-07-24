@@ -5,7 +5,7 @@
 
 <div class="p-grid">
 
-    <div class="p-col-12 p-md-8">
+    <div class="p-col-12 p-md-9">
 
        
 
@@ -23,13 +23,18 @@
 <hr class="full">
 
         
-
-<p-fullCalendar #calendar [events]="appointments" [options]="options"></p-fullCalendar>
+<div *ngIf="calendarOptions">
+    <ng-fullcalendar #ucCalendar [options]="calendarOptions" 
+    (eventClick)="eventClick($event.detail)" 
+    (clickButton)="clickButton($event.detail)" 
+    (dayClick)="dayClick($event.detail)">
+        </ng-fullcalendar>
+</div>
 </p-card>
     </div>
 
 
-    <div class="p-col-12 p-md-4">
+    <div class="p-col-12 p-md-3">
         <p-card>
 
             
@@ -47,6 +52,17 @@
         </p-card>
     </div>
 </div>
+
+
+
+
+<p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'50%'}">
+    <ng-template pTemplate="content">
+        <p>{{displayEvent | json}}</p>
+
+    </ng-template>
+
+</p-sidebar>
 
 <p-toast key="myKey1"></p-toast>
 

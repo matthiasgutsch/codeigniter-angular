@@ -30,7 +30,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { FileUploadModule } from 'primeng/fileupload';
 import { HttpClientModule, HttpClient} from '@angular/common/http';
-import { FullCalendarModule } from 'primeng/fullcalendar';
+import { FullCalendarModule } from 'ng-fullcalendar';
 import { CalendarModule } from 'primeng/calendar';
 import { MomentPipe } from './pipe/moment.pipe';
 import { InputMaskModule } from 'primeng/inputmask';
@@ -43,7 +43,7 @@ import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
 import {TooltipModule} from 'primeng/tooltip';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
-
+import * as $ from 'jquery';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ManageAppointmentsComponent } from './appointments/manage-appointments/manage-appointments.component';
@@ -85,6 +85,7 @@ export class I18nModule {
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
+    FullCalendarModule,
     CheckboxModule,
     EditorModule,
     InputMaskModule,
@@ -99,7 +100,6 @@ export class I18nModule {
     DropdownModule,
     HttpClientModule,
     FileUploadModule,
-    FullCalendarModule,
     ButtonModule,
     InputSwitchModule,
     AutoCompleteModule,
