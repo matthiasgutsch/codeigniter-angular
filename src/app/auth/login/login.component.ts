@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
 
-    this.authService.logout();
   }
 
   get username() { return this.loginForm.get('username'); }
