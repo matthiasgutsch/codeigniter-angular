@@ -48,6 +48,7 @@ import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-transla
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ManageAppointmentsComponent } from './appointments/manage-appointments/manage-appointments.component';
 import { AppointmentsFormComponent } from './appointments/appointments-form/appointments-form.component';
+import {TimelineModule} from 'primeng/timeline';
 
 export class I18nModule {
   constructor(translate: TranslateService) {
@@ -93,6 +94,7 @@ export class I18nModule {
     CardModule,
     ChipsModule,
     ConfirmDialogModule,
+    TimelineModule,
     InputTextModule,
     AdminRoutingModule,
     DialogModule,

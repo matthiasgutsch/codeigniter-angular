@@ -229,17 +229,25 @@
                         <h3>Ultimi Appuntamenti</h3>
                     </div>
 
-
-                    <div margin *ngFor="let appointment of appointments">
-                        {{appointment.id}}
-                    </div>
                 </div>
+
+                <p-timeline [value]="appointments">
+                    <ng-template pTemplate="content" let-appointment>
+                        {{appointment.title}}
+                        {{appointment.date}}
+
+                    </ng-template>
+                </p-timeline>
+
+                
+              
+
             </div>
+       
                
     </p-card>
 
 
         </div>
     </div>
-
-</div>  </form>
+</div></form>
