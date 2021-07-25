@@ -92,7 +92,9 @@
 
                     <ng-template pTemplate="body" let-client>
                         <tr>
-                            <td><strong>{{client.name}}</strong><br> {{ getCategoryItem(client.category_id)?.nome }}
+                            <td><strong>{{client.name}}</strong><br>
+                                {{ getComuniItem(client.category_id)?.nome }}
+
 
 
                             </td>

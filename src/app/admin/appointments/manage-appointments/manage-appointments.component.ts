@@ -7,6 +7,8 @@ import { Category } from '../../../models/category';
 import {MessageService} from 'primeng/api';
 import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
+import { ComuniService } from 'src/app/services/comuni.service';
+import { Comuni } from 'src/app/models/comuni';
 
 @Component({
   selector: 'app-manage-appointments',
@@ -22,7 +24,7 @@ export class ManageAppointmentsComponent implements OnInit {
   private id: number;
   clients: any = [];
   client: Clients;
-  
+  comuni: any = [];
   productDialog:boolean = false;
   showDialog() {
     this.productDialog = true;
@@ -38,6 +40,7 @@ trackByFn(index, item) {
     private clientsService: ClientsService,
     private appointmentsService: AppointmentsService,
     private messageService: MessageService,
+    private comuniService: ComuniService,
     private categoryService: CategoryService, 
     private confirmationService: ConfirmationService,) { 
 
@@ -55,11 +58,17 @@ trackByFn(index, item) {
       error => this.error = error
     );
 
+
+    
     this.clientsService.getAllList().subscribe(
       (data: Clients) => this.clients = data,
       error => this.error = error
     );
 
+    this.comuniService.getAllList().subscribe(
+      (data: Comuni) => this.comuni = data,
+      error => this.error = error
+    );
     
   }
 
@@ -67,7 +76,9 @@ trackByFn(index, item) {
     return this.clients.find(item => item.id === category_id);
   }
 
-  
+  getComuniItem(category_id: string, id: string) {
+    return this.comuni.find(item => item.id === category_id);
+  }
   
   editProduct(blog: Blog) {
     this.blog = {...blog};

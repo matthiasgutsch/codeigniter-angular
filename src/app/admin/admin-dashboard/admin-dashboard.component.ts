@@ -118,6 +118,13 @@ getCategoryItem(category_id: string, id: string) {
 }
 
 
+getComuniItem(category_id: string, id: string) {
+  return this.comuni.find(item => item.id === category_id);
+}
+
+
+
+
 
 showDialog() {
   this.productDialog = true;
