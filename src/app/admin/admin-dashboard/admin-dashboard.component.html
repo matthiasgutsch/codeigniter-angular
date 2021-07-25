@@ -13,7 +13,7 @@
 
             <div class="p-field p-grid">
                 <div class="p-col-10 p-md-10">
-                    <h3>Calendario</h3>
+                    <h3>Dashboard</h3>
                 </div>
                 <div class="p-col-2 p-md-2">
     
@@ -79,6 +79,25 @@
 </div>
 
 
-<p-toast key="myKey1"></p-toast>
+<p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'50%'}">
+    <ng-template pTemplate="content">
+        <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', displayEvent.event.id]"></button>
+
+        <h3>{{displayEvent.event.title}}</h3>
+        {{displayEvent.event.description}}
+        {{displayEvent.event.start}}
+        {{displayEvent.event.category_id}}
+        <hr>
+        {{ getCategoryItem(displayEvent.event.category_id)?.name }}
+        {{ getCategoryItem(displayEvent.event.category_id)?.address }}
+        {{ getCategoryItem(displayEvent.event.category_id)?.city }}
+        {{ getCategoryItem(displayEvent.event.category_id)?.region }}
+        <button pButton pRipple icon="pi pi-pencil" label="modifica" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/clients/edit', displayEvent.event.category_id]"></button>
+
+        <hr>
+ 
+    </ng-template>
+
+</p-sidebar>
 
 

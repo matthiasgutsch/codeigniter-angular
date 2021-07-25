@@ -42,7 +42,8 @@ export class AdminDashboardComponent implements OnInit {
   categories: any = [];
   category: Category;
   productDialog:boolean = false;
-  clients: Clients;
+  appointmentsDialog: boolean = false;
+  clients: any = [];
   client: Clients;
   comuni: any = [];
   displayEvent: any;
@@ -112,10 +113,8 @@ trackByFn(index, item) {
 } 
 
 
-
-
 getCategoryItem(category_id: string, id: string) {
-  return this.comuni.find(item => item.id === category_id);
+  return this.clients.find(item => item.id === category_id);
 }
 
 
@@ -133,7 +132,10 @@ eventClick(model: any) {
       id: model.event.id,
       start: model.event.start,
       title: model.event.title,
-      allDay: model.event.allDay
+      allDay: model.event.allDay,
+      description: model.event.description,
+      category_id: model.event.category_id
+
       // other params
     },
     duration: {}
