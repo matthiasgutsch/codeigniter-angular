@@ -70,10 +70,11 @@ export class ClientsFormComponent implements OnInit {
     }
 
     this.typeList = SEX_LIST;
-
   }
 
   ngOnInit() {
+
+   
 
     this.clientsService.getAllList().subscribe(
       (data: Clients) => this.clients = data,
@@ -93,7 +94,6 @@ export class ClientsFormComponent implements OnInit {
     );
 
     const id = this.route.snapshot.paramMap.get('id');
-
     
     if (id) {
       this.pageTitle = 'Modifica Cliente';
