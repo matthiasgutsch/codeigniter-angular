@@ -9,5 +9,6 @@ export class Appointments {
     is_active: boolean;
     created_at: Date;
     date: string;
+    files: string;
 
 }

@@ -2,16 +2,16 @@
     <div class="dash-title">
     </div>
 </div>
+<form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
 
 <div class="p-fluid">
     <div class="p-field p-grid">
-        <div class="p-col-8 p-md-8">
+        <div class="p-col-12 p-md-8">
 
             <p-card>
              
                 <div class="blog-form">
 
-                    <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
                         <div class="p-field p-grid">
                             <div class="p-col-10 p-md-10">
                                 <h3>{{pageTitle}}</h3>
@@ -76,7 +76,8 @@
                                     </div>
                                 </div>
         
-        
+                                <hr class="full">
+
                                 <div class="p-fluid">
         
                                     <div class="p-field p-grid">
@@ -153,7 +154,12 @@
                                         </div>
                                     </div>
                                 </div>
+                                <hr class="full">
 
+                                
+                            </p-tabPanel>
+
+                            <p-tabPanel header="Informazione aggiuntive">
                                 <div class="p-fluid">
                                     <div class="p-field p-grid">
                                         <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Description <span
@@ -208,11 +214,32 @@
 
                             </div>
                         </div>
-                    </form>
+                  
 
                 </div>
             </p-card>
         </div>
+
+        <div class="p-col-12 p-md-4">
+        <p-card>
+            <div class="blog-form">
+
+                <div class="p-field p-grid">
+                    <div class="p-col-10 p-md-10">
+                        <h3>Ultimi Appuntamenti</h3>
+                    </div>
+
+
+                    <div margin *ngFor="let appointment of appointments">
+                        {{appointment.id}}
+                    </div>
+                </div>
+            </div>
+               
+    </p-card>
+
+
+        </div>
     </div>
 
-</div>
+</div>  </form>

@@ -13,6 +13,8 @@ import { SEX_LIST } from '../../constants/constants';
 import { ComuniService } from 'src/app/services/comuni.service';
 import { Comuni } from 'src/app/models/comuni';
 import {Location} from '@angular/common';
+import { AppointmentsService } from 'src/app/services/appointments.service';
+import { Appointments } from 'src/app/models/appointments';
 
 @Component({
   selector: 'app-clients-form',
@@ -33,7 +35,7 @@ export class ClientsFormComponent implements OnInit {
   checked: boolean = true;
   selectedValue: string;
   comuni: Comuni;
-
+  
   blogForm: FormGroup;
   typeList: any[];
 
@@ -44,6 +46,7 @@ export class ClientsFormComponent implements OnInit {
   selectedCategories: Category;
   selectedDate: Date;
   date: Date;
+  appointments: Appointments;
 
   trackByFn(index, item) {
     return item.id;
@@ -57,6 +60,7 @@ export class ClientsFormComponent implements OnInit {
     private categoryService: CategoryService, 
     private comuniService: ComuniService,
     private _location: Location,
+    private appointmentsService: AppointmentsService,
     private confirmationService: ConfirmationService,
     private router: Router,
     private route: ActivatedRoute
@@ -89,8 +93,17 @@ export class ClientsFormComponent implements OnInit {
     );
 
     const id = this.route.snapshot.paramMap.get('id');
+
+    
     if (id) {
       this.pageTitle = 'Modifica Cliente';
+
+
+      this.appointmentsService.find_client(+id).subscribe(
+        (data: Appointments) => this.appointments = data,
+        error => this.error = error
+      );
+
       this.clientsService.getId(+id).subscribe(
         res => {
           this.blogForm.patchValue({
@@ -129,6 +142,8 @@ export class ClientsFormComponent implements OnInit {
     });
   }
 
+
+
   onSelectedFile(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -163,8 +178,7 @@ export class ClientsFormComponent implements OnInit {
   }
 
 
- 
-
+  
 
   onSubmit() {
     const formData = new FormData();

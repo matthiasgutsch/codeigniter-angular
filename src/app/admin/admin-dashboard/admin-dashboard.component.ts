@@ -118,6 +118,7 @@ getCategoryItem(category_id: string, id: string) {
 }
 
 
+
 showDialog() {
   this.productDialog = true;
 }
@@ -183,7 +184,7 @@ onSubmit() {
           this.productDialog = false;
           this.messageService.add({key: 'myKey1', severity:'success', summary: 'Congratulazione', detail: 'Aggiunto con successo'});
           this.blogService.getBlogs().subscribe(
-            (data: Blog) => this.appointments = data,
+            (data: Appointments) => this.appointments = data,
             error => this.error = error
           );
         }
