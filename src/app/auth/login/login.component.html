@@ -1,17 +1,20 @@
 <section class="login-wrap mtb-40">
-  <div class="container">
-    <div class="row justify-content-center" *ngIf="!error">
-      <p-card>  <div class="p-grid">
+    <div class="login-box" *ngIf="!error">
 
-        <div class="p-col-8">
+      <div class="login-box-inner">
+ <div class="p-grid">
+
+        <div class="p-col-12">
        
-        <div class="login-box">
+    
           <h1>Administrator Login</h1>
           <div class="alert alert-danger" *ngIf="loginError">
             {{loginError}}
           </div>
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <div class="form-group">
+            <div class="p-fluid">
+
+              <div class="p-field p-grid">
 
               
               <input type="text" pInputText  formControlName="username" class="form-control" placeholder="Username" required>
@@ -21,7 +24,7 @@
                 </div>
               </div>
             </div>
-            <div class="form-group">
+            <div class="p-field p-grid">
               <input type="password"  pInputText  formControlName="password" class="form-control" placeholder="Password" required>
               <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error">
                 <div *ngIf="password.errors">
@@ -29,14 +32,15 @@
                 </div>
               </div>
             </div>
-            <div class="form-group">
+            <div class="p-field p-grid">
               <button
               pButton
               pRipple
               label="login"
-              class="p-button p-button-primary p-mr-2"
+              class="p-button p-button-primary"
               [disabled]="!loginForm.valid"
               ></button>
+            </div>
             </div>
           </form>
         </div>
@@ -48,10 +52,6 @@
     </div>
 
        
-
-  </div>
-      </div>
-    </p-card>
-    </div>
-  </div>
-</section>
+</div></div>
+    
+    </div></section>
