@@ -12,6 +12,7 @@ import * as moment from 'moment';
 import { TYPE_LIST } from '../../constants/constants';
 import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-appointments-form',
@@ -55,6 +56,8 @@ export class AppointmentsFormComponent implements OnInit {
     private appointmentsService: AppointmentsService,
     private messageService: MessageService,
     private clientsService: ClientsService,
+    private _location: Location,
+
     private categoryService: CategoryService, 
     private confirmationService: ConfirmationService,
     private router: Router,
@@ -177,7 +180,7 @@ export class AppointmentsFormComponent implements OnInit {
           if (res.status == 'error') {
             this.uploadError = res.message;
           } else {
-            this.router.navigate(['/admin/appointments']);
+            this._location.back();
           }
         },
         error => this.error = error
@@ -188,7 +191,7 @@ export class AppointmentsFormComponent implements OnInit {
           if (res.status === 'error') {
             this.uploadError = res.message;
           } else {
-            this.router.navigate(['/admin/appointments']);
+            this._location.back();
           }
         },
         error => this.error = error

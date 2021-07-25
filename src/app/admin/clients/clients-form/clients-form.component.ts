@@ -97,6 +97,8 @@ export class ClientsFormComponent implements OnInit {
             name: res.name,
             city: res.city,
             address: res.address,
+            email: res.email,
+            phone: res.phone,
             description: res.description,
             category_id: res.category_id,
             is_featured: res.is_featured,
@@ -116,6 +118,8 @@ export class ClientsFormComponent implements OnInit {
       name: ['', Validators.required],
       city: ['', Validators.required],
       address: ['', Validators.required],
+      email: ['', Validators.required],
+      phone: ['', Validators.required],
       description: ['', Validators.required],
       is_featured: ['0'],
       category_id: ['', Validators.required],
@@ -167,6 +171,8 @@ export class ClientsFormComponent implements OnInit {
     formData.append('name', this.blogForm.get('name').value);
     formData.append('city', this.blogForm.get('city').value);
     formData.append('address', this.blogForm.get('address').value);
+    formData.append('email', this.blogForm.get('email').value);
+    formData.append('phone', this.blogForm.get('phone').value);
     formData.append('description', this.blogForm.get('description').value);
     formData.append('is_featured', this.blogForm.get('is_featured').value);
     formData.append('category_id', this.blogForm.get('category_id').value);

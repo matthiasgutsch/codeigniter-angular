@@ -3,6 +3,8 @@ export class Clients {
     name: string;
     city: string;
     address: string;
+    email: string;
+    phone: string;
     user_id: number;
     description: string;
     image: string;

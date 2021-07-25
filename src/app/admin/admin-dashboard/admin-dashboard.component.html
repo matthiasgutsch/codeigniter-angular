@@ -81,20 +81,33 @@
 
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'50%'}">
     <ng-template pTemplate="content">
+        <div class="p-col-12 p-md-12">
+            <p-card>
+
         <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', displayEvent.event.id]"></button>
 
         <h3>{{displayEvent.event.title}}</h3>
-        {{displayEvent.event.description}}
-        {{displayEvent.event.start}}
-        {{displayEvent.event.category_id}}
-        <hr>
-        {{ getCategoryItem(displayEvent.event.category_id)?.name }}
-        {{ getCategoryItem(displayEvent.event.category_id)?.address }}
-        {{ getCategoryItem(displayEvent.event.category_id)?.city }}
-        {{ getCategoryItem(displayEvent.event.category_id)?.region }}
-        <button pButton pRipple icon="pi pi-pencil" label="modifica" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/clients/edit', displayEvent.event.category_id]"></button>
+        <p [innerHTML]="displayEvent.event.description"></p>
+        <p [innerHTML]="displayEvent.event.start"></p>
+        </p-card>
+        </div>
+        <div class="clearfix"></div><br>
+        <div class="clearfix"></div>
+        <div class="p-col-12 p-md-12">
 
-        <hr>
+        <p-card>
+        <h4>{{ getCategoryItem(displayEvent.event.category_id)?.name }}</h4>
+        <p>{{ getCategoryItem(displayEvent.event.category_id)?.address }}<br>
+  
+        {{ getCategoryItem(displayEvent.event.category_id)?.city }}<br>
+        {{ getCategoryItem(displayEvent.event.category_id)?.region }}<br>
+ 
+        {{ getCategoryItem(displayEvent.event.category_id)?.phone }}<br>
+        {{ getCategoryItem(displayEvent.event.category_id)?.email }}</p>
+        <div class="clearfix"></div>
+        <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente" class="p-button p-button-primary p-mr-2" [routerLink]="['/admin/clients/edit', displayEvent.event.category_id]"></button>
+    </p-card>
+        </div>
  
     </ng-template>
 
