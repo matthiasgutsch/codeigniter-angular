@@ -50,6 +50,10 @@ import { ManageAppointmentsComponent } from './appointments/manage-appointments/
 import { AppointmentsFormComponent } from './appointments/appointments-form/appointments-form.component';
 import {TimelineModule} from 'primeng/timeline';
 
+import { ManageBillingsComponent } from './billings/manage-billings/manage-billings.component';
+import { BillingsFormComponent } from './billings/billings-form/billings-form.component';
+
+
 export class I18nModule {
   constructor(translate: TranslateService) {
     translate.addLangs(['it', 'en']);
@@ -63,6 +67,8 @@ export class I18nModule {
   declarations: [
     AdminDashboardComponent,
     AdminComponent,
+    ManageBillingsComponent,
+    BillingsFormComponent,
     ManageBlogsComponent,
     ManageCategoriesComponent,
     ManageClientsComponent,
