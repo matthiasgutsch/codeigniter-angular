@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AppointmentsService } from '../../../services/appointments.service';
 import { Blog } from '../../../models/blog';
 import {ConfirmationService} from 'primeng/api';
 import { CategoryService } from '../../../services/categories.service';
@@ -9,6 +8,7 @@ import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
 import { ComuniService } from 'src/app/services/comuni.service';
 import { Comuni } from 'src/app/models/comuni';
+import { BillingsService } from 'src/app/services/billings.service';
 
 @Component({
   selector: "app-manage-billings",
@@ -36,7 +36,7 @@ export class ManageBillingsComponent implements OnInit {
 
   constructor(
     private clientsService: ClientsService,
-    private appointmentsService: AppointmentsService,
+    private billingsService: BillingsService,
     private messageService: MessageService,
     private comuniService: ComuniService,
     private categoryService: CategoryService,
@@ -44,7 +44,7 @@ export class ManageBillingsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.appointmentsService.getAllList().subscribe(
+    this.billingsService.getAllList().subscribe(
       (data: Blog) => (this.blogs = data),
       (error) => (this.error = error)
     );
@@ -88,7 +88,7 @@ export class ManageBillingsComponent implements OnInit {
       header: "Confirmation",
       icon: "pi pi-exclamation-triangle",
       accept: () => {
-        this.appointmentsService.delete(+id).subscribe(
+        this.billingsService.delete(+id).subscribe(
           (res) => {
             console.log(res);
             this.ngOnInit();

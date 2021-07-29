@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { AppointmentsService } from '../../../services/appointments.service';
+import { BillingsService } from '../../../services/billings.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
@@ -52,7 +52,7 @@ export class BillingsFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private appointmentsService: AppointmentsService,
+    private billingsService: BillingsService,
     private messageService: MessageService,
     private clientsService: ClientsService,
     private _location: Location,
@@ -70,7 +70,7 @@ export class BillingsFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.appointmentsService.getAllList().subscribe(
+    this.billingsService.getAllList().subscribe(
       (data: Blog) => (this.blogs = data),
       (error) => (this.error = error)
     );
@@ -88,7 +88,7 @@ export class BillingsFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get("id");
     if (id) {
       this.pageTitle = "Modifica Appuntamento";
-      this.appointmentsService.getId(+id).subscribe((res) => {
+      this.billingsService.getId(+id).subscribe((res) => {
         this.blogForm.patchValue({
           title: res.title,
           description: res.description,
@@ -161,7 +161,7 @@ export class BillingsFormComponent implements OnInit {
     const id = this.blogForm.get("id").value;
 
     if (id) {
-      this.appointmentsService.update(formData, +id).subscribe(
+      this.billingsService.update(formData, +id).subscribe(
         (res) => {
           if (res.status == "error") {
             this.uploadError = res.message;
@@ -172,7 +172,7 @@ export class BillingsFormComponent implements OnInit {
         (error) => (this.error = error)
       );
     } else {
-      this.appointmentsService.create(formData).subscribe(
+      this.billingsService.create(formData).subscribe(
         (res) => {
           if (res.status === "error") {
             this.uploadError = res.message;
