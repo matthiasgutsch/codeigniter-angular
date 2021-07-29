@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Blog } from '../../../models/blog';
 import {ConfirmationService} from 'primeng/api';
 import { CategoryService } from '../../../services/categories.service';
@@ -9,6 +9,7 @@ import { ClientsService } from 'src/app/services/clients.service';
 import { ComuniService } from 'src/app/services/comuni.service';
 import { Comuni } from 'src/app/models/comuni';
 import { BillingsService } from 'src/app/services/billings.service';
+import { jsPDF } from "jspdf";
 
 @Component({
   selector: "app-manage-billings",
@@ -26,6 +27,9 @@ export class ManageBillingsComponent implements OnInit {
   client: Clients;
   comuni: any = [];
   productDialog: boolean = false;
+
+  @ViewChild("content", { static: false }) content: ElementRef;
+
   showDialog() {
     this.productDialog = true;
   }
@@ -73,6 +77,25 @@ export class ManageBillingsComponent implements OnInit {
     return this.comuni.find((item) => item.id === category_id);
   }
 
+  downloadPDF() {
+    const doc = new jsPDF();
+
+    const specialElementHandlers = {
+      "#editor": function (element, renderer) {
+        return true;
+      },
+    };
+
+    const content = this.content.nativeElement;
+
+    doc.fromHTML(content.innerHTML, 15, 15, {
+      width: 190,
+      elementHandlers: specialElementHandlers,
+    });
+
+    doc.save("test.pdf");
+  }
+  
   editProduct(blog: Blog) {
     this.blog = { ...blog };
     this.productDialog = true;

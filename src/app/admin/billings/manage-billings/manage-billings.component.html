@@ -76,7 +76,10 @@
 </div>
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'60em'}">
     <ng-template pTemplate="content">
-        {{blog.id}}
+   
+<div id="content" #content>
+
+     {{blog.id}}
         <h3>{{blog.title}}</h3>
         <hr>
         <p [innerHTML]="blog.description"></p>
@@ -88,6 +91,9 @@
         <p>{{blog.is_featured}}</p>
         <p>{{blog.is_active}}</p>
 
+</div>
+
+<button (click)="downloadPDF()">Export To PDF</button>
     </ng-template>
 
 </p-sidebar>
