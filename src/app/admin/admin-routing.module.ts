@@ -31,6 +31,8 @@ const routes: Routes = [
           { path: "blogs/create", component: BlogFormComponent },
           { path: "blogs/edit/:id", component: BlogFormComponent },
 
+          
+
           { path: "appointments", component: ManageAppointmentsComponent },
           { path: "appointments/create", component: AppointmentsFormComponent },
           { path: "appointments/edit/:id",component: AppointmentsFormComponent,},
@@ -45,9 +47,11 @@ const routes: Routes = [
           { path: "clients/edit/:id", component: ClientsFormComponent },
 
           { path: "calendar", component: AdminCalendarComponent },
+
           { path: "categories", component: ManageCategoriesComponent },
           { path: "categories/edit/:id", component: CategoryFormComponent },
           { path: "categories/create", component: CategoryFormComponent },
+          
           { path: "pages", component: ManagePagesComponent },
           { path: "", component: AdminDashboardComponent },
         ],

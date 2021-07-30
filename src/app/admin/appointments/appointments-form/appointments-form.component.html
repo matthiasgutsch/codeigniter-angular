@@ -28,14 +28,17 @@
                         <div class="p-fluid">
 
                             <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Title <span
+                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Tipo <span
                                         class="required">*</span></label>
                                 <div class="p-col-12 p-md-10">
-                                    <p-dropdown [virtualScroll]="true" filter="true" [required]="true"
-                                        [showClear]="true" [options]="typeList" filter="true"
-                                        placeholder="Tipo Intervento" inputStyleClass="selectpicker"
-                                        formControlName="title" [style]="{ width: '100%' }">
+
+                                    <p-dropdown [options]="categories" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true"
+                                        placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedCategories" formControlName="title"
+                                        optionLabel="name" optionValue="name">
+                                     
+                                    
                                     </p-dropdown>
+
 
                                 </div>
                             </div>
@@ -44,7 +47,7 @@
                         <div class="p-fluid">
 
                             <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Date <span
+                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Data <span
                                         class="required">*</span></label>
                                 <div class="p-col-12 p-md-10">
 
@@ -57,10 +60,10 @@
 
                         <div class="p-fluid">
                             <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Is Featured <span
+                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">In evidenzia <span
                                         class="required">*</span></label>
                                 <div class="p-col-12 p-md-10">
-                                    <input type="radio" formControlName="is_featured" value="1" /> Yes
+                                    <input type="radio" formControlName="is_featured" value="1" /> Si
                                     <input type="radio" formControlName="is_featured" value="0" /> No
                                 </div>
                             </div>
@@ -68,7 +71,7 @@
 
                         <div class="p-fluid">
                             <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Is Active <span
+                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Attivo <span
                                         class="required">*</span></label>
                                 <div class="p-col-12 p-md-10">
                                     <input type="radio" formControlName="is_active" value="1" /> Yes
@@ -86,7 +89,7 @@
                                 <div class="p-col-12 p-md-10">
                                     <p-dropdown [options]="clients" [virtualScroll]="true" filter="true"
                                         [required]="true" [showClear]="true" placeholder="Scegli"
-                                        [style]="{ width: '100%' }" [(ngModel)]="selectedCategories"
+                                        [style]="{ width: '100%' }" [(ngModel)]="selectedClients"
                                         formControlName="category_id" optionLabel="name" optionValue="id">
                                         <ng-template let-option pTemplate="item">
 
