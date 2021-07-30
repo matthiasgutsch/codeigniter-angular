@@ -42,48 +42,7 @@
                             </div>
                         </div>
 
-                        <div class="p-fluid">
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Description <span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-10">
-                                    <input type="text" [style]="{ width: '100%' }" pInputText
-                                        formControlName="category_address" placeholder="Indrizzo" required />
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="p-fluid">
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Provincia <span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-10">
-                                    <div class="p-fluid">
-                                        <div class="p-field p-grid">
-
-                                            <div class="p-col-12 p-md-12">
-
-                                                <p-dropdown [options]="comuni" [virtualScroll]="true" filter="true"
-                                                    [required]="true" [showClear]="true" placeholder="Scegli"
-                                                    [style]="{ width: '100%' }"
-                                                    formControlName="category_region" optionLabel="nome"
-                                                    optionValue="nome">
-                                                    <ng-template let-option pTemplate="item">
-
-                                                        {{option.nome}}
-
-                                                    </ng-template>
-
-                                                </p-dropdown>
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    
 
                         <div class="p-fluid">
                             <div class="p-field p-grid">
