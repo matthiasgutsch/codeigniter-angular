@@ -1,5 +1,14 @@
 import { SelectItem } from "primeng/api";
 
+import { environment } from "../../../environments/environment";
+export const APP_API = "api/v1/";
+
+
+export const CLIENTS_API = environment.baseUrl + APP_API + "locations";
+export const APPOINTMENTS_API = environment.baseUrl + APP_API + "appointments";
+export const LOCATIONS_API = environment.baseUrl + APP_API + "locations";
+
+
 export const PAGES: SelectItem[] = [
   { label: "{{'calendar.main.title' | translate}}", value: "./", icon: "" },
   { label: "Visita", value: "./appointments" },
@@ -63,18 +72,6 @@ export const TIPO_CONTENUTO_ITEMS: SelectItem[] = [
   { label: "Sotto Attività", value: "Sotto Attività" },
   { label: "Sotto Servizi", value: "Sotto Servizi" },
   { label: "Storie", value: "Storie" },
-];
-export const COLORI_ITEMS: any[] = [
-  { label: "green1", value: "green1", color: "#70A829" },
-  { label: "green2", value: "green2", color: "#BDCD00" },
-  { label: "grey1", value: "grey1", color: "#748C8F" },
-  { label: "blue1", value: "blue1", color: "#2BABA5" },
-  { label: "blue2", value: "blue2", color: "#619BB3" },
-  { label: "orange", value: "orange", color: "#ff9e18" },
-  { label: "red_dark", value: "red_dark", color: "#815366" },
-  { label: "rose", value: "rose", color: "#ec9bad" },
-  { label: "pink", value: "pink", color: "#e50695" },
-  { label: "red1", value: "red1", color: "#d50037" },
 ];
 
 export const MENU_ITEMS: any[] = [

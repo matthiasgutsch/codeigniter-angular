@@ -10,7 +10,6 @@ import { ComuniService } from '../../../services/comuni.service';
 
 import { SelectItem } from "primeng/api";
 import * as moment from 'moment';
-import { COLORI_ITEMS } from 'src/app/admin/constants/constants';
 import { Comuni } from 'src/app/models/comuni';
 
 @Component({
