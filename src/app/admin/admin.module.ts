@@ -14,6 +14,7 @@ import { ManageCategoriesComponent } from './category/manage-categories/manage-c
 import { ManageClientsComponent } from './clients/manage-clients/manage-clients.component';
 import { ClientsFormComponent } from './clients/clients-form/clients-form.component';
 import {TabViewModule} from 'primeng/tabview';
+import { DateValidPipe } from "./pipe/date-valid.pipe";
 
 import { ManagePagesComponent } from './manage-pages/manage-pages.component';
 import { BlogFormComponent } from './blog/blog-form/blog-form.component';
@@ -75,6 +76,7 @@ export class I18nModule {
     ClientsFormComponent,
     ManagePagesComponent,
     MomentPipe,
+    DateValidPipe,
     ManageAppointmentsComponent,
     AppointmentsFormComponent,
     BlogFormComponent,

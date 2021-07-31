@@ -19,6 +19,12 @@ export class AppointmentsService {
     );
   }
 
+    getAllListCalendar() {
+    return this.http.get<Blog>(this.serverUrl + 'appointments/calendar/').pipe(
+      catchError(this.handleError)
+    );
+    }
+  
   find_client(id: number) {
     return this.http.get<Blog>(this.serverUrl + 'appointments/appointments_by_client/id/' + id).pipe(
       catchError(this.handleError)
