@@ -73,7 +73,7 @@ trackByFn(index, item) {
   ngOnInit() {
     
     
-    this.appointmentsService.getAllListCalendar().subscribe(data => {
+    this.appointmentsService.getAllList().subscribe(data => {
       this.calendarOptions = {
         editable: true,
         eventLimit: false,
