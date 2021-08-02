@@ -82,6 +82,7 @@ trackByFn(index, item) {
           left: 'title',
         },
         events: data,
+         locale: 'it',
         timezone: 'UTC',
         selectable: true,
       };

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ClientsService } from '../../../services/clients.service';
 import { Blog } from '../../../models/blog';
 import { Clients } from '../../../models/clients';
-
 import {ConfirmationService} from 'primeng/api';
 import { CategoryService } from '../../../services/categories.service';
 import { Category } from '../../../models/category';

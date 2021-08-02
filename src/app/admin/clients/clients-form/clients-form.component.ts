@@ -129,7 +129,7 @@ export class ClientsFormComponent implements OnInit {
       email: ["", Validators.required],
       phone: ["", Validators.required],
       fiscalcode: new FormControl("",Validators.compose([Validators.required, codFisc])),
-      description: ["", Validators.required],
+      description: [""],
       is_featured: ["0"],
       category_id: ["", Validators.required],
       is_active: ["0"],

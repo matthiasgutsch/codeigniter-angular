@@ -67,12 +67,13 @@ export class AdminCalendarComponent implements OnInit {
       this.calendarOptions = {
         editable: true,
         eventLimit: false,
+        locale: "it",
         header: {
-          right: 'prev,next',
-          left: 'title',
+          right: "prev,next",
+          left: "title",
         },
         events: data,
-        timezone: 'UTC',
+        timezone: "UTC",
         selectable: true,
       };
     });

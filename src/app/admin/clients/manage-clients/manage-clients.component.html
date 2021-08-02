@@ -7,15 +7,15 @@
 
 <div class="p-fluid">
     <div class="p-field p-grid">
-        <div class="p-col-8 p-md-8">
+        <div class="p-col-12 p-md-12">
 
             <p-card>
 
                 <div class="p-field p-grid">
-                    <div class="p-col-9 p-md-9">
+                    <div class="p-col-12 p-md-10">
                         <h3>{{'clients.main.title' | translate}}</h3>
                     </div>
-                    <div class="p-col-3 p-md-3">
+                    <div class="p-col-12 p-md-2">
 
                         <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']"
                             label="{{'add' | translate}}" class="p-button p-button-primary"></button>
@@ -43,7 +43,9 @@
                         <tr>
 
                           
-                            <th>Utente</th>
+                                                    <th>Utente</th>
+
+                            <th>Codice Fiscale</th>
                             <th>Data nascita</th>
                             <th>Indirizzo</th>
 
@@ -55,9 +57,10 @@
                   
 
                             <td>
-                                <span class="user"> <i class="pi pi-user"></i></span>{{client.name}}
+                                <span class="user"> <i class="pi pi-user"></i></span>{{client.name}}<br>
+                                
                             </td>
-
+                            <td>{{client.fiscalcode}}</td>
                             <td><i class="pi pi-calendar"></i>
                                 {{client.date}}</td>
 
@@ -79,42 +82,7 @@
             </p-card>
         </div>
 
-        <div class="p-col-4 p-md-4">
-            <p-card>
-                <div class="p-field p-grid">
-                    <div class="p-col-8 p-md-8">
-                        <h3>Clienti</h3>
-                    </div>
-                    <div class="p-col-4 p-md-4">
-
-                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']"
-                            label="Aggiungi" class="p-button p-button-primary p-mr-2"></button>
-
-                    </div>
-                </div>
-
-                <p-table #dt1 [value]="clients" [globalFilterFields]="['name','address','category.name']"
-                [paginator]="false" [rows]="10" [showCurrentPageReport]="true"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-        
-
-           
-                <ng-template pTemplate="body" let-client>
-                    <tr>
-                        <td><strong>{{client.name}}</strong><br>  {{ getCategoryItem(client.category_id)?.nome }}</td>
-                        <td class="action">
-                            <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2 pull-right"
-                                [routerLink]="['/admin/clients/edit', client.id]"></button>
-
-                            <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2 pull-right"
-                                (click)="onDelete(client.id)"></button>
-
-                        </td>
-                    </tr>
-                </ng-template>
-            </p-table>
-            </p-card>
-        </div>
+       
     </div>
 </div>
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'30em'}">
