@@ -80,7 +80,7 @@ hideDialog() {
   onDelete(id: number, title: string) {
 
     this.confirmationService.confirm({
-      message: 'Are you sure want to delete it = ' + id,
+      message: 'Are you sure want to delete',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {

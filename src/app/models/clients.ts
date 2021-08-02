@@ -2,7 +2,10 @@ export class Clients {
   id: number;
   name: string;
   city: string;
+  zip: string;
   address: string;
+  region: string;
+  province: string;
   email: string;
   phone: string;
   user_id: number;
