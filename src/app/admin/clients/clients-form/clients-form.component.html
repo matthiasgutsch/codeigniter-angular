@@ -176,14 +176,14 @@
                             <p-tabPanel header="Informazione aggiuntive">
                                 <div class="p-fluid">
                                     <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Description <span
+                                        <label class="p-col-12 p-mb-12">Description <span
                                                 class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
+                                                </div>
+                                <div class="p-field p-grid">
                                             <p-editor formControlName="description" [style]="{'height':'320px'}">
         
                                             </p-editor>
-        
-                                        </div>
+                                       
                                     </div>
                                 </div>
                             </p-tabPanel>
@@ -196,6 +196,7 @@
                                 <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Upload Image <span
                                         class="required">*</span></label>
                                 <div class="p-col-12 p-md-10">
+                                    
                                     <input #myInput type="file" id="image" (change)="onSelectedFile($event)" />
                                     <div [innerHTML]="uploadError" class="error"></div>
                                     <div *ngIf="imagePath">
