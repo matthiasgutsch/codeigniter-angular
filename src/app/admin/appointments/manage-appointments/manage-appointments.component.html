@@ -5,7 +5,7 @@
 
 <div class="p-fluid">
     <div class="p-field p-grid">
-        <div class="p-col-8 p-md-8">
+        <div class="p-col-12 p-md-12">
 
             <p-card>
 
@@ -39,6 +39,9 @@
                             <th>Data Intervento
 
                             </th>
+                            <th>Tipo Intervento
+
+                            </th>
                             <th>Utente</th>
 
                             <th>Action</th>
@@ -47,13 +50,13 @@
                     <ng-template pTemplate="body" let-blog>
                         <tr>
                             <td><strong>{{blog.date}}</strong><br>
-                            {{blog.title}}
+                           
                             </td>
-
+                            <td> {{blog.title}}</td>
                             <td>
                                 <a [routerLink]="['/admin/clients/edit', getCategoryItem(blog.category_id)?.id]">
-                                    <span class="user"><i class="pi pi-user"></i> {{
-                                        getCategoryItem(blog.category_id)?.name }}</span></a>
+                                    <span class="user"><i class="pi pi-user"></i></span>{{
+                                        getCategoryItem(blog.category_id)?.name }}</a>
                             </td>
 
 
@@ -67,44 +70,6 @@
                         </tr>
                     </ng-template>
                 </p-table>
-            </p-card>
-        </div>
-
-        <div class="p-col-12 p-md-4">
-            <p-card>
-
-
-                <div class="p-field p-grid">
-                    <div class="p-col-12 p-md-8">
-                        <h3>Clienti</h3>
-                    </div>
-                    <div class="p-col-12 p-md-4">
-                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']" class="p-button p-button-primary p-mr-2 pull-right"></button>
-
-                    </div>
-                </div>
-                <hr class="full">
-
-                <p-table #dt1 [value]="clients" [globalFilterFields]="['name','address','category.name']" [paginator]="false" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-
-
-
-                    <ng-template pTemplate="body" let-client>
-                        <tr>
-                            <td><strong>{{client.name}}</strong><br>
-                                {{ getComuniItem(client.category_id)?.nome }}
-
-
-
-                            </td>
-                            <td class="action">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2 pull-right" [routerLink]="['/admin/clients/edit', client.id]"></button>
-
-                            </td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-
             </p-card>
         </div>
     </div>
