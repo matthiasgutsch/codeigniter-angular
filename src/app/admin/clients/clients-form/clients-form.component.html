@@ -6,7 +6,7 @@
 
 
 <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
-
+    
 <div class="p-fluid">
     <div class="p-field p-grid">
         <div class="p-col-12 p-md-7">
@@ -250,6 +250,7 @@
                             </div>
                         </div>
                   
+                       
 
                 </div>
             </p-card>
@@ -260,9 +261,16 @@
             <div class="blog-form">
 
                 <div class="p-field p-grid">
-                    <div class="p-col-10 p-md-10">
+
+                    <div class="p-col-12 p-md-8">
                         <h3>Elenco Appuntamenti</h3>
                     </div>
+                    <div class="p-col-12 p-md-4">
+                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']"
+                           class="p-button p-button-primary p-mr-2 pull-right"></button>
+                    </div>
+
+                 
 
                 </div>
 

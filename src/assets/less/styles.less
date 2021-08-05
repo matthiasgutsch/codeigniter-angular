@@ -399,6 +399,23 @@ margin-bottom: 20px;
 }
 
 
+.p-timeline {
+  max-height: 700px;
+  overflow: hidden;
+  overflow-y: auto;
+
+  .p-timeline-event {
+    min-height: 100px;
+  }
+  .p-timeline-event-marker {
+  border: 2px solid @ness_color_3;
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+    background-color: #ffffff;
+}
+}
+
 .p-timeline-event-opposite {
   display: none;
   visibility: hidden;
@@ -426,6 +443,20 @@ margin-bottom: 20px;
 }
 
 
+.p-tabview {
+  
+  .p-tabview-nav {
+    li{
+      &.p-highlight {
+        
+        .p-tabview-nav-link {
+          color: @ness_color_3;
+          border-color: transparent transparent @ness_color_3
+        }
+      }
+    }
+  }
+}
 
 .main {
   transition: margin-left 0.1s;
