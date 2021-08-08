@@ -59,7 +59,7 @@ trackByFn(index, item) {
     private appointmentsService: AppointmentsService,
     private fb: FormBuilder,
     private comuniService: ComuniService,
-
+    private categoryService: CategoryService, 
     private router: Router,
     private messageService: MessageService,
     private route: ActivatedRoute
@@ -77,9 +77,11 @@ trackByFn(index, item) {
       this.calendarOptions = {
         editable: true,
         eventLimit: false,
+        
         header: {
           right: 'prev,next',
           left: 'title',
+          
         },
         events: data,
          locale: 'it',
@@ -93,11 +95,17 @@ trackByFn(index, item) {
       error => this.error = error
     );
 
+
     this.comuniService.getAllList().subscribe(
       (data: Comuni) => this.comuni = data,
       error => this.error = error
     );
 
+    
+    this.categoryService.getAllList().subscribe(
+      (data: Category) => this.categories = data,
+      error => this.error = error
+    );
 
 
   this.blogForm = this.fb.group({
@@ -119,8 +127,8 @@ getCategoryItem(category_id: string, id: string) {
 }
 
 
-getComuniItem(category_id: string, id: string) {
-  return this.comuni.find(item => item.id === category_id);
+getComuniItem(province: string, id: string) {
+  return this.comuni.find(item => item.id === province);
 }
 
 
