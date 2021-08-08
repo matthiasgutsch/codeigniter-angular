@@ -53,7 +53,8 @@ import {TimelineModule} from 'primeng/timeline';
 
 import { ManageBillingsComponent } from './billings/manage-billings/manage-billings.component';
 import { BillingsFormComponent } from './billings/billings-form/billings-form.component';
-
+import { WorksFormComponent } from './works/works-form/works-form.component';
+import { ManageWorksComponent } from './works/manage-works/manage-works.component';
 
 export class I18nModule {
   constructor(translate: TranslateService) {
@@ -77,6 +78,8 @@ export class I18nModule {
     ManagePagesComponent,
     MomentPipe,
     DateValidPipe,
+    WorksFormComponent,
+    ManageWorksComponent,
     ManageAppointmentsComponent,
     AppointmentsFormComponent,
     BlogFormComponent,

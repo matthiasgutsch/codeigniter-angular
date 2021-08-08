@@ -1,0 +1,69 @@
+<div class="dash-header">
+    <div class="p-fluid">
+  
+    </div>
+</div>
+
+<div class="p-fluid">
+    <div class="p-field p-grid">
+        <div class="p-col-12 p-md-8">
+
+     
+<p-card>
+    <div class="p-field p-grid">
+        <div class="p-col-9 p-md-9">
+    <h3>{{title}}</h3>
+        </div>
+        <div class="p-col-3 p-md-3">
+
+            <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/works/create']" label="Aggiungi" class="p-button p-button-primary p-mr-2"></button> 
+
+</div>
+    </div>
+
+
+<p-table #dt1 [value]="works" [globalFilterFields]="['name','address','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+    <ng-template pTemplate="caption">
+        <div class="p-d-flex">
+           <span class="p-input-icon-left p-ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Search keyword" />
+            </span>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Name</th>
+     
+
+            <th width="160"></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-works>
+        <tr>
+            <td>{{works.name}}</td>
+          
+
+            <td class="action">
+                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/works/edit', works.id]"></button>
+
+                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(works.id)"></button>
+
+
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+</p-card>
+        </div></div></div>
+
+
+
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
+
+{{error}}

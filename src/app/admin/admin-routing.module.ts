@@ -17,6 +17,8 @@ import { ManageAppointmentsComponent } from './appointments/manage-appointments/
 import { AppointmentsFormComponent } from './appointments/appointments-form/appointments-form.component';
 import { ManageBillingsComponent } from './billings/manage-billings/manage-billings.component';
 import { BillingsFormComponent } from './billings/billings-form/billings-form.component';
+import { WorksFormComponent } from './works/works-form/works-form.component';
+import { ManageWorksComponent } from './works/manage-works/manage-works.component';
 
 const routes: Routes = [
   {
@@ -51,6 +53,10 @@ const routes: Routes = [
           { path: "categories", component: ManageCategoriesComponent },
           { path: "categories/edit/:id", component: CategoryFormComponent },
           { path: "categories/create", component: CategoryFormComponent },
+
+          { path: "works", component: ManageWorksComponent },
+          { path: "works/edit/:id", component: WorksFormComponent },
+          { path: "works/create", component: WorksFormComponent },
           
           { path: "pages", component: ManagePagesComponent },
           { path: "", component: AdminDashboardComponent },
