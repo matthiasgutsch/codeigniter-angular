@@ -13,8 +13,8 @@ export const FISCAL_CODE_VALIDATOR_REGEX =
 
 
 export const PAGES: SelectItem[] = [
-  { label: "{{'calendar.main.title' | translate}}", value: "./", icon: "" },
-  { label: "Visita", value: "./appointments" },
+  { label: "Tipo di lavorazione", value: "../works", icon: "" },
+  { label: "Tipo di impegno", value: "../categories" },
   { label: "Intervento", value: "{{'calendar.main.title' | translate}}" },
   { label: "Visita di controllo", value: "Visita di controllo" },
   { label: "Amministrazione", value: "Amministrazione" },

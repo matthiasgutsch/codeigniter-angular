@@ -55,6 +55,7 @@ import { ManageBillingsComponent } from './billings/manage-billings/manage-billi
 import { BillingsFormComponent } from './billings/billings-form/billings-form.component';
 import { WorksFormComponent } from './works/works-form/works-form.component';
 import { ManageWorksComponent } from './works/manage-works/manage-works.component';
+import { SettingsComponent } from './settings/settings.component';
 
 export class I18nModule {
   constructor(translate: TranslateService) {
@@ -84,7 +85,8 @@ export class I18nModule {
     AppointmentsFormComponent,
     BlogFormComponent,
     AdminCalendarComponent,
-    CategoryFormComponent
+    CategoryFormComponent,
+    SettingsComponent
   ],
   imports: [
     CommonModule,
