@@ -54,7 +54,7 @@
                             </td>
                             <td> {{blog.title}}</td>
                             <td>
-                                <a [routerLink]="['/admin/clients/edit', getCategoryItem(blog.category_id)?.id]">
+                                <a (click)="editProduct(blog)">
                                     <span class="user"><i class="pi pi-user"></i></span>{{
                                         getCategoryItem(blog.category_id)?.name }}</a>
                             </td>
