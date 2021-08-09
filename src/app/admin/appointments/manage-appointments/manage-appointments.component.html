@@ -74,20 +74,38 @@
         </div>
     </div>
 </div>
-<p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'60em'}">
+
+
+<p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'50%'}">
     <ng-template pTemplate="content">
-        {{blog.id}}
+        <div class="p-col-12 p-md-12">
+            <p-card>
         <h3>{{blog.title}}</h3>
-        <hr>
         <p [innerHTML]="blog.description"></p>
+        <p [innerHTML]="blog.start"></p>
+        <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', blog.id]"></button>
+
+        </p-card>
+        </div>
+        <div class="clearfix"></div><br>
+        <div class="clearfix"></div>
+        <div class="p-col-12 p-md-12">
+
+        <p-card>
+        <strong>{{ getCategoryItem(blog.category_id)?.name }}</strong>
+      
+        <p>{{ getCategoryItem(blog.category_id)?.address }}<br>
+  
+        {{ getCategoryItem(blog.category_id)?.zip }} - {{ getCategoryItem(blog.category_id)?.city }} ({{ getCategoryItem(blog.category_id)?.province }})<br>
+        </p>
         <hr>
-        <img src="{{blog.image}}" width="100px">
-
-        <p [innerHTML]="getCategoryItem(blog.category_id)?.description"></p>
-
-        <p>{{blog.is_featured}}</p>
-        <p>{{blog.is_active}}</p>
-
+        <p>{{ getCategoryItem(blog.category_id)?.phone }}<br>
+        {{ getCategoryItem(blog.category_id)?.email }}</p>
+        <div class="clearfix"></div>
+        <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente" class="p-button p-button-primary p-mr-2" [routerLink]="['/admin/clients/edit', blog.category_id]"></button>
+    </p-card>
+        </div>
+ 
     </ng-template>
 
 </p-sidebar>
