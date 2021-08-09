@@ -8,7 +8,6 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminCalendarComponent } from './calendar/calendar.component';
 import { AdminComponent } from './admin/admin.component';
-import { ManageBlogsComponent } from './blog/manage-blogs/manage-blogs.component';
 import { ManageCategoriesComponent } from './category/manage-categories/manage-categories.component';
 
 import { ManageClientsComponent } from './clients/manage-clients/manage-clients.component';
@@ -17,7 +16,6 @@ import {TabViewModule} from 'primeng/tabview';
 import { DateValidPipe } from "./pipe/date-valid.pipe";
 
 import { ManagePagesComponent } from './manage-pages/manage-pages.component';
-import { BlogFormComponent } from './blog/blog-form/blog-form.component';
 import { TableModule } from 'primeng/table';
 import { EditorModule } from 'primeng/editor';
 import { InputTextModule } from 'primeng/inputtext';
@@ -56,6 +54,8 @@ import { BillingsFormComponent } from './billings/billings-form/billings-form.co
 import { WorksFormComponent } from './works/works-form/works-form.component';
 import { ManageWorksComponent } from './works/manage-works/manage-works.component';
 import { SettingsComponent } from './settings/settings.component';
+import { EmployeesFormComponent } from './employees/employees-form/employees-form.component';
+import { ManageEmployeesComponent } from './employees/manage-employees/manage-employees.component';
 
 export class I18nModule {
   constructor(translate: TranslateService) {
@@ -72,7 +72,6 @@ export class I18nModule {
     AdminComponent,
     ManageBillingsComponent,
     BillingsFormComponent,
-    ManageBlogsComponent,
     ManageCategoriesComponent,
     ManageClientsComponent,
     ClientsFormComponent,
@@ -83,10 +82,11 @@ export class I18nModule {
     ManageWorksComponent,
     ManageAppointmentsComponent,
     AppointmentsFormComponent,
-    BlogFormComponent,
     AdminCalendarComponent,
     CategoryFormComponent,
-    SettingsComponent
+    SettingsComponent,
+    EmployeesFormComponent,
+    ManageEmployeesComponent
   ],
   imports: [
     CommonModule,

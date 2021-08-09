@@ -9,10 +9,10 @@ import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
 
 @Component({
-  selector: 'app-manage-blogs',
-  templateUrl: './manage-blogs.component.html'
+  selector: 'app-manage-employees',
+  templateUrl: './manage-employees.component.html'
 })
-export class ManageBlogsComponent implements OnInit {
+export class ManageEmployeesComponent implements OnInit {
   title = 'Interventi';
   blogs: Blog;
   blog: Blog;

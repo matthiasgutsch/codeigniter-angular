@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from '../auth/auth.guard';
 
 import { AdminComponent } from './admin/admin.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { ManageBlogsComponent } from './blog/manage-blogs/manage-blogs.component';
 import { ManageCategoriesComponent } from './category/manage-categories/manage-categories.component';
 import { ManagePagesComponent } from './manage-pages/manage-pages.component';
-import { BlogFormComponent } from './blog/blog-form/blog-form.component';
 
-import { AuthGuard } from '../auth/auth.guard';
 import { CategoryFormComponent } from './category/category-form/category-form.component';
 import { AdminCalendarComponent } from './calendar/calendar.component';
 import { ManageClientsComponent } from './clients/manage-clients/manage-clients.component';
@@ -20,6 +18,8 @@ import { BillingsFormComponent } from './billings/billings-form/billings-form.co
 import { WorksFormComponent } from './works/works-form/works-form.component';
 import { ManageWorksComponent } from './works/manage-works/manage-works.component';
 import { SettingsComponent } from './settings/settings.component';
+import { EmployeesFormComponent } from './employees/employees-form/employees-form.component';
+import { ManageEmployeesComponent } from './employees/manage-employees/manage-employees.component';
 
 const routes: Routes = [
   {
@@ -30,9 +30,7 @@ const routes: Routes = [
       {
         path: "",
         children: [
-          { path: "blogs", component: ManageBlogsComponent },
-          { path: "blogs/create", component: BlogFormComponent },
-          { path: "blogs/edit/:id", component: BlogFormComponent },
+
 
           { path: "settings", component: SettingsComponent },
 
@@ -59,6 +57,10 @@ const routes: Routes = [
           { path: "works", component: ManageWorksComponent },
           { path: "works/edit/:id", component: WorksFormComponent },
           { path: "works/create", component: WorksFormComponent },
+
+          { path: "employees", component: ManageEmployeesComponent },
+          { path: "employees/edit/:id", component: EmployeesFormComponent },
+          { path: "employees/create", component: EmployeesFormComponent },
           
           { path: "pages", component: ManagePagesComponent },
           { path: "", component: AdminDashboardComponent },
