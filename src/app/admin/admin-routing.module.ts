@@ -19,6 +19,7 @@ import { ManageBillingsComponent } from './billings/manage-billings/manage-billi
 import { BillingsFormComponent } from './billings/billings-form/billings-form.component';
 import { WorksFormComponent } from './works/works-form/works-form.component';
 import { ManageWorksComponent } from './works/manage-works/manage-works.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
   {
@@ -33,7 +34,8 @@ const routes: Routes = [
           { path: "blogs/create", component: BlogFormComponent },
           { path: "blogs/edit/:id", component: BlogFormComponent },
 
-          
+          { path: "settings", component: SettingsComponent },
+
 
           { path: "appointments", component: ManageAppointmentsComponent },
           { path: "appointments/create", component: AppointmentsFormComponent },
