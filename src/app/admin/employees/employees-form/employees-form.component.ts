@@ -12,6 +12,8 @@ import * as moment from 'moment';
 import { TYPE_LIST } from '../../constants/constants';
 import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
+import { EmployeesService } from 'src/app/services/employees.service';
+import { Employees } from 'src/app/models/employees';
 
 @Component({
   selector: 'app-employees-form',
@@ -24,8 +26,8 @@ export class EmployeesFormComponent implements OnInit {
   error: string;
   uploadError: string;
   imagePath: any;
-  blogs: Blog;
-  blog: Blog;
+  blogs: Employees;
+  blog: Employees;
 
   categories: any = [];
   category: Category;
@@ -36,7 +38,7 @@ export class EmployeesFormComponent implements OnInit {
   typeList: any[];
   clients: any = [];
   client: Clients;
-  
+
   cities: Blog[];
   format1: string = "";
   format2: string = "";
@@ -49,13 +51,13 @@ export class EmployeesFormComponent implements OnInit {
     return item.id;
   }
 
-  
+
   constructor(
     private fb: FormBuilder,
-    private blogService: BlogService,
+    private employeesService: EmployeesService,
     private messageService: MessageService,
     private clientsService: ClientsService,
-    private categoryService: CategoryService, 
+    private categoryService: CategoryService,
     private confirmationService: ConfirmationService,
     private router: Router,
     private route: ActivatedRoute
@@ -70,8 +72,8 @@ export class EmployeesFormComponent implements OnInit {
 
   ngOnInit() {
 
-    this.blogService.getBlogs().subscribe(
-      (data: Blog) => this.blogs = data,
+    this.employeesService.getAllList().subscribe(
+      (data: Employees) => this.blogs = data,
       error => this.error = error
     );
 
@@ -92,7 +94,7 @@ export class EmployeesFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.pageTitle = 'Edit Blog';
-      this.blogService.getBlog(+id).subscribe(
+      this.employeesService.getId(+id).subscribe(
         res => {
           this.blogForm.patchValue({
             title: res.title,
@@ -156,7 +158,7 @@ export class EmployeesFormComponent implements OnInit {
   }
 
 
- 
+
 
 
   onSubmit() {
@@ -172,7 +174,7 @@ export class EmployeesFormComponent implements OnInit {
     const id = this.blogForm.get('id').value;
 
     if (id) {
-      this.blogService.updateBlog(formData, +id).subscribe(
+      this.employeesService.update(formData, +id).subscribe(
         res => {
           if (res.status == 'error') {
             this.uploadError = res.message;
@@ -183,7 +185,7 @@ export class EmployeesFormComponent implements OnInit {
         error => this.error = error
       );
     } else {
-      this.blogService.createBlog(formData).subscribe(
+      this.employeesService.create(formData).subscribe(
         res => {
           if (res.status === 'error') {
             this.uploadError = res.message;

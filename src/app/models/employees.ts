@@ -4,6 +4,7 @@ export class Employees {
   city: string;
   zip: string;
   address: string;
+  title: string;
   region: string;
   province: string;
   email: string;
