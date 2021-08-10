@@ -110,7 +110,7 @@ export class CategoryFormComponent implements OnInit {
     const id = this.categoryForm.get('id').value;
 
     if (id) {
-      this.categoryService.updateCategory(formData, +id).subscribe(
+      this.categoryService.update(formData, +id).subscribe(
         res => {
           if (res.status == 'error') {
             this.uploadError = res.message;
@@ -121,7 +121,7 @@ export class CategoryFormComponent implements OnInit {
         error => this.error = error
       );
     } else {
-      this.categoryService.createCategory(formData).subscribe(
+      this.categoryService.create(formData).subscribe(
         res => {
           if (res.status === 'error') {
             this.uploadError = res.message;

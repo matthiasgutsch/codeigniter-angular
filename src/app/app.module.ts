@@ -1,9 +1,8 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { HttpClientModule, HttpClient} from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { BlogpostModule } from './blogpost/blogpost.module';
 import { CmspageModule } from './cmspage/cmspage.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -39,7 +38,6 @@ export class I18nModule {
     BrowserModule,
     HttpClientModule,
     CmspageModule,
-    BlogpostModule,
     AdminModule,
     AuthModule,
     AppRoutingModule,

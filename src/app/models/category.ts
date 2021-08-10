@@ -1,11 +1,9 @@
 export class Category {
-    id: number;
-    category_name: string;
-    category_description: string;
-    category_address: string;
-    category_region: string;
+  id: number;
+  category_name: string;
+  category_description: string;
 
   constructor() {
 
-}
+  }
 }
