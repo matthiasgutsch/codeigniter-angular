@@ -4,17 +4,20 @@ import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { CrudService } from './crud.service';
-import { Blog } from '../models/blog';
+import { Clients } from '../models/clients';
+import { Employees } from '../models/employees';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class BlogService extends CrudService<Blog, number> {
+export class EmployeesService extends CrudService<Employees, number> {
 
   constructor(protected _http: HttpClient) {
-    super(_http, `${environment.baseUrl}/blog`);
+    super(_http, `${environment.baseUrl}/clients`);
   }
 
 }
+
+
 

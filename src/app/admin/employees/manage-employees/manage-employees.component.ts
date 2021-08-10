@@ -7,6 +7,8 @@ import { Category } from '../../../models/category';
 import { MessageService } from 'primeng/api';
 import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
+import { EmployeesService } from 'src/app/services/employees.service';
+import { Employees } from 'src/app/models/employees';
 
 @Component({
   selector: 'app-manage-employees',
@@ -14,8 +16,8 @@ import { ClientsService } from 'src/app/services/clients.service';
 })
 export class ManageEmployeesComponent implements OnInit {
   title = 'Interventi';
-  blogs: Blog;
-  blog: Blog;
+  blogs: Employees;
+  blog: Employees;
   categories: any = [];
   category: Category;
   error: string;
@@ -37,7 +39,7 @@ export class ManageEmployeesComponent implements OnInit {
 
   constructor(
     private clientsService: ClientsService,
-    private blogService: BlogService,
+    private employeesService: EmployeesService,
     private messageService: MessageService,
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,) {
@@ -45,8 +47,8 @@ export class ManageEmployeesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.blogService.getBlogs().subscribe(
-      (data: Blog) => this.blogs = data,
+    this.employeesService.getAllList().subscribe(
+      (data: Employees) => this.blogs = data,
       error => this.error = error
     );
 
@@ -63,7 +65,7 @@ export class ManageEmployeesComponent implements OnInit {
     return this.clients.find(item => item.id === category_id);
   }
 
-  editProduct(blog: Blog) {
+  editProduct(blog: Employees) {
     this.blog = { ...blog };
     this.productDialog = true;
   }
@@ -80,7 +82,7 @@ export class ManageEmployeesComponent implements OnInit {
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.blogService.deleteBlog(+id).subscribe(
+        this.employeesService.delete(+id).subscribe(
           res => {
             console.log(res);
             this.ngOnInit();
