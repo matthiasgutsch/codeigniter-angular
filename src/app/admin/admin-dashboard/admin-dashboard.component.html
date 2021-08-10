@@ -5,7 +5,7 @@
 
 <div class="p-grid">
 
-    <div class="p-col-12 p-md-8">
+    <div class="p-col-12 p-md-7">
 
        
 
@@ -36,38 +36,39 @@
     </div>
 
 
-    <div class="p-col-12 p-md-4">
+    <div class="p-col-12 p-md-5">
         <p-card>
 
             
             <div class="p-field p-grid">
                 <div class="p-col-12 p-md-8">
-                    <h3>Clienti</h3>
+                    <h3>Appuntamenti {{myDate }}</h3>
                 </div>
                 <div class="p-col-12 p-md-4">
-                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']"
+                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']"
                        class="p-button p-button-primary p-mr-2 pull-right"></button>
 
                 </div>
             </div>
             <hr class="full">
 
-            <p-table #dt1 [value]="clients" [globalFilterFields]="['name','address','category.name']"
+            <p-table #dt1 [value]="appointments" [globalFilterFields]="['name','address','category.name']"
                 [paginator]="false" [rows]="10" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
         
 
            
-                <ng-template pTemplate="body" let-client>
+                <ng-template pTemplate="body" let-appointment>
                     <tr>
-                        <td><strong>{{client.name}}</strong><br>
-                            
-                            {{ getComuniItem(client.category_id)?.nome }}
-                            
+                        <td width="100">   <strong>{{appointment.date | date: 'HH:mm' }}</strong>
+                            </td>
+                            <td>{{appointment.title}}</td>
+                        <td>
+                            {{ getCategoryItem(appointment.category_id)?.name }}
                        </td>
-                        <td class="action">
+                        <td class="action" width="70">
                             <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2 pull-right"
-                                [routerLink]="['/admin/clients/edit', client.id]"></button>
+                                [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
 
                         </td>
                     </tr>

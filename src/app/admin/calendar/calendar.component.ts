@@ -69,6 +69,7 @@ export class AdminCalendarComponent implements OnInit {
         editable: true,
         eventLimit: false,
         locale: "it",
+        timeFormat: 'H(:mm)', 
         header: {
           right: "prev,next",
           left: "title",

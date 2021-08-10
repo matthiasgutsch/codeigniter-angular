@@ -17,6 +17,14 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     );
   }
 
+
+  getToday() {
+    return this._http.get<T>(this._base + '/today').pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
   getAllListCalendar() {
     return this._http.get<T>(this._base + 'appointments/calendar/').pipe(
       catchError(this.handleError)

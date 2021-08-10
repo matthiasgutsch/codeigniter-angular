@@ -18,6 +18,7 @@ import { Appointments } from 'src/app/models/appointments';
 import { AppointmentsService } from 'src/app/services/appointments.service';
 import { CalendarComponent } from 'ng-fullcalendar';
 import * as $ from 'jquery';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -51,6 +52,8 @@ export class AdminDashboardComponent implements OnInit {
   trackByFn(index, item) {
     return item.id;
   }
+  
+  myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en')  ;
 
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
@@ -77,7 +80,7 @@ export class AdminDashboardComponent implements OnInit {
       this.calendarOptions = {
         editable: true,
         eventLimit: false,
-
+        timeFormat: 'H(:mm)', 
         header: {
           right: 'prev,next',
           left: 'title',
@@ -95,6 +98,11 @@ export class AdminDashboardComponent implements OnInit {
       error => this.error = error
     );
 
+
+    this.appointmentsService.getToday().subscribe(
+      (data: Appointments) => this.appointments = data,
+      error => this.error = error
+    );
 
     this.comuniService.getAllList().subscribe(
       (data: Comuni) => this.comuni = data,
