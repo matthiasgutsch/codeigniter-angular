@@ -69,7 +69,7 @@ export class CategoryFormComponent implements OnInit {
     if (id) {
 
 
-      this.pageTitle = 'Edit Category';
+      this.pageTitle = 'Modifica Tipo di Appuntamento';
       this.categoryService.getId(+id).subscribe(
         res => {
           this.categoryForm.patchValue({

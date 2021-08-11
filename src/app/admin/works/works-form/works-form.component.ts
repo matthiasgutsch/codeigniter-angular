@@ -69,7 +69,7 @@ export class WorksFormComponent implements OnInit {
     if (id) {
 
 
-      this.pageTitle = 'Modifica Tipo di Intervento';
+      this.pageTitle = 'Modifica Tipo di lavorazione';
       this.worksService.getId(+id).subscribe(
         res => {
           this.categoryForm.patchValue({

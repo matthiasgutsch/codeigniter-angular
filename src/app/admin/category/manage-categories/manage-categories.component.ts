@@ -8,7 +8,7 @@ import { ConfirmationService } from 'primeng/api';
   templateUrl: './manage-categories.component.html'
 })
 export class ManageCategoriesComponent implements OnInit {
-  title = 'Manage Categories';
+  title = 'Tipo di Appuntamento';
   categories: Category;
   category: Category;
   error: string;

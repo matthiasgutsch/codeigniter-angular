@@ -8,7 +8,7 @@ import { WorksService } from 'src/app/services/works.service';
   templateUrl: './manage-works.component.html'
 })
 export class ManageWorksComponent implements OnInit {
-  title = 'Tipo di Intervento';
+  title = 'Tipo di lavorazione';
   works: Works;
   work: Works;
   error: string;
