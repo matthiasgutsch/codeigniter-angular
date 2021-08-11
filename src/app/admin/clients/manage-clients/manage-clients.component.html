@@ -23,7 +23,7 @@
                 </div>
                 <hr class="full">
 
-                <p-table #dt1 [value]="clients" [globalFilterFields]="['title','status','category.name']"
+                <p-table #dt1 [value]="clients" [globalFilterFields]="['name','status','category.name']"
                     [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                     [totalRecords]="true">

@@ -45,8 +45,7 @@ export class AdminDashboardComponent implements OnInit {
   
   works: any = [];
   work: Works;
-
-
+  clientsCount: any;
   error: string;
   blogForm: FormGroup;
   typeList: any;
@@ -68,6 +67,7 @@ export class AdminDashboardComponent implements OnInit {
   displayEvent: any;
   currentUser: any ;
   items: any;
+  appointmentsCount: Appointments;
   trackByFn(index, item) {
     return item.id;
   }
@@ -130,6 +130,16 @@ export class AdminDashboardComponent implements OnInit {
 
     this.worksService.getAllList().subscribe(
       (data: Works) => this.works = data,
+      error => this.error = error
+    );
+
+    this.clientsService.count().subscribe(
+      (data: Clients) => this.clientsCount = data,
+      error => this.error = error
+    );
+
+    this.appointmentsService.count().subscribe(
+      (data: Appointments) => this.appointmentsCount = data,
       error => this.error = error
     );
 
