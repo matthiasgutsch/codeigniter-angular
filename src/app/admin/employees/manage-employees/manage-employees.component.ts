@@ -15,9 +15,9 @@ import { Employees } from 'src/app/models/employees';
   templateUrl: './manage-employees.component.html'
 })
 export class ManageEmployeesComponent implements OnInit {
-  title = 'Interventi';
-  blogs: Employees;
-  blog: Employees;
+  title = 'Dipendenti / Personale';
+  employees: Employees;
+  employee: Employees;
   categories: any = [];
   category: Category;
   error: string;
@@ -48,15 +48,11 @@ export class ManageEmployeesComponent implements OnInit {
 
   ngOnInit() {
     this.employeesService.getAllList().subscribe(
-      (data: Employees) => this.blogs = data,
+      (data: Employees) => this.employees = data,
       error => this.error = error
     );
 
 
-    this.clientsService.getAllList().subscribe(
-      (data: Clients) => this.clients = data,
-      error => this.error = error
-    );
 
 
   }
@@ -65,8 +61,8 @@ export class ManageEmployeesComponent implements OnInit {
     return this.clients.find(item => item.id === category_id);
   }
 
-  editProduct(blog: Employees) {
-    this.blog = { ...blog };
+  editProduct(employee: Employees) {
+    this.employee = { ...employee };
     this.productDialog = true;
   }
 

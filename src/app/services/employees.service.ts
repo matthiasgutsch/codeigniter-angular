@@ -14,7 +14,7 @@ import { Employees } from '../models/employees';
 export class EmployeesService extends CrudService<Employees, number> {
 
   constructor(protected _http: HttpClient) {
-    super(_http, `${environment.baseUrl}/clients`);
+    super(_http, `${environment.baseUrl}/employee`);
   }
 
 }

@@ -13,9 +13,9 @@ export const FISCAL_CODE_VALIDATOR_REGEX =
 
 
 export const PAGES: SelectItem[] = [
-  { label: "Tipo di lavorazione", value: "../works", icon: "" },
-  { label: "Tipo di impegno", value: "../categories" },
-  { label: "Impiegato", value: "../employees" },
+  { label: "Lavorazioni", value: "../works", icon: "" },
+  { label: "Tipo di Appuntamento", value: "../categories" },
+  { label: "Dipendenti / Personale", value: "../employees" },
 
 ];
 

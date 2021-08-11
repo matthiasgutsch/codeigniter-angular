@@ -15,6 +15,8 @@ import { ClientsService } from 'src/app/services/clients.service';
 import { Location } from '@angular/common';
 import { WorksService } from 'src/app/services/works.service';
 import { Works } from 'src/app/models/works';
+import { EmployeesService } from 'src/app/services/employees.service';
+import { Employees } from 'src/app/models/employees';
 
 @Component({
   selector: "app-appointments-form",
@@ -44,6 +46,10 @@ export class AppointmentsFormComponent implements OnInit {
   clients: any = [];
   client: Clients;
 
+
+  employees: any = [];
+  employee: Employees;
+
   cities: Blog[];
   format1: string = "";
   format2: string = "";
@@ -65,6 +71,7 @@ export class AppointmentsFormComponent implements OnInit {
     private clientsService: ClientsService,
     private _location: Location,
     private worksService: WorksService,
+    private employeesService: EmployeesService,
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,
     private router: Router,
@@ -88,6 +95,12 @@ export class AppointmentsFormComponent implements OnInit {
       (error) => (this.error = error)
     );
 
+    this.employeesService.getAllList().subscribe(
+      (data: Employees) => (this.employees = data),
+      (error) => (this.error = error)
+    );
+
+
     this.worksService.getAllList().subscribe(
       (data: Works) => (this.works = data),
       (error) => (this.error = error)
@@ -107,6 +120,7 @@ export class AppointmentsFormComponent implements OnInit {
           description: res.description,
           category_id: res.category_id,
           works_id: res.works_id,
+          employee_id: res.employee_id,
           is_featured: res.is_featured,
           is_active: res.is_active,
           date: res.date,
@@ -125,6 +139,7 @@ export class AppointmentsFormComponent implements OnInit {
       is_featured: ["0"],
       category_id: ["", Validators.required],
       works_id: [""],
+      employee_id: [""],
       is_active: ["0"],
       image: [""],
       date: ["", Validators.required],
@@ -170,6 +185,7 @@ export class AppointmentsFormComponent implements OnInit {
     formData.append("is_featured", this.blogForm.get("is_featured").value);
     formData.append("category_id", this.blogForm.get("category_id").value);
     formData.append("works_id", this.blogForm.get("works_id").value);
+    formData.append("employee_id", this.blogForm.get("employee_id").value);
     formData.append("is_active", this.blogForm.get("is_active").value);
     formData.append("image", this.blogForm.get("image").value);
     formData.append("date", this.blogForm.get("date").value);
