@@ -16,6 +16,7 @@ export const PAGES: SelectItem[] = [
   { label: "Lavorazioni", value: "../works", icon: "" },
   { label: "Tipo di Appuntamento", value: "../categories" },
   { label: "Dipendenti / Personale", value: "../employees" },
+  { label: "Località", value: "../locations" },
 
 ];
 

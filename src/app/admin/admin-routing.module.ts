@@ -20,6 +20,8 @@ import { ManageWorksComponent } from './works/manage-works/manage-works.componen
 import { SettingsComponent } from './settings/settings.component';
 import { EmployeesFormComponent } from './employees/employees-form/employees-form.component';
 import { ManageEmployeesComponent } from './employees/manage-employees/manage-employees.component';
+import { LocationsFormComponent } from './locations/locations-form/locations-form.component';
+import { ManageLocationsComponent } from './locations/manage-locations/manage-locations.component';
 
 const routes: Routes = [
   {
@@ -57,6 +59,10 @@ const routes: Routes = [
           { path: "works", component: ManageWorksComponent },
           { path: "works/edit/:id", component: WorksFormComponent },
           { path: "works/create", component: WorksFormComponent },
+
+          { path: "locations", component: ManageLocationsComponent },
+          { path: "locations/edit/:id", component: LocationsFormComponent },
+          { path: "locations/create", component: LocationsFormComponent },
 
           { path: "employees", component: ManageEmployeesComponent },
           { path: "employees/edit/:id", component: EmployeesFormComponent },
