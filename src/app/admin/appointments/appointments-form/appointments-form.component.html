@@ -25,6 +25,9 @@
                         </div>
                         <hr class="full">
 
+                        <p-tabView>
+                            <p-tabPanel header="Informazioni">
+                                
                         <div class="p-fluid">
 
                             <div class="p-field p-grid">
@@ -150,9 +153,9 @@
                                 <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Nota <span
                                         class="required">*</span></label>
                                 <div class="p-col-12 p-md-10">
-                                    <p-editor formControlName="description" [style]="{'height':'320px'}">
 
-                                    </p-editor>
+                                    <textarea [rows]="5" [cols]="30" formControlName="description" pInputTextarea [style]="{'height':'160px', 'width':'100%'}" ></textarea>
+
 
                                 </div>
                             </div>
@@ -166,7 +169,30 @@
 
                             </div>
                         </div>
+                            </p-tabPanel>
 
+                            <p-tabPanel header="Documenti">
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                      
+                                        <div class="p-col-12 p-md-12">
+                                            <input #myInput type="file" id="image" (change)="onSelectedFile($event)" />
+                                            <div [innerHTML]="uploadError" class="error"></div>
+                                            <div *ngIf="imagePath">
+                                                <br />
+                                                <span class="image-container" *ngIf="!imagePath == ''">
+                                                    <img [src]="imagePath" width="300px">
+                    
+                                                    <button pButton pRipple icon="pi pi-trash"
+                                                        class="imgcancel p-button p-button-primary p-mr-2"
+                                                        (click)="removeImageFile($event)"></button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </p-tabPanel>
+                        </p-tabView>
                 </div>
             </p-card>
         </div>
@@ -197,25 +223,7 @@
                     </div>
                 </div>
 
-            <div class="p-fluid">
-                <div class="p-field p-grid">
-                  
-                    <div class="p-col-12 p-md-12">
-                        <input #myInput type="file" id="image" (change)="onSelectedFile($event)" />
-                        <div [innerHTML]="uploadError" class="error"></div>
-                        <div *ngIf="imagePath">
-                            <br />
-                            <span class="image-container" *ngIf="!imagePath == ''">
-                                <img [src]="imagePath" width="300px">
-
-                                <button pButton pRipple icon="pi pi-trash"
-                                    class="imgcancel p-button p-button-primary p-mr-2"
-                                    (click)="removeImageFile($event)"></button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
             </p-card>
         </div>
     </div>

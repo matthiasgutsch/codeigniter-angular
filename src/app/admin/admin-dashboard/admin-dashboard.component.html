@@ -31,15 +31,15 @@
     <div class="p-col-12 p-md-5">
 
         <div class="p-field p-grid">
-            <div class="p-col-12 p-md-6">
-                <p-card>
-                    <h4>Clienti</h4>
 
-                </p-card>
-            </div>
-            <div class="p-col-12 p-md-6">
-                <p-card>
-                    <h4>Appuntamenti</h4>
+            <div class="p-col-12 p-md-6" *ngFor="let item of items">
+
+                <p-card routerLink="{{ item.value }}" routerLinkActive="active">
+        
+           
+                            <h4>{{ item.label
+                              }}</h4>
+                
                 </p-card>
             </div>
 
@@ -94,6 +94,11 @@
         <h3>{{appointment.title}}</h3>
         <h3>{{appointment.date | date:'dd/MM/yyyy HH:mm' }}</h3>
 
+        {{ getWorksItem(appointment.works_id)?.name }}<br>
+        {{ getLocationItem(appointment.location_id)?.name }}<br>
+        {{ getEmployeeItem(appointment.employee_id)?.name }}
+
+
         <p [innerHTML]="appointment.description"></p>
         <p [innerHTML]="appointment.start"></p>
         <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
@@ -130,6 +135,11 @@
         <div class="p-col-12 p-md-12">
             <p-card>
         <h3>{{displayEvent.event.title}}</h3>
+                
+        {{ getWorksItem(displayEvent.event.works_id)?.name }}<br>
+        {{ getLocationItem(displayEvent.event.location_id)?.name }}<br>
+        {{ getEmployeeItem(displayEvent.event.employee_id)?.name }}<br>
+
 
         {{displayEvent.event.start | date:'dd/MM/yyyy HH:mm':'-0000'}}
         <p [innerHTML]="displayEvent.event.description"></p>

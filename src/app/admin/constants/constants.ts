@@ -20,6 +20,13 @@ export const PAGES: SelectItem[] = [
 
 ];
 
+
+export const DASHBOARD: SelectItem[] = [
+  { label: "Clienti", value: "./clients", icon: "" },
+  { label: "Appuntamenti", value: "./appointments" }
+
+];
+
 export const TYPE_LIST: SelectItem[] = [
   { label: "Tutte", value: null },
   { label: "Visita", value: "Visita" },

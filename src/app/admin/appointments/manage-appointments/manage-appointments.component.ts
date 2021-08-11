@@ -11,6 +11,10 @@ import { ComuniService } from 'src/app/services/comuni.service';
 import { Comuni } from 'src/app/models/comuni';
 import { WorksService } from 'src/app/services/works.service';
 import { Works } from 'src/app/models/works';
+import { LocationsService } from 'src/app/services/locations.service';
+import { Locations } from 'src/app/models/locations';
+import { Employees } from 'src/app/models/employees';
+import { EmployeesService } from 'src/app/services/employees.service';
 
 @Component({
   selector: 'app-manage-appointments',
@@ -22,6 +26,12 @@ export class ManageAppointmentsComponent implements OnInit {
 
   works: any = [];
   work: Works;
+
+  locations: any = [];
+  location: Locations;
+
+  employees: any = [];
+  employee: Employees;
 
   categories: any = [];
   category: Category;
@@ -46,8 +56,9 @@ trackByFn(index, item) {
     private clientsService: ClientsService,
     private appointmentsService: AppointmentsService,
     private worksService: WorksService,
-
+    private locationsService: LocationsService, 
     private messageService: MessageService,
+    private employeesService: EmployeesService,
     private comuniService: ComuniService,
     private categoryService: CategoryService, 
     private confirmationService: ConfirmationService,) { 
@@ -66,13 +77,23 @@ trackByFn(index, item) {
       error => this.error = error
     );
 
+    this.locationsService.getAllList().subscribe(
+      (data: Locations) => this.locations = data,
+      error => this.error = error
+    );
+
+
     this.worksService.getAllList().subscribe(
       (data: Works) => this.works = data,
       error => this.error = error
     );
 
 
-    
+    this.employeesService.getAllList().subscribe(
+      (data: Employees) => this.employees = data,
+      error => this.error = error
+    );
+
     this.clientsService.getAllList().subscribe(
       (data: Clients) => this.clients = data,
       error => this.error = error
@@ -88,6 +109,18 @@ trackByFn(index, item) {
   getCategoryItem(category_id: string, id: string) {
     return this.clients.find(item => item.id === category_id);
   }
+
+
+  getEmployeeItem(employee_id: string, id: string) {
+    return this.employees.find(item => item.id === employee_id);
+  }
+
+  
+
+  getLocationItem(location_id: string, id: string) {
+    return this.locations.find(item => item.id === location_id);
+  }
+
 
 
   getWorksItem(works_id: string, id: string) {

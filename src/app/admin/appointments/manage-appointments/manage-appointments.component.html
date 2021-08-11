@@ -84,7 +84,9 @@
 
         <h3>{{blog.title}}</h3>
 
-        {{ getWorksItem(blog.works_id)?.name }}
+        {{ getWorksItem(blog.works_id)?.name }}<br>
+        {{ getLocationItem(blog.location_id)?.name }}<br>
+        {{ getEmployeeItem(blog.employee_id)?.name }}
 
         <p [innerHTML]="blog.description"></p>
                 

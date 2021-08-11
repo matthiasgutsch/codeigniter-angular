@@ -14,6 +14,7 @@ import { ManageClientsComponent } from './clients/manage-clients/manage-clients.
 import { ClientsFormComponent } from './clients/clients-form/clients-form.component';
 import {TabViewModule} from 'primeng/tabview';
 import { DateValidPipe } from "./pipe/date-valid.pipe";
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 import { ManagePagesComponent } from './manage-pages/manage-pages.component';
 import { TableModule } from 'primeng/table';
@@ -97,6 +98,7 @@ export class I18nModule {
     TableModule,
     MessagesModule,
     TooltipModule,
+    InputTextareaModule,
     ToastModule,
     TabViewModule,
     OverlayPanelModule,
