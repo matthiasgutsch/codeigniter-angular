@@ -28,7 +28,8 @@ export class AdminDashboardComponent implements OnInit {
 
   calendarOptions: any;
   events: any;
-  appointments: Appointments;
+  appointments: any = [];
+  appointment: Appointments;
   error: string;
   blogForm: FormGroup;
   typeList: any;
@@ -80,7 +81,7 @@ export class AdminDashboardComponent implements OnInit {
       this.calendarOptions = {
         editable: true,
         eventLimit: false,
-        timeFormat: 'H(:mm)', 
+        timeFormat: 'HH:mm', 
         header: {
           right: 'prev,next',
           left: 'title',
@@ -140,6 +141,12 @@ export class AdminDashboardComponent implements OnInit {
   }
 
 
+
+    
+  editProduct(appointment: Appointments) {
+    this.appointment = {...appointment};
+    this.appointmentsDialog = true;
+}
 
 
 

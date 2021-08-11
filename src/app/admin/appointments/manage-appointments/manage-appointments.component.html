@@ -49,7 +49,7 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-blog>
                         <tr>
-                            <td><strong>{{blog.date}}</strong><br>
+                            <td><strong>{{blog.date | date:'dd/MM/yyyy HH:mm'}}</strong><br>
                            
                             </td>
                             <td> {{blog.title}}</td>

@@ -20,7 +20,7 @@
 <div *ngIf="calendarOptions">
     <ng-fullcalendar #ucCalendar [options]="calendarOptions" 
     (eventClick)="eventClick($event.detail)" 
-    (clickButton)="clickButton($event.detail)" 
+   
     (dayClick)="dayClick($event.detail)">
         </ng-fullcalendar>
 </div>
@@ -60,9 +60,8 @@
             </div>
             <hr class="full">
 
-            <p-table #dt1 [value]="appointments" [globalFilterFields]="['name','address','category.name']"
-                [paginator]="false" [rows]="10" [showCurrentPageReport]="true"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+            <p-table #dt1 [value]="appointments"
+                [paginator]="false" [rows]="10">
         
 
            
@@ -76,8 +75,8 @@
                        </td>
                         <td class="action" width="70">
                             <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2 pull-right"
-                                [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
-
+                            (click)="editProduct(appointment)"></button>
+                            
                         </td>
                     </tr>
                 </ng-template>
@@ -88,13 +87,53 @@
 </div>
 
 
+<p-sidebar [(visible)]="appointmentsDialog" position="right" [style]="{width:'50%'}">
+    <ng-template pTemplate="content">
+        <div class="p-col-12 p-md-12">
+            <p-card>
+        <h3>{{appointment.title}}</h3>
+        <h3>{{appointment.date | date:'dd/MM/yyyy HH:mm' }}</h3>
+
+        <p [innerHTML]="appointment.description"></p>
+        <p [innerHTML]="appointment.start"></p>
+        <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
+
+        </p-card>
+        </div>
+        <div class="clearfix"></div><br>
+        <div class="clearfix"></div>
+        <div class="p-col-12 p-md-12">
+
+        <p-card>
+        <strong>{{ getCategoryItem(appointment.category_id)?.name }}</strong>
+      
+        <p>{{ getCategoryItem(appointment.category_id)?.address }}<br>
+  
+        {{ getCategoryItem(appointment.category_id)?.zip }} - {{ getCategoryItem(appointment.category_id)?.city }} ({{ getCategoryItem(appointment.category_id)?.province }})<br>
+        </p>
+        <hr>
+        <p>{{ getCategoryItem(appointment.category_id)?.phone }}<br>
+        {{ getCategoryItem(appointment.category_id)?.email }}</p>
+        <div class="clearfix"></div>
+        <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente" class="p-button p-button-primary p-mr-2" [routerLink]="['/admin/clients/edit', appointment.category_id]"></button>
+    </p-card>
+        </div>
+ 
+    </ng-template>
+
+</p-sidebar>
+
+
+
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'50%'}">
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
             <p-card>
         <h3>{{displayEvent.event.title}}</h3>
+
+        {{displayEvent.event.start | date:'dd/MM/yyyy HH:mm':'-0000'}}
         <p [innerHTML]="displayEvent.event.description"></p>
-        <p [innerHTML]="displayEvent.event.start"></p>
+        <p [innerHTML]="displayEvent.event.end"></p>
         <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', displayEvent.event.id]"></button>
 
         </p-card>
