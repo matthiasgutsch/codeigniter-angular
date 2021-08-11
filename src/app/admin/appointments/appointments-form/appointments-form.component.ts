@@ -19,6 +19,7 @@ import { EmployeesService } from 'src/app/services/employees.service';
 import { Employees } from 'src/app/models/employees';
 import { Locations } from 'src/app/models/locations';
 import { LocationsService } from 'src/app/services/locations.service';
+import { Appointments } from 'src/app/models/appointments';
 
 @Component({
   selector: "app-appointments-form",
@@ -33,6 +34,10 @@ export class AppointmentsFormComponent implements OnInit {
   imagePath: any;
   blogs: Blog;
   blog: Blog;
+
+  appointments: Appointments;
+  appointment: Appointments;
+
 
   categories: any = [];
   category: Category;
@@ -94,7 +99,7 @@ export class AppointmentsFormComponent implements OnInit {
 
   ngOnInit() {
     this.appointmentsService.getAllList().subscribe(
-      (data: Blog) => (this.blogs = data),
+      (data: Appointments) => (this.appointments = data),
       (error) => (this.error = error)
     );
 

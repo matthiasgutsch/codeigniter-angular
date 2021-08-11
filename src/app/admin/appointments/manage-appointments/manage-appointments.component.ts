@@ -15,6 +15,7 @@ import { LocationsService } from 'src/app/services/locations.service';
 import { Locations } from 'src/app/models/locations';
 import { Employees } from 'src/app/models/employees';
 import { EmployeesService } from 'src/app/services/employees.service';
+import { Appointments } from 'src/app/models/appointments';
 
 @Component({
   selector: 'app-manage-appointments',
@@ -32,6 +33,9 @@ export class ManageAppointmentsComponent implements OnInit {
 
   employees: any = [];
   employee: Employees;
+
+  appointments: any = [];
+  appointment: Appointments;
 
   categories: any = [];
   category: Category;
@@ -67,7 +71,7 @@ trackByFn(index, item) {
 
   ngOnInit() {
     this.appointmentsService.getAllList().subscribe(
-      (data: Blog) => this.blogs = data,
+      (data: Appointments) => this.appointments = data,
       error => this.error = error
     );
 
@@ -133,8 +137,8 @@ trackByFn(index, item) {
   }
   
   
-  editProduct(blog: Blog) {
-    this.blog = {...blog};
+  editProduct(appointment: Appointments) {
+    this.appointment = {...appointment};
     this.productDialog = true;
 }
 

@@ -20,7 +20,7 @@
                 </div>
                 <hr class="full">
 
-                <p-table #dt1 [value]="blogs" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
+                <p-table #dt1 [value]="appointments" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
                     <ng-template pTemplate="caption">
                         <div class="p-d-flex">
                             <span class="p-input-icon-left p-ml-auto">
@@ -47,24 +47,24 @@
                             <th>Action</th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-blog>
+                    <ng-template pTemplate="body" let-appointment>
                         <tr>
-                            <td><strong>{{blog.date | date:'dd/MM/yyyy HH:mm'}}</strong><br>
+                            <td><strong>{{appointment.date | date:'dd/MM/yyyy HH:mm'}}</strong><br>
                            
                             </td>
-                            <td> {{blog.title}}</td>
+                            <td> {{appointment.title}}</td>
                             <td>
-                                <a (click)="editProduct(blog)">
+                                <a (click)="editProduct(appointment)">
                                     <span class="user"><i class="pi pi-user"></i></span>{{
-                                        getCategoryItem(blog.category_id)?.name }}</a>
+                                        getCategoryItem(appointment.category_id)?.name }}</a>
                             </td>
 
 
 
                             <td class="action">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', blog.id]"></button>
-                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2" (click)="editProduct(blog)"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(blog.id)"></button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
+                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2" (click)="editProduct(appointment)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(appointment.id)"></button>
 
                             </td>
                         </tr>
