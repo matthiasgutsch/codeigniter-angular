@@ -154,7 +154,7 @@ export class AppointmentsFormComponent implements OnInit {
     this.blogForm = this.fb.group({
       id: [""],
       title: ["", Validators.required],
-      description: ["", Validators.required],
+      description: [""],
       is_featured: ["0"],
       category_id: ["", Validators.required],
       works_id: [""],

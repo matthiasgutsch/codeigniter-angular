@@ -21,9 +21,11 @@
                             </div>
                             <div class="p-col-3 p-md-3">
 
-                                <button pButton pRipple label="save" class="p-button p-button-success p-mr-2"
+                              
+                                <button pButton pRipple icon="pi pi-save" label="salva" class="p-button pull-right p-button-success p-mr-2"
                                 [disabled]="!blogForm.valid"></button>
-                                
+                                <button pButton pRipple icon="pi pi-chevron-left" (click)="goback()"
+                                class="p-button p-button-primary p-mr-2 pull-right"></button>
                             </div>
                         </div>
                         <hr class="full">
@@ -200,9 +202,9 @@
                                                 class="required">*</span></label>
                                                 </div>
                                 <div class="p-field p-grid">
-                                            <p-editor formControlName="description" [style]="{'height':'320px'}">
-        
-                                            </p-editor>
+                                    <textarea [rows]="5" [cols]="30" formControlName="description" pInputTextarea [style]="{'height':'160px', 'width':'100%'}" ></textarea>
+
+                              
                                        
                                     </div>
                                 </div>
@@ -267,7 +269,8 @@
                     </div>
                     <div class="p-col-12 p-md-4">
                         <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']"
-                           class="p-button p-button-primary p-mr-2 pull-right"></button>
+                        class="p-button p-button-primary p-mr-2 pull-right"></button>
+     
                     </div>
 
                  
@@ -303,3 +306,6 @@
         </div>
     </div>
 </div></form>
+
+
+<p-toast key="myKey1"></p-toast>

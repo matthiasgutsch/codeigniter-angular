@@ -38,11 +38,11 @@
         
                            {{clientsCount}}
                             <h4>Clients</h4>
-                              <button pButton pRipple label="Elenco" [routerLink]="['/admin/appointments']" routerLinkActive="active"
-                       class="p-button p-button-primary p-mr-2"></button>
-                       <button pButton pRipple label="Aggiungi" [routerLink]="['/admin/appointments/create']" routerLinkActive="active"
-                       class="p-button p-button-secondary p-mr-2"></button>
-                            
+                             
+                            <button pButton pRipple label="Elenco" [routerLink]="['/admin/clients']" routerLinkActive="active"
+                            class="p-button p-button-primary p-mr-2"></button>
+                            <button pButton pRipple label="Aggiungi" [routerLink]="['/admin/clients/create']" routerLinkActive="active"
+                            class="p-button p-button-secondary p-mr-2"></button>
                 </p-card>
             </div>
             <div class="p-col-12 p-md-6">
@@ -52,10 +52,11 @@
                     {{appointmentsCount}}
 
                      <h4>Appointments</h4>
-                       <button pButton pRipple label="Elenco" [routerLink]="['/admin/clients']" routerLinkActive="active"
-                class="p-button p-button-primary p-mr-2"></button>
-                <button pButton pRipple label="Aggiungi" [routerLink]="['/admin/clients/create']" routerLinkActive="active"
-                class="p-button p-button-secondary p-mr-2"></button>
+                     <button pButton pRipple label="Elenco" [routerLink]="['/admin/appointments']" routerLinkActive="active"
+                     class="p-button p-button-primary p-mr-2"></button>
+                     <button pButton pRipple label="Aggiungi" [routerLink]="['/admin/appointments/create']" routerLinkActive="active"
+                     class="p-button p-button-secondary p-mr-2"></button>
+               
                      
          </p-card>
 
@@ -112,9 +113,12 @@
         <h3>{{appointment.title}}</h3>
         <h3>{{appointment.date | date:'dd/MM/yyyy HH:mm' }}</h3>
 
-        {{ getWorksItem(appointment.works_id)?.name }}<br>
-        {{ getLocationItem(appointment.location_id)?.name }}<br>
-        {{ getEmployeeItem(appointment.employee_id)?.name }}
+        <i class="pi pi-check"></i>
+{{ getWorksItem(appointment.works_id)?.name }}<br>
+<i class="pi pi-check"></i>
+{{ getLocationItem(appointment.location_id)?.name }}<br>
+<i class="pi pi-check"></i>
+{{ getEmployeeItem(appointment.employee_id)?.name }}
 
 
         <p [innerHTML]="appointment.description"></p>
@@ -152,14 +156,18 @@
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
             <p-card>
+                <strong> {{displayEvent.event.start | date:'dd/MM/yyyy HH:mm':'-0000'}}</strong>
         <h3>{{displayEvent.event.title}}</h3>
                 
-        {{ getWorksItem(displayEvent.event.works_id)?.name }}<br>
-        {{ getLocationItem(displayEvent.event.location_id)?.name }}<br>
-        {{ getEmployeeItem(displayEvent.event.employee_id)?.name }}<br>
+        <i class="pi pi-check"></i>
+{{ getWorksItem(displayEvent.event.works_id)?.name }}<br>
+<i class="pi pi-check"></i>
+{{ getLocationItem(displayEvent.event.location_id)?.name }}<br>
+<i class="pi pi-check"></i>
+{{ getEmployeeItem(displayEvent.event.employee_id)?.name }}<br>
 
 
-        {{displayEvent.event.start | date:'dd/MM/yyyy HH:mm':'-0000'}}
+       
         <p [innerHTML]="displayEvent.event.description"></p>
         <p [innerHTML]="displayEvent.event.end"></p>
         <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', displayEvent.event.id]"></button>
