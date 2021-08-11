@@ -121,6 +121,7 @@ export class AppointmentsFormComponent implements OnInit {
           category_id: res.category_id,
           works_id: res.works_id,
           employee_id: res.employee_id,
+          location_id: res.location_id,
           is_featured: res.is_featured,
           is_active: res.is_active,
           date: res.date,
@@ -139,6 +140,7 @@ export class AppointmentsFormComponent implements OnInit {
       is_featured: ["0"],
       category_id: ["", Validators.required],
       works_id: [""],
+      location_id: [""],
       employee_id: [""],
       is_active: ["0"],
       image: [""],
@@ -185,6 +187,7 @@ export class AppointmentsFormComponent implements OnInit {
     formData.append("is_featured", this.blogForm.get("is_featured").value);
     formData.append("category_id", this.blogForm.get("category_id").value);
     formData.append("works_id", this.blogForm.get("works_id").value);
+    formData.append("location_id", this.blogForm.get("location_id").value);
     formData.append("employee_id", this.blogForm.get("employee_id").value);
     formData.append("is_active", this.blogForm.get("is_active").value);
     formData.append("image", this.blogForm.get("image").value);

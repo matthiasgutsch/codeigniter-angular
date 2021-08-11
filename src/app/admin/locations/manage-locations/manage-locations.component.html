@@ -36,7 +36,8 @@
     <ng-template pTemplate="header">
         <tr>
             <th>Name</th>
-     
+            <th>Description</th>
+
 
             <th width="160"></th>
         </tr>
@@ -45,6 +46,7 @@
         <tr>
             <td>{{locations.name}}</td>
           
+            <td>{{locations.description}}</td>
 
             <td class="action">
                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/locations/edit', locations.id]"></button>
