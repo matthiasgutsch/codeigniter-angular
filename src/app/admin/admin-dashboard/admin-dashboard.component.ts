@@ -48,7 +48,7 @@ export class AdminDashboardComponent implements OnInit {
   client: Clients;
   comuni: any = [];
   displayEvent: any;
-
+  currentUser: any ;
   trackByFn(index, item) {
     return item.id;
   }
@@ -68,7 +68,7 @@ export class AdminDashboardComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.typeList = TYPE_LIST;
-
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     this.events = this.appointments;
 
   }
