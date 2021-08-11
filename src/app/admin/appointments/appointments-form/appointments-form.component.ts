@@ -17,6 +17,8 @@ import { WorksService } from 'src/app/services/works.service';
 import { Works } from 'src/app/models/works';
 import { EmployeesService } from 'src/app/services/employees.service';
 import { Employees } from 'src/app/models/employees';
+import { Locations } from 'src/app/models/locations';
+import { LocationsService } from 'src/app/services/locations.service';
 
 @Component({
   selector: "app-appointments-form",
@@ -50,6 +52,11 @@ export class AppointmentsFormComponent implements OnInit {
   employees: any = [];
   employee: Employees;
 
+
+  locations: any = [];
+  location: Locations;
+
+
   cities: Blog[];
   format1: string = "";
   format2: string = "";
@@ -70,6 +77,7 @@ export class AppointmentsFormComponent implements OnInit {
     private messageService: MessageService,
     private clientsService: ClientsService,
     private _location: Location,
+    private locationsService: LocationsService,
     private worksService: WorksService,
     private employeesService: EmployeesService,
     private categoryService: CategoryService,
@@ -103,6 +111,11 @@ export class AppointmentsFormComponent implements OnInit {
 
     this.worksService.getAllList().subscribe(
       (data: Works) => (this.works = data),
+      (error) => (this.error = error)
+    );
+
+    this.locationsService.getAllList().subscribe(
+      (data: Locations) => (this.locations = data),
       (error) => (this.error = error)
     );
 
