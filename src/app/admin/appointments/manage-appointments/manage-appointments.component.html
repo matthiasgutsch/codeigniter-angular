@@ -80,9 +80,15 @@
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
             <p-card>
+        <strong>{{blog.date | date:'dd/MM/yyyy HH:mm'}}</strong>
+
         <h3>{{blog.title}}</h3>
+
+        {{ getWorksItem(blog.works_id)?.name }}
+
         <p [innerHTML]="blog.description"></p>
-        <p [innerHTML]="blog.start"></p>
+                
+
         <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', blog.id]"></button>
 
         </p-card>

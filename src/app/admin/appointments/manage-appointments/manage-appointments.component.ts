@@ -9,6 +9,8 @@ import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
 import { ComuniService } from 'src/app/services/comuni.service';
 import { Comuni } from 'src/app/models/comuni';
+import { WorksService } from 'src/app/services/works.service';
+import { Works } from 'src/app/models/works';
 
 @Component({
   selector: 'app-manage-appointments',
@@ -17,6 +19,10 @@ import { Comuni } from 'src/app/models/comuni';
 export class ManageAppointmentsComponent implements OnInit {
   blogs: Blog;
   blog: Blog;
+
+  works: any = [];
+  work: Works;
+
   categories: any = [];
   category: Category;
   error: string;
@@ -39,6 +45,8 @@ trackByFn(index, item) {
   constructor(
     private clientsService: ClientsService,
     private appointmentsService: AppointmentsService,
+    private worksService: WorksService,
+
     private messageService: MessageService,
     private comuniService: ComuniService,
     private categoryService: CategoryService, 
@@ -55,6 +63,11 @@ trackByFn(index, item) {
 
     this.categoryService.getAllList().subscribe(
       (data: Category) => this.categories = data,
+      error => this.error = error
+    );
+
+    this.worksService.getAllList().subscribe(
+      (data: Works) => this.works = data,
       error => this.error = error
     );
 
@@ -75,6 +88,12 @@ trackByFn(index, item) {
   getCategoryItem(category_id: string, id: string) {
     return this.clients.find(item => item.id === category_id);
   }
+
+
+  getWorksItem(works_id: string, id: string) {
+    return this.works.find(item => item.id === works_id);
+  }
+
 
   getComuniItem(category_id: string, id: string) {
     return this.comuni.find(item => item.id === category_id);

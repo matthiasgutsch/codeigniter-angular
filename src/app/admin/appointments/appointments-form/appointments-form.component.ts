@@ -13,6 +13,8 @@ import { TYPE_LIST } from '../../constants/constants';
 import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
 import { Location } from '@angular/common';
+import { WorksService } from 'src/app/services/works.service';
+import { Works } from 'src/app/models/works';
 
 @Component({
   selector: "app-appointments-form",
@@ -30,6 +32,10 @@ export class AppointmentsFormComponent implements OnInit {
 
   categories: any = [];
   category: Category;
+
+  works: any = [];
+  work: Works;
+
   checked: boolean = true;
   selectedValue: string;
 
@@ -43,6 +49,7 @@ export class AppointmentsFormComponent implements OnInit {
   format2: string = "";
   selectedCity: Blog;
   selectedCategories: Category;
+  selectedWorks: Works;
   selectedClients: Clients;
   selectedDate: Date;
   date: Date;
@@ -57,7 +64,7 @@ export class AppointmentsFormComponent implements OnInit {
     private messageService: MessageService,
     private clientsService: ClientsService,
     private _location: Location,
-
+    private worksService: WorksService,
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,
     private router: Router,
@@ -81,6 +88,11 @@ export class AppointmentsFormComponent implements OnInit {
       (error) => (this.error = error)
     );
 
+    this.worksService.getAllList().subscribe(
+      (data: Works) => (this.works = data),
+      (error) => (this.error = error)
+    );
+
     this.clientsService.getAllList().subscribe(
       (data: Clients) => (this.clients = data),
       (error) => (this.error = error)
@@ -94,6 +106,7 @@ export class AppointmentsFormComponent implements OnInit {
           title: res.title,
           description: res.description,
           category_id: res.category_id,
+          works_id: res.works_id,
           is_featured: res.is_featured,
           is_active: res.is_active,
           date: res.date,
@@ -111,6 +124,7 @@ export class AppointmentsFormComponent implements OnInit {
       description: ["", Validators.required],
       is_featured: ["0"],
       category_id: ["", Validators.required],
+      works_id: [""],
       is_active: ["0"],
       image: [""],
       date: ["", Validators.required],
@@ -155,6 +169,7 @@ export class AppointmentsFormComponent implements OnInit {
     formData.append("description", this.blogForm.get("description").value);
     formData.append("is_featured", this.blogForm.get("is_featured").value);
     formData.append("category_id", this.blogForm.get("category_id").value);
+    formData.append("works_id", this.blogForm.get("works_id").value);
     formData.append("is_active", this.blogForm.get("is_active").value);
     formData.append("image", this.blogForm.get("image").value);
     formData.append("date", this.blogForm.get("date").value);
