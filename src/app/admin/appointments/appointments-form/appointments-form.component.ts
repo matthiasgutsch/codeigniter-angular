@@ -166,6 +166,10 @@ export class AppointmentsFormComponent implements OnInit {
     });
   }
 
+  goback(){
+    this._location.back();
+  }
+
   onSelectedFile(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -219,7 +223,7 @@ export class AppointmentsFormComponent implements OnInit {
           if (res.status == "error") {
             this.uploadError = res.message;
           } else {
-            this._location.back();
+            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con successo' });
           }
         },
         (error) => (this.error = error)
