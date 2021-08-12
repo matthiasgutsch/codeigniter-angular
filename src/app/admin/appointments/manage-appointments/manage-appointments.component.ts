@@ -16,6 +16,7 @@ import { Locations } from 'src/app/models/locations';
 import { Employees } from 'src/app/models/employees';
 import { EmployeesService } from 'src/app/services/employees.service';
 import { Appointments } from 'src/app/models/appointments';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-manage-appointments',
@@ -36,7 +37,7 @@ export class ManageAppointmentsComponent implements OnInit {
 
   appointments: any = [];
   appointment: Appointments;
-
+  date: Date;
   categories: any = [];
   category: Category;
   error: string;
@@ -50,6 +51,7 @@ export class ManageAppointmentsComponent implements OnInit {
     this.productDialog = true;
 }
 
+myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en')  ;
 
 trackByFn(index, item) {
   return item.id;

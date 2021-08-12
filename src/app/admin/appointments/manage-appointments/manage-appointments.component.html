@@ -80,18 +80,18 @@
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
             <p-card>
-        <strong>{{blog.date | date:'dd/MM/yyyy HH:mm'}}</strong>
+        <strong>{{appointment.date | date:'dd/MM/yyyy HH:mm'}}</strong>
 
-        <h3>{{blog.title}}</h3>
+        <h3>{{appointment.title}}</h3>
 
-        {{ getWorksItem(blog.works_id)?.name }}<br>
-        {{ getLocationItem(blog.location_id)?.name }}<br>
-        {{ getEmployeeItem(blog.employee_id)?.name }}
+        {{ getWorksItem(appointment.works_id)?.name }}<br>
+        {{ getLocationItem(appointment.location_id)?.name }}<br>
+        {{ getEmployeeItem(appointment.employee_id)?.name }}
 
-        <p [innerHTML]="blog.description"></p>
+        <p [innerHTML]="appointment.description"></p>
                 
 
-        <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', blog.id]"></button>
+        <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
 
         </p-card>
         </div>
@@ -100,17 +100,17 @@
         <div class="p-col-12 p-md-12">
 
         <p-card>
-        <strong>{{ getCategoryItem(blog.category_id)?.name }}</strong>
+        <strong>{{ getCategoryItem(appointment.category_id)?.name }}</strong>
       
-        <p>{{ getCategoryItem(blog.category_id)?.address }}<br>
+        <p>{{ getCategoryItem(appointment.category_id)?.address }}<br>
   
-        {{ getCategoryItem(blog.category_id)?.zip }} - {{ getCategoryItem(blog.category_id)?.city }} ({{ getCategoryItem(blog.category_id)?.province }})<br>
+        {{ getCategoryItem(appointment.category_id)?.zip }} - {{ getCategoryItem(appointment.category_id)?.city }} ({{ getCategoryItem(appointment.category_id)?.province }})<br>
         </p>
         <hr>
-        <p>{{ getCategoryItem(blog.category_id)?.phone }}<br>
-        {{ getCategoryItem(blog.category_id)?.email }}</p>
+        <p>{{ getCategoryItem(appointment.category_id)?.phone }}<br>
+        {{ getCategoryItem(appointment.category_id)?.email }}</p>
         <div class="clearfix"></div>
-        <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente" class="p-button p-button-primary p-mr-2" [routerLink]="['/admin/clients/edit', blog.category_id]"></button>
+        <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente" class="p-button p-button-primary p-mr-2" [routerLink]="['/admin/clients/edit', appointment.category_id]"></button>
     </p-card>
         </div>
  
