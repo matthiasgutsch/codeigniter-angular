@@ -55,7 +55,9 @@ export class ManageClientsComponent implements OnInit {
 
     this.cols = [
       { field: "name", header: "Nome" },
-      { field: "email", header: "Email" }
+      { field: "email", header: "Email" },
+      { field: "date", header: "Data di nascità" }
+
     ];
 
     this._selectedColumns = this.cols;
@@ -98,7 +100,7 @@ export class ManageClientsComponent implements OnInit {
     const doc = new jsPDF('p','pt');
     doc['autoTable'](this.exportColumns, this.clients);
     // doc.autoTable(this.exportColumns, this.products);
-    doc.save("products.pdf");
+    doc.save("clients.pdf");
   }
 
 

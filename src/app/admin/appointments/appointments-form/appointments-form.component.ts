@@ -223,7 +223,7 @@ export class AppointmentsFormComponent implements OnInit {
           if (res.status == "error") {
             this.uploadError = res.message;
           } else {
-            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con successo' });
+            this._location.back();
           }
         },
         (error) => (this.error = error)

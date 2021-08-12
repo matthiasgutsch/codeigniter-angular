@@ -17,6 +17,8 @@ import { Employees } from 'src/app/models/employees';
 import { EmployeesService } from 'src/app/services/employees.service';
 import { Appointments } from 'src/app/models/appointments';
 import {formatDate} from '@angular/common';
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 @Component({
   selector: 'app-manage-appointments',
@@ -31,6 +33,9 @@ export class ManageAppointmentsComponent implements OnInit {
 
   locations: any = [];
   location: Locations;
+  cols: any[];
+  exportColumns: any[];
+  _selectedColumns: any[];
 
   employees: any = [];
   employee: Employees;
@@ -72,6 +77,21 @@ trackByFn(index, item) {
   }
 
   ngOnInit() {
+
+    this.cols = [
+      { field: "date", header: "Data" },
+      { field: "title", header: "titolo" },
+      { field: "category_id", header: "Cliente" }
+
+    ];
+
+    this._selectedColumns = this.cols;
+    this.exportColumns = this.cols.map(col => ({
+      title: col.header,
+      dataKey: col.field
+    }));
+
+
     this.appointmentsService.getAllList().subscribe(
       (data: Appointments) => this.appointments = data,
       error => this.error = error
@@ -142,6 +162,15 @@ trackByFn(index, item) {
   editProduct(appointment: Appointments) {
     this.appointment = {...appointment};
     this.productDialog = true;
+}
+
+
+exportPdf() {
+  // const doc = new jsPDF();
+  const doc = new jsPDF('p','pt');
+  doc['autoTable'](this.exportColumns, this.appointments);
+  // doc.autoTable(this.exportColumns, this.products);
+  doc.save("appointments.pdf");
 }
 
 
