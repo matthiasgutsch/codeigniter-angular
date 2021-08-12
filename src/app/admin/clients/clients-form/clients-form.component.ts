@@ -171,10 +171,6 @@ export class ClientsFormComponent implements OnInit {
     console.log(this.myInputVariable.nativeElement.files);
   }
 
-  goback(){
-    this._location.back();
-  }
-  
   get title() {
     return this.blogForm.get("title");
   }
@@ -210,7 +206,7 @@ export class ClientsFormComponent implements OnInit {
           if (res.status == "error") {
             this.uploadError = res.message;
           } else {
-            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con successo' });
+            this._location.back();
           }
         },
         (error) => (this.error = error)

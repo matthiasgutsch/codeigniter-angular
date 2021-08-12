@@ -8,19 +8,25 @@ import { Category } from '../../../models/category';
 import { MessageService } from 'primeng/api';
 import { ComuniService } from 'src/app/services/comuni.service';
 import { Comuni } from 'src/app/models/comuni';
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+
 
 @Component({
   selector: 'app-manage-clients',
   templateUrl: './manage-clients.component.html'
 })
 export class ManageClientsComponent implements OnInit {
-  clients: Clients;
+  clients: any = [];
   client: Clients;
   categories: any = [];
   category: Category;
   error: string;
   comuni: any = [];
-
+  cols: any[];
+  exportColumns: any[];
+  _selectedColumns: any[];
+  
   private category_id: number;
   private id: number;
 
@@ -41,10 +47,24 @@ export class ManageClientsComponent implements OnInit {
     private comuniService: ComuniService,
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,) {
+      const doc = new jsPDF();
 
   }
 
   ngOnInit() {
+
+    this.cols = [
+      { field: "name", header: "Nome" },
+      { field: "email", header: "Email" }
+    ];
+
+    this._selectedColumns = this.cols;
+    this.exportColumns = this.cols.map(col => ({
+      title: col.header,
+      dataKey: col.field
+    }));
+
+
     this.clientsService.getAllList().subscribe(
       (data: Clients) => this.clients = data,
       error => this.error = error
@@ -72,6 +92,17 @@ export class ManageClientsComponent implements OnInit {
   hideDialog() {
     this.productDialog = false;
   }
+
+  exportPdf() {
+    // const doc = new jsPDF();
+    const doc = new jsPDF('p','pt');
+    doc['autoTable'](this.exportColumns, this.clients);
+    // doc.autoTable(this.exportColumns, this.products);
+    doc.save("products.pdf");
+  }
+
+
+
 
   onDelete(id: number, title: string) {
 
