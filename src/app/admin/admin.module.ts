@@ -59,6 +59,7 @@ import { EmployeesFormComponent } from './employees/employees-form/employees-for
 import { ManageEmployeesComponent } from './employees/manage-employees/manage-employees.component';
 import { LocationsFormComponent } from './locations/locations-form/locations-form.component';
 import { ManageLocationsComponent } from './locations/manage-locations/manage-locations.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 export class I18nModule {
   constructor(translate: TranslateService) {
@@ -91,7 +92,8 @@ export class I18nModule {
     CategoryFormComponent,
     SettingsComponent,
     EmployeesFormComponent,
-    ManageEmployeesComponent
+    ManageEmployeesComponent,
+    StatisticsComponent
   ],
   imports: [
     CommonModule,
