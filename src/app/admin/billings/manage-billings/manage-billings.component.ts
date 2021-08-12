@@ -77,24 +77,7 @@ export class ManageBillingsComponent implements OnInit {
     return this.comuni.find((item) => item.id === category_id);
   }
 
-  downloadPDF() {
-    const doc = new jsPDF();
-
-    const specialElementHandlers = {
-      "#editor": function (element, renderer) {
-        return true;
-      },
-    };
-
-    const content = this.content.nativeElement;
-
-    doc.fromHTML(content.innerHTML, 15, 15, {
-      width: 190,
-      elementHandlers: specialElementHandlers,
-    });
-
-    doc.save("test.pdf");
-  }
+  
   
   editProduct(blog: Blog) {
     this.blog = { ...blog };
