@@ -14,6 +14,8 @@ import { ManageClientsComponent } from './clients/manage-clients/manage-clients.
 import { ClientsFormComponent } from './clients/clients-form/clients-form.component';
 import {TabViewModule} from 'primeng/tabview';
 import { DateValidPipe } from "./pipe/date-valid.pipe";
+import { JoinPipe } from "./pipe/join.pipe";
+
 import {InputTextareaModule} from 'primeng/inputtextarea';
 
 import { ManagePagesComponent } from './manage-pages/manage-pages.component';
@@ -42,6 +44,8 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
 import {TooltipModule} from 'primeng/tooltip';
+import {MultiSelectModule} from 'primeng/multiselect';
+
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import * as $ from 'jquery';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -82,6 +86,7 @@ export class I18nModule {
     ManagePagesComponent,
     MomentPipe,
     DateValidPipe,
+    JoinPipe,
     WorksFormComponent,
     ManageWorksComponent,
     ManageAppointmentsComponent,
@@ -124,6 +129,7 @@ export class I18nModule {
     DropdownModule,
     HttpClientModule,
     FileUploadModule,
+    MultiSelectModule,
     ButtonModule,
     InputSwitchModule,
     AutoCompleteModule,

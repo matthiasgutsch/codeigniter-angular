@@ -38,7 +38,6 @@ export class AppointmentsFormComponent implements OnInit {
   appointments: Appointments;
   appointment: Appointments;
 
-
   categories: any = [];
   category: Category;
 
@@ -57,6 +56,8 @@ export class AppointmentsFormComponent implements OnInit {
   employees: any = [];
   employee: Employees;
 
+  description: Works[];
+  selectedWorks: Works[] = [];
 
   locations: any = [];
   location: Locations;
@@ -67,7 +68,6 @@ export class AppointmentsFormComponent implements OnInit {
   format2: string = "";
   selectedCity: Blog;
   selectedCategories: Category;
-  selectedWorks: Works;
   selectedClients: Clients;
   selectedDate: Date;
   date: Date;
@@ -93,11 +93,13 @@ export class AppointmentsFormComponent implements OnInit {
     if (this.date) {
       this.selectedDate = new Date(this.date);
     }
-
+    
     this.typeList = TYPE_LIST;
   }
 
   ngOnInit() {
+
+
     this.appointmentsService.getAllList().subscribe(
       (data: Appointments) => (this.appointments = data),
       (error) => (this.error = error)
@@ -151,6 +153,8 @@ export class AppointmentsFormComponent implements OnInit {
       this.pageTitle = "Aggiungi Appuntamento";
     }
 
+    
+    
     this.blogForm = this.fb.group({
       id: [""],
       title: ["", Validators.required],
@@ -166,10 +170,12 @@ export class AppointmentsFormComponent implements OnInit {
     });
   }
 
+  
   goback(){
     this._location.back();
   }
 
+  
   onSelectedFile(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -198,9 +204,10 @@ export class AppointmentsFormComponent implements OnInit {
     return this.blogForm.get("title");
   }
 
-  get description() {
-    return this.blogForm.get("description");
-  }
+
+
+
+
 
   onSubmit() {
     const formData = new FormData();

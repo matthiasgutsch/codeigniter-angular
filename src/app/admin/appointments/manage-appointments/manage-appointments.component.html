@@ -55,6 +55,7 @@
                            
                             </td>
                             <td> {{appointment.title}}</td>
+                            
                             <td>
                                 <a (click)="editProduct(appointment)">
                                     <span class="user"><i class="pi pi-user"></i></span>{{
@@ -81,11 +82,11 @@
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'50%'}">
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
-            <p-card>
+        <p-card>
         <strong>{{appointment.date | date:'dd/MM/yyyy HH:mm'}}</strong>
 
         <h3>{{appointment.title}}</h3>
-
+        <h3>{{appointment.description | join: ', '}}</h3>
         {{ getWorksItem(appointment.works_id)?.name }}<br>
         {{ getLocationItem(appointment.location_id)?.name }}<br>
         {{ getEmployeeItem(appointment.employee_id)?.name }}
