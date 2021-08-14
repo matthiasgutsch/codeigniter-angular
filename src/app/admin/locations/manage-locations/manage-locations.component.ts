@@ -16,7 +16,8 @@ export class ManageLocationsComponent implements OnInit {
   error: string;
 
 
-  constructor(private locationsService: LocationsService, private confirmationService: ConfirmationService,) { }
+  constructor(private locationsService: LocationsService, 
+    private confirmationService: ConfirmationService,) { }
 
   ngOnInit() {
     this.locationsService.getAllList().subscribe(
