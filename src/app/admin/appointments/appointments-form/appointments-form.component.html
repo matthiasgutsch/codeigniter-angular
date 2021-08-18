@@ -213,7 +213,7 @@
             </div>
 
             <div class="p-col-4 p-md-4">
-                <p-card>
+                <p-card *ngIf="selectedWorks">
 
                     <div class="p-fluid">
                         <div class="p-field p-grid">
@@ -238,7 +238,7 @@
 
                 </p-card>
 
-                <p-card>
+                <p-card *ngIf="getCategoryItem(selectedClients)">
 
                     <div class="p-fluid">
                         <div class="p-field p-grid">
@@ -252,7 +252,14 @@
                             <div class="p-col-12 p-md-12">
                                 {{ getCategoryItem(selectedClients)?.name }}<br>{{ getCategoryItem(selectedClients)?.zip }} - {{ getCategoryItem(selectedClients)?.city }} <br> {{ getCategoryItem(selectedClients)?.phone }}
 
+
+
                             </div>
+                            <div class="p-col-12 p-md-12">
+                                <br>
+                            <button pButton pRipple icon="pi pi-pencil" label="modifica Cliente" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/clients/edit', getCategoryItem(selectedClients)?.id]"></button>
+                            </div>
+
                         </div>
                     </div>
 
