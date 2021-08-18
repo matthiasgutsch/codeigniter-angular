@@ -75,7 +75,6 @@
         </div>
     </div>
 </div>
-{{title}}
 
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'50%'}">
     <ng-template pTemplate="content">
@@ -83,13 +82,19 @@
             <p-card>
                 <strong>{{appointment.date | date:'dd/MM/yyyy HH:mm'}}</strong>
 
+
+                <div *ngFor="let item of selectedWorks">
+                    {{ getWorksItem(item)?.name }}
+                </div>
+                
                 <h3>{{appointment.title}}</h3>
+          
                 {{ getWorksItem(appointment.works_id)?.name }}<br> {{ getLocationItem(appointment.location_id)?.name }}
                 <br> {{ getEmployeeItem(appointment.employee_id)?.name }}
 
 
 
-                <p [innerHTML]="appointment.description.split(',')"></p>
+                <p [innerHTML]="appointment.description"></p>
 
 
                 <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', appointment.id]"></button>

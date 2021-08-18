@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppointmentsService } from '../../../services/appointments.service';
 import { Blog } from '../../../models/blog';
-import {ConfirmationService} from 'primeng/api';
+import {ConfirmationService, SelectItem} from 'primeng/api';
 import { CategoryService } from '../../../services/categories.service';
 import { Category } from '../../../models/category';
 import {MessageService} from 'primeng/api';
@@ -36,6 +36,7 @@ export class ManageAppointmentsComponent implements OnInit {
   cols: any[];
   exportColumns: any[];
   _selectedColumns: any[];
+  selectedWorks: any[];
 
   employees: any = [];
   employee: Employees;
@@ -52,6 +53,7 @@ export class ManageAppointmentsComponent implements OnInit {
   client: Clients;
   comuni: any = [];
   productDialog:boolean = false;
+  works_id: any;
   showDialog() {
     this.productDialog = true;
 }
@@ -137,6 +139,8 @@ trackByFn(index, item) {
   }
 
 
+
+    
   getEmployeeItem(employee_id: string, id: string) {
     return this.employees.find(item => item.id === employee_id);
   }
@@ -161,6 +165,7 @@ trackByFn(index, item) {
   
   editProduct(appointment: Appointments) {
     this.appointment = {...appointment};
+    this.selectedWorks = this.appointment.works_id.split(',');
     this.productDialog = true;
 }
 
