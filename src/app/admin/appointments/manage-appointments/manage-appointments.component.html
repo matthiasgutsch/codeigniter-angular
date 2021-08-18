@@ -84,7 +84,8 @@
                 <strong>{{appointment.date | date:'dd/MM/yyyy HH:mm'}}</strong>
 
                 <h3>{{appointment.title}}</h3>
-                {{ getWorksItem(appointment.works_id)?.name }}<br> {{ getLocationItem(appointment.location_id)?.name }}<br> {{ getEmployeeItem(appointment.employee_id)?.name }}
+                {{ getWorksItem(appointment.works_id)?.name }}<br> {{ getLocationItem(appointment.location_id)?.name }}
+                <br> {{ getEmployeeItem(appointment.employee_id)?.name }}
 
 
 
