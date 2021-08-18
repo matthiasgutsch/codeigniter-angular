@@ -56,8 +56,8 @@ export class AppointmentsFormComponent implements OnInit {
   employees: any = [];
   employee: Employees;
 
-  description: Works[];
-  selectedWorks: Works[] = [];
+  description: any;
+  selectedWorks: SelectItem[];
 
   locations: any = [];
   location: Locations;
@@ -71,7 +71,7 @@ export class AppointmentsFormComponent implements OnInit {
   selectedClients: Clients;
   selectedDate: Date;
   date: Date;
-
+  
   trackByFn(index, item) {
     return item.id;
   }
@@ -93,8 +93,8 @@ export class AppointmentsFormComponent implements OnInit {
     if (this.date) {
       this.selectedDate = new Date(this.date);
     }
-    
     this.typeList = TYPE_LIST;
+
   }
 
   ngOnInit() {
@@ -137,7 +137,7 @@ export class AppointmentsFormComponent implements OnInit {
       this.appointmentsService.getId(+id).subscribe((res) => {
         this.blogForm.patchValue({
           title: res.title,
-          description: res.description,
+          description: res.description.split(','),
           category_id: res.category_id,
           works_id: res.works_id,
           employee_id: res.employee_id,
@@ -211,6 +211,7 @@ export class AppointmentsFormComponent implements OnInit {
 
   onSubmit() {
     const formData = new FormData();
+
     formData.append("title", this.blogForm.get("title").value);
     formData.append("description", this.blogForm.get("description").value);
     formData.append("is_featured", this.blogForm.get("is_featured").value);

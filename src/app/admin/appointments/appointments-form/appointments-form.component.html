@@ -154,10 +154,10 @@
                                 <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Nota <span
                                         class="required">*</span></label>
                                 <div class="p-col-12 p-md-10">
-                                    <p-multiSelect [options]="works" formControlName="description"  [(ngModel)]="selectedWorks" optionLabel="name" optionValue="id"></p-multiSelect>
+
+                                    <p-multiSelect [options]="works" display="chip" formControlName="description" [(ngModel)]="selectedWorks" optionLabel="name" optionValue="id" ></p-multiSelect>
 
                                     
-                                    {{selectedWorks}}  {{description}}
                                 </div>
                             </div>
                         </div>
@@ -212,12 +212,7 @@
                        
                         <div class="p-col-12 p-md-12">
 
-                            <p-dropdown [options]="works" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true"
-                                placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedWorks" formControlName="works_id"
-                                optionLabel="name" optionValue="id">
-                             
-                            
-                            </p-dropdown>
+                        
 
 
                         </div>
