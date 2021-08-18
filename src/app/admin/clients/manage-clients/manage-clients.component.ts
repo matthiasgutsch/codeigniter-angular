@@ -56,7 +56,10 @@ export class ManageClientsComponent implements OnInit {
     this.cols = [
       { field: "name", header: "Nome" },
       { field: "email", header: "Email" },
-      { field: "date", header: "Data di nascità" }
+      { field: "date", header: "Data di nascità" },
+      { field: "zip", header: "Cap" },
+      { field: "city", header: "Città" },
+      { field: "province", header: "Provincia" },
 
     ];
 

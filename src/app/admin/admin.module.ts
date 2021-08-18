@@ -53,6 +53,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ManageAppointmentsComponent } from './appointments/manage-appointments/manage-appointments.component';
 import { AppointmentsFormComponent } from './appointments/appointments-form/appointments-form.component';
 import {TimelineModule} from 'primeng/timeline';
+import { TagModule } from 'primeng/tag';
 
 import { ManageBillingsComponent } from './billings/manage-billings/manage-billings.component';
 import { BillingsFormComponent } from './billings/billings-form/billings-form.component';
@@ -119,6 +120,7 @@ export class I18nModule {
     InputMaskModule,
     CardModule,
     ChipsModule,
+    TagModule,
     ConfirmDialogModule,
     TimelineModule,
     InputTextModule,

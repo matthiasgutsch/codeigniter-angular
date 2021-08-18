@@ -67,7 +67,7 @@
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
 
-                                            <p-dropdown [options]="employees" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedEmployees" formControlName="employee_id" optionLabel="name" optionValue="id">
+                                            <p-dropdown [options]="employees" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" formControlName="employee_id" optionLabel="name" optionValue="id">
 
 
                                             </p-dropdown>
@@ -85,7 +85,7 @@
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
 
-                                            <p-dropdown [options]="locations" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedEmployees" formControlName="location_id" optionLabel="name" optionValue="id">
+                                            <p-dropdown [options]="locations" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" formControlName="location_id" optionLabel="name" optionValue="id">
 
 
                                             </p-dropdown>
@@ -225,12 +225,11 @@
                         <div class="p-field p-grid">
 
                             <div class="p-col-12 p-md-12">
-
-                                <div *ngFor="let item of selectedWorks">
-                                    {{ getWorksItem(item)?.name }}
-
-                                </div>
-
+                                <table class="works">
+                                <tr *ngFor="let item of selectedWorks" >
+                                    <td >{{ getWorksItem(item)?.name }}</td><td> {{ getWorksItem(item)?.description }}</td>
+                                </tr>
+                            </table>
                             </div>
                         </div>
                     </div>
@@ -238,7 +237,7 @@
 
                 </p-card>
 
-                <p-card *ngIf="getCategoryItem(selectedClients)">
+                <p-card *ngIf="selectedClients">
 
                     <div class="p-fluid">
                         <div class="p-field p-grid">
