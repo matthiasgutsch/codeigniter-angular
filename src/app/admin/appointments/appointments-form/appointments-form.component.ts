@@ -51,14 +51,14 @@ export class AppointmentsFormComponent implements OnInit {
   typeList: any[];
   clients: any = [];
   client: Clients;
-
+  arrString: string;
 
   employees: any = [];
   employee: Employees;
 
   description: any;
   selectedWorks: SelectItem[];
-
+  selectedWorks2: SelectItem[];
   locations: any = [];
   location: Locations;
 
@@ -71,7 +71,7 @@ export class AppointmentsFormComponent implements OnInit {
   selectedClients: Clients;
   selectedDate: Date;
   date: Date;
-  
+
   trackByFn(index, item) {
     return item.id;
   }
@@ -110,6 +110,7 @@ export class AppointmentsFormComponent implements OnInit {
       (error) => (this.error = error)
     );
 
+
     this.employeesService.getAllList().subscribe(
       (data: Employees) => (this.employees = data),
       (error) => (this.error = error)
@@ -139,7 +140,7 @@ export class AppointmentsFormComponent implements OnInit {
           title: res.title,
           description: res.description.split(','),
           category_id: res.category_id,
-          works_id: res.works_id,
+          works_id: res.works_id.split(','),
           employee_id: res.employee_id,
           location_id: res.location_id,
           is_featured: res.is_featured,
@@ -148,13 +149,15 @@ export class AppointmentsFormComponent implements OnInit {
           id: res.id,
         });
         this.imagePath = res.image;
+        this.selectedWorks = this.description.split(',');
+
       });
     } else {
       this.pageTitle = "Aggiungi Appuntamento";
     }
 
-    
-    
+
+
     this.blogForm = this.fb.group({
       id: [""],
       title: ["", Validators.required],
@@ -170,12 +173,16 @@ export class AppointmentsFormComponent implements OnInit {
     });
   }
 
-  
-  goback(){
+
+  getWorksItem(works_id: string, id: string) {
+    return this.works.find(item => item.id === works_id);
+  }
+
+  goback() {
     this._location.back();
   }
 
-  
+
   onSelectedFile(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
