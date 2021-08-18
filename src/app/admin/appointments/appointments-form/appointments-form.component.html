@@ -210,14 +210,28 @@
                                     {{ getWorksItem(item)?.name }}
 
                                 </div>
-                                <hr>
 
-                                <div *ngFor="let item of selectedWorks2">
-                                    {{ getWorksItem(item)?.name }}
-                                </div>
-
+                            </div>
+                        </div>
+                    </div>
 
 
+                </p-card>
+
+                <p-card>
+
+                    <div class="p-fluid">
+                        <div class="p-field p-grid">
+
+                            <div class="p-col-12 p-md-12">
+                                <h3>Cliente</h3>
+                            </div>
+                        </div>
+                        <div class="p-field p-grid">
+
+                            <div class="p-col-12 p-md-12">
+                                {{ getCategoryItem(selectedClients)?.name }}<br> {{ getCategoryItem(selectedClients)?.city }} {{ getCategoryItem(selectedClients)?.zip }} {{ getCategoryItem(selectedClients)?.address }} {{ getCategoryItem(selectedClients)?.name
+                                }}
 
                             </div>
                         </div>
