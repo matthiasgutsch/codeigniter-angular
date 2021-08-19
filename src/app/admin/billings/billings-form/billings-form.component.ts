@@ -12,7 +12,7 @@ import * as moment from 'moment';
 import { TYPE_LIST } from '../../constants/constants';
 import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 
 @Component({
   selector: "app-billings-form",
@@ -42,9 +42,10 @@ export class BillingsFormComponent implements OnInit {
   format1: string = "";
   format2: string = "";
   selectedCity: Blog;
-  selectedCategories: Category;
+  selectedCategories: SelectItem[];
   selectedDate: Date;
   date: Date;
+  category_id: number;
 
   trackByFn(index, item) {
     return item.id;
@@ -65,6 +66,7 @@ export class BillingsFormComponent implements OnInit {
     if (this.date) {
       this.selectedDate = new Date(this.date);
     }
+    this.selectedCategories = this.router.getCurrentNavigation().extras.state.selectedCategories;
 
     this.typeList = TYPE_LIST;
   }
