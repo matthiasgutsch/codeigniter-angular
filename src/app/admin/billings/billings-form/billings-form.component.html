@@ -79,7 +79,7 @@
                                 <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Cliente <span
                                         class="required">*</span></label>
                                 <div class="p-col-12 p-md-10">
-                                    <p-dropdown [options]="clients" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedCategories" formControlName="category_id" optionLabel="name" optionValue="id">
+                                    <p-dropdown [options]="clients" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedClients" formControlName="category_id" optionLabel="name" optionValue="id">
                                         <ng-template let-option pTemplate="item">
 
                                             <strong>{{option.name}} {{option.surname}}</strong><br>
@@ -119,28 +119,57 @@
                 </p-card>
             </div>
 
-            <div class="p-col-4 p-md-4">
-                <p-card>
+            <div class="p-col-12 p-md-4">
+                <p-card *ngIf="selectedWorks">
 
                     <div class="p-fluid">
                         <div class="p-field p-grid">
 
                             <div class="p-col-12 p-md-12">
-                                <input #myInput type="file" id="image" (change)="onSelectedFile($event)" />
-                                <div [innerHTML]="uploadError" class="error"></div>
-                                <div *ngIf="imagePath">
-                                    <br />
-                                    <span class="image-container" *ngIf="!imagePath == ''">
-                                        <img [src]="imagePath" width="300px">
+                                <h3>Lavorazione</h3>
+                            </div>
+                        </div>
+                        <div class="p-field p-grid">
 
-                                        <button pButton pRipple icon="pi pi-trash"
-                                            class="imgcancel p-button p-button-primary p-mr-2"
-                                            (click)="removeImageFile($event)"></button>
-                                    </span>
-                                </div>
+                            <div class="p-col-12 p-md-12">
+                                <table class="works">
+                                <tr *ngFor="let item of selectedWorks" >
+                                    <td >{{ getWorksItem(item)?.name }}</td><td> {{ getWorksItem(item)?.description }}</td>
+                                </tr>
+                            </table>
                             </div>
                         </div>
                     </div>
+
+
+                </p-card>
+
+                <p-card *ngIf="selectedClients">
+
+                    <div class="p-fluid">
+                        <div class="p-field p-grid">
+
+                            <div class="p-col-12 p-md-12">
+                                <h3>Cliente</h3>
+                            </div>
+                        </div>
+                        <div class="p-field p-grid">
+
+                            <div class="p-col-12 p-md-12">
+                                {{ getCategoryItem(selectedClients)?.name }}<br>{{ getCategoryItem(selectedClients)?.zip }} - {{ getCategoryItem(selectedClients)?.city }} <br> {{ getCategoryItem(selectedClients)?.phone }}
+
+
+
+                            </div>
+                            <div class="p-col-12 p-md-12">
+                                <br>
+                            <button pButton pRipple icon="pi pi-pencil" label="modifica Cliente" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/clients/edit', getCategoryItem(selectedClients)?.id]"></button>
+                            </div>
+
+                        </div>
+                    </div>
+
+
                 </p-card>
             </div>
         </div>

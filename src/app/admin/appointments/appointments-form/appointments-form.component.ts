@@ -180,7 +180,7 @@ export class AppointmentsFormComponent implements OnInit {
   navigate() {
     // this.router.navigate(['other']);
     this.router.navigate(['admin/billings/create'], {
-      state: { selectedCategories: '111' }
+      state: { selectedClients: '111' }
     });
   }
 

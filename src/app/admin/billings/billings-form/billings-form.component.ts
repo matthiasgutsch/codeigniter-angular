@@ -42,7 +42,7 @@ export class BillingsFormComponent implements OnInit {
   format1: string = "";
   format2: string = "";
   selectedCity: Blog;
-  selectedCategories: SelectItem[];
+  selectedClients: string;
   selectedDate: Date;
   date: Date;
   category_id: number;
@@ -66,7 +66,7 @@ export class BillingsFormComponent implements OnInit {
     if (this.date) {
       this.selectedDate = new Date(this.date);
     }
-    this.selectedCategories = this.router.getCurrentNavigation().extras.state.selectedCategories;
+    this.selectedClients = this.router.getCurrentNavigation().extras.state.selectedClients;
 
     this.typeList = TYPE_LIST;
   }
@@ -87,6 +87,8 @@ export class BillingsFormComponent implements OnInit {
       (error) => (this.error = error)
     );
 
+
+    
     const id = this.route.snapshot.paramMap.get("id");
     if (id) {
       this.pageTitle = "Modifica Appuntamento";
@@ -134,6 +136,8 @@ export class BillingsFormComponent implements OnInit {
   getCategoryItem(category_id: string, id: string) {
     return this.clients.find((item) => item.id === category_id);
   }
+
+  
 
   removeImageFile() {
     this.imagePath = "";
