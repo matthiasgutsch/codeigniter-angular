@@ -46,12 +46,11 @@
 
                         <div class="p-fluid">
                             <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Ruolo<span
+                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Description <span
                                         class="required">*</span></label>
                                 <div class="p-col-12 p-md-10">
-                                    <input type="text" [style]="{ width: '100%' }" pInputText
-                                    formControlName="category_description" placeholder="Descrizione" required />
-                                    
+                                    <p-editor formControlName="category_description" [style]="{'height':'320px'}">
+                                    </p-editor>
                                 </div>
                             </div>
                         </div>
