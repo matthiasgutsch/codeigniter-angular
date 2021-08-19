@@ -37,12 +37,12 @@
                 <p-card >
         
                            {{clientsCount}}
-                            <h4>Clients</h4>
+                            <h4>{{'clients.main.title' | translate}}</h4>
                              
-                            <button pButton pRipple label="Elenco" [routerLink]="['/admin/clients']" routerLinkActive="active"
+                            <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/clients']" routerLinkActive="active"
                             class="p-button p-button-primary p-mr-2"></button>
-                            <button pButton pRipple label="Aggiungi" [routerLink]="['/admin/clients/create']" routerLinkActive="active"
-                            class="p-button p-button-secondary p-mr-2"></button>
+                            <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']" routerLinkActive="active"
+                            class="p-button p-button-success p-mr-2"></button>
                 </p-card>
             </div>
             <div class="p-col-12 p-md-6">
@@ -51,11 +51,11 @@
         
                     {{appointmentsCount}}
 
-                     <h4>Appointments</h4>
-                     <button pButton pRipple label="Elenco" [routerLink]="['/admin/appointments']" routerLinkActive="active"
+                     <h4>{{'appointments.main.title' | translate}}</h4>
+                     <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/appointments']" routerLinkActive="active"
                      class="p-button p-button-primary p-mr-2"></button>
-                     <button pButton pRipple label="Aggiungi" [routerLink]="['/admin/appointments/create']" routerLinkActive="active"
-                     class="p-button p-button-secondary p-mr-2"></button>
+                     <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']" routerLinkActive="active"
+                     class="p-button p-button-success p-mr-2"></button>
                
                      
          </p-card>
@@ -69,7 +69,7 @@
             
             <div class="p-field p-grid">
                 <div class="p-col-12 p-md-8">
-                    <h3>Appuntamenti {{myDate }}</h3>
+                    <h3>{{'appointments.main.title' | translate}} {{myDate }}</h3>
                 </div>
                 <div class="p-col-12 p-md-4">
                     <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']"

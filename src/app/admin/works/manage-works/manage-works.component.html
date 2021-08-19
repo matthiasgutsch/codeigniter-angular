@@ -36,7 +36,8 @@
     <ng-template pTemplate="header">
         <tr>
             <th>Name</th>
-     
+            <th>Prezzo/h</th>
+
 
             <th width="160"></th>
         </tr>
@@ -44,7 +45,8 @@
     <ng-template pTemplate="body" let-works>
         <tr>
             <td>{{works.name}}</td>
-          
+            <td>{{works.description}}</td>
+
 
             <td class="action">
                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/works/edit', works.id]"></button>

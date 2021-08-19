@@ -71,6 +71,7 @@ export class AppointmentsFormComponent implements OnInit {
   selectedClients: Clients;
   selectedDate: Date;
   date: Date;
+  works_id: any;
 
   trackByFn(index, item) {
     return item.id;
@@ -99,6 +100,7 @@ export class AppointmentsFormComponent implements OnInit {
 
   ngOnInit() {
 
+    this.getselectedWorks;
 
     this.appointmentsService.getAllList().subscribe(
       (data: Appointments) => (this.appointments = data),
@@ -135,6 +137,7 @@ export class AppointmentsFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get("id");
     if (id) {
       this.pageTitle = "Modifica Appuntamento";
+      
       this.appointmentsService.getId(+id).subscribe((res) => {
         this.blogForm.patchValue({
           title: res.title,
@@ -149,7 +152,7 @@ export class AppointmentsFormComponent implements OnInit {
           id: res.id,
         });
         this.imagePath = res.image;
-        this.selectedWorks = this.description.split(',');
+        
 
       });
     } else {
@@ -185,7 +188,9 @@ export class AppointmentsFormComponent implements OnInit {
     return this.works.find(item => item.id === works_id);
   }
 
-
+  getselectedWorks() {
+  this.selectedWorks = this.works_id.split(',');
+  }
 
   goback() {
     this._location.back();

@@ -6,17 +6,17 @@
 
     <div class="p-fluid">
         <div class="p-field p-grid">
-            <div class="p-col-8 p-md-8">
+            <div class="p-col-12 p-md-8">
 
                 <p-card>
 
                     <div class="blog-form">
 
                         <div class="p-field p-grid">
-                            <div class="p-col-9 p-md-9">
+                            <div class="p-col-12 p-md-9">
                                 <h3>{{pageTitle}}</h3>
                             </div>
-                            <div class="p-col-3 p-md-3">
+                            <div class="p-col-12 p-md-3">
 
                                 <button pButton pRipple icon="pi pi-save" label="salva" class="p-button pull-right p-button-success p-mr-2" [disabled]="!blogForm.valid"></button>
 
@@ -68,7 +68,7 @@
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
 
-                                            <p-dropdown [options]="employees" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedEmployees" formControlName="employee_id" optionLabel="name" optionValue="id">
+                                            <p-dropdown [options]="employees" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" formControlName="employee_id" optionLabel="name" optionValue="id">
 
 
                                             </p-dropdown>
@@ -86,7 +86,7 @@
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
 
-                                            <p-dropdown [options]="locations" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedEmployees" formControlName="location_id" optionLabel="name" optionValue="id">
+                                            <p-dropdown [options]="locations" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" formControlName="location_id" optionLabel="name" optionValue="id">
 
 
                                             </p-dropdown>
@@ -145,9 +145,26 @@
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
 
-                                            <p-multiSelect [options]="works" display="chip" formControlName="description" [(ngModel)]="selectedWorks" optionLabel="name" optionValue="id"></p-multiSelect>
-                                            <p-multiSelect [options]="works" display="chip" formControlName="works_id" [(ngModel)]="selectedWorks2" optionLabel="name" optionValue="id">
-                                            </p-multiSelect>
+                                           
+
+                                            <textarea pInputTextarea formControlName="description" ></textarea>
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Nota 2 <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+
+                                            <p-multiSelect [options]="works" display="chip" formControlName="works_id" [(ngModel)]="selectedWorks" optionLabel="name" optionValue="id">
+                                            </p-multiSelect>                                           
 
 
 
@@ -156,6 +173,9 @@
                                         </div>
                                     </div>
                                 </div>
+
+                           
+
 
                                 <div class="form-group form-row">
                                     <label class="col-md-3"></label>
@@ -176,7 +196,7 @@
                                             <div [innerHTML]="uploadError" class="error"></div>
                                             <div *ngIf="imagePath">
                                                 <br />
-                                                <span class="image-container" *ngIf="!imagePath == ''">
+                                                <span class="image-container">
                                                     <img [src]="imagePath" width="300px">
 
                                                     <button pButton pRipple icon="pi pi-trash"
@@ -193,8 +213,8 @@
                 </p-card>
             </div>
 
-            <div class="p-col-4 p-md-4">
-                <p-card>
+            <div class="p-col-12 p-md-4">
+                <p-card *ngIf="selectedWorks">
 
                     <div class="p-fluid">
                         <div class="p-field p-grid">
@@ -206,12 +226,11 @@
                         <div class="p-field p-grid">
 
                             <div class="p-col-12 p-md-12">
-
-                                <div *ngFor="let item of selectedWorks">
-                                    {{ getWorksItem(item)?.name }}
-
-                                </div>
-
+                                <table class="works">
+                                <tr *ngFor="let item of selectedWorks" >
+                                    <td >{{ getWorksItem(item)?.name }}</td><td> {{ getWorksItem(item)?.description }}</td>
+                                </tr>
+                            </table>
                             </div>
                         </div>
                     </div>
@@ -219,7 +238,7 @@
 
                 </p-card>
 
-                <p-card>
+                <p-card *ngIf="selectedClients">
 
                     <div class="p-fluid">
                         <div class="p-field p-grid">
@@ -231,10 +250,16 @@
                         <div class="p-field p-grid">
 
                             <div class="p-col-12 p-md-12">
-                                {{ getCategoryItem(selectedClients)?.name }}<br> {{ getCategoryItem(selectedClients)?.city }} {{ getCategoryItem(selectedClients)?.zip }} {{ getCategoryItem(selectedClients)?.address }} {{ getCategoryItem(selectedClients)?.name
-                                }}
+                                {{ getCategoryItem(selectedClients)?.name }}<br>{{ getCategoryItem(selectedClients)?.zip }} - {{ getCategoryItem(selectedClients)?.city }} <br> {{ getCategoryItem(selectedClients)?.phone }}
+
+
 
                             </div>
+                            <div class="p-col-12 p-md-12">
+                                <br>
+                            <button pButton pRipple icon="pi pi-pencil" label="modifica Cliente" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/clients/edit', getCategoryItem(selectedClients)?.id]"></button>
+                            </div>
+
                         </div>
                     </div>
 
