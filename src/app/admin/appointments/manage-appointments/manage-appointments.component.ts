@@ -172,7 +172,7 @@ trackByFn(index, item) {
 
 exportPdf() {
   // const doc = new jsPDF();
-  const doc = new jsPDF('p','pt');
+  const doc = new jsPDF('l','pt','A4');
   doc['autoTable'](this.exportColumns, this.appointments);
   // doc.autoTable(this.exportColumns, this.products);
   doc.save("appointments.pdf");

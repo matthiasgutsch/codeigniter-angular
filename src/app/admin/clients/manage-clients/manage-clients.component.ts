@@ -100,7 +100,7 @@ export class ManageClientsComponent implements OnInit {
 
   exportPdf() {
     // const doc = new jsPDF();
-    const doc = new jsPDF('p','pt');
+    const doc = new jsPDF('l','pt','A4');
     doc['autoTable'](this.exportColumns, this.clients);
     // doc.autoTable(this.exportColumns, this.products);
     doc.save("clients.pdf");
