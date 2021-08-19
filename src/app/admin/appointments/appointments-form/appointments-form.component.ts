@@ -57,7 +57,7 @@ export class AppointmentsFormComponent implements OnInit {
   employee: Employees;
 
   description: any;
-  selectedWorks: SelectItem[];
+  selectedWorks: SelectItem[] = [];
   selectedWorks2: SelectItem[];
   locations: any = [];
   location: Locations;
@@ -180,7 +180,7 @@ export class AppointmentsFormComponent implements OnInit {
   navigate() {
     // this.router.navigate(['other']);
     this.router.navigate(['admin/billings/create'], {
-      state: { selectedClients: '111' }
+      state: { selectedClients: '111', selectedWorks: '7,14' }
     });
   }
 

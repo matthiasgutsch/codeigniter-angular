@@ -13,6 +13,8 @@ import { TYPE_LIST } from '../../constants/constants';
 import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
 import { Location } from '@angular/common';
+import { WorksService } from 'src/app/services/works.service';
+import { Works } from 'src/app/models/works';
 
 @Component({
   selector: "app-billings-form",
@@ -27,7 +29,8 @@ export class BillingsFormComponent implements OnInit {
   imagePath: any;
   blogs: Blog;
   blog: Blog;
-
+  works: any = [];
+  work: Works;
   categories: any = [];
   category: Category;
   checked: boolean = true;
@@ -43,6 +46,8 @@ export class BillingsFormComponent implements OnInit {
   format2: string = "";
   selectedCity: Blog;
   selectedClients: string;
+  selectedWorks: SelectItem[] = [];
+  selectedWorks2: SelectItem[];
   selectedDate: Date;
   date: Date;
   category_id: number;
@@ -57,7 +62,7 @@ export class BillingsFormComponent implements OnInit {
     private messageService: MessageService,
     private clientsService: ClientsService,
     private _location: Location,
-
+    private worksService: WorksService,
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,
     private router: Router,
@@ -67,6 +72,7 @@ export class BillingsFormComponent implements OnInit {
       this.selectedDate = new Date(this.date);
     }
     this.selectedClients = this.router.getCurrentNavigation().extras.state.selectedClients;
+    this.selectedWorks = this.router.getCurrentNavigation().extras.state.selectedWorks;
 
     this.typeList = TYPE_LIST;
   }
@@ -138,6 +144,9 @@ export class BillingsFormComponent implements OnInit {
   }
 
   
+  getWorksItem(works_id: string, id: string) {
+    return this.works.find(item => item.id === works_id);
+  }
 
   removeImageFile() {
     this.imagePath = "";
