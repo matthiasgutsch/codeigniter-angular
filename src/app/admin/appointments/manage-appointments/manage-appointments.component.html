@@ -21,7 +21,7 @@
                 </div>
                 <hr class="full">
 
-                <p-table #dt1 [value]="appointments" responsive="true" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
+                <p-table #dt1 [value]="appointments" [pageLinks]="3" [responsive]="true" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
                     <ng-template pTemplate="caption">
                         <div class="p-d-flex">
                             <span class="p-input-icon-left p-ml-auto">
