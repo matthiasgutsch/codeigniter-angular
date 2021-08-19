@@ -179,8 +179,9 @@ export class AppointmentsFormComponent implements OnInit {
 
   navigate() {
     // this.router.navigate(['other']);
+    
     this.router.navigate(['admin/billings/create'], {
-      state: { selectedClients: '111', selectedWorks: '7,14' }
+      state: { selectedClients: '111', selectedWorks: '7,14,39,42,43' }
     });
   }
 

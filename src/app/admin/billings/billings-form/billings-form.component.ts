@@ -51,6 +51,7 @@ export class BillingsFormComponent implements OnInit {
   selectedDate: Date;
   date: Date;
   category_id: number;
+  works_id: any;
 
   trackByFn(index, item) {
     return item.id;
@@ -78,6 +79,8 @@ export class BillingsFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getselectedWorks;
+    
     this.billingsService.getAllList().subscribe(
       (data: Blog) => (this.blogs = data),
       (error) => (this.error = error)
@@ -126,6 +129,12 @@ export class BillingsFormComponent implements OnInit {
     });
   }
 
+  getselectedWorks() {
+    this.selectedWorks = this.works_id.split(',');
+    }
+
+    
+    
   onSelectedFile(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
