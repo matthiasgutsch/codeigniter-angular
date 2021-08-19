@@ -23,6 +23,8 @@ import { ManageEmployeesComponent } from './employees/manage-employees/manage-em
 import { LocationsFormComponent } from './locations/locations-form/locations-form.component';
 import { ManageLocationsComponent } from './locations/manage-locations/manage-locations.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { ManageTypeComponent } from './type/manage-type/manage-type.component';
+import { TypeFormComponent } from './type/type-form/type-form.component';
 
 const routes: Routes = [
   {
@@ -57,6 +59,11 @@ const routes: Routes = [
           { path: "categories", component: ManageCategoriesComponent },
           { path: "categories/edit/:id", component: CategoryFormComponent },
           { path: "categories/create", component: CategoryFormComponent },
+
+          { path: "type", component: ManageTypeComponent },
+          { path: "type/edit/:id", component: TypeFormComponent },
+          { path: "type/create", component: TypeFormComponent },
+
 
           { path: "works", component: ManageWorksComponent },
           { path: "works/edit/:id", component: WorksFormComponent },

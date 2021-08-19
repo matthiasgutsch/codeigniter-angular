@@ -4,8 +4,8 @@ import { Category } from '../../../models/category';
 import { ConfirmationService } from 'primeng/api';
 
 @Component({
-  selector: 'app-manage-categories',
-  templateUrl: './manage-categories.component.html'
+  selector: 'app-manage-type',
+  templateUrl: './manage-type.component.html'
 })
 export class ManageTypeComponent implements OnInit {
   title = 'Tipo di Appuntamento';

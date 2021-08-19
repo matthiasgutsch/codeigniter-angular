@@ -65,6 +65,8 @@ import { ManageEmployeesComponent } from './employees/manage-employees/manage-em
 import { LocationsFormComponent } from './locations/locations-form/locations-form.component';
 import { ManageLocationsComponent } from './locations/manage-locations/manage-locations.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { ManageTypeComponent } from './type/manage-type/manage-type.component';
+import { TypeFormComponent } from './type/type-form/type-form.component';
 
 export class I18nModule {
   constructor(translate: TranslateService) {
@@ -84,6 +86,8 @@ export class I18nModule {
     ManageCategoriesComponent,
     ManageClientsComponent,
     ClientsFormComponent,
+    ManageTypeComponent,
+    TypeFormComponent,
     ManagePagesComponent,
     MomentPipe,
     DateValidPipe,

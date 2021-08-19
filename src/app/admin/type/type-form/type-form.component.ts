@@ -13,8 +13,8 @@ import * as moment from 'moment';
 import { Comuni } from 'src/app/models/comuni';
 
 @Component({
-  selector: 'app-category-form',
-  templateUrl: './category-form.component.html'
+  selector: 'app-type-form',
+  templateUrl: './type-form.component.html'
 })
 export class TypeFormComponent implements OnInit {
   @ViewChild("myInput", { static: false }) myInputVariable: ElementRef;
