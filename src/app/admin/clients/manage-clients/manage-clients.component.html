@@ -37,7 +37,7 @@
 
                                 <input pInputText type="text"
                                     (input)="dt1.filterGlobal($event.target.value, 'contains')"
-                                    placeholder="Search keyword" />
+                                    placeholder="{{'search' | translate}} {{'clients.main.title' | translate}}" />
 
                             </span>
                         </div>
@@ -48,10 +48,10 @@
                           
                                                     <th>Utente</th>
 
-                            <th>Data nascita</th>
+                            <th width="200">Data nascita</th>
                             <th>Indirizzo</th>
 
-                            <th width="200">Action</th>
+                            <th width="200"></th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-client>

@@ -6,6 +6,7 @@
   "add": "Aggiungi",
   "save": "Salva",
   "create": "Crea",
+  "search": "Cerca",
 
   "form.appointment.type": "Tipo",
   "form.appointment.date": "Data",
