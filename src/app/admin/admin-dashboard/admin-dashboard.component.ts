@@ -215,6 +215,7 @@ export class AdminDashboardComponent implements OnInit {
     
   editProduct(appointment: Appointments) {
     this.appointment = {...appointment};
+    this.selectedWorks = this.appointment.works_id.split(',');
     this.appointmentsDialog = true;
 }
 

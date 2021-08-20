@@ -164,42 +164,51 @@
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
             <p-card>
-        <h3>{{appointment.title}}</h3>
-        <h3>{{appointment.date | date:'dd/MM/yyyy HH:mm' }}</h3>
+                <div class="p-grid">
+                    <div class="p-col-12 p-md-6">
+                <strong>{{appointment.date | date:'dd/MM/yyyy HH:mm'}}</strong>
 
-        <i class="pi pi-check"></i>
-{{ getWorksItem(appointment.works_id)?.name }}<br>
-<i class="pi pi-check"></i>
-{{ getLocationItem(appointment.location_id)?.name }}<br>
-<i class="pi pi-check"></i>
-{{ getEmployeeItem(appointment.employee_id)?.name }}
+                <h3>{{appointment.title}}</h3>
+          
+                
+            {{ getLocationItem(appointment.location_id)?.name }}
+                <br> {{ getEmployeeItem(appointment.employee_id)?.name }} 
+
+                <p [innerHTML]="appointment.description"></p>
+
+                    </div>
+                    <div class="p-col-12 p-md-6">
+
+                        <div *ngFor="let item of selectedWorks">
+                            {{ getWorksItem(item)?.name }}
+                        </div>
+
+    
+            </div>
 
 
-        <p [innerHTML]="appointment.description"></p>
-        <p [innerHTML]="appointment.start"></p>
-        <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
 
-        </p-card>
+        </div>
+                <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
+
+            </p-card>
         </div>
         <div class="clearfix"></div><br>
         <div class="clearfix"></div>
         <div class="p-col-12 p-md-12">
 
-        <p-card>
-        <strong>{{ getCategoryItem(appointment.category_id)?.name }}</strong>
-      
-        <p>{{ getCategoryItem(appointment.category_id)?.address }}<br>
-  
-        {{ getCategoryItem(appointment.category_id)?.zip }} - {{ getCategoryItem(appointment.category_id)?.city }} ({{ getCategoryItem(appointment.category_id)?.province }})<br>
-        </p>
-        <hr>
-        <p>{{ getCategoryItem(appointment.category_id)?.phone }}<br>
-        {{ getCategoryItem(appointment.category_id)?.email }}</p>
-        <div class="clearfix"></div>
-        <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente" class="p-button p-button-primary p-mr-2" [routerLink]="['/admin/clients/edit', appointment.category_id]"></button>
-    </p-card>
+            <p-card>
+                <strong>{{ getCategoryItem(appointment.category_id)?.name }}</strong>
+
+                <p>{{ getCategoryItem(appointment.category_id)?.address }}<br> {{ getCategoryItem(appointment.category_id)?.zip }} - {{ getCategoryItem(appointment.category_id)?.city }} ({{ getCategoryItem(appointment.category_id)?.province }})<br>
+                </p>
+                <hr>
+                <p>{{ getCategoryItem(appointment.category_id)?.phone }}<br> {{ getCategoryItem(appointment.category_id)?.email }}</p>
+                <div class="clearfix"></div>
+                <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente" class="p-button p-button-primary p-mr-2" [routerLink]="['/admin/clients/edit', appointment.category_id]"></button>
+            </p-card>
         </div>
- 
+
     </ng-template>
 
 </p-sidebar>
