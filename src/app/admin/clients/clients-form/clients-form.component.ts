@@ -93,7 +93,7 @@ export class ClientsFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get("id");
 
     if (id) {
-      this.pageTitle = "Modifica Cliente";
+      this.pageTitle = "Modifica Scheda Cliente";
 
       this.appointmentsService.find_client(+id).subscribe(
         (data: Appointments) => (this.appointments = data),
