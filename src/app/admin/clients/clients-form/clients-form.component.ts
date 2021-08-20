@@ -140,8 +140,7 @@ export class ClientsFormComponent implements OnInit {
         Validators.compose([codFisc])
       ),
       fiscalnumber: new FormControl(
-        "",
-        Validators.compose([Validators.required])
+        ""
       ),
       description: [""],
       is_featured: ["0"],

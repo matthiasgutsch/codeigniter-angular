@@ -26,7 +26,7 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
   getAllList() {
-    return this._http.get<T>(this._base + '/?user=' + this.currentUser.user_id).pipe(
+    return this._http.get<T>(this._base + '/').pipe(
       catchError(this.handleError)
     );
   }
