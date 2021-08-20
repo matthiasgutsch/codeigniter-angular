@@ -7,7 +7,7 @@ import { ChipsModule } from "primeng/chips";
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminComponent } from './admin/admin.component';
-import { ManageCategoriesComponent } from './category/manage-categories/manage-categories.component';
+import { ManageCategoriesComponent } from './settings/category/manage-categories/manage-categories.component';
 
 import { ManageClientsComponent } from './clients/manage-clients/manage-clients.component';
 import { ClientsFormComponent } from './clients/clients-form/clients-form.component';
@@ -35,7 +35,7 @@ import { FullCalendarModule } from 'ng-fullcalendar';
 import { CalendarModule } from 'primeng/calendar';
 import { MomentPipe } from './pipe/moment.pipe';
 import { InputMaskModule } from 'primeng/inputmask';
-import { CategoryFormComponent } from './category/category-form/category-form.component';
+import { CategoryFormComponent } from './settings/category/category-form/category-form.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
@@ -56,16 +56,15 @@ import { TagModule } from 'primeng/tag';
 
 import { ManageBillingsComponent } from './billings/manage-billings/manage-billings.component';
 import { BillingsFormComponent } from './billings/billings-form/billings-form.component';
-import { WorksFormComponent } from './works/works-form/works-form.component';
-import { ManageWorksComponent } from './works/manage-works/manage-works.component';
+import { WorksFormComponent } from './settings/works/works-form/works-form.component';
+import { ManageWorksComponent } from './settings/works/manage-works/manage-works.component';
 import { SettingsComponent } from './settings/settings.component';
-import { EmployeesFormComponent } from './employees/employees-form/employees-form.component';
-import { ManageEmployeesComponent } from './employees/manage-employees/manage-employees.component';
-import { LocationsFormComponent } from './locations/locations-form/locations-form.component';
-import { ManageLocationsComponent } from './locations/manage-locations/manage-locations.component';
-import { StatisticsComponent } from './statistics/statistics.component';
-import { ManageTypeComponent } from './type/manage-type/manage-type.component';
-import { TypeFormComponent } from './type/type-form/type-form.component';
+import { EmployeesFormComponent } from './settings/employees/employees-form/employees-form.component';
+import { ManageEmployeesComponent } from './settings/employees/manage-employees/manage-employees.component';
+import { LocationsFormComponent } from './settings/locations/locations-form/locations-form.component';
+import { ManageLocationsComponent } from './settings/locations/manage-locations/manage-locations.component';
+import { ManageTypeComponent } from './settings/type/manage-type/manage-type.component';
+import { TypeFormComponent } from './settings/type/type-form/type-form.component';
 import { SumPipeModule } from './pipe/sum.pipe';
 
 export class I18nModule {
@@ -101,9 +100,8 @@ export class I18nModule {
     CategoryFormComponent,
     SettingsComponent,
     EmployeesFormComponent,
-    ManageEmployeesComponent,
-    StatisticsComponent
-  ],
+    ManageEmployeesComponent
+    ],
   imports: [
     CommonModule,
     TableModule,

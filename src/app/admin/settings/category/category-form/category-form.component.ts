@@ -2,11 +2,11 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
-import { Blog } from '../../../models/blog';
-import { Category } from '../../../models/category';
+import { Blog } from '../../../../models/blog';
+import { Category } from '../../../../models/category';
 import { FormControl } from '@angular/forms';
-import { CategoryService } from '../../../services/categories.service';
-import { ComuniService } from '../../../services/comuni.service';
+import { CategoryService } from '../../../../services/categories.service';
+import { ComuniService } from '../../../../services/comuni.service';
 
 import { SelectItem } from "primeng/api";
 import * as moment from 'moment';
@@ -115,7 +115,7 @@ export class CategoryFormComponent implements OnInit {
           if (res.status == 'error') {
             this.uploadError = res.message;
           } else {
-            this.router.navigate(['/admin/categories']);
+            this.router.navigate(['/admin/settings/categories']);
           }
         },
         error => this.error = error
@@ -126,7 +126,7 @@ export class CategoryFormComponent implements OnInit {
           if (res.status === 'error') {
             this.uploadError = res.message;
           } else {
-            this.router.navigate(['/admin/categories']);
+            this.router.navigate(['/admin/settings/categories']);
           }
         },
         error => this.error = error

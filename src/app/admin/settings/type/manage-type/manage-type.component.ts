@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from '../../../services/categories.service';
-import { Category } from '../../../models/category';
+import { CategoryService } from '../../../../services/categories.service';
+import { Category } from '../../../../models/category';
 import { ConfirmationService } from 'primeng/api';
 
 @Component({
-  selector: 'app-manage-categories',
-  templateUrl: './manage-categories.component.html'
+  selector: 'app-manage-type',
+  templateUrl: './manage-type.component.html'
 })
-export class ManageCategoriesComponent implements OnInit {
+export class ManageTypeComponent implements OnInit {
   title = 'Tipo di Appuntamento';
   categories: Category;
   category: Category;

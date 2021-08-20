@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Works } from '../../../models/works';
+import { Works } from '../../../../models/works';
 import {ConfirmationService} from 'primeng/api';
 import { WorksService } from 'src/app/services/works.service';
 import { LocationsService } from 'src/app/services/locations.service';
@@ -10,7 +10,7 @@ import { Locations } from 'src/app/models/locations';
   templateUrl: './manage-locations.component.html'
 })
 export class ManageLocationsComponent implements OnInit {
-  title = 'Tipo di lavorazione';
+  title = 'Luogo di lavorazione';
   locations: Locations;
   location: Locations;
   error: string;

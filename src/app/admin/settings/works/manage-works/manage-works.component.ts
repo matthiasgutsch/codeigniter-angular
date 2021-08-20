@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Works } from '../../../models/works';
+import { Works } from '../../../../models/works';
 import {ConfirmationService} from 'primeng/api';
 import { WorksService } from 'src/app/services/works.service';
 

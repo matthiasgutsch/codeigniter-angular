@@ -1,34 +1,32 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { BlogService } from '../../../services/blog.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
-import { Blog } from '../../../models/blog';
-import { Category } from '../../../models/category';
+import { Blog } from '../../../../models/blog';
+import { Works } from '../../../../models/works';
 import { FormControl } from '@angular/forms';
-import { CategoryService } from '../../../services/categories.service';
-import { ConfirmationService, MessageService, SelectItem } from "primeng/api";
+import { WorksService } from '../../../../services/works.service';
+import { ComuniService } from '../../../../services/comuni.service';
+
+import { SelectItem } from "primeng/api";
 import * as moment from 'moment';
-import { TYPE_LIST } from '../../constants/constants';
-import { Clients } from 'src/app/models/clients';
-import { ClientsService } from 'src/app/services/clients.service';
-import { EmployeesService } from 'src/app/services/employees.service';
-import { Employees } from 'src/app/models/employees';
-import { Location } from '@angular/common';
+import { Comuni } from 'src/app/models/comuni';
 
 @Component({
-  selector: 'app-employees-form',
-  templateUrl: './employees-form.component.html'
+  selector: 'app-works-form',
+  templateUrl: './works-form.component.html'
 })
-export class EmployeesFormComponent implements OnInit {
+export class WorksFormComponent implements OnInit {
   @ViewChild("myInput", { static: false }) myInputVariable: ElementRef;
 
   pageTitle: string;
   error: string;
   uploadError: string;
   imagePath: any;
-  categories: Category;
-  category: Category;
+  works: Works;
+  work: Works;
+
+  comuni: Comuni;
 
   checked: boolean = true;
   selectedValue: string;
@@ -39,14 +37,14 @@ export class EmployeesFormComponent implements OnInit {
   format1: string = "";
   format2: string = "";
   selectedCity: Blog;
-  selectedCategories: Category;
+  selectedWorks: Works;
   selectedDate: Date;
   date: Date;
 
   constructor(
     private fb: FormBuilder,
-    private employeesService: EmployeesService,
-    private _location: Location,
+    private worksService: WorksService,
+    private comuniService: ComuniService,
 
     private router: Router,
     private route: ActivatedRoute
@@ -61,12 +59,18 @@ export class EmployeesFormComponent implements OnInit {
   ngOnInit() {
 
 
+    this.comuniService.getAllList().subscribe(
+      (data: Comuni) => this.comuni = data,
+      error => this.error = error
+    );
+
+
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
 
 
-      this.pageTitle = 'Modifica Dipendente';
-      this.employeesService.getId(+id).subscribe(
+      this.pageTitle = 'Modifica Tipo di lavorazione';
+      this.worksService.getId(+id).subscribe(
         res => {
           this.categoryForm.patchValue({
             category_name: res.category_name,
@@ -106,23 +110,23 @@ export class EmployeesFormComponent implements OnInit {
     const id = this.categoryForm.get('id').value;
 
     if (id) {
-      this.employeesService.update(formData, +id).subscribe(
+      this.worksService.update(formData, +id).subscribe(
         res => {
           if (res.status == 'error') {
             this.uploadError = res.message;
           } else {
-            this._location.back();
+            this.router.navigate(['/admin/settings/works']);
           }
         },
         error => this.error = error
       );
     } else {
-      this.employeesService.create(formData).subscribe(
+      this.worksService.create(formData).subscribe(
         res => {
           if (res.status === 'error') {
             this.uploadError = res.message;
           } else {
-            this._location.back();
+            this.router.navigate(['/admin/settings/works']);
           }
         },
         error => this.error = error

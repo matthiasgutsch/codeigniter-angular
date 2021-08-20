@@ -4,26 +4,25 @@ import { AuthGuard } from '../auth/auth.guard';
 
 import { AdminComponent } from './admin/admin.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { ManageCategoriesComponent } from './category/manage-categories/manage-categories.component';
+import { ManageCategoriesComponent } from './settings/category/manage-categories/manage-categories.component';
 import { ManagePagesComponent } from './manage-pages/manage-pages.component';
 
-import { CategoryFormComponent } from './category/category-form/category-form.component';
+import { CategoryFormComponent } from './settings/category/category-form/category-form.component';
 import { ManageClientsComponent } from './clients/manage-clients/manage-clients.component';
 import { ClientsFormComponent } from './clients/clients-form/clients-form.component';
 import { ManageAppointmentsComponent } from './appointments/manage-appointments/manage-appointments.component';
 import { AppointmentsFormComponent } from './appointments/appointments-form/appointments-form.component';
 import { ManageBillingsComponent } from './billings/manage-billings/manage-billings.component';
 import { BillingsFormComponent } from './billings/billings-form/billings-form.component';
-import { WorksFormComponent } from './works/works-form/works-form.component';
-import { ManageWorksComponent } from './works/manage-works/manage-works.component';
+import { WorksFormComponent } from './settings/works/works-form/works-form.component';
+import { ManageWorksComponent } from './settings/works/manage-works/manage-works.component';
 import { SettingsComponent } from './settings/settings.component';
-import { EmployeesFormComponent } from './employees/employees-form/employees-form.component';
-import { ManageEmployeesComponent } from './employees/manage-employees/manage-employees.component';
-import { LocationsFormComponent } from './locations/locations-form/locations-form.component';
-import { ManageLocationsComponent } from './locations/manage-locations/manage-locations.component';
-import { StatisticsComponent } from './statistics/statistics.component';
-import { ManageTypeComponent } from './type/manage-type/manage-type.component';
-import { TypeFormComponent } from './type/type-form/type-form.component';
+import { EmployeesFormComponent } from './settings/employees/employees-form/employees-form.component';
+import { ManageEmployeesComponent } from './settings/employees/manage-employees/manage-employees.component';
+import { LocationsFormComponent } from './settings/locations/locations-form/locations-form.component';
+import { ManageLocationsComponent } from './settings/locations/manage-locations/manage-locations.component';
+import { ManageTypeComponent } from './settings/type/manage-type/manage-type.component';
+import { TypeFormComponent } from './settings/type/type-form/type-form.component';
 
 const routes: Routes = [
   {
@@ -35,9 +34,6 @@ const routes: Routes = [
         path: "",
         children: [
 
-
-          { path: "settings", component: SettingsComponent },
-          { path: "statistics", component: StatisticsComponent },
 
 
           { path: "appointments", component: ManageAppointmentsComponent },
@@ -52,27 +48,28 @@ const routes: Routes = [
           { path: "clients", component: ManageClientsComponent },
           { path: "clients/create", component: ClientsFormComponent },
           { path: "clients/edit/:id", component: ClientsFormComponent },
+          { path: "settings", component: SettingsComponent },
 
-          { path: "categories", component: ManageCategoriesComponent },
-          { path: "categories/edit/:id", component: CategoryFormComponent },
-          { path: "categories/create", component: CategoryFormComponent },
+          { path: "settings/categories", component: ManageCategoriesComponent },
+          { path: "settings/categories/edit/:id", component: CategoryFormComponent },
+          { path: "settings/categories/create", component: CategoryFormComponent },
 
-          { path: "type", component: ManageTypeComponent },
-          { path: "type/edit/:id", component: TypeFormComponent },
-          { path: "type/create", component: TypeFormComponent },
+          { path: "settings/type", component: ManageTypeComponent },
+          { path: "settings/type/edit/:id", component: TypeFormComponent },
+          { path: "settings/type/create", component: TypeFormComponent },
 
 
-          { path: "works", component: ManageWorksComponent },
-          { path: "works/edit/:id", component: WorksFormComponent },
-          { path: "works/create", component: WorksFormComponent },
+          { path: "settings/works", component: ManageWorksComponent },
+          { path: "settings/works/edit/:id", component: WorksFormComponent },
+          { path: "settings/works/create", component: WorksFormComponent },
 
-          { path: "locations", component: ManageLocationsComponent },
-          { path: "locations/edit/:id", component: LocationsFormComponent },
-          { path: "locations/create", component: LocationsFormComponent },
+          { path: "settings/locations", component: ManageLocationsComponent },
+          { path: "settings/locations/edit/:id", component: LocationsFormComponent },
+          { path: "settings/locations/create", component: LocationsFormComponent },
 
-          { path: "employees", component: ManageEmployeesComponent },
-          { path: "employees/edit/:id", component: EmployeesFormComponent },
-          { path: "employees/create", component: EmployeesFormComponent },
+          { path: "settings/employees", component: ManageEmployeesComponent },
+          { path: "settings/employees/edit/:id", component: EmployeesFormComponent },
+          { path: "settings/employees/create", component: EmployeesFormComponent },
           
           { path: "pages", component: ManagePagesComponent },
           { path: "", component: AdminDashboardComponent },

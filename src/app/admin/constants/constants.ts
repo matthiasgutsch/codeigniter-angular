@@ -13,10 +13,10 @@ export const FISCAL_CODE_VALIDATOR_REGEX =
 
 
 export const PAGES: SelectItem[] = [
-  { label: "Lavorazioni", value: "../works", icon: "" },
-  { label: "Tipo di Appuntamento", value: "../categories" },
-  { label: "Dipendenti / Personale", value: "../employees" },
-  { label: "Località", value: "../locations" },
+  { label: "Lavorazioni", value: "../settings/works", icon: "" },
+  { label: "Tipo di Appuntamento", value: "../settings/categories" },
+  { label: "Dipendenti / Personale", value: "../settings/employees" },
+  { label: "Località", value: "../settings/locations" },
 
 ];
 

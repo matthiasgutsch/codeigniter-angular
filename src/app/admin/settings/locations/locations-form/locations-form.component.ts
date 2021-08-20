@@ -2,11 +2,11 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
-import { Blog } from '../../../models/blog';
-import { Works } from '../../../models/works';
+import { Blog } from '../../../../models/blog';
+import { Works } from '../../../../models/works';
 import { FormControl } from '@angular/forms';
-import { WorksService } from '../../../services/works.service';
-import { ComuniService } from '../../../services/comuni.service';
+import { WorksService } from '../../../../services/works.service';
+import { ComuniService } from '../../../../services/comuni.service';
 
 import { SelectItem } from "primeng/api";
 import * as moment from 'moment';
@@ -72,7 +72,7 @@ export class LocationsFormComponent implements OnInit {
     if (id) {
 
 
-      this.pageTitle = 'Modifica Tipo di lavorazione';
+      this.pageTitle = 'Luogo lavorazione';
       this.locationsService.getId(+id).subscribe(
         res => {
           this.categoryForm.patchValue({
@@ -84,7 +84,7 @@ export class LocationsFormComponent implements OnInit {
         }
       );
     } else {
-      this.pageTitle = 'Create Category';
+      this.pageTitle = 'Crea Luogo lavorazione';
     }
 
     this.categoryForm = this.fb.group({

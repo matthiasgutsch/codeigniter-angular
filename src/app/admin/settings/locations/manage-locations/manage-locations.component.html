@@ -16,7 +16,7 @@
         </div>
         <div class="p-col-3 p-md-3">
 
-            <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/locations/create']" label="Aggiungi" class="p-button p-button-primary p-mr-2"></button> 
+            <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/settings/locations/create']" label="Aggiungi" class="p-button p-button-primary p-mr-2"></button> 
 
 </div>
     </div>
@@ -49,7 +49,7 @@
             <td>{{locations.description}}</td>
 
             <td class="action">
-                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/locations/edit', locations.id]"></button>
+                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/settings/locations/edit', locations.id]"></button>
 
                 <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(locations.id)"></button>
 
