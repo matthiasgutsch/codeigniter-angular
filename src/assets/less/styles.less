@@ -680,6 +680,49 @@ margin-bottom: 20px;
   align-items: center;
 }
 
+.fc-icon {
+	display: block;
+
+	// Icon base
+	&:after {
+		display: inline-block;
+		font-family: "FontAwesome";
+		line-height: 1;
+		font-size: 20px;
+		vertical-align: middle;
+		position: relative;
+		top: -1px;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+}
+
+// Arrow icons
+.fc-icon-left-single-arrow:after {
+	content: "\f053";
+}
+.fc-icon-right-single-arrow:after {
+	content: "\f054";
+}
+.fc-icon-left-double-arrow:after {
+	content: "\000AB";
+}
+.fc-icon-right-double-arrow:after {
+	content: "\000BB";
+}
+
+// X icon
+.fc-icon-x:after {
+	content: "\ed6b";
+	font-size:20px;
+	display: block;
+}
+
+
+.fc-icon.fa {
+  font: normal normal normal 14px/1 FontAwesome !important;
+}
+
 .fc .fc-toolbar .fc-button:enabled:hover {
   background:  @ness_color_3;
   color: #ffffff;

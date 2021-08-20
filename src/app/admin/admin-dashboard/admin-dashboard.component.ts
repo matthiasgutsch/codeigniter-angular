@@ -111,6 +111,7 @@ export class AdminDashboardComponent implements OnInit {
           left: 'title',
 
         },
+        
         events: data,
         locale: 'it',
         timezone: 'UTC',
