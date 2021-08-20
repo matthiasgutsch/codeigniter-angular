@@ -6,115 +6,208 @@
 
     <div class="p-fluid">
         <div class="p-field p-grid">
-            <div class="p-col-8 p-md-8">
+            <div class="p-col-12 p-md-8">
 
                 <p-card>
 
                     <div class="blog-form">
 
                         <div class="p-field p-grid">
-                            <div class="p-col-10 p-md-10">
+                            <div class="p-col-12 p-md-9">
                                 <h3>{{pageTitle}}</h3>
                             </div>
-                            <div class="p-col-2 p-md-2">
+                            <div class="p-col-12 p-md-3">
 
-                                <button pButton pRipple label="save" class="p-button p-button-success p-mr-2" [disabled]="!blogForm.valid"></button>
+                                <button pButton pRipple icon="pi pi-save" label="Crea Fattura" class="p-button pull-right p-button-success p-mr-2" [disabled]="!blogForm.valid"></button>
+
 
                             </div>
                         </div>
                         <hr class="full">
 
-                        <div class="p-fluid">
+                        <p-tabView>
+                            <p-tabPanel header="Informazioni">
 
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Title <span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-10">
-                                    <p-dropdown [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" [options]="typeList" filter="true" placeholder="Tipo Intervento" inputStyleClass="selectpicker" formControlName="title" [style]="{ width: '100%' }">
-                                    </p-dropdown>
+                                <div class="p-fluid">
 
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Tipo di Impegno<span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+
+                                            <p-dropdown [options]="categories" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedCategories" formControlName="title" optionLabel="name" optionValue="name">
+
+
+                                            </p-dropdown>
+
+
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div class="p-fluid">
+                                <div class="p-fluid">
 
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Date <span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-10">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Data <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
 
-                                    <p-calendar [stepMinute]="15" formControlName="date" dataType="string" [(ngModel)]="selectedDate" hourFormat="24" dateFormat="yy-mm-dd" showTime="true" appendTo="body"></p-calendar>
+                                            <p-calendar [stepMinute]="15" formControlName="date" dataType="string" [(ngModel)]="selectedDate" hourFormat="24" dateFormat="yy-mm-dd" showTime="true" appendTo="body"></p-calendar>
 
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div class="p-fluid">
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Is Featured <span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-10">
-                                    <input type="radio" formControlName="is_featured" value="1" /> Yes
-                                    <input type="radio" formControlName="is_featured" value="0" /> No
+
+
+                                <div class="p-fluid">
+
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Perona incaricata <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+
+                                            <p-dropdown [options]="employees" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" formControlName="employee_id" optionLabel="name" optionValue="id">
+
+
+                                            </p-dropdown>
+
+
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div class="p-fluid">
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Is Active <span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-10">
-                                    <input type="radio" formControlName="is_active" value="1" /> Yes
-                                    <input type="radio" formControlName="is_active" value="0" /> No
+
+                                <div class="p-fluid">
+
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Location <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+
+                                            <p-dropdown [options]="locations" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" formControlName="location_id" optionLabel="name" optionValue="id">
+
+
+                                            </p-dropdown>
+
+
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
-
-
-                        <div class="p-fluid">
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Cliente <span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-10">
-                                    <p-dropdown [options]="clients" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedClients" formControlName="category_id" optionLabel="name" optionValue="id">
-                                        <ng-template let-option pTemplate="item">
-
-                                            <strong>{{option.name}} {{option.surname}}</strong><br>
-                                            <span>{{option.address}} - {{option.city}}</span>
-
-                                        </ng-template>
-
-                                    </p-dropdown>
-
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">In evidenzia <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+                                            <input type="radio" formControlName="is_featured" value="1" /> Si
+                                            <input type="radio" formControlName="is_featured" value="0" /> No
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div class="p-fluid">
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Description <span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-10">
-                                    <p-editor formControlName="description" [style]="{'height':'320px'}">
-
-                                    </p-editor>
-
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Attivo <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+                                            <input type="radio" formControlName="is_active" value="1" /> Yes
+                                            <input type="radio" formControlName="is_active" value="0" /> No
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group form-row">
-                            <label class="col-md-3"></label>
-                            <div class="col-md-9">
-                                <input type="hidden" formControlName="id">
 
 
-                            </div>
-                        </div>
 
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Cliente <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+                                            <p-dropdown [options]="clients" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedClients" formControlName="category_id" optionLabel="name" optionValue="id">
+                                                <ng-template let-option pTemplate="item">
+
+                                                    <strong>{{option.name}} {{option.surname}}</strong><br>
+                                                    <span>{{option.address}} - {{option.zip}} {{option.city}}</span>
+
+                                                </ng-template>
+
+                                            </p-dropdown>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Nota <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+
+                                           
+
+                                            <textarea pInputTextarea formControlName="description" ></textarea>
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Tipo di Lavorazione<span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+
+                                            <p-multiSelect [options]="works" display="chip" formControlName="works_id" [(ngModel)]="selectedWorks" optionLabel="name" optionValue="id">
+                                            </p-multiSelect>                                           
+
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                           
+
+
+                                <div class="form-group form-row">
+                                    <label class="col-md-3"></label>
+                                    <div class="col-md-9">
+                                        <input type="hidden" formControlName="id">
+
+
+                                    </div>
+                                </div>
+                            </p-tabPanel>
+
+                            <p-tabPanel header="Documenti">
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+
+                                        <div class="p-col-12 p-md-12">
+                                            <input #myInput type="file" id="image" (change)="onSelectedFile($event)" />
+                                            <div [innerHTML]="uploadError" class="error"></div>
+                                            <div *ngIf="imagePath">
+                                                <br />
+                                                <span class="image-container">
+                                                    <img [src]="imagePath" width="300px">
+
+                                                    <button pButton pRipple icon="pi pi-trash"
+                                                        class="imgcancel p-button p-button-primary p-mr-2"
+                                                        (click)="removeImageFile($event)"></button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </p-tabPanel>
+                        </p-tabView>
                     </div>
                 </p-card>
             </div>
@@ -176,3 +269,4 @@
 
     </div>
 </form>
+<p-toast key="myKey1"></p-toast>

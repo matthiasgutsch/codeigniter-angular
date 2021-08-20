@@ -20,7 +20,6 @@
 
                                 <button pButton pRipple icon="pi pi-save" label="salva" class="p-button pull-right p-button-success p-mr-2" [disabled]="!blogForm.valid"></button>
 
-                                <button pButton pRipple icon="pi pi-save" label="create billing" class="p-button pull-right p-button-success p-mr-2" (click)="navigate()"></button>
 
                             </div>
                         </div>
@@ -159,7 +158,7 @@
 
                                 <div class="p-fluid">
                                     <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Nota 2 <span
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Tipo di Lavorazione <span
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
 
@@ -185,6 +184,10 @@
 
                                     </div>
                                 </div>
+
+
+
+
                             </p-tabPanel>
 
                             <p-tabPanel header="Documenti">
@@ -209,7 +212,13 @@
                                 </div>
                             </p-tabPanel>
                         </p-tabView>
+
+
                     </div>
+                </p-card>
+                <p-card>
+                    <button pButton pRipple icon="pi pi-save" label="Crea Fattura / Ricevuta" class="p-button p-button-primary p-mr-2" (click)="navigate()"></button>
+
                 </p-card>
             </div>
 
@@ -265,6 +274,8 @@
 
 
                 </p-card>
+
+
             </div>
         </div>
 

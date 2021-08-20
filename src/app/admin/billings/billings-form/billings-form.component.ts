@@ -15,6 +15,12 @@ import { ClientsService } from 'src/app/services/clients.service';
 import { Location } from '@angular/common';
 import { WorksService } from 'src/app/services/works.service';
 import { Works } from 'src/app/models/works';
+import { Locations } from 'src/app/models/locations';
+import { Appointments } from 'src/app/models/appointments';
+import { Employees } from 'src/app/models/employees';
+import { AppointmentsService } from 'src/app/services/appointments.service';
+import { LocationsService } from 'src/app/services/locations.service';
+import { EmployeesService } from 'src/app/services/employees.service';
 
 @Component({
   selector: "app-billings-form",
@@ -29,10 +35,16 @@ export class BillingsFormComponent implements OnInit {
   imagePath: any;
   blogs: Blog;
   blog: Blog;
-  works: any = [];
-  work: Works;
+
+  appointments: Appointments;
+  appointment: Appointments;
+
   categories: any = [];
   category: Category;
+
+  works: any = [];
+  work: Works;
+
   checked: boolean = true;
   selectedValue: string;
 
@@ -40,17 +52,26 @@ export class BillingsFormComponent implements OnInit {
   typeList: any[];
   clients: any = [];
   client: Clients;
+  arrString: string;
+
+  employees: any = [];
+  employee: Employees;
+
+  description: any;
+  selectedWorks: SelectItem[] = [];
+  selectedWorks2: SelectItem[];
+  locations: any = [];
+  location: Locations;
+
 
   cities: Blog[];
   format1: string = "";
   format2: string = "";
   selectedCity: Blog;
-  selectedClients: string;
-  selectedWorks: SelectItem[] = [];
-  selectedWorks2: SelectItem[];
+  selectedCategories: Category;
+  selectedClients: Clients;
   selectedDate: Date;
   date: Date;
-  category_id: number;
   works_id: any;
 
   trackByFn(index, item) {
@@ -59,11 +80,14 @@ export class BillingsFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private appointmentsService: AppointmentsService,
     private billingsService: BillingsService,
     private messageService: MessageService,
     private clientsService: ClientsService,
     private _location: Location,
+    private locationsService: LocationsService,
     private worksService: WorksService,
+    private employeesService: EmployeesService,
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,
     private router: Router,
@@ -72,8 +96,6 @@ export class BillingsFormComponent implements OnInit {
     if (this.date) {
       this.selectedDate = new Date(this.date);
     }
-    this.selectedClients = this.router.getCurrentNavigation().extras.state.selectedClients;
-    this.selectedWorks = this.router.getCurrentNavigation().extras.state.selectedWorks;
 
     this.typeList = TYPE_LIST;
   }
@@ -81,13 +103,30 @@ export class BillingsFormComponent implements OnInit {
   ngOnInit() {
     this.getselectedWorks;
     
-    this.billingsService.getAllList().subscribe(
-      (data: Blog) => (this.blogs = data),
+    this.appointmentsService.getAllList().subscribe(
+      (data: Appointments) => (this.appointments = data),
       (error) => (this.error = error)
     );
 
     this.categoryService.getAllList().subscribe(
       (data: Category) => (this.categories = data),
+      (error) => (this.error = error)
+    );
+
+
+    this.employeesService.getAllList().subscribe(
+      (data: Employees) => (this.employees = data),
+      (error) => (this.error = error)
+    );
+
+
+    this.worksService.getAllList().subscribe(
+      (data: Works) => (this.works = data),
+      (error) => (this.error = error)
+    );
+
+    this.locationsService.getAllList().subscribe(
+      (data: Locations) => (this.locations = data),
       (error) => (this.error = error)
     );
 
@@ -97,15 +136,19 @@ export class BillingsFormComponent implements OnInit {
     );
 
 
+
     
     const id = this.route.snapshot.paramMap.get("id");
     if (id) {
-      this.pageTitle = "Modifica Appuntamento";
+      this.pageTitle = "Modifica Fattura / Ricevuta";
       this.billingsService.getId(+id).subscribe((res) => {
         this.blogForm.patchValue({
           title: res.title,
-          description: res.description,
+          description: res.description.split(','),
           category_id: res.category_id,
+          works_id: res.works_id.split(','),
+          employee_id: res.employee_id,
+          location_id: res.location_id,
           is_featured: res.is_featured,
           is_active: res.is_active,
           date: res.date,
@@ -114,15 +157,18 @@ export class BillingsFormComponent implements OnInit {
         this.imagePath = res.image;
       });
     } else {
-      this.pageTitle = "Aggiungi Appuntamento";
+      this.pageTitle = "Aggiungi Fattura / Ricevuta";
     }
 
     this.blogForm = this.fb.group({
       id: [""],
       title: ["", Validators.required],
-      description: ["", Validators.required],
+      description: [""],
       is_featured: ["0"],
       category_id: ["", Validators.required],
+      works_id: [""],
+      location_id: [""],
+      employee_id: [""],
       is_active: ["0"],
       image: [""],
       date: ["", Validators.required],
@@ -157,6 +203,7 @@ export class BillingsFormComponent implements OnInit {
     return this.works.find(item => item.id === works_id);
   }
 
+
   removeImageFile() {
     this.imagePath = "";
     console.log(this.myInputVariable.nativeElement.files);
@@ -168,9 +215,7 @@ export class BillingsFormComponent implements OnInit {
     return this.blogForm.get("title");
   }
 
-  get description() {
-    return this.blogForm.get("description");
-  }
+
 
   onSubmit() {
     const formData = new FormData();
@@ -178,6 +223,9 @@ export class BillingsFormComponent implements OnInit {
     formData.append("description", this.blogForm.get("description").value);
     formData.append("is_featured", this.blogForm.get("is_featured").value);
     formData.append("category_id", this.blogForm.get("category_id").value);
+    formData.append("works_id", this.blogForm.get("works_id").value);
+    formData.append("location_id", this.blogForm.get("location_id").value);
+    formData.append("employee_id", this.blogForm.get("employee_id").value);
     formData.append("is_active", this.blogForm.get("is_active").value);
     formData.append("image", this.blogForm.get("image").value);
     formData.append("date", this.blogForm.get("date").value);

@@ -79,7 +79,7 @@
             </div>
             <hr class="full">
 
-            <p-table #dt1 [value]="appointments"
+            <p-table #dt1 [value]="appointmentsToday"
                 [paginator]="false" [rows]="10">
         
 
@@ -105,6 +105,60 @@
     </div>
 </div>
 
+
+
+
+<p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'50%'}">
+    <ng-template pTemplate="content">
+        <div class="p-col-12 p-md-12">
+            <p-card>
+                <div class="p-grid">
+                    <div class="p-col-12 p-md-6">
+                        <strong> {{displayEvent.event.start | date:'dd/MM/yyyy HH:mm':'-0000'}}</strong>
+
+                <h3>{{displayEvent.event.title}}</h3>
+          
+                
+            {{ getLocationItem(displayEvent.event.location_id)?.name }}
+                <br> {{ getEmployeeItem(displayEvent.event.employee_id)?.name }} 
+
+                <p [innerHTML]="displayEvent.event.description"></p>
+
+                    </div>
+                    <div class="p-col-12 p-md-6">
+                        <div *ngFor="let item of displayEvent.event.works_id">
+                            {{ getWorksItem(item)?.name }}
+                        </div>
+
+    
+            </div>
+
+
+
+        </div>
+                <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', displayEvent.event.id]"></button>
+
+            </p-card>
+        </div>
+        <div class="clearfix"></div><br>
+        <div class="clearfix"></div>
+        <div class="p-col-12 p-md-12">
+
+            <p-card>
+                <strong>{{ getCategoryItem(displayEvent.event.category_id)?.name }}</strong>
+
+                <p>{{ getCategoryItem(displayEvent.event.category_id)?.address }}<br> {{ getCategoryItem(displayEvent.event.category_id)?.zip }} - {{ getCategoryItem(displayEvent.event.category_id)?.city }} ({{ getCategoryItem(displayEvent.event.category_id)?.province }})<br>
+                </p>
+                <hr>
+                <p>{{ getCategoryItem(displayEvent.event.category_id)?.phone }}<br> {{ getCategoryItem(displayEvent.event.category_id)?.email }}</p>
+                <div class="clearfix"></div>
+                <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente" class="p-button p-button-primary p-mr-2" [routerLink]="['/admin/clients/edit', displayEvent.event.category_id]"></button>
+            </p-card>
+        </div>
+
+    </ng-template>
+
+</p-sidebar>
 
 <p-sidebar [(visible)]="appointmentsDialog" position="right" [style]="{width:'50%'}">
     <ng-template pTemplate="content">
@@ -152,48 +206,4 @@
 
 
 
-<p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'50%'}">
-    <ng-template pTemplate="content">
-        <div class="p-col-12 p-md-12">
-            <p-card>
-                <strong> {{displayEvent.event.start | date:'dd/MM/yyyy HH:mm':'-0000'}}</strong>
-        <h3>{{displayEvent.event.title}}</h3>
-                
-        <i class="pi pi-check"></i>
-{{ getWorksItem(displayEvent.event.works_id)?.name }}<br>
-<i class="pi pi-check"></i>
-{{ getLocationItem(displayEvent.event.location_id)?.name }}<br>
-<i class="pi pi-check"></i>
-{{ getEmployeeItem(displayEvent.event.employee_id)?.name }}<br>
-
-
-       
-        <p [innerHTML]="displayEvent.event.description"></p>
-        <p [innerHTML]="displayEvent.event.end"></p>
-        <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', displayEvent.event.id]"></button>
-
-        </p-card>
-        </div>
-        <div class="clearfix"></div><br>
-        <div class="clearfix"></div>
-        <div class="p-col-12 p-md-12">
-
-        <p-card>
-        <strong>{{ getCategoryItem(displayEvent.event.category_id)?.name }}</strong>
-      
-        <p>{{ getCategoryItem(displayEvent.event.category_id)?.address }}<br>
-  
-        {{ getCategoryItem(displayEvent.event.category_id)?.zip }} - {{ getCategoryItem(displayEvent.event.category_id)?.city }} ({{ getCategoryItem(displayEvent.event.category_id)?.province }})<br>
-        </p>
-        <hr>
-        <p>{{ getCategoryItem(displayEvent.event.category_id)?.phone }}<br>
-        {{ getCategoryItem(displayEvent.event.category_id)?.email }}</p>
-        <div class="clearfix"></div>
-        <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente" class="p-button p-button-primary p-mr-2" [routerLink]="['/admin/clients/edit', displayEvent.event.category_id]"></button>
-    </p-card>
-        </div>
- 
-    </ng-template>
-
-</p-sidebar>
 

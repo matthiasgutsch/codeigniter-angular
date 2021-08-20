@@ -177,13 +177,6 @@ export class AppointmentsFormComponent implements OnInit {
   }
 
 
-  navigate() {
-    // this.router.navigate(['other']);
-    
-    this.router.navigate(['admin/billings/create'], {
-      state: { selectedClients: '111', selectedWorks: '7,14,39,42,43' }
-    });
-  }
 
   getWorksItem(works_id: string, id: string) {
     return this.works.find(item => item.id === works_id);

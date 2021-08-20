@@ -36,7 +36,7 @@ export class AdminDashboardComponent implements OnInit {
   events: any;
   appointments: any = [];
   appointment: Appointments;
-
+  appointmentsToday: any = [];
   locations: any = [];
   location: Locations;
 
@@ -57,6 +57,7 @@ export class AdminDashboardComponent implements OnInit {
   selectedCategories: Category;
   selectedDate: Date;
   date: Date;
+  selectedWorks: any[];
   categories: any = [];
   category: Category;
   productDialog: boolean = false;
@@ -116,20 +117,9 @@ export class AdminDashboardComponent implements OnInit {
       };
     });
 
-    this.clientsService.getAllList().subscribe(
-      (data: Clients) => this.clients = data,
-      error => this.error = error
-    );
-
-
-    this.locationsService.getAllList().subscribe(
-      (data: Locations) => this.locations = data,
-      error => this.error = error
-    );
-
-
-    this.worksService.getAllList().subscribe(
-      (data: Works) => this.works = data,
+    
+    this.appointmentsService.getAllList().subscribe(
+      (data: Appointments) => this.appointments = data,
       error => this.error = error
     );
 
@@ -143,14 +133,30 @@ export class AdminDashboardComponent implements OnInit {
       error => this.error = error
     );
 
+    this.categoryService.getAllList().subscribe(
+      (data: Category) => this.categories = data,
+      error => this.error = error
+    );
+
+    this.locationsService.getAllList().subscribe(
+      (data: Locations) => this.locations = data,
+      error => this.error = error
+    );
+
+
+    this.worksService.getAllList().subscribe(
+      (data: Works) => this.works = data,
+      error => this.error = error
+    );
+
 
     this.employeesService.getAllList().subscribe(
       (data: Employees) => this.employees = data,
       error => this.error = error
     );
 
-    this.appointmentsService.getToday().subscribe(
-      (data: Appointments) => this.appointments = data,
+    this.clientsService.getAllList().subscribe(
+      (data: Clients) => this.clients = data,
       error => this.error = error
     );
 
@@ -159,11 +165,11 @@ export class AdminDashboardComponent implements OnInit {
       error => this.error = error
     );
 
-
-    this.categoryService.getAllList().subscribe(
-      (data: Category) => this.categories = data,
+    this.appointmentsService.getToday().subscribe(
+      (data: Appointments) => this.appointmentsToday = data,
       error => this.error = error
     );
+
 
 
     this.blogForm = this.fb.group({
@@ -228,7 +234,7 @@ export class AdminDashboardComponent implements OnInit {
         id: model.event.id,
         start: model.event.start,
         title: model.event.title,
-        works_id: model.event.works_id,
+        works_id: model.event.works_id.split(','),
         location_id: model.event.location_id,
         employee_id: model.event.employee_id,
         allDay: model.event.allDay,
