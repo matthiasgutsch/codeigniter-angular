@@ -3,6 +3,9 @@
   "yes": "Yes",
   "no": "No",
   "add": "Add",
+  "save": "Save",
+  "create": "Create",
+
 
   "form.appointment.type": "Type",
   "form.appointment.date": "Date",

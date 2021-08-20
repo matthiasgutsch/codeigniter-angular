@@ -4,6 +4,8 @@
   "yes": "Si",
   "no": "No",
   "add": "Aggiungi",
+  "save": "Salva",
+  "create": "Crea",
 
   "form.appointment.type": "Tipo",
   "form.appointment.date": "Data",
