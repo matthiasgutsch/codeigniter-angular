@@ -6,17 +6,10 @@
 <div class="p-grid">
     <div class="p-col-12 p-md-12">
         <h3>Benvenuto, {{currentUser.first_name}} {{currentUser.last_name}}</h3>
-
+       <!-- {{currentUser.user_id}}-->
     </div>
     <div class="p-col-12 p-md-7">
-
-       
-
         <p-card>
-
-      
-        
-
 <div *ngIf="calendarOptions">
     <ng-fullcalendar #ucCalendar [options]="calendarOptions" 
     (eventClick)="eventClick($event.detail)" 
@@ -80,7 +73,7 @@
                 [paginator]="false" [rows]="10">
         
 
-           
+                
                 <ng-template pTemplate="body" let-appointment>
                     <tr>
                         <td width="100">  <p-tag value="{{appointment.date | date: 'HH:mm' }}"  severity="warning"></p-tag> 

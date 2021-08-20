@@ -5,14 +5,28 @@ import { CrudOperations } from './crud-operations.interface';
 import { catchError } from 'rxjs/operators';
 
 export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
+  currentUser: any ;
+  submitted = false;
+  returnUrl: string;
+  error: {};
+  loginError: string;
+  username: string;
+  user_id: number;
+
+  password: string;
+  first_name: string;
+  last_name: string;
+  pages: any[];
 
   constructor(
     protected _http: HttpClient,
     protected _base: string
-  ) { }
+  ) { 
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+  }
 
   getAllList() {
-    return this._http.get<T>(this._base + '/').pipe(
+    return this._http.get<T>(this._base + '/?user=' + this.currentUser.user_id).pipe(
       catchError(this.handleError)
     );
   }
@@ -38,7 +52,7 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
   find_client(id: ID) {
-    return this._http.get<T>(this._base + '/appointments_by_client/id/' + id).pipe(
+    return this._http.get<T>(this._base + '/appointments_by_client/id/' + id + '/?user=' + this.currentUser.user_id).pipe(
       catchError(this.handleError)
     );
   }

@@ -670,8 +670,8 @@ margin-bottom: 20px;
 
 
 .fc .fc-toolbar .fc-button {
-  color: #ffffff;
-  background: @ness_color_2;
+  color: @ness_color_2;
+  background: transparent;
   border: 1px solid @ness_color_2;
   font-size: 1rem;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
@@ -679,6 +679,13 @@ margin-bottom: 20px;
   display: flex;
   align-items: center;
 }
+
+.fc .fc-toolbar .fc-button:enabled:hover {
+  background:  @ness_color_3;
+  color: #ffffff;
+  border-color:  @ness_color_3;
+}
+
 
 .fc .fc-toolbar .fc-button.fc-dayGridMonth-button.fc-button-active, .fc .fc-toolbar .fc-button.fc-timeGridWeek-button.fc-button-active, .fc .fc-toolbar .fc-button.fc-timeGridDay-button.fc-button-active {
   background: @ness_color_2;

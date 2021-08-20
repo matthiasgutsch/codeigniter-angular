@@ -8,7 +8,6 @@ import { ManageCategoriesComponent } from './category/manage-categories/manage-c
 import { ManagePagesComponent } from './manage-pages/manage-pages.component';
 
 import { CategoryFormComponent } from './category/category-form/category-form.component';
-import { AdminCalendarComponent } from './calendar/calendar.component';
 import { ManageClientsComponent } from './clients/manage-clients/manage-clients.component';
 import { ClientsFormComponent } from './clients/clients-form/clients-form.component';
 import { ManageAppointmentsComponent } from './appointments/manage-appointments/manage-appointments.component';
@@ -53,8 +52,6 @@ const routes: Routes = [
           { path: "clients", component: ManageClientsComponent },
           { path: "clients/create", component: ClientsFormComponent },
           { path: "clients/edit/:id", component: ClientsFormComponent },
-
-          { path: "calendar", component: AdminCalendarComponent },
 
           { path: "categories", component: ManageCategoriesComponent },
           { path: "categories/edit/:id", component: CategoryFormComponent },

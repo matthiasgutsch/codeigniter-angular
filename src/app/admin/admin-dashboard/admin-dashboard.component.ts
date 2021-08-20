@@ -102,6 +102,7 @@ export class AdminDashboardComponent implements OnInit {
 
     this.appointmentsService.getAllList().subscribe(data => {
       this.calendarOptions = {
+    
         editable: true,
         eventLimit: false,
         timeFormat: 'HH:mm', 
