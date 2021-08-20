@@ -17,4 +17,5 @@ export class Clients {
   created_at: Date;
   fiscalcode: string;
   date: string;
+  fiscalnumber: string;
 }

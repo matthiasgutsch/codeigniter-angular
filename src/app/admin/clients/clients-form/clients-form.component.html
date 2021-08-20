@@ -38,8 +38,9 @@
                                         <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Account <span
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
-                                            <input type="radio" formControlName="is_featured" value="1" /> Business
-                                            <input type="radio" formControlName="is_featured" value="0" /> Privato
+                                            
+                                            <input type="radio" formControlName="is_featured" [(ngModel)]="is_featured" value="1" /> Business
+                                            <input type="radio" formControlName="is_featured" [(ngModel)]="is_featured" value="0" /> Privato
                                         </div>
                                     </div>
                                 </div>
@@ -69,7 +70,7 @@
                                         <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Data di nascita <span
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
-                <p-inputMask mask="99/99/9999" [(ngModel)]="selectedDate" formControlName="date" placeholder="99/99/9999" slotChar="dd/mm/yyyy"></p-inputMask>
+                         <p-inputMask mask="99/99/9999" [(ngModel)]="selectedDate" formControlName="date" placeholder="99/99/9999" slotChar="dd/mm/yyyy"></p-inputMask>
 
                                            
         
@@ -163,10 +164,12 @@
                                 <div class="p-fluid">
                                 
                                     <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Codice Fiscale <span class="required">*</span></label>
+                                        <label *ngIf="is_featured === '1'" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Partita Iva</label>
+                                        <label *ngIf="is_featured === '0'" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Codice Fiscale </label>
                                         <div class="p-col-12 p-md-10">
-                                            <input type="text" pInputText formControlName="fiscalcode" />
-                                
+                                            <input type="text" *ngIf="is_featured === '0'" placeholder="Codice Fiscale" pInputText formControlName="fiscalcode" />
+                                            <input type="text" *ngIf="is_featured === '1'" placeholder="Partita Iva" pInputText formControlName="fiscalnumber" />
+
                                         </div>
                                     </div>
                                 </div>
