@@ -68,14 +68,11 @@
 
             
             <div class="p-field p-grid">
-                <div class="p-col-12 p-md-8">
-                    <h3>{{'appointments.main.title' | translate}} {{myDate }}</h3>
+                <div class="p-col-12 p-md-12">
+                    <h6>{{'appointments_for_today.main.title' | translate}}</h6>
+                    <h3 class="date"> {{myDate }}</h3>
                 </div>
-                <div class="p-col-12 p-md-4">
-                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']"
-                       class="p-button p-button-primary p-mr-2 pull-right"></button>
-
-                </div>
+               
             </div>
             <hr class="full">
 
@@ -86,12 +83,10 @@
            
                 <ng-template pTemplate="body" let-appointment>
                     <tr>
-                        <td width="100">   <strong>{{appointment.date | date: 'HH:mm' }}</strong>
+                        <td width="100">  <p-tag value="{{appointment.date | date: 'HH:mm' }}"  severity="warning"></p-tag> 
                             </td>
-                            <td>{{appointment.title}}</td>
-                        <td>
-                            {{ getCategoryItem(appointment.category_id)?.name }}
-                       </td>
+                            <td>{{appointment.title}}<br> {{ getCategoryItem(appointment.category_id)?.name }}</td>
+                    
                         <td class="action" width="70">
                             <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2 pull-right"
                             (click)="editProduct(appointment)"></button>
