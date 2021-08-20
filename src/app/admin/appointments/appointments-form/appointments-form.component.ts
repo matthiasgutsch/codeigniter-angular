@@ -20,6 +20,7 @@ import { Employees } from 'src/app/models/employees';
 import { Locations } from 'src/app/models/locations';
 import { LocationsService } from 'src/app/services/locations.service';
 import { Appointments } from 'src/app/models/appointments';
+import { SumPipe } from '../../pipe/sum.pipe';
 
 @Component({
   selector: "app-appointments-form",

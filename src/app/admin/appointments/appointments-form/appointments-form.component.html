@@ -237,8 +237,12 @@
                             <div class="p-col-12 p-md-12">
                                 <table class="works">
                                 <tr *ngFor="let item of selectedWorks" >
-                                    <td >{{ getWorksItem(item)?.name }}</td><td> {{ getWorksItem(item)?.description }}</td>
+                                    <td >{{ getWorksItem(item)?.name }}</td><td> {{ getWorksItem(item)?.description }} / <p-tag value="h"  severity="warning"></p-tag></td>
                                 </tr>
+
+                                {{ selectedWorks | sum:'getWorksItem(item)?.description' }}
+                                
+
                             </table>
                             </div>
                         </div>

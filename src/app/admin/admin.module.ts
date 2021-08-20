@@ -67,6 +67,7 @@ import { ManageLocationsComponent } from './locations/manage-locations/manage-lo
 import { StatisticsComponent } from './statistics/statistics.component';
 import { ManageTypeComponent } from './type/manage-type/manage-type.component';
 import { TypeFormComponent } from './type/type-form/type-form.component';
+import { SumPipeModule } from './pipe/sum.pipe';
 
 export class I18nModule {
   constructor(translate: TranslateService) {
@@ -109,6 +110,7 @@ export class I18nModule {
     CommonModule,
     TableModule,
     MessagesModule,
+    SumPipeModule,
     TooltipModule,
     InputTextareaModule,
     ToastModule,
@@ -148,7 +150,7 @@ export class I18nModule {
       }
     }),
   ],
-  providers: [ConfirmationService, MessageService]
+  providers: [ConfirmationService, MessageService, SumPipeModule]
 })
 export class AdminModule { }
 
