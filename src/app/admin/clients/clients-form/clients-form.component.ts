@@ -50,7 +50,7 @@ export class ClientsFormComponent implements OnInit {
   selectedDate: Date;
   date: Date;
   appointments: Appointments;
-
+  is_featured = '0';
   trackByFn(index, item) {
     return item.id;
   }
