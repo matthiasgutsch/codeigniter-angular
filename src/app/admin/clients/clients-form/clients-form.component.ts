@@ -75,6 +75,7 @@ export class ClientsFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    
     this.clientsService.getAllList().subscribe(
       (data: Clients) => (this.clients = data),
       (error) => (this.error = error)
@@ -164,6 +165,8 @@ export class ClientsFormComponent implements OnInit {
     }
   }
 
+
+  
   getCategoryItem(category_id: string, id: string) {
     return this.categories.find((item) => item.id === category_id);
   }
@@ -210,6 +213,7 @@ export class ClientsFormComponent implements OnInit {
           if (res.status == "error") {
             this.uploadError = res.message;
           } else {
+            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
             this._location.back();
           }
         },
@@ -221,6 +225,7 @@ export class ClientsFormComponent implements OnInit {
           if (res.status === "error") {
             this.uploadError = res.message;
           } else {
+            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
             this._location.back();
           }
         },

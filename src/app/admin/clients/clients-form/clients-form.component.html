@@ -285,9 +285,17 @@
                  
 
                 </div>
+                
+
+                <div class="suggestion"  *ngIf="!appointments?.length > 0">
+                  Non ci sono Appuntamenti presenti
+                 </div>
 
                 <p-timeline [value]="appointments">
+
                     <ng-template pTemplate="content" let-appointment>
+
+                       
                         <p-card>
                             <div class="p-grid">
                                 <div class="p-col-12 p-md-10">  

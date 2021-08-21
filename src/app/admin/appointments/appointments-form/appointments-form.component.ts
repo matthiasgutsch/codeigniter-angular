@@ -177,7 +177,10 @@ export class AppointmentsFormComponent implements OnInit {
     });
   }
 
-
+  gotoDynamic() {
+    //this.router.navigateByUrl('/dynamic', { state: { id:1 , name:'Angular' } });
+    this.router.navigateByUrl("/admin/billings/create", { state: this.blogForm });
+  }
 
   getWorksItem(works_id: string, id: string) {
     return this.works.find(item => item.id === works_id);
@@ -247,7 +250,9 @@ export class AppointmentsFormComponent implements OnInit {
           if (res.status == "error") {
             this.uploadError = res.message;
           } else {
+            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
             this._location.back();
+
           }
         },
         (error) => (this.error = error)
@@ -258,7 +263,9 @@ export class AppointmentsFormComponent implements OnInit {
           if (res.status === "error") {
             this.uploadError = res.message;
           } else {
+            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
             this._location.back();
+
           }
         },
         (error) => (this.error = error)
