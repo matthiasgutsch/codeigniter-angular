@@ -16,16 +16,16 @@
                 <div class="blog-form">
 
 
-                    
+                    {{id}}
                         <div class="p-field p-grid">
-                            <div class="p-col-9 p-md-9">
-                                <h3>{{pageTitle}}</h3>
+                            <div class="p-col-12 p-md-6">
+                                <h3>{{pageTitle | translate}}</h3>
                             </div>
-                            <div class="p-col-3 p-md-3">
-
-                                <button pButton pRipple label="{{'save' | translate}}" class="p-button p-button-success p-mr-2 pull-right"
+                            <div class="p-col-12 p-md-6">
+       
+                                <button pButton pRipple label=" {{'save' | translate}}" class="p-button p-button-success p-mr-2 pull-right"
                                 [disabled]="!blogForm.valid"></button>
-                                
+                           
                             </div>
                         </div>
                         <hr class="full">
@@ -265,6 +265,12 @@
 
                 </div>
             </p-card>
+
+            <p-card>
+                
+                <button pButton pRipple label=" {{'cancel' | translate}} {{'client' | translate}}" *ngIf="deleteButton" class="p-button p-button-danger p-mr-2"
+(click)="onDelete(id)"></button> 
+            </p-card>
         </div>
 
         <div class="p-col-12 p-md-5">
@@ -322,6 +328,10 @@
         </div>
     </div>
 </div></form>
+
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
 
 
 <p-toast key="myKey1"></p-toast>

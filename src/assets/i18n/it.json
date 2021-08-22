@@ -7,7 +7,13 @@
   "save": "Salva",
   "create": "Crea",
   "search": "Cerca",
+  "cancel": "Cancella",
 
+
+  "add.client": "Aggiungi Cliente",
+  "edit.client": "Modifica Cliente",
+
+  
   "form.appointment.type": "Tipo",
   "form.appointment.date": "Data",
   "form.appointment.featured": "Importante",
@@ -23,6 +29,7 @@
   "appointments_for_today.main.title": "Appuntamenti per oggi",
 
   
+  "client": "Cliente",
 
   "clients.main.title": "Clienti",
 

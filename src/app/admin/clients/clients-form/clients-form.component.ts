@@ -51,6 +51,7 @@ export class ClientsFormComponent implements OnInit {
   date: Date;
   appointments: any = [];
   is_featured = '0';
+  deleteButton: boolean;
   trackByFn(index, item) {
     return item.id;
   }
@@ -94,8 +95,8 @@ export class ClientsFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get("id");
 
     if (id) {
-      this.pageTitle = "Modifica Cliente";
-
+      this.pageTitle = "edit.client";
+      this.deleteButton = true;
       this.appointmentsService.find_client(+id).subscribe(
         (data: Appointments) => (this.appointments = data),
         (error) => (this.error = error)
@@ -123,7 +124,8 @@ export class ClientsFormComponent implements OnInit {
         this.imagePath = res.image;
       });
     } else {
-      this.pageTitle = "Aggiungi Cliente";
+      this.deleteButton = false;
+      this.pageTitle = "add.client";
     }
 
     this.blogForm = this.fb.group({
@@ -176,6 +178,29 @@ export class ClientsFormComponent implements OnInit {
   }
 
 
+  onDelete(id: number, title: string) {
+
+    this.confirmationService.confirm({
+      message: 'Are you sure want to delete',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.clientsService.delete(+id).subscribe(
+          res => {
+            console.log(res);
+            this.messageService.add({ key: 'cancel', severity: 'success', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo' });
+
+          },
+          error => {
+            this.error = error;
+            this.messageService.add({ key: 'cancel', severity: 'warn', summary: 'Attenzione', detail: 'Errore backend' });
+          });
+      },
+
+    });
+
+
+  }
   removeImageFile() {
     this.imagePath = "";
     console.log(this.myInputVariable.nativeElement.files);
@@ -186,6 +211,11 @@ export class ClientsFormComponent implements OnInit {
   get title() {
     return this.blogForm.get("title");
   }
+
+  get id() {
+    return this.blogForm.get("id").value;
+  }
+
 
   get description() {
     return this.blogForm.get("description");

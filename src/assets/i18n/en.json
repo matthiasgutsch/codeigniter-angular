@@ -6,6 +6,8 @@
   "save": "Save",
   "create": "Create",
   "search": "Search",
+  "cancel": "Cancel",
+  "pageTitle": "Cancel",
 
 
   "form.appointment.type": "Type",
@@ -19,6 +21,7 @@
   "calendar.main.title": "Calendar",
   "appointments.main.title": "Appointments",
   "appointments_for_today.main.title": "Appointments for today",
+  "client": "Client",
 
   "clients.main.title": "Clients",
 
