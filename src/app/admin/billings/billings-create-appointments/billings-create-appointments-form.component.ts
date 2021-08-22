@@ -21,6 +21,8 @@ import { Employees } from 'src/app/models/employees';
 import { AppointmentsService } from 'src/app/services/appointments.service';
 import { LocationsService } from 'src/app/services/locations.service';
 import { EmployeesService } from 'src/app/services/employees.service';
+import { CompanyService } from 'src/app/services/company.service';
+import { Company } from 'src/app/models/company';
 
 @Component({
   selector: "app-billings-create-appointments-form",
@@ -77,6 +79,7 @@ export class BillingsCreateAppointmentFormComponent implements OnInit {
   idAppointments: number;
   categoryAppointments: string;
   works_idAppointments:any;
+  company: Company;
 
 
   trackByFn(index, item) {
@@ -93,6 +96,8 @@ export class BillingsCreateAppointmentFormComponent implements OnInit {
     private locationsService: LocationsService,
     private worksService: WorksService,
     private employeesService: EmployeesService,
+    private companyService: CompanyService,
+
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,
     private router: Router,
@@ -145,7 +150,11 @@ export class BillingsCreateAppointmentFormComponent implements OnInit {
     );
 
 
-
+    this.companyService.getId(1).subscribe(
+      (data: Company) => (this.company = data),
+      (error) => (this.error = error)
+    );
+   
     
     const id = this.route.snapshot.paramMap.get("id");
     if (id) {
