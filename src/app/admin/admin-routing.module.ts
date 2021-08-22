@@ -24,6 +24,7 @@ import { ManageLocationsComponent } from './settings/locations/manage-locations/
 import { ManageTypeComponent } from './settings/type/manage-type/manage-type.component';
 import { TypeFormComponent } from './settings/type/type-form/type-form.component';
 import { BillingsCreateAppointmentFormComponent } from './billings/billings-create-appointments/billings-create-appointments-form.component';
+import { CompanyFormComponent } from './settings/company/company-form/company-form.component';
 
 const routes: Routes = [
   {
@@ -73,6 +74,9 @@ const routes: Routes = [
           { path: "settings/employees", component: ManageEmployeesComponent },
           { path: "settings/employees/edit/:id", component: EmployeesFormComponent },
           { path: "settings/employees/create", component: EmployeesFormComponent },
+
+
+          { path: "settings/company", component: CompanyFormComponent },
           
           { path: "pages", component: ManagePagesComponent },
           { path: "", component: AdminDashboardComponent },

@@ -264,64 +264,22 @@
                 </div>
             </p-card>
 
-            <p-card *ngIf="deleteButton">
-                
-                <button pButton pRipple label=" {{'cancel' | translate}} {{'client' | translate}}"  class="p-button p-button-danger p-mr-2"
-(click)="onDelete(id)"></button> 
-            </p-card>
+           
         </div>
 
         <div class="p-col-12 p-md-5">
-        <p-card>
-            <div class="blog-form">
+            <div class="p-field p-grid">
 
-                <div class="p-field p-grid">
+            <div class="p-col-12 p-md-12" *ngFor="let item of items">
 
-                    <div class="p-col-12 p-md-8">
-                        <h3>Elenco Appuntamenti</h3>
-                    </div>
-                    <div class="p-col-12 p-md-4">
-                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']"
-                        class="p-button p-button-primary p-mr-2 pull-right"></button>
-               
-                    </div>
-
-                 
-
-                </div>
+                <p-card>
+        
+           
+                            <a routerLink="{{ item.value }}" routerLinkActive="active"><i class="{{ item.icon }}"></i> {{ item.label
+                              }}</a>
                 
-                <div *ngIf="!appointments || hasNoSelectedAppointments()">
-                    <p-message severity="info"  text="Non ci sono Appuntamenti"></p-message>
-                </div>
-
-                <p-timeline [value]="appointments">
-
-                    <ng-template pTemplate="content" let-appointment>
-
-                       
-                        <p-card>
-                            <div class="p-grid">
-                                <div class="p-col-12 p-md-10">  
-                        <strong>{{appointment.title}}</strong><br>
-                        <i class="pi pi-calendar"></i> {{appointment.date}}
-                                </div>
-                                <div class="p-col-12 p-md-2">  
-                                    <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
-
-                                </div>
-                            </div>
-                    </p-card>
-                    </ng-template>
-                </p-timeline>
-
-                
-              
-
-            </div>
-       
-               
-    </p-card>
-
+                </p-card>
+            </div></div>
 
         </div>
     </div>
