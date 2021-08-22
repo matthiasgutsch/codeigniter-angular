@@ -286,10 +286,9 @@
 
                 </div>
                 
-
-                <div class="suggestion"  *ngIf="!appointments?.length > 0">
-                  Non ci sono Appuntamenti presenti
-                 </div>
+                <div *ngIf="!appointments || hasNoSelectedAppointments()">
+                    <p-message severity="info"  text="Non ci sono Appuntamenti"></p-message>
+                </div>
 
                 <p-timeline [value]="appointments">
 

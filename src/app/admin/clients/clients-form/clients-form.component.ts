@@ -49,7 +49,7 @@ export class ClientsFormComponent implements OnInit {
   selectedCategories: Category;
   selectedDate: Date;
   date: Date;
-  appointments: Appointments;
+  appointments: any = [];
   is_featured = '0';
   trackByFn(index, item) {
     return item.id;
@@ -75,6 +75,7 @@ export class ClientsFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.hasNoSelectedAppointments;
     
     this.clientsService.getAllList().subscribe(
       (data: Clients) => (this.clients = data),
@@ -170,6 +171,11 @@ export class ClientsFormComponent implements OnInit {
   getCategoryItem(category_id: string, id: string) {
     return this.categories.find((item) => item.id === category_id);
   }
+
+  hasNoSelectedAppointments(){
+    return this.appointments.filter(appointment => appointment.title).length===0;
+  }
+
 
   removeImageFile() {
     this.imagePath = "";
