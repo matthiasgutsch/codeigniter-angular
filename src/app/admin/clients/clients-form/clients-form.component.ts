@@ -75,7 +75,6 @@ export class ClientsFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.hasNoSelectedAppointments;
     
     this.clientsService.getAllList().subscribe(
       (data: Clients) => (this.clients = data),
