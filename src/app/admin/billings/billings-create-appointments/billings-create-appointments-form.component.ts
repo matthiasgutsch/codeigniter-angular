@@ -23,10 +23,10 @@ import { LocationsService } from 'src/app/services/locations.service';
 import { EmployeesService } from 'src/app/services/employees.service';
 
 @Component({
-  selector: "app-billings-form",
-  templateUrl: "./billings-form.component.html",
+  selector: "app-billings-create-appointments-form",
+  templateUrl: "./billings-create-appointments-form.component.html",
 })
-export class BillingsFormComponent implements OnInit {
+export class BillingsCreateAppointmentFormComponent implements OnInit {
   @ViewChild("myInput", { static: false }) myInputVariable: ElementRef;
 
   pageTitle: string;
@@ -74,7 +74,11 @@ export class BillingsFormComponent implements OnInit {
   date: Date;
   works_id: any;
   page: string;
-  
+  idAppointments: number;
+  categoryAppointments: string;
+  works_idAppointments:any;
+
+
   trackByFn(index, item) {
     return item.id;
   }
@@ -146,7 +150,7 @@ export class BillingsFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get("id");
     if (id) {
       this.pageTitle = "Modifica Fattura / Ricevuta";
-      this.billingsService.getId(+id).subscribe((res) => {
+      this.appointmentsService.getId(+id).subscribe((res) => {
         this.blogForm.patchValue({
           title: res.title,
           description: res.description.split(','),
@@ -160,6 +164,10 @@ export class BillingsFormComponent implements OnInit {
           id: res.id,
         });
         this.imagePath = res.image;
+        this.idAppointments = res.id;
+        this.categoryAppointments = res.category_id;
+        this.works_idAppointments = res.works_id.split(',');
+
       });
     } else {
       this.pageTitle = "Aggiungi Fattura / Ricevuta";

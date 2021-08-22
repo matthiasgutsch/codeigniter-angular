@@ -84,9 +84,11 @@ export class ManageClientsComponent implements OnInit {
 
   }
 
+
   getCategoryItem(category_id: string, id: string) {
-    return this.comuni.find(item => item.id === category_id);
+    return this.clients.find(item => item.id === category_id);
   }
+
 
   edit(client: Clients) {
     this.client = { ...client };

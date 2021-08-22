@@ -37,7 +37,11 @@
                     <ng-template pTemplate="header">
                         <tr>
 
-                            <th>Data Intervento
+                            <th width="150px">Data
+
+                            </th >
+
+                            <th width="100px">Ora
 
                             </th>
                             <th>Tipo Intervento
@@ -50,7 +54,11 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-appointment>
                         <tr>
-                            <td><strong>{{appointment.date | date:'dd/MM/yyyy HH:mm'}}</strong><br>
+                            <td><strong>{{appointment.date | date:'dd/MM/yyyy'}}</strong><br>
+                                <td>
+                                    
+                                    <p-tag value="{{appointment.date | date: 'HH:mm' }}"  severity="warning"></p-tag> 
+                               
 
                             </td>
                             <td> {{appointment.title}}</td>

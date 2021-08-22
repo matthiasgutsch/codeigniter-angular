@@ -86,20 +86,24 @@
        
     </div>
 </div>
-<p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'30em'}">
+<p-sidebar [(visible)]="productDialog" position="right"  [style]="{width:'50%'}">
     <ng-template pTemplate="content">
-        {{client.id}}
-        <h3>{{client.name}} {{client.surname}}</h3>
-        <hr>
-        <p [innerHTML]="client.description"></p>
-        <hr>
-        <img src="{{client.image}}" width="100px">
-        <p>{{ getCategoryItem(client.category_id)?.name }} {{ getCategoryItem(client.category_id)?.address }}
-            {{ getCategoryItem(client.category_id)?.description }}
-        </p>
-        <p>{{client.is_featured}}</p>
-        <p>{{client.is_active}}</p>
+        <div class="p-col-12 p-md-12">
+        <p-card>
 
+            <strong>{{client.name}} {{client.surname}}</strong>
+
+            <p>{{ client.address }}<br> {{ getCategoryItem(client.category_id)?.zip }} - {{ getCategoryItem(client.category_id)?.city }} ({{ getCategoryItem(client.category_id)?.province }})<br>
+            </p>
+            <hr>
+            <p>{{ getCategoryItem(client.category_id)?.phone }}<br> {{ getCategoryItem(client.category_id)?.email }}</p>
+            <div class="clearfix"></div>
+            <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente" class="p-button p-button-primary p-mr-2" [routerLink]="['/admin/clients/edit', appointment.category_id]"></button>
+   
+
+
+       
+    </p-card>    </div>
     </ng-template>
 
 </p-sidebar>

@@ -62,7 +62,7 @@ export class AppointmentsFormComponent implements OnInit {
   selectedWorks2: SelectItem[];
   locations: any = [];
   location: Locations;
-
+  id: number;
 
   cities: Blog[];
   format1: string = "";
@@ -153,7 +153,8 @@ export class AppointmentsFormComponent implements OnInit {
           id: res.id,
         });
         this.imagePath = res.image;
-        
+        this.id = res.id;
+
 
       });
     } else {
@@ -175,11 +176,6 @@ export class AppointmentsFormComponent implements OnInit {
       image: [""],
       date: ["", Validators.required],
     });
-  }
-
-  gotoDynamic() {
-    //this.router.navigateByUrl('/dynamic', { state: { id:1 , name:'Angular' } });
-    this.router.navigateByUrl("/admin/billings/create", { state: this.blogForm });
   }
 
   getWorksItem(works_id: string, id: string) {
@@ -222,7 +218,6 @@ export class AppointmentsFormComponent implements OnInit {
   get title() {
     return this.blogForm.get("title");
   }
-
 
 
 
