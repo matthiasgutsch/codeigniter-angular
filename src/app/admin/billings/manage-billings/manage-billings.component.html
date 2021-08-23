@@ -47,7 +47,10 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-blog>
                         <tr>
-                            <td><i class="pi pi-calendar"></i> {{blog.date}}
+                            <td>{{blog.id}}</td>
+                            <td>{{blog.appointment_id}}</td>
+
+                            <td><i class="pi pi-calendar"></i> {{blog.created_at}}
                             </td>
 
                             <td>

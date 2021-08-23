@@ -69,6 +69,12 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     );
   }
 
+  getAppointmentId(id: ID) {
+    return this._http.get<T>(this._base + '/id/' + id).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   create(blog) {
     return this._http.post<any>(this._base + '/create', blog).pipe(
       catchError(this.handleError)

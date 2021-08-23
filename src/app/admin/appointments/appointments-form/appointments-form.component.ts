@@ -21,6 +21,7 @@ import { Locations } from 'src/app/models/locations';
 import { LocationsService } from 'src/app/services/locations.service';
 import { Appointments } from 'src/app/models/appointments';
 import { SumPipe } from '../../pipe/sum.pipe';
+import { BillingsService } from 'src/app/services/billings.service';
 
 @Component({
   selector: "app-appointments-form",
@@ -83,6 +84,7 @@ export class AppointmentsFormComponent implements OnInit {
     private appointmentsService: AppointmentsService,
     private messageService: MessageService,
     private clientsService: ClientsService,
+    private billingsService: BillingsService,
     private _location: Location,
     private locationsService: LocationsService,
     private worksService: WorksService,
@@ -178,6 +180,53 @@ export class AppointmentsFormComponent implements OnInit {
     });
   }
 
+
+
+createBilling() {
+  const formData = new FormData();
+
+  formData.append("title", this.blogForm.get("title").value);
+  formData.append("description", this.blogForm.get("description").value);
+  formData.append("appointment_id", this.blogForm.get("id").value);
+  formData.append("is_featured", this.blogForm.get("is_featured").value);
+  formData.append("category_id", this.blogForm.get("category_id").value);
+  formData.append("works_id", this.blogForm.get("works_id").value);
+  formData.append("location_id", this.blogForm.get("location_id").value);
+  formData.append("employee_id", this.blogForm.get("employee_id").value);
+  formData.append("is_active", this.blogForm.get("is_active").value);
+  formData.append("image", this.blogForm.get("image").value);
+  formData.append("date", this.blogForm.get("date").value);
+
+  const id = this.blogForm.get("id").value;
+
+  if (id) {
+    this.billingsService.create(formData).subscribe(
+      (res) => {
+        if (res.status === "error") {
+          this.uploadError = res.message;
+        } else {
+          this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
+          this.router.navigate(['/admin/billings/']);
+        }
+      },
+      (error) => (this.error = error)
+    );
+  } else {
+    this.billingsService.create(formData).subscribe(
+      (res) => {
+        if (res.status === "error") {
+          this.uploadError = res.message;
+        } else {
+          this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
+          this._location.back();
+
+        }
+      },
+      (error) => (this.error = error)
+    );
+  }
+}
+
   getWorksItem(works_id: string, id: string) {
     return this.works.find(item => item.id === works_id);
   }
@@ -190,6 +239,11 @@ export class AppointmentsFormComponent implements OnInit {
     this._location.back();
   }
 
+
+  fillClients(): void {
+    this.client.id = this.selectedClients.id;
+    this.client.name = this.selectedClients.name;
+  }
 
   onSelectedFile(event) {
     if (event.target.files.length > 0) {
@@ -267,4 +321,5 @@ export class AppointmentsFormComponent implements OnInit {
       );
     }
   }
+
 }

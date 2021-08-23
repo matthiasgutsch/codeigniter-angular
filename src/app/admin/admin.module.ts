@@ -66,7 +66,6 @@ import { ManageLocationsComponent } from './settings/locations/manage-locations/
 import { ManageTypeComponent } from './settings/type/manage-type/manage-type.component';
 import { TypeFormComponent } from './settings/type/type-form/type-form.component';
 import { SumPipeModule } from './pipe/sum.pipe';
-import { BillingsCreateAppointmentFormComponent } from './billings/billings-create-appointments/billings-create-appointments-form.component';
 import { CompanyFormComponent } from './settings/company/company-form/company-form.component';
 
 export class I18nModule {
@@ -102,7 +101,6 @@ export class I18nModule {
     AppointmentsFormComponent,
     CategoryFormComponent,
     SettingsComponent,
-    BillingsCreateAppointmentFormComponent,
     EmployeesFormComponent,
     ManageEmployeesComponent
     ],

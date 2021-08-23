@@ -23,7 +23,6 @@ import { LocationsFormComponent } from './settings/locations/locations-form/loca
 import { ManageLocationsComponent } from './settings/locations/manage-locations/manage-locations.component';
 import { ManageTypeComponent } from './settings/type/manage-type/manage-type.component';
 import { TypeFormComponent } from './settings/type/type-form/type-form.component';
-import { BillingsCreateAppointmentFormComponent } from './billings/billings-create-appointments/billings-create-appointments-form.component';
 import { CompanyFormComponent } from './settings/company/company-form/company-form.component';
 
 const routes: Routes = [
@@ -45,9 +44,6 @@ const routes: Routes = [
           { path: "billings", component: ManageBillingsComponent },
           { path: "billings/edit/:id",component: BillingsFormComponent,},
           { path: "billings/create", component: BillingsFormComponent },
-
-          { path: "billings/appointments/edit/:id", component: BillingsCreateAppointmentFormComponent },
-
 
           { path: "clients", component: ManageClientsComponent },
           { path: "clients/create", component: ClientsFormComponent },

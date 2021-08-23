@@ -21,6 +21,11 @@ import { Employees } from 'src/app/models/employees';
 import { AppointmentsService } from 'src/app/services/appointments.service';
 import { LocationsService } from 'src/app/services/locations.service';
 import { EmployeesService } from 'src/app/services/employees.service';
+import { CompanyService } from 'src/app/services/company.service';
+import { Company } from 'src/app/models/company';
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import { Billings } from 'src/app/models/billings';
 
 @Component({
   selector: "app-billings-form",
@@ -38,6 +43,10 @@ export class BillingsFormComponent implements OnInit {
 
   appointments: Appointments;
   appointment: Appointments;
+
+  billing: Billings;
+  billings: Billings;
+
 
   categories: any = [];
   category: Category;
@@ -74,14 +83,20 @@ export class BillingsFormComponent implements OnInit {
   date: Date;
   works_id: any;
   page: string;
-  
+  idAppointments: number;
+  categoryAppointments: string;
+  works_idAppointments:any;
+  company: Company;
+  descriptionAppointments: string;
+  dateAppointments: string;
+
+
   trackByFn(index, item) {
     return item.id;
   }
 
   constructor(
     private fb: FormBuilder,
-    private appointmentsService: AppointmentsService,
     private billingsService: BillingsService,
     private messageService: MessageService,
     private clientsService: ClientsService,
@@ -89,6 +104,8 @@ export class BillingsFormComponent implements OnInit {
     private locationsService: LocationsService,
     private worksService: WorksService,
     private employeesService: EmployeesService,
+    private companyService: CompanyService,
+
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,
     private router: Router,
@@ -100,6 +117,7 @@ export class BillingsFormComponent implements OnInit {
 
     this.typeList = TYPE_LIST;
   }
+  @ViewChild('reportContent') reportContent: ElementRef;
 
   ngOnInit() {
 
@@ -107,11 +125,7 @@ export class BillingsFormComponent implements OnInit {
 
 
     this.getselectedWorks;
-    
-    this.appointmentsService.getAllList().subscribe(
-      (data: Appointments) => (this.appointments = data),
-      (error) => (this.error = error)
-    );
+  
 
     this.categoryService.getAllList().subscribe(
       (data: Category) => (this.categories = data),
@@ -141,7 +155,11 @@ export class BillingsFormComponent implements OnInit {
     );
 
 
-
+    this.companyService.getId(1).subscribe(
+      (data: Company) => (this.company = data),
+      (error) => (this.error = error)
+    );
+   
     
     const id = this.route.snapshot.paramMap.get("id");
     if (id) {
@@ -152,14 +170,18 @@ export class BillingsFormComponent implements OnInit {
           description: res.description.split(','),
           category_id: res.category_id,
           works_id: res.works_id.split(','),
-          employee_id: res.employee_id,
-          location_id: res.location_id,
           is_featured: res.is_featured,
-          is_active: res.is_active,
           date: res.date,
           id: res.id,
         });
         this.imagePath = res.image;
+        this.idAppointments = res.id;
+        this.categoryAppointments = res.category_id;
+        this.descriptionAppointments = res.description;
+        this.dateAppointments = res.date;
+
+        this.works_idAppointments = res.works_id.split(',');
+
       });
     } else {
       this.pageTitle = "Aggiungi Fattura / Ricevuta";
@@ -169,23 +191,47 @@ export class BillingsFormComponent implements OnInit {
       id: [""],
       title: ["", Validators.required],
       description: [""],
-      is_featured: ["0"],
-      category_id: ["", Validators.required],
+      appointment_id: [""],
+      category_id: [""],
       works_id: [""],
-      location_id: [""],
-      employee_id: [""],
-      is_active: ["0"],
-      image: [""],
+      is_featured: ["0"],
       date: ["", Validators.required],
     });
   }
 
+  @ViewChild('content', {static: false}) content: ElementRef;
+
+
+  public downloadPDF() {
+    const doc = new jsPDF();
+    const specialElementHandlers = {
+      '#editor': function (element, renderer) {
+        return true;
+      }
+    };
+
+    const content = this.reportContent.nativeElement;
+
+    doc.fromHTML(content.innerHTML, 15, 15, {
+      'width': 190,
+      'elementHandlers': specialElementHandlers
+    });
+
+    doc.save('asdfghj' + '.pdf');
+
+  }
   getselectedWorks() {
     this.selectedWorks = this.works_id.split(',');
     }
   
 
-    
+    changed(value){
+      this.descriptionAppointments = value.target.value
+    }
+
+    changeTime(value){
+      this.dateAppointments = value.target.value
+    }
     
   onSelectedFile(event) {
     if (event.target.files.length > 0) {
@@ -200,8 +246,8 @@ export class BillingsFormComponent implements OnInit {
     }
   }
 
-  getCategoryItem(category_id: string, id: string) {
-    return this.clients.find((item) => item.id === category_id);
+  getCategoryItem(categoryAppointments: string, id: string) {
+    return this.clients.find((item) => item.id === categoryAppointments);
   }
 
   
@@ -227,39 +273,27 @@ export class BillingsFormComponent implements OnInit {
     const formData = new FormData();
     formData.append("title", this.blogForm.get("title").value);
     formData.append("description", this.blogForm.get("description").value);
-    formData.append("is_featured", this.blogForm.get("is_featured").value);
+    formData.append("appointment_id", this.blogForm.get("appointment_id").value);
     formData.append("category_id", this.blogForm.get("category_id").value);
+    formData.append("is_featured", this.blogForm.get("is_featured").value);
     formData.append("works_id", this.blogForm.get("works_id").value);
-    formData.append("location_id", this.blogForm.get("location_id").value);
-    formData.append("employee_id", this.blogForm.get("employee_id").value);
-    formData.append("is_active", this.blogForm.get("is_active").value);
-    formData.append("image", this.blogForm.get("image").value);
     formData.append("date", this.blogForm.get("date").value);
 
     const id = this.blogForm.get("id").value;
 
     if (id) {
-      this.billingsService.update(formData, +id).subscribe(
-        (res) => {
-          if (res.status == "error") {
-            this.uploadError = res.message;
-          } else {
-            this._location.back();
-          }
-        },
-        (error) => (this.error = error)
-      );
-    } else {
       this.billingsService.create(formData).subscribe(
         (res) => {
           if (res.status === "error") {
             this.uploadError = res.message;
           } else {
-            this._location.back();
+            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
           }
         },
         (error) => (this.error = error)
       );
+    } else {
+      
     }
   }
 }
