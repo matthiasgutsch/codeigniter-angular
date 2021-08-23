@@ -23,6 +23,8 @@ import { LocationsService } from 'src/app/services/locations.service';
 import { EmployeesService } from 'src/app/services/employees.service';
 import { CompanyService } from 'src/app/services/company.service';
 import { Company } from 'src/app/models/company';
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 @Component({
   selector: "app-billings-create-appointments-form",
@@ -115,6 +117,7 @@ export class BillingsCreateAppointmentFormComponent implements OnInit {
 
     this.typeList = TYPE_LIST;
   }
+  @ViewChild('reportContent') reportContent: ElementRef;
 
   ngOnInit() {
 
@@ -207,6 +210,27 @@ export class BillingsCreateAppointmentFormComponent implements OnInit {
     });
   }
 
+  @ViewChild('content', {static: false}) content: ElementRef;
+
+
+  public downloadPDF() {
+    const doc = new jsPDF();
+    const specialElementHandlers = {
+      '#editor': function (element, renderer) {
+        return true;
+      }
+    };
+
+    const content = this.reportContent.nativeElement;
+
+    doc.fromHTML(content.innerHTML, 15, 15, {
+      'width': 190,
+      'elementHandlers': specialElementHandlers
+    });
+
+    doc.save('asdfghj' + '.pdf');
+
+  }
   getselectedWorks() {
     this.selectedWorks = this.works_id.split(',');
     }
