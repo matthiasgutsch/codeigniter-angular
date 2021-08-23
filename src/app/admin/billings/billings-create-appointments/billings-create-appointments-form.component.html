@@ -19,7 +19,7 @@
                             </div>
                             <div class="p-col-12 p-md-6">
 
-                                <button pButton pRipple icon="pi pi-save" label="Crea Fattura" class="p-button pull-right p-button-success p-mr-2"></button>
+                                <button pButton pRipple icon="pi pi-save" disabled label="Crea Fattura" class="p-button pull-right p-button-success p-mr-2"></button>
 
 
                             </div>
@@ -110,7 +110,7 @@
             </div>
 
             <div class="p-col-12 p-md-8">
-                <p-card *ngIf="selectedWorks">
+                <p-card >
                     <div #reportContent>
 
                     <div class="p-fluid">
@@ -132,7 +132,7 @@
 
                             </div>
                       
-                            <div class="p-col-12 p-md-6">
+                            <div class="p-col-12 p-md-6" *ngIf="company">
                                 <h3>Intestatario</h3>
 
                         {{company.name}}<br>
@@ -166,7 +166,7 @@
                                 <h3>Lavorazione</h3>
                             </div>
                         </div>
-                        <div class="p-field p-grid">
+                        <div class="p-field p-grid" *ngIf="selectedWorks">
 
                             <div class="p-col-12 p-md-12">
                                 <table class="works">
@@ -179,7 +179,8 @@
                     </div>
 
                     </div>
-                    <button (click)="downloadPDF()">Export To PDF</button>
+                    <button pButton pRipple icon="pi pi-save" (click)="downloadPDF()" label="Export To PDF" class="p-button p-button-primary p-mr-2"></button>
+
                 </p-card>
 
         
