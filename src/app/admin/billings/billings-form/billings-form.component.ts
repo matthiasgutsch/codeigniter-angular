@@ -165,22 +165,24 @@ export class BillingsFormComponent implements OnInit {
     if (id) {
       this.pageTitle = "Modifica Fattura / Ricevuta";
       this.billingsService.getId(+id).subscribe((res) => {
-        this.blogForm.patchValue({
-          title: res.title,
-          description: res.description.split(','),
-          category_id: res.category_id,
-          works_id: res.works_id.split(','),
-          is_featured: res.is_featured,
-          date: res.date,
-          id: res.id,
-        });
         this.imagePath = res.image;
         this.idAppointments = res.id;
         this.categoryAppointments = res.category_id;
         this.descriptionAppointments = res.description;
         this.dateAppointments = res.date;
-
         this.works_idAppointments = res.works_id.split(',');
+
+        this.blogForm.patchValue({
+          title: res.title,
+          description: res.description.split(','),
+          category_id: res.category_id,
+          appointment_id: res.appointment_id,
+          works_id: res.works_id.split(','),
+          is_featured: res.is_featured,
+          date: res.date,
+          id: res.id,
+        });
+    
 
       });
     } else {
@@ -282,6 +284,18 @@ export class BillingsFormComponent implements OnInit {
     const id = this.blogForm.get("id").value;
 
     if (id) {
+      this.billingsService.update(formData, +id).subscribe(
+        (res) => {
+          if (res.status == "error") {
+            this.uploadError = res.message;
+          } else {
+            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
+
+          }
+        },
+        (error) => (this.error = error)
+      ); 
+    } else {
       this.billingsService.create(formData).subscribe(
         (res) => {
           if (res.status === "error") {
@@ -292,8 +306,6 @@ export class BillingsFormComponent implements OnInit {
         },
         (error) => (this.error = error)
       );
-    } else {
-      
     }
   }
 }
