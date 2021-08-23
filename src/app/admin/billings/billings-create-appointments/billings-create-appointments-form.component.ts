@@ -257,8 +257,8 @@ export class BillingsCreateAppointmentFormComponent implements OnInit {
     }
   }
 
-  getCategoryItem(category_id: string, id: string) {
-    return this.clients.find((item) => item.id === category_id);
+  getCategoryItem(categoryAppointments: string, id: string) {
+    return this.clients.find((item) => item.id === categoryAppointments);
   }
 
   
