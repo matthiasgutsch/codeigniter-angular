@@ -85,6 +85,7 @@ export class BillingsCreateAppointmentFormComponent implements OnInit {
   works_idAppointments:any;
   company: Company;
   descriptionAppointments: string;
+  dateAppointments: string;
 
 
   trackByFn(index, item) {
@@ -181,6 +182,7 @@ export class BillingsCreateAppointmentFormComponent implements OnInit {
         this.idAppointments = res.id;
         this.categoryAppointments = res.category_id;
         this.descriptionAppointments = res.description;
+        this.dateAppointments = res.date;
 
         this.works_idAppointments = res.works_id.split(',');
 
@@ -211,8 +213,11 @@ export class BillingsCreateAppointmentFormComponent implements OnInit {
   
 
     changed(value){
-      console.log("changed", value.target.value);
       this.descriptionAppointments = value.target.value
+    }
+
+    changeTime(value){
+      this.dateAppointments = value.target.value
     }
     
   onSelectedFile(event) {

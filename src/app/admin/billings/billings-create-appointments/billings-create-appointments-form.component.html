@@ -27,50 +27,16 @@
                         <hr class="full">
 
                        
-                                <div class="p-fluid">
-
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Tipo di Impegno<span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-
-                                            <p-dropdown [options]="categories" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedCategories" formControlName="title" optionLabel="name" optionValue="name">
-
-
-                                            </p-dropdown>
-
-
-                                        </div>
-                                    </div>
-                                </div>
+                               
 
                                 <div class="p-fluid">
 
                                     <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Data <span
+                                        <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Data di Emissione<span
                                                 class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
+                                        <div class="p-col-12 p-md-12">
 
-                                            <p-calendar [stepMinute]="15" formControlName="date" dataType="string" [(ngModel)]="selectedDate" hourFormat="24" dateFormat="yy-mm-dd" showTime="true" appendTo="body"></p-calendar>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                <div class="p-fluid">
-
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Perona incaricata <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-
-                                            <p-dropdown [options]="employees" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" formControlName="employee_id" optionLabel="name" optionValue="id">
-
-
-                                            </p-dropdown>
-
+                                            <p-calendar [stepMinute]="15" (onBlur)="changeTime($event)" formControlName="date" dataType="string" [(ngModel)]="selectedDate" dateFormat="yy-mm-dd" appendTo="body"></p-calendar>
 
                                         </div>
                                     </div>
@@ -78,53 +44,23 @@
 
 
                                 <div class="p-fluid">
-
                                     <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Location <span
+                                        <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Tipo di Fattura <span
                                                 class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-
-                                            <p-dropdown [options]="locations" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" formControlName="location_id" optionLabel="name" optionValue="id">
-
-
-                                            </p-dropdown>
-
-
+                                        <div class="p-col-12 p-md-12">
+                                            <input type="radio" formControlName="is_featured" value="1" /> Fattura
+                                            <input type="radio" formControlName="is_featured" value="0" /> Ricevuta
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="p-fluid">
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">In evidenzia <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-                                            <input type="radio" formControlName="is_featured" value="1" /> Si
-                                            <input type="radio" formControlName="is_featured" value="0" /> No
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="p-fluid">
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Attivo <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-                                            <input type="radio" formControlName="is_active" value="1" /> Yes
-                                            <input type="radio" formControlName="is_active" value="0" /> No
-                                        </div>
-                                    </div>
-                                </div>
-
-
 
                                 
 
                                 <div class="p-fluid">
                                     <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Nota <span
+                                        <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Nota <span
                                                 class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
+                                        <div class="p-col-12 p-md-12">
 
                                            
 
@@ -140,9 +76,9 @@
 
                                 <div class="p-fluid">
                                     <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Tipo di Lavorazione<span
+                                        <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Tipo di Lavorazione<span
                                                 class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
+                                        <div class="p-col-12 p-md-12">
 
                                             <p-multiSelect [options]="works" display="chip" formControlName="works_id" [(ngModel)]="works_idAppointments" optionLabel="name" optionValue="id">
                                             </p-multiSelect>                                           
@@ -181,7 +117,7 @@
 
                             <div class="p-col-12 p-md-12">
                                 <h1>Fattura</h1>
-
+                                <h3>{{dateAppointments}}</h3>
                             </div>
                         </div>
                         <div class="p-field p-grid">
