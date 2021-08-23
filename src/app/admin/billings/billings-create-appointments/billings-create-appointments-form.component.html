@@ -14,12 +14,12 @@
                     <div class="blog-form">
 
                         <div class="p-field p-grid">
-                            <div class="p-col-12 p-md-9">
-                                <h3>{{pageTitle}}</h3>
+                            <div class="p-col-12 p-md-6">
+                                <h3>Impostazione Fattura</h3>
                             </div>
-                            <div class="p-col-12 p-md-3">
+                            <div class="p-col-12 p-md-6">
 
-                                <button pButton pRipple icon="pi pi-save" label="Crea Fattura" class="p-button pull-right p-button-success p-mr-2" [disabled]="!blogForm.valid"></button>
+                                <button pButton pRipple icon="pi pi-save" label="Crea Fattura" class="p-button pull-right p-button-success p-mr-2"></button>
 
 
                             </div>
@@ -118,24 +118,7 @@
 
 
 
-                                <div class="p-fluid">
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Cliente <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-                                            <p-dropdown [options]="clients" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="categoryAppointments" formControlName="category_id" optionLabel="name" optionValue="id">
-                                                <ng-template let-option pTemplate="item">
-
-                                                    <strong>{{option.name}} {{option.surname}}</strong><br>
-                                                    <span>{{option.address}} - {{option.zip}} {{option.city}}</span>
-
-                                                </ng-template>
-
-                                            </p-dropdown>
-
-                                        </div>
-                                    </div>
-                                </div>
+                                
 
                                 <div class="p-fluid">
                                     <div class="p-field p-grid">
@@ -145,7 +128,7 @@
 
                                            
 
-                                            <textarea pInputTextarea formControlName="description" ></textarea>
+                                            <textarea pInputTextarea formControlName="description" (keyup)="changed($event)" ></textarea>
 
 
 
@@ -229,6 +212,17 @@
 
                     <hr class="full">
                     <div class="p-fluid">
+                        <div class="p-field p-grid">
+
+
+                        <div class="p-col-12 p-md-12">
+                            <h3>Descrizione</h3>
+
+                            {{descriptionAppointments}}
+
+                        </div>
+                    </div>
+
                         <div class="p-field p-grid">
 
                             <div class="p-col-12 p-md-12">

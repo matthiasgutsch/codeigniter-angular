@@ -84,6 +84,7 @@ export class BillingsCreateAppointmentFormComponent implements OnInit {
   categoryAppointments: string;
   works_idAppointments:any;
   company: Company;
+  descriptionAppointments: string;
 
 
   trackByFn(index, item) {
@@ -179,6 +180,8 @@ export class BillingsCreateAppointmentFormComponent implements OnInit {
         this.imagePath = res.image;
         this.idAppointments = res.id;
         this.categoryAppointments = res.category_id;
+        this.descriptionAppointments = res.description;
+
         this.works_idAppointments = res.works_id.split(',');
 
       });
@@ -207,7 +210,10 @@ export class BillingsCreateAppointmentFormComponent implements OnInit {
     }
   
 
-    
+    changed(value){
+      console.log("changed", value.target.value);
+      this.descriptionAppointments = value.target.value
+    }
     
   onSelectedFile(event) {
     if (event.target.files.length > 0) {
