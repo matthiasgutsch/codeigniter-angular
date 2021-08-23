@@ -41,6 +41,10 @@ export class BillingsCreateAppointmentFormComponent implements OnInit {
   appointments: Appointments;
   appointment: Appointments;
 
+  billing: Appointments;
+  billings: Appointments;
+
+
   categories: any = [];
   category: Category;
 
@@ -186,6 +190,7 @@ export class BillingsCreateAppointmentFormComponent implements OnInit {
       id: [""],
       title: ["", Validators.required],
       description: [""],
+      appointment_id: ["", Validators.required],
       is_featured: ["0"],
       category_id: ["", Validators.required],
       works_id: [""],
@@ -244,6 +249,7 @@ export class BillingsCreateAppointmentFormComponent implements OnInit {
     const formData = new FormData();
     formData.append("title", this.blogForm.get("title").value);
     formData.append("description", this.blogForm.get("description").value);
+    formData.append("appointment_id", this.blogForm.get("appointment_id").value);
     formData.append("is_featured", this.blogForm.get("is_featured").value);
     formData.append("category_id", this.blogForm.get("category_id").value);
     formData.append("works_id", this.blogForm.get("works_id").value);

@@ -197,6 +197,41 @@
                         <div class="p-field p-grid">
 
                             <div class="p-col-12 p-md-12">
+                                <h1>Fattura</h1>
+
+                            </div>
+                        </div>
+                        <div class="p-field p-grid">
+
+                            <div class="p-col-12 p-md-6">
+                                <h3>Cliente</h3>
+
+                                {{ getCategoryItem(categoryAppointments)?.name }}<br>{{ getCategoryItem(categoryAppointments)?.zip }} - {{ getCategoryItem(categoryAppointments)?.city }} <br> {{ getCategoryItem(categoryAppointments)?.phone }}
+
+
+
+                            </div>
+                      
+                            <div class="p-col-12 p-md-6">
+                                <h3>Intestatario</h3>
+
+                            {{company.name}}<br>
+                        {{company.address}}<br>
+                        {{company.zip}} - {{company.city}}<br>
+                        {{company.fiscalcode}}<br>
+                        {{company.fiscalnumber}}<br>
+
+                        </div>
+                        </div>
+                        
+
+                    </div>
+
+                    <hr class="full">
+                    <div class="p-fluid">
+                        <div class="p-field p-grid">
+
+                            <div class="p-col-12 p-md-12">
                                 <h3>Lavorazione</h3>
                             </div>
                         </div>
@@ -212,27 +247,7 @@
                         </div>
                     </div>
 
-                    <div class="p-fluid">
-                        <div class="p-field p-grid">
-
-                            <div class="p-col-12 p-md-12">
-                                <h3>Cliente</h3>
-                            </div>
-                        </div>
-                        <div class="p-field p-grid">
-
-                            <div class="p-col-12 p-md-6">
-                                {{ getCategoryItem(categoryAppointments)?.name }}<br>{{ getCategoryItem(categoryAppointments)?.zip }} - {{ getCategoryItem(categoryAppointments)?.city }} <br> {{ getCategoryItem(categoryAppointments)?.phone }}
-
-
-
-                            </div>
-                      
-
-                        </div>
-                        
-                        {{company.name}}
-                    </div>
+                    
 
                 </p-card>
 
