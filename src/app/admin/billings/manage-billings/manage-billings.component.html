@@ -36,21 +36,20 @@
                     <ng-template pTemplate="header">
                         <tr>
 
-                            <th>Data Intervento
+                            <th width="80px">Numero
 
                             </th>
-                            <th>Utente</th>
-                            <th></th>
-                            <th></th>
+                            <th>Data emissione</th>
+                            <th>Cliente</th>
+                            <th>Residente</th>
 
                             <th>Tipo di Intervento</th>
-                            <th>Action</th>
+                            <th></th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-blog>
                         <tr>
                             <td>{{blog.id}}</td>
-                            <td>{{blog.appointment_id}}</td>
 
                             <td><i class="pi pi-calendar"></i> {{blog.created_at}}
                             </td>
@@ -61,7 +60,9 @@
                                         getCategoryItem(blog.category_id)?.name }}</span></a>
                             </td>
 
-
+                            <td>{{
+                                getCategoryItem(blog.category_id)?.zip }} - {{
+                                getCategoryItem(blog.category_id)?.city }}</td>
                             <td>{{blog.title}}</td>
 
                             <td class="action">
