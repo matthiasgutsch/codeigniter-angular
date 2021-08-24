@@ -2,7 +2,6 @@
     <div class="dash-title">
     </div>
 </div>
-<form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
 
 
     <div class="p-fluid">
@@ -10,6 +9,7 @@
             <div class="p-col-12 p-md-4">
 
                 <p-card>
+                    <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
 
                     <div class="blog-form">
 
@@ -115,7 +115,7 @@
                                     <label class="col-md-3"></label>
                                     <div class="col-md-9">
                                         <input type="hidden" formControlName="id">
-                                        <input type="text" value="{{idAppointments}}" *ngIf="idAppointments" formControlName="appointment_id">
+                                        <input type="hidden" value="{{idAppointments}}" *ngIf="idAppointments" formControlName="appointment_id">
 
 
                                     </div>
@@ -124,6 +124,8 @@
                                 
               
                     </div>
+                </form>
+
                 </p-card>
             </div>
 
@@ -208,5 +210,4 @@
         </div>
 
     </div>
-</form>
 <p-toast key="myKey1"></p-toast>
