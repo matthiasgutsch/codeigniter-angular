@@ -170,6 +170,7 @@ export class BillingsFormComponent implements OnInit {
         this.categoryAppointments = res.category_id;
         this.descriptionAppointments = res.description;
         this.dateAppointments = res.date;
+        
         this.works_idAppointments = res.works_id.split(',');
 
         this.blogForm.patchValue({
@@ -191,7 +192,7 @@ export class BillingsFormComponent implements OnInit {
 
     this.blogForm = this.fb.group({
       id: [""],
-      title: ["", Validators.required],
+      title: [""],
       description: [""],
       appointment_id: [""],
       category_id: [""],
@@ -302,6 +303,8 @@ export class BillingsFormComponent implements OnInit {
             this.uploadError = res.message;
           } else {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
+            this._location.back();
+
           }
         },
         (error) => (this.error = error)
