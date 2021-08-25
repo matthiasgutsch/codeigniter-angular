@@ -15,6 +15,8 @@ import { Comuni } from 'src/app/models/comuni';
 import {Location} from '@angular/common';
 import { AppointmentsService } from 'src/app/services/appointments.service';
 import { Appointments } from 'src/app/models/appointments';
+import { BillingsService } from 'src/app/services/billings.service';
+import { Billings } from 'src/app/models/billings';
 
 
 
@@ -52,6 +54,9 @@ export class ClientsFormComponent implements OnInit {
   appointments: any = [];
   is_featured = '0';
   deleteButton: boolean;
+  billings: Billings;
+  billing: Billings;
+
   trackByFn(index, item) {
     return item.id;
   }
@@ -64,6 +69,8 @@ export class ClientsFormComponent implements OnInit {
     private comuniService: ComuniService,
     private _location: Location,
     private appointmentsService: AppointmentsService,
+    private billingsService: BillingsService,
+
     private confirmationService: ConfirmationService,
     private router: Router,
     private route: ActivatedRoute
@@ -99,6 +106,11 @@ export class ClientsFormComponent implements OnInit {
       this.deleteButton = true;
       this.appointmentsService.find_client(+id).subscribe(
         (data: Appointments) => (this.appointments = data),
+        (error) => (this.error = error)
+      );
+
+      this.billingsService.find_billing_client(+id).subscribe(
+        (data: Billings) => (this.billings = data),
         (error) => (this.error = error)
       );
 
