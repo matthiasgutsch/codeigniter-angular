@@ -57,11 +57,20 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     );
   }
 
+
+  
   find_billing_client(id: ID) {
     return this._http.get<T>(this._base + '/billings_by_client/' + id).pipe(
       catchError(this.handleError)
     );
   }
+
+  find_billings_by_appointments(id: ID) {
+    return this._http.get<T>(this._base + '/billings_by_appointments/' + id).pipe(
+      catchError(this.handleError)
+    );
+  }
+  
 
   find(id: ID) {
     return this._http.get<T>(this._base + 'appointments/' + id).pipe(

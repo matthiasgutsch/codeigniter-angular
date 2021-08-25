@@ -211,6 +211,13 @@
                                     </div>
                                 </div>
                             </p-tabPanel>
+
+
+                        <p-tabPanel header="Fattura">
+                            <div *ngFor="let item of billings" >
+                                {{item.id}}
+                            </div>
+                        </p-tabPanel>
                         </p-tabView>
 
 

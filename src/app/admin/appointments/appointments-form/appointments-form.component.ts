@@ -22,6 +22,7 @@ import { LocationsService } from 'src/app/services/locations.service';
 import { Appointments } from 'src/app/models/appointments';
 import { SumPipe } from '../../pipe/sum.pipe';
 import { BillingsService } from 'src/app/services/billings.service';
+import { Billings } from 'src/app/models/billings';
 
 @Component({
   selector: "app-appointments-form",
@@ -74,6 +75,7 @@ export class AppointmentsFormComponent implements OnInit {
   selectedDate: Date;
   date: Date;
   works_id: any;
+  billings: Billings;
 
   trackByFn(index, item) {
     return item.id;
@@ -137,7 +139,17 @@ export class AppointmentsFormComponent implements OnInit {
       (error) => (this.error = error)
     );
 
+
+  
+
     const id = this.route.snapshot.paramMap.get("id");
+
+    this.billingsService.find_billings_by_appointments(+id).subscribe(
+      (data: Billings) => (this.billings = data),
+      (error) => (this.error = error)
+    );
+
+
     if (id) {
       this.pageTitle = "Modifica Appuntamento";
       
