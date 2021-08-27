@@ -76,6 +76,12 @@ export class AppointmentsFormComponent implements OnInit {
   date: Date;
   works_id: any;
   billings: Billings;
+  public dataValues: object;
+
+  public element: Billings;
+  billings_id: any;
+  appointmentId: string;
+
 
   trackByFn(index, item) {
     return item.id;
@@ -104,9 +110,9 @@ export class AppointmentsFormComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.getselectedWorks;
 
+    
     this.appointmentsService.getAllList().subscribe(
       (data: Appointments) => (this.appointments = data),
       (error) => (this.error = error)
@@ -144,6 +150,7 @@ export class AppointmentsFormComponent implements OnInit {
 
     const id = this.route.snapshot.paramMap.get("id");
 
+    
     this.billingsService.find_billings_by_appointments(+id).subscribe(
       (data: Billings) => (this.billings = data),
       (error) => (this.error = error)
@@ -193,6 +200,7 @@ export class AppointmentsFormComponent implements OnInit {
   }
 
 
+  
 
 createBilling() {
   const formData = new FormData();
@@ -218,6 +226,10 @@ createBilling() {
           this.uploadError = res.message;
         } else {
           this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
+
+          this.billingsService.find_billings_by_appointment_id(+id).subscribe((data: Billings) => this.dataValues = data);
+          console.log(this.dataValues);
+
           this.router.navigate(['/admin/billings/']);
         }
       },

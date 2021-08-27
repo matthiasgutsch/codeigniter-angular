@@ -93,12 +93,12 @@
 
             <strong>{{client.name}} {{client.surname}}</strong>
 
-            <p>{{ client.address }}<br> {{ getCategoryItem(client.category_id)?.zip }} - {{ getCategoryItem(client.category_id)?.city }} ({{ getCategoryItem(client.category_id)?.province }})<br>
+            <p>{{ client.address }}<br> {{ client.zip }} - {{ client.city }} ({{ client.province }})<br>
             </p>
             <hr>
-            <p>{{ getCategoryItem(client.category_id)?.phone }}<br> {{ getCategoryItem(client.category_id)?.email }}</p>
+            <p>{{ client.phone }}<br> {{ client.email }}</p>
             <div class="clearfix"></div>
-            <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente" class="p-button p-button-primary p-mr-2" [routerLink]="['/admin/clients/edit', appointment.category_id]"></button>
+            <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente" class="p-button p-button-primary p-mr-2" [routerLink]="['/admin/clients/edit', client.id]"></button>
    
 
 
