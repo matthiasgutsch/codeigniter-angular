@@ -37,9 +37,9 @@ export class AppointmentsFormComponent implements OnInit {
   imagePath: any;
   blogs: Blog;
   blog: Blog;
-
+  id: number
   appointments: Appointments;
-  appointment: Appointments;
+  appointment: any;
 
   categories: any = [];
   category: Category;
@@ -64,8 +64,7 @@ export class AppointmentsFormComponent implements OnInit {
   selectedWorks2: SelectItem[];
   locations: any = [];
   location: Locations;
-  id: number;
-
+  
   cities: Blog[];
   format1: string = "";
   format2: string = "";
@@ -75,8 +74,9 @@ export class AppointmentsFormComponent implements OnInit {
   selectedDate: Date;
   date: Date;
   works_id: any;
-  billings: Billings;
+  billings: any = [];
   public dataValues: object;
+  pages: any;
 
   public element: Billings;
   billings_id: any;
@@ -111,7 +111,6 @@ export class AppointmentsFormComponent implements OnInit {
 
   ngOnInit() {
     this.getselectedWorks;
-
     
     this.appointmentsService.getAllList().subscribe(
       (data: Appointments) => (this.appointments = data),
@@ -150,6 +149,31 @@ export class AppointmentsFormComponent implements OnInit {
 
     const id = this.route.snapshot.paramMap.get("id");
 
+
+    
+
+    this.billingsService.find_billings_by_appointments(+id).subscribe(
+      (data: Billings) => (this.billings = data),
+      (error) => (this.error = error)
+    );
+
+
+    this.billingsService
+      .find_billings_by_appointment_id(+id)
+      .subscribe(data => {
+        this.pages = data[0];
+        console.log(data[0])
+      }, err => {
+    });
+
+
+    this.appointmentsService
+      .getId(+id)
+      .subscribe(data => {
+        this.appointment = data;
+        console.log(data)
+      }, err => {
+    });
     
     this.billingsService.find_billings_by_appointments(+id).subscribe(
       (data: Billings) => (this.billings = data),
@@ -199,8 +223,9 @@ export class AppointmentsFormComponent implements OnInit {
     });
   }
 
-
   
+
+
 
 createBilling() {
   const formData = new FormData();
@@ -219,37 +244,35 @@ createBilling() {
 
   const id = this.blogForm.get("id").value;
 
-  if (id) {
+  this.billingsService
+      .find_billings_by_appointment_id(+id)
+      .subscribe(data => {
+        this.pages = data[0];
+        return data.id;
+        console.log(data[0])
+      }, err => {
+    });
+
+  if (id ) {
     this.billingsService.create(formData).subscribe(
       (res) => {
         if (res.status === "error") {
           this.uploadError = res.message;
         } else {
+          const currentUrl = this.router.url;
           this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
-
-          this.billingsService.find_billings_by_appointment_id(+id).subscribe((data: Billings) => this.dataValues = data);
-          console.log(this.dataValues);
-
-          this.router.navigate(['/admin/billings/']);
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+            this.router.navigate([currentUrl]);
+        });
         }
       },
       (error) => (this.error = error)
     );
   } else {
-    this.billingsService.create(formData).subscribe(
-      (res) => {
-        if (res.status === "error") {
-          this.uploadError = res.message;
-        } else {
-          this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
-          this._location.back();
-
-        }
-      },
-      (error) => (this.error = error)
-    );
+    this.router.navigate(['/admin/billings/edit/', this.pages.id]);
   }
 }
+
 
   getWorksItem(works_id: string, id: string) {
     return this.works.find(item => item.id === works_id);
@@ -281,6 +304,9 @@ createBilling() {
       };
     }
   }
+
+
+
 
   getCategoryItem(category_id: string, id: string) {
     return this.clients.find((item) => item.id === category_id);

@@ -244,11 +244,16 @@
                     </div>
                 </form>
                 </p-card>
-                <p-card>
-                    <button pButton pRipple icon="pi pi-save" label="Crea Fattura / Ricevuta" (click)="createBilling()" class="p-button p-button-primary p-mr-2"></button>
-                </p-card>
-            </div>
 
+                <p-card *ngIf="pages" >    
+                    <button pButton pRipple icon="pi pi-save" label="Visualizza Fattura / Ricevuta" [routerLink]="['/admin/billings/edit', pages.id]" class="p-button p-button-primary p-mr-2"></button>
+                 </p-card> 
+
+                <p-card *ngIf="!pages" >           
+                    <button pButton pRipple icon="pi pi-save" label="Crea Fattura / Ricevuta"  (click)="createBilling()" class="p-button p-button-primary p-mr-2"></button>
+                 </p-card> 
+            </div>
+           
             <div class="p-col-12 p-md-4">
                 <p-card *ngIf="selectedWorks">
 

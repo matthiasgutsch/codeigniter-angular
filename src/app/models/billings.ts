@@ -13,5 +13,5 @@ export class Billings {
     created_at: Date;
     date: string;
     files: string;
-    appointment_id: string;
+    appointment_id: number;
 }
