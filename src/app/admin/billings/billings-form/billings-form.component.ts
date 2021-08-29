@@ -222,7 +222,7 @@ export class BillingsFormComponent implements OnInit {
       'elementHandlers': specialElementHandlers
     });
 
-    doc.save('Fattura-' + this.dateAppointments + '.pdf');
+    doc.save('Fattura-' + this.idAppointments + '.pdf');
 
   }
   getselectedWorks() {
