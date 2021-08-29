@@ -89,6 +89,7 @@ export class BillingsFormComponent implements OnInit {
   company: Company;
   descriptionAppointments: string;
   dateAppointments: string;
+  numberAppointments: number;
 
 
   trackByFn(index, item) {
@@ -170,7 +171,8 @@ export class BillingsFormComponent implements OnInit {
         this.categoryAppointments = res.category_id;
         this.descriptionAppointments = res.description;
         this.dateAppointments = res.date;
-        
+        this.numberAppointments = res.appointment_id;
+
         this.works_idAppointments = res.works_id.split(',');
 
         this.blogForm.patchValue({
