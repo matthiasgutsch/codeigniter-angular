@@ -263,6 +263,7 @@ createBilling() {
           this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
           this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
             this.router.navigate([currentUrl]);
+            
         });
         }
       },
