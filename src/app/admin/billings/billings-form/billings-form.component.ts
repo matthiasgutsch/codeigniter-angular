@@ -207,7 +207,7 @@ export class BillingsFormComponent implements OnInit {
   @ViewChild('content', {static: false}) content: ElementRef;
 
 
-  public downloadPDF(id: Billings) {
+  public downloadPDF() {
     const doc = new jsPDF();
     const specialElementHandlers = {
       '#editor': function (element, renderer) {
