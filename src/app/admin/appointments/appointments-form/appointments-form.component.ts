@@ -254,21 +254,30 @@ createBilling() {
     });
 
   if (id ) {
-    this.billingsService.create(formData).subscribe(
-      (res) => {
-        if (res.status === "error") {
-          this.uploadError = res.message;
-        } else {
-          const currentUrl = this.router.url;
-          this.messageService.add({ key: 'myKey1', severity: 'info', summary: 'Attenzione', detail: 'Futtura / Ricevuta creata con successo' });
-          this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-            this.router.navigate([currentUrl]);
-            
-        });
-        }
+    this.confirmationService.confirm({
+      message: 'Vorresti creare la Fattua/ Ricevuta ?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.billingsService.create(formData).subscribe(
+          (res) => {
+            if (res.status === "error") {
+              this.uploadError = res.message;
+            } else {
+              const currentUrl = this.router.url;
+    
+              
+              this.messageService.add({ key: 'myKey1', severity: 'info', summary: 'Attenzione', detail: 'Futtura / Ricevuta creata con successo' });
+              this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+                this.router.navigate([currentUrl]);
+                
+            });
+            }
+          },
+          error => this.error = error
+        );
       },
-      (error) => (this.error = error)
-    );
+    });
   } else {
     this.router.navigate(['/admin/billings/edit/', this.pages.id]);
   }

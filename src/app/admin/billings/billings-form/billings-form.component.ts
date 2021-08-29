@@ -207,7 +207,7 @@ export class BillingsFormComponent implements OnInit {
   @ViewChild('content', {static: false}) content: ElementRef;
 
 
-  public downloadPDF() {
+  public downloadPDF(id: Billings) {
     const doc = new jsPDF();
     const specialElementHandlers = {
       '#editor': function (element, renderer) {
@@ -222,7 +222,7 @@ export class BillingsFormComponent implements OnInit {
       'elementHandlers': specialElementHandlers
     });
 
-    doc.save('asdfghj' + '.pdf');
+    doc.save('Fattura-' + this.dateAppointments + '.pdf');
 
   }
   getselectedWorks() {
