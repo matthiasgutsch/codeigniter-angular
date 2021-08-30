@@ -106,6 +106,7 @@ export class AdminDashboardComponent implements OnInit {
         editable: true,
         eventLimit: false,
         timeFormat: 'HH:mm', 
+        weekNumbers: true,
         header: {
           right: 'prev,next',
           left: 'title',
