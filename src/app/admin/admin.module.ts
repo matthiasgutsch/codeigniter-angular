@@ -67,6 +67,8 @@ import { ManageTypeComponent } from './settings/type/manage-type/manage-type.com
 import { TypeFormComponent } from './settings/type/type-form/type-form.component';
 import { SumPipeModule } from './pipe/sum.pipe';
 import { CompanyFormComponent } from './settings/company/company-form/company-form.component';
+import { ProductsFormComponent } from './products/products-form/products-form.component';
+import { ManageProductsComponent } from './products/manage-products/manage-products.component';
 
 export class I18nModule {
   constructor(translate: TranslateService) {
@@ -101,6 +103,8 @@ export class I18nModule {
     AppointmentsFormComponent,
     CategoryFormComponent,
     SettingsComponent,
+    ProductsFormComponent,
+    ManageProductsComponent,
     EmployeesFormComponent,
     ManageEmployeesComponent
     ],

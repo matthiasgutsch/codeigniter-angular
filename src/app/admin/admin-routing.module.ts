@@ -24,6 +24,8 @@ import { ManageLocationsComponent } from './settings/locations/manage-locations/
 import { ManageTypeComponent } from './settings/type/manage-type/manage-type.component';
 import { TypeFormComponent } from './settings/type/type-form/type-form.component';
 import { CompanyFormComponent } from './settings/company/company-form/company-form.component';
+import { ManageProductsComponent } from './products/manage-products/manage-products.component';
+import { ProductsFormComponent } from './products/products-form/products-form.component';
 
 const routes: Routes = [
   {
@@ -35,7 +37,9 @@ const routes: Routes = [
         path: "",
         children: [
 
-
+          { path: "products", component: ManageProductsComponent },
+          { path: "products/create", component: ProductsFormComponent },
+          { path: "products/edit/:id",component: ProductsFormComponent,},
 
           { path: "appointments", component: ManageAppointmentsComponent },
           { path: "appointments/create", component: AppointmentsFormComponent },

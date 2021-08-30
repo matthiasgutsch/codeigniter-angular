@@ -13,9 +13,11 @@
 }
 
 
-
+.p-datatable .p-datatable-tbody > tr {
+  color: @text-color;
+}
 .p-button {
-    color: #222;
+    color: @white !important;
     background: #ddd;
     border: 1px solid #ddd;
     padding: 0.5rem 1rem;
@@ -48,10 +50,27 @@
   }
   
   .p-button.p-button-danger, .p-buttonset.p-button-danger > .p-button, .p-splitbutton.p-button-danger > .p-button {
-    color: @white;
+    color: @white !important;
     background: @red;
     border-radius: @radius;
     border: 1px solid @red !important;
+
+    &:hover {
+        color: @ness_color_2;
+        background: darken(@red,20%) !important;
+        border-radius: @radius;
+      
+        border: 1px solid @red !important;
+    }
+
+  }
+
+
+  .p-button.p-button-blue {
+    color: @white !important;
+    background: #5c6b84;
+    border-radius: @radius;
+    border: 1px solid #5c6b84 !important;
 
     &:hover {
         color: @ness_color_2;
@@ -80,7 +99,7 @@
   
   
   .p-button.p-button-primary, .p-buttonset.p-button-primary > .p-button, .p-splitbutton.p-button-primary > .p-button {
-    color: @white;
+    color: @white !important;
     background: @ness_color_3;
     border: 1px solid @ness_color_3 !important;
     border-radius: @radius;
