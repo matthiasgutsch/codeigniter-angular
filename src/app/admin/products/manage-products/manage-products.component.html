@@ -11,17 +11,17 @@
 
                 <div class="p-field p-grid">
                     <div class="p-col-12 p-md-9">
-                        <h3>{{'appointments.main.title' | translate}}</h3>
+                        <h3>{{'products.main.title' | translate}}</h3>
                     </div>
                     <div class="p-col-12 p-md-3">
-                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']" label="{{'add' | translate}}" class="p-button p-button-primary pull-right"></button>
+                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/products/create']" label="{{'add' | translate}}" class="p-button p-button-primary pull-right"></button>
                         <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()" class="p-button-blue p-mr-2 pull-right" pTooltip="PDF" tooltipPosition="bottom"></button>
 
                     </div>
                 </div>
                 <hr class="full">
 
-                <p-table #dt1 [value]="appointments" [pageLinks]="3" [responsive]="true" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
+                <p-table #dt1 [value]="products" [pageLinks]="3" [responsive]="true" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
                     <ng-template pTemplate="caption">
                         <div class="p-d-flex">
                             <span class="p-input-icon-left p-ml-auto">
@@ -71,7 +71,7 @@
 
 
                             <td class="action">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/products/edit', appointment.id]"></button>
                                 <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2" (click)="editProduct(appointment)"></button>
                                 <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(appointment.id)"></button>
 
@@ -113,7 +113,7 @@
 
 
         </div>
-                <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
+                <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/products/edit', appointment.id]"></button>
 
             </p-card>
         </div>

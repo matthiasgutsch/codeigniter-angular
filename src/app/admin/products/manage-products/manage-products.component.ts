@@ -19,6 +19,8 @@ import { Appointments } from 'src/app/models/appointments';
 import {formatDate} from '@angular/common';
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import { ProductsService } from 'src/app/services/products.service';
+import { Products } from 'src/app/models/products';
 
 @Component({
   selector: 'app-manage-products',
@@ -41,8 +43,8 @@ export class ManageProductsComponent implements OnInit {
   employees: any = [];
   employee: Employees;
 
-  appointments: any = [];
-  appointment: Appointments;
+  products: any = [];
+  product: Products;
   date: Date;
   categories: any = [];
   category: Category;
@@ -67,7 +69,7 @@ trackByFn(index, item) {
 
   constructor(
     private clientsService: ClientsService,
-    private appointmentsService: AppointmentsService,
+    private productsService: ProductsService,
     private worksService: WorksService,
     private locationsService: LocationsService, 
     private messageService: MessageService,
@@ -94,8 +96,8 @@ trackByFn(index, item) {
     }));
 
 
-    this.appointmentsService.getAllList().subscribe(
-      (data: Appointments) => this.appointments = data,
+    this.productsService.getAllList().subscribe(
+      (data: Products) => this.products = data,
       error => this.error = error
     );
 
@@ -163,9 +165,9 @@ trackByFn(index, item) {
   }
   
   
-  editProduct(appointment: Appointments) {
-    this.appointment = {...appointment};
-    this.selectedWorks = this.appointment.works_id.split(',');
+  editProduct(product: Products) {
+    this.product = {...this.product};
+    this.selectedWorks = this.product.works_id.split(',');
     this.productDialog = true;
 }
 
@@ -173,7 +175,7 @@ trackByFn(index, item) {
 exportPdf() {
   // const doc = new jsPDF();
   const doc = new jsPDF('l','pt','A4');
-  doc['autoTable'](this.exportColumns, this.appointments);
+  doc['autoTable'](this.exportColumns, this.products);
   // doc.autoTable(this.exportColumns, this.products);
   doc.save("appointments.pdf");
 }
@@ -190,7 +192,7 @@ hideDialog() {
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.appointmentsService.delete(+id).subscribe(
+        this.productsService.delete(+id).subscribe(
           res => {
             console.log(res);
             this.ngOnInit();

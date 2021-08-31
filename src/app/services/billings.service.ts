@@ -16,7 +16,29 @@ export class BillingsService extends CrudService<Billings, number> {
     super(_http, `${environment.baseUrl}/billings`);
   }
 
+
+
+
+  find_billing_client(id: number) {
+    return this._http.get<Billings>(this._base + '/billings_by_client/' + id)
+  }
+
+  find_billings_by_appointments(id: number) {
+    return this._http.get<Billings>(this._base + '/billings_by_appointments/' + id)
+  }
+  
+  find_billings_by_appointment_id(id: number) {
+    return this._http.get<Billings>(this._base + '/billings_by_appointment_id/' + id)
+  }
+  
+
+  
+
+
+
+
 }
+
 
 
 

@@ -59,25 +59,6 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
 
 
   
-  find_billing_client(id: ID) {
-    return this._http.get<T>(this._base + '/billings_by_client/' + id).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  find_billings_by_appointments(id: ID) {
-    return this._http.get<T>(this._base + '/billings_by_appointments/' + id).pipe(
-      catchError(this.handleError)
-    );
-  }
-  
-  find_billings_by_appointment_id(id: ID) {
-    return this._http.get<T>(this._base + '/billings_by_appointment_id/' + id).pipe(
-      catchError(this.handleError)
-    );
-  }
-  
-
   
 
   find(id: ID) {
@@ -116,19 +97,7 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     );
   }
 
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error.message);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong.
-      console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`);
-    }
-    // return an observable with a user-facing error message
-    return throwError('Something bad happened. Please try again later.');
-  }
-
+ 
   save(t: T): Observable<T> {
     return this._http.post<T>(this._base, t);
   }
@@ -149,4 +118,19 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     return this._http.delete<T>(this._base + '/' + id);
   }
 
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+      console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`);
+    }
+    // return an observable with a user-facing error message
+    return throwError('Something bad happened. Please try again later.');
+  }
+
+  
 }
