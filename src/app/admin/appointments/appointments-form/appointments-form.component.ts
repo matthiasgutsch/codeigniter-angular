@@ -162,7 +162,6 @@ export class AppointmentsFormComponent implements OnInit {
       .find_billings_by_appointment_id(+id)
       .subscribe(data => {
         this.pages = data[0];
-        console.log(data[0])
       }, err => {
     });
 
@@ -171,7 +170,7 @@ export class AppointmentsFormComponent implements OnInit {
       .getId(+id)
       .subscribe(data => {
         this.appointment = data;
-        console.log(data)
+
       }, err => {
     });
     

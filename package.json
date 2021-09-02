@@ -37,6 +37,7 @@
     "less": "^4.1.1",
     "moment": "^2.24.0",
     "ng-fullcalendar": "1.7.1",
+    "ngx-spinner": "^7.2.0",
     "npm": "^7.20.5",
     "primeflex": "^2.0.0",
     "primeicons": "^4.1.0",

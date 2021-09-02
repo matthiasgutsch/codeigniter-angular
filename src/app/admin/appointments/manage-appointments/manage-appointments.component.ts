@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AppointmentsService } from '../../../services/appointments.service';
 import { Blog } from '../../../models/blog';
-import {ConfirmationService, SelectItem} from 'primeng/api';
+import { ConfirmationService, SelectItem } from 'primeng/api';
 import { CategoryService } from '../../../services/categories.service';
 import { Category } from '../../../models/category';
-import {MessageService} from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
 import { ComuniService } from 'src/app/services/comuni.service';
@@ -16,9 +16,10 @@ import { Locations } from 'src/app/models/locations';
 import { Employees } from 'src/app/models/employees';
 import { EmployeesService } from 'src/app/services/employees.service';
 import { Appointments } from 'src/app/models/appointments';
-import {formatDate} from '@angular/common';
+import { formatDate } from '@angular/common';
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-manage-appointments',
@@ -52,33 +53,31 @@ export class ManageAppointmentsComponent implements OnInit {
   clients: any = [];
   client: Clients;
   comuni: any = [];
-  productDialog:boolean = false;
+  productDialog: boolean = false;
   works_id: any;
   showDialog() {
     this.productDialog = true;
-}
+  }
 
-myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en')  ;
+  myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en');
 
-trackByFn(index, item) {
-  return item.id;
-}
+  trackByFn(index, item) {
+    return item.id;
+  }
 
 
   constructor(
     private clientsService: ClientsService,
     private appointmentsService: AppointmentsService,
     private worksService: WorksService,
-    private locationsService: LocationsService, 
+    private locationsService: LocationsService,
     private messageService: MessageService,
+    private spinner: NgxSpinnerService,
     private employeesService: EmployeesService,
     private comuniService: ComuniService,
-    private categoryService: CategoryService, 
-    private confirmationService: ConfirmationService,) { 
+    private categoryService: CategoryService,
+    private confirmationService: ConfirmationService,) {
 
-  }
-
-  ngOnInit() {
 
     this.cols = [
       { field: "date", header: "Data" },
@@ -93,45 +92,70 @@ trackByFn(index, item) {
       dataKey: col.field
     }));
 
+  }
 
-    this.appointmentsService.getAllList().subscribe(
-      (data: Appointments) => this.appointments = data,
-      error => this.error = error
-    );
+  ngOnInit() {
 
+    this.getComuni();
+    this.getAppointments();
+    this.getCategories();
+    this.getLocations();
+    this.getWorks();
+    this.getEmployees();
+    this.getClients();
 
-    this.categoryService.getAllList().subscribe(
-      (data: Category) => this.categories = data,
-      error => this.error = error
-    );
-
-    this.locationsService.getAllList().subscribe(
-      (data: Locations) => this.locations = data,
-      error => this.error = error
-    );
+  }
 
 
-    this.worksService.getAllList().subscribe(
-      (data: Works) => this.works = data,
-      error => this.error = error
-    );
 
+  getClients() {
+  this.clientsService.getAllList().subscribe(
+    (data: Clients) => this.clients = data,
+    error => this.error = error
+  );
 
+  }
+
+  getEmployees() {
     this.employeesService.getAllList().subscribe(
       (data: Employees) => this.employees = data,
       error => this.error = error
     );
+  }
 
-    this.clientsService.getAllList().subscribe(
-      (data: Clients) => this.clients = data,
+  getWorks() {
+    this.worksService.getAllList().subscribe(
+      (data: Works) => this.works = data,
       error => this.error = error
     );
+  }
 
+  getLocations() {
+    this.locationsService.getAllList().subscribe(
+      (data: Locations) => this.locations = data,
+      error => this.error = error
+    );
+  }
+
+  getComuni() {
     this.comuniService.getAllList().subscribe(
       (data: Comuni) => this.comuni = data,
       error => this.error = error
     );
-    
+  }
+
+  getCategories() {
+    this.categoryService.getAllList().subscribe(
+      (data: Category) => this.categories = data,
+      error => this.error = error
+    );
+  }
+
+  getAppointments() {
+    this.appointmentsService.getAllList().subscribe(
+      (data: Appointments) => this.appointments = data,
+      error => this.error = error
+    );
   }
 
   getCategoryItem(category_id: string, id: string) {
@@ -140,12 +164,12 @@ trackByFn(index, item) {
 
 
 
-    
+
   getEmployeeItem(employee_id: string, id: string) {
     return this.employees.find(item => item.id === employee_id);
   }
 
-  
+
 
   getLocationItem(location_id: string, id: string) {
     return this.locations.find(item => item.id === location_id);
@@ -161,27 +185,27 @@ trackByFn(index, item) {
   getComuniItem(category_id: string, id: string) {
     return this.comuni.find(item => item.id === category_id);
   }
-  
-  
+
+
   editProduct(appointment: Appointments) {
-    this.appointment = {...appointment};
+    this.appointment = { ...appointment };
     this.selectedWorks = this.appointment.works_id.split(',');
     this.productDialog = true;
-}
+  }
 
 
-exportPdf() {
-  // const doc = new jsPDF();
-  const doc = new jsPDF('l','pt','A4');
-  doc['autoTable'](this.exportColumns, this.appointments);
-  // doc.autoTable(this.exportColumns, this.products);
-  doc.save("appointments.pdf");
-}
+  exportPdf() {
+    // const doc = new jsPDF();
+    const doc = new jsPDF('l', 'pt', 'A4');
+    doc['autoTable'](this.exportColumns, this.appointments);
+    // doc.autoTable(this.exportColumns, this.products);
+    doc.save("appointments.pdf");
+  }
 
 
-hideDialog() {
-  this.productDialog = false;
-}
+  hideDialog() {
+    this.productDialog = false;
+  }
 
   onDelete(id: number, title: string) {
 
@@ -194,16 +218,16 @@ hideDialog() {
           res => {
             console.log(res);
             this.ngOnInit();
-            this.messageService.add({key: 'myKey1', severity:'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo'});
+            this.messageService.add({ key: 'myKey1', severity: 'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo' });
 
           },
           error => this.error = error
         );
       },
-     
-  });
 
-   
+    });
+
+
   }
 
 }

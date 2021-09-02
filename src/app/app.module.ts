@@ -1,6 +1,7 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { NgxSpinnerService } from "ngx-spinner";
 
 import { AppRoutingModule } from './app-routing.module';
 import { CmspageModule } from './cmspage/cmspage.module';
@@ -15,6 +16,7 @@ import { AuthModule } from './auth/auth.module';
 import { httpInterceptorProviders } from './http-interceptors/index';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 export class I18nModule {
   constructor(translate: TranslateService) {
@@ -40,6 +42,7 @@ export class I18nModule {
     CmspageModule,
     AdminModule,
     AuthModule,
+    NgxSpinnerModule,
     AppRoutingModule,
     HttpClientModule,
     TranslateModule.forRoot({
@@ -54,6 +57,7 @@ export class I18nModule {
 
   providers: [
     Title,
+    NgxSpinnerService,
     httpInterceptorProviders
   ],
   bootstrap: [AppComponent]

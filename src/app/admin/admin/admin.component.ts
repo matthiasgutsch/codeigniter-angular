@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { PAGES } from '../constants/constants';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-admin',
@@ -21,7 +22,7 @@ export class AdminComponent implements OnInit {
   last_name: string;
   pages: any[];
 
-  constructor(  public translate: TranslateService) { 
+  constructor(  public translate: TranslateService, private spinner: NgxSpinnerService) { 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     //console.log(this.currentUser);
 
@@ -38,7 +39,11 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.spinner.show();
+ 
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 2000);
     }
 
 

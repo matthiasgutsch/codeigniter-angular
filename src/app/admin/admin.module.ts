@@ -8,6 +8,7 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminComponent } from './admin/admin.component';
 import { ManageCategoriesComponent } from './settings/category/manage-categories/manage-categories.component';
+import { NgxSpinnerService } from "ngx-spinner";
 
 import { ManageClientsComponent } from './clients/manage-clients/manage-clients.component';
 import { ClientsFormComponent } from './clients/clients-form/clients-form.component';
@@ -53,6 +54,7 @@ import { ManageAppointmentsComponent } from './appointments/manage-appointments/
 import { AppointmentsFormComponent } from './appointments/appointments-form/appointments-form.component';
 import {TimelineModule} from 'primeng/timeline';
 import { TagModule } from 'primeng/tag';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import { ManageBillingsComponent } from './billings/manage-billings/manage-billings.component';
 import { BillingsFormComponent } from './billings/billings-form/billings-form.component';
@@ -114,6 +116,7 @@ export class I18nModule {
     MessagesModule,
     SumPipeModule,
     TooltipModule,
+    NgxSpinnerModule,
     InputTextareaModule,
     ToastModule,
     TabViewModule,
@@ -152,7 +155,7 @@ export class I18nModule {
       }
     }),
   ],
-  providers: [ConfirmationService, MessageService, SumPipeModule]
+  providers: [ConfirmationService, MessageService, SumPipeModule, NgxSpinnerService]
 })
 export class AdminModule { }
 
