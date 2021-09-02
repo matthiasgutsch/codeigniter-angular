@@ -98,6 +98,21 @@
   }
   
   
+  .p-button.p-button-info, .p-buttonset.p-button-info > .p-button, .p-splitbutton.p-button-info > .p-button {
+    color: @white;
+    background: @ness_color_6;
+    border-radius: @radius;
+    border: 1px solid @ness_color_6 !important;
+
+    &:hover {
+        color: @ness_color_2;
+        background: darken(@ness_color_6,20%) !important;
+        border-radius: @radius;
+      
+        border: 1px solid @ness_color_6 !important;
+    }
+  }
+
   .p-button.p-button-primary, .p-buttonset.p-button-primary > .p-button, .p-splitbutton.p-button-primary > .p-button {
     color: @white !important;
     background: @ness_color_3;
