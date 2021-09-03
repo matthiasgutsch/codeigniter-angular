@@ -64,7 +64,7 @@ export class ManageWorksComponent implements OnInit {
 onDelete(id: number, category_name: string) {
 
   this.confirmationService.confirm({
-    message: 'Are you sure want to delete it = ' + category_name,
+    message: 'Are you sure want to delete it',
     header: 'Confirmation',
     icon: 'pi pi-exclamation-triangle',
     accept: () => {
