@@ -22,15 +22,20 @@
     </div>
 
 
+    <div class="p-col-12">
+    <div class="p-field p-grid">
 
-        <div *ngFor="let col of cols" >
+        <div class="p-col" *ngFor="let col of cols" >
+         
             <input placeholder="{{col.header}}" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
         </div>
-        <p-multiSelect [options]="columnOptions" [showToggleAll]="false" (onChange)="selectionItemForFilter($event)" [(ngModel)]="cols" maxSelectedLabels="{0} columns selected">
-        </p-multiSelect>
+    </div>
+    </div>
+       <!-- <p-multiSelect [options]="columnOptions" [showToggleAll]="false" (onChange)="selectionItemForFilter($event)" [(ngModel)]="cols" maxSelectedLabels="{0} columns selected">
+        </p-multiSelect>-->
 
 
-    <p-table #dt [columns]="cols" [value]="works"  [globalFilterFields]="['name', 'description']" currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
+    <p-table #dt [columns]="cols" [value]="works" [globalFilterFields]="['name', 'description']" currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
 
     <ng-template pTemplate="header" let-columns>
         <tr>

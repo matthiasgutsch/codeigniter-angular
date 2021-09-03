@@ -15,7 +15,10 @@ export class ManageLocationsComponent implements OnInit {
   location: Locations;
   error: string;
 
-
+  public cols: any[];
+  public columnOptions: any[];
+  public selectedColumns: any[];
+  
   constructor(private locationsService: LocationsService, 
     private confirmationService: ConfirmationService,) { }
 
@@ -24,6 +27,18 @@ export class ManageLocationsComponent implements OnInit {
       (data: Locations) => this.locations = data,
       error => this.error = error
     );
+
+
+    this.cols = [
+      { field: 'name', header: 'Nome', index: 1 },
+      { field: 'description', header: 'Descrizione', index: 2 }
+    ];
+
+    this.columnOptions = [];
+    this.selectedColumns = [];
+    for (let i = 0; i < this.cols.length; i++) {
+      this.columnOptions.push({label: this.cols[i].header, value: this.cols[i]});
+    }
   }
 
 
