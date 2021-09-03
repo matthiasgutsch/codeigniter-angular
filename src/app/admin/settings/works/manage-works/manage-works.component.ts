@@ -12,9 +12,26 @@ export class ManageWorksComponent implements OnInit {
   works: Works;
   work: Works;
   error: string;
+  public cols: any[];
+  public columnOptions: any[];
+  public selectedColumns: any[];
 
 
-  constructor(private worksService: WorksService, private confirmationService: ConfirmationService,) { }
+  constructor(private worksService: WorksService, private confirmationService: ConfirmationService,) {
+
+    this.cols = [
+      { field: 'name', header: 'Nome', index: 1 },
+      { field: 'description', header: 'Descrizione', index: 2 }
+    ];
+
+    this.columnOptions = [];
+    this.selectedColumns = [];
+    for (let i = 0; i < this.cols.length; i++) {
+      this.columnOptions.push({label: this.cols[i].header, value: this.cols[i]});
+    }
+
+    
+   }
 
   ngOnInit() {
     this.worksService.getAllList().subscribe(
@@ -24,9 +41,24 @@ export class ManageWorksComponent implements OnInit {
   }
 
 
+  public selectionItemForFilter(e) {
+    const colsTempor = e.value;
+    colsTempor.sort(function (a, b) {
+      return a.index - b.index;
+    });
+    this.cols = [];
+    this.cols = colsTempor;
+    if (e.value.length > 10) {
+      e.value.pop();
+    }
+  }
+
+
+  
   editProduct(work: Works) {
     this.work = {...work};
 }
+
 
 
 onDelete(id: number, category_name: string) {
