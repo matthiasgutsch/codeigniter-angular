@@ -22,13 +22,22 @@
     </div>
 
 
-    <p-table #dt [columns]="cols" [value]="works" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
+
+        <div *ngFor="let col of cols" >
+            <input placeholder="{{col.header}}" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+        </div>
+ 
+    <p-table #dt [columns]="cols" [value]="works"  [globalFilterFields]="['name', 'description']" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
   <ng-template pTemplate="caption">
     <div class="text-left">
       <p-multiSelect [options]="columnOptions" [showToggleAll]="false" (onChange)="selectionItemForFilter($event)" [(ngModel)]="cols" maxSelectedLabels="{0} columns selected">
       </p-multiSelect>
     </div>
   </ng-template>
+
+
+
+
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th *ngFor="let col of cols">
@@ -36,9 +45,10 @@
             </th>
             <th></th>
         </tr>
+       
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
-        <tr style="height:30px">
+        <tr>
             <td *ngFor="let col of cols">
                 {{rowData[col.field]}}
             </td>
