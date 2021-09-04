@@ -2,10 +2,12 @@
     <ng-template pTemplate>
         <div class="p-col-12">
         
-                <div class="p-field p-grid" *ngFor="let col of cols" >
+                <div class="p-field p-grid" *ngFor="let col of cols" [ngSwitch]="col.field">
                     <div class="p-col-12">
 
-                    <input placeholder="{{col.header}}" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                    <input placeholder="{{col.header}}" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+
+             
             </div>
                 </div>
             </div>
@@ -64,10 +66,7 @@
                             <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
                                 (click)="edit(rowData)"></button>
                             <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
-                                (click)="onDelete(rowData.id)"></button>
-
-
-                                
+                                (click)="onDelete(rowData.id)"></button>                                
                             </td>
                         </tr>
                     </ng-template>
