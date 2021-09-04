@@ -25,7 +25,7 @@
                 </div>
                 <hr class="full">
 
-                <p-table #dt1 [value]="clients" [pageLinks]="3" [responsive]="true" [globalFilterFields]="['name','status','category.name']"
+                <p-table #dt1 [value]="clients" [pageLinks]="3" [responsive]="true" [globalFilterFields]="['name','date','province','fiscalcode']"
                     [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                     [totalRecords]="true">
@@ -50,7 +50,7 @@
 
                             <th width="200">Data nascita</th>
                             <th>Indirizzo</th>
-
+                            <th>Codice Fiscale</th>
                             <th width="200"></th>
                         </tr>
                     </ng-template>
@@ -67,7 +67,7 @@
 
                            
                             <td> {{client.zip}} {{client.city}} - {{client.province}}</td>
-
+                                <td>{{client.fiscalcode}}</td>
                             <td class="action">
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
                                     [routerLink]="['/admin/clients/edit', client.id]"></button>

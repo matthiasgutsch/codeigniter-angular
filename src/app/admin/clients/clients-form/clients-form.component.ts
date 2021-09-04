@@ -54,7 +54,7 @@ export class ClientsFormComponent implements OnInit {
   appointments: any = [];
   is_featured = '0';
   deleteButton: boolean;
-  billings: Billings;
+  billings: any = [];
   billing: Billings;
 
   trackByFn(index, item) {
@@ -189,6 +189,9 @@ export class ClientsFormComponent implements OnInit {
     return this.appointments.filter(appointment => appointment.title).length===0;
   }
 
+  hasNoSelectedBillings(){
+    return this.billings.filter(billing => billing.title).length===0;
+  }
 
   onDelete(id: number, title: string) {
 

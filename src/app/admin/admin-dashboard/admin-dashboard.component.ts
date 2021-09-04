@@ -25,6 +25,7 @@ import { WorksService } from 'src/app/services/works.service';
 import { LocationsService } from 'src/app/services/locations.service';
 import { EmployeesService } from 'src/app/services/employees.service';
 import { Works } from 'src/app/models/works';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -101,6 +102,8 @@ export class AdminDashboardComponent implements OnInit {
 
 
     this.appointmentsService.getAllList().subscribe(data => {
+
+      
       this.calendarOptions = {
     
         editable: true,
@@ -118,6 +121,9 @@ export class AdminDashboardComponent implements OnInit {
         timezone: 'UTC',
         selectable: true,
       };
+
+      
+
     });
 
     
@@ -126,6 +132,8 @@ export class AdminDashboardComponent implements OnInit {
       error => this.error = error
     );
 
+
+    
     this.clientsService.count().subscribe(
       (data: Clients) => this.clientsCount = data,
       error => this.error = error
@@ -187,6 +195,8 @@ export class AdminDashboardComponent implements OnInit {
     });
 
   }
+
+
 
 
   getCategoryItem(category_id: string, id: string) {

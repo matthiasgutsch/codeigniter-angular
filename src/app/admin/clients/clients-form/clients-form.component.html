@@ -312,6 +312,14 @@
 
 
                 <p-tabPanel header="Fatture">
+
+
+                    <div *ngIf="!billings || hasNoSelectedBillings()">
+                        <p-message severity="info"  text="Non ci sono Fatture"></p-message>
+                    </div>
+    
+
+
                     <p-timeline [value]="billings">
         
                         <ng-template pTemplate="content" let-billing>
