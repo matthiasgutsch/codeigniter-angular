@@ -10,7 +10,7 @@ import { BrandService } from 'src/app/services/brands.service';
   templateUrl: './manage-brands.component.html'
 })
 export class ManageBrandsComponent implements OnInit {
-  title = 'Tipo di lavorazione';
+  title = 'Brands / Marca';
   brands: Brand;
   brand: Brand;
   error: string;
