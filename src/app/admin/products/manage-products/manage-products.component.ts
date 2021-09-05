@@ -90,6 +90,7 @@ trackByFn(index, item) {
     this.cols = [
       { field: "title", header: "titolo" },
       { field: "code", header: "Codice" },
+      { field: "code_int", header: "Codice interno" },
       { field: "brand_id", header: "Brand" }
 
     ];
@@ -181,7 +182,7 @@ exportPdf() {
   const doc = new jsPDF('l','pt','A4');
   doc['autoTable'](this.exportColumns, this.products);
   // doc.autoTable(this.exportColumns, this.products);
-  doc.save("appointments.pdf");
+  doc.save("prodotti.pdf");
 }
 
 

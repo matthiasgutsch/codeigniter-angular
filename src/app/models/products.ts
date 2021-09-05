@@ -12,6 +12,7 @@ export class Products {
     is_active: boolean;
     created_at: Date;
     code: string;
+    code_int: string;
     files: string;
 
 }
