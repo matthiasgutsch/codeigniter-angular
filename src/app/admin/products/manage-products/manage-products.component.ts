@@ -44,6 +44,7 @@ export class ManageProductsComponent implements OnInit {
 
   brands: any = [];
   brand: Brand;
+  selectedBrands: Brand;
 
   products: any = [];
   product: Products;
@@ -87,9 +88,9 @@ trackByFn(index, item) {
   ngOnInit() {
 
     this.cols = [
-      { field: "date", header: "Data" },
       { field: "title", header: "titolo" },
-      { field: "category_id", header: "Cliente" }
+      { field: "description", header: "Descrizione" },
+      { field: "brand_id", header: "Brand" }
 
     ];
 

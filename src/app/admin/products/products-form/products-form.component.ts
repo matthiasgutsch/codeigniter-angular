@@ -95,7 +95,6 @@ export class ProductsFormComponent implements OnInit {
     private _location: Location,
     private productsService: ProductsService,
     private brandsService: BrandService,
-    private locationsService: LocationsService,
     private worksService: WorksService,
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,
@@ -134,27 +133,12 @@ export class ProductsFormComponent implements OnInit {
       (error) => (this.error = error)
     );
 
-    this.locationsService.getAllList().subscribe(
-      (data: Locations) => (this.locations = data),
-      (error) => (this.error = error)
-    );
 
 
 
   
 
     const id = this.route.snapshot.paramMap.get("id");
-
-
-    this.productsService
-      .getId(+id)
-      .subscribe(data => {
-        this.product = data;
-        console.log(data)
-      }, err => {
-    });
-    
-    
 
     if (id) {
       this.pageTitle = "Modifica Prodotto";
@@ -166,7 +150,6 @@ export class ProductsFormComponent implements OnInit {
           category_id: res.category_id,
           works_id: res.works_id.split(','),
           brand_id: res.brand_id,
-          location_id: res.location_id,
           is_featured: res.is_featured,
           is_active: res.is_active,
           date: res.date,
@@ -188,13 +171,12 @@ export class ProductsFormComponent implements OnInit {
       title: ["", Validators.required],
       description: [""],
       is_featured: ["0"],
-      category_id: ["", Validators.required],
+      category_id: [""],
       works_id: [""],
-      location_id: [""],
       brand_id: [""],
       is_active: ["0"],
       image: [""],
-      date: ["", Validators.required],
+      date: [""],
     });
   }
 
@@ -261,7 +243,6 @@ export class ProductsFormComponent implements OnInit {
     formData.append("is_featured", this.blogForm.get("is_featured").value);
     formData.append("category_id", this.blogForm.get("category_id").value);
     formData.append("works_id", this.blogForm.get("works_id").value);
-    formData.append("location_id", this.blogForm.get("location_id").value);
     formData.append("brand_id", this.blogForm.get("brand_id").value);
     formData.append("is_active", this.blogForm.get("is_active").value);
     formData.append("image", this.blogForm.get("image").value);
