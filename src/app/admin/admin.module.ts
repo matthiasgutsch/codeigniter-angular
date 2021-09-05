@@ -71,6 +71,9 @@ import { SumPipeModule } from './pipe/sum.pipe';
 import { CompanyFormComponent } from './settings/company/company-form/company-form.component';
 import { ProductsFormComponent } from './products/products-form/products-form.component';
 import { ManageProductsComponent } from './products/manage-products/manage-products.component';
+import { ManageBrandsComponent } from './settings/brands/manage-brands/manage-brands.component';
+import { BrandsFormComponent } from './settings/brands/brands-form/brands-form.component';
+
 
 export class I18nModule {
   constructor(translate: TranslateService) {
@@ -91,6 +94,8 @@ export class I18nModule {
     ManageClientsComponent,
     ClientsFormComponent,
     ManageTypeComponent,
+    ManageBrandsComponent,
+    BrandsFormComponent,
     TypeFormComponent,
     ManagePagesComponent,
     MomentPipe,

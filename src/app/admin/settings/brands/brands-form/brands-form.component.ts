@@ -13,10 +13,10 @@ import * as moment from 'moment';
 import { Comuni } from 'src/app/models/comuni';
 
 @Component({
-  selector: 'app-works-form',
-  templateUrl: './works-form.component.html'
+  selector: 'app-brands-form',
+  templateUrl: './brands-form.component.html'
 })
-export class WorksFormComponent implements OnInit {
+export class BrandsFormComponent implements OnInit {
   @ViewChild("myInput", { static: false }) myInputVariable: ElementRef;
 
   pageTitle: string;

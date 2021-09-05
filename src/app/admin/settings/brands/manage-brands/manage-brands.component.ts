@@ -2,22 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { Works } from '../../../../models/works';
 import {ConfirmationService} from 'primeng/api';
 import { WorksService } from 'src/app/services/works.service';
+import { Brand } from 'src/app/models/brand';
+import { BrandService } from 'src/app/services/brands.service';
 
 @Component({
-  selector: 'app-manage-works',
-  templateUrl: './manage-works.component.html'
+  selector: 'app-manage-brands',
+  templateUrl: './manage-brands.component.html'
 })
-export class ManageWorksComponent implements OnInit {
+export class ManageBrandsComponent implements OnInit {
   title = 'Tipo di lavorazione';
-  works: Works;
-  work: Works;
+  brands: Brand;
+  brand: Brand;
   error: string;
   public cols: any[];
   public columnOptions: any[];
   public selectedColumns: any[];
 
 
-  constructor(private worksService: WorksService, private confirmationService: ConfirmationService,) {
+  constructor(private brandsService: BrandService, private confirmationService: ConfirmationService,) {
 
     this.cols = [
       { field: 'name', header: 'Nome', index: 1 },
@@ -34,8 +36,8 @@ export class ManageWorksComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.worksService.getAllList().subscribe(
-      (data: Works) => this.works = data,
+    this.brandsService.getAllList().subscribe(
+      (data: Brand) => this.brands = data,
       error => this.error = error
     );
   }
@@ -55,8 +57,8 @@ export class ManageWorksComponent implements OnInit {
 
 
   
-  editProduct(work: Works) {
-    this.work = {...work};
+  editProduct(brand: Brand) {
+    this.brand = {...brand};
 }
 
 
@@ -68,7 +70,7 @@ onDelete(id: number, category_name: string) {
     header: 'Confirmation',
     icon: 'pi pi-exclamation-triangle',
     accept: () => {
-      this.worksService.delete(+id).subscribe(
+      this.brandsService.delete(+id).subscribe(
         res => {
           console.log(res);
           this.ngOnInit();

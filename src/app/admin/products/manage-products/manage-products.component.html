@@ -37,14 +37,11 @@
                     <ng-template pTemplate="header">
                         <tr>
 
-                            <th width="150px">Data
+                            <th width="90px">
 
                             </th >
 
-                            <th width="100px">Ora
-
-                            </th>
-                            <th>Tipo Intervento
+                            <th>Nome
 
                             </th>
                             <th>Utente</th>
@@ -54,18 +51,13 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-product>
                         <tr>
-                            <td><img [src]="product.image" class="img-responsive">
-                                <td>
-                                    
-                                    <p-tag value="{{product.date | date: 'HH:mm' }}"  severity="warning"></p-tag> 
-                               
-
-                            </td>
+                            <td><img [src]="product.image" class="img-responsive"></td>
+                              
                             <td> {{product.title}}</td>
 
                             <td>
                                 <a (click)="editProduct(product)">
-                                    <span class="user"><i class="pi pi-user"></i></span>{{ getCategoryItem(product.category_id)?.name }}</a>
+                                   {{ getBrandItem(product.brand_id)?.name }}</a>
                             </td>
 
 

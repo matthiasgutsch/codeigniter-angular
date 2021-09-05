@@ -43,7 +43,7 @@ export class AdminComponent implements OnInit {
  
     setTimeout(() => {
       this.spinner.hide();
-    }, 2000);
+    }, 500);
     }
 
 

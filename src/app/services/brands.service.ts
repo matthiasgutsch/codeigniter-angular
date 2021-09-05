@@ -14,7 +14,7 @@ import { Brand } from '../models/brand';
 export class BrandService extends CrudService<Brand, number> {
 
   constructor(protected _http: HttpClient) {
-    super(_http, `${environment.baseUrl}/brand`);
+    super(_http, `${environment.baseUrl}/brands`);
   }
 
 }

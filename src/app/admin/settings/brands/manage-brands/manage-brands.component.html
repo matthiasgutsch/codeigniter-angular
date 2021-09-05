@@ -31,7 +31,7 @@
         </div>
         <div class="p-col-4 p-md-4">
 
-            <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/settings/works/create']" label="Aggiungi" class="p-button p-button-primary p-mr-2 pull-right"></button> 
+            <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/settings/brands/create']" label="Aggiungi" class="p-button p-button-primary p-mr-2 pull-right"></button> 
             <button type="text" pButton label="Filter"  icon="pi pi-filter" class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
 
 </div>
@@ -43,7 +43,7 @@
         </p-multiSelect>-->
 
 
-    <p-table #dt [columns]="cols" [value]="works" [globalFilterFields]="['name', 'description']" currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
+    <p-table #dt [columns]="cols" [value]="brands" [globalFilterFields]="['name', 'description']" currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
 
     <ng-template pTemplate="header" let-columns>
         <tr>

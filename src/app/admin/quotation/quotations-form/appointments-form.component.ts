@@ -21,17 +21,14 @@ import { Locations } from 'src/app/models/locations';
 import { LocationsService } from 'src/app/services/locations.service';
 import { Appointments } from 'src/app/models/appointments';
 import { SumPipe } from '../../pipe/sum.pipe';
-import { ProductsService } from 'src/app/services/products.service';
-import { Products } from 'src/app/models/products';
-import { Brand } from 'src/app/models/brand';
-import { BrandService } from 'src/app/services/brands.service';
-
+import { BillingsService } from 'src/app/services/billings.service';
+import { Billings } from 'src/app/models/billings';
 
 @Component({
-  selector: "app-products-form",
-  templateUrl: "./products-form.component.html",
+  selector: "app-appointments-form",
+  templateUrl: "./appointments-form.component.html",
 })
-export class ProductsFormComponent implements OnInit {
+export class AppointmentsFormComponent implements OnInit {
   @ViewChild("myInput", { static: false }) myInputVariable: ElementRef;
 
   pageTitle: string;
@@ -52,17 +49,15 @@ export class ProductsFormComponent implements OnInit {
 
   checked: boolean = true;
   selectedValue: string;
-  products: any = [];
-  product: Products;
+
   blogForm: FormGroup;
   typeList: any[];
   clients: any = [];
   client: Clients;
   arrString: string;
 
-  brands: any = [];
-  brand: Brand;
-
+  employees: any = [];
+  employee: Employees;
 
   description: any;
   selectedWorks: SelectItem[] = [];
@@ -79,8 +74,13 @@ export class ProductsFormComponent implements OnInit {
   selectedDate: Date;
   date: Date;
   works_id: any;
+  billings: any = [];
   public dataValues: object;
   pages: any;
+
+  public element: Billings;
+  billings_id: any;
+  appointmentId: string;
 
 
   trackByFn(index, item) {
@@ -92,11 +92,11 @@ export class ProductsFormComponent implements OnInit {
     private appointmentsService: AppointmentsService,
     private messageService: MessageService,
     private clientsService: ClientsService,
+    private billingsService: BillingsService,
     private _location: Location,
-    private productsService: ProductsService,
-    private brandsService: BrandService,
     private locationsService: LocationsService,
     private worksService: WorksService,
+    private employeesService: EmployeesService,
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,
     private router: Router,
@@ -123,8 +123,8 @@ export class ProductsFormComponent implements OnInit {
     );
 
 
-    this.brandsService.getAllList().subscribe(
-      (data: Brand) => (this.brands = data),
+    this.employeesService.getAllList().subscribe(
+      (data: Employees) => (this.employees = data),
       (error) => (this.error = error)
     );
 
@@ -139,6 +139,10 @@ export class ProductsFormComponent implements OnInit {
       (error) => (this.error = error)
     );
 
+    this.clientsService.getAllList().subscribe(
+      (data: Clients) => (this.clients = data),
+      (error) => (this.error = error)
+    );
 
 
   
@@ -146,26 +150,46 @@ export class ProductsFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get("id");
 
 
-    this.productsService
+    
+
+    this.billingsService.find_billings_by_appointments(+id).subscribe(
+      (data: Billings) => (this.billings = data),
+      (error) => (this.error = error)
+    );
+
+
+    this.billingsService
+      .find_billings_by_appointment_id(+id)
+      .subscribe(data => {
+        this.pages = data[0];
+      }, err => {
+    });
+
+
+    this.appointmentsService
       .getId(+id)
       .subscribe(data => {
-        this.product = data;
-        console.log(data)
+        this.appointment = data;
+
       }, err => {
     });
     
-    
+    this.billingsService.find_billings_by_appointments(+id).subscribe(
+      (data: Billings) => (this.billings = data),
+      (error) => (this.error = error)
+    );
+
 
     if (id) {
-      this.pageTitle = "Modifica Prodotto";
+      this.pageTitle = "Modifica Appuntamento";
       
-      this.productsService.getId(+id).subscribe((res) => {
+      this.appointmentsService.getId(+id).subscribe((res) => {
         this.blogForm.patchValue({
           title: res.title,
           description: res.description.split(','),
           category_id: res.category_id,
           works_id: res.works_id.split(','),
-          brand_id: res.brand_id,
+          employee_id: res.employee_id,
           location_id: res.location_id,
           is_featured: res.is_featured,
           is_active: res.is_active,
@@ -178,7 +202,7 @@ export class ProductsFormComponent implements OnInit {
 
       });
     } else {
-      this.pageTitle = "Aggiungi Prodotto";
+      this.pageTitle = "Aggiungi Appuntamento";
     }
 
 
@@ -191,7 +215,7 @@ export class ProductsFormComponent implements OnInit {
       category_id: ["", Validators.required],
       works_id: [""],
       location_id: [""],
-      brand_id: [""],
+      employee_id: [""],
       is_active: ["0"],
       image: [""],
       date: ["", Validators.required],
@@ -199,6 +223,65 @@ export class ProductsFormComponent implements OnInit {
   }
 
   
+
+
+
+createBilling() {
+  const formData = new FormData();
+
+  formData.append("title", this.blogForm.get("title").value);
+  formData.append("description", this.blogForm.get("description").value);
+  formData.append("appointment_id", this.blogForm.get("id").value);
+  formData.append("is_featured", this.blogForm.get("is_featured").value);
+  formData.append("category_id", this.blogForm.get("category_id").value);
+  formData.append("works_id", this.blogForm.get("works_id").value);
+  formData.append("location_id", this.blogForm.get("location_id").value);
+  formData.append("employee_id", this.blogForm.get("employee_id").value);
+  formData.append("is_active", this.blogForm.get("is_active").value);
+  formData.append("image", this.blogForm.get("image").value);
+  formData.append("date", this.blogForm.get("date").value);
+
+  const id = this.blogForm.get("id").value;
+
+  this.billingsService
+      .find_billings_by_appointment_id(+id)
+      .subscribe(data => {
+        this.pages = data[0];
+        return data.id;
+        console.log(data[0])
+      }, err => {
+    });
+
+  if (id ) {
+    this.confirmationService.confirm({
+      message: 'Vorresti creare la Fattua/ Ricevuta ?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.billingsService.create(formData).subscribe(
+          (res) => {
+            if (res.status === "error") {
+              this.uploadError = res.message;
+            } else {
+              const currentUrl = this.router.url;
+    
+              
+              this.messageService.add({ key: 'myKey1', severity: 'info', summary: 'Attenzione', detail: 'Futtura / Ricevuta creata con successo' });
+              this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+                this.router.navigate([currentUrl]);
+                
+            });
+            }
+          },
+          error => this.error = error
+        );
+      },
+    });
+  } else {
+    this.router.navigate(['/admin/billings/edit/', this.pages.id]);
+  }
+}
+
 
   getWorksItem(works_id: string, id: string) {
     return this.works.find(item => item.id === works_id);
@@ -262,7 +345,7 @@ export class ProductsFormComponent implements OnInit {
     formData.append("category_id", this.blogForm.get("category_id").value);
     formData.append("works_id", this.blogForm.get("works_id").value);
     formData.append("location_id", this.blogForm.get("location_id").value);
-    formData.append("brand_id", this.blogForm.get("brand_id").value);
+    formData.append("employee_id", this.blogForm.get("employee_id").value);
     formData.append("is_active", this.blogForm.get("is_active").value);
     formData.append("image", this.blogForm.get("image").value);
     formData.append("date", this.blogForm.get("date").value);
@@ -270,7 +353,7 @@ export class ProductsFormComponent implements OnInit {
     const id = this.blogForm.get("id").value;
 
     if (id) {
-      this.productsService.update(formData, +id).subscribe(
+      this.appointmentsService.update(formData, +id).subscribe(
         (res) => {
           if (res.status == "error") {
             this.uploadError = res.message;
@@ -283,7 +366,7 @@ export class ProductsFormComponent implements OnInit {
         (error) => (this.error = error)
       );
     } else {
-      this.productsService.create(formData).subscribe(
+      this.appointmentsService.create(formData).subscribe(
         (res) => {
           if (res.status === "error") {
             this.uploadError = res.message;

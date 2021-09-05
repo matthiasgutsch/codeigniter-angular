@@ -26,6 +26,8 @@ import { TypeFormComponent } from './settings/type/type-form/type-form.component
 import { CompanyFormComponent } from './settings/company/company-form/company-form.component';
 import { ManageProductsComponent } from './products/manage-products/manage-products.component';
 import { ProductsFormComponent } from './products/products-form/products-form.component';
+import { ManageBrandsComponent } from './settings/brands/manage-brands/manage-brands.component';
+import { BrandsFormComponent } from './settings/brands/brands-form/brands-form.component';
 
 const routes: Routes = [
   {
@@ -62,6 +64,10 @@ const routes: Routes = [
           { path: "settings/type/edit/:id", component: TypeFormComponent },
           { path: "settings/type/create", component: TypeFormComponent },
 
+
+          { path: "settings/brands", component: ManageBrandsComponent },
+          { path: "settings/brands/edit/:id", component: BrandsFormComponent },
+          { path: "settings/brands/create", component: BrandsFormComponent },
 
           { path: "settings/works", component: ManageWorksComponent },
           { path: "settings/works/edit/:id", component: WorksFormComponent },
