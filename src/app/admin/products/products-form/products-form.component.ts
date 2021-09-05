@@ -146,8 +146,8 @@ export class ProductsFormComponent implements OnInit {
       this.productsService.getId(+id).subscribe((res) => {
         this.blogForm.patchValue({
           title: res.title,
-          description: res.description.split(','),
-          category_id: res.category_id,
+          description: res.description,
+          description_full: res.description_full,
           works_id: res.works_id.split(','),
           brand_id: res.brand_id,
           is_featured: res.is_featured,
@@ -171,8 +171,8 @@ export class ProductsFormComponent implements OnInit {
       id: [""],
       title: ["", Validators.required],
       description: [""],
+      description_full: [""],
       is_featured: ["0"],
-      category_id: [""],
       works_id: [""],
       brand_id: [""],
       is_active: ["0"],
@@ -242,8 +242,8 @@ export class ProductsFormComponent implements OnInit {
 
     formData.append("title", this.blogForm.get("title").value);
     formData.append("description", this.blogForm.get("description").value);
+    formData.append("description_full", this.blogForm.get("description_full").value);
     formData.append("is_featured", this.blogForm.get("is_featured").value);
-    formData.append("category_id", this.blogForm.get("category_id").value);
     formData.append("works_id", this.blogForm.get("works_id").value);
     formData.append("brand_id", this.blogForm.get("brand_id").value);
     formData.append("is_active", this.blogForm.get("is_active").value);

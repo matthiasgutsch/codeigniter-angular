@@ -53,8 +53,7 @@
                                                 <div class="p-col-12 p-md-5">
                                                 <input type="text" [style]="{ width: '100%' }" pInputText formControlName="code" >
                                             </div>
-                                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Codice interno <span
-                                                    class="required">*</span></label>
+                                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Codice int</label>
                                                     <div class="p-col-4 p-md-5">
 
                                                 <input type="text" [style]="{ width: '100%' }" pInputText formControlName="code_int" >
@@ -115,24 +114,7 @@
 
 
 
-                                <div class="p-fluid">
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Cliente <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-                                            <p-dropdown [options]="clients" [virtualScroll]="true" filter="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedClients" formControlName="category_id" optionLabel="name" optionValue="id">
-                                                <ng-template let-option pTemplate="item">
-
-                                                    <strong>{{option.name}} {{option.surname}}</strong><br>
-                                                    <span>{{option.address}} - {{option.zip}} {{option.city}}</span>
-
-                                                </ng-template>
-
-                                            </p-dropdown>
-
-                                        </div>
-                                    </div>
-                                </div>
+                               
 
                                 <div class="p-fluid">
                                     <div class="p-field p-grid">
@@ -154,13 +136,13 @@
 
                                 <div class="p-fluid">
                                     <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Descrizione <span
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Descrizione completa <span
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
 
                                            
 
-                                            <textarea pInputTextarea formControlName="description" ></textarea>
+                                            <textarea pInputTextarea formControlName="description_full" ></textarea>
 
 
 
