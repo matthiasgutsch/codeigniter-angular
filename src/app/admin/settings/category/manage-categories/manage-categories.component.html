@@ -1,25 +1,25 @@
 <div class="dash-header">
     <div class="p-fluid">
-  
+        <div class="p-field p-grid">
+            <div class="p-col-9 p-md-9">
+        <h3>{{title}}</h3>
+            </div>
+            <div class="p-col-3 p-md-3">
+    
+                <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/settings/categories/create']" label="Aggiungi" class="p-button p-button-primary pull-right"></button> 
+    
+    </div>
+        </div>
     </div>
 </div>
 
 <div class="p-fluid">
     <div class="p-field p-grid">
-        <div class="p-col-12 p-md-8">
+        <div class="p-col-12 p-md-12">
 
      
 <p-card>
-    <div class="p-field p-grid">
-        <div class="p-col-9 p-md-9">
-    <h3>{{title}}</h3>
-        </div>
-        <div class="p-col-3 p-md-3">
-
-            <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/settings/categories/create']" label="Aggiungi" class="p-button p-button-primary pull-right"></button> 
-
-</div>
-    </div>
+   
 
 
 <p-table #dt1 [value]="categories" [globalFilterFields]="['name','address','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
