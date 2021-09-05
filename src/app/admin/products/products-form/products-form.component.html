@@ -31,14 +31,12 @@
                                 <div class="p-fluid">
 
                                     <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Tipo di Impegno<span
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Nome Prodottoo<span
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
 
-                                            <p-dropdown [options]="categories" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedCategories" formControlName="title" optionLabel="name" optionValue="name">
+                                            <input type="text" [style]="{ width: '100%' }" pInputText formControlName="title" >
 
-
-                                            </p-dropdown>
 
 
                                         </div>
@@ -63,11 +61,11 @@
                                 <div class="p-fluid">
 
                                     <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Perona incaricata <span
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Marca <span
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
 
-                                            <p-dropdown [options]="employees" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" formControlName="employee_id" optionLabel="name" optionValue="id">
+                                            <p-dropdown [options]="brands" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" formControlName="brand_id" optionLabel="name" optionValue="id">
 
 
                                             </p-dropdown>
@@ -190,7 +188,7 @@
 
                             </p-tabPanel>
 
-                            <p-tabPanel header="Documenti">
+                            <p-tabPanel header="Allegati">
                                 <div class="p-fluid">
                                     <div class="p-field p-grid">
 
@@ -213,31 +211,7 @@
                             </p-tabPanel>
 
 
-                        <p-tabPanel header="Fattura">
-
-                            <p-timeline [value]="billings">
-        
-                                <ng-template pTemplate="content" let-billing>
-            
-                                   
-                                    <p-card>
-                                        <div class="p-grid">
-                                            <div class="p-col-12 p-md-10">  
-                                    <strong>Fattura / Ricevuta {{billing.id}}</strong><br>
-                                    <i class="pi pi-calendar"></i> {{billing.date}}
-                                            </div>
-                                            <div class="p-col-12 p-md-2">  
-                                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/billings/edit', billing.id]"></button>
-            
-                                            </div>
-                                        </div>
-                                </p-card>
-                                </ng-template>
-                            </p-timeline>
-
-
-                 
-                        </p-tabPanel>
+                       
                         </p-tabView>
 
 
@@ -245,69 +219,16 @@
                 </form>
                 </p-card>
 
-                <p-card *ngIf="pages">    
-                    <button pButton pRipple icon="pi pi-save" label="Visualizza Fattura / Ricevuta" [routerLink]="['/admin/billings/edit', pages.id]" class="p-button p-button-primary p-mr-2"></button>
-                 </p-card> 
-
-                <p-card *ngIf="!pages" >           
-                    <button pButton pRipple icon="pi pi-save" label="Crea Fattura / Ricevuta"  (click)="createBilling()" class="p-button p-button-primary p-mr-2"></button>
-                 </p-card> 
             </div>
            
             <div class="p-col-12 p-md-4">
-                <p-card *ngIf="selectedWorks">
+                <p-card>
 
-                    <div class="p-fluid">
-                        <div class="p-field p-grid">
-
-                            <div class="p-col-12 p-md-12">
-                                <h3>Lavorazione</h3>
-                            </div>
-                        </div>
-                        <div class="p-field p-grid">
-
-                            <div class="p-col-12 p-md-12">
-                                <table class="works">
-                                <tr *ngFor="let item of selectedWorks" >
-                                    <td >{{ getWorksItem(item)?.name }}</td><td> {{ getWorksItem(item)?.description }} / <p-tag value="h"  severity="warning"></p-tag></td>
-                                </tr>
-                            </table>
-                            </div>
-                        </div>
-                    </div>
-
+                   
 
                 </p-card>
 
-                <p-card *ngIf="selectedClients">
-
-                    <div class="p-fluid">
-                        <div class="p-field p-grid">
-
-                            <div class="p-col-12 p-md-12">
-                                <h3>Cliente</h3>
-                            </div>
-                        </div>
-                        <div class="p-field p-grid">
-
-                            <div class="p-col-12 p-md-12">
-                                {{ getCategoryItem(selectedClients)?.name }}<br>{{ getCategoryItem(selectedClients)?.zip }} - {{ getCategoryItem(selectedClients)?.city }} <br> {{ getCategoryItem(selectedClients)?.phone }}<br>
-                                {{getCategoryItem(selectedClients)?.fiscalcode }}<br>
-                                P.IVA {{getCategoryItem(selectedClients)?.fiscalnumber}}
-
-
-
-                            </div>
-                            <div class="p-col-12 p-md-12">
-                                <br>
-                            <button pButton pRipple icon="pi pi-pencil" label="modifica Cliente" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/clients/edit', getCategoryItem(selectedClients)?.id]"></button>
-                            </div>
-
-                        </div>
-                    </div>
-
-
-                </p-card>
+              
 
 
             </div>

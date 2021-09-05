@@ -167,7 +167,6 @@ trackByFn(index, item) {
   
   editProduct(product: Products) {
     this.product = {...this.product};
-    this.selectedWorks = this.product.works_id.split(',');
     this.productDialog = true;
 }
 

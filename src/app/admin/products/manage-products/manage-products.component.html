@@ -52,28 +52,28 @@
                             <th>Action</th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-appointment>
+                    <ng-template pTemplate="body" let-product>
                         <tr>
-                            <td><strong>{{appointment.date | date:'dd/MM/yyyy'}}</strong><br>
+                            <td><img [src]="product.image" class="img-responsive">
                                 <td>
                                     
-                                    <p-tag value="{{appointment.date | date: 'HH:mm' }}"  severity="warning"></p-tag> 
+                                    <p-tag value="{{product.date | date: 'HH:mm' }}"  severity="warning"></p-tag> 
                                
 
                             </td>
-                            <td> {{appointment.title}}</td>
+                            <td> {{product.title}}</td>
 
                             <td>
-                                <a (click)="editProduct(appointment)">
-                                    <span class="user"><i class="pi pi-user"></i></span>{{ getCategoryItem(appointment.category_id)?.name }}</a>
+                                <a (click)="editProduct(product)">
+                                    <span class="user"><i class="pi pi-user"></i></span>{{ getCategoryItem(product.category_id)?.name }}</a>
                             </td>
 
 
 
                             <td class="action">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/products/edit', appointment.id]"></button>
-                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2" (click)="editProduct(appointment)"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(appointment.id)"></button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/products/edit', product.id]"></button>
+                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2" (click)="editProduct(product)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(product.id)"></button>
 
                             </td>
                         </tr>
@@ -90,22 +90,20 @@
             <p-card>
                 <div class="p-grid">
                     <div class="p-col-12 p-md-6">
-                <strong>{{appointment.date | date:'dd/MM/yyyy HH:mm'}}</strong>
+                <strong>ddddd</strong>
 
-                <h3>{{appointment.title}}</h3>
+                <h3>{{product.title}}</h3>
           
                 
-            {{ getLocationItem(appointment.location_id)?.name }}
-                <br> {{ getEmployeeItem(appointment.employee_id)?.name }} 
+            {{ getLocationItem(product.location_id)?.name }}
+                <br> {{ getEmployeeItem(product.employee_id)?.name }} 
 
-                <p [innerHTML]="appointment.description"></p>
+                <p [innerHTML]="product.description"></p>
 
                     </div>
                     <div class="p-col-12 p-md-6">
 
-                        <div *ngFor="let item of selectedWorks">
-                            {{ getWorksItem(item)?.name }}
-                        </div>
+               
 
     
             </div>
@@ -113,7 +111,7 @@
 
 
         </div>
-                <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/products/edit', appointment.id]"></button>
+                <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/products/edit', product.id]"></button>
 
             </p-card>
         </div>
@@ -122,14 +120,14 @@
         <div class="p-col-12 p-md-12">
 
             <p-card>
-                <strong>{{ getCategoryItem(appointment.category_id)?.name }}</strong>
+                <strong>{{ getCategoryItem(product.category_id)?.name }}</strong>
 
-                <p>{{ getCategoryItem(appointment.category_id)?.address }}<br> {{ getCategoryItem(appointment.category_id)?.zip }} - {{ getCategoryItem(appointment.category_id)?.city }} ({{ getCategoryItem(appointment.category_id)?.province }})<br>
+                <p>{{ getCategoryItem(product.category_id)?.address }}<br> {{ getCategoryItem(product.category_id)?.zip }} - {{ getCategoryItem(product.category_id)?.city }} ({{ getCategoryItem(product.category_id)?.province }})<br>
                 </p>
                 <hr>
-                <p>{{ getCategoryItem(appointment.category_id)?.phone }}<br> {{ getCategoryItem(appointment.category_id)?.email }}</p>
+                <p>{{ getCategoryItem(product.category_id)?.phone }}<br> {{ getCategoryItem(product.category_id)?.email }}</p>
                 <div class="clearfix"></div>
-                <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente" class="p-button p-button-primary p-mr-2" [routerLink]="['/admin/clients/edit', appointment.category_id]"></button>
+                <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente" class="p-button p-button-primary p-mr-2" [routerLink]="['/admin/product/edit', product.category_id]"></button>
             </p-card>
         </div>
 
