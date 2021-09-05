@@ -152,7 +152,7 @@ export class ProductsFormComponent implements OnInit {
           brand_id: res.brand_id,
           is_featured: res.is_featured,
           is_active: res.is_active,
-          date: res.date,
+          code: res.code,
           id: res.id,
         });
         this.imagePath = res.image;
@@ -176,7 +176,7 @@ export class ProductsFormComponent implements OnInit {
       brand_id: [""],
       is_active: ["0"],
       image: [""],
-      date: [""],
+      code: [""],
     });
   }
 
@@ -246,7 +246,7 @@ export class ProductsFormComponent implements OnInit {
     formData.append("brand_id", this.blogForm.get("brand_id").value);
     formData.append("is_active", this.blogForm.get("is_active").value);
     formData.append("image", this.blogForm.get("image").value);
-    formData.append("date", this.blogForm.get("date").value);
+    formData.append("code", this.blogForm.get("code").value);
 
     const id = this.blogForm.get("id").value;
 

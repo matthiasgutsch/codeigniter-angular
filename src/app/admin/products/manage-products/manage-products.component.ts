@@ -89,7 +89,7 @@ trackByFn(index, item) {
 
     this.cols = [
       { field: "title", header: "titolo" },
-      { field: "description", header: "Descrizione" },
+      { field: "code", header: "Codice" },
       { field: "brand_id", header: "Brand" }
 
     ];
@@ -170,7 +170,7 @@ trackByFn(index, item) {
   }
   
   
-  editProduct(product: Products) {
+  view(product: Products) {
     this.product = {...this.product};
     this.productDialog = true;
 }

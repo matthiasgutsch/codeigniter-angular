@@ -11,7 +11,7 @@ export class Products {
     is_featured: boolean;
     is_active: boolean;
     created_at: Date;
-    date: string;
+    code: string;
     files: string;
 
 }

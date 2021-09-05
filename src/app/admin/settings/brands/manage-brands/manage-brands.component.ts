@@ -23,7 +23,9 @@ export class ManageBrandsComponent implements OnInit {
 
     this.cols = [
       { field: 'name', header: 'Nome', index: 1 },
-      { field: 'description', header: 'Descrizione', index: 2 }
+      { field: 'description', header: 'Descrizione', index: 2 },
+      { field: 'code', header: 'Codice', index: 2 }
+
     ];
 
     this.columnOptions = [];

@@ -16,6 +16,17 @@
 
 <div class="dash-header">
     <div class="dash-title">
+
+        <div class="p-field p-grid">
+            <div class="p-col-12 p-md-6">
+                <h3>{{'products.main.title' | translate}}</h3>
+            </div>
+            <div class="p-col-12 p-md-6">
+                <button type="text" pButton label="Filter"  icon="pi pi-filter" class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
+                <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/products/create']" label="{{'add' | translate}}" class="p-button p-button-primary p-mr-2 pull-right"></button>
+                <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()" class="p-button-blue p-mr-2 pull-right" pTooltip="PDF" tooltipPosition="bottom"></button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -25,17 +36,8 @@
 
             <p-card>
 
-                <div class="p-field p-grid">
-                    <div class="p-col-12 p-md-6">
-                        <h3>{{'products.main.title' | translate}}</h3>
-                    </div>
-                    <div class="p-col-12 p-md-6">
-                        <button type="text" pButton label="Filter"  icon="pi pi-filter" class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
-                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/products/create']" label="{{'add' | translate}}" class="p-button p-button-primary p-mr-2 pull-right"></button>
-                        <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()" class="p-button-blue p-mr-2 pull-right" pTooltip="PDF" tooltipPosition="bottom"></button>
-                    </div>
-                </div>
-                <hr class="full">
+              
+       
 
 
                 <p-table #dt [columns]="cols" [value]="products" [globalFilterFields]="['name', 'description']" currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
@@ -61,8 +63,7 @@
                             <td class="action">
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
                                 [routerLink]="['/admin/products/edit', rowData.id]"></button>
-                            <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
-                                (click)="edit(rowData)"></button>
+                   
                             <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
                                 (click)="onDelete(rowData.id)"></button>                                
                             </td>
@@ -78,56 +79,7 @@
     </div>
 </div>
 
-<p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'50%'}">
-    <ng-template pTemplate="content">
-        <div class="p-col-12 p-md-12">
-            <p-card>
-                <div class="p-grid">
-                    <div class="p-col-12 p-md-6">
-                <strong>ddddd</strong>
 
-                <h3>{{product.title}}</h3>
-          
-                
-            {{ getLocationItem(product.location_id)?.name }}
-                <br> {{ getEmployeeItem(product.employee_id)?.name }} 
-
-                <p [innerHTML]="product.description"></p>
-
-                    </div>
-                    <div class="p-col-12 p-md-6">
-
-               
-
-    
-            </div>
-
-
-
-        </div>
-                <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/products/edit', product.id]"></button>
-
-            </p-card>
-        </div>
-        <div class="clearfix"></div><br>
-        <div class="clearfix"></div>
-        <div class="p-col-12 p-md-12">
-
-            <p-card>
-                <strong>{{ getCategoryItem(product.category_id)?.name }}</strong>
-
-                <p>{{ getCategoryItem(product.category_id)?.address }}<br> {{ getCategoryItem(product.category_id)?.zip }} - {{ getCategoryItem(product.category_id)?.city }} ({{ getCategoryItem(product.category_id)?.province }})<br>
-                </p>
-                <hr>
-                <p>{{ getCategoryItem(product.category_id)?.phone }}<br> {{ getCategoryItem(product.category_id)?.email }}</p>
-                <div class="clearfix"></div>
-                <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente" class="p-button p-button-primary p-mr-2" [routerLink]="['/admin/product/edit', product.category_id]"></button>
-            </p-card>
-        </div>
-
-    </ng-template>
-
-</p-sidebar>
 
 
 
