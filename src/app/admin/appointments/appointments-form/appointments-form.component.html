@@ -1,5 +1,18 @@
 <div class="dash-header">
     <div class="dash-title">
+
+        <div class="p-field p-grid">
+            <div class="p-col-12 p-md-9">
+                <h3>{{pageTitle}}</h3>
+            </div>
+            <div class="p-col-12 p-md-3">
+
+                <button pButton pRipple icon="pi pi-save" label="salva" class="p-button pull-right p-button-success p-mr-2" [disabled]="!blogForm.valid"></button>
+
+
+            </div>
+        </div>
+        
     </div>
 </div>
 
@@ -12,19 +25,7 @@
 
                     <div class="blog-form">
 
-                        <div class="p-field p-grid">
-                            <div class="p-col-12 p-md-9">
-                                <h3>{{pageTitle}}</h3>
-                            </div>
-                            <div class="p-col-12 p-md-3">
-
-                                <button pButton pRipple icon="pi pi-save" label="salva" class="p-button pull-right p-button-success p-mr-2" [disabled]="!blogForm.valid"></button>
-
-
-                            </div>
-                        </div>
-                        <hr class="full">
-
+            
                         <p-tabView>
                             <p-tabPanel header="Informazioni">
 

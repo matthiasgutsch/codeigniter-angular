@@ -1,13 +1,21 @@
 <div class="dash-header">
     <div class="dash-title">
+
+        <div class="p-field p-grid">
+            <div class="p-col-12 p-md-9">
+                <h3>Benvenuto, {{currentUser.first_name}} {{currentUser.last_name}}</h3>
+            </div>
+            <div class="p-col-12 p-md-3">
+
+
+
+            </div>
+        </div>
+        
     </div>
 </div>
-
 <div class="p-grid">
-    <div class="p-col-12 p-md-12">
-        <h3>Benvenuto, {{currentUser.first_name}} {{currentUser.last_name}}</h3>
-       <!-- {{currentUser.user_id}}-->
-    </div>
+
     <div class="p-col-12 p-md-7">
         <p-card>
 <div *ngIf="calendarOptions">
