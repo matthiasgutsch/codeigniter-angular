@@ -10,14 +10,15 @@ import { ComuniService } from 'src/app/services/comuni.service';
 import { Comuni } from 'src/app/models/comuni';
 import { BillingsService } from 'src/app/services/billings.service';
 import { jsPDF } from "jspdf";
+import { Billings } from 'src/app/models/billings';
 
 @Component({
   selector: "app-manage-billings",
   templateUrl: "./manage-billings.component.html",
 })
 export class ManageBillingsComponent implements OnInit {
-  blogs: Blog;
-  blog: Blog;
+  billings: any = [];
+  billing: Billings;
   categories: any = [];
   category: Category;
   error: string;
@@ -27,6 +28,10 @@ export class ManageBillingsComponent implements OnInit {
   client: Clients;
   comuni: any = [];
   productDialog: boolean = false;
+  cols: any[];
+  exportColumns: any[];
+  _selectedColumns: any[];
+
 
   @ViewChild("content", { static: false }) content: ElementRef;
 
@@ -45,11 +50,30 @@ export class ManageBillingsComponent implements OnInit {
     private comuniService: ComuniService,
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService
-  ) {}
+  ) {
+
+
+    this.cols = [
+      { field: "id", header: "Id" },
+      { field: "category_id", header: "Cliente" },
+
+      { field: "created_at", header: "Creato" },
+      { field: "appointment_id", header: "Id Appuntamento" },
+
+    ];
+
+    this._selectedColumns = this.cols;
+    this.exportColumns = this.cols.map(col => ({
+      title: col.header,
+      dataKey: col.field
+    }));
+
+
+  }
 
   ngOnInit() {
     this.billingsService.getAllList().subscribe(
-      (data: Blog) => (this.blogs = data),
+      (data: Blog) => (this.billings = data),
       (error) => (this.error = error)
     );
 
@@ -79,8 +103,8 @@ export class ManageBillingsComponent implements OnInit {
 
   
   
-  editProduct(blog: Blog) {
-    this.blog = { ...blog };
+  editProduct(billing: Billings) {
+    this.billing = { ...billing };
     this.productDialog = true;
   }
 

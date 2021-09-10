@@ -1,4 +1,5 @@
-<div class="dash-header">
+<form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+    <div class="dash-header">
     <div class="dash-title">
 
         <div class="p-field p-grid">
@@ -12,7 +13,7 @@
 
             </div>
         </div>
-        
+
     </div>
 </div>
 
@@ -21,7 +22,6 @@
             <div class="p-col-12 p-md-8">
 
                 <p-card>
-                    <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
 
                     <div class="blog-form">
 
@@ -243,7 +243,7 @@
 
 
                     </div>
-                </form>
+             
                 </p-card>
 
                 <p-card *ngIf="pages">    
@@ -315,7 +315,7 @@
         </div>
 
     </div>
-
+</form>
     <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
     </p-confirmDialog>
 

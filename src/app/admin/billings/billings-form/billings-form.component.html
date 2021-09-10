@@ -1,4 +1,5 @@
-<div class="dash-header">
+<form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+    <div class="dash-header">
     <div class="dash-title">
 
         <div class="p-field p-grid">
@@ -209,4 +210,7 @@
         </div>
 
     </div>
+
+</form>
+
 <p-toast key="myKey1"></p-toast>
