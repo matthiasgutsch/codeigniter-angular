@@ -13,21 +13,23 @@
 </p-overlayPanel>
 
 
+
 <div class="dash-header">
-    <div class="p-fluid">
+    <div class="dash-title">
+
         <div class="p-field p-grid">
-            <div class="p-col-8 p-md-8">
-        <h3>{{title}}</h3>
+            <div class="p-col-12 p-md-6">
+                <h3>{{title}}</h3>
             </div>
-            <div class="p-col-4 p-md-4">
-    
+            <div class="p-col-12 p-md-6">
                 <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/settings/works/create']" label="Aggiungi" class="p-button p-button-primary p-mr-2 pull-right"></button> 
                 <button type="text" pButton label="Filter"  icon="pi pi-filter" class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
-    
-    </div>
+       </div>
         </div>
     </div>
 </div>
+
+
 
 <div class="p-fluid">
     <div class="p-field p-grid">

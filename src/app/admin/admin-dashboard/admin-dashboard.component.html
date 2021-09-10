@@ -16,6 +16,72 @@
 </div>
 <div class="p-grid">
 
+    <div class="p-col-12 p-md-3">
+
+        <p-card >
+
+                   {{clientsCount}}
+                    <h4>{{'clients.main.title' | translate}}</h4>
+                     
+                    <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/clients']" routerLinkActive="active"
+                    class="p-button p-button-primary p-mr-2"></button>
+                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']" routerLinkActive="active"
+                    class="p-button p-button-success p-mr-2"></button>
+        </p-card>
+    </div>
+    <div class="p-col-12 p-md-3">
+
+        <p-card >
+
+            {{appointmentsCount}}
+
+             <h4>{{'appointments.main.title' | translate}}</h4>
+             <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/appointments']" routerLinkActive="active"
+             class="p-button p-button-primary p-mr-2"></button>
+             <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']" routerLinkActive="active"
+             class="p-button p-button-success p-mr-2"></button>
+       
+             
+ </p-card>
+
+
+  
+</div>
+        <div class="p-col-12 p-md-3">
+
+            <p-card >
+    
+                       {{clientsCount}}
+                        <h4>{{'clients.main.title' | translate}}</h4>
+                         
+                        <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/clients']" routerLinkActive="active"
+                        class="p-button p-button-primary p-mr-2"></button>
+                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']" routerLinkActive="active"
+                        class="p-button p-button-success p-mr-2"></button>
+            </p-card>
+        </div>
+        <div class="p-col-12 p-md-3">
+
+            <p-card >
+    
+                {{appointmentsCount}}
+
+                 <h4>{{'appointments.main.title' | translate}}</h4>
+                 <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/appointments']" routerLinkActive="active"
+                 class="p-button p-button-primary p-mr-2"></button>
+                 <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']" routerLinkActive="active"
+                 class="p-button p-button-success p-mr-2"></button>
+           
+                 
+     </p-card>
+
+
+      
+    </div>
+
+</div>
+<div class="p-grid">
+
     <div class="p-col-12 p-md-7">
         <p-card>
 <div *ngIf="calendarOptions">
@@ -31,40 +97,7 @@
 
     <div class="p-col-12 p-md-5">
 
-        <div class="p-field p-grid">
-
-            <div class="p-col-12 p-md-6">
-
-                <p-card >
-        
-                           {{clientsCount}}
-                            <h4>{{'clients.main.title' | translate}}</h4>
-                             
-                            <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/clients']" routerLinkActive="active"
-                            class="p-button p-button-primary p-mr-2"></button>
-                            <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']" routerLinkActive="active"
-                            class="p-button p-button-success p-mr-2"></button>
-                </p-card>
-            </div>
-            <div class="p-col-12 p-md-6">
-
-                <p-card >
-        
-                    {{appointmentsCount}}
-
-                     <h4>{{'appointments.main.title' | translate}}</h4>
-                     <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/appointments']" routerLinkActive="active"
-                     class="p-button p-button-primary p-mr-2"></button>
-                     <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']" routerLinkActive="active"
-                     class="p-button p-button-success p-mr-2"></button>
-               
-                     
-         </p-card>
-
-            </div>
-
-          
-        </div>
+       
         <p-card>
 
             
