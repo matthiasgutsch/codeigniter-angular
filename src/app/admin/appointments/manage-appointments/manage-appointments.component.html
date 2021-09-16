@@ -1,3 +1,26 @@
+
+<p-overlayPanel #op>
+    <ng-template pTemplate>
+        <div class="p-col-12">
+
+            <div class="p-field p-grid" *ngFor="let col of cols" [ngSwitch]="col.field">
+                <div class="p-col-12">
+
+                    <p-dropdown *ngSwitchCase="'title'" placeholder="Scegli" [showClear]="true" optionLabel="name" optionValue="name" [options]="categories" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')">
+                    </p-dropdown>
+
+
+                    <p-dropdown *ngSwitchCase="'category_id'" placeholder="Scegli" [showClear]="true" optionLabel="name" optionValue="id" [options]="clients" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')">
+                    </p-dropdown>
+
+                </div>
+
+            </div>
+        </div>
+    </ng-template>
+</p-overlayPanel>
+
+
 <div class="dash-header">
     <div class="dash-title">
 
@@ -8,6 +31,7 @@
             <div class="p-col-12 p-md-3">
                 <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']" label="{{'add' | translate}}" class="p-button p-button-success pull-right"></button>
                 <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()" class="p-button-primary p-mr-2 pull-right" pTooltip="PDF" tooltipPosition="bottom"></button>
+                <button type="text" pButton label="Filter" icon="pi pi-filter" class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
 
             </div>
         </div>
@@ -20,7 +44,7 @@
         <div class="p-col-12 p-md-12">
 
             <p-card>
-                <p-table #dt1 [value]="appointments" [pageLinks]="3" [responsive]="true" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                <p-table #dt [value]="appointments" [pageLinks]="3" [responsive]="true" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                     [totalRecords]="true">
 
                     <ng-template pTemplate="header">
