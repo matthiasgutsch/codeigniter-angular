@@ -1,5 +1,6 @@
 @import "colors.less";
 @import "print.less";
+@import "font-awesome.min.less";
 
 @import "primeng.less";
 
@@ -179,23 +180,7 @@ border-bottom: 1px solid #ccc;
   transition: 0.1s;
   padding-top: 0px;
 
-  .openbtn {
-    font-size: 20px;
-    cursor: pointer;
-    background-color: @ness_color_3;
-    color: @ness_color_3;
-    width: 64px;
-    height: 60px;
-    border: none;
-    text-align: center;
-    line-height: 60px;
-    float: left;
-    border-right: 0px solid #ccc;
-    i {
-      color: @ness_color_2;
-    }
-  }
-
+ 
 
   .user-menu {
     position: absolute;
@@ -239,13 +224,14 @@ border-bottom: 1px solid #ccc;
     list-style: none;
     padding: 0px;
     margin: 0px;
+    padding-top: 80px;
     li {
       list-style-type: none;
       float: left;
       width: 100%;
       padding: 0px;
       text-align: center;
-      height: 60px;
+      height: 50px;
       line-height: 40px;
 
       a {
@@ -272,6 +258,7 @@ border-bottom: 1px solid #ccc;
           width: 40px;
           line-height: 40px;
           height: 40px;
+          margin-right: 20px;
           text-align: center;
         }
 
@@ -304,7 +291,24 @@ border-bottom: 1px solid #ccc;
     }
   }
   &.open {
-    width: 250px;
+    width: 70px;
+
+    ul {
+      li {
+        a {
+          span {
+            display: none !important;
+            visibility: hidden !important;
+          }
+          &:hover {}
+          i {}
+        }
+      }
+    }
+    
+  }
+  &.close {
+    width: 200px;
     ul {
       li {
         a {
@@ -318,28 +322,23 @@ border-bottom: 1px solid #ccc;
       }
     }
   }
+}
+
+
+#main {
+  transition: margin-left 0.1s;
+  padding: 60px 30px 30px 30px;
+  margin-left: 70px;
+  &.open {
+    margin-left: 200px;
+  }
   &.close {
-    width: 60px;
-    ul {
-      li {
-        a {
-          span {
-            display: none !important;
-            visibility: hidden !important;
-          }
-          &:hover {}
-          i {}
-        }
-      }
-    }
+    margin-left: 70px;
+
   }
 }
 
 
-
-.main {
-  padding: 0px;
-}
 
 
 hr.full {
@@ -355,6 +354,27 @@ margin-bottom: 20px;
   width: 100%;
   z-index: 100;
  
+  .openbtn {
+    font-size: 22px;
+    cursor: pointer;
+    background-color: @white;
+    color: @ness_color_3;
+    width: 70px;
+    height: 60px;
+    border: none;
+    text-align: center;
+    line-height: 60px;
+    float: left;
+    border-right: 0px solid #ccc;
+    i {
+      color: @ness_color_2;
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+
+
   .logo-wrapper {
     float: left;
     margin-left: 20px;
@@ -572,7 +592,7 @@ margin-bottom: 20px;
     }
   }
   &.open {
-    width: 250px;
+    width: 200px;
     ul {
       li {
         a {

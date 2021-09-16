@@ -16,6 +16,7 @@ export class AdminComponent implements OnInit {
   loginError: string;
   username: string;
   user_id: number;
+  flag = true;
 
   password: string;
   first_name: string;

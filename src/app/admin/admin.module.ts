@@ -48,7 +48,7 @@ import {MultiSelectModule} from 'primeng/multiselect';
 
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import * as $ from 'jquery';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule, TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ManageAppointmentsComponent } from './appointments/manage-appointments/manage-appointments.component';
 import { AppointmentsFormComponent } from './appointments/appointments-form/appointments-form.component';
@@ -115,6 +115,9 @@ export class I18nModule {
     EmployeesFormComponent,
     ManageEmployeesComponent
     ],
+    exports: [
+      TranslateModule
+    ],
   imports: [
     CommonModule,
     TableModule,
@@ -160,7 +163,7 @@ export class I18nModule {
       }
     }),
   ],
-  providers: [ConfirmationService, MessageService, SumPipeModule, NgxSpinnerService]
+  providers: [ConfirmationService, MessageService, TranslateService, SumPipeModule, NgxSpinnerService]
 })
 export class AdminModule { }
 

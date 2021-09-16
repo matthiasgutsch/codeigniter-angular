@@ -1,18 +1,16 @@
 
-<div class="sidebar">
-  <div class="openbtn">
-    <i class="pi pi-inbox"></i>
-  </div>
+<div class="sidebar"  id="mySidebar" [ngClass]=" flag ? 'open' : 'close'">
+ 
 
   <ul class="nav-menu">
 
   
-    <li><a routerLink="./" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ><i class="pi pi-inbox" pTooltip="Dashboard" tooltipPosition="right"></i></a></li>
-    <li><a routerLink="./appointments" routerLinkActive="active" ><i class="pi pi-calendar-plus" pTooltip="{{'appointments.main.title' | translate}}" tooltipPosition="right"></i></a></li>
-    <li><a routerLink="./clients" routerLinkActive="active"><i class="pi pi-users" pTooltip="{{'clients.main.title' | translate}}" tooltipPosition="right"></i></a></li>
-    <li><a routerLink="./billings" routerLinkActive="active"><i class="pi pi-credit-card" pTooltip="{{'billings.main.title' | translate}}" tooltipPosition="right"></i></a></li>
-    <li><a routerLink="./products" routerLinkActive="active"><i class="pi pi-shopping-cart" pTooltip="{{'products.main.title' | translate}}" tooltipPosition="right"></i></a></li>
-    <li><a routerLink="./settings" routerLinkActive="active" ><i class="pi pi-cog" pTooltip="Settings" tooltipPosition="right"></i></a></li>
+    <li><a routerLink="./" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ><i class="pi pi-inbox" pTooltip="Dashboard" tooltipPosition="right"></i><span>Dashboard</span></a></li>
+    <li><a routerLink="./appointments" routerLinkActive="active" ><i class="pi pi-calendar-plus" pTooltip="{{'appointments.main.title' | translate}}" tooltipPosition="right"></i><span>{{'appointments.main.title' | translate}}</span></a></li>
+    <li><a routerLink="./clients" routerLinkActive="active"><i class="pi pi-users" pTooltip="{{'clients.main.title' | translate}}" tooltipPosition="right"></i><span>{{'clients.main.title' | translate}}</span></a></li>
+    <li><a routerLink="./billings" routerLinkActive="active"><i class="pi pi-credit-card" pTooltip="{{'billings.main.title' | translate}}" tooltipPosition="right"></i><span>{{'billings.main.title' | translate}}</span></a></li>
+    <li><a routerLink="./products" routerLinkActive="active"><i class="pi pi-shopping-cart" pTooltip="{{'products.main.title' | translate}}" tooltipPosition="right"></i><span>{{'products.main.title' | translate}}</span></a></li>
+    <li><a routerLink="./settings" routerLinkActive="active" ><i class="pi pi-cog" pTooltip="Settings" tooltipPosition="right"></i><span>Settings</span></a></li>
 
   </ul>
   <ul class="user-menu">
@@ -23,6 +21,10 @@
 </div>
 
 <div class="navbar-top">
+  <div class="openbtn" (click)="flag = !flag">
+    <i class="pi pi-list"></i>
+  </div>
+
   <div class="user-menu"><ul><li><i class="pi pi-user"></i> {{currentUser.first_name}} {{currentUser.last_name}}
     </li><li> <select class="form-control" #selectedLang (change)="switchLang(selectedLang.value)">
       <option *ngFor="let language of translate.getLangs()" [value]="language"
@@ -36,7 +38,8 @@
 </div>
 
 
-      <div class="main close">
+<div id="main" [ngClass]=" flag ? 'close' : 'open'">  
+
           <router-outlet></router-outlet>
       </div>
       <p-toast key="myKey1"></p-toast>
