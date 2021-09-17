@@ -2,12 +2,27 @@
     <ng-template pTemplate>
         <div class="p-col-12">
         
-                <div class="p-field p-grid" *ngFor="let col of cols" [ngSwitch]="col.field">
-                    <div class="p-col-12">
+            <div class="p-field p-grid" *ngFor="let col of cols" [ngSwitch]="col.field">
+                <div class="p-col-12">
 
-                    <input placeholder="{{col.header}}" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
-
+                    <input *ngSwitchCase="'name'" [ngModel]="dt.filters['name']? dt.filters['name'].value : ''" 
+                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
              
+                    <input *ngSwitchCase="'date'" [ngModel]="dt.filters['date']? dt.filters['date'].value : ''" 
+                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
+
+
+                    <input *ngSwitchCase="'phone'" [ngModel]="dt.filters['phone']? dt.filters['phone'].value : ''" 
+                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
+
+
+                    <input *ngSwitchCase="'city'" [ngModel]="dt.filters['city']? dt.filters['city'].value : ''" 
+                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
+
+
+                    <input *ngSwitchCase="'fiscalcode'" [ngModel]="dt.filters['fiscalcode']? dt.filters['fiscalcode'].value : ''" 
+                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
+
             </div>
                 </div>
             </div>
