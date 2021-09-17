@@ -3,6 +3,7 @@ export class Products {
     title: string;
     user_id: number;
     description: string;
+    description_full: string;
     image: string;
     category_id: string;
     works_id: string;

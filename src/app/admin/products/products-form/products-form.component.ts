@@ -111,10 +111,7 @@ export class ProductsFormComponent implements OnInit {
   ngOnInit() {
     this.getselectedWorks;
     
-    this.appointmentsService.getAllList().subscribe(
-      (data: Appointments) => (this.appointments = data),
-      (error) => (this.error = error)
-    );
+  
 
     this.categoryService.getAllList().subscribe(
       (data: Category) => (this.categories = data),
@@ -153,6 +150,7 @@ export class ProductsFormComponent implements OnInit {
           is_featured: res.is_featured,
           is_active: res.is_active,
           code: res.code,
+          description_full: res.description_full,
           code_int: res.code_int,
           id: res.id,
         });
@@ -171,6 +169,7 @@ export class ProductsFormComponent implements OnInit {
       id: [""],
       title: ["", Validators.required],
       description: [""],
+      description_full: [""],
       is_featured: ["0"],
       category_id: [""],
       works_id: [""],
@@ -242,6 +241,7 @@ export class ProductsFormComponent implements OnInit {
 
     formData.append("title", this.blogForm.get("title").value);
     formData.append("description", this.blogForm.get("description").value);
+    formData.append("description_full", this.blogForm.get("description_full").value);
     formData.append("is_featured", this.blogForm.get("is_featured").value);
     formData.append("category_id", this.blogForm.get("category_id").value);
     formData.append("works_id", this.blogForm.get("works_id").value);

@@ -5,11 +5,12 @@
             <div class="p-field p-grid" *ngFor="let col of cols" [ngSwitch]="col.field">
                 <div class="p-col-12">
 
-                    <input *ngSwitchCase="'title'" placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                    <input *ngSwitchCase="'code'" placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                    <input *ngSwitchCase="'code_int'" placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                    <input *ngSwitchCase="'title'" [ngModel]="dt.filters['title']? dt.filters['title'].value : ''" 
+                     placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                    <input *ngSwitchCase="'code'" [ngModel]="dt.filters['code']? dt.filters['code'].value : ''"  placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                    <input *ngSwitchCase="'code_int'" [ngModel]="dt.filters['code_int']? dt.filters['code_int'].value : ''"  placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
 
-                    <p-dropdown *ngSwitchCase="'brand_id'" placeholder="Scegli" [showClear]="true" optionLabel="name" optionValue="name" [options]="brands" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')">
+                    <p-dropdown *ngSwitchCase="'brand_id'" placeholder="Scegli" [ngModel]="dt.filters['brand_id']? dt.filters['brand_id'].value : ''" [showClear]="true" optionLabel="name" optionValue="name" [options]="brands" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')">
                     </p-dropdown>
 
                 </div>

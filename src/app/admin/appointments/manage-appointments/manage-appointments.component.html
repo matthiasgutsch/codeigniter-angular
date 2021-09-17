@@ -19,7 +19,9 @@
         </div>
     </ng-template>
 </p-overlayPanel>
-
+<label *ngFor="let filterRow of Symbols_Array;let l=index;">
+    <button (click)="dt.reset(); ColumnFilter(dt,filterRow.label,'symbol','')" pButton type="button" [style]="{'text-transform': 'capitalize','width':'100%'}" class="button btn-xs" [label]="filterRow.label"></button>
+  </label>
 
 <div class="dash-header">
     <div class="dash-title">
