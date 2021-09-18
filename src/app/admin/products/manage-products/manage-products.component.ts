@@ -23,6 +23,7 @@ import { ProductsService } from 'src/app/services/products.service';
 import { Products } from 'src/app/models/products';
 import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brands.service';
+import { STATUS_PRODUCTS } from '../../constants/constants';
 
 @Component({
   selector: 'app-manage-products',
@@ -59,6 +60,7 @@ export class ManageProductsComponent implements OnInit {
   comuni: any = [];
   productDialog:boolean = false;
   works_id: any;
+  status: any;
   showDialog() {
     this.productDialog = true;
 }
@@ -82,6 +84,7 @@ trackByFn(index, item) {
 
     private categoryService: CategoryService, 
     private confirmationService: ConfirmationService,) { 
+      this.status = STATUS_PRODUCTS;
 
   }
 
@@ -90,6 +93,8 @@ trackByFn(index, item) {
     this.cols = [
       { field: "title", header: "titolo" },
       { field: "code", header: "Codice" },
+      { field: "status", header: "Status" },
+
       { field: "code_int", header: "Codice interno" },
       { field: "brand_id", header: "Brand" }
 

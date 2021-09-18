@@ -9,7 +9,7 @@ import { FormControl } from '@angular/forms';
 import { CategoryService } from '../../../services/categories.service';
 import { ConfirmationService, MessageService, SelectItem } from "primeng/api";
 import * as moment from 'moment';
-import { TYPE_LIST } from '../../constants/constants';
+import { TYPE_LIST, STATUS_PRODUCTS } from '../../constants/constants';
 import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
 import { Location } from '@angular/common';
@@ -56,6 +56,8 @@ export class ProductsFormComponent implements OnInit {
   product: Products;
   blogForm: FormGroup;
   typeList: any[];
+  status: any[];
+
   clients: any = [];
   client: Clients;
   arrString: string;
@@ -75,7 +77,8 @@ export class ProductsFormComponent implements OnInit {
   format2: string = "";
   selectedCity: Blog;
   selectedCategories: Category;
-  selectedClients: Clients;
+  selectedClients: SelectItem[];
+  
   selectedDate: Date;
   date: Date;
   works_id: any;
@@ -105,6 +108,7 @@ export class ProductsFormComponent implements OnInit {
       this.selectedDate = new Date(this.date);
     }
     this.typeList = TYPE_LIST;
+    this.status = STATUS_PRODUCTS;
 
   }
 
@@ -145,6 +149,7 @@ export class ProductsFormComponent implements OnInit {
           title: res.title,
           description: res.description.split(','),
           category_id: res.category_id,
+          status: res.status,
           works_id: res.works_id.split(','),
           brand_id: res.brand_id,
           is_featured: res.is_featured,
@@ -172,6 +177,7 @@ export class ProductsFormComponent implements OnInit {
       description_full: [""],
       is_featured: ["0"],
       category_id: [""],
+      status: [""],
       works_id: [""],
       brand_id: [""],
       is_active: ["0"],
@@ -195,11 +201,6 @@ export class ProductsFormComponent implements OnInit {
     this._location.back();
   }
 
-
-  fillClients(): void {
-    this.client.id = this.selectedClients.id;
-    this.client.name = this.selectedClients.name;
-  }
 
   onSelectedFile(event) {
     if (event.target.files.length > 0) {
@@ -250,6 +251,8 @@ export class ProductsFormComponent implements OnInit {
     formData.append("image", this.blogForm.get("image").value);
     formData.append("code", this.blogForm.get("code").value);
     formData.append("code_int", this.blogForm.get("code_int").value);
+    formData.append("status", this.blogForm.get("status").value);
+
 
     const id = this.blogForm.get("id").value;
 

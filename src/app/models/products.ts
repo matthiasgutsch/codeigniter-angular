@@ -1,3 +1,5 @@
+import { StringMap } from "@angular/compiler/src/compiler_facade_interface";
+
 export class Products {
     id: number;
     title: string;
@@ -15,5 +17,5 @@ export class Products {
     code: string;
     code_int: string;
     files: string;
-
+    status: StringMap;
 }

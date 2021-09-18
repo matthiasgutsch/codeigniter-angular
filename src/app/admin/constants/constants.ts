@@ -38,6 +38,17 @@ export const TYPE_LIST: SelectItem[] = [
   { label: "Altro", value: "Altro" }
 ];
 
+export const STATUS_PRODUCTS: SelectItem[] = [
+  { label: "Disponibile", value: "1" },
+  { label: "Esaurito", value: "2" },
+  { label: "Esauriro temporaneamente", value: "3" },
+  { label: "In ordinazione", value: "4" },
+  { label: "Altro", value: "5" }
+];
+
+
+
+
 export const SEX_LIST: SelectItem[] = [
   { label: "Tutte", value: null },
   { label: "Uomo", value: "Uomo" },
