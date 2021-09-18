@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppointmentsService } from '../../../services/appointments.service';
 import { Blog } from '../../../models/blog';
 import {ConfirmationService, SelectItem} from 'primeng/api';
@@ -24,6 +24,7 @@ import { Products } from 'src/app/models/products';
 import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brands.service';
 import { STATUS_PRODUCTS } from '../../constants/constants';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-manage-products',
@@ -71,6 +72,7 @@ trackByFn(index, item) {
   return item.id;
 }
 
+@ViewChild("dt", { static: false }) public dt: Table;
 
   constructor(
     private clientsService: ClientsService,
@@ -151,8 +153,13 @@ trackByFn(index, item) {
     return this.clients.find(item => item.id === category_id);
   }
 
-
-
+  clear(table: any) 
+  {
+    
+      //  THIS DOES NOT WORK!!   Filter stops working after clearing
+      table.clear();
+      
+	} 
     
   getBrandItem(brand_id: string, id: string) {
     return this.brands.find(item => item.id === brand_id);
