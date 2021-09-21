@@ -26,6 +26,8 @@ import { LocationsService } from 'src/app/services/locations.service';
 import { EmployeesService } from 'src/app/services/employees.service';
 import { Works } from 'src/app/models/works';
 import * as moment from 'moment';
+import { ProductsService } from 'src/app/services/products.service';
+import { Products } from 'src/app/models/products';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -47,6 +49,7 @@ export class AdminDashboardComponent implements OnInit {
   works: any = [];
   work: Works;
   clientsCount: any;
+  productsCount: any;
   error: string;
   blogForm: FormGroup;
   typeList: any;
@@ -88,6 +91,7 @@ export class AdminDashboardComponent implements OnInit {
     private employeesService: EmployeesService,
     private categoryService: CategoryService,
     private router: Router,
+    private productsService: ProductsService,
     private messageService: MessageService,
     private route: ActivatedRoute
   ) {
@@ -138,6 +142,12 @@ export class AdminDashboardComponent implements OnInit {
       (data: Clients) => this.clientsCount = data,
       error => this.error = error
     );
+
+    this.productsService.count().subscribe(
+      (data: Products) => this.productsCount = data,
+      error => this.error = error
+    );
+
 
     this.appointmentsService.count().subscribe(
       (data: Appointments) => this.appointmentsCount = data,

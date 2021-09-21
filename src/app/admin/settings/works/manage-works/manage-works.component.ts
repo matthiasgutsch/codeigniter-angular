@@ -21,7 +21,7 @@ export class ManageWorksComponent implements OnInit {
 
     this.cols = [
       { field: 'name', header: 'Nome', index: 1 },
-      { field: 'description', header: 'Descrizione', index: 2 }
+      { field: 'description', header: 'Prezzo/h', index: 2 }
     ];
 
     this.columnOptions = [];
