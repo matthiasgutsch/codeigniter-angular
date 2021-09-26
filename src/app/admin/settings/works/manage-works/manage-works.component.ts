@@ -12,6 +12,7 @@ export class ManageWorksComponent implements OnInit {
   works: Works;
   work: Works;
   error: string;
+  loading: boolean;
   public cols: any[];
   public columnOptions: any[];
   public selectedColumns: any[];

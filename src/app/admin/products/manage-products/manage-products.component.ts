@@ -47,6 +47,7 @@ export class ManageProductsComponent implements OnInit {
   brands: any = [];
   brand: Brand;
   selectedBrands: Brand;
+  loading: boolean;
 
   products: any = [];
   product: Products;

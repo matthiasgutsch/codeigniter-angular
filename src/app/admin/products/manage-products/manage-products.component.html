@@ -17,18 +17,15 @@
                 </div>
 
             </div>
-
-            <button pButton label="Clear Filters"  class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt)
-            "></button>
+       
+   
         </div>
     </ng-template>
 </p-overlayPanel>
 
 <div *ngFor="let col of cols" [ngSwitch]="col.field">
 
-<div class="tag" *ngIf="dt.filters[col.field]">{{dt.filters[col.field]? dt.filters[col.field].value : ''}} 
-    <button pButton label="Clear Filters"  class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt)
-    "></button></div>
+<div class="tag" *ngIf="dt.filters[col.field]">{{dt.filters[col.field]? dt.filters[col.field].value : ''}}</div>
 </div>
 <div class="dash-header">
     <div class="dash-title">
@@ -51,10 +48,6 @@
         <div class="p-col-12 p-md-12">
 
             <p-card>
-
-
-
-
 
                 <p-table #dt [columns]="cols" [value]="products" [globalFilterFields]="['name', 'description']" currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [loading]="loading"
                     [totalRecords]="totalRecords">

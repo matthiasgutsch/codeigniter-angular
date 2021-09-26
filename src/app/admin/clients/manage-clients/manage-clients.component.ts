@@ -26,6 +26,8 @@ export class ManageClientsComponent implements OnInit {
   cols: any[];
   exportColumns: any[];
   _selectedColumns: any[];
+  loading: boolean;
+  totalRecords: string;
   
   private category_id: number;
   private id: number;
