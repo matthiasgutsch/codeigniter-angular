@@ -107,7 +107,7 @@ export class CompanyFormComponent implements OnInit {
     const id = '1';
 
     if (id) {
-      this.pageTitle = "edit.company";
+      this.pageTitle = "Dati aziendali";
       this.deleteButton = true;
 
       this.companyService.getId(+id).subscribe((res) => {

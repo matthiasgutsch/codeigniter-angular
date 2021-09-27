@@ -48,8 +48,6 @@ import {MultiSelectModule} from 'primeng/multiselect';
 
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import * as $ from 'jquery';
-import { TranslateLoader, TranslateModule, TranslateService, TranslatePipe } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ManageAppointmentsComponent } from './appointments/manage-appointments/manage-appointments.component';
 import { AppointmentsFormComponent } from './appointments/appointments-form/appointments-form.component';
 import {TimelineModule} from 'primeng/timeline';
@@ -75,13 +73,7 @@ import { ManageBrandsComponent } from './settings/brands/manage-brands/manage-br
 import { BrandsFormComponent } from './settings/brands/brands-form/brands-form.component';
 
 
-export class I18nModule {
-  constructor(translate: TranslateService) {
-    translate.addLangs(['it', 'en']);
-    const browserLang = translate.getBrowserLang();
-    translate.use(browserLang.match(/it|en/) ? browserLang : 'it');
-  }
-}
+
 
 
 @NgModule({
@@ -116,7 +108,7 @@ export class I18nModule {
     ManageEmployeesComponent
     ],
     exports: [
-      TranslateModule
+
     ],
   imports: [
     CommonModule,
@@ -154,20 +146,10 @@ export class I18nModule {
     ButtonModule,
     InputSwitchModule,
     AutoCompleteModule,
-    SidebarModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: translateLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
+    SidebarModule
   ],
-  providers: [ConfirmationService, MessageService, TranslateService, SumPipeModule, NgxSpinnerService]
+  providers: [ConfirmationService, MessageService, SumPipeModule, NgxSpinnerService]
 })
 export class AdminModule { }
 
 
-export function translateLoaderFactory(httpClient: HttpClient) {
-  return new TranslateHttpLoader(httpClient);
-}

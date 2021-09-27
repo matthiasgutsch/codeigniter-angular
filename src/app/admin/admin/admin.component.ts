@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { PAGES } from '../constants/constants';
 import { NgxSpinnerService } from "ngx-spinner";
 
@@ -23,21 +22,17 @@ export class AdminComponent implements OnInit {
   last_name: string;
   pages: any[];
 
-  constructor(  public translate: TranslateService, private spinner: NgxSpinnerService) { 
+  constructor(  private spinner: NgxSpinnerService) { 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     //console.log(this.currentUser);
 
-    translate.addLangs(['it', 'en']);
-    translate.setDefaultLang('it');
 
     this.pages = PAGES;
 
   }
 
 
-  switchLang(lang: string) {
-    this.translate.use(lang);
-  }
+  
 
   ngOnInit() {
     this.spinner.show();

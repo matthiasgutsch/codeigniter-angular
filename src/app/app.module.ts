@@ -14,17 +14,8 @@ import { AdminModule } from './admin/admin.module';
 import { AuthModule } from './auth/auth.module';
 
 import { httpInterceptorProviders } from './http-interceptors/index';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgxSpinnerModule } from "ngx-spinner";
 
-export class I18nModule {
-  constructor(translate: TranslateService) {
-    translate.addLangs(['it', 'en']);
-    const browserLang = translate.getBrowserLang();
-    translate.use(browserLang.match(/it|en/) ? browserLang : 'it');
-  }
-}
 
 
 
@@ -45,15 +36,9 @@ export class I18nModule {
     NgxSpinnerModule,
     AppRoutingModule,
     HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: translateLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
+
   ],
-  exports: [TranslateModule],
+  exports: [],
 
   providers: [
     Title,
@@ -68,6 +53,3 @@ export class I18nModule {
 export class AppModule { }
 
 
-export function translateLoaderFactory(httpClient: HttpClient) {
-  return new TranslateHttpLoader(httpClient);
-}
