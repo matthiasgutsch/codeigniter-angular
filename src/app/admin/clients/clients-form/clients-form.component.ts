@@ -102,7 +102,7 @@ export class ClientsFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get("id");
 
     if (id) {
-      this.pageTitle = "edit.client";
+      this.pageTitle = "Modifica Cliente";
       this.deleteButton = true;
       this.appointmentsService.find_client(+id).subscribe(
         (data: Appointments) => (this.appointments = data),
@@ -137,7 +137,7 @@ export class ClientsFormComponent implements OnInit {
       });
     } else {
       this.deleteButton = false;
-      this.pageTitle = "add.client";
+      this.pageTitle = "Aggiungi Cliente";
     }
 
     this.blogForm = this.fb.group({
