@@ -28,6 +28,8 @@ import { Works } from 'src/app/models/works';
 import * as moment from 'moment';
 import { ProductsService } from 'src/app/services/products.service';
 import { Products } from 'src/app/models/products';
+import { BillingsService } from 'src/app/services/billings.service';
+import { Billings } from 'src/app/models/billings';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -73,6 +75,8 @@ export class AdminDashboardComponent implements OnInit {
   currentUser: any ;
   items: any;
   appointmentsCount: Appointments;
+  billingsCount: Billings;
+
   trackByFn(index, item) {
     return item.id;
   }
@@ -84,6 +88,8 @@ export class AdminDashboardComponent implements OnInit {
   constructor(private blogService: BlogService,
     private clientsService: ClientsService,
     private appointmentsService: AppointmentsService,
+    private billingsService: BillingsService,
+
     private fb: FormBuilder,
     private comuniService: ComuniService,
     private worksService: WorksService,
@@ -151,6 +157,12 @@ export class AdminDashboardComponent implements OnInit {
 
     this.appointmentsService.count().subscribe(
       (data: Appointments) => this.appointmentsCount = data,
+      error => this.error = error
+    );
+
+
+    this.billingsService.count().subscribe(
+      (data: Billings) => this.billingsCount = data,
       error => this.error = error
     );
 
