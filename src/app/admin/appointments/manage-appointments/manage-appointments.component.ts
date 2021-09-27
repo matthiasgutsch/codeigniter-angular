@@ -41,7 +41,7 @@ export class ManageAppointmentsComponent implements OnInit {
 
   employees: any = [];
   employee: Employees;
-
+  Symbols_Array: any = [];
   appointments: any = [];
   appointment: Appointments;
   date: Date;
