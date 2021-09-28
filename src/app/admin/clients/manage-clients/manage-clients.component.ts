@@ -10,6 +10,7 @@ import { ComuniService } from 'src/app/services/comuni.service';
 import { Comuni } from 'src/app/models/comuni';
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import { NgxSpinnerService } from "ngx-spinner";
 
 
 @Component({
@@ -28,7 +29,7 @@ export class ManageClientsComponent implements OnInit {
   _selectedColumns: any[];
   loading: boolean;
   totalRecords: string;
-  
+
   private category_id: number;
   private id: number;
 
@@ -46,6 +47,7 @@ export class ManageClientsComponent implements OnInit {
   constructor(
     private clientsService: ClientsService,
     private messageService: MessageService,
+    private spinner: NgxSpinnerService,
     private comuniService: ComuniService,
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,) {
@@ -71,18 +73,22 @@ export class ManageClientsComponent implements OnInit {
     }));
 
 
-    this.clientsService.getAllList().subscribe(
-      (data: Clients) => this.clients = data,
-      error => this.error = error
-    );
+
+    this.spinner.show();
+    this.clientsService.getAllList().subscribe(data => {
+      this.clients = data;
+      this.getComuni();
+      this.spinner.hide();
+    });
+
+  }
 
 
+  getComuni() {
     this.comuniService.getAllList().subscribe(
       (data: Comuni) => this.comuni = data,
       error => this.error = error
     );
-
-
   }
 
 

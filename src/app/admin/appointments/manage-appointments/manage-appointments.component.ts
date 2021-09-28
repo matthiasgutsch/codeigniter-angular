@@ -95,16 +95,19 @@ export class ManageAppointmentsComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.getComuni();
-    this.getAppointments();
-    this.getCategories();
-    this.getLocations();
-    this.getWorks();
-    this.getEmployees();
-    this.getClients();
-
+    this.spinner.show();
+      this.appointmentsService.getAllList().subscribe(data => {
+        this.appointments = data;
+        this.getCategories();
+        this.getLocations();
+        this.getWorks();
+        this.getEmployees();
+        this.getClients();
+        this.getComuni();
+        this.spinner.hide();
+      });
   }
+
 
 
 
@@ -151,12 +154,7 @@ export class ManageAppointmentsComponent implements OnInit {
     );
   }
 
-  getAppointments() {
-    this.appointmentsService.getAllList().subscribe(
-      (data: Appointments) => this.appointments = data,
-      error => this.error = error
-    );
-  }
+ 
 
   getCategoryItem(category_id: string, id: string) {
     return this.clients.find(item => item.id === category_id);

@@ -30,6 +30,7 @@ import { ProductsService } from 'src/app/services/products.service';
 import { Products } from 'src/app/models/products';
 import { BillingsService } from 'src/app/services/billings.service';
 import { Billings } from 'src/app/models/billings';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -89,7 +90,7 @@ export class AdminDashboardComponent implements OnInit {
     private clientsService: ClientsService,
     private appointmentsService: AppointmentsService,
     private billingsService: BillingsService,
-
+    private spinner: NgxSpinnerService,
     private fb: FormBuilder,
     private comuniService: ComuniService,
     private worksService: WorksService,
@@ -110,6 +111,7 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit() {
 
+    this.spinner.show();
 
     this.appointmentsService.getAllList().subscribe(data => {
 
@@ -204,17 +206,8 @@ export class AdminDashboardComponent implements OnInit {
     );
 
 
-
-    this.blogForm = this.fb.group({
-      id: [''],
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      is_featured: ['0'],
-      category_id: ['', Validators.required],
-      is_active: ['0'],
-      image: [''],
-      date: ['', Validators.required]
-    });
+    this.spinner.hide();
+    
 
   }
 
