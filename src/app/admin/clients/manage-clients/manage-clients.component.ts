@@ -57,26 +57,24 @@ export class ManageClientsComponent implements OnInit {
 
   ngOnInit() {
 
-    this.cols = [
-      { field: "name", header: "Nome" },
-      { field: "date", header: "Data di nascità" },
-      { field: "phone", header: "Cellulare" },
-      { field: "city", header: "Indirizzo" },
-      { field: "fiscalcode", header: "Codice Fiscale" },
-
-    ];
-
-    this._selectedColumns = this.cols;
-    this.exportColumns = this.cols.map(col => ({
-      title: col.header,
-      dataKey: col.field
-    }));
-
-
+   
 
     this.spinner.show();
     this.clientsService.getAllList().subscribe(data => {
       this.clients = data;
+      this.cols = [
+        { field: "name", header: "Nome" },
+        { field: "date", header: "Data di nascità" },
+        { field: "phone", header: "Cellulare" },
+        { field: "city", header: "Indirizzo" },
+        { field: "fiscalcode", header: "Codice Fiscale" },
+  
+      ];
+      this._selectedColumns = this.cols;
+      this.exportColumns = this.cols.map(col => ({
+        title: col.header,
+        dataKey: col.field
+      }));
       this.getComuni();
       this.spinner.hide();
     });
