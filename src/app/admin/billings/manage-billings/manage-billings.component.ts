@@ -29,6 +29,7 @@ export class ManageBillingsComponent implements OnInit {
   productDialog: boolean = false;
 
   @ViewChild("content", { static: false }) content: ElementRef;
+  currentUser: any;
 
   showDialog() {
     this.productDialog = true;
@@ -48,7 +49,11 @@ export class ManageBillingsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.billingsService.getAllList().subscribe(
+
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    const userId = this.currentUser.user_id;
+    
+    this.billingsService.getAllListbyUser(+userId).subscribe(
       (data: Blog) => (this.blogs = data),
       (error) => (this.error = error)
     );
@@ -58,7 +63,7 @@ export class ManageBillingsComponent implements OnInit {
       (error) => (this.error = error)
     );
 
-    this.clientsService.getAllList().subscribe(
+    this.clientsService.getAllListbyUser(+userId).subscribe(
       (data: Clients) => (this.clients = data),
       (error) => (this.error = error)
     );
