@@ -194,7 +194,7 @@ export class AdminDashboardComponent implements OnInit {
       error => this.error = error
     );
 
-    this.appointmentsService.getToday().subscribe(
+    this.appointmentsService.getToday(+userId).subscribe(
       (data: Appointments) => this.appointmentsToday = data,
       error => this.error = error
     );

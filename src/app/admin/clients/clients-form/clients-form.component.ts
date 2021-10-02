@@ -56,6 +56,7 @@ export class ClientsFormComponent implements OnInit {
   deleteButton: boolean;
   billings: any = [];
   billing: Billings;
+  currentUser: any;
 
   trackByFn(index, item) {
     return item.id;
@@ -78,7 +79,7 @@ export class ClientsFormComponent implements OnInit {
     if (this.date) {
       this.selectedDate = new Date(this.date);
     }
-
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     this.typeList = SEX_LIST;
   }
 
@@ -115,6 +116,7 @@ export class ClientsFormComponent implements OnInit {
       );
 
       this.clientsService.getId(+id).subscribe((res) => {
+        if (res.user_id == this.currentUser.user_id) {
         this.blogForm.patchValue({
           name: res.name,
           city: res.city,
@@ -127,12 +129,18 @@ export class ClientsFormComponent implements OnInit {
           fiscalcode: res.fiscalcode,
           fiscalnumber: res.fiscalnumber,
           description: res.description,
+          user_id: this.currentUser.user_id,
           category_id: res.category_id,
           is_featured: res.is_featured,
           is_active: res.is_active,
           date: res.date,
           id: res.id,
         });
+        }
+        else {
+          this.router.navigate(['/admin/clients']);
+
+        }
         this.imagePath = res.image;
       });
     } else {
@@ -150,15 +158,11 @@ export class ClientsFormComponent implements OnInit {
       region: [""],
       email: ["", Validators.required],
       phone: ["", Validators.required],
-      fiscalcode: new FormControl(
-        "",
-        Validators.compose([codFisc])
-      ),
-      fiscalnumber: new FormControl(
-        ""
-      ),
+      fiscalcode: new FormControl("",Validators.compose([codFisc])),
+      fiscalnumber: new FormControl(""),
       description: [""],
       is_featured: ["0"],
+      user_id: [this.currentUser.user_id],
       category_id: ["", Validators.required],
       is_active: ["0"],
       image: [""],
@@ -251,6 +255,7 @@ export class ClientsFormComponent implements OnInit {
     formData.append("description", this.blogForm.get("description").value);
     formData.append("is_featured", this.blogForm.get("is_featured").value);
     formData.append("category_id", this.blogForm.get("category_id").value);
+    formData.append('user_id', this.blogForm.get('user_id').value);
     formData.append("is_active", this.blogForm.get("is_active").value);
     formData.append("image", this.blogForm.get("image").value);
     formData.append("date", this.blogForm.get("date").value);

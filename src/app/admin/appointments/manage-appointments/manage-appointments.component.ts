@@ -93,15 +93,14 @@ export class ManageAppointmentsComponent implements OnInit {
       dataKey: col.field
     }));
 
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
   }
 
   ngOnInit() {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-
-
-    const userId = this.currentUser.user_id;
+   
 
     this.spinner.show();
+    const userId = this.currentUser.user_id;
       this.appointmentsService.getAllListbyUser(+userId).subscribe(data => {
         this.appointments = data;
         this.getCategories();
@@ -127,6 +126,7 @@ export class ManageAppointmentsComponent implements OnInit {
   }
 
   getEmployees() {
+    const userId = this.currentUser.user_id;
     this.employeesService.getAllList().subscribe(
       (data: Employees) => this.employees = data,
       error => this.error = error
@@ -141,6 +141,7 @@ export class ManageAppointmentsComponent implements OnInit {
   }
 
   getLocations() {
+    const userId = this.currentUser.user_id;
     this.locationsService.getAllList().subscribe(
       (data: Locations) => this.locations = data,
       error => this.error = error
@@ -148,6 +149,7 @@ export class ManageAppointmentsComponent implements OnInit {
   }
 
   getComuni() {
+    const userId = this.currentUser.user_id;
     this.comuniService.getAllList().subscribe(
       (data: Comuni) => this.comuni = data,
       error => this.error = error
@@ -155,6 +157,7 @@ export class ManageAppointmentsComponent implements OnInit {
   }
 
   getCategories() {
+    const userId = this.currentUser.user_id;
     this.categoryService.getAllList().subscribe(
       (data: Category) => this.categories = data,
       error => this.error = error

@@ -81,6 +81,7 @@ export class AppointmentsFormComponent implements OnInit {
   public element: Billings;
   billings_id: any;
   appointmentId: string;
+  currentUser: any;
 
 
   trackByFn(index, item) {
@@ -106,16 +107,14 @@ export class AppointmentsFormComponent implements OnInit {
       this.selectedDate = new Date(this.date);
     }
     this.typeList = TYPE_LIST;
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
   }
 
   ngOnInit() {
+
     this.getselectedWorks;
     
-    this.appointmentsService.getAllList().subscribe(
-      (data: Appointments) => (this.appointments = data),
-      (error) => (this.error = error)
-    );
 
     this.categoryService.getAllList().subscribe(
       (data: Category) => (this.categories = data),
@@ -139,7 +138,8 @@ export class AppointmentsFormComponent implements OnInit {
       (error) => (this.error = error)
     );
 
-    this.clientsService.getAllList().subscribe(
+    const userId = this.currentUser.user_id;
+    this.clientsService.getAllListbyUser(+userId).subscribe(
       (data: Clients) => (this.clients = data),
       (error) => (this.error = error)
     );
@@ -184,6 +184,7 @@ export class AppointmentsFormComponent implements OnInit {
       this.pageTitle = "Modifica Appuntamento";
       
       this.appointmentsService.getId(+id).subscribe((res) => {
+        if (res.user_id == this.currentUser.user_id) {
         this.blogForm.patchValue({
           title: res.title,
           description: res.description.split(','),
@@ -193,9 +194,15 @@ export class AppointmentsFormComponent implements OnInit {
           location_id: res.location_id,
           is_featured: res.is_featured,
           is_active: res.is_active,
+          user_id: this.currentUser.user_id,
           date: res.date,
           id: res.id,
         });
+      }
+      else {
+        this.router.navigate(['/admin/appointments']);
+
+      }
         this.imagePath = res.image;
         this.id = res.id;
 
@@ -215,6 +222,7 @@ export class AppointmentsFormComponent implements OnInit {
       category_id: ["", Validators.required],
       works_id: [""],
       location_id: [""],
+      user_id: [this.currentUser.user_id],
       employee_id: [""],
       is_active: ["0"],
       image: [""],
@@ -240,6 +248,7 @@ createBilling() {
   formData.append("is_active", this.blogForm.get("is_active").value);
   formData.append("image", this.blogForm.get("image").value);
   formData.append("date", this.blogForm.get("date").value);
+  formData.append("user_id", this.blogForm.get("user_id").value);
 
   const id = this.blogForm.get("id").value;
 
@@ -349,6 +358,8 @@ createBilling() {
     formData.append("is_active", this.blogForm.get("is_active").value);
     formData.append("image", this.blogForm.get("image").value);
     formData.append("date", this.blogForm.get("date").value);
+    formData.append("user_id", this.blogForm.get("user_id").value);
+
 
     const id = this.blogForm.get("id").value;
 

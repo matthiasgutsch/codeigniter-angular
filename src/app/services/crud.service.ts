@@ -46,8 +46,8 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     );
   }
 
-  getToday() {
-    return this._http.get<T>(this._base + '/today').pipe(
+  getToday(userId: number) {
+    return this._http.get<T>(this._base + '/today/' + userId).pipe(
       catchError(this.handleError)
     );
   }
