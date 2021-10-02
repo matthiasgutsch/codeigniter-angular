@@ -29,6 +29,7 @@ export class ManageClientsComponent implements OnInit {
   _selectedColumns: any[];
   loading: boolean;
   totalRecords: string;
+  currentUser: any ;
 
   private category_id: number;
   private id: number;
@@ -56,11 +57,13 @@ export class ManageClientsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    const userId = this.currentUser.user_id;
 
    
 
     this.spinner.show();
-    this.clientsService.getAllList().subscribe(data => {
+    this.clientsService.getAllListbyUser(+userId).subscribe(data => {
       this.clients = data;
       this.cols = [
         { field: "name", header: "Nome" },

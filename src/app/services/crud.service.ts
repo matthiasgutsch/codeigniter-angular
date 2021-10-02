@@ -32,8 +32,16 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
 
-  count() {
-    return this._http.get<T>(this._base + '/count').pipe(
+  getAllListbyUser(userId: number) {
+    return this._http.get<T>(this._base + '/user/' + userId).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+
+  count(userId: number) {
+    return this._http.get<T>(this._base + '/count/' + userId).pipe(
       catchError(this.handleError)
     );
   }

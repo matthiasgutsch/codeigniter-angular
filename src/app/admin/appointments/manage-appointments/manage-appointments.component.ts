@@ -58,6 +58,7 @@ export class ManageAppointmentsComponent implements OnInit {
   showDialog() {
     this.productDialog = true;
   }
+  currentUser: any ;
 
   myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en');
 
@@ -95,8 +96,13 @@ export class ManageAppointmentsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+
+
+    const userId = this.currentUser.user_id;
+
     this.spinner.show();
-      this.appointmentsService.getAllList().subscribe(data => {
+      this.appointmentsService.getAllListbyUser(+userId).subscribe(data => {
         this.appointments = data;
         this.getCategories();
         this.getLocations();
@@ -112,7 +118,8 @@ export class ManageAppointmentsComponent implements OnInit {
 
 
   getClients() {
-  this.clientsService.getAllList().subscribe(
+  const userId = this.currentUser.user_id;
+  this.clientsService.getAllListbyUser(+userId).subscribe(
     (data: Clients) => this.clients = data,
     error => this.error = error
   );

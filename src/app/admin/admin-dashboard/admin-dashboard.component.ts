@@ -112,8 +112,8 @@ export class AdminDashboardComponent implements OnInit {
   ngOnInit() {
 
     this.spinner.show();
-
-    this.appointmentsService.getAllList().subscribe(data => {
+    const userId = this.currentUser.user_id;
+    this.appointmentsService.getAllListbyUser(+userId).subscribe(data => {
 
       
       this.calendarOptions = {
@@ -138,32 +138,26 @@ export class AdminDashboardComponent implements OnInit {
 
     });
 
-    
-    this.appointmentsService.getAllList().subscribe(
-      (data: Appointments) => this.appointments = data,
-      error => this.error = error
-    );
-
 
     
-    this.clientsService.count().subscribe(
+    this.clientsService.count(+userId).subscribe(
       (data: Clients) => this.clientsCount = data,
       error => this.error = error
     );
 
-    this.productsService.count().subscribe(
+    this.productsService.count(+userId).subscribe(
       (data: Products) => this.productsCount = data,
       error => this.error = error
     );
 
 
-    this.appointmentsService.count().subscribe(
+    this.appointmentsService.count(+userId).subscribe(
       (data: Appointments) => this.appointmentsCount = data,
       error => this.error = error
     );
 
 
-    this.billingsService.count().subscribe(
+    this.billingsService.count(+userId).subscribe(
       (data: Billings) => this.billingsCount = data,
       error => this.error = error
     );
