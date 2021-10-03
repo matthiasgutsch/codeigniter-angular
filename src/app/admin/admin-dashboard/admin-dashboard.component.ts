@@ -161,7 +161,7 @@ export class AdminDashboardComponent implements OnInit {
 
     getProductsCount() {
       const userId = this.currentUser.user_id; 
-    this.productsService.count(+userId).subscribe(
+      this.productsService.count(+userId).subscribe(
       (data: Products) => this.productsCount = data,
       error => this.error = error
       );

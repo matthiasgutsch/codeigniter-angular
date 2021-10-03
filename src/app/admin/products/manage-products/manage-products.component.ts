@@ -25,6 +25,7 @@ import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brands.service';
 import { STATUS_PRODUCTS } from '../../constants/constants';
 import { Table } from 'primeng/table';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-manage-products',
@@ -85,7 +86,7 @@ trackByFn(index, item) {
     private employeesService: EmployeesService,
     private comuniService: ComuniService,
     private brandService: BrandService,
-
+    private spinner: NgxSpinnerService,
     private categoryService: CategoryService, 
     private confirmationService: ConfirmationService,) { 
       this.status = STATUS_PRODUCTS;
@@ -112,6 +113,7 @@ trackByFn(index, item) {
       dataKey: col.field
     }));
 
+    this.spinner.show();
 
     this.productsService.getAllListbyUser(+userId).subscribe(
       (data: Products) => this.products = data,
@@ -124,33 +126,15 @@ trackByFn(index, item) {
       error => this.error = error
     );
 
-    this.locationsService.getAllList().subscribe(
-      (data: Locations) => this.locations = data,
-      error => this.error = error
-    );
-
-
-    this.worksService.getAllList().subscribe(
-      (data: Works) => this.works = data,
-      error => this.error = error
-    );
-
 
     this.brandService.getAllListbyUser(+userId).subscribe(
       (data: Brand) => this.brands = data,
       error => this.error = error
     );
 
-    this.clientsService.getAllList().subscribe(
-      (data: Clients) => this.clients = data,
-      error => this.error = error
-    );
+  
+    this.spinner.hide();
 
-    this.comuniService.getAllList().subscribe(
-      (data: Comuni) => this.comuni = data,
-      error => this.error = error
-    );
-    
   }
 
   getCategoryItem(category_id: string, id: string) {
