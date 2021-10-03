@@ -41,6 +41,7 @@ export class BrandsFormComponent implements OnInit {
   selectedWorks: Works;
   selectedDate: Date;
   date: Date;
+  currentUser: any;
 
   constructor(
     private fb: FormBuilder,
@@ -54,6 +55,7 @@ export class BrandsFormComponent implements OnInit {
       this.selectedDate = new Date(this.date);
     }
 
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
   }
 
@@ -70,25 +72,27 @@ export class BrandsFormComponent implements OnInit {
     if (id) {
 
 
-      this.pageTitle = 'Modifica Tipo di lavorazione';
+      this.pageTitle = 'Modifica Brand';
       this.brandsService.getId(+id).subscribe(
         res => {
           this.categoryForm.patchValue({
             category_name: res.category_name,
             category_description: res.category_description,
+            user_id: this.currentUser.user_id,
             id: res.id
           });
 
         }
       );
     } else {
-      this.pageTitle = 'Create Category';
+      this.pageTitle = 'Aggiungi Brand';
     }
 
     this.categoryForm = this.fb.group({
       id: [''],
       category_name: ['', Validators.required],
-      category_description: ['']
+      category_description: [''],
+      user_id: [this.currentUser.user_id],
 
     });
   }
@@ -107,6 +111,7 @@ export class BrandsFormComponent implements OnInit {
 
     formData.append('category_name', this.categoryForm.get('category_name').value);
     formData.append('category_description', this.categoryForm.get('category_description').value);
+    formData.append('user_id', this.categoryForm.get('user_id').value);
 
     const id = this.categoryForm.get('id').value;
 

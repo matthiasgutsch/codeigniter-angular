@@ -77,6 +77,7 @@ export class AdminDashboardComponent implements OnInit {
   items: any;
   appointmentsCount: Appointments;
   billingsCount: Billings;
+  category_id: string;
 
   trackByFn(index, item) {
     return item.id;
@@ -107,12 +108,24 @@ export class AdminDashboardComponent implements OnInit {
     this.events = this.appointments;
     this.items = DASHBOARD;
 
+
+    
   }
 
   ngOnInit() {
 
     this.spinner.show();
     const userId = this.currentUser.user_id;
+
+    this.getClientsCount();
+    this.getClients();
+     this.getProductsCount();
+     this.getBillingsCount();
+     this.getAppointmentsToday();
+     this.getAppointmentsCount();
+     
+     this.spinner.hide();
+
     this.appointmentsService.getAllListbyUser().subscribe(data => {
 
       
@@ -133,46 +146,40 @@ export class AdminDashboardComponent implements OnInit {
         timezone: 'UTC',
         selectable: true,
       };
-
-       this.getClientsCount();
-       this.getClients();
-        this.getProductsCount();
-        this.getBillingsCount();
-        this.getAppointmentsToday();
-        this.getAppointmentsCount();
-        this.spinner.hide();
-
     });
   }
 
 
+
+  
     getClientsCount() {
     const userId = this.currentUser.user_id; 
-    this.clientsService.count(+userId).subscribe(
+    this.clientsService.count().subscribe(
       (data: Clients) => this.clientsCount = data,
       error => this.error = error
       );
     }
 
     getClients() {
-      const userId = this.currentUser.user_id; 
-      this.clientsService.getAllListbyUser().subscribe(
-        (data: Clients) => this.clients = data,
+      this.clientsService.getAllListbyUser().subscribe(data => {
+        this.clients = data;
         error => this.error = error
-        );
-      }
+      });
+    }
+
 
     getProductsCount() {
-      const userId = this.currentUser.user_id; 
-      this.productsService.count(+userId).subscribe(
-      (data: Products) => this.productsCount = data,
-      error => this.error = error
-      );
+      this.productsService.count().subscribe(data => {
+        this.productsCount = data;
+        error => this.error = error
+      });
     }
+
+  
 
     getAppointmentsCount() {
       const userId = this.currentUser.user_id; 
-    this.appointmentsService.count(+userId).subscribe(
+    this.appointmentsService.count().subscribe(
       (data: Appointments) => this.appointmentsCount = data,
       error => this.error = error
       );
@@ -180,7 +187,7 @@ export class AdminDashboardComponent implements OnInit {
 
     getBillingsCount() {
       const userId = this.currentUser.user_id; 
-    this.billingsService.count(+userId).subscribe(
+    this.billingsService.count().subscribe(
       (data: Billings) => this.billingsCount = data,
       error => this.error = error
       );
@@ -196,31 +203,33 @@ export class AdminDashboardComponent implements OnInit {
     }
 
 
-  getCategoryItem(category_id: string, id: string) {
-    return this.clients.find(item => item.id === category_id);
-  }
-
-
-  getComuniItem(province: string, id: string) {
-    return this.comuni.find(item => item.id === province);
-  }
-
-  getEmployeeItem(employee_id: string, id: string) {
-    return this.employees.find(item => item.id === employee_id);
-  }
-
-  
-
-  getLocationItem(location_id: string, id: string) {
-    return this.locations.find(item => item.id === location_id);
-  }
 
 
 
-  getWorksItem(works_id: string, id: string) {
-    return this.works.find(item => item.id === works_id);
-  }
+    getCategoryItem(category_id: string, id: string) {
+      return this.clients.find(item => item.id === category_id);
+    }
 
+
+    getComuniItem(province: string, id: string) {
+      return this.comuni.find(item => item.id === province);
+    }
+
+    getEmployeeItem(employee_id: string, id: string) {
+      return this.employees.find(item => item.id === employee_id);
+    }
+
+    
+
+    getLocationItem(location_id: string, id: string) {
+      return this.locations.find(item => item.id === location_id);
+    }
+
+
+
+    getWorksItem(works_id: string, id: string) {
+      return this.works.find(item => item.id === works_id);
+    }
 
     
   editProduct(appointment: Appointments) {

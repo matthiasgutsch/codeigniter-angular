@@ -44,7 +44,8 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
 
 
 
-  count(userId: number) {
+  count() {
+    const userId = this.currentUser.user_id;
     return this._http.get<T>(this._base + '/count/' + userId).pipe(
       catchError(this.handleError)
     );
