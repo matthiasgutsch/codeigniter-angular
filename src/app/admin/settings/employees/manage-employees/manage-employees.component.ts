@@ -47,7 +47,7 @@ export class ManageEmployeesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.employeesService.getAllList().subscribe(
+    this.employeesService.getAllListbyUser().subscribe(
       (data: Employees) => this.employees = data,
       error => this.error = error
     );

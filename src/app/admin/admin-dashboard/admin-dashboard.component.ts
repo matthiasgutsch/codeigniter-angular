@@ -143,12 +143,6 @@ export class AdminDashboardComponent implements OnInit {
         this.spinner.hide();
 
     });
-
-
-  
-
-    
-
   }
 
 

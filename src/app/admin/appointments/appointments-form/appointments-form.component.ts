@@ -116,24 +116,24 @@ export class AppointmentsFormComponent implements OnInit {
     this.getselectedWorks;
     
 
-    this.categoryService.getAllList().subscribe(
+    this.categoryService.getAllListbyUser().subscribe(
       (data: Category) => (this.categories = data),
       (error) => (this.error = error)
     );
 
 
-    this.employeesService.getAllList().subscribe(
+    this.employeesService.getAllListbyUser().subscribe(
       (data: Employees) => (this.employees = data),
       (error) => (this.error = error)
     );
 
 
-    this.worksService.getAllList().subscribe(
+    this.worksService.getAllListbyUser().subscribe(
       (data: Works) => (this.works = data),
       (error) => (this.error = error)
     );
 
-    this.locationsService.getAllList().subscribe(
+    this.locationsService.getAllListbyUser().subscribe(
       (data: Locations) => (this.locations = data),
       (error) => (this.error = error)
     );
