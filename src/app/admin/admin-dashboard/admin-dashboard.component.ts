@@ -135,6 +135,7 @@ export class AdminDashboardComponent implements OnInit {
       };
 
        this.getClientsCount();
+       this.getClients();
         this.getProductsCount();
         this.getBillingsCount();
         this.getAppointmentsToday();
@@ -158,6 +159,14 @@ export class AdminDashboardComponent implements OnInit {
       error => this.error = error
       );
     }
+
+    getClients() {
+      const userId = this.currentUser.user_id; 
+      this.clientsService.getAllListbyUser(+userId).subscribe(
+        (data: Clients) => this.clients = data,
+        error => this.error = error
+        );
+      }
 
     getProductsCount() {
       const userId = this.currentUser.user_id; 
