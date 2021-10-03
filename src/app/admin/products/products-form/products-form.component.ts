@@ -119,21 +119,14 @@ export class ProductsFormComponent implements OnInit {
 
     this.getselectedWorks;
     
-  
 
-    this.categoryService.getAllList().subscribe(
-      (data: Category) => (this.categories = data),
-      (error) => (this.error = error)
-    );
-
-
-    this.brandsService.getAllListbyUser(+userId).subscribe(
+    this.brandsService.getAllListbyUser().subscribe(
       (data: Brand) => (this.brands = data),
       (error) => (this.error = error)
     );
 
 
-    this.worksService.getAllListbyUser(+userId).subscribe(
+    this.worksService.getAllListbyUser().subscribe(
       (data: Works) => (this.works = data),
       (error) => (this.error = error)
     );

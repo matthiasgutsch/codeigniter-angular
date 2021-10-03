@@ -35,7 +35,8 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
 
-  getAllListbyUser(userId: number) {
+  getAllListbyUser() {
+    const userId = this.currentUser.user_id;
     return this._http.get<T>(this._base + '/user/' + userId).pipe(
       catchError(this.handleError)
     );
@@ -102,7 +103,8 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
   create(blog) {
-    return this._http.post<any>(this._base + '/create', blog).pipe(
+    const userId = this.currentUser.user_id;
+    return this._http.post<any>(this._base + '/create/' + userId, blog).pipe(
       catchError(this.handleError)
     );
   }
@@ -115,7 +117,8 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
   delete(id: number) {
-    return this._http.delete(this._base + '/delete/' + id).pipe(
+    const userId = this.currentUser.user_id;
+    return this._http.delete(this._base + '/delete/' + id + '/' + userId).pipe(
       catchError(this.handleError)
     );
   }

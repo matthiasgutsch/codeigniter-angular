@@ -113,7 +113,7 @@ export class AdminDashboardComponent implements OnInit {
 
     this.spinner.show();
     const userId = this.currentUser.user_id;
-    this.appointmentsService.getAllListbyUser(+userId).subscribe(data => {
+    this.appointmentsService.getAllListbyUser().subscribe(data => {
 
       
       this.calendarOptions = {
@@ -162,7 +162,7 @@ export class AdminDashboardComponent implements OnInit {
 
     getClients() {
       const userId = this.currentUser.user_id; 
-      this.clientsService.getAllListbyUser(+userId).subscribe(
+      this.clientsService.getAllListbyUser().subscribe(
         (data: Clients) => this.clients = data,
         error => this.error = error
         );

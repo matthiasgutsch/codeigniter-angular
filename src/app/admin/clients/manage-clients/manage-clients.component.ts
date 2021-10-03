@@ -63,7 +63,7 @@ export class ManageClientsComponent implements OnInit {
    
 
     this.spinner.show();
-    this.clientsService.getAllListbyUser(+userId).subscribe(data => {
+    this.clientsService.getAllListbyUser().subscribe(data => {
       this.clients = data;
       this.cols = [
         { field: "name", header: "Nome" },

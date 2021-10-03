@@ -53,13 +53,13 @@ export class ManageBillingsComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     const userId = this.currentUser.user_id;
     
-    this.billingsService.getAllListbyUser(+userId).subscribe(
+    this.billingsService.getAllListbyUser().subscribe(
       (data: Blog) => (this.blogs = data),
       (error) => (this.error = error)
     );
 
 
-    this.clientsService.getAllListbyUser(+userId).subscribe(
+    this.clientsService.getAllListbyUser().subscribe(
       (data: Clients) => (this.clients = data),
       (error) => (this.error = error)
     );

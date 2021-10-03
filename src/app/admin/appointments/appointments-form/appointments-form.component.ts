@@ -139,7 +139,7 @@ export class AppointmentsFormComponent implements OnInit {
     );
 
     const userId = this.currentUser.user_id;
-    this.clientsService.getAllListbyUser(+userId).subscribe(
+    this.clientsService.getAllListbyUser().subscribe(
       (data: Clients) => (this.clients = data),
       (error) => (this.error = error)
     );

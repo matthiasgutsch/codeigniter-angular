@@ -128,29 +128,13 @@ export class BillingsFormComponent implements OnInit {
     this.getselectedWorks;
   
 
-    this.categoryService.getAllList().subscribe(
-      (data: Category) => (this.categories = data),
-      (error) => (this.error = error)
-    );
-
-
-    this.employeesService.getAllList().subscribe(
-      (data: Employees) => (this.employees = data),
-      (error) => (this.error = error)
-    );
-
-
-    this.worksService.getAllList().subscribe(
+    this.worksService.getAllListbyUser().subscribe(
       (data: Works) => (this.works = data),
       (error) => (this.error = error)
     );
 
-    this.locationsService.getAllList().subscribe(
-      (data: Locations) => (this.locations = data),
-      (error) => (this.error = error)
-    );
 
-    this.clientsService.getAllList().subscribe(
+    this.clientsService.getAllListbyUser().subscribe(
       (data: Clients) => (this.clients = data),
       (error) => (this.error = error)
     );

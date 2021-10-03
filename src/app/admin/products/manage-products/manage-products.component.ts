@@ -115,19 +115,13 @@ trackByFn(index, item) {
 
     this.spinner.show();
 
-    this.productsService.getAllListbyUser(+userId).subscribe(
+    this.productsService.getAllListbyUser().subscribe(
       (data: Products) => this.products = data,
       error => this.error = error
     );
 
 
-    this.categoryService.getAllList().subscribe(
-      (data: Category) => this.categories = data,
-      error => this.error = error
-    );
-
-
-    this.brandService.getAllListbyUser(+userId).subscribe(
+    this.brandService.getAllListbyUser().subscribe(
       (data: Brand) => this.brands = data,
       error => this.error = error
     );
