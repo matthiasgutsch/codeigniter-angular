@@ -96,7 +96,7 @@ trackByFn(index, item) {
 
   ngOnInit() {
     const userId = this.currentUser.user_id;
-    
+
     this.cols = [
       { field: "title", header: "titolo" },
       { field: "code", header: "Codice" },

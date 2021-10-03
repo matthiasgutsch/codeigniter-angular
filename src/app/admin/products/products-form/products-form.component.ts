@@ -133,7 +133,7 @@ export class ProductsFormComponent implements OnInit {
     );
 
 
-    this.worksService.getAllList().subscribe(
+    this.worksService.getAllListbyUser(+userId).subscribe(
       (data: Works) => (this.works = data),
       (error) => (this.error = error)
     );

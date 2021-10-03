@@ -58,10 +58,6 @@ export class ManageBillingsComponent implements OnInit {
       (error) => (this.error = error)
     );
 
-    this.categoryService.getAllList().subscribe(
-      (data: Category) => (this.categories = data),
-      (error) => (this.error = error)
-    );
 
     this.clientsService.getAllListbyUser(+userId).subscribe(
       (data: Clients) => (this.clients = data),

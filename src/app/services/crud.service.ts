@@ -3,6 +3,7 @@ import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { CrudOperations } from './crud-operations.interface';
 import { catchError } from 'rxjs/operators';
+import { Billings } from '../models/billings';
 
 export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   currentUser: any ;
@@ -23,8 +24,10 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     protected _base: string
   ) { 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+
   }
 
+  
   getAllList() {
     return this._http.get<T>(this._base + '/').pipe(
       catchError(this.handleError)
@@ -65,8 +68,18 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     );
   }
 
-
   
+  find_billing_client(id: number, ) {
+    return this._http.get<Billings>(this._base + '/billings_by_client/' + id)
+  }
+
+  find_billings_by_appointments(id: number) {
+    return this._http.get<Billings>(this._base + '/billings_by_appointments/' + id)
+  }
+  
+  find_billings_by_appointment_id(id: number) {
+    return this._http.get<Billings>(this._base + '/billings_by_appointment_id/' + id)
+  }
   
 
   find(id: ID) {
@@ -76,7 +89,8 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
   getId(id: ID) {
-    return this._http.get<T>(this._base + '/id/' + id).pipe(
+    const userId = this.currentUser.user_id;
+    return this._http.get<T>(this._base + '/id/' + id + '/' + userId).pipe(
       catchError(this.handleError)
     );
   }
@@ -94,7 +108,8 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
   update(blog, id: number) {
-    return this._http.post<any>(this._base + '/update/' + id, blog).pipe(
+    const userId = this.currentUser.user_id;
+    return this._http.post<any>(this._base + '/update/' + id + '/' + userId, blog).pipe(
       catchError(this.handleError)
     );
   }

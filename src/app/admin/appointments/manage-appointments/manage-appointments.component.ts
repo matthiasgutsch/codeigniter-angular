@@ -103,12 +103,7 @@ export class ManageAppointmentsComponent implements OnInit {
     const userId = this.currentUser.user_id;
       this.appointmentsService.getAllListbyUser(+userId).subscribe(data => {
         this.appointments = data;
-        this.getCategories();
-        this.getLocations();
-        this.getWorks();
-        this.getEmployees();
         this.getClients();
-        this.getComuni();
         this.spinner.hide();
       });
   }

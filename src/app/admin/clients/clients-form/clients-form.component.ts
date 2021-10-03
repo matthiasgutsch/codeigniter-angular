@@ -84,16 +84,8 @@ export class ClientsFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    
-    this.clientsService.getAllList().subscribe(
-      (data: Clients) => (this.clients = data),
-      (error) => (this.error = error)
-    );
+    const userId = this.currentUser.user_id;
 
-    this.categoryService.getAllList().subscribe(
-      (data: Category) => (this.categories = data),
-      (error) => (this.error = error)
-    );
 
     this.comuniService.getAllList().subscribe(
       (data: Comuni) => (this.comuni = data),
