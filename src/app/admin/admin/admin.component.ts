@@ -36,7 +36,8 @@ export class AdminComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
- 
+    const userId = this.currentUser.user_id;
+
     setTimeout(() => {
       this.spinner.hide();
     }, 500);

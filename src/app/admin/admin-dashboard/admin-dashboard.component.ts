@@ -123,7 +123,6 @@ export class AdminDashboardComponent implements OnInit {
      this.getBillingsCount();
      this.getAppointmentsToday();
      this.getAppointmentsCount();
-     
      this.spinner.hide();
 
     this.appointmentsService.getAllListbyUser().subscribe(data => {
