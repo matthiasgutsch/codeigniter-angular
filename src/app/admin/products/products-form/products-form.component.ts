@@ -84,6 +84,7 @@ export class ProductsFormComponent implements OnInit {
   works_id: any;
   public dataValues: object;
   pages: any;
+  currentUser: any;
 
 
   trackByFn(index, item) {
@@ -109,10 +110,13 @@ export class ProductsFormComponent implements OnInit {
     }
     this.typeList = TYPE_LIST;
     this.status = STATUS_PRODUCTS;
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
   }
 
   ngOnInit() {
+    const userId = this.currentUser.user_id;
+
     this.getselectedWorks;
     
   
@@ -123,7 +127,7 @@ export class ProductsFormComponent implements OnInit {
     );
 
 
-    this.brandsService.getAllList().subscribe(
+    this.brandsService.getAllListbyUser(+userId).subscribe(
       (data: Brand) => (this.brands = data),
       (error) => (this.error = error)
     );
@@ -145,6 +149,7 @@ export class ProductsFormComponent implements OnInit {
       this.pageTitle = "Modifica Prodotto";
       
       this.productsService.getId(+id).subscribe((res) => {
+        if (res.user_id == this.currentUser.user_id) {
         this.blogForm.patchValue({
           title: res.title,
           description: res.description.split(','),
@@ -155,10 +160,16 @@ export class ProductsFormComponent implements OnInit {
           is_featured: res.is_featured,
           is_active: res.is_active,
           code: res.code,
+          user_id: this.currentUser.user_id,
           description_full: res.description_full,
           code_int: res.code_int,
           id: res.id,
         });
+      }
+      else {
+        this.router.navigate(['/admin/products']);
+
+      }
         this.imagePath = res.image;
         this.id = res.id;
 
@@ -183,6 +194,7 @@ export class ProductsFormComponent implements OnInit {
       is_active: ["0"],
       image: [""],
       code: [""],
+      user_id: [this.currentUser.user_id],
       code_int: [""],
     });
   }
@@ -252,6 +264,7 @@ export class ProductsFormComponent implements OnInit {
     formData.append("code", this.blogForm.get("code").value);
     formData.append("code_int", this.blogForm.get("code_int").value);
     formData.append("status", this.blogForm.get("status").value);
+    formData.append('user_id', this.blogForm.get('user_id').value);
 
 
     const id = this.blogForm.get("id").value;

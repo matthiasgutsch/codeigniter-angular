@@ -10,13 +10,14 @@ import { BrandService } from 'src/app/services/brands.service';
   templateUrl: './manage-brands.component.html'
 })
 export class ManageBrandsComponent implements OnInit {
-  title = 'Tipo di lavorazione';
+  title = 'Brands';
   brands: Brand;
   brand: Brand;
   error: string;
   public cols: any[];
   public columnOptions: any[];
   public selectedColumns: any[];
+  currentUser: any;
 
 
   constructor(private brandsService: BrandService, private confirmationService: ConfirmationService,) {
@@ -34,11 +35,14 @@ export class ManageBrandsComponent implements OnInit {
       this.columnOptions.push({label: this.cols[i].header, value: this.cols[i]});
     }
 
-    
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+
    }
 
   ngOnInit() {
-    this.brandsService.getAllList().subscribe(
+    const userId = this.currentUser.user_id;
+    
+    this.brandsService.getAllListbyUser(+userId).subscribe(
       (data: Brand) => this.brands = data,
       error => this.error = error
     );

@@ -11,6 +11,7 @@ import { ComuniService } from '../../../../services/comuni.service';
 import { SelectItem } from "primeng/api";
 import * as moment from 'moment';
 import { Comuni } from 'src/app/models/comuni';
+import { BrandService } from 'src/app/services/brands.service';
 
 @Component({
   selector: 'app-brands-form',
@@ -43,7 +44,7 @@ export class BrandsFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private worksService: WorksService,
+    private brandsService: BrandService, 
     private comuniService: ComuniService,
 
     private router: Router,
@@ -70,7 +71,7 @@ export class BrandsFormComponent implements OnInit {
 
 
       this.pageTitle = 'Modifica Tipo di lavorazione';
-      this.worksService.getId(+id).subscribe(
+      this.brandsService.getId(+id).subscribe(
         res => {
           this.categoryForm.patchValue({
             category_name: res.category_name,
@@ -110,23 +111,23 @@ export class BrandsFormComponent implements OnInit {
     const id = this.categoryForm.get('id').value;
 
     if (id) {
-      this.worksService.update(formData, +id).subscribe(
+      this.brandsService.update(formData, +id).subscribe(
         res => {
           if (res.status == 'error') {
             this.uploadError = res.message;
           } else {
-            this.router.navigate(['/admin/settings/works']);
+            this.router.navigate(['/admin/settings/brands']);
           }
         },
         error => this.error = error
       );
     } else {
-      this.worksService.create(formData).subscribe(
+      this.brandsService.create(formData).subscribe(
         res => {
           if (res.status === 'error') {
             this.uploadError = res.message;
           } else {
-            this.router.navigate(['/admin/settings/works']);
+            this.router.navigate(['/admin/settings/brands']);
           }
         },
         error => this.error = error

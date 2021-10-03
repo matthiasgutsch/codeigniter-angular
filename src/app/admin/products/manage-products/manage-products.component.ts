@@ -63,6 +63,7 @@ export class ManageProductsComponent implements OnInit {
   productDialog:boolean = false;
   works_id: any;
   status: any;
+  currentUser: any;
   showDialog() {
     this.productDialog = true;
 }
@@ -88,11 +89,13 @@ trackByFn(index, item) {
     private categoryService: CategoryService, 
     private confirmationService: ConfirmationService,) { 
       this.status = STATUS_PRODUCTS;
+      this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
   }
 
   ngOnInit() {
-
+    const userId = this.currentUser.user_id;
+    
     this.cols = [
       { field: "title", header: "titolo" },
       { field: "code", header: "Codice" },
@@ -110,7 +113,7 @@ trackByFn(index, item) {
     }));
 
 
-    this.productsService.getAllList().subscribe(
+    this.productsService.getAllListbyUser(+userId).subscribe(
       (data: Products) => this.products = data,
       error => this.error = error
     );
@@ -133,7 +136,7 @@ trackByFn(index, item) {
     );
 
 
-    this.brandService.getAllList().subscribe(
+    this.brandService.getAllListbyUser(+userId).subscribe(
       (data: Brand) => this.brands = data,
       error => this.error = error
     );

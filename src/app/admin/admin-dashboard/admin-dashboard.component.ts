@@ -134,78 +134,63 @@ export class AdminDashboardComponent implements OnInit {
         selectable: true,
       };
 
-      
+       this.getClientsCount();
+        this.getProductsCount();
+        this.getBillingsCount();
+        this.getAppointmentsToday();
+        this.getAppointmentsCount();
+        this.spinner.hide();
 
     });
 
 
-    
-    this.clientsService.count(+userId).subscribe(
-      (data: Clients) => this.clientsCount = data,
-      error => this.error = error
-    );
+  
 
-    this.productsService.count(+userId).subscribe(
-      (data: Products) => this.productsCount = data,
-      error => this.error = error
-    );
-
-
-    this.appointmentsService.count(+userId).subscribe(
-      (data: Appointments) => this.appointmentsCount = data,
-      error => this.error = error
-    );
-
-
-    this.billingsService.count(+userId).subscribe(
-      (data: Billings) => this.billingsCount = data,
-      error => this.error = error
-    );
-
-    this.categoryService.getAllList().subscribe(
-      (data: Category) => this.categories = data,
-      error => this.error = error
-    );
-
-    this.locationsService.getAllList().subscribe(
-      (data: Locations) => this.locations = data,
-      error => this.error = error
-    );
-
-
-    this.worksService.getAllList().subscribe(
-      (data: Works) => this.works = data,
-      error => this.error = error
-    );
-
-
-    this.employeesService.getAllList().subscribe(
-      (data: Employees) => this.employees = data,
-      error => this.error = error
-    );
-
-    this.clientsService.getAllList().subscribe(
-      (data: Clients) => this.clients = data,
-      error => this.error = error
-    );
-
-    this.comuniService.getAllList().subscribe(
-      (data: Comuni) => this.comuni = data,
-      error => this.error = error
-    );
-
-    this.appointmentsService.getToday(+userId).subscribe(
-      (data: Appointments) => this.appointmentsToday = data,
-      error => this.error = error
-    );
-
-
-    this.spinner.hide();
     
 
   }
 
 
+    getClientsCount() {
+    const userId = this.currentUser.user_id; 
+    this.clientsService.count(+userId).subscribe(
+      (data: Clients) => this.clientsCount = data,
+      error => this.error = error
+      );
+    }
+
+    getProductsCount() {
+      const userId = this.currentUser.user_id; 
+    this.productsService.count(+userId).subscribe(
+      (data: Products) => this.productsCount = data,
+      error => this.error = error
+      );
+    }
+
+    getAppointmentsCount() {
+      const userId = this.currentUser.user_id; 
+    this.appointmentsService.count(+userId).subscribe(
+      (data: Appointments) => this.appointmentsCount = data,
+      error => this.error = error
+      );
+    }
+
+    getBillingsCount() {
+      const userId = this.currentUser.user_id; 
+    this.billingsService.count(+userId).subscribe(
+      (data: Billings) => this.billingsCount = data,
+      error => this.error = error
+      );
+    }
+
+
+    getAppointmentsToday() {
+      const userId = this.currentUser.user_id; 
+    this.appointmentsService.getToday(+userId).subscribe(
+      (data: Appointments) => this.appointmentsToday = data,
+      error => this.error = error
+      );
+    }
 
 
   getCategoryItem(category_id: string, id: string) {
