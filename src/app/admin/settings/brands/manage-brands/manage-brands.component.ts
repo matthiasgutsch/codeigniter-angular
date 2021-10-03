@@ -42,7 +42,7 @@ export class ManageBrandsComponent implements OnInit {
   ngOnInit() {
     const userId = this.currentUser.user_id;
     
-    this.brandsService.getAllListbyUser(+userId).subscribe(
+    this.brandsService.getAllListbyUser().subscribe(
       (data: Brand) => this.brands = data,
       error => this.error = error
     );
