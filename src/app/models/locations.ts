@@ -4,7 +4,8 @@ export class Locations {
     category_description: string;
     category_address: string;
     category_region: string;
-
+    user_id: string;
+    
   constructor() {
 
 }

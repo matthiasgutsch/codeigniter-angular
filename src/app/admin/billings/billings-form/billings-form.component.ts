@@ -90,6 +90,7 @@ export class BillingsFormComponent implements OnInit {
   descriptionAppointments: string;
   dateAppointments: string;
   numberAppointments: number;
+  currentUser: any;
 
 
   trackByFn(index, item) {
@@ -115,6 +116,7 @@ export class BillingsFormComponent implements OnInit {
     if (this.date) {
       this.selectedDate = new Date(this.date);
     }
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
     this.typeList = TYPE_LIST;
   }
@@ -122,6 +124,9 @@ export class BillingsFormComponent implements OnInit {
 
   ngOnInit() {
 
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    const userId = this.currentUser.user_id;
+    
     this.page = history.state;
 
 
@@ -165,6 +170,7 @@ export class BillingsFormComponent implements OnInit {
           category_id: res.category_id,
           appointment_id: res.appointment_id,
           works_id: res.works_id.split(','),
+          user_id: this.currentUser.user_id,
           is_featured: res.is_featured,
           date: res.date,
           id: res.id,
@@ -183,6 +189,7 @@ export class BillingsFormComponent implements OnInit {
       appointment_id: [""],
       category_id: [""],
       works_id: [""],
+      user_id: [this.currentUser.user_id],
       is_featured: ["0"],
       date: ["", Validators.required],
     });
@@ -267,6 +274,7 @@ export class BillingsFormComponent implements OnInit {
     formData.append("is_featured", this.blogForm.get("is_featured").value);
     formData.append("works_id", this.blogForm.get("works_id").value);
     formData.append("date", this.blogForm.get("date").value);
+    formData.append('user_id', this.blogForm.get('user_id').value);
 
     const id = this.blogForm.get("id").value;
 

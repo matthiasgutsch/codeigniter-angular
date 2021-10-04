@@ -2,11 +2,9 @@
     <div class="login-box" *ngIf="!error">
 
       <div class="login-box-inner">
- <div class="p-grid">
 
-        <div class="p-col-12">
        
-          <div class="p-field p-grid">
+          <div class="p-field">
 
           <h1>Administrator Login</h1>
           </div>
@@ -16,7 +14,7 @@
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="p-fluid">
 
-              <div class="p-field p-grid">
+              <div class="p-field">
 
               
               <input type="text" pInputText  formControlName="username" class="form-control" placeholder="Username" required>
@@ -26,7 +24,7 @@
                 </div>
               </div>
             </div>
-            <div class="p-field p-grid">
+            <div class="p-field">
               <input type="password"  pInputText  formControlName="password" class="form-control" placeholder="Password" required>
               <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error">
                 <div *ngIf="password.errors">
@@ -34,7 +32,7 @@
                 </div>
               </div>
             </div>
-            <div class="p-field p-grid">
+            <div class="p-field">
               <button
               pButton
               pRipple
@@ -54,6 +52,6 @@
     </div>
 
        
-</div></div>
+
     
     </div></section>

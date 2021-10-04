@@ -43,6 +43,7 @@ export class LocationsFormComponent implements OnInit {
   selectedWorks: Works;
   selectedDate: Date;
   date: Date;
+  currentUser: any;
 
   constructor(
     private fb: FormBuilder,
@@ -55,6 +56,7 @@ export class LocationsFormComponent implements OnInit {
     if (this.date) {
       this.selectedDate = new Date(this.date);
     }
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
 
   }
@@ -78,6 +80,7 @@ export class LocationsFormComponent implements OnInit {
           this.categoryForm.patchValue({
             category_name: res.category_name,
             category_description: res.category_description,
+            user_id: this.currentUser.user_id,
             id: res.id
           });
 
@@ -90,7 +93,8 @@ export class LocationsFormComponent implements OnInit {
     this.categoryForm = this.fb.group({
       id: [''],
       category_name: ['', Validators.required],
-      category_description: ['']
+      category_description: [''],
+      user_id: [this.currentUser.user_id]
 
     });
   }
@@ -109,6 +113,7 @@ export class LocationsFormComponent implements OnInit {
 
     formData.append('category_name', this.categoryForm.get('category_name').value);
     formData.append('category_description', this.categoryForm.get('category_description').value);
+    formData.append('user_id', this.categoryForm.get('user_id').value);
 
     const id = this.categoryForm.get('id').value;
 

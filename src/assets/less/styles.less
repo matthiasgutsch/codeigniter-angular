@@ -413,17 +413,24 @@ margin-bottom: 20px;
 
   height: 100vh;
   background-color: @ness_color_3;
+  position: relative;
 }
 
 
 .login-box {
-
-  height: 100vh;
+  position: absolute;
+  left: 50%;
+  margin-left: -250px;
+  top: 50%;
+  margin-top: -200px;
+  box-shadow: @shadow;
   background-color: #FFF;
-  max-width: 40%;
+  width: 100%;
+  max-width: 500px;
+
   
   .login-box-inner {
-    padding: 40% 60px 0px 60px;
+    padding: 30px;
   }
 }
 

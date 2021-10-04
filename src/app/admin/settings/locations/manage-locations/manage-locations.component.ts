@@ -18,12 +18,17 @@ export class ManageLocationsComponent implements OnInit {
   public cols: any[];
   public columnOptions: any[];
   public selectedColumns: any[];
+  currentUser: any;
   
   constructor(private locationsService: LocationsService, 
-    private confirmationService: ConfirmationService,) { }
+    private confirmationService: ConfirmationService,) { 
+
+      this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+
+    }
 
   ngOnInit() {
-    this.locationsService.getAllList().subscribe(
+    this.locationsService.getAllListbyUser().subscribe(
       (data: Locations) => this.locations = data,
       error => this.error = error
     );

@@ -58,6 +58,7 @@ export class CompanyFormComponent implements OnInit {
   appointments: any = [];
   is_featured = '0';
   deleteButton: boolean;
+  currentUser: any;
   trackByFn(index, item) {
     return item.id;
   }
@@ -81,6 +82,8 @@ export class CompanyFormComponent implements OnInit {
     }
     this.items = [];
     this.typeList = SEX_LIST;
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+
   }
 
   ngOnInit() {
@@ -88,23 +91,14 @@ export class CompanyFormComponent implements OnInit {
     this.items = PAGES;
 
 
-    
-    this.clientsService.getAllList().subscribe(
-      (data: Clients) => (this.clients = data),
-      (error) => (this.error = error)
-    );
-
-    this.categoryService.getAllList().subscribe(
-      (data: Category) => (this.categories = data),
-      (error) => (this.error = error)
-    );
+  
 
     this.comuniService.getAllList().subscribe(
       (data: Comuni) => (this.comuni = data),
       (error) => (this.error = error)
     );
 
-    const id = '1';
+    const id = [this.currentUser.user_id];
 
     if (id) {
       this.pageTitle = "Dati aziendali";
