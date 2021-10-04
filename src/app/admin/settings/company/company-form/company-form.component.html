@@ -21,8 +21,7 @@
                             </div>
                             <div class="p-col-12 p-md-6">
        
-                                <button pButton pRipple label="Salva" class="p-button p-button-success p-mr-2 pull-right"
-                                [disabled]="!blogForm.valid"></button>
+                                <button pButton pRipple label="Salva" class="p-button p-button-success p-mr-2 pull-right"></button>
                            
                             </div>
                         </div>
@@ -254,7 +253,8 @@
                             <label class="col-md-3"></label>
                             <div class="col-md-9">
                                 <input type="hidden" formControlName="id">
-                              
+                                <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
+
 
                             </div>
                         </div>

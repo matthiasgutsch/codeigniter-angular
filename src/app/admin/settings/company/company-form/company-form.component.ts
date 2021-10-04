@@ -119,6 +119,7 @@ export class CompanyFormComponent implements OnInit {
           description: res.description,
           category_id: res.category_id,
           is_featured: res.is_featured,
+          user_id: this.currentUser.user_id,
           is_active: res.is_active,
           date: res.date,
           id: res.id,
@@ -152,6 +153,7 @@ export class CompanyFormComponent implements OnInit {
       category_id: ["", Validators.required],
       is_active: ["0"],
       image: [""],
+      user_id: [this.currentUser.user_id],
       date: ["", Validators.required],
     });
   }
@@ -241,6 +243,7 @@ export class CompanyFormComponent implements OnInit {
     formData.append("is_active", this.blogForm.get("is_active").value);
     formData.append("image", this.blogForm.get("image").value);
     formData.append("date", this.blogForm.get("date").value);
+    formData.append('user_id', this.blogForm.get('user_id').value);
 
     const id = this.blogForm.get("id").value;
 
