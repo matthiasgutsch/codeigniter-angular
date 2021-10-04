@@ -17,7 +17,7 @@ export class ManageCategoriesComponent implements OnInit {
   constructor(private categoryService: CategoryService, private confirmationService: ConfirmationService,) { }
 
   ngOnInit() {
-    this.categoryService.getAllList().subscribe(
+    this.categoryService.getAllListbyUser().subscribe(
       (data: Category) => this.categories = data,
       error => this.error = error
     );

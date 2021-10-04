@@ -35,7 +35,7 @@ export class ManageWorksComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.worksService.getAllList().subscribe(
+    this.worksService.getAllListbyUser().subscribe(
       (data: Works) => this.works = data,
       error => this.error = error
     );
