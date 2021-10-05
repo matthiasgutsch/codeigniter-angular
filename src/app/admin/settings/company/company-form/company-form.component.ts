@@ -177,10 +177,6 @@ export class CompanyFormComponent implements OnInit {
     return this.categories.find((item) => item.id === category_id);
   }
 
-  hasNoSelectedAppointments(){
-    return this.appointments.filter(appointment => appointment.title).length===0;
-  }
-
 
   onDelete(id: number, title: string) {
 

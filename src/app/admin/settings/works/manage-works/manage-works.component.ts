@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Works } from '../../../../models/works';
 import {ConfirmationService} from 'primeng/api';
 import { WorksService } from 'src/app/services/works.service';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-manage-works',
@@ -17,6 +18,7 @@ export class ManageWorksComponent implements OnInit {
   public columnOptions: any[];
   public selectedColumns: any[];
 
+  @ViewChild('dt', { static: true }) dt: Table;
 
   constructor(private worksService: WorksService, private confirmationService: ConfirmationService,) {
 

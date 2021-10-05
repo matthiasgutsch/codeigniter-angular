@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BlogService } from '../../../../services/blog.service';
 import { Blog } from '../../../../models/blog';
 import { ConfirmationService } from 'primeng/api';
@@ -9,6 +9,7 @@ import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
 import { EmployeesService } from 'src/app/services/employees.service';
 import { Employees } from 'src/app/models/employees';
+import { Table } from 'primeng/table/table';
 
 @Component({
   selector: 'app-manage-employees',
@@ -36,6 +37,7 @@ export class ManageEmployeesComponent implements OnInit {
     return item.id;
   }
 
+  @ViewChild('dt', { static: true }) dt: Table;
 
   constructor(
     private clientsService: ClientsService,

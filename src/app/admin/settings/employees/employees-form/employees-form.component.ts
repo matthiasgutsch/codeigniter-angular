@@ -48,7 +48,7 @@ export class EmployeesFormComponent implements OnInit {
     private fb: FormBuilder,
     private employeesService: EmployeesService,
     private _location: Location,
-
+    private messageService: MessageService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -116,6 +116,7 @@ export class EmployeesFormComponent implements OnInit {
           if (res.status == 'error') {
             this.uploadError = res.message;
           } else {
+            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
             this._location.back();
           }
         },

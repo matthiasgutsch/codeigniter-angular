@@ -8,7 +8,7 @@ import { FormControl } from '@angular/forms';
 import { WorksService } from '../../../../services/works.service';
 import { ComuniService } from '../../../../services/comuni.service';
 
-import { SelectItem } from "primeng/api";
+import { MessageService, SelectItem } from "primeng/api";
 import * as moment from 'moment';
 import { Comuni } from 'src/app/models/comuni';
 import { BrandService } from 'src/app/services/brands.service';
@@ -47,7 +47,7 @@ export class BrandsFormComponent implements OnInit {
     private fb: FormBuilder,
     private brandsService: BrandService, 
     private comuniService: ComuniService,
-
+    private messageService: MessageService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -121,6 +121,7 @@ export class BrandsFormComponent implements OnInit {
           if (res.status == 'error') {
             this.uploadError = res.message;
           } else {
+            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
             this.router.navigate(['/admin/settings/brands']);
           }
         },

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Works } from '../../../../models/works';
 import {ConfirmationService} from 'primeng/api';
 import { WorksService } from 'src/app/services/works.service';
 import { LocationsService } from 'src/app/services/locations.service';
 import { Locations } from 'src/app/models/locations';
+import { Table } from 'primeng/table/table';
 
 @Component({
   selector: 'app-manage-locations',
@@ -19,7 +20,8 @@ export class ManageLocationsComponent implements OnInit {
   public columnOptions: any[];
   public selectedColumns: any[];
   currentUser: any;
-  
+  @ViewChild('dt', { static: true }) dt: Table;
+
   constructor(private locationsService: LocationsService, 
     private confirmationService: ConfirmationService,) { 
 

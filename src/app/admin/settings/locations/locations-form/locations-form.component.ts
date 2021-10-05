@@ -8,7 +8,7 @@ import { FormControl } from '@angular/forms';
 import { WorksService } from '../../../../services/works.service';
 import { ComuniService } from '../../../../services/comuni.service';
 
-import { SelectItem } from "primeng/api";
+import { MessageService, SelectItem } from "primeng/api";
 import * as moment from 'moment';
 import { Comuni } from 'src/app/models/comuni';
 import { Locations } from 'src/app/models/locations';
@@ -51,6 +51,7 @@ export class LocationsFormComponent implements OnInit {
     private locationsService: LocationsService,
     private router: Router,
     private route: ActivatedRoute,
+    private messageService: MessageService,
     private _location: Location
   ) {
     if (this.date) {
@@ -123,6 +124,7 @@ export class LocationsFormComponent implements OnInit {
           if (res.status == 'error') {
             this.uploadError = res.message;
           } else {
+            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
             this._location.back();
           }
         },

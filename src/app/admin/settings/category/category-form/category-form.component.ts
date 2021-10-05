@@ -8,7 +8,7 @@ import { FormControl } from '@angular/forms';
 import { CategoryService } from '../../../../services/categories.service';
 import { ComuniService } from '../../../../services/comuni.service';
 
-import { SelectItem } from "primeng/api";
+import { MessageService, SelectItem } from "primeng/api";
 import * as moment from 'moment';
 import { Comuni } from 'src/app/models/comuni';
 
@@ -46,7 +46,7 @@ export class CategoryFormComponent implements OnInit {
     private fb: FormBuilder,
     private categoryService: CategoryService,
     private comuniService: ComuniService,
-
+    private messageService: MessageService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -120,6 +120,7 @@ export class CategoryFormComponent implements OnInit {
           if (res.status == 'error') {
             this.uploadError = res.message;
           } else {
+            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
             this.router.navigate(['/admin/settings/categories']);
           }
         },
