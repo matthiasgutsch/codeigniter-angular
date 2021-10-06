@@ -25,6 +25,8 @@ import { ProductsService } from 'src/app/services/products.service';
 import { Products } from 'src/app/models/products';
 import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brands.service';
+import { TagsService } from 'src/app/services/tags.service';
+import { Tags } from 'src/app/models/tags';
 
 
 @Component({
@@ -64,11 +66,14 @@ export class ProductsFormComponent implements OnInit {
 
   brands: any = [];
   brand: Brand;
+  tags: any = [];
 
 
   description: any;
   selectedWorks: SelectItem[] = [];
   selectedWorks2: SelectItem[];
+  selectedCategories: SelectItem[] = [];
+
   locations: any = [];
   location: Locations;
   
@@ -76,12 +81,12 @@ export class ProductsFormComponent implements OnInit {
   format1: string = "";
   format2: string = "";
   selectedCity: Blog;
-  selectedCategories: Category;
   selectedClients: SelectItem[];
   
   selectedDate: Date;
   date: Date;
   works_id: any;
+  category_id: any;
   public dataValues: object;
   pages: any;
   currentUser: any;
@@ -103,6 +108,7 @@ export class ProductsFormComponent implements OnInit {
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,
     private router: Router,
+    private tagsService: TagsService,
     private route: ActivatedRoute
   ) {
     if (this.date) {
@@ -118,7 +124,8 @@ export class ProductsFormComponent implements OnInit {
     const userId = this.currentUser.user_id;
 
     this.getselectedWorks;
-    
+    this.getselectedCategories;
+
 
     this.brandsService.getAllListbyUser().subscribe(
       (data: Brand) => (this.brands = data),
@@ -132,9 +139,16 @@ export class ProductsFormComponent implements OnInit {
     );
 
 
+    this.categoryService.getAllListbyUser().subscribe(
+      (data: Category) => (this.categories = data),
+      (error) => (this.error = error)
+    );
 
 
-  
+    this.tagsService.getAllListbyUser().subscribe(
+      (data: Tags) => this.tags = data,
+      error => this.error = error
+    );
 
     const id = this.route.snapshot.paramMap.get("id");
 
@@ -146,7 +160,7 @@ export class ProductsFormComponent implements OnInit {
         this.blogForm.patchValue({
           title: res.title,
           description: res.description.split(','),
-          category_id: res.category_id,
+          category_id: res.category_id.split(','),
           status: res.status,
           works_id: res.works_id.split(','),
           brand_id: res.brand_id,
@@ -193,7 +207,7 @@ export class ProductsFormComponent implements OnInit {
   }
 
   
-
+ 
   getWorksItem(works_id: string, id: string) {
     return this.works.find(item => item.id === works_id);
   }
@@ -201,6 +215,10 @@ export class ProductsFormComponent implements OnInit {
   getselectedWorks() {
   this.selectedWorks = this.works_id.split(',');
   }
+
+  getselectedCategories() {
+    this.selectedCategories = this.category_id.split(',');
+    }
 
   goback() {
     this._location.back();
@@ -224,7 +242,7 @@ export class ProductsFormComponent implements OnInit {
 
 
   getCategoryItem(category_id: string, id: string) {
-    return this.clients.find((item) => item.id === category_id);
+    return this.categories.find((item) => item.id === category_id);
   }
 
   removeImageFile() {

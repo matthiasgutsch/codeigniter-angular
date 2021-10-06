@@ -220,27 +220,31 @@
                              
                         
 
-                        <div class="p-fluid">
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Upload Image <span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-10">
-                                    
-                                    <input #myInput type="file" id="image" (change)="onSelectedFile($event)" />
-                                    <div [innerHTML]="uploadError" class="error"></div>
-                                    <div *ngIf="imagePath">
-                                        <br />
-                                        <span class="image-container" >
-                                            <img [src]="imagePath" width="300px">
-
-                                            <button pButton pRipple icon="pi pi-trash"
-                                                class="imgcancel p-button p-button-primary p-mr-2"
-                                                (click)="removeImageFile($event)"></button>
-                                        </span>
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+            
+                                        <div class="p-col-12 p-md-12">
+                                            <div class="button_outer">
+                                            <div class="btn_upload">
+                                            <input #myInput type="file" id="image" (change)="onSelectedFile($event)" />
+                                            Carica Immagine
+            
+                                            </div>
+                                        </div>
+                                            <div [innerHTML]="uploadError" class="error"></div>
+                                            <div *ngIf="imagePath">
+                                                <br />
+                                                <span class="image-container">
+                                                    <img [src]="imagePath" *ngIf="imagePath" width="300px">
+            
+                                                    <button pButton pRipple icon="pi pi-trash"
+                                                        class="imgcancel p-button p-button-primary p-mr-2"
+                                                        (click)="removeImageFile($event)"></button>
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
 
                        
              

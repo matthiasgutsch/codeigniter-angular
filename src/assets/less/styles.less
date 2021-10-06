@@ -1,10 +1,7 @@
 @import "colors.less";
 @import "print.less";
 @import "font-awesome.min.less";
-
 @import "primeng.less";
-
-
 @font-face {
   font-family: "Circular";
   font-weight: normal;
@@ -73,17 +70,14 @@ h1, h2, h3, h1 span, h2 span, h3 span {
 
 .dash-title {
   padding-bottom: 10px;
-h3 {
-  padding: 0px;
-  margin: 4px 0px 4px 0px;
-  font-size: 25px;
+  h3 {
+    padding: 0px;
+    margin: 4px 0px 4px 0px;
+    font-size: 25px;
+  }
 }
-
-}
-
 
 .pull-right {
-
   float: right;
 }
 
@@ -134,17 +128,18 @@ body {
 }
 
 .p-fluid .p-button {
- width: auto;
- min-width: 40px;
+  width: auto;
+  min-width: 40px;
 }
 
 .works {
   width: 100%;
   margin: 0px;
- td {
-padding: 12px 0px ;
-border-bottom: 1px solid #ccc;
-}}
+  td {
+    padding: 12px 0px;
+    border-bottom: 1px solid #ccc;
+  }
+}
 
 .user {
   background-color: @ness_color_2;
@@ -152,21 +147,16 @@ border-bottom: 1px solid #ccc;
   border-radius: @radius;
   color: @white;
   margin-right: 10px;
-
   &:hover {
-    background-color: darken(@green,20%);
-  
+    background-color: darken(@green, 20%);
   }
 }
-
 
 .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
   background: fade(@ness_color_2, 20%);
   border-color: fade(@ness_color_2, 20%);
   color: @text-color;
 }
-
-
 
 .sidebar {
   height: 100%;
@@ -179,9 +169,6 @@ border-bottom: 1px solid #ccc;
   overflow-x: hidden;
   transition: 0.1s;
   padding-top: 0px;
-
- 
-
   .user-menu {
     position: absolute;
     list-style-type: none;
@@ -208,18 +195,11 @@ border-bottom: 1px solid #ccc;
         margin-bottom: 10px;
         color: @ness_color_2;
       }
-
       a {
         color: @ness_color_2;
-
       }
     }
   }
-
-     
-  
-
-
   ul.nav-menu {
     list-style: none;
     padding: 0px;
@@ -233,7 +213,6 @@ border-bottom: 1px solid #ccc;
       text-align: center;
       height: 50px;
       line-height: 40px;
-
       a {
         padding: 8px 14px;
         text-decoration: none;
@@ -241,7 +220,6 @@ border-bottom: 1px solid #ccc;
         color: @ness_color_2;
         display: block;
         text-align: center;
-
         transition: 0.3s;
         span {
           float: left;
@@ -261,7 +239,6 @@ border-bottom: 1px solid #ccc;
           margin-right: 20px;
           text-align: center;
         }
-
         &:hover {
           i {
             float: left;
@@ -274,7 +251,6 @@ border-bottom: 1px solid #ccc;
             text-align: center;
           }
         }
-
         &.active {
           i {
             float: left;
@@ -292,7 +268,6 @@ border-bottom: 1px solid #ccc;
   }
   &.open {
     width: 70px;
-
     ul {
       li {
         a {
@@ -305,7 +280,6 @@ border-bottom: 1px solid #ccc;
         }
       }
     }
-    
   }
   &.close {
     width: 200px;
@@ -324,7 +298,6 @@ border-bottom: 1px solid #ccc;
   }
 }
 
-
 #main {
   transition: margin-left 0.1s;
   padding: 60px 30px 30px 30px;
@@ -334,17 +307,13 @@ border-bottom: 1px solid #ccc;
   }
   &.close {
     margin-left: 70px;
-
   }
 }
 
-
-
-
 hr.full {
-border: 0px;
-border-bottom: 1px solid #ccc;
-margin-bottom: 20px;
+  border: 0px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
 }
 
 .navbar-top {
@@ -353,7 +322,6 @@ margin-bottom: 20px;
   position: fixed;
   width: 100%;
   z-index: 100;
- 
   .openbtn {
     font-size: 22px;
     cursor: pointer;
@@ -372,9 +340,6 @@ margin-bottom: 20px;
       height: 40px;
     }
   }
-
-
-
   .logo-wrapper {
     float: left;
     margin-left: 20px;
@@ -387,46 +352,73 @@ margin-bottom: 20px;
       height: 20px;
     }
   }
-
   .user-menu {
     list-style: none;
     float: right;
     margin-right: 40px;
     margin-top: 5px;
-
     li {
       list-style-type: none;
       font-size: 16px;
       float: left;
       margin-left: 10px;
-
-        i {
-          color: fade(@ness_color_2, 40%);
-        }
+      i {
+        color: fade(@ness_color_2, 40%);
+      }
     }
   }
 }
 
+.button_outer {
+  background: fade(@ness_color_2,10%);
+  border-radius: @radius;
+  text-align: center;
+  height: 50px;
+  width: 100%;
+  display: inline-block;
+  transition: .2s;
+  position: relative;
+  border: 2px dotted fade(@ness_color_2,30%);
+  overflow: hidden;
+}
 
+.btn_upload {
+  padding: 14px 30px 12px;
+  color: @ness_color_2;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  font-size: 14px;
+  z-index: 3;
+  white-space: nowrap;
+}
+
+.btn_upload input {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 105%;
+  cursor: pointer;
+  opacity: 0;
+}
 
 .login-wrap {
-
   height: 100vh;
   background-color: @ness_color_3;
   position: relative;
 }
 
-
 .login-box {
   position: absolute;
   right: 0px;
-
   box-shadow: @shadow;
   background-color: #FFF;
   width: 100%;
   max-width: 70%;
   height: 100%;
-  
   .login-box-inner {
     padding: 30px;
     max-width: 500px;
@@ -435,22 +427,20 @@ margin-bottom: 20px;
   }
 }
 
-
 .p-timeline {
   max-height: 700px;
   overflow: hidden;
   overflow-y: auto;
-
   .p-timeline-event {
     min-height: 100px;
   }
   .p-timeline-event-marker {
-  border: 2px solid @ness_color_3;
+    border: 2px solid @ness_color_3;
     border-radius: 50%;
     width: 1rem;
     height: 1rem;
     background-color: #ffffff;
-}
+  }
 }
 
 .p-timeline-event-opposite {
@@ -467,25 +457,21 @@ margin-bottom: 20px;
   margin-bottom: 20px;
   .p-card-body {
     padding: 1.5rem;
-  .p-card-content {
-    padding: 0px;
-  h3 {
-    padding: 8px 0px;
-    margin: 0px;
-    font-size: 20px;
+    .p-card-content {
+      padding: 0px;
+      h3 {
+        padding: 8px 0px;
+        margin: 0px;
+        font-size: 20px;
+      }
+    }
   }
-
 }
-}
-}
-
 
 .p-tabview {
-  
   .p-tabview-nav {
-    li{
+    li {
       &.p-highlight {
-        
         .p-tabview-nav-link {
           color: @ness_color_3;
           border-color: transparent transparent @ness_color_3
@@ -506,9 +492,11 @@ margin-bottom: 20px;
     margin-left: 64px;
   }
 }
+
 .dash-header {
   padding: 30px 0px 0px 0px;
 }
+
 .sidebar-main {
   height: 100%;
   width: 260px;
@@ -522,7 +510,6 @@ margin-bottom: 20px;
   padding-top: 0px;
   padding-left: 20px;
   padding-right: 20px;
-
   .title-wrapper {
     float: left;
     margin-left: 0px;
@@ -541,9 +528,6 @@ margin-bottom: 20px;
       line-height: 66px;
     }
   }
-  
-
-
   .information-box {
     list-style-type: none;
     float: left;
@@ -692,14 +676,12 @@ margin-bottom: 20px;
   background: @ness_color_3;
   border: 1px solid @ness_color_3;
   color: @white;
-
   .fc-title {
-  a {
-    color: @white !important;
+    a {
+      color: @white !important;
+    }
   }
 }
-}
-
 
 .fc .fc-toolbar .fc-button {
   color: @ness_color_2;
@@ -713,52 +695,53 @@ margin-bottom: 20px;
 }
 
 .fc-icon {
-	display: block;
-
-	// Icon base
-	&:after {
-		display: inline-block;
-		font-family: "FontAwesome";
-		line-height: 1;
-		font-size: 14px;
-		vertical-align: middle;
-		position: relative;
-		top: -1px;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-	}
+  display: block;
+  // Icon base
+  &:after {
+    display: inline-block;
+    font-family: "FontAwesome";
+    line-height: 1;
+    font-size: 14px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
 // Arrow icons
 .fc-icon-left-single-arrow:after {
-	content: "\f053";
+  content: "\f053";
 }
+
 .fc-icon-right-single-arrow:after {
-	content: "\f054";
+  content: "\f054";
 }
+
 .fc-icon-left-double-arrow:after {
-	content: "\000AB";
+  content: "\000AB";
 }
+
 .fc-icon-right-double-arrow:after {
-	content: "\000BB";
+  content: "\000BB";
 }
 
 // X icon
 .fc-icon-x:after {
-	content: "\ed6b";
-	font-size:14px;
-	display: block;
+  content: "\ed6b";
+  font-size: 14px;
+  display: block;
 }
-
 
 .fc-icon.fa {
   font: normal normal normal 14px/1 FontAwesome !important;
 }
 
 .fc .fc-toolbar .fc-button:enabled:hover {
-  background:  @ness_color_3;
+  background: @ness_color_3;
   color: #ffffff;
-  border-color:  @ness_color_3;
+  border-color: @ness_color_3;
 }
 
 .fc-button {
@@ -770,6 +753,5 @@ margin-bottom: 20px;
   border-color: @ness_color_2;
   color: #ffffff;
 }
-
 
 @import "media.less";

@@ -90,7 +90,22 @@
                                     </div>
                                 </div>
 
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Categories <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
 
+                                            <p-multiSelect [options]="categories" display="chip" formControlName="category_id" [(ngModel)]="selectedCategories" optionLabel="name" optionValue="name">
+                                            </p-multiSelect>                                           
+
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
                                 
 
                                 <div class="p-fluid">
@@ -176,7 +191,7 @@
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
 
-                                            <p-multiSelect [options]="works" display="chip" formControlName="works_id" [(ngModel)]="selectedWorks" optionLabel="name" optionValue="id">
+                                            <p-multiSelect [options]="tags" display="chip" formControlName="works_id" [(ngModel)]="selectedWorks" optionLabel="name" optionValue="id">
                                             </p-multiSelect>                                           
 
 
@@ -227,7 +242,12 @@
                         <div class="p-field p-grid">
 
                             <div class="p-col-12 p-md-12">
+                                <div class="button_outer">
+                                <div class="btn_upload">
                                 <input #myInput type="file" id="image" (change)="onSelectedFile($event)" />
+                                Carica Immagine
+                                </div>
+                                </div>
                                 <div [innerHTML]="uploadError" class="error"></div>
                                 <div *ngIf="imagePath">
                                     <br />

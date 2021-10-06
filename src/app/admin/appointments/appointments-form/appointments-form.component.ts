@@ -23,6 +23,8 @@ import { Appointments } from 'src/app/models/appointments';
 import { SumPipe } from '../../pipe/sum.pipe';
 import { BillingsService } from 'src/app/services/billings.service';
 import { Billings } from 'src/app/models/billings';
+import { AppointmentTypeService } from 'src/app/services/appointment_type.service';
+import { Appointment_type } from 'src/app/models/appointment_type';
 
 @Component({
   selector: "app-appointments-form",
@@ -82,7 +84,8 @@ export class AppointmentsFormComponent implements OnInit {
   billings_id: any;
   appointmentId: string;
   currentUser: any;
-
+  appointment_type: Appointment_type;
+  appointment_typ: Appointment_type;
 
   trackByFn(index, item) {
     return item.id;
@@ -98,10 +101,10 @@ export class AppointmentsFormComponent implements OnInit {
     private locationsService: LocationsService,
     private worksService: WorksService,
     private employeesService: EmployeesService,
-    private categoryService: CategoryService,
     private confirmationService: ConfirmationService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private appointmentTypeService: AppointmentTypeService, 
   ) {
     if (this.date) {
       this.selectedDate = new Date(this.date);
@@ -116,8 +119,8 @@ export class AppointmentsFormComponent implements OnInit {
     this.getselectedWorks;
     
 
-    this.categoryService.getAllListbyUser().subscribe(
-      (data: Category) => (this.categories = data),
+    this.appointmentTypeService.getAllListbyUser().subscribe(
+      (data: Appointment_type) => (this.appointment_type = data),
       (error) => (this.error = error)
     );
 

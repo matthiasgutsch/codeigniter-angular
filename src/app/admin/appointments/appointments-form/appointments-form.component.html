@@ -38,7 +38,7 @@
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
 
-                                            <p-dropdown [options]="categories" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedCategories" formControlName="title" optionLabel="name" optionValue="name">
+                                            <p-dropdown [options]="appointment_type" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedCategories" formControlName="title" optionLabel="name" optionValue="name">
 
 
                                             </p-dropdown>
@@ -136,7 +136,6 @@
                                                 </ng-template>
 
                                             </p-dropdown>
-
                                         </div>
                                     </div>
                                 </div>

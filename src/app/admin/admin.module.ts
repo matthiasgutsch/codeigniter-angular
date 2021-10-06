@@ -71,8 +71,10 @@ import { ProductsFormComponent } from './products/products-form/products-form.co
 import { ManageProductsComponent } from './products/manage-products/manage-products.component';
 import { ManageBrandsComponent } from './settings/brands/manage-brands/manage-brands.component';
 import { BrandsFormComponent } from './settings/brands/brands-form/brands-form.component';
-
-
+import { ManageTagsComponent } from './settings/tags/manage-tags/manage-tags.component';
+import { TagsFormComponent } from './settings/tags/tags-form/tags-form.component';
+import { ManageAppointmentTypeComponent } from './settings/appointment-type/manage-appointment-type/manage-appointment-type.component';
+import { AppointmentTypeFormComponent } from './settings/appointment-type/appointment-type-form/appointment-type-form.component';
 
 
 
@@ -85,6 +87,8 @@ import { BrandsFormComponent } from './settings/brands/brands-form/brands-form.c
     ManageCategoriesComponent,
     ManageClientsComponent,
     ClientsFormComponent,
+    ManageTagsComponent,
+    TagsFormComponent,
     ManageTypeComponent,
     ManageBrandsComponent,
     BrandsFormComponent,
@@ -92,6 +96,8 @@ import { BrandsFormComponent } from './settings/brands/brands-form/brands-form.c
     ManagePagesComponent,
     MomentPipe,
     DateValidPipe,
+    ManageAppointmentTypeComponent,
+    AppointmentTypeFormComponent,
     JoinPipe,
     WorksFormComponent,
     ManageWorksComponent,

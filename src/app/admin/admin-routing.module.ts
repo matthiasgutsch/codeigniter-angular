@@ -28,6 +28,10 @@ import { ManageProductsComponent } from './products/manage-products/manage-produ
 import { ProductsFormComponent } from './products/products-form/products-form.component';
 import { ManageBrandsComponent } from './settings/brands/manage-brands/manage-brands.component';
 import { BrandsFormComponent } from './settings/brands/brands-form/brands-form.component';
+import { ManageTagsComponent } from './settings/tags/manage-tags/manage-tags.component';
+import { TagsFormComponent } from './settings/tags/tags-form/tags-form.component';
+import { ManageAppointmentTypeComponent } from './settings/appointment-type/manage-appointment-type/manage-appointment-type.component';
+import { AppointmentTypeFormComponent } from './settings/appointment-type/appointment-type-form/appointment-type-form.component';
 
 const routes: Routes = [
   {
@@ -73,6 +77,10 @@ const routes: Routes = [
           { path: "settings/works/edit/:id", component: WorksFormComponent },
           { path: "settings/works/create", component: WorksFormComponent },
 
+          { path: "settings/tags", component: ManageTagsComponent },
+          { path: "settings/tags/edit/:id", component: TagsFormComponent },
+          { path: "settings/tags/create", component: TagsFormComponent },
+
           { path: "settings/locations", component: ManageLocationsComponent },
           { path: "settings/locations/edit/:id", component: LocationsFormComponent },
           { path: "settings/locations/create", component: LocationsFormComponent },
@@ -81,6 +89,10 @@ const routes: Routes = [
           { path: "settings/employees/edit/:id", component: EmployeesFormComponent },
           { path: "settings/employees/create", component: EmployeesFormComponent },
 
+
+          { path: "settings/appointment-type", component: ManageAppointmentTypeComponent },
+          { path: "settings/appointment-type/edit/:id", component: AppointmentTypeFormComponent },
+          { path: "settings/appointment-type/create", component: AppointmentTypeFormComponent },
 
           { path: "settings/company", component: CompanyFormComponent },
           
