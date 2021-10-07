@@ -67,6 +67,8 @@ export class ManageClientsComponent implements OnInit {
       this.clients = data;
       this.cols = [
         { field: "name", header: "Nome" },
+        { field: "surname", header: "Cognome" },
+
         { field: "date", header: "Data di nascità" },
         { field: "phone", header: "Cellulare" },
         { field: "city", header: "Indirizzo" },

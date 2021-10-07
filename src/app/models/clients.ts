@@ -1,6 +1,9 @@
+import { StringMap } from "@angular/compiler/src/compiler_facade_interface";
+
 export class Clients {
   id: number;
   name: string;
+  surname: string;
   city: string;
   zip: string;
   address: string;

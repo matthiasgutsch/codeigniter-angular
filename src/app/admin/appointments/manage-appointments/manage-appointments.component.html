@@ -80,7 +80,7 @@
 
                                 <td>
                                     <a (click)="editProduct(appointment)">
-                                        <span class="user"><i class="pi pi-user"></i></span>{{ getCategoryItem(appointment.category_id)?.name }}</a>
+                                        <span class="user">{{ getCategoryItem(appointment.category_id)?.name | slice:0:1}}{{ getCategoryItem(appointment.category_id)?.surname | slice:0:1}}</span>{{ getCategoryItem(appointment.category_id)?.name }} {{ getCategoryItem(appointment.category_id)?.surname }}</a>
                                 </td>
 
 

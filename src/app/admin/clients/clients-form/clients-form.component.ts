@@ -111,6 +111,7 @@ export class ClientsFormComponent implements OnInit {
         if (res.user_id == this.currentUser.user_id) {
         this.blogForm.patchValue({
           name: res.name,
+          surname: res.surname,
           city: res.city,
           zip: res.zip,
           address: res.address,
@@ -143,6 +144,7 @@ export class ClientsFormComponent implements OnInit {
     this.blogForm = this.fb.group({
       id: [""],
       name: ["", Validators.required],
+      surname: ["", Validators.required],
       city: ["", Validators.required],
       zip: ["", Validators.required],
       address: ["", Validators.required],
@@ -235,6 +237,7 @@ export class ClientsFormComponent implements OnInit {
   onSubmit() {
     const formData = new FormData();
     formData.append("name", this.blogForm.get("name").value);
+    formData.append("surname", this.blogForm.get("surname").value);
     formData.append("city", this.blogForm.get("city").value);
     formData.append("zip", this.blogForm.get("zip").value);
     formData.append("address", this.blogForm.get("address").value);

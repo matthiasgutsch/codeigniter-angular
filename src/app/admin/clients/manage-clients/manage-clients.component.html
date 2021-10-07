@@ -8,6 +8,11 @@
                     <input *ngSwitchCase="'name'" [ngModel]="dt.filters['name']? dt.filters['name'].value : ''" 
                     placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
              
+                    <input *ngSwitchCase="'surname'" [ngModel]="dt.filters['surname']? dt.filters['surname'].value : ''" 
+                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
+             
+
+
                     <input *ngSwitchCase="'date'" [ngModel]="dt.filters['date']? dt.filters['date'].value : ''" 
                     placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
 

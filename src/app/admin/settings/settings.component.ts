@@ -5,7 +5,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { BlogService } from '../../services/blog.service';
 import { Blog } from '../../models/blog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TYPE_LIST } from '../constants/constants';
+import { PAGES_PRODUCT, TYPE_LIST } from '../constants/constants';
 import { CategoryService } from 'src/app/services/categories.service';
 import { Category } from 'src/app/models/category';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -49,6 +49,7 @@ export class SettingsComponent implements OnInit {
   client: Clients;
   comuni: any = [];
   items: any = [];
+  itemsProduct: any = [];
 
 trackByFn(index, item) {
   return item.id;
@@ -67,11 +68,13 @@ trackByFn(index, item) {
     private route: ActivatedRoute
     ) {
       this.items = [];
+      this.itemsProduct = [];
 
    }
 
   ngOnInit() {
     this.items = PAGES;
+    this.itemsProduct = PAGES_PRODUCT;
 
 
 } 

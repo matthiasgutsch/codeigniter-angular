@@ -21,7 +21,7 @@
             </div>
             <div class="p-col-4 p-md-4">
     
-                <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/settings/tags/create']" label="Aggiungi" class="p-button p-button-primary p-mr-2 pull-right"></button> 
+                <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/settings/appointment-type/create']" label="Aggiungi" class="p-button p-button-primary p-mr-2 pull-right"></button> 
                 <button type="text" pButton label="Filter"  icon="pi pi-filter" class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
     
     </div>
@@ -61,7 +61,7 @@
             </td>
 
             <td class="action">
-                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/settings/works/edit', rowData.id]"></button>
+                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/settings/appointment-type/edit', rowData.id]"></button>
                 <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(rowData.id)"></button>
             </td>
         </tr>

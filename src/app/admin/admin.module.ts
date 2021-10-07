@@ -15,6 +15,9 @@ import { ClientsFormComponent } from './clients/clients-form/clients-form.compon
 import {TabViewModule} from 'primeng/tabview';
 import { DateValidPipe } from "./pipe/date-valid.pipe";
 import { JoinPipe } from "./pipe/join.pipe";
+import { LimitPipe } from "./pipe/limit.pipe";
+
+
 
 import {InputTextareaModule} from 'primeng/inputtextarea';
 
@@ -99,6 +102,7 @@ import { AppointmentTypeFormComponent } from './settings/appointment-type/appoin
     ManageAppointmentTypeComponent,
     AppointmentTypeFormComponent,
     JoinPipe,
+    LimitPipe,
     WorksFormComponent,
     ManageWorksComponent,
     ManageAppointmentsComponent,
@@ -114,7 +118,7 @@ import { AppointmentTypeFormComponent } from './settings/appointment-type/appoin
     ManageEmployeesComponent
     ],
     exports: [
-
+      LimitPipe
     ],
   imports: [
     CommonModule,
@@ -154,7 +158,7 @@ import { AppointmentTypeFormComponent } from './settings/appointment-type/appoin
     AutoCompleteModule,
     SidebarModule
   ],
-  providers: [ConfirmationService, MessageService, SumPipeModule, NgxSpinnerService]
+  providers: [ConfirmationService, MessageService, SumPipeModule,  NgxSpinnerService]
 })
 export class AdminModule { }
 
