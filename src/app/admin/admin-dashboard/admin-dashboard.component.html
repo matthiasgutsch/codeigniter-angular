@@ -107,24 +107,23 @@
             <p-table #dt1 [value]="appointmentsToday" [paginator]="false" [rows]="10">
 
                 <ng-template pTemplate="body" let-appointment>
-                    <tr>
+                    <tr >
                         <td width="100">
                             <p-tag value="{{appointment.date | date: 'HH:mm' }}" severity="warning"></p-tag>
                         </td>
-                        <td width="50">
-                            <app-initials-avatar (click)="editProduct(appointment)"
+                        
+
+                        <td width="50" >
+                            <app-initials-avatar  (click)="editProduct(appointment)"
                                 firstName="{{ getCategoryItem(appointment.category_id)?.name | slice:0:1}}"
                                 lastName="{{ getCategoryItem(appointment.category_id)?.surname | slice:0:1}}">
                             </app-initials-avatar>
                         </td>
-                        <td> {{appointment.title}}<br> {{ getCategoryItem(appointment.category_id)?.name }}
+                        <td> {{ getCategoryItem(appointment.category_id)?.name }}
                             {{ getCategoryItem(appointment.category_id)?.surname }}</td>
 
-                        <td class="action" width="70">
-                            <button pButton pRipple icon="pi pi-eye" class="p-button p-button-info p-mr-2 pull-right"
-                                (click)="editProduct(appointment)"></button>
-
-                        </td>
+                          
+                            <td>{{appointment.title}}</td>
                     </tr>
                 </ng-template>
             </p-table>

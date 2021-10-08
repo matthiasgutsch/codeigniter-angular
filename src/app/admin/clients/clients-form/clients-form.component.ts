@@ -146,7 +146,7 @@ export class ClientsFormComponent implements OnInit {
       id: [""],
       name: ["", Validators.required],
       surname: ["", Validators.required],
-      username: ["", Validators.required],
+      username: [""],
       city: ["", Validators.required],
       zip: ["", Validators.required],
       address: ["", Validators.required],

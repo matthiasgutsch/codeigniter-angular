@@ -11,6 +11,7 @@ export class Clients {
   province: string;
   email: string;
   phone: string;
+  username: string;
   user_id: number;
   description: string;
   image: string;
