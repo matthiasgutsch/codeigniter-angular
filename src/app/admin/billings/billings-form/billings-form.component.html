@@ -59,7 +59,7 @@
                                         <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Cliente <span
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-12">
-                                            <p-dropdown [options]="clients" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="categoryAppointments" formControlName="category_id" optionLabel="name" optionValue="id">
+                                            <p-dropdown [options]="clients" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="categoryAppointments" formControlName="category_id" optionLabel="username" optionValue="id">
                                                 <ng-template let-option pTemplate="item">
 
                                                     <strong>{{option.name}} {{option.surname}}</strong><br>
@@ -149,7 +149,7 @@
                             <div class="p-col-12 p-md-6" *ngIf="getCategoryItem">
                                 <h3>Cliente</h3>
 
-                                {{ getCategoryItem(categoryAppointments)?.name }}<br>{{ getCategoryItem(categoryAppointments)?.zip }} - {{ getCategoryItem(categoryAppointments)?.city }} <br> {{ getCategoryItem(categoryAppointments)?.phone }}
+                                {{ getCategoryItem(categoryAppointments)?.username }}<br>{{ getCategoryItem(categoryAppointments)?.zip }} - {{ getCategoryItem(categoryAppointments)?.city }} <br> {{ getCategoryItem(categoryAppointments)?.phone }}
 
 
 
