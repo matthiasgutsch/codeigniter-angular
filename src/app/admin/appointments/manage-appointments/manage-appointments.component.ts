@@ -20,6 +20,8 @@ import { formatDate } from '@angular/common';
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { NgxSpinnerService } from "ngx-spinner";
+import { Appointment_type } from 'src/app/models/appointment_type';
+import { AppointmentTypeService } from 'src/app/services/appointment_type.service';
 
 @Component({
   selector: 'app-manage-appointments',
@@ -52,6 +54,8 @@ export class ManageAppointmentsComponent implements OnInit {
   private id: number;
   clients: any = [];
   client: Clients;
+  appointmenttype: any = [];
+  appointment_typ: Appointment_type;
   comuni: any = [];
   productDialog: boolean = false;
   works_id: any;
@@ -76,6 +80,7 @@ export class ManageAppointmentsComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private employeesService: EmployeesService,
     private comuniService: ComuniService,
+    private appointmentTypeService: AppointmentTypeService,
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,) {
 
@@ -104,6 +109,7 @@ export class ManageAppointmentsComponent implements OnInit {
       this.appointmentsService.getAllListbyUser().subscribe(data => {
         this.appointments = data;
         this.getClients();
+        this.getAppointmentType();
         this.spinner.hide();
       });
   }
@@ -156,6 +162,13 @@ export class ManageAppointmentsComponent implements OnInit {
     this.categoryService.getAllList().subscribe(
       (data: Category) => this.categories = data,
       error => this.error = error
+    );
+  }
+
+  getAppointmentType() {
+  this.appointmentTypeService.getAllListbyUser().subscribe(
+    (data: Appointment_type) => this.appointmenttype = data,
+    error => this.error = error
     );
   }
 

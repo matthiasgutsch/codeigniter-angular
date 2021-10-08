@@ -78,6 +78,7 @@ import { ManageTagsComponent } from './settings/tags/manage-tags/manage-tags.com
 import { TagsFormComponent } from './settings/tags/tags-form/tags-form.component';
 import { ManageAppointmentTypeComponent } from './settings/appointment-type/manage-appointment-type/manage-appointment-type.component';
 import { AppointmentTypeFormComponent } from './settings/appointment-type/appointment-type-form/appointment-type-form.component';
+import { InitialsAvatarComponent } from './components/initials-avatar/initials-avatar.component';
 
 
 
@@ -89,6 +90,7 @@ import { AppointmentTypeFormComponent } from './settings/appointment-type/appoin
     BillingsFormComponent,
     ManageCategoriesComponent,
     ManageClientsComponent,
+    InitialsAvatarComponent,
     ClientsFormComponent,
     ManageTagsComponent,
     TagsFormComponent,

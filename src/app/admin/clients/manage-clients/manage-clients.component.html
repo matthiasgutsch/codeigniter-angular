@@ -69,6 +69,7 @@
     
                     <ng-template pTemplate="header" let-columns>
                         <tr>
+                            <th width="50"></th>
                             <th *ngFor="let col of cols">
                                 {{col.header}} 
                             </th>
@@ -78,6 +79,10 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-rowData let-columns="columns">
                         <tr>
+                            <td>
+                                <app-initials-avatar firstName="{{ rowData['name'] | slice:0:1}}" lastName="{{ rowData['surname'] | slice:0:1}}"></app-initials-avatar>
+
+                            </td>
                             <td *ngFor="let col of cols">
                                 {{rowData[col.field]}}
                             </td>

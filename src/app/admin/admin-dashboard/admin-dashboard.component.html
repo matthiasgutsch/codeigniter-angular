@@ -119,7 +119,11 @@
                     <tr>
                         <td width="100">  <p-tag value="{{appointment.date | date: 'HH:mm' }}"  severity="warning"></p-tag> 
                             </td>
-                            <td>{{appointment.title}}<br> {{ getCategoryItem(appointment.category_id)?.name }}</td>
+                            <td width="50"> <app-initials-avatar (click)="editProduct(appointment)"
+                                firstName="{{ getCategoryItem(appointment.category_id)?.name | slice:0:1}}"
+                                lastName="{{ getCategoryItem(appointment.category_id)?.surname | slice:0:1}}">
+                            </app-initials-avatar></td>
+                            <td> {{appointment.title}}<br> {{ getCategoryItem(appointment.category_id)?.name }} {{ getCategoryItem(appointment.category_id)?.surname }}</td>
                     
                         <td class="action" width="70">
                             <button pButton pRipple icon="pi pi-eye" class="p-button p-button-info p-mr-2 pull-right"
@@ -174,7 +178,7 @@
         <div class="p-col-12 p-md-12">
 
             <p-card>
-                <strong>{{ getCategoryItem(displayEvent.event.category_id)?.name }}</strong>
+                <strong>{{ getCategoryItem(displayEvent.event.category_id)?.name }} {{ getCategoryItem(displayEvent.event.category_id)?.surname }}</strong>
 
                 <p>{{ getCategoryItem(displayEvent.event.category_id)?.address }}<br> {{ getCategoryItem(displayEvent.event.category_id)?.zip }} - {{ getCategoryItem(displayEvent.event.category_id)?.city }} ({{ getCategoryItem(displayEvent.event.category_id)?.province }})<br>
                 </p>
@@ -227,7 +231,7 @@
         <div class="p-col-12 p-md-12">
 
             <p-card>
-                <strong>{{ getCategoryItem(appointment.category_id)?.name }}</strong>
+                <strong>{{ getCategoryItem(appointment.category_id)?.name }} {{ getCategoryItem(appointment.category_id)?.surname }}</strong>
 
                 <p>{{ getCategoryItem(appointment.category_id)?.address }}<br> {{ getCategoryItem(appointment.category_id)?.zip }} - {{ getCategoryItem(appointment.category_id)?.city }} ({{ getCategoryItem(appointment.category_id)?.province }})<br>
                 </p>

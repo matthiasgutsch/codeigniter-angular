@@ -1,4 +1,3 @@
-
 <p-overlayPanel #op>
     <ng-template pTemplate>
         <div class="p-col-12">
@@ -6,11 +5,21 @@
             <div class="p-field p-grid" *ngFor="let col of cols" [ngSwitch]="col.field">
                 <div class="p-col-12">
 
-                    <p-dropdown *ngSwitchCase="'title'" placeholder="Scegli" [showClear]="true" optionLabel="name" optionValue="name" [options]="categories" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')">
+                    <p-dropdown *ngSwitchCase="'title'" placeholder="Scegli" [showClear]="true" optionLabel="name"
+                        optionValue="name" [options]="appointmenttype" [style]="{'width':'100%'}"
+                        (onChange)="dt.filter($event.value, col.field, 'equals')">
                     </p-dropdown>
 
+                    <p-dropdown *ngSwitchCase="'category_id'" placeholder="Scegli" [showClear]="true" optionLabel="name"
+                        optionValue="id" [options]="clients" [style]="{'width':'100%'}"
+                        (onChange)="dt.filter($event.value, col.field, 'equals')">
 
-                    <p-dropdown *ngSwitchCase="'category_id'" placeholder="Scegli" [showClear]="true" optionLabel="name" optionValue="id" [options]="clients" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')">
+                        <ng-template let-option pTemplate="item">
+
+                            {{option.name}} {{option.surname}}
+
+                        </ng-template>
+
                     </p-dropdown>
 
                 </div>
@@ -20,8 +29,10 @@
     </ng-template>
 </p-overlayPanel>
 <label *ngFor="let filterRow of Symbols_Array;let l=index;">
-    <button (click)="dt.reset(); ColumnFilter(dt,filterRow.label,'symbol','')" pButton type="button" [style]="{'text-transform': 'capitalize','width':'100%'}" class="button btn-xs" [label]="filterRow.label"></button>
-  </label>
+    <button (click)="dt.reset(); ColumnFilter(dt,filterRow.label,'symbol','')" pButton type="button"
+        [style]="{'text-transform': 'capitalize','width':'100%'}" class="button btn-xs"
+        [label]="filterRow.label"></button>
+</label>
 
 <div class="dash-header">
     <div class="dash-title">
@@ -31,9 +42,12 @@
                 <h3>Appuntamenti</h3>
             </div>
             <div class="p-col-12 p-md-6">
-                <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']" label="Aggiungi" class="p-button p-button-success pull-right"></button>
-                <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()" class="p-button-primary p-mr-2 pull-right" pTooltip="PDF" tooltipPosition="bottom"></button>
-                <button type="text" pButton label="Filter" icon="pi pi-filter" class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
+                <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']" label="Aggiungi"
+                    class="p-button p-button-success pull-right"></button>
+                <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()"
+                    class="p-button-primary p-mr-2 pull-right" pTooltip="PDF" tooltipPosition="bottom"></button>
+                <button type="text" pButton label="Filter" icon="pi pi-filter"
+                    class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
 
             </div>
         </div>
@@ -46,7 +60,10 @@
         <div class="p-col-12 p-md-12">
 
             <p-card>
-                <p-table #dt [value]="appointments" [pageLinks]="3" [responsive]="true" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                <p-table #dt [value]="appointments" [pageLinks]="3" [responsive]="true"
+                    [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10"
+                    [showCurrentPageReport]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                     [totalRecords]="true">
 
                     <ng-template pTemplate="header">
@@ -62,7 +79,11 @@
                             <th>Tipo Intervento
 
                             </th>
+                            <th width="50">Data
+
+                            </th>
                             <th>Utente</th>
+                            <th>Residenza</th>
 
                             <th>Action</th>
                         </tr>
@@ -70,27 +91,39 @@
                     <ng-template pTemplate="body" let-appointment>
                         <tr>
                             <td><strong>{{appointment.date | date:'dd/MM/yyyy'}}</strong><br>
-                                <td>
+                            <td>
 
-                                    <p-tag value="{{appointment.date | date: 'HH:mm' }}" severity="warning"></p-tag>
+                                <p-tag value="{{appointment.date | date: 'HH:mm' }}" severity="warning"></p-tag>
 
+                            </td>
+                            <td> {{appointment.title}}</td>
 
-                                </td>
-                                <td> {{appointment.title}}</td>
+                            <td width="50">
+                                <app-initials-avatar (click)="editProduct(appointment)"
+                                    firstName="{{ getCategoryItem(appointment.category_id)?.name | slice:0:1}}"
+                                    lastName="{{ getCategoryItem(appointment.category_id)?.surname | slice:0:1}}">
+                                </app-initials-avatar>
+                            </td>
+                            <td>
 
-                                <td>
-                                    <a (click)="editProduct(appointment)">
-                                        <span class="user">{{ getCategoryItem(appointment.category_id)?.name | slice:0:1}}{{ getCategoryItem(appointment.category_id)?.surname | slice:0:1}}</span>{{ getCategoryItem(appointment.category_id)?.name }} {{ getCategoryItem(appointment.category_id)?.surname }}</a>
-                                </td>
+                                {{ getCategoryItem(appointment.category_id)?.name }}
+                                {{ getCategoryItem(appointment.category_id)?.surname }}
+                            </td>
 
+                            <td>
 
+                                {{ getCategoryItem(appointment.category_id)?.city }}
+                            </td>
 
-                                <td class="action">
-                                    <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
-                                    <button pButton pRipple icon="pi pi-eye" class="p-button p-button-info p-mr-2" (click)="editProduct(appointment)"></button>
-                                    <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(appointment.id)"></button>
+                            <td class="action">
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
+                                    [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
+                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-info p-mr-2"
+                                    (click)="editProduct(appointment)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
+                                    (click)="onDelete(appointment.id)"></button>
 
-                                </td>
+                            </td>
                         </tr>
                     </ng-template>
                 </p-table>
@@ -109,7 +142,6 @@
 
                         <h3>{{appointment.title}}</h3>
 
-
                         {{ getLocationItem(appointment.location_id)?.name }}
                         <br> {{ getEmployeeItem(appointment.employee_id)?.name }}
 
@@ -122,13 +154,12 @@
                             {{ getWorksItem(item)?.name }}
                         </div>
 
-
                     </div>
 
-
-
                 </div>
-                <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
+                <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento"
+                    class="p-button p-button-success p-mr-2"
+                    [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
 
             </p-card>
         </div>
@@ -139,20 +170,24 @@
             <p-card>
                 <strong>{{ getCategoryItem(appointment.category_id)?.name }}</strong>
 
-                <p>{{ getCategoryItem(appointment.category_id)?.address }}<br> {{ getCategoryItem(appointment.category_id)?.zip }} - {{ getCategoryItem(appointment.category_id)?.city }} ({{ getCategoryItem(appointment.category_id)?.province }})<br>
+                <p>{{ getCategoryItem(appointment.category_id)?.address }}<br>
+                    {{ getCategoryItem(appointment.category_id)?.zip }} -
+                    {{ getCategoryItem(appointment.category_id)?.city }}
+                    ({{ getCategoryItem(appointment.category_id)?.province }})<br>
                 </p>
                 <hr>
-                <p>{{ getCategoryItem(appointment.category_id)?.phone }}<br> {{ getCategoryItem(appointment.category_id)?.email }}</p>
+                <p>{{ getCategoryItem(appointment.category_id)?.phone }}<br>
+                    {{ getCategoryItem(appointment.category_id)?.email }}</p>
                 <div class="clearfix"></div>
-                <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente" class="p-button p-button-primary p-mr-2" [routerLink]="['/admin/clients/edit', appointment.category_id]"></button>
+                <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente"
+                    class="p-button p-button-primary p-mr-2"
+                    [routerLink]="['/admin/clients/edit', appointment.category_id]"></button>
             </p-card>
         </div>
 
     </ng-template>
 
 </p-sidebar>
-
-
 
 {{error}}
 

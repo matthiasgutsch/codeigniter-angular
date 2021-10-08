@@ -71,8 +71,7 @@ export class ManageClientsComponent implements OnInit {
 
         { field: "date", header: "Data di nascità" },
         { field: "phone", header: "Cellulare" },
-        { field: "city", header: "Indirizzo" },
-        { field: "fiscalcode", header: "Codice Fiscale" },
+        { field: "city", header: "Indirizzo" }
   
       ];
       this._selectedColumns = this.cols;
