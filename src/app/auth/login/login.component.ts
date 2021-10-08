@@ -3,7 +3,8 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { NgxSpinnerService } from "ngx-spinner";
-
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

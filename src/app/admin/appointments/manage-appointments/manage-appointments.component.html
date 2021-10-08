@@ -10,7 +10,7 @@
                         (onChange)="dt.filter($event.value, col.field, 'equals')">
                     </p-dropdown>
 
-                    <p-dropdown *ngSwitchCase="'category_id'" placeholder="Scegli" [showClear]="true" optionLabel="name"
+                    <p-dropdown *ngSwitchCase="'category_id'" placeholder="Scegli" [showClear]="true" optionLabel="username"
                         optionValue="id" [options]="clients" [style]="{'width':'100%'}"
                         (onChange)="dt.filter($event.value, col.field, 'equals')">
 

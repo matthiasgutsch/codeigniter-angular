@@ -127,7 +127,7 @@
                                         <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Cliente <span
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
-                                            <p-dropdown [options]="clients" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedClients" formControlName="category_id" optionLabel="name" optionValue="id">
+                                            <p-dropdown [options]="clients" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedClients" formControlName="category_id" optionLabel="username" optionValue="id">
                                                 <ng-template let-option pTemplate="item">
 
                                                     <strong>{{option.name}} {{option.surname}}</strong><br>

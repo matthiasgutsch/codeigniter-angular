@@ -112,6 +112,7 @@ export class ClientsFormComponent implements OnInit {
         this.blogForm.patchValue({
           name: res.name,
           surname: res.surname,
+          username: res.name + ' ' + res.surname,
           city: res.city,
           zip: res.zip,
           address: res.address,
@@ -145,6 +146,7 @@ export class ClientsFormComponent implements OnInit {
       id: [""],
       name: ["", Validators.required],
       surname: ["", Validators.required],
+      username: ["", Validators.required],
       city: ["", Validators.required],
       zip: ["", Validators.required],
       address: ["", Validators.required],
@@ -238,6 +240,7 @@ export class ClientsFormComponent implements OnInit {
     const formData = new FormData();
     formData.append("name", this.blogForm.get("name").value);
     formData.append("surname", this.blogForm.get("surname").value);
+    formData.append("username", this.blogForm.get("username").value);
     formData.append("city", this.blogForm.get("city").value);
     formData.append("zip", this.blogForm.get("zip").value);
     formData.append("address", this.blogForm.get("address").value);
