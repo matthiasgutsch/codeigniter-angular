@@ -24,9 +24,11 @@
 
                 <p-card>
 
-                    {{clientsCount}}
+                   
                     <h4>Clienti</h4>
 
+                    
+                    <button pButton pRipple  class="p-button p-button-dark p-mr-2" label="{{clientsCount}}"></button>
                     <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/clients']"
                         routerLinkActive="active" class="p-button p-button-primary p-mr-2"></button>
                     <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']"
@@ -37,9 +39,11 @@
 
                 <p-card>
 
-                    {{appointmentsCount}}
+            
 
                     <h4>Appuntamenti</h4>
+                    <button pButton pRipple  class="p-button p-button-dark p-mr-2" label="{{appointmentsCount}}"></button>
+
                     <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/appointments']"
                         routerLinkActive="active" class="p-button p-button-primary p-mr-2"></button>
                     <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']"
@@ -53,8 +57,9 @@
 
                 <p-card>
 
-                    {{billingsCount}}
+     
                     <h4>Fatturazione</h4>
+                    <button pButton pRipple  class="p-button p-button-dark p-mr-2" label="{{billingsCount}}"></button>
 
                     <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/billings']"
                         routerLinkActive="active" class="p-button p-button-primary p-mr-2"></button>
@@ -66,9 +71,11 @@
 
                 <p-card>
 
-                    {{productsCount}}
+   
 
                     <h4>Prodotti</h4>
+                    <button pButton pRipple  class="p-button p-button-dark p-mr-2" label="{{productsCount}}"></button>
+
                     <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/products']"
                         routerLinkActive="active" class="p-button p-button-primary p-mr-2"></button>
                     <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/products/create']"

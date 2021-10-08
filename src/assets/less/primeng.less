@@ -19,6 +19,11 @@
   padding: 5px 1rem;
 }
 
+.p-overlaypanel .p-overlaypanel-content {
+
+min-width: 200px;
+  
+}
 
 .p-datatable .p-datatable-tbody > tr {
   color: @text-color;
@@ -85,6 +90,22 @@
         border-radius: @radius;
       
         border: 1px solid @red !important;
+    }
+
+  }
+
+
+  .p-button.p-button-dark {
+    color: @white !important;
+    background: @ness_color_2;
+    border-radius: @radius;
+    border: 1px solid @ness_color_2 !important;
+
+    &:hover {
+        color: @white;
+        background: @ness_color_2 !important;
+        border-radius: @radius;
+        border: 1px solid @ness_color_2 !important;
     }
 
   }
@@ -225,6 +246,11 @@ label {
     font-size: 16px;
     color: @ness_color_2 !important;
   }
+
+  h4 {
+    margin-top: 0px;
+  }
+
   h3.date {
     color: @ness_color_3 !important;
 
