@@ -43,6 +43,8 @@ export class ManageProductsComponent implements OnInit {
   locations: any = [];
   location: Locations;
   cols: any[];
+  colsData: any[];
+
   exportColumns: any[];
   _selectedColumns: any[];
   selectedWorks: any[];
@@ -56,6 +58,7 @@ export class ManageProductsComponent implements OnInit {
   selectedBrands: Brand;
   loading: boolean;
 
+  productsData: any = [];
   products: any = [];
   product: Products;
   date: Date;
@@ -110,6 +113,12 @@ trackByFn(index, item) {
       { field: "category_id", header: "Categoria" },
       { field: "code_int", header: "Codice interno" },
       { field: "brand_id", header: "Brand" }
+
+    ];
+
+    this.colsData = [
+      { field: "title", header: "titolo" },
+      { field: "description", header: "Codice" },
 
     ];
 
@@ -186,6 +195,20 @@ trackByFn(index, item) {
     this.product = {...this.product};
     this.productDialog = true;
 }
+
+
+
+edit(product: Products) {
+  this.product = { ...product };
+  this.productDialog = true;
+  const id = this.product.id;
+
+  this.productsService.getr_products_data(+id).subscribe(
+    (data: Products) => this.productsData = data,
+    error => this.error = error
+  );
+}
+
 
 
 exportPdf() {

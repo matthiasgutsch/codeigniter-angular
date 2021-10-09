@@ -17,5 +17,6 @@ export class Products {
     code: string;
     code_int: string;
     files: string;
+    data: string;
     status: StringMap;
 }

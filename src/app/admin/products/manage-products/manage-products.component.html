@@ -75,7 +75,8 @@
 
                             <td class="action">
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/products/edit', rowData.id]"></button>
-
+                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
+                                (click)="edit(rowData)"></button>
                                 <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(rowData.id)"></button>
                             </td>
                         </tr>
@@ -92,7 +93,36 @@
 
 
 
+<p-sidebar [(visible)]="productDialog" position="right"  [style]="{width:'60%'}">
+    <ng-template pTemplate="content">
+        <div class="p-col-12 p-md-12">
 
+            
+            <h3>{{product.title}}</h3>
+            <p [innerHTML]="product.description"></p>
+
+            {{product.data}}
+
+            <p-table #dt [columns]="colsData" [value]="productsData"  [loading]="loading"
+            [totalRecords]="totalRecords">
+
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                    <td *ngFor="let col of colsData" [ngSwitch]="col.field">
+                        {{rowData[col.field]}}
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+
+ 
+
+       
+   </div>
+    </ng-template>
+
+</p-sidebar>
 
 {{error}}
 
