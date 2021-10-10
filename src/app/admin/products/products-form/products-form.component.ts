@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { AppointmentsService } from '../../../services/appointments.service';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
 import { Blog } from '../../../models/blog';
@@ -90,8 +90,11 @@ export class ProductsFormComponent implements OnInit {
   public dataValues: object;
   pages: any;
   currentUser: any;
+  addForm: FormGroup;
+  rows: FormArray;
+  itemForm: FormGroup;
 
-
+  
   trackByFn(index, item) {
     return item.id;
   }
@@ -118,6 +121,13 @@ export class ProductsFormComponent implements OnInit {
     this.status = STATUS_PRODUCTS;
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
+    this.addForm = this.fb.group({
+      items: [null, Validators.required],
+      items_value: ['no', Validators.required],
+    });
+
+    this.rows = this.fb.array([]);
+
   }
 
   ngOnInit() {
@@ -126,6 +136,7 @@ export class ProductsFormComponent implements OnInit {
     this.getselectedWorks;
     this.getselectedCategories;
 
+    this.addForm.addControl('rows', this.rows);
 
     this.brandsService.getAllListbyUser().subscribe(
       (data: Brand) => (this.brands = data),
@@ -171,6 +182,8 @@ export class ProductsFormComponent implements OnInit {
           description_full: res.description_full,
           code_int: res.code_int,
           id: res.id,
+          data: res.data,
+
         });
       }
       else {
@@ -203,6 +216,8 @@ export class ProductsFormComponent implements OnInit {
       code: [""],
       user_id: [this.currentUser.user_id],
       code_int: [""],
+      data: [""],
+
     });
   }
 
@@ -224,6 +239,21 @@ export class ProductsFormComponent implements OnInit {
     this._location.back();
   }
 
+  onAddRow() {
+    this.rows.push(this.createItemFormGroup());
+  }
+
+  onRemoveRow(rowIndex: number) {
+    this.rows.removeAt(rowIndex);
+  }
+
+  createItemFormGroup(): FormGroup {
+    return this.fb.group({
+      name: '',
+      description: '',
+      qty: '',
+    });
+  }
 
   onSelectedFile(event) {
     if (event.target.files.length > 0) {
@@ -276,6 +306,7 @@ export class ProductsFormComponent implements OnInit {
     formData.append("code_int", this.blogForm.get("code_int").value);
     formData.append("status", this.blogForm.get("status").value);
     formData.append('user_id', this.blogForm.get('user_id').value);
+    formData.append('data', this.blogForm.get('data').value);
 
 
     const id = this.blogForm.get("id").value;

@@ -20,19 +20,26 @@
 
         <div class="p-field p-grid">
 
-            <div class="p-col-12 p-md-3">
+            <div class="p-col-6 p-md-3">
 
                 <p-card>
 
-                   
-                    <h4>Clienti</h4>
+                   <div class="p-grid">
+                    <div class="p-col-12 p-md-6">
 
+                    <h4>Clienti</h4>
+                    </div>
                     
-                    <button pButton pRipple  class="p-button p-button-dark p-mr-2" label="{{clientsCount}}"></button>
-                    <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/clients']"
-                        routerLinkActive="active" class="p-button p-button-primary p-mr-2"></button>
-                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']"
-                        routerLinkActive="active" class="p-button p-button-success p-mr-2"></button>
+                    <div class="p-col-12 p-md-6">
+
+                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']"
+                        routerLinkActive="active" class="p-button p-button-success pull-right"></button>
+
+                    <button pButton pRipple label="{{clientsCount}}" [routerLink]="['/admin/clients']"
+                        routerLinkActive="active" class="p-button p-button-primary pull-right p-mr-2"></button>
+           
+                    </div>
+                    </div>
                 </p-card>
             </div>
             <div class="p-col-12 p-md-3">
@@ -41,14 +48,19 @@
 
             
 
+                    <div class="p-grid">
+                        <div class="p-col-6 p-md-6">
                     <h4>Appuntamenti</h4>
-                    <button pButton pRipple  class="p-button p-button-dark p-mr-2" label="{{appointmentsCount}}"></button>
+                        </div>
+                        <div class="p-col-6 p-md-6">
 
-                    <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/appointments']"
-                        routerLinkActive="active" class="p-button p-button-primary p-mr-2"></button>
+             
                     <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']"
-                        routerLinkActive="active" class="p-button p-button-success p-mr-2"></button>
-
+                        routerLinkActive="active" class="p-button p-button-success pull-right"></button>
+                        <button pButton pRipple  label="{{appointmentsCount}}" [routerLink]="['/admin/appointments']"
+                        routerLinkActive="active" class="p-button p-button-primary p-mr-2 pull-right"></button>
+                        </div>
+                    </div>
                 </p-card>
 
             </div>
@@ -57,30 +69,40 @@
 
                 <p-card>
 
-     
+                    <div class="p-grid">
+                        <div class="p-col-6 p-md-6">
                     <h4>Fatturazione</h4>
-                    <button pButton pRipple  class="p-button p-button-dark p-mr-2" label="{{billingsCount}}"></button>
+                        </div>
+                        <div class="p-col-6 p-md-6">
 
-                    <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/billings']"
-                        routerLinkActive="active" class="p-button p-button-primary p-mr-2"></button>
+
+                    
                     <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/billings/create']"
-                        routerLinkActive="active" class="p-button p-button-success p-mr-2"></button>
+                        routerLinkActive="active" class="p-button p-button-success pull-right"></button>
+                        <button pButton pRipple label="{{billingsCount}}" [routerLink]="['/admin/billings']"
+                        routerLinkActive="active" class="p-button p-button-primary p-mr-2 pull-right"></button>
+                        </div>
+                    </div>
                 </p-card>
             </div>
             <div class="p-col-12 p-md-3">
 
                 <p-card>
 
-   
-
-                    <h4>Prodotti</h4>
-                    <button pButton pRipple  class="p-button p-button-dark p-mr-2" label="{{productsCount}}"></button>
-
-                    <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/products']"
-                        routerLinkActive="active" class="p-button p-button-primary p-mr-2"></button>
+                    <div class="p-grid">
+                        <div class="p-col-12 p-md-6">
+    
+                        <h4>Prodotti</h4>
+                        </div>
+                        
+                        <div class="p-col-12 p-md-6">
+                   
                     <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/products/create']"
-                        routerLinkActive="active" class="p-button p-button-success p-mr-2"></button>
-
+                        routerLinkActive="active" class="p-button p-button-success pull-right"></button>
+                        <button pButton pRipple label="{{productsCount}}" [routerLink]="['/admin/products']"
+                        routerLinkActive="active" class="p-button p-button-primary pull-right p-mr-2"></button>
+                        </div>
+                    </div>
                 </p-card>
 
             </div>

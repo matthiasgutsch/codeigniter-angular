@@ -2,6 +2,37 @@
     <div class="dash-title">
     </div>
 </div>
+
+<!-- 
+<div class="col-md-2" [formGroup]="addForm">
+    <div class="form-group">
+
+  
+      <table>
+        <thead>
+          <button (click)="onAddRow()">add row</button>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let row of addForm.get('rows')?.controls; let index = index"
+          >
+            <td>name : <input [formControl]="row.get('name')" /></td>
+            <td>
+              description : <input [formControl]="row.get('description')" />
+            </td>
+            <td>qty : <input [formControl]="row.get('qty')" /></td>
+            <td>
+              <button (click)="onRemoveRow(index)">Remove</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  {{ rows.value | json }}
+-->
+  
 <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
 
     <div class="p-fluid">
@@ -39,8 +70,9 @@
 
                                             <input type="text" [style]="{ width: '100%' }" pInputText formControlName="title" >
 
+                                           <!-- <input type="text" [style]="{ width: '100%' }" [(ngModel)]="data" value="{{rows.value | json}}" pInputText formControlName="data" >-->
 
-
+                                            
                                         </div>
                                     </div>
                                 </div>
