@@ -3,38 +3,35 @@
     </div>
 </div>
 
-<!-- 
-<div class="col-md-2" [formGroup]="addForm">
-    <div class="form-group">
 
-  
-      <table>
-        <thead>
-          <button (click)="onAddRow()">add row</button>
-        </thead>
-        <tbody>
-          <tr
-            *ngFor="let row of addForm.get('rows')?.controls; let index = index"
-          >
-            <td>name : <input [formControl]="row.get('name')" /></td>
-            <td>
-              description : <input [formControl]="row.get('description')" />
-            </td>
-            <td>qty : <input [formControl]="row.get('qty')" /></td>
-            <td>
-              <button (click)="onRemoveRow(index)">Remove</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  
-  {{ rows.value | json }}
--->
+
+   
+   
+
+   
   
 <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
 
+
+    {{this.blogForm.value | json}}
+
+    <div formArrayName="skills">
+        <div *ngFor="let skill of skills.controls; let i=index">
+          <div [formGroupName]="i">
+            {{i}}
+            skill name :
+            <input type="text" formControlName="skill">
+            exp:
+            <input type="text" formControlName="exp">
+     
+            <button (click)="removeSkill(i)">Remove</button>
+          </div>
+        </div>
+      </div>
+
+      <p>
+        <button type="button" (click)="addSkills()">Add</button>
+      </p>
     <div class="p-fluid">
         <div class="p-field p-grid">
 

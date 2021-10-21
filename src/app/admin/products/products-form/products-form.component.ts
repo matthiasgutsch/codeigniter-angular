@@ -27,6 +27,7 @@ import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brands.service';
 import { TagsService } from 'src/app/services/tags.service';
 import { Tags } from 'src/app/models/tags';
+import { SkillsService } from 'src/app/services/skills.service';
 
 
 @Component({
@@ -93,6 +94,7 @@ export class ProductsFormComponent implements OnInit {
   addForm: FormGroup;
   rows: FormArray;
   itemForm: FormGroup;
+  skillsForm: FormGroup;
 
   
   trackByFn(index, item) {
@@ -106,6 +108,7 @@ export class ProductsFormComponent implements OnInit {
     private clientsService: ClientsService,
     private _location: Location,
     private productsService: ProductsService,
+    private skillsService: SkillsService,
     private brandsService: BrandService,
     private worksService: WorksService,
     private categoryService: CategoryService,
@@ -121,12 +124,6 @@ export class ProductsFormComponent implements OnInit {
     this.status = STATUS_PRODUCTS;
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
-    this.addForm = this.fb.group({
-      items: [null, Validators.required],
-      items_value: ['no', Validators.required],
-    });
-
-    this.rows = this.fb.array([]);
 
   }
 
@@ -136,7 +133,6 @@ export class ProductsFormComponent implements OnInit {
     this.getselectedWorks;
     this.getselectedCategories;
 
-    this.addForm.addControl('rows', this.rows);
 
     this.brandsService.getAllListbyUser().subscribe(
       (data: Brand) => (this.brands = data),
@@ -182,8 +178,7 @@ export class ProductsFormComponent implements OnInit {
           description_full: res.description_full,
           code_int: res.code_int,
           id: res.id,
-          data: res.data,
-
+          data: res.data
         });
       }
       else {
@@ -216,9 +211,10 @@ export class ProductsFormComponent implements OnInit {
       code: [""],
       user_id: [this.currentUser.user_id],
       code_int: [""],
-      data: [""],
+      skills: this.fb.array([]),
 
     });
+
   }
 
   
@@ -239,21 +235,28 @@ export class ProductsFormComponent implements OnInit {
     this._location.back();
   }
 
-  onAddRow() {
-    this.rows.push(this.createItemFormGroup());
+  
+  get skills() : FormArray {
+    return this.blogForm.get("skills") as FormArray
   }
-
-  onRemoveRow(rowIndex: number) {
-    this.rows.removeAt(rowIndex);
-  }
-
-  createItemFormGroup(): FormGroup {
+ 
+  newSkill(): FormGroup {
     return this.fb.group({
-      name: '',
-      description: '',
-      qty: '',
-    });
+      skill: '',
+      exp: '',
+    })
   }
+ 
+  addSkills() {
+    this.skills.push(this.newSkill());
+  }
+ 
+  removeSkill(i:number) {
+    this.skills.removeAt(i);
+  }
+ 
+ 
+
 
   onSelectedFile(event) {
     if (event.target.files.length > 0) {
@@ -286,7 +289,9 @@ export class ProductsFormComponent implements OnInit {
     return this.blogForm.get("title");
   }
 
-
+  get skillsArray() {
+    return JSON.stringify(this.blogForm.get('skills').value || '[]');
+  }
 
 
 
@@ -306,7 +311,7 @@ export class ProductsFormComponent implements OnInit {
     formData.append("code_int", this.blogForm.get("code_int").value);
     formData.append("status", this.blogForm.get("status").value);
     formData.append('user_id', this.blogForm.get('user_id').value);
-    formData.append('data', this.blogForm.get('data').value);
+    formData.append('skills', JSON.stringify(this.blogForm.get('skills').value));
 
 
     const id = this.blogForm.get("id").value;
@@ -340,4 +345,16 @@ export class ProductsFormComponent implements OnInit {
     }
   }
 
+
+}
+
+
+export class country {
+  id: string;
+  name: string;
+ 
+  constructor(id: string, name: string) {
+    this.id = id;
+    this.name = name;
+  }
 }

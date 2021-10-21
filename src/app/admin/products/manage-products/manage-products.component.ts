@@ -48,7 +48,7 @@ export class ManageProductsComponent implements OnInit {
   exportColumns: any[];
   _selectedColumns: any[];
   selectedWorks: any[];
-
+  selectedSkills: any = [];
   brands: any = [];
   brand: Brand;
 
@@ -57,11 +57,13 @@ export class ManageProductsComponent implements OnInit {
 
   selectedBrands: Brand;
   loading: boolean;
+  currentIndex = 1;
 
   productsData: any = [];
   products: any = [];
   product: Products;
   date: Date;
+  skillsArray: any = [];
   categories: any = [];
   category: Category;
   error: string;
@@ -73,6 +75,7 @@ export class ManageProductsComponent implements OnInit {
   category_id: any;
   status: any;
   currentUser: any;
+  skills:  any[] = [];
   showDialog() {
     this.productDialog = true;
 }
@@ -200,9 +203,15 @@ trackByFn(index, item) {
 
 edit(product: Products) {
   this.product = { ...product };
+  
+  this.selectedSkills = this.product.skills;
+
+
+  
+  
   this.productDialog = true;
   const id = this.product.id;
-
+  
   this.productsService.getr_products_data(+id).subscribe(
     (data: Products) => this.productsData = data,
     error => this.error = error

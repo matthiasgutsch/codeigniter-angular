@@ -69,6 +69,7 @@ import { ManageLocationsComponent } from './settings/locations/manage-locations/
 import { ManageTypeComponent } from './settings/type/manage-type/manage-type.component';
 import { TypeFormComponent } from './settings/type/type-form/type-form.component';
 import { SumPipeModule } from './pipe/sum.pipe';
+
 import { CompanyFormComponent } from './settings/company/company-form/company-form.component';
 import { ProductsFormComponent } from './products/products-form/products-form.component';
 import { ManageProductsComponent } from './products/manage-products/manage-products.component';
@@ -79,6 +80,7 @@ import { TagsFormComponent } from './settings/tags/tags-form/tags-form.component
 import { ManageAppointmentTypeComponent } from './settings/appointment-type/manage-appointment-type/manage-appointment-type.component';
 import { AppointmentTypeFormComponent } from './settings/appointment-type/appointment-type-form/appointment-type-form.component';
 import { InitialsAvatarComponent } from './components/initials-avatar/initials-avatar.component';
+import { SplitCommaStringPipe } from './pipe/split.pipe';
 
 
 
@@ -105,6 +107,7 @@ import { InitialsAvatarComponent } from './components/initials-avatar/initials-a
     AppointmentTypeFormComponent,
     JoinPipe,
     LimitPipe,
+    SplitCommaStringPipe,
     WorksFormComponent,
     ManageWorksComponent,
     ManageAppointmentsComponent,

@@ -101,9 +101,15 @@
             <h3>{{product.title}}</h3>
             <p [innerHTML]="product.description"></p>
 
-    
+            <h3>{{selectedSkills}}</h3>
 
 
+           
+        
+
+
+
+              
             <p-table #dt [columns]="colsData" [value]="productsData"  [loading]="loading"
             [totalRecords]="totalRecords">
 
