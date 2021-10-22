@@ -95,7 +95,7 @@ export class ProductsFormComponent implements OnInit {
   rows: FormArray;
   itemForm: FormGroup;
   skillsForm: FormGroup;
-
+  skillsValues: any;
   
   trackByFn(index, item) {
     return item.id;
@@ -183,12 +183,10 @@ export class ProductsFormComponent implements OnInit {
       }
       else {
         this.router.navigate(['/admin/products']);
-
       }
         this.imagePath = res.image;
         this.id = res.id;
-
-
+        this.skillsValues = res.skills;
       });
     } else {
       this.pageTitle = "Aggiungi Prodotto";
@@ -218,7 +216,25 @@ export class ProductsFormComponent implements OnInit {
   }
 
   
- 
+  skills() : FormArray {
+    return this.blogForm.get("skills") as FormArray
+  }
+   
+  newQuantity(): FormGroup {
+    return this.fb.group({
+      qty: '',
+      price: '',
+    })
+  }
+   
+  addQuantity() {
+    this.skills().push(this.newQuantity());
+  }
+   
+  removeQuantity(i:number) {
+    this.skills().removeAt(i);
+  }
+
   getWorksItem(works_id: string, id: string) {
     return this.works.find(item => item.id === works_id);
   }
@@ -226,6 +242,12 @@ export class ProductsFormComponent implements OnInit {
   getselectedWorks() {
   this.selectedWorks = this.works_id.split(',');
   }
+
+
+  getCategoryItem(category_id: string, id: string) {
+    return this.categories.find((item) => item.id === category_id);
+  }
+
 
   getselectedCategories() {
     this.selectedCategories = this.category_id.split(',');
@@ -236,26 +258,6 @@ export class ProductsFormComponent implements OnInit {
   }
 
   
-  get skills() : FormArray {
-    return this.blogForm.get("skills") as FormArray
-  }
- 
-  newSkill(): FormGroup {
-    return this.fb.group({
-      skill: '',
-      exp: '',
-    })
-  }
- 
-  addSkills() {
-    this.skills.push(this.newSkill());
-  }
- 
-  removeSkill(i:number) {
-    this.skills.removeAt(i);
-  }
- 
- 
 
 
   onSelectedFile(event) {
@@ -274,10 +276,6 @@ export class ProductsFormComponent implements OnInit {
 
 
 
-  getCategoryItem(category_id: string, id: string) {
-    return this.categories.find((item) => item.id === category_id);
-  }
-
   removeImageFile() {
     this.imagePath = "";
     console.log(this.myInputVariable.nativeElement.files);
@@ -288,6 +286,7 @@ export class ProductsFormComponent implements OnInit {
   get title() {
     return this.blogForm.get("title");
   }
+
 
   get skillsArray() {
     return JSON.stringify(this.blogForm.get('skills').value || '[]');
@@ -343,18 +342,5 @@ export class ProductsFormComponent implements OnInit {
         (error) => (this.error = error)
       );
     }
-  }
-
-
-}
-
-
-export class country {
-  id: string;
-  name: string;
- 
-  constructor(id: string, name: string) {
-    this.id = id;
-    this.name = name;
   }
 }

@@ -206,9 +206,6 @@ edit(product: Products) {
   
   this.selectedSkills = this.product.skills;
 
-
-  
-  
   this.productDialog = true;
   const id = this.product.id;
   

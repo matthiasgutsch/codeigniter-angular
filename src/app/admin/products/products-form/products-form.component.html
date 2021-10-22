@@ -12,26 +12,31 @@
   
 <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
 
-
+{{skillsValues}}<br><br>
     {{this.blogForm.value | json}}
 
-    <div formArrayName="skills">
-        <div *ngFor="let skill of skills.controls; let i=index">
-          <div [formGroupName]="i">
-            {{i}}
-            skill name :
-            <input type="text" formControlName="skill">
-            exp:
-            <input type="text" formControlName="exp">
-     
-            <button (click)="removeSkill(i)">Remove</button>
-          </div>
-        </div>
-      </div>
 
-      <p>
-        <button type="button" (click)="addSkills()">Add</button>
-      </p>
+    <table class="table table-bordered" formArrayName="skills">
+        <tr>
+          <th colspan="2">Add Multiple Quantity:</th>
+          <th width="150px"><button type="button" (click)="addQuantity()" class="btn btn-primary">Add More</button></th>
+        </tr>
+        <tr *ngFor="let quantity of skills().controls; let i=index" [formGroupName]="i">
+          <td>
+              Quantity :
+              <input type="text" formControlName="qty" class="form-control">
+          </td>
+          <td>
+              Price:
+              <input type="text" formControlName="price" class="form-control">
+          </td>
+          <td>
+              <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
+          </td>
+        </tr>
+      </table>
+
+    
     <div class="p-fluid">
         <div class="p-field p-grid">
 
