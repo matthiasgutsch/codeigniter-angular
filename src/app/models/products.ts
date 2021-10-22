@@ -19,5 +19,5 @@ export class Products {
     files: string;
     data: JSON;
     status: StringMap;
-    skills: object[];
+    skills: any;
 }
