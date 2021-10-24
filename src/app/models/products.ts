@@ -19,5 +19,12 @@ export class Products {
     files: string;
     data: JSON;
     status: StringMap;
-    skills: any;
+    skills: any[];
+}
+
+
+export interface ISkill{
+    skillName: string;
+    experienceInYears: number;
+    proficiency: string
 }
