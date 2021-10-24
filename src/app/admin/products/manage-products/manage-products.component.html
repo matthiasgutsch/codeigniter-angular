@@ -107,17 +107,7 @@
    
 
               
-            <p-table #dt [columns]="colsData" [value]="productsData"  [loading]="loading"
-            [totalRecords]="totalRecords">
-
-            <ng-template pTemplate="body" let-rowData let-columns="columns">
-                <tr>
-                    <td *ngFor="let col of colsData" [ngSwitch]="col.field">
-                        {{rowData[col.field]}}
-                    </td>
-                </tr>
-            </ng-template>
-        </p-table>
+           
 
 
  
