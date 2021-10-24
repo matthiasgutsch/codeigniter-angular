@@ -11,30 +11,8 @@
    
   
 <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
- {{skillsValues | json}}<br><br>
 
-    {{this.blogForm.value | json}}
-
-    <table class="table table-bordered" formArrayName="skills">
-        <tr>
-          <th colspan="2">Add Multiple Quantity:</th>
-          <th width="150px"><button type="button" (click)="addQuantity()" class="btn btn-primary">Add More</button></th>
-        </tr>
-        <tr *ngFor="let quantity of skills.controls; let i=index" [formGroupName]="i">
-          <td>
-              Quantity :
-              <input type="text" formControlName="qty" class="form-control">
-          </td>
-          <td>
-              Price:
-              <input type="text" formControlName="price" class="form-control">
-          </td>
-          <td>
-              <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
-          </td>
-        </tr>
-      </table>
-
+    
     
     <div class="p-fluid">
         <div class="p-field p-grid">
@@ -251,6 +229,41 @@
 
 
 
+                            </p-tabPanel>
+
+                            <p-tabPanel header="Dati tecnici">
+
+                                <button pButton pRipple icon="pi pi-save" label="Aggiungi" class="p-button pull-right p-button-success p-mr-2" (click)="addQuantity()"></button>
+
+
+                            <table formArrayName="skills" style="width: 100%">
+                              
+                                <tr *ngFor="let quantity of skills.controls; let i=index" [formGroupName]="i">
+                                    <td>Quantity :</td>
+                                  <td>
+                                      
+                                    <p-dropdown [options]="status" [virtualScroll]="true" filter="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" formControlName="qty" optionLabel="label" optionValue="label">
+                                        <ng-template let-option pTemplate="item">
+
+                                            {{option.label}}
+
+                                        </ng-template>
+
+                                    </p-dropdown>
+
+
+                                      
+                                  </td>
+                                  <td>Price:</td>
+                                  <td>
+                                    
+                                      <input ttype="text" [style]="{ width: '100%' }" pInputText  formControlName="price">
+                                  </td>
+                                  <td>
+                                      <button (click)="removeQuantity(i)" class="p-button p-button-danger p-mr-2">Remove</button>
+                                  </td>
+                                </tr>
+                              </table>
                             </p-tabPanel>
 
                             <p-tabPanel header="Allegati">
