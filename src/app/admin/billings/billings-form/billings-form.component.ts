@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { BillingsService } from '../../../services/billings.service';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
 import { Blog } from '../../../models/blog';
 import { Category } from '../../../models/category';
@@ -26,6 +26,7 @@ import { Company } from 'src/app/models/company';
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { Billings } from 'src/app/models/billings';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: "app-billings-form",
@@ -40,6 +41,7 @@ export class BillingsFormComponent implements OnInit {
   imagePath: any;
   blogs: Blog;
   blog: Blog;
+  blogForm: FormGroup;
 
   appointments: Appointments;
   appointment: Appointments;
@@ -57,7 +59,6 @@ export class BillingsFormComponent implements OnInit {
   checked: boolean = true;
   selectedValue: string;
 
-  blogForm: FormGroup;
   typeList: any[];
   clients: any = [];
   client: Clients;
@@ -65,7 +66,7 @@ export class BillingsFormComponent implements OnInit {
 
   employees: any = [];
   employee: Employees;
-
+  skillsArray: any = [];
   description: any;
   selectedWorks: SelectItem[] = [];
   selectedWorks2: SelectItem[];
@@ -91,8 +92,15 @@ export class BillingsFormComponent implements OnInit {
   dateAppointments: string;
   numberAppointments: number;
   currentUser: any;
+  public dataValues: object;
+  addForm: FormGroup;
+  rows: FormArray;
+  itemForm: FormGroup;
+  skillsForm: FormGroup;
+  skillsValues: any = [];
 
 
+  
   trackByFn(index, item) {
     return item.id;
   }
@@ -152,6 +160,14 @@ export class BillingsFormComponent implements OnInit {
    
     
     const id = this.route.snapshot.paramMap.get("id");
+
+    this.billingsService.skills(+id).subscribe(value => {
+      this.skillsValues = value;
+    });
+
+
+
+
     if (id) {
       this.pageTitle = "Modifica Fattura / Ricevuta";
       this.billingsService.getId(+id).subscribe((res) => {
@@ -174,6 +190,7 @@ export class BillingsFormComponent implements OnInit {
           is_featured: res.is_featured,
           date: res.date,
           id: res.id,
+          skills: this.skillsValues,
         });
     
 
@@ -192,6 +209,7 @@ export class BillingsFormComponent implements OnInit {
       user_id: [this.currentUser.user_id],
       is_featured: ["0"],
       date: ["", Validators.required],
+      skills: this.initSkill(),
     });
   }
 
@@ -263,8 +281,62 @@ export class BillingsFormComponent implements OnInit {
     return this.blogForm.get("title");
   }
 
+  initSkill() {
+    var formArray = this.fb.array([]);
+    const id = this.route.snapshot.paramMap.get("id");
+
+    this.billingsService.skills(+id).subscribe(
+      (res)=>{
+        this.skillsValues = res;
+
+        this.skillsValues.forEach((e)=>{
+          formArray.push(this.fb.group({
+            qty: [e.qty],
+            price: [e.price]
+          }))
+        })
+      }
+    )
+
+    /*formArray.push(this.fb.group({
+      qty: [''],
+      price: ['']
+    })) */
+    
+
+    return formArray;
+  }
+
+   
+  private createSkillFormGroup(skill:any): FormGroup{
+    return new FormGroup({'qty':new FormControl(skill.qty),'price':new FormControl(skill.price)})
+  }
+
+  public addSkill(skill:any){
+    this.skills.push(this.createSkillFormGroup(skill));
+  }
 
 
+  get skills() {
+    return this.blogForm.get('skills') as FormArray;
+  }
+   
+  
+  newQuantity(): FormGroup {
+    return this.fb.group({
+      qty: "",
+      price: "",
+    })
+  }
+   
+  addQuantity() {
+    this.skills.push(this.newQuantity());
+  }
+   
+  removeQuantity(i:number) {
+    this.skills.removeAt(i);
+  }
+  
   onSubmit() {
     const formData = new FormData();
     formData.append("title", this.blogForm.get("title").value);
@@ -275,6 +347,7 @@ export class BillingsFormComponent implements OnInit {
     formData.append("works_id", this.blogForm.get("works_id").value);
     formData.append("date", this.blogForm.get("date").value);
     formData.append('user_id', this.blogForm.get('user_id').value);
+    formData.append('skills', JSON.stringify(this.blogForm.get('skills').value));
 
     const id = this.blogForm.get("id").value;
 

@@ -3,13 +3,12 @@
     </div>
 </div>
 
+<div class="p-fluid">                <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
 
-    <div class="p-fluid">
-        <div class="p-field p-grid">
-            <div class="p-col-12 p-md-5">
+    <div class="p-field p-grid">
+        <div class="p-col-12 p-md-5">
 
-                <p-card>
-                    <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+            <p-card>
 
                     <div class="blog-form">
 
@@ -19,120 +18,108 @@
                             </div>
                             <div class="p-col-12 p-md-3">
 
-                                <button pButton pRipple icon="pi pi-save"  [disabled]="!blogForm.valid" label="Salva" class="p-button pull-right p-button-success p-mr-2"></button>
-
+                                <button pButton pRipple icon="pi pi-save" [disabled]="!blogForm.valid" label="Salva"
+                                    class="p-button pull-right p-button-success p-mr-2"></button>
 
                             </div>
                         </div>
                         <hr class="full">
 
-                       
-                               
+                        <div class="p-fluid">
 
-                                <div class="p-fluid">
+                            <div class="p-field p-grid">
+                                <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Data di Emissione<span
+                                        class="required">*</span></label>
+                                <div class="p-col-12 p-md-12">
 
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Data di Emissione<span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-12">
+                                    <p-calendar (onBlur)="changeTime($event)" formControlName="date" dataType="string"
+                                        [(ngModel)]="dateAppointments" dateFormat="yy-mm-dd" appendTo="body">
+                                    </p-calendar>
 
-                                            <p-calendar  (onBlur)="changeTime($event)" formControlName="date" dataType="string" [(ngModel)]="dateAppointments" dateFormat="yy-mm-dd" appendTo="body"></p-calendar>
-
-                                        </div>
-                                    </div>
                                 </div>
+                            </div>
+                        </div>
 
-
-                                <div class="p-fluid">
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Tipo di Fattura <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-12">
-                                            <input type="radio" formControlName="title" value="Fattura" /> Fattura
-                                            <input type="radio" formControlName="title" value="Ricevuta" /> Ricevuta
-                                        </div>
-                                    </div>
+                        <div class="p-fluid">
+                            <div class="p-field p-grid">
+                                <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Tipo di Fattura <span
+                                        class="required">*</span></label>
+                                <div class="p-col-12 p-md-12">
+                                    <input type="radio" formControlName="title" value="Fattura" /> Fattura
+                                    <input type="radio" formControlName="title" value="Ricevuta" /> Ricevuta
                                 </div>
+                            </div>
+                        </div>
 
-                                <div class="p-fluid">
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Cliente <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-12">
-                                            <p-dropdown [options]="clients" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="categoryAppointments" formControlName="category_id" optionLabel="username" optionValue="id">
-                                                <ng-template let-option pTemplate="item">
+                        <div class="p-fluid">
+                            <div class="p-field p-grid">
+                                <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Cliente <span
+                                        class="required">*</span></label>
+                                <div class="p-col-12 p-md-12">
+                                    <p-dropdown [options]="clients" [virtualScroll]="true" filter="true"
+                                        [required]="true" [showClear]="true" placeholder="Scegli"
+                                        [style]="{ width: '100%' }" [(ngModel)]="categoryAppointments"
+                                        formControlName="category_id" optionLabel="username" optionValue="id">
+                                        <ng-template let-option pTemplate="item">
 
-                                                    <strong>{{option.name}} {{option.surname}}</strong><br>
-                                                    <span>{{option.address}} - {{option.zip}} {{option.city}}</span>
+                                            <strong>{{option.name}} {{option.surname}}</strong><br>
+                                            <span>{{option.address}} - {{option.zip}} {{option.city}}</span>
 
-                                                </ng-template>
+                                        </ng-template>
 
-                                            </p-dropdown>
+                                    </p-dropdown>
 
-                                        </div>
-                                    </div>
                                 </div>
+                            </div>
+                        </div>
 
-                                <div class="p-fluid">
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Nota <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-12">
+                        <div class="p-fluid">
+                            <div class="p-field p-grid">
+                                <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Nota <span
+                                        class="required">*</span></label>
+                                <div class="p-col-12 p-md-12">
 
-                                           
+                                    <textarea pInputTextarea formControlName="description"
+                                        (keyup)="changed($event)"></textarea>
 
-                                            <textarea pInputTextarea formControlName="description" (keyup)="changed($event)" ></textarea>
-
-
-
-
-                                        </div>
-                                    </div>
                                 </div>
+                            </div>
+                        </div>
 
+                        <div class="p-fluid">
+                            <div class="p-field p-grid">
+                                <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Tipo di Lavorazione<span
+                                        class="required">*</span></label>
+                                <div class="p-col-12 p-md-12">
 
-                                <div class="p-fluid">
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Tipo di Lavorazione<span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-12">
+                                    <p-multiSelect [options]="works" display="chip" formControlName="works_id"
+                                        [(ngModel)]="selectedWorks" optionLabel="name" optionValue="id">
+                                    </p-multiSelect>
 
-                                            <p-multiSelect [options]="works" display="chip" formControlName="works_id" [(ngModel)]="selectedWorks" optionLabel="name" optionValue="id">
-                                            </p-multiSelect>                                           
-
-
-
-
-
-                                        </div>
-                                    </div>
                                 </div>
+                            </div>
+                        </div>
 
-                           
+                        <div class="form-group form-row">
+                            <label class="col-md-3"></label>
+                            <div class="col-md-9">
+                                <input type="hidden" formControlName="id">
+                                <input type="hidden" value="{{idAppointments}}" *ngIf="idAppointments"
+                                    formControlName="appointment_id">
+                                <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
 
+                            </div>
+                        </div>
 
-                                <div class="form-group form-row">
-                                    <label class="col-md-3"></label>
-                                    <div class="col-md-9">
-                                        <input type="hidden" formControlName="id">
-                                        <input type="hidden" value="{{idAppointments}}" *ngIf="idAppointments" formControlName="appointment_id">
-                                        <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
-
-
-                                    </div>
-                                </div>
-                        
-                                
-              
                     </div>
-                </form>
+               
 
-                </p-card>
-            </div>
+            </p-card>
+        </div>
 
-            <div class="p-col-12 p-md-7">
-                <p-card >
-                    <div #reportContent>
+        <div class="p-col-12 p-md-7">
+            <p-card>
+                <div #reportContent>
 
                     <div class="p-fluid">
                         <div class="p-field p-grid">
@@ -141,32 +128,30 @@
                                 <h1>Fattura {{idAppointments}}</h1>
                                 <h3>{{dateAppointments}}</h3>
                             </div>
-                            
-                            
+
                         </div>
                         <div class="p-field p-grid">
 
                             <div class="p-col-12 p-md-6" *ngIf="getCategoryItem">
                                 <h3>Cliente</h3>
 
-                                {{ getCategoryItem(categoryAppointments)?.username }}<br>{{ getCategoryItem(categoryAppointments)?.zip }} - {{ getCategoryItem(categoryAppointments)?.city }} <br> {{ getCategoryItem(categoryAppointments)?.phone }}
-
-
+                                {{ getCategoryItem(categoryAppointments)?.username }}<br>{{ getCategoryItem(categoryAppointments)?.zip }}
+                                - {{ getCategoryItem(categoryAppointments)?.city }} <br>
+                                {{ getCategoryItem(categoryAppointments)?.phone }}
 
                             </div>
-                      
+
                             <div class="p-col-12 p-md-6" *ngIf="company">
                                 <h3>Intestatario</h3>
 
-                        {{company.name}}<br>
-                        {{company.address}}<br>
-                        {{company.zip}} - {{company.city}}<br>
-                        {{company.fiscalcode}}<br>
-                        {{company.fiscalnumber}}<br>
+                                {{company.name}}<br>
+                                {{company.address}}<br>
+                                {{company.zip}} - {{company.city}}<br>
+                                {{company.fiscalcode}}<br>
+                                {{company.fiscalnumber}}<br>
 
+                            </div>
                         </div>
-                        </div>
-                        
 
                     </div>
 
@@ -174,14 +159,13 @@
                     <div class="p-fluid">
                         <div class="p-field p-grid">
 
+                            <div class="p-col-12 p-md-12">
+                                <h3>Descrizione</h3>
 
-                        <div class="p-col-12 p-md-12">
-                            <h3>Descrizione</h3>
+                                {{descriptionAppointments}}
 
-                            {{descriptionAppointments}}
-
+                            </div>
                         </div>
-                    </div>
 
                         <div class="p-field p-grid">
 
@@ -193,23 +177,52 @@
 
                             <div class="p-col-12 p-md-12">
                                 <table class="works">
-                                <tr *ngFor="let item of selectedWorks" >
-                                    <td >{{ getWorksItem(item)?.name }}</td><td> {{ getWorksItem(item)?.description }}</td>
-                                </tr>
-                            </table>
+                                    <tr *ngFor="let item of selectedWorks">
+                                        <td>{{ getWorksItem(item)?.name }}</td>
+                                        <td> {{ getWorksItem(item)?.description }}</td>
+                                    </tr>
+                                </table>
+
                             </div>
                         </div>
-                    </div>
 
                     </div>
-                    <button pButton pRipple icon="pi pi-save" (click)="downloadPDF()" label="Genera PDF" class="p-button p-button-primary p-mr-2"></button>
-                    <button pButton pRipple icon="pi pi-save" *ngIf="numberAppointments > 0" [routerLink]="['/admin/appointments/edit', numberAppointments]" label="Visualizza Dettaglio Appuntamento" class="p-button p-button-primary p-mr-2"></button>
-
-                </p-card>
 
         
-            </div>
-        </div>
+                        <button pButton pRipple icon="pi pi-save" label="Aggiungi"
+                            class="p-button pull-right p-button-success p-mr-2" (click)="addQuantity()"></button>
 
+                        <table formArrayName="skills" style="width: 100%">
+
+                            <tr *ngFor="let quantity of skills.controls; let i=index" [formGroupName]="i">
+                                <td>Quantity :</td>
+                                <td>
+
+                                    <input ttype="text" [style]="{ width: '100%' }" pInputText formControlName="qty">
+
+                                </td>
+                                <td>Price:</td>
+                                <td>
+
+                                    <input ttype="text" [style]="{ width: '100%' }" pInputText formControlName="price">
+                                </td>
+                                <td>
+                                    <button (click)="removeQuantity(i)"
+                                        class="p-button p-button-danger p-mr-2">Remove</button>
+                                </td>
+                            </tr>
+                        </table>
+            
+                <button pButton pRipple icon="pi pi-save" (click)="downloadPDF()" label="Genera PDF"
+                    class="p-button p-button-primary p-mr-2"></button>
+                <button pButton pRipple icon="pi pi-save" *ngIf="numberAppointments > 0"
+                    [routerLink]="['/admin/appointments/edit', numberAppointments]"
+                    label="Visualizza Dettaglio Appuntamento" class="p-button p-button-primary p-mr-2"></button>
+                </div>
+            </p-card>
+
+        </div>
     </div>
+</form>
+</div>
 <p-toast key="myKey1"></p-toast>

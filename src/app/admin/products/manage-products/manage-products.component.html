@@ -104,15 +104,12 @@
             <h3>{{selectedSkills}}</h3>
 
 
-   
-
-              
-           
-
-
- 
-
+                <table>
+            <tr *ngFor="let entry of product.skills | keys">           
+                <td> {{entry.key}} {{entry.value}}</td>
+              </tr>
        
+            </table>
    </div>
     </ng-template>
 

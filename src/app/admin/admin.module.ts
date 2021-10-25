@@ -16,6 +16,7 @@ import {TabViewModule} from 'primeng/tabview';
 import { DateValidPipe } from "./pipe/date-valid.pipe";
 import { JoinPipe } from "./pipe/join.pipe";
 import { LimitPipe } from "./pipe/limit.pipe";
+import { KeysPipe } from "./pipe/key.pipe";
 
 
 
@@ -106,6 +107,7 @@ import { SplitCommaStringPipe } from './pipe/split.pipe';
     ManageAppointmentTypeComponent,
     AppointmentTypeFormComponent,
     JoinPipe,
+    KeysPipe,
     LimitPipe,
     SplitCommaStringPipe,
     WorksFormComponent,
@@ -123,7 +125,8 @@ import { SplitCommaStringPipe } from './pipe/split.pipe';
     ManageEmployeesComponent
     ],
     exports: [
-      LimitPipe
+      LimitPipe,
+      KeysPipe
     ],
   imports: [
     CommonModule,

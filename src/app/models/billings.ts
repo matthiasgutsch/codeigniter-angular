@@ -14,4 +14,5 @@ export class Billings {
     date: string;
     files: string;
     appointment_id: number;
+    skills: any[];
 }

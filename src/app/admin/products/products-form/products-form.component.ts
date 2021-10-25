@@ -132,14 +132,7 @@ export class ProductsFormComponent implements OnInit {
     }
     this.typeList = TYPE_LIST;
     this.status = STATUS_PRODUCTS;
-
-  
-
-    
-
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-
-
   }
 
   ngOnInit() {
@@ -269,10 +262,7 @@ export class ProductsFormComponent implements OnInit {
 
     return formArray;
   }
-  get skills() {
-    return this.blogForm.get('skills') as FormArray;
-  }
-   
+
    
   private createSkillFormGroup(skill:any): FormGroup{
     return new FormGroup({'qty':new FormControl(skill.qty),'price':new FormControl(skill.price)})
@@ -282,6 +272,12 @@ export class ProductsFormComponent implements OnInit {
     this.skills.push(this.createSkillFormGroup(skill));
   }
 
+
+  get skills() {
+    return this.blogForm.get('skills') as FormArray;
+  }
+   
+  
   newQuantity(): FormGroup {
     return this.fb.group({
       qty: "",

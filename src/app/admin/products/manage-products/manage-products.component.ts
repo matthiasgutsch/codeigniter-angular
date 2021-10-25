@@ -28,6 +28,7 @@ import { Table } from 'primeng/table';
 import { NgxSpinnerService } from "ngx-spinner";
 import { TagsService } from 'src/app/services/tags.service';
 import { Tags } from 'src/app/models/tags';
+import { KeyValue } from '@angular/common';
 
 @Component({
   selector: 'app-manage-products',
@@ -76,6 +77,7 @@ export class ManageProductsComponent implements OnInit {
   status: any;
   currentUser: any;
   skills:  any[] = [];
+  batches: any[];
   showDialog() {
     this.productDialog = true;
 }
@@ -205,15 +207,10 @@ edit(product: Products) {
   this.product = { ...product };
   
   this.selectedSkills = this.product.skills;
-
   this.productDialog = true;
-  const id = this.product.id;
-  
-  this.productsService.getr_products_data(+id).subscribe(
-    (data: Products) => this.productsData = data,
-    error => this.error = error
-  );
 }
+
+
 
 
 
