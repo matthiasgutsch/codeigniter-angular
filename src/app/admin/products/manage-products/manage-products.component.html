@@ -106,9 +106,9 @@
 
               
 
-                <table>
+                <table class="table">
             <tr *ngFor="let entry of selectedSkills | keys">           
-                <td>{{entry.value | json}}</td>
+                <td>{{entry.value.qty}}</td> <td>{{entry.value.price}}</td>
               </tr>
        
             </table>

@@ -109,6 +109,7 @@ export class ManageAppointmentsComponent implements OnInit {
       this.appointmentsService.getAllListbyUser().subscribe(data => {
         this.appointments = data;
         this.getClients();
+        this.getWorks();
         this.getAppointmentType();
         this.spinner.hide();
       });
@@ -135,7 +136,7 @@ export class ManageAppointmentsComponent implements OnInit {
   }
 
   getWorks() {
-    this.worksService.getAllList().subscribe(
+    this.worksService.getAllListbyUser().subscribe(
       (data: Works) => this.works = data,
       error => this.error = error
     );

@@ -123,6 +123,7 @@ export class AdminDashboardComponent implements OnInit {
      this.getBillingsCount();
      this.getAppointmentsToday();
      this.getAppointmentsCount();
+     this.getWorks();
      this.spinner.hide();
 
     this.appointmentsService.getAllListbyUser().subscribe(data => {
@@ -164,6 +165,13 @@ export class AdminDashboardComponent implements OnInit {
         this.clients = data;
         error => this.error = error
       });
+    }
+
+    getWorks() {
+      this.worksService.getAllListbyUser().subscribe(
+        (data: Works) => this.works = data,
+        error => this.error = error
+      );
     }
 
 
