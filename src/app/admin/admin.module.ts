@@ -82,6 +82,7 @@ import { ManageAppointmentTypeComponent } from './settings/appointment-type/mana
 import { AppointmentTypeFormComponent } from './settings/appointment-type/appointment-type-form/appointment-type-form.component';
 import { InitialsAvatarComponent } from './components/initials-avatar/initials-avatar.component';
 import { SplitCommaStringPipe } from './pipe/split.pipe';
+import { TotalPipe } from './pipe/total.pipe';
 
 
 
@@ -109,6 +110,7 @@ import { SplitCommaStringPipe } from './pipe/split.pipe';
     JoinPipe,
     KeysPipe,
     LimitPipe,
+    TotalPipe,
     SplitCommaStringPipe,
     WorksFormComponent,
     ManageWorksComponent,
@@ -126,7 +128,8 @@ import { SplitCommaStringPipe } from './pipe/split.pipe';
     ],
     exports: [
       LimitPipe,
-      KeysPipe
+      KeysPipe,
+      TotalPipe,
     ],
   imports: [
     CommonModule,

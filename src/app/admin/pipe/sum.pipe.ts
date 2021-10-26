@@ -4,10 +4,11 @@ import { NgModule, Pipe, PipeTransform } from "@angular/core";
   name: "sum"
 })
 export class SumPipe implements PipeTransform {
-  transform(items: any[], attr: string): any {
-    return items.reduce((a, b) => a + b[attr], 0);  }
-}
-
+transform(items: any[], attr: string): any {
+        return items.reduce((a, b) => a + b[attr], 0);
+    }
+  }
+  
 @NgModule({
   declarations: [SumPipe],
   exports: [SumPipe]
