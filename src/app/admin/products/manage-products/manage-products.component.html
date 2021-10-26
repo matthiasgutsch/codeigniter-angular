@@ -101,12 +101,14 @@
             <h3>{{product.title}}</h3>
             <p [innerHTML]="product.description"></p>
 
-            <h3>{{selectedSkills}}</h3>
+         
 
+
+              
 
                 <table>
-            <tr *ngFor="let entry of product.skills | keys">           
-                <td> {{entry.key}} {{entry.value}}</td>
+            <tr *ngFor="let entry of selectedSkills | keys">           
+                <td>{{entry.value | json}}</td>
               </tr>
        
             </table>

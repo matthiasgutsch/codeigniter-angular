@@ -49,7 +49,7 @@ export class ManageProductsComponent implements OnInit {
   exportColumns: any[];
   _selectedColumns: any[];
   selectedWorks: any[];
-  selectedSkills: any = [];
+  selectedSkills: any[];
   brands: any = [];
   brand: Brand;
 
@@ -87,6 +87,8 @@ myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en')  ;
 trackByFn(index, item) {
   return item.id;
 }
+
+
 
 @ViewChild("dt", { static: false }) public dt: Table;
 
@@ -171,6 +173,8 @@ trackByFn(index, item) {
       
 	} 
     
+ 
+
   getBrandItem(brand_id: string, id: string) {
     return this.brands.find(item => item.id === brand_id);
   }
@@ -206,7 +210,9 @@ trackByFn(index, item) {
 edit(product: Products) {
   this.product = { ...product };
   
-  this.selectedSkills = this.product.skills;
+  this.selectedSkills = JSON.parse("" + this.product.skills + "");
+
+  
   this.productDialog = true;
 }
 

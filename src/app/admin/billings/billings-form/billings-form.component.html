@@ -173,24 +173,13 @@
                                 <h3>Lavorazione</h3>
                             </div>
                         </div>
-                        <div class="p-field p-grid" *ngIf="selectedWorks">
+                        
 
-                            <div class="p-col-12 p-md-12">
-                                <table class="works">
-                                    <tr *ngFor="let item of selectedWorks">
-                                        <td>{{ getWorksItem(item)?.name }}</td>
-                                        <td> {{ getWorksItem(item)?.description }}</td>
-                                    </tr>
-                                </table>
-
-                            </div>
-                        </div>
-
-                    </div>
+                   
 
         
                         <button pButton pRipple icon="pi pi-save" label="Aggiungi"
-                            class="p-button pull-right p-button-success p-mr-2" (click)="addQuantity()"></button>
+                            class="p-button pull-left p-button-success" (click)="addQuantity()"></button>
 
                         <table formArrayName="skills" style="width: 100%">
 
@@ -213,12 +202,18 @@
                             </tr>
                         </table>
             
+                        <div class="clearfix"></div><br>
+                        <div class="clearfix"></div><br>
+    
                 <button pButton pRipple icon="pi pi-save" (click)="downloadPDF()" label="Genera PDF"
                     class="p-button p-button-primary p-mr-2"></button>
                 <button pButton pRipple icon="pi pi-save" *ngIf="numberAppointments > 0"
                     [routerLink]="['/admin/appointments/edit', numberAppointments]"
                     label="Visualizza Dettaglio Appuntamento" class="p-button p-button-primary p-mr-2"></button>
+
+         
                 </div>
+            </div>
             </p-card>
 
         </div>
