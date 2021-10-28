@@ -86,6 +86,7 @@ import { TotalPipe } from './pipe/total.pipe';
 import { ManageSupportsComponent } from './supports/manage-supports/manage-supports.component';
 import { SupportsFormComponent } from './supports/supports-form/supports-form.component';
 import { ManageTechnicalDataComponent } from './settings/technical-data/manage-technical-data/manage-technical-data.component';
+import { TechnicalDataFormComponent } from './settings/technical-data/technical-data-form/technical-data-form.component';
 
 
 @NgModule({
@@ -129,7 +130,8 @@ import { ManageTechnicalDataComponent } from './settings/technical-data/manage-t
     ManageProductsComponent,
     EmployeesFormComponent,
     ManageEmployeesComponent,
-    ManageTechnicalDataComponent
+    ManageTechnicalDataComponent,
+    TechnicalDataFormComponent
     ],
     exports: [
       LimitPipe,

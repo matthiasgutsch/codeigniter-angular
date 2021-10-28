@@ -13,12 +13,13 @@ import * as moment from 'moment';
 import { Comuni } from 'src/app/models/comuni';
 import { Tags } from 'src/app/models/tags';
 import { TagsService } from 'src/app/services/tags.service';
+import { TechnicalDataService } from 'src/app/services/technical_data.service';
 
 @Component({
-  selector: 'app-appointment-type-form',
-  templateUrl: './appointment-type-form.component.html'
+  selector: 'app-technical-data-form',
+  templateUrl: './technical-data-form.component.html'
 })
-export class AppointmentTypeFormComponent implements OnInit {
+export class TechnicalDataFormComponent implements OnInit {
   @ViewChild("myInput", { static: false }) myInputVariable: ElementRef;
 
   pageTitle: string;
@@ -46,7 +47,7 @@ export class AppointmentTypeFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private tagsService: TagsService,
+    private technicalDataService: TechnicalDataService,
     private comuniService: ComuniService,
 
     private router: Router,
@@ -69,7 +70,7 @@ export class AppointmentTypeFormComponent implements OnInit {
 
 
       this.pageTitle = 'Modifica Tipo di lavorazione';
-      this.tagsService.getId(+id).subscribe(
+      this.technicalDataService.getId(+id).subscribe(
         res => {
           this.categoryForm.patchValue({
             category_name: res.category_name,
@@ -112,23 +113,23 @@ export class AppointmentTypeFormComponent implements OnInit {
     const id = this.categoryForm.get('id').value;
 
     if (id) {
-      this.tagsService.update(formData, +id).subscribe(
+      this.technicalDataService.update(formData, +id).subscribe(
         res => {
           if (res.status == 'error') {
             this.uploadError = res.message;
           } else {
-            this.router.navigate(['/admin/settings/tags']);
+            this.router.navigate(['/admin/settings/technical-data']);
           }
         },
         error => this.error = error
       );
     } else {
-      this.tagsService.create(formData).subscribe(
+      this.technicalDataService.create(formData).subscribe(
         res => {
           if (res.status === 'error') {
             this.uploadError = res.message;
           } else {
-            this.router.navigate(['/admin/settings/tags']);
+            this.router.navigate(['/admin/settings/technical-data']);
           }
         },
         error => this.error = error

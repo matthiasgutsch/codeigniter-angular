@@ -232,12 +232,12 @@
                             </p-tabPanel>
 
                             <p-tabPanel header="Dati tecnici">
+                                <div class="form-group form-row">
 
-                                <button pButton pRipple icon="pi pi-save" label="Aggiungi" class="p-button pull-right p-button-success p-mr-2" (click)="addQuantity()"></button>
+                                <button pButton pRipple icon="pi pi-plus" label="Aggiungi Dati technici" class="p-button pull-right p-button-success p-mr-2" (click)="addQuantity()"></button>
 
-
-
-                                
+                                <button pButton pRipple icon="pi pi-cog" label="Configura Dati technici" class="p-button pull-left p-button-primary p-mr-2" routerLink="/admin/settings/technical-data"></button>
+                                </div>
                             <table formArrayName="skills" style="width: 100%">
                               
                                 <tr *ngFor="let quantity of skills.controls; let i=index" [formGroupName]="i">
@@ -262,7 +262,7 @@
                                       <input ttype="text" [style]="{ width: '100%' }" pInputText  formControlName="price">
                                   </td>
                                   <td>
-                                      <button (click)="removeQuantity(i)" class="p-button p-button-danger p-mr-2">Remove</button>
+                                      <button pButton (click)="removeQuantity(i)" icon="pi pi-trash" class="p-button p-button-danger p-mr-2"></button>
                                   </td>
                                 </tr>
                               </table>
