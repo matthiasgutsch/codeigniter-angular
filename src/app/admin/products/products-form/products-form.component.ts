@@ -29,6 +29,8 @@ import { TagsService } from 'src/app/services/tags.service';
 import { Tags } from 'src/app/models/tags';
 import { SkillsService } from 'src/app/services/skills.service';
 import { map, tap } from 'rxjs/operators';
+import { Technical_data } from 'src/app/models/technical_data';
+import { TechnicalDataService } from 'src/app/services/technical_data.service';
 
 
 export interface fPairs {
@@ -73,6 +75,9 @@ export class ProductsFormComponent implements OnInit {
 
   brands: any = [];
   brand: Brand;
+  technical_datas: any = [];
+  technical_data: Technical_data;
+
   tags: any = [];
 
 
@@ -114,6 +119,7 @@ export class ProductsFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private appointmentsService: AppointmentsService,
+    private technicalDataService: TechnicalDataService,
     private messageService: MessageService,
     private clientsService: ClientsService,
     private _location: Location,
@@ -142,6 +148,12 @@ export class ProductsFormComponent implements OnInit {
     this.getselectedCategories;
 
    
+
+
+    this.technicalDataService.getAllListbyUser().subscribe(
+      (data: Technical_data) => (this.technical_datas = data),
+      (error) => (this.error = error)
+    );
 
 
     this.brandsService.getAllListbyUser().subscribe(
@@ -277,7 +289,7 @@ export class ProductsFormComponent implements OnInit {
     return this.blogForm.get('skills') as FormArray;
   }
    
-  
+
   newQuantity(): FormGroup {
     return this.fb.group({
       qty: "",

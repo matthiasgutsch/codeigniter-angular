@@ -85,6 +85,7 @@ import { SplitCommaStringPipe } from './pipe/split.pipe';
 import { TotalPipe } from './pipe/total.pipe';
 import { ManageSupportsComponent } from './supports/manage-supports/manage-supports.component';
 import { SupportsFormComponent } from './supports/supports-form/supports-form.component';
+import { ManageTechnicalDataComponent } from './settings/technical-data/manage-technical-data/manage-technical-data.component';
 
 
 @NgModule({
@@ -127,7 +128,8 @@ import { SupportsFormComponent } from './supports/supports-form/supports-form.co
     ProductsFormComponent,
     ManageProductsComponent,
     EmployeesFormComponent,
-    ManageEmployeesComponent
+    ManageEmployeesComponent,
+    ManageTechnicalDataComponent
     ],
     exports: [
       LimitPipe,

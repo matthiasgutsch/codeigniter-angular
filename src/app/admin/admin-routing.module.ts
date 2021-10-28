@@ -34,6 +34,7 @@ import { ManageAppointmentTypeComponent } from './settings/appointment-type/mana
 import { AppointmentTypeFormComponent } from './settings/appointment-type/appointment-type-form/appointment-type-form.component';
 import { ManageSupportsComponent } from './supports/manage-supports/manage-supports.component';
 import { SupportsFormComponent } from './supports/supports-form/supports-form.component';
+import { ManageTechnicalDataComponent } from './settings/technical-data/manage-technical-data/manage-technical-data.component';
 
 const routes: Routes = [
   {
@@ -91,6 +92,10 @@ const routes: Routes = [
           { path: "settings/locations", component: ManageLocationsComponent },
           { path: "settings/locations/edit/:id", component: LocationsFormComponent },
           { path: "settings/locations/create", component: LocationsFormComponent },
+
+          { path: "settings/technical-data", component: ManageTechnicalDataComponent },
+          { path: "settings/technical-data/edit/:id", component: LocationsFormComponent },
+          { path: "settings/technical-data/create", component: LocationsFormComponent },
 
           { path: "settings/employees", component: ManageEmployeesComponent },
           { path: "settings/employees/edit/:id", component: EmployeesFormComponent },

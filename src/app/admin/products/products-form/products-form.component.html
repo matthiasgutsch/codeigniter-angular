@@ -244,10 +244,10 @@
                                     <td>Quantity :</td>
                                   <td>
                                       
-                                    <p-dropdown [options]="status" [virtualScroll]="true" filter="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" formControlName="qty" optionLabel="label" optionValue="label">
+                                    <p-dropdown [options]="technical_datas" [virtualScroll]="true" filter="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" formControlName="qty" optionLabel="name" optionValue="name">
                                         <ng-template let-option pTemplate="item">
 
-                                            {{option.label}}
+                                            {{option.name}}
 
                                         </ng-template>
 
