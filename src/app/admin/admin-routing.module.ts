@@ -32,6 +32,8 @@ import { ManageTagsComponent } from './settings/tags/manage-tags/manage-tags.com
 import { TagsFormComponent } from './settings/tags/tags-form/tags-form.component';
 import { ManageAppointmentTypeComponent } from './settings/appointment-type/manage-appointment-type/manage-appointment-type.component';
 import { AppointmentTypeFormComponent } from './settings/appointment-type/appointment-type-form/appointment-type-form.component';
+import { ManageSupportsComponent } from './supports/manage-supports/manage-supports.component';
+import { SupportsFormComponent } from './supports/supports-form/supports-form.component';
 
 const routes: Routes = [
   {
@@ -42,6 +44,11 @@ const routes: Routes = [
       {
         path: "",
         children: [
+
+
+          { path: "support", component: ManageSupportsComponent },
+          { path: "support/create", component: SupportsFormComponent },
+          { path: "support/edit/:id",component: SupportsFormComponent,},
 
           { path: "products", component: ManageProductsComponent },
           { path: "products/create", component: ProductsFormComponent },

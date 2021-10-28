@@ -31,7 +31,7 @@ export class CmspageService {
   }
 
   contactForm(formdata: Contact) {
-    return this.http.post<Contact>(this.serverUrl + 'api/contact/', formdata, this.httpOptions).pipe(
+    return this.http.post<Contact>(this.serverUrl + '/api/contact/', formdata, this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }

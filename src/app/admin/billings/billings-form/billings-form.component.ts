@@ -213,6 +213,9 @@ export class BillingsFormComponent implements OnInit {
     });
   }
 
+
+
+  
   @ViewChild('content', {static: false}) content: ElementRef;
 
 
@@ -239,6 +242,8 @@ export class BillingsFormComponent implements OnInit {
     }
   
 
+
+    
     changed(value){
       this.descriptionAppointments = value.target.value
     }
@@ -269,6 +274,8 @@ export class BillingsFormComponent implements OnInit {
     return this.works.find(item => item.id === works_id);
   }
 
+
+  
 
   removeImageFile() {
     this.imagePath = "";

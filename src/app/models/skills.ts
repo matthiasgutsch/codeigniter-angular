@@ -19,4 +19,6 @@ export class Skills {
     files: string;
     data: JSON;
     status: StringMap;
+    price: string;
+    qty: string;
 }

@@ -83,7 +83,8 @@ import { AppointmentTypeFormComponent } from './settings/appointment-type/appoin
 import { InitialsAvatarComponent } from './components/initials-avatar/initials-avatar.component';
 import { SplitCommaStringPipe } from './pipe/split.pipe';
 import { TotalPipe } from './pipe/total.pipe';
-
+import { ManageSupportsComponent } from './supports/manage-supports/manage-supports.component';
+import { SupportsFormComponent } from './supports/supports-form/supports-form.component';
 
 
 @NgModule({
@@ -114,6 +115,8 @@ import { TotalPipe } from './pipe/total.pipe';
     SplitCommaStringPipe,
     WorksFormComponent,
     ManageWorksComponent,
+    ManageSupportsComponent,
+    SupportsFormComponent,
     ManageAppointmentsComponent,
     LocationsFormComponent,
     CompanyFormComponent,
