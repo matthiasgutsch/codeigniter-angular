@@ -27,7 +27,10 @@ export class ManageBillingsComponent implements OnInit {
   client: Clients;
   comuni: any = [];
   productDialog: boolean = false;
+  selectedSkills: any[];
+  skills:  any[] = [];
 
+  
   @ViewChild("content", { static: false }) content: ElementRef;
   currentUser: any;
 
@@ -84,6 +87,16 @@ export class ManageBillingsComponent implements OnInit {
     this.blog = { ...blog };
     this.productDialog = true;
   }
+
+
+edit(blog: Blog) {
+  this.blog = { ...blog };
+  this.selectedSkills = JSON.parse("" + this.blog.skills + "");
+  this.productDialog = true;
+}
+
+
+
 
   hideDialog() {
     this.productDialog = false;

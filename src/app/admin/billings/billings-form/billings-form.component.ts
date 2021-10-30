@@ -252,6 +252,8 @@ export class BillingsFormComponent implements OnInit {
     doc.save('Fattura-' + this.idAppointments + '.pdf');
 
   }
+
+  
   getselectedWorks() {
     this.selectedWorks = this.works_id.split(',');
     }
@@ -366,9 +368,11 @@ export class BillingsFormComponent implements OnInit {
   newQuantity(): FormGroup {
     const numberPatern = '^[0-9.,]+$';
     return this.fb.group({
+      description: [''],
       qty: [1, [Validators.required, Validators.pattern(numberPatern)]],
       price: ['', [Validators.required, Validators.pattern(numberPatern)]],
-      itemTotal: ['']
+      itemTotal: [''],
+      
     })
   }
    

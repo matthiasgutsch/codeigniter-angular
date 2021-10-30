@@ -9,5 +9,6 @@ export class Blog {
     is_active: boolean;
     created_at: Date;
     date: string;
+    skills: any;
 
 }

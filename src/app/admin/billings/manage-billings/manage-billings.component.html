@@ -74,6 +74,7 @@
 
                             <td class="action">
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/billings/edit', blog.id]"></button>
+                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2" (click)="edit(blog.id)"></button>
                                 <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(blog.id)"></button>
 
                             </td>
@@ -91,6 +92,14 @@
    
 <div id="content" #content>
 
+
+    <table class="table">
+        <tr *ngFor="let entry of selectedSkills | keys">           
+            <td>{{entry.value.qty}}</td> <td>{{entry.value.price}}</td>
+          </tr>
+   
+        </table>
+
      {{blog.id}}
         <h3>{{blog.title}}</h3>
         <hr>
@@ -104,8 +113,6 @@
         <p>{{blog.is_active}}</p>
 
 </div>
-
-<button (click)="downloadPDF()">Export To PDF</button>
     </ng-template>
 
 </p-sidebar>
