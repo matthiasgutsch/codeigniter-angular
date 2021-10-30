@@ -43,7 +43,7 @@
                             <th>Cliente</th>
                             <th>Residente</th>
 
-                            <th>Tipo di Documento</th>
+                            <th>Prezzo</th>
                             <th></th>
                         </tr>
                     </ng-template>
@@ -70,7 +70,7 @@
                             <td>{{
                                 getCategoryItem(blog.category_id)?.zip }} - {{
                                 getCategoryItem(blog.category_id)?.city }}</td>
-                            <td>Appuntamento {{blog.appointment_id}}</td>
+                            <td>{{blog.total | currency :'EUR':'symbol':'1.2-2'}}</td>
 
                             <td class="action">
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/billings/edit', blog.id]"></button>

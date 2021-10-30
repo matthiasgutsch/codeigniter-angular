@@ -27,6 +27,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { Billings } from 'src/app/models/billings';
 import { map, tap } from 'rxjs/operators';
+import { ISkill } from 'src/app/models/products';
 
 @Component({
   selector: "app-billings-form",
@@ -42,7 +43,7 @@ export class BillingsFormComponent implements OnInit {
   blogs: Blog;
   blog: Blog;
   blogForm: FormGroup;
-
+  itemTotal: any
   appointments: Appointments;
   appointment: Appointments;
 
@@ -72,7 +73,9 @@ export class BillingsFormComponent implements OnInit {
   selectedWorks2: SelectItem[];
   locations: any = [];
   location: Locations;
-
+  subTotal: any;
+  vat: any;
+  grandTotal: any;
 
   cities: Blog[];
   format1: string = "";
@@ -98,6 +101,7 @@ export class BillingsFormComponent implements OnInit {
   itemForm: FormGroup;
   skillsForm: FormGroup;
   skillsValues: any = [];
+  total: number;
 
 
   
@@ -176,6 +180,10 @@ export class BillingsFormComponent implements OnInit {
         this.categoryAppointments = res.category_id;
         this.descriptionAppointments = res.description;
         this.dateAppointments = res.date;
+        this.grandTotal = res.total;
+        this.vat = res.vat;
+        this.subTotal = res.subtotal;
+
         this.numberAppointments = res.appointment_id;
 
         this.works_idAppointments = res.works_id.split(',');
@@ -191,6 +199,10 @@ export class BillingsFormComponent implements OnInit {
           date: res.date,
           id: res.id,
           skills: this.skillsValues,
+          subtotal: res.subtotal,
+          vat: res.vat,
+          total: res.total,
+
         });
     
 
@@ -209,7 +221,10 @@ export class BillingsFormComponent implements OnInit {
       user_id: [this.currentUser.user_id],
       is_featured: ["0"],
       date: ["", Validators.required],
-      skills: this.initSkill(),
+      skills: this.initSkill(this.skillsValues),
+      subtotal: [""],
+      vat: [""],
+      total: [this.grandTotal],
     });
   }
 
@@ -241,14 +256,12 @@ export class BillingsFormComponent implements OnInit {
     this.selectedWorks = this.works_id.split(',');
     }
   
-
-
     
-    changed(value){
+  changed(value){
       this.descriptionAppointments = value.target.value
     }
 
-    changeTime(value){
+  changeTime(value){
       this.dateAppointments = value.target.value
     }
     
@@ -288,8 +301,8 @@ export class BillingsFormComponent implements OnInit {
     return this.blogForm.get("title");
   }
 
-  initSkill() {
-    var formArray = this.fb.array([]);
+  initSkill(skillsValues: ISkill[]): FormArray {
+    const formArray = new FormArray([]);
     const id = this.route.snapshot.paramMap.get("id");
 
     this.billingsService.skills(+id).subscribe(
@@ -298,8 +311,10 @@ export class BillingsFormComponent implements OnInit {
 
         this.skillsValues.forEach((e)=>{
           formArray.push(this.fb.group({
-            qty: [e.qty],
-            price: [e.price]
+            description: e.description,
+            qty: e.qty,
+            price: e.price,
+            itemTotal: e.qty * e.price,
           }))
         })
       }
@@ -316,7 +331,11 @@ export class BillingsFormComponent implements OnInit {
 
    
   private createSkillFormGroup(skill:any): FormGroup{
-    return new FormGroup({'qty':new FormControl(skill.qty),'price':new FormControl(skill.price)})
+    return new FormGroup({
+      'qty':new FormControl(skill.qty),
+      'price':new FormControl(skill.price), 
+      'itemTotal':new FormControl(skill.itemTotal)
+    })
   }
 
   public addSkill(skill:any){
@@ -327,23 +346,49 @@ export class BillingsFormComponent implements OnInit {
   get skills() {
     return this.blogForm.get('skills') as FormArray;
   }
-   
+  
+  
+  
+  itemsChanged(): void {
+    let total: number = 0;
+    for (let t = 0; t < (<FormArray>this.blogForm.get('skills')).length; t++) {
+      if (this.blogForm.get('skills')?.value[t].qty != '' && this.blogForm.get('skills')?.value[t].price) {
+        total = (this.blogForm.get('skills')?.value[t].qty * this.blogForm.get('skills')?.value[t].price) + total;
+      }
+    }
+    this.subTotal = total;
+    this.vat = this.subTotal / 100 * 22;
+    this.grandTotal = this.subTotal + this.vat;
+
+  }
+
   
   newQuantity(): FormGroup {
+    const numberPatern = '^[0-9.,]+$';
     return this.fb.group({
-      qty: "",
-      price: "",
+      qty: [1, [Validators.required, Validators.pattern(numberPatern)]],
+      price: ['', [Validators.required, Validators.pattern(numberPatern)]],
+      itemTotal: ['']
     })
   }
    
-  addQuantity() {
+  addQuantity(event) {
     this.skills.push(this.newQuantity());
   }
    
-  removeQuantity(i:number) {
-    this.skills.removeAt(i);
+  removeQuantity(i: number): void {
+    let totalCostOfItem = this.blogForm.get('skills')?.value[i].qty * this.blogForm.get('skills')?.value[i].price;
+    this.subTotal = this.subTotal - totalCostOfItem;
+    this.vat = this.subTotal / 100 * 22;
+    this.grandTotal = this.subTotal + this.vat;
+    (<FormArray>this.blogForm.get('skills')).removeAt(i);
   }
   
+  get total_sum() {
+    return this.itemTotal.reduce((total, fee) => total + fee.balance, 0);
+}
+
+
   onSubmit() {
     const formData = new FormData();
     formData.append("title", this.blogForm.get("title").value);
@@ -355,6 +400,9 @@ export class BillingsFormComponent implements OnInit {
     formData.append("date", this.blogForm.get("date").value);
     formData.append('user_id', this.blogForm.get('user_id').value);
     formData.append('skills', JSON.stringify(this.blogForm.get('skills').value));
+    formData.append('subtotal', this.subTotal);
+    formData.append('vat', this.vat);
+    formData.append('total', this.grandTotal);
 
     const id = this.blogForm.get("id").value;
 

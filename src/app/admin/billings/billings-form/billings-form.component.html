@@ -198,28 +198,67 @@
                         <button pButton pRipple icon="pi pi-save" label="Aggiungi"
                             class="p-button pull-left p-button-success" (click)="addQuantity()"></button>
 
+                            
                         <table formArrayName="skills" style="width: 100%">
 
+                            <thead>
+                                <tr>
+                                <th>Descrizione</th>
+                                <th>Quantità</th>
+                                <th>Prezzo</th>
+                                <th>Totale</th>
+
+                            </tr></thead>
+                            <tbody>
                             <tr *ngFor="let quantity of skills.controls; let i=index" [formGroupName]="i">
-                                <td>Quantity :</td>
+                                
                                 <td>
 
-                                    <input ttype="text" [style]="{ width: '100%' }" pInputText formControlName="qty">
+                                    <input type="text" [style]="{ width: '100%' }" pInputText formControlName="description" (input)="itemsChanged()">
 
                                 </td>
-                                <td>Price:</td>
                                 <td>
 
-                                    <input ttype="text" [style]="{ width: '100%' }" pInputText formControlName="price">
+                                    <input type="text" [style]="{ width: '100%' }" pInputText formControlName="qty" (input)="itemsChanged()">
+
                                 </td>
                                 <td>
-                                    <button (click)="removeQuantity(i)"
+
+                                    <input type="text" [style]="{ width: '100%' }" pInputText formControlName="price" (input)="itemsChanged()">
+                                </td>
+
+
+                                <td class="p-15">
+                                    <input type="text" formControlName="itemTotal" [id]="'txtitemTotalControl'+i" 
+                                        [value]="blogForm.get('skills').value[this.i].qty * blogForm.get('skills').value[this.i].price" pInputText />
+    
+                                </td>
+
+                                
+                                <td>
+                                    <button (click)="removeQuantity(i)" 
                                         class="p-button p-button-danger p-mr-2">Remove</button>
                                 </td>
                             </tr>
-
-                            <tr><td><span>{{ skillsValues | sum:'price'}}</span></td></tr>
+                        </tbody>
                         </table>
+            
+
+                        <div class="text-right m-t-30">
+                     
+            
+                            <div class="text-right m-t-30">
+                                
+            
+            
+                                <h5 class="m-b-5 font-medium">Sub total: {{subTotal | currency :'EUR':'symbol':'1.2-2'}}</h5>
+                                <h5 class="m-t-0 font-medium">Total Vat: {{vat | currency :'EUR':'symbol':'1.2-2'}}</h5>
+            
+                                <h3 class="m-b-0 b-t p-t-20">Grand Total: {{grandTotal | currency :'EUR':'symbol':'1.2-2'}}</h3>
+                            </div>
+            
+            
+                        </div>
             
            
                

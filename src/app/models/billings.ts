@@ -15,4 +15,7 @@ export class Billings {
     files: string;
     appointment_id: number;
     skills: any[];
+    subtotal: string;
+    vat: string;
+    total: string;
 }
