@@ -77,6 +77,7 @@ export class AdminDashboardComponent implements OnInit {
   items: any;
   appointmentsCount: Appointments;
   billingsCount: Billings;
+  billingsCountTotal:  Billings;
   category_id: string;
 
   trackByFn(index, item) {
@@ -120,6 +121,7 @@ export class AdminDashboardComponent implements OnInit {
     this.getClientsCount();
     this.getClients();
      this.getProductsCount();
+     this.getBillingsCountTotal();
      this.getBillingsCount();
      this.getAppointmentsToday();
      this.getAppointmentsCount();
@@ -196,6 +198,15 @@ export class AdminDashboardComponent implements OnInit {
       const userId = this.currentUser.user_id; 
     this.billingsService.count().subscribe(
       (data: Billings) => this.billingsCount = data,
+      error => this.error = error
+      );
+    }
+
+
+    getBillingsCountTotal() {
+      const userId = this.currentUser.user_id; 
+    this.billingsService.countTotal(+userId).subscribe(
+      (data: Billings) => this.billingsCountTotal = data,
       error => this.error = error
       );
     }
