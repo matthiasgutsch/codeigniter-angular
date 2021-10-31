@@ -102,7 +102,7 @@ export class BillingsFormComponent implements OnInit {
   skillsForm: FormGroup;
   skillsValues: any = [];
   total: number;
-
+  viewMode = '1';
 
   
   trackByFn(index, item) {

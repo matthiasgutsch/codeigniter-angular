@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { ClientsService } from '../../../services/clients.service';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
 import { Clients } from '../../../models/clients';
@@ -57,7 +57,13 @@ export class ClientsFormComponent implements OnInit {
   billings: any = [];
   billing: Billings;
   currentUser: any;
+  addForm: FormGroup;
+  rows: FormArray;
+  itemForm: FormGroup;
+  skillsForm: FormGroup;
+  skillsValues: any = [];
 
+  
   trackByFn(index, item) {
     return item.id;
   }
@@ -129,6 +135,7 @@ export class ClientsFormComponent implements OnInit {
           is_active: res.is_active,
           date: res.date,
           id: res.id,
+          skills: this.skillsValues,
         });
         }
         else {
@@ -163,6 +170,7 @@ export class ClientsFormComponent implements OnInit {
       is_active: ["0"],
       image: [""],
       date: ["", Validators.required],
+      skills: this.initSkill(),
     });
   }
 
@@ -216,6 +224,60 @@ export class ClientsFormComponent implements OnInit {
 
 
   }
+
+
+  initSkill() {
+    var formArray = this.fb.array([]);
+    const id = this.route.snapshot.paramMap.get("id");
+
+    this.clientsService.skills(+id).subscribe(
+      (res)=>{
+        this.skillsValues = res;
+
+        this.skillsValues.forEach((e)=>{
+          formArray.push(this.fb.group({
+            qty: [e.qty],
+            price: [e.price]
+          }))
+        })
+      }
+    )
+
+    /*formArray.push(this.fb.group({
+      qty: [''],
+      price: ['']
+    })) */
+    
+
+    return formArray;
+  }
+
+   
+  private createSkillFormGroup(skill:any): FormGroup{
+    return new FormGroup({'qty':new FormControl(skill.qty),'price':new FormControl(skill.price)})
+  }
+
+  public addSkill(skill:any){
+    this.skills.push(this.createSkillFormGroup(skill));
+  }
+
+
+  get skills() {
+    return this.blogForm.get('skills') as FormArray;
+  }
+   
+
+  newQuantity(): FormGroup {
+    return this.fb.group({
+      qty: "",
+      price: "",
+    })
+  }
+   
+  addQuantity() {
+    this.skills.push(this.newQuantity());
+  }
+  
   removeImageFile() {
     this.imagePath = "";
     console.log(this.myInputVariable.nativeElement.files);
@@ -257,6 +319,7 @@ export class ClientsFormComponent implements OnInit {
     formData.append("is_active", this.blogForm.get("is_active").value);
     formData.append("image", this.blogForm.get("image").value);
     formData.append("date", this.blogForm.get("date").value);
+    formData.append('skills', JSON.stringify(this.blogForm.get('skills').value));
 
     const id = this.blogForm.get("id").value;
 

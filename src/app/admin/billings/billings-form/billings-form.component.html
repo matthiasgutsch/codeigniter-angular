@@ -1,38 +1,35 @@
 <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
-    
+
     <div class="dash-header">
-    <div class="dash-title">
+        <div class="dash-title">
+
+            <div class="p-field p-grid">
+                <div class="p-col-12 p-md-6">
+                    <h3>{{pageTitle}}</h3>
+                </div>
+                <div class="p-col-12 p-md-6">
+                    <button pButton pRipple icon="pi pi-save" [disabled]="!blogForm.valid" label="Salva"
+                        class="p-button pull-right p-button-success"></button>
+
+                    <button pButton pRipple icon="pi pi-save" (click)="downloadPDF()" label="Genera PDF"
+                        class="p-button p-button-primary pull-right p-mr-2"></button>
+
+                    <button pButton pRipple *ngIf="numberAppointments > 0"
+                        [routerLink]="['/admin/appointments/edit', numberAppointments]" label="Visualizza Appuntamento"
+                        class="p-button p-button-secondary  pull-right p-mr-2"></button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="p-fluid">
 
         <div class="p-field p-grid">
-            <div class="p-col-12 p-md-6">
-                <h3>{{pageTitle}}</h3>
-            </div>
-            <div class="p-col-12 p-md-6">
-                <button pButton pRipple icon="pi pi-save" [disabled]="!blogForm.valid" label="Salva"
-                class="p-button pull-right p-button-success"></button>
-                
-                <button pButton pRipple icon="pi pi-save" (click)="downloadPDF()" label="Genera PDF"
-                class="p-button p-button-primary pull-right p-mr-2"></button>
-         
-                <button pButton pRipple *ngIf="numberAppointments > 0"
-                    [routerLink]="['/admin/appointments/edit', numberAppointments]"
-                    label="Visualizza Appuntamento" class="p-button p-button-secondary  pull-right p-mr-2"></button>
-             
+            <div class="p-col-12 p-md-4">
 
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-
-<div class="p-fluid">              
-
-    <div class="p-field p-grid">
-        <div class="p-col-12 p-md-4">
-
-            <p-card>
+                <p-card>
 
                     <div class="blog-form">
 
@@ -40,7 +37,7 @@
                             <div class="p-col-12 p-md-12">
                                 <h3>Informazioni</h3>
                             </div>
-                          
+
                         </div>
                         <hr class="full">
 
@@ -119,7 +116,6 @@
                             </div>
                         </div>
 
-
                         <div class="form-group form-row">
                             <label class="col-md-3"></label>
                             <div class="col-md-9">
@@ -132,143 +128,150 @@
                         </div>
 
                     </div>
-               
 
-            </p-card>
-        </div>
-
-        <div class="p-col-12 p-md-8">
-            <p-card>
-                <div #reportContent id="editor">
-
-                    <div class="p-fluid">
-                
-                        <div class="p-field p-grid">
-
-
-                            <div class="p-col-12 p-md-6">
-                                <h1>Fattura {{idAppointments}}</h1>
-                                <h3>{{dateAppointments}}</h3>
-                            </div>
-
-                        </div>
-                        <div class="p-field p-grid">
-
-                            <div class="p-col-12 p-md-6" *ngIf="getCategoryItem">
-                                <h3>Cliente</h3>
-
-                                {{ getCategoryItem(categoryAppointments)?.username }}<br>{{ getCategoryItem(categoryAppointments)?.zip }}
-                                - {{ getCategoryItem(categoryAppointments)?.city }} <br>
-                                {{ getCategoryItem(categoryAppointments)?.phone }}
-
-                            </div>
-
-                            <div class="p-col-12 p-md-6" *ngIf="company">
-                                <h3>Intestatario</h3>
-
-                                {{company.name}}<br>
-                                {{company.address}}<br>
-                                {{company.zip}} - {{company.city}}<br>
-                                {{company.fiscalcode}}<br>
-                                {{company.fiscalnumber}}<br>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <hr class="full">
-                    <div class="p-fluid">
-                        <div class="p-field p-grid">
-
-                            <div class="p-col-12 p-md-12">
-                                <h3>Descrizione</h3>
-
-                                {{descriptionAppointments}}
-
-                            </div>
-                        </div>
-
-                        <div class="p-field p-grid">
-
-                            <div class="p-col-12 p-md-8">
-                                <h3>Lavorazione</h3>
-                            </div>
-                            <div class="p-col-12 p-md-4">
-
-                            <button pButton pRipple icon="pi pi-save" type="button" label="Aggiungi"
-                            class="p-button pull-right p-button-success" (click)="addQuantity()"></button>
-                            </div>
-                        </div>
-                        
-
-                   
-
-        
-                        
-
-                            
-                        <table formArrayName="skills" class="billings-list">
-
-                            <tr *ngFor="let quantity of skills.controls; let i=index" [formGroupName]="i">
-                                
-                                <td>
-                                    <div class="p-inputgroup">
-                                    <input type="text" [style]="{ width: '100%' }" pInputText formControlName="description" (input)="itemsChanged()">
-                                    <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
-                                    </div>
-                                </td>
-                                <td width="100px">
-                                    <input type="text" [style]="{ width: '100%' }" pInputText formControlName="qty" (input)="itemsChanged()">
-
-                                </td>
-                                <td width="100px">
-                                    <input type="text" [style]="{ width: '100%' }" pInputText formControlName="price" (input)="itemsChanged()">
-                                </td>
-
-
-                                <td>
-                                    <input type="hidden" formControlName="itemTotal" [id]="'txtitemTotalControl'+i" 
-                                        [value]="blogForm.get('skills').value[this.i].qty * blogForm.get('skills').value[this.i].price" pInputText disabled />
-                                    {{blogForm.get('skills').value[this.i].qty * blogForm.get('skills').value[this.i].price | currency :'EUR':'symbol':'1.2-2'}}
-                                </td>
-
-                                
-                                <td>
-                                    <button (click)="removeQuantity(i)" 
-                                        class="p-button p-button-danger p-mr-2"><i class="pi pi-trash"></i></button>
-                                </td>
-                            </tr>
-                        </table>
-            
-                        <br><br>
-                        <div class="p-field p-grid">
-
-                            <div class="p-col-12 p-md-8">
-                                
-            
-            
-                                <h4 class="m-b-5 font-medium">Sub total: {{subTotal | currency :'EUR':'symbol':'1.2-2'}}</h4>
-                                <h5 class="m-t-0 font-medium">Total Vat: {{vat | currency :'EUR':'symbol':'1.2-2'}}</h5>
-            
-                                <h3 class="m-b-0 b-t p-t-20">Grand Total: {{grandTotal | currency :'EUR':'symbol':'1.2-2'}}</h3>
-                            </div>
-            
-            
-                        </div>
-            
-           
-               
-
-         
-                </div>
+                </p-card>
             </div>
-            </p-card>
 
+            <div class="p-col-12 p-md-8">
+                <p-card>
+                    <div #reportContent id="editor">
+
+                        <div class="p-fluid">
+
+                            <div class="p-field p-grid">
+
+                                <div class="p-col-12 p-md-6">
+                                    <h1>Fattura {{idAppointments}}</h1>
+                                    <h3>{{dateAppointments}}</h3>
+                                </div>
+
+                            </div>
+                            <div class="p-field p-grid">
+
+                                <div class="p-col-12 p-md-6" *ngIf="getCategoryItem">
+                                    <h3>Cliente</h3>
+
+                                    {{ getCategoryItem(categoryAppointments)?.username }}<br>{{ getCategoryItem(categoryAppointments)?.zip }}
+                                    - {{ getCategoryItem(categoryAppointments)?.city }} <br>
+                                    {{ getCategoryItem(categoryAppointments)?.phone }}
+
+                                </div>
+
+                                <div class="p-col-12 p-md-6" *ngIf="company">
+                                    <h3>Intestatario</h3>
+
+                                    {{company.name}}<br>
+                                    {{company.address}}<br>
+                                    {{company.zip}} - {{company.city}}<br>
+                                    {{company.fiscalcode}}<br>
+                                    {{company.fiscalnumber}}<br>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <hr class="full">
+                        <div class="p-fluid">
+                            <div class="p-field p-grid">
+
+                                <div class="p-col-12 p-md-12">
+                                    <h3>Note</h3>
+
+                        
+                                    <p [innerHTML]="descriptionAppointments"></p>
+
+                                </div>
+                            </div>
+
+                            <div class="p-field p-grid">
+
+                                <div class="p-col-12 p-md-8">
+                                    <h3>Lavorazione</h3>
+                                </div>
+                                <div class="p-col-12 p-md-4">
+
+                                    <button pButton pRipple icon="pi pi-save" type="button" label="Aggiungi"
+                                        class="p-button pull-right p-button-success" (click)="addQuantity()"></button>
+                                </div>
+                            </div>
+
+                            <table formArrayName="skills" class="billings-list">
+
+                                <tr *ngFor="let quantity of skills.controls; let i=index" [formGroupName]="i">
+
+                                    <td>
+                                      
+                                        
+                                        <input type="text" [style]="{ width: '100%' }" pInputText
+                                            formControlName="description" (input)="itemsChanged()">
+                                    </td>
+                                    <td width="150px">
+                                        <input type="text" [style]="{ width: '100%' }" pInputText formControlName="qty"
+                                            (input)="itemsChanged()">
+
+                                    </td>
+                                    <td width="150px">
+                                        <input type="text" [style]="{ width: '100%' }" pInputText
+                                            formControlName="price" (input)="itemsChanged()">
+                                    </td>
+
+                                    <td width="150px">
+                                        <input type="hidden" formControlName="itemTotal" [id]="'txtitemTotalControl'+i"
+                                            [value]="blogForm.get('skills').value[this.i].qty * blogForm.get('skills').value[this.i].price"
+                                            pInputText disabled />
+                                        {{blogForm.get('skills').value[this.i].qty * blogForm.get('skills').value[this.i].price | currency :'EUR':'symbol':'1.2-2'}}
+                                    </td>
+
+                                    <td width="60">
+                                        <button (click)="removeQuantity(i)" class="p-button p-button-danger p-mr-2"><i
+                                                class="pi pi-trash"></i></button>
+                                    </td>
+                                </tr>
+
+                                    
+                                <tr>
+                                    <td colspan="3">
+                                       Total senza Iva
+                                    </td>
+
+                                    <td>
+                                       <h4>
+                                            {{subTotal | currency :'EUR':'symbol':'1.2-2'}}</h4>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        Valore Iva
+                                    </td>
+                                    <td>{{vat | currency :'EUR':'symbol':'1.2-2'}}</td>
+                                    <td></td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="3">
+                                        Totale
+                                    </td>
+                                    <td>
+                                        <h3>
+                                            {{grandTotal | currency :'EUR':'symbol':'1.2-2'}}</h3>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                        
+                            </table>
+
+                            <br><br>
+
+                        </div>
+                    </div>
+                </p-card>
+
+            </div>
         </div>
-    </div>
 
-</div>
+    </div>
 
 </form>
 

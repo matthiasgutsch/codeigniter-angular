@@ -217,6 +217,39 @@
                                     </div>
                                 </div>
                             </p-tabPanel>
+
+
+                            <p-tabPanel header="Dati aggiuntivi">
+                                <div class="form-group form-row">
+
+                                <button pButton pRipple icon="pi pi-plus" label="Aggiungi Dati technici" type="button" class="p-button pull-right p-button-success p-mr-2" (click)="addQuantity()"></button>
+
+                                </div>
+                            <table formArrayName="skills" style="width: 100%">
+                              
+                                <tr *ngFor="let quantity of skills.controls; let i=index" [formGroupName]="i">
+                                    <td>Quantity :</td>
+                                  <td>
+                                    <input ttype="text" [style]="{ width: '100%' }" pInputText  formControlName="qty">
+
+                                
+
+
+                                      
+                                  </td>
+                                  <td>Price:</td>
+                                  <td>
+                                    
+                                      <input ttype="text" [style]="{ width: '100%' }" pInputText  formControlName="price">
+                                  </td>
+                                  <td>
+                                      <button pButton (click)="removeQuantity(i)" icon="pi pi-trash" class="p-button p-button-danger p-mr-2"></button>
+                                  </td>
+                                </tr>
+                              </table>
+                            </p-tabPanel>
+
+
                             <p-tabPanel header="Allegati">
                              
                         
