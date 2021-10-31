@@ -131,6 +131,8 @@ export class BillingsFormComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
     this.typeList = TYPE_LIST;
+
+    
   }
   @ViewChild('reportContent') reportContent: ElementRef;
 
@@ -253,7 +255,7 @@ export class BillingsFormComponent implements OnInit {
 
   }
 
-  
+
   getselectedWorks() {
     this.selectedWorks = this.works_id.split(',');
     }
