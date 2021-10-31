@@ -8,10 +8,16 @@
                 <h3>{{pageTitle}}</h3>
             </div>
             <div class="p-col-12 p-md-6">
+                <button pButton pRipple icon="pi pi-save" [disabled]="!blogForm.valid" label="Salva"
+                class="p-button pull-right p-button-success"></button>
+                
                 <button pButton pRipple icon="pi pi-save" (click)="downloadPDF()" label="Genera PDF"
                 class="p-button p-button-primary pull-right p-mr-2"></button>
-                <button pButton pRipple icon="pi pi-save" [disabled]="!blogForm.valid" label="Salva"
-                class="p-button pull-right p-button-success p-mr-2"></button>
+         
+                <button pButton pRipple *ngIf="numberAppointments > 0"
+                    [routerLink]="['/admin/appointments/edit', numberAppointments]"
+                    label="Visualizza Appuntamento" class="p-button p-button-secondary  pull-right p-mr-2"></button>
+             
 
             </div>
         </div>
@@ -24,7 +30,7 @@
 <div class="p-fluid">              
 
     <div class="p-field p-grid">
-        <div class="p-col-12 p-md-5">
+        <div class="p-col-12 p-md-4">
 
             <p-card>
 
@@ -113,17 +119,6 @@
                             </div>
                         </div>
 
-                        <div class="p-fluid">
-                            <div class="p-field p-grid">
-                        <div class="p-col-12 p-md-12">
-                            <button pButton pRipple icon="pi pi-save" *ngIf="numberAppointments > 0"
-                                [routerLink]="['/admin/appointments/edit', numberAppointments]"
-                                label="Visualizza Appuntamento" class="p-button p-button-primary p-mr-2"></button>
-                          
-
-                        </div>
-                            </div>
-                        </div>
 
                         <div class="form-group form-row">
                             <label class="col-md-3"></label>
@@ -142,7 +137,7 @@
             </p-card>
         </div>
 
-        <div class="p-col-12 p-md-7">
+        <div class="p-col-12 p-md-8">
             <p-card>
                 <div #reportContent id="editor">
 
@@ -213,7 +208,7 @@
                         
 
                             
-                        <table formArrayName="skills" style="width: 100%">
+                        <table formArrayName="skills" class="billings-list">
 
                             <tr *ngFor="let quantity of skills.controls; let i=index" [formGroupName]="i">
                                 
