@@ -118,19 +118,19 @@ export class AdminDashboardComponent implements OnInit {
     this.spinner.show();
     const userId = this.currentUser.user_id;
 
-    this.getClientsCount();
-    this.getClients();
-     this.getProductsCount();
-     this.getBillingsCountTotal();
-     this.getBillingsCount();
-     this.getAppointmentsToday();
-     this.getAppointmentsCount();
-     this.getWorks();
-     this.spinner.hide();
+   
 
     this.appointmentsService.getAllListbyUser().subscribe(data => {
 
-      
+      this.getClientsCount();
+      this.getClients();
+       this.getProductsCount();
+       this.getBillingsCountTotal();
+       this.getBillingsCount();
+       this.getAppointmentsToday();
+       this.getAppointmentsCount();
+       this.getWorks();
+       
       this.calendarOptions = {
     
         editable: true,
@@ -149,6 +149,8 @@ export class AdminDashboardComponent implements OnInit {
         selectable: true,
       };
     });
+    this.spinner.hide();
+
   }
 
 
