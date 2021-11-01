@@ -188,6 +188,9 @@ export class ClientsFormComponent implements OnInit {
   }
 
 
+  removeQuantity(i:number) {
+    this.skills.removeAt(i);
+  }
   
   getCategoryItem(category_id: string, id: string) {
     return this.categories.find((item) => item.id === category_id);
