@@ -122,7 +122,7 @@
         <p-card>
             <app-initials-avatar class="pull-right"  [routerLink]="['/admin/clients/edit', getCategoryItem(order.category_id)?.id]" firstName="{{ getCategoryItem(order.category_id)?.name | slice:0:1}}" lastName="{{ getCategoryItem(order.category_id)?.surname | slice:0:1}}"></app-initials-avatar>
 
-            <h3>Dettaglio Fattura {{order.id}}</h3>
+            <h3>Dettaglio Ordine {{order.id}}</h3>
             <p-tag severity="default" value="{{order.date}}"></p-tag>
             <hr class="full">
 
