@@ -30,6 +30,10 @@ export class ManageBillingsComponent implements OnInit {
   selectedSkills: any[];
   skills:  any[] = [];
 
+  cols: any[];
+  exportColumns: any[];
+  _selectedColumns: any[];
+
   
   @ViewChild("content", { static: false }) content: ElementRef;
   currentUser: any;
@@ -49,7 +53,17 @@ export class ManageBillingsComponent implements OnInit {
     private comuniService: ComuniService,
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService
-  ) {}
+  ) {
+
+    this.cols = [
+      //{ field: "date", header: "Data" },
+      { field: "category_id", header: "Cliente" }
+
+    ];
+
+    this._selectedColumns = this.cols;
+
+  }
 
   ngOnInit() {
 
