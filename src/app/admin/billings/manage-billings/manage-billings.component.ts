@@ -11,14 +11,16 @@ import { Comuni } from 'src/app/models/comuni';
 import { BillingsService } from 'src/app/services/billings.service';
 import { jsPDF } from "jspdf";
 import { NgxSpinnerService } from "ngx-spinner";
+import { Billings } from 'src/app/models/billings';
 
 @Component({
   selector: "app-manage-billings",
   templateUrl: "./manage-billings.component.html",
 })
 export class ManageBillingsComponent implements OnInit {
-  blogs: Blog;
-  blog: Blog;
+
+  billings: any = [];
+  billing: Billings;
   categories: any = [];
   category: Category;
   error: string;
@@ -30,6 +32,7 @@ export class ManageBillingsComponent implements OnInit {
   productDialog: boolean = false;
   selectedSkills: any[];
   skills:  any[] = [];
+  skillsArray: any = [];
 
   cols: any[];
   exportColumns: any[];
@@ -55,7 +58,6 @@ export class ManageBillingsComponent implements OnInit {
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,
     private spinner: NgxSpinnerService,
-
   ) {
 
 
@@ -71,12 +73,10 @@ export class ManageBillingsComponent implements OnInit {
 
     this.spinner.show();
     this.billingsService.getAllListbyUser().subscribe(data => {
-      this.blogs = data;
+      this.billings = data;
       this.cols = [
         { field: "category_id", header: "Cliente" },
         { field: "id", header: "Numero Fattura" },
-
-  
       ];
       this._selectedColumns = this.cols;
       this.exportColumns = this.cols.map(col => ({
@@ -120,16 +120,11 @@ export class ManageBillingsComponent implements OnInit {
   }
 
   
-  
-  editProduct(blog: Blog) {
-    this.blog = { ...blog };
-    this.productDialog = true;
-  }
 
 
-edit(blog: Blog) {
-  this.blog = { ...blog };
-  this.selectedSkills = JSON.parse("" + this.blog.skills + "");
+edit(billing: Billings) {
+  this.billing = { ...billing};
+  this.selectedSkills = JSON.parse("" + this.billing.skills + "");
   this.productDialog = true;
 }
 

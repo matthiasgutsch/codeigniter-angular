@@ -1,3 +1,5 @@
+import { StringMap } from "@angular/compiler/src/compiler_facade_interface";
+
 export class Blog {
     id: number;
     title: string;
@@ -9,6 +11,12 @@ export class Blog {
     is_active: boolean;
     created_at: Date;
     date: string;
-    skills: any;
+    skills: ISkill[];
 
+}
+
+export interface ISkill{
+    qty: string;
+    price: number;
+    itemTotal: string;
 }

@@ -787,12 +787,24 @@ hr.full {
 
 .billings-list {
 
-width: 100%;
+  width: 100%;
+  border: 0px;
+  border-spacing: 0px;
 
+thead {
+  tr {
+    th {
+      background-color: #efefef;
+      text-align: left;
+      padding: 5px 10px;
+      font-size: 13px;
+    }
+  }
+}
 tr {
   td {
     border-top: 1px solid #ccc;
-    padding: 5px 10px;
+    padding: 10px 10px;
 
     h4 {
       margin-top: 10px;

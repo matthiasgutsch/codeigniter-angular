@@ -55,7 +55,7 @@
         <div class="p-col-12 p-md-12">
 
             <p-card>
-                <p-table #dt [value]="blogs" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
+                <p-table #dt [value]="billings" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
                    
                     <ng-template pTemplate="header">
                         <tr>
@@ -73,35 +73,35 @@
                             <th></th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-blog>
+                    <ng-template pTemplate="body" let-billing>
                         <tr>
-                            <td>{{blog.id}}</td>
+                            <td>{{billing.id}}</td>
 
-                            <td><i class="pi pi-calendar"></i> {{blog.created_at}}
+                            <td><i class="pi pi-calendar"></i> {{billing.created_at}}
                             </td>
 
                             <td width="50">
 
-                                <app-initials-avatar  [routerLink]="['/admin/clients/edit', getCategoryItem(blog.category_id)?.id]" firstName="{{ getCategoryItem(blog.category_id)?.name | slice:0:1}}" lastName="{{ getCategoryItem(blog.category_id)?.surname | slice:0:1}}"></app-initials-avatar>
+                                <app-initials-avatar  [routerLink]="['/admin/clients/edit', getCategoryItem(billing.category_id)?.id]" firstName="{{ getCategoryItem(billing.category_id)?.name | slice:0:1}}" lastName="{{ getCategoryItem(billing.category_id)?.surname | slice:0:1}}"></app-initials-avatar>
 
                                
                             </td>
 
                             <td>
 
-                                {{ getCategoryItem(blog.category_id)?.name }}
-                                {{ getCategoryItem(blog.category_id)?.surname }}
+                                {{ getCategoryItem(billing.category_id)?.name }}
+                                {{ getCategoryItem(billing.category_id)?.surname }}
                             </td>
 
                             <td>{{
-                                getCategoryItem(blog.category_id)?.zip }} - {{
-                                getCategoryItem(blog.category_id)?.city }}</td>
-                            <td>{{blog.total | currency :'EUR':'symbol':'1.2-2'}}</td>
+                                getCategoryItem(billing.category_id)?.zip }} - {{
+                                getCategoryItem(billing.category_id)?.city }}</td>
+                            <td>{{billing.total | currency :'EUR':'symbol':'1.2-2'}}</td>
 
                             <td class="action">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/billings/edit', blog.id]"></button>
-                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2" (click)="edit(blog.id)"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(blog.id)"></button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/billings/edit', billing.id]"></button>
+                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2" (click)="edit(billing)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(billing.id)"></button>
 
                             </td>
                         </tr>
@@ -118,26 +118,66 @@
    
 <div id="content" #content>
 
+    <div class="p-col-12 p-md-12">
+        <p-card>
+            <app-initials-avatar class="pull-right"  [routerLink]="['/admin/clients/edit', getCategoryItem(billing.category_id)?.id]" firstName="{{ getCategoryItem(billing.category_id)?.name | slice:0:1}}" lastName="{{ getCategoryItem(billing.category_id)?.surname | slice:0:1}}"></app-initials-avatar>
 
-    <table class="table">
+            <h3>Dettaglio Fattura {{billing.id}}</h3>
+            <p-tag severity="default" value="{{billing.date}}"></p-tag>
+            <hr class="full">
+
+                <strong>{{ getCategoryItem(billing.category_id)?.username }}</strong><br>
+                {{ getCategoryItem(billing.category_id)?.address }} - {{ getCategoryItem(billing.category_id)?.zip }} {{ getCategoryItem(billing.category_id)?.city }} <br>
+                {{ getCategoryItem(billing.category_id)?.phone }}
+
+        </p-card>
+<p-card>
+       
+    <table class="billings-list">
+        <thead>
+            <tr>
+                <th>Descrizione</th>
+                <th>Prezzo</th>
+                <th>qty</th>
+                <th>Totale</th>
+
+            </tr>
+        </thead>
         <tr *ngFor="let entry of selectedSkills | keys">           
-            <td>{{entry.value.qty}}</td> <td>{{entry.value.price}}</td>
+            <td>{{entry.value.description}}</td>  <td>{{entry.value.price}}</td> <td>{{entry.value.qty}}</td><td> {{entry.value.qty * entry.value.price | currency :'EUR':'symbol':'1.2-2'}}</td>
           </tr>
    
+             <tr>
+                                    <td colspan="3">
+                                       Total senza Iva
+                                    </td>
+
+                                    <td>
+                                       <h4>
+                                            {{billing.subtotal | currency :'EUR':'symbol':'1.2-2'}}</h4>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        Valore Iva
+                                    </td>
+                                    <td>{{billing.vat | currency :'EUR':'symbol':'1.2-2'}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="3">
+                                        Totale
+                                    </td>
+                                    <td>
+                                        <h3>
+                                            {{billing.total | currency :'EUR':'symbol':'1.2-2'}}</h3>
+                                    </td>
+                                </tr>
+                        
         </table>
-
-     {{blog.id}}
-        <h3>{{blog.title}}</h3>
-        <hr>
-        <p [innerHTML]="blog.description"></p>
-        <hr>
-        <img src="{{blog.image}}" width="100px">
-
-        <p [innerHTML]="getCategoryItem(blog.category_id)?.description"></p>
-
-        <p>{{blog.is_featured}}</p>
-        <p>{{blog.is_active}}</p>
-
+                                <button pButton pRipple icon="pi pi-pencil" label="modifica" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/billings/edit', billing.id]"></button>
+                            </p-card>
+    </div>
 </div>
     </ng-template>
 
