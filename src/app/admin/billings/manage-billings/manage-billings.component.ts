@@ -58,13 +58,6 @@ export class ManageBillingsComponent implements OnInit {
 
   ) {
 
-    this.cols = [
-      //{ field: "date", header: "Data" },
-      { field: "category_id", header: "Cliente" }
-
-    ];
-
-    this._selectedColumns = this.cols;
 
   }
 
@@ -80,7 +73,8 @@ export class ManageBillingsComponent implements OnInit {
     this.billingsService.getAllListbyUser().subscribe(data => {
       this.blogs = data;
       this.cols = [
-        { field: "category_id", header: "Cliente" }
+        { field: "category_id", header: "Cliente" },
+        { field: "id", header: "Numero Fattura" },
 
   
       ];

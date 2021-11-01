@@ -18,6 +18,10 @@
 
                     </p-dropdown>
 
+                    <input *ngSwitchCase="'id'" [ngModel]="dt.filters['id']? dt.filters['id'].value : ''" 
+                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
+
+
                 </div>
 
             </div>
