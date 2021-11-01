@@ -36,6 +36,10 @@ import { ManageSupportsComponent } from './supports/manage-supports/manage-suppo
 import { SupportsFormComponent } from './supports/supports-form/supports-form.component';
 import { ManageTechnicalDataComponent } from './settings/technical-data/manage-technical-data/manage-technical-data.component';
 import { TechnicalDataFormComponent } from './settings/technical-data/technical-data-form/technical-data-form.component';
+import { QuotesFormComponent } from './quotes/quotes-form/quotes-form.component';
+import { ManageQuotesComponent } from './quotes/manage-quotes/manage-quotes.component';
+import { ManageOrdersComponent } from './orders/manage-orders/manage-orders.component';
+import { OrdersFormComponent } from './orders/orders-form/orders-form.component';
 
 const routes: Routes = [
   {
@@ -63,6 +67,15 @@ const routes: Routes = [
           { path: "billings", component: ManageBillingsComponent },
           { path: "billings/edit/:id",component: BillingsFormComponent,},
           { path: "billings/create", component: BillingsFormComponent },
+
+
+          { path: "orders", component: ManageOrdersComponent },
+          { path: "orders/edit/:id",component: OrdersFormComponent,},
+          { path: "orders/create", component: OrdersFormComponent },
+
+          { path: "quotes", component: ManageQuotesComponent },
+          { path: "quotes/edit/:id",component: QuotesFormComponent,},
+          { path: "quotes/create", component: QuotesFormComponent },
 
           { path: "clients", component: ManageClientsComponent },
           { path: "clients/create", component: ClientsFormComponent },

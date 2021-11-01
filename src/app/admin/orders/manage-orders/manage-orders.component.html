@@ -34,11 +34,11 @@
 
         <div class="p-field p-grid">
             <div class="p-col-10 p-md-6">
-                <h3>Fatture</h3>
+                <h3>Ordini</h3>
             </div>
             <div class="p-col-2 p-md-6">
                
-                <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/billings/create']" label="Aggiungi" class="p-button p-button-primary pull-right"></button>
+                <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/orders/create']" label="Aggiungi" class="p-button p-button-primary pull-right"></button>
 
                 <button type="text" pButton label="Filter" icon="pi pi-filter"
                 class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
@@ -55,7 +55,7 @@
         <div class="p-col-12 p-md-12">
 
             <p-card>
-                <p-table #dt [value]="billings" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
+                <p-table #dt [value]="orders" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
                    
                     <ng-template pTemplate="header">
                         <tr>
@@ -73,35 +73,35 @@
                             <th></th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-billing>
+                    <ng-template pTemplate="body" let-order>
                         <tr>
-                            <td>{{billing.id}}</td>
+                            <td>{{order.id}}</td>
 
-                            <td><i class="pi pi-calendar"></i> {{billing.created_at}}
+                            <td><i class="pi pi-calendar"></i> {{order.created_at}}
                             </td>
 
                             <td width="50">
 
-                                <app-initials-avatar  [routerLink]="['/admin/clients/edit', getCategoryItem(billing.category_id)?.id]" firstName="{{ getCategoryItem(billing.category_id)?.name | slice:0:1}}" lastName="{{ getCategoryItem(billing.category_id)?.surname | slice:0:1}}"></app-initials-avatar>
+                                <app-initials-avatar  [routerLink]="['/admin/clients/edit', getCategoryItem(order.category_id)?.id]" firstName="{{ getCategoryItem(order.category_id)?.name | slice:0:1}}" lastName="{{ getCategoryItem(order.category_id)?.surname | slice:0:1}}"></app-initials-avatar>
 
                                
                             </td>
 
                             <td>
 
-                                {{ getCategoryItem(billing.category_id)?.name }}
-                                {{ getCategoryItem(billing.category_id)?.surname }}
+                                {{ getCategoryItem(order.category_id)?.name }}
+                                {{ getCategoryItem(order.category_id)?.surname }}
                             </td>
 
                             <td>{{
-                                getCategoryItem(billing.category_id)?.zip }} - {{
-                                getCategoryItem(billing.category_id)?.city }}</td>
-                            <td>{{billing.total | currency :'EUR':'symbol':'1.2-2'}}</td>
+                                getCategoryItem(order.category_id)?.zip }} - {{
+                                getCategoryItem(order.category_id)?.city }}</td>
+                            <td>{{order.total | currency :'EUR':'symbol':'1.2-2'}}</td>
 
                             <td class="action">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/billings/edit', billing.id]"></button>
-                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2" (click)="edit(billing)"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(billing.id)"></button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/orders/edit', order.id]"></button>
+                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2" (click)="edit(order)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(order.id)"></button>
 
                             </td>
                         </tr>
@@ -120,15 +120,15 @@
 
     <div class="p-col-12 p-md-12">
         <p-card>
-            <app-initials-avatar class="pull-right"  [routerLink]="['/admin/clients/edit', getCategoryItem(billing.category_id)?.id]" firstName="{{ getCategoryItem(billing.category_id)?.name | slice:0:1}}" lastName="{{ getCategoryItem(billing.category_id)?.surname | slice:0:1}}"></app-initials-avatar>
+            <app-initials-avatar class="pull-right"  [routerLink]="['/admin/clients/edit', getCategoryItem(order.category_id)?.id]" firstName="{{ getCategoryItem(order.category_id)?.name | slice:0:1}}" lastName="{{ getCategoryItem(order.category_id)?.surname | slice:0:1}}"></app-initials-avatar>
 
-            <h3>Dettaglio Fattura {{billing.id}}</h3>
-            <p-tag severity="default" value="{{billing.date}}"></p-tag>
+            <h3>Dettaglio Fattura {{order.id}}</h3>
+            <p-tag severity="default" value="{{order.date}}"></p-tag>
             <hr class="full">
 
-                <strong>{{ getCategoryItem(billing.category_id)?.username }}</strong><br>
-                {{ getCategoryItem(billing.category_id)?.address }} - {{ getCategoryItem(billing.category_id)?.zip }} {{ getCategoryItem(billing.category_id)?.city }} <br>
-                {{ getCategoryItem(billing.category_id)?.phone }}
+                <strong>{{ getCategoryItem(order.category_id)?.username }}</strong><br>
+                {{ getCategoryItem(order.category_id)?.address }} - {{ getCategoryItem(order.category_id)?.zip }} {{ getCategoryItem(order.category_id)?.city }} <br>
+                {{ getCategoryItem(order.category_id)?.phone }}
 
         </p-card>
 <p-card>
@@ -154,14 +154,14 @@
 
                                     <td>
                                        <h4>
-                                            {{billing.subtotal | currency :'EUR':'symbol':'1.2-2'}}</h4>
+                                            {{order.subtotal | currency :'EUR':'symbol':'1.2-2'}}</h4>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="3">
                                         Valore Iva
                                     </td>
-                                    <td>{{billing.vat | currency :'EUR':'symbol':'1.2-2'}}</td>
+                                    <td>{{order.vat | currency :'EUR':'symbol':'1.2-2'}}</td>
                                 </tr>
 
                                 <tr>
@@ -170,12 +170,12 @@
                                     </td>
                                     <td>
                                         <h3>
-                                            {{billing.total | currency :'EUR':'symbol':'1.2-2'}}</h3>
+                                            {{order.total | currency :'EUR':'symbol':'1.2-2'}}</h3>
                                     </td>
                                 </tr>
                         
         </table>
-                                <button pButton pRipple icon="pi pi-pencil" label="modifica" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/billings/edit', billing.id]"></button>
+                                <button pButton pRipple icon="pi pi-pencil" label="modifica" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/billings/edit', order.id]"></button>
                             </p-card>
     </div>
 </div>
