@@ -10,6 +10,7 @@ import { ComuniService } from 'src/app/services/comuni.service';
 import { Comuni } from 'src/app/models/comuni';
 import { BillingsService } from 'src/app/services/billings.service';
 import { jsPDF } from "jspdf";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: "app-manage-billings",
@@ -52,7 +53,9 @@ export class ManageBillingsComponent implements OnInit {
     private messageService: MessageService,
     private comuniService: ComuniService,
     private categoryService: CategoryService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private spinner: NgxSpinnerService,
+
   ) {
 
     this.cols = [
@@ -69,23 +72,50 @@ export class ManageBillingsComponent implements OnInit {
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     const userId = this.currentUser.user_id;
+
     
-    this.billingsService.getAllListbyUser().subscribe(
-      (data: Blog) => (this.blogs = data),
-      (error) => (this.error = error)
-    );
 
 
-    this.clientsService.getAllListbyUser().subscribe(
-      (data: Clients) => (this.clients = data),
-      (error) => (this.error = error)
-    );
+    this.spinner.show();
+    this.billingsService.getAllListbyUser().subscribe(data => {
+      this.blogs = data;
+      this.cols = [
+        { field: "category_id", header: "Cliente" }
 
-    this.comuniService.getAllList().subscribe(
-      (data: Comuni) => (this.comuni = data),
-      (error) => (this.error = error)
-    );
+  
+      ];
+      this._selectedColumns = this.cols;
+      this.exportColumns = this.cols.map(col => ({
+        title: col.header,
+        dataKey: col.field
+      }));
+      this.getComuni();
+      this.getClients();
+
+      this.spinner.hide();
+    });
+
+   
+
   }
+
+    getClients() {
+    const userId = this.currentUser.user_id;
+    this.clientsService.getAllListbyUser().subscribe(
+      (data: Clients) => this.clients = data,
+      error => this.error = error
+    );
+  
+    }
+  
+    getComuni() {
+  this.comuniService.getAllList().subscribe(
+    (data: Comuni) => (this.comuni = data),
+    (error) => (this.error = error)
+  );
+
+  }
+
 
   getCategoryItem(category_id: string, id: string) {
     return this.clients.find((item) => item.id === category_id);
