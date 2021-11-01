@@ -433,11 +433,27 @@ hr.full {
   width: 100%;
   max-width: 70%;
   height: 100%;
+
+  .alert.alert-danger {
+    background-color: @red;
+    margin-bottom: 10px;
+    padding: 8px 14px;
+    color: @white;
+    border-radius: @radius;
+  }
+
   .login-box-inner {
     padding: 30px;
     max-width: 500px;
     margin: 0 auto;
     margin-top: 30%;
+
+    h1 {
+      span  {
+        font-family: "Circular";
+        font-weight: normal;
+      }
+    }
   }
 }
 

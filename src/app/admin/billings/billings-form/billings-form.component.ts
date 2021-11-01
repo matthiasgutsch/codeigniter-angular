@@ -103,6 +103,7 @@ export class BillingsFormComponent implements OnInit {
   skillsValues: any = [];
   total: number;
   viewMode = '1';
+  fiscaltype: number;
 
   
   trackByFn(index, item) {
@@ -131,7 +132,7 @@ export class BillingsFormComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
     this.typeList = TYPE_LIST;
-
+   
     
   }
   @ViewChild('reportContent') reportContent: ElementRef;
@@ -140,7 +141,6 @@ export class BillingsFormComponent implements OnInit {
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     const userId = this.currentUser.user_id;
-    
     this.page = history.state;
 
 
@@ -159,18 +159,20 @@ export class BillingsFormComponent implements OnInit {
     );
 
 
-    this.companyService.getId(1).subscribe(
+    this.companyService.getId(userId).subscribe(
       (data: Company) => (this.company = data),
       (error) => (this.error = error)
     );
    
-    
+    this.companyService.getId(userId).subscribe(value => {
+      this.fiscaltype = this.company.fiscaltype;
+    });
+
     const id = this.route.snapshot.paramMap.get("id");
 
     this.billingsService.skills(+id).subscribe(value => {
       this.skillsValues = value;
     });
-
 
 
 
@@ -361,7 +363,7 @@ export class BillingsFormComponent implements OnInit {
       }
     }
     this.subTotal = total;
-    this.vat = this.subTotal / 100 * 22;
+    this.vat = this.subTotal / 100 * this.fiscaltype;
     this.grandTotal = this.subTotal + this.vat;
 
   }
@@ -385,7 +387,7 @@ export class BillingsFormComponent implements OnInit {
   removeQuantity(i: number): void {
     let totalCostOfItem = this.blogForm.get('skills')?.value[i].qty * this.blogForm.get('skills')?.value[i].price;
     this.subTotal = this.subTotal - totalCostOfItem;
-    this.vat = this.subTotal / 100 * 22;
+    this.vat = this.subTotal / 100 * this.fiscaltype;
     this.grandTotal = this.subTotal + this.vat;
     (<FormArray>this.blogForm.get('skills')).removeAt(i);
   }

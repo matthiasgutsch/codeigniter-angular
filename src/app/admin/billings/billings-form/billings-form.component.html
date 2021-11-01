@@ -242,8 +242,8 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3">
-                                        Valore Iva
+                                    <td colspan="3" *ngIf="company">
+                                        Valore Iva ({{fiscaltype}} %)
                                     </td>
                                     <td>{{vat | currency :'EUR':'symbol':'1.2-2'}}</td>
                                     <td></td>

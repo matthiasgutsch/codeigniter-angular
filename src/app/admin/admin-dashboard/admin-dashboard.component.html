@@ -72,7 +72,8 @@
                     <div class="p-grid">
                         <div class="p-col-6 p-md-6">
                     <h4 class="mb-0">Fatturazione</h4>
-                    {{billingsCountTotal | currency :'EUR':'symbol':'1.2-2'}}
+                    <p-tag severity="default" value="{{billingsCountTotal | currency :'EUR':'symbol':'1.2-2'}}"></p-tag>
+                    
                         </div>
                         <div class="p-col-6 p-md-6">
 
@@ -93,7 +94,9 @@
                     <div class="p-grid">
                         <div class="p-col-12 p-md-6">
     
-                        <h4>Prodotti</h4>
+                        <h4 class="mb-0">Prodotti</h4>
+                        <p-tag severity="default" value="{{productsCount}} Prodotti"></p-tag>
+
                         </div>
                         
                         <div class="p-col-12 p-md-6">

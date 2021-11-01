@@ -143,7 +143,7 @@
                         <h3>{{appointment.title}}</h3>
 
                         {{ getLocationItem(appointment.location_id)?.name }}
-                        <br> {{ getEmployeeItem(appointment.employee_id)?.name }}
+                        <br> {{ getEmployeeItem(appointment.employee_id)?.name }} 
 
                         <p [innerHTML]="appointment.description"></p>
 
@@ -168,7 +168,7 @@
         <div class="p-col-12 p-md-12">
 
             <p-card>
-                <strong>{{ getCategoryItem(appointment.category_id)?.name }}</strong>
+                <strong>{{ getCategoryItem(appointment.category_id)?.name }} {{ getCategoryItem(appointment.category_id)?.surname }}</strong>
 
                 <p>{{ getCategoryItem(appointment.category_id)?.address }}<br>
                     {{ getCategoryItem(appointment.category_id)?.zip }} -

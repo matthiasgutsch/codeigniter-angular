@@ -122,6 +122,7 @@ export class CompanyFormComponent implements OnInit {
           user_id: this.currentUser.user_id,
           is_active: res.is_active,
           date: res.date,
+          fiscaltype: res.fiscaltype,
           id: res.id,
         });
         this.imagePath = res.image;
@@ -145,6 +146,7 @@ export class CompanyFormComponent implements OnInit {
         "",
         Validators.compose([codFisc])
       ),
+      fiscaltype: ["", Validators.required],
       fiscalnumber: new FormControl(
         ""
       ),
@@ -240,6 +242,7 @@ export class CompanyFormComponent implements OnInit {
     formData.append("image", this.blogForm.get("image").value);
     formData.append("date", this.blogForm.get("date").value);
     formData.append('user_id', this.blogForm.get('user_id').value);
+    formData.append('fiscaltype', this.blogForm.get('fiscaltype').value);
 
     const id = this.blogForm.get("id").value;
 

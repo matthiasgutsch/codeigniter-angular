@@ -18,4 +18,6 @@ export class Company {
   fiscalcode: string;
   date: string;
   fiscalnumber: string;
+  fiscaltype: number;
+
 }

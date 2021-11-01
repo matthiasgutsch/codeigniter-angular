@@ -17,7 +17,7 @@ export const PAGES: SelectItem[] = [
   { label: "Tipo di Appuntamento", value: "/admin/settings/appointment-type", icon: "pi pi-list" },
   { label: "Dipendenti / Personale", value: "/admin/settings/employees", icon: "pi pi-list" },
   { label: "Luogo di lavorazione", value: "/admin/settings/locations", icon: "pi pi-list" },
-  { label: "Company", value: "/admin/settings/company", icon: "pi pi-list" },
+  { label: "Dati aziendali", value: "/admin/settings/company", icon: "pi pi-list" },
 
 ];
 
