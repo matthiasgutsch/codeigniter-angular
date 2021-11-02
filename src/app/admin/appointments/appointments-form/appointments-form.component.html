@@ -294,12 +294,17 @@
                         <div class="p-field p-grid">
 
                             <div class="p-col-12 p-md-12">
-                                {{ getCategoryItem(selectedClients)?.name }}<br>{{ getCategoryItem(selectedClients)?.zip }} - {{ getCategoryItem(selectedClients)?.city }} <br> {{ getCategoryItem(selectedClients)?.phone }}<br>
-                                {{getCategoryItem(selectedClients)?.fiscalcode }}<br>
-                                P.IVA {{getCategoryItem(selectedClients)?.fiscalnumber}}
+                                <strong>{{ getCategoryItem(selectedClients)?.name }} {{ getCategoryItem(selectedClients)?.surname }}</strong><br>{{ getCategoryItem(selectedClients)?.zip }} - {{ getCategoryItem(selectedClients)?.city }} <br> {{ getCategoryItem(selectedClients)?.phone }}<br>
+                          
+                               
 
-
-
+                                <div *ngIf="getCategoryItem(selectedClients)?.is_featured ==='0'">
+                                    {{getCategoryItem(selectedClients)?.fiscalcode }}
+                                </div>
+                            
+                                <div *ngIf="getCategoryItem(selectedClients)?.is_featured ==='1'">
+                                    P.IVA {{getCategoryItem(selectedClients)?.fiscalnumber}}
+                                </div>
                             </div>
                             <div class="p-col-12 p-md-12">
                                 <br>
