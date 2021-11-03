@@ -11,47 +11,18 @@
 
                 <div class="p-field p-grid">
                     <div class="p-col-12 p-md-6">
-                        <h3>Appuntamenti</h3>
+                        <h3>Helpdesk</h3>
                     </div>
                     <div class="p-col-12 p-md-6">
-                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/support/create']" label="Aggiungi" class="p-button p-button-success pull-right"></button>
-                        <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()" class="p-button-primary p-mr-2 pull-right" pTooltip="PDF" tooltipPosition="bottom"></button>
+                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/support/create']" label="Aggiungi Ticket" class="p-button p-button-success pull-right"></button>
 
                     </div>
                 </div>
                 <hr class="full">
 
-                <p-table #dt1 [value]="appointments" [pageLinks]="3" [responsive]="true" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
-                    <ng-template pTemplate="caption">
-                        <div class="p-grid">
-                            <div class="p-col-6">
-
-                                
-
-                        <p-dropdown  [options]="clients" 
-                        [style]="{'width':'100%'}" (onChange)="dt1.filter($event.target.value, 'equals')" placeholder="Filtra per utenti">
-                        <ng-template let-option pTemplate="item">
-
-                            <strong>{{option.name}} {{option.surname}}</strong>
-
-                        </ng-template>
-                    </p-dropdown>
-                        </div>
-                        
-                        <div class="p-col-6">
-
-                            <span class="p-input-icon-left p-ml-auto">
-                                <i class="pi pi-search"></i>
-
-                           
-                                <input pInputText type="text"
-                                    (input)="dt1.filterGlobal($event.target.category_id, 'contains')"
-                                    placeholder="Search keyword" />
-
-                            </span>
-                        </div>
-                        </div>
-                    </ng-template>
+                <p-table #dt1 [value]="supports" [pageLinks]="3" [responsive]="true" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
+                   
+                   
                     <ng-template pTemplate="header">
                         <tr>
 
@@ -70,28 +41,28 @@
                             <th>Action</th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-appointment>
+                    <ng-template pTemplate="body" let-support>
                         <tr>
-                            <td><strong>{{appointment.date | date:'dd/MM/yyyy'}}</strong><br>
+                            <td><strong>{{support.date | date:'dd/MM/yyyy'}}</strong><br>
                                 <td>
                                     
-                                    <p-tag value="{{appointment.date | date: 'HH:mm' }}"  severity="warning"></p-tag> 
+                                    <p-tag value="{{support.date | date: 'HH:mm' }}"  severity="warning"></p-tag> 
                                
 
                             </td>
-                            <td> {{appointment.title}}</td>
+                            <td> {{support.title}}</td>
 
                             <td>
-                                <a (click)="editProduct(appointment)">
-                                    <span class="user"><i class="pi pi-user"></i></span>{{ getCategoryItem(appointment.category_id)?.name }}</a>
+                                <a (click)="editProduct(support)">
+                                    <span class="user"><i class="pi pi-user"></i></span>{{ getCategoryItem(support.category_id)?.name }}</a>
                             </td>
 
 
 
                             <td class="action">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/support/edit', appointment.id]"></button>
-                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-info p-mr-2" (click)="editProduct(appointment)"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(appointment.id)"></button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/support/edit', support.id]"></button>
+                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-info p-mr-2" (click)="editProduct(support)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(support.id)"></button>
 
                             </td>
                         </tr>

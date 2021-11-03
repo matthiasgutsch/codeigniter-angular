@@ -165,6 +165,7 @@ export class AppointmentsFormComponent implements OnInit {
       .find_billings_by_appointment_id(+id)
       .subscribe(data => {
         this.pages = data[0];
+        return this.pages.id;
       }, err => {
     });
 
@@ -254,7 +255,6 @@ createBilling() {
   formData.append("user_id", this.blogForm.get("user_id").value);
 
   const id = this.blogForm.get("id").value;
-
   this.billingsService
       .find_billings_by_appointment_id(+id)
       .subscribe(data => {

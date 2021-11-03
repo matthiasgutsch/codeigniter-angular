@@ -20,14 +20,18 @@ import { formatDate } from '@angular/common';
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { NgxSpinnerService } from "ngx-spinner";
+import { SupportsService } from 'src/app/services/supports.service';
+import { Supports } from 'src/app/models/supports';
 
 @Component({
   selector: 'app-manage-supports',
   templateUrl: './manage-supports.component.html'
 })
 export class ManageSupportsComponent implements OnInit {
-  blogs: Blog;
-  blog: Blog;
+
+
+  supports: any = [];
+  support: Supports;
 
   works: any = [];
   work: Works;
@@ -68,7 +72,7 @@ export class ManageSupportsComponent implements OnInit {
 
   constructor(
     private clientsService: ClientsService,
-    private appointmentsService: AppointmentsService,
+    private supportsService: SupportsService,
     private worksService: WorksService,
     private locationsService: LocationsService,
     private messageService: MessageService,
@@ -96,11 +100,14 @@ export class ManageSupportsComponent implements OnInit {
 
   ngOnInit() {
 
-    this.getAppointments();
+    this.getSupports();
     
 
   }
 
+  getCategoryItem(category_id: string, id: string) {
+    return this.clients.find(item => item.id === category_id);
+  }
 
 
   getClients() {
@@ -133,9 +140,9 @@ export class ManageSupportsComponent implements OnInit {
   }
 
  
-  getAppointments() {
-    this.appointmentsService.getAllListbyUser().subscribe(
-      (data: Appointments) => this.appointments = data,
+  getSupports() {
+    this.supportsService.getAllListbyUser().subscribe(
+      (data: Supports) => this.supports = data,
       error => this.error = error
     );
   }
@@ -171,7 +178,7 @@ export class ManageSupportsComponent implements OnInit {
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.appointmentsService.delete(+id).subscribe(
+        this.supportsService.delete(+id).subscribe(
           res => {
             console.log(res);
             this.ngOnInit();
