@@ -10,7 +10,7 @@
                 <p-card>
                     <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
                         <div class="form-group">
-                          <input type="text" name="name" id="name" [(ngModel)]="model.name" class="form-control" placeholder="Name"
+                          <input type="text" name="name" id="name" pInputText [(ngModel)]="model.name" placeholder="Name"
                             required #name="ngModel">
                           <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
                             <div *ngIf="name.errors.required">
@@ -19,7 +19,7 @@
                           </div>
                         </div>
                         <div class="form-group">
-                          <input type="text" name="email" id="email" [(ngModel)]="model.email" class="form-control"
+                          <input type="text" name="email" id="email" [(ngModel)]="model.email" pInputText
                             placeholder="E-Mail" required email #email="ngModel">
                           <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error">
                             <div *ngIf="email.errors.required">Email is required.</div>
@@ -27,9 +27,11 @@
                           </div>
                         </div>
                         <div class="form-group">
-                          <input type="text" name="phone" id="phone" [(ngModel)]="model.phone" class="form-control"
+                          <input type="text" name="phone" id="phone" [(ngModel)]="model.phone" pInputText
                             placeholder="Phone">
                         </div>
+
+                        
                         <div class="form-group">
                           <textarea name="message" id="message" [(ngModel)]="model.message" rows="5" class="form-control"
                             placeholder="Message" required #message="ngModel"></textarea>
@@ -52,6 +54,26 @@
 
     </div>
 
-
+    <div *ngIf="support">
+      <div>
+        <label><b>id </b></label> {{support.id}} 
+      </div>
+      <div>
+        <label><b>First Name: </b></label> {{support.message}} 
+      </div>
+      <div>
+        <label><b>Last Name: </b></label> {{support.date}}
+      </div>
+      <div>
+        <label><b>Email Id: </b></label> {{support.title}}
+      </div>  
+    </div>
     
+    <div *ngFor="let item of supportsList">
+      <p-card>
+          {{item.title}}<br>
+          {{item.message}}<br>
+          {{item.date}}
+        </p-card>
+    </div>
 <p-toast key="myKey1"></p-toast>
