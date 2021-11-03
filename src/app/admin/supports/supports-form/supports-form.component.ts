@@ -42,6 +42,8 @@ export class SupportsFormComponent implements OnInit {
   error = {};
   success: any;
   id: number;
+  blogForm: FormGroup;
+  currentUser: any;
 
   support: Supports;
   supports: Observable<Supports[]>;
@@ -53,32 +55,71 @@ export class SupportsFormComponent implements OnInit {
     private titleService: Title,
     protected route: ActivatedRoute,
     private supportsService: SupportsService,
+    private fb: FormBuilder,
     private _location: Location,
-  ) { }
+  ) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+  }
 
   ngOnInit() {
     this.titleService.setTitle(this.title);
 
-    this.route.paramMap.subscribe((params) => {
-      const id = this.route.snapshot.paramMap.get("id");
-      this.supportsService.getId(+id)
-        .subscribe(data => {
-          console.log(data)
-          this.support = data;
-        }, error => console.log(error));
+    const id = this.route.snapshot.paramMap.get("id");
+
+
+    if (id) {
+      this.supportsService.getId(+id).subscribe((res) => {
+        if (res.user_id == this.currentUser.user_id) {
+          this.blogForm.patchValue({
+            title: res.title,
+            id: res.id,
+            data: res.data
+          });
+
+
+          this.route.paramMap.subscribe((params) => {
+            this.supportsService.getId(+id)
+              .subscribe(data => {
+                this.support = data;
+              }, error => console.log(error));
+          });
+
+
+          this.supportsService.find_tickets_support_id(+id).subscribe(
+            (data: Billings) => (this.supportsList = data),
+            (error) => (this.error = error)
+          );
+
+
+        }
+        else {
+          this.router.navigate(['/admin/products']);
+        }
+        this.id = res.id;
       });
+    } else {
+    }
 
-      const id = this.route.snapshot.paramMap.get("id");
 
-      this.supportsService.find_tickets_support_id(+id).subscribe(
-        (data: Billings) => (this.supportsList = data),
-        (error) => (this.error = error)
-      );
-
+    this.blogForm = this.fb.group({
+      id: [""],
+      title: ["", Validators.required],
+      description: [""],
+      description_full: [""],
+      is_featured: ["0"],
+      category_id: [""],
+      status: [""],
+      works_id: [""],
+      brand_id: [""],
+      is_active: ["0"],
+      image: [""],
+      code: [""],
+      user_id: [this.currentUser.user_id],
+      code_int: [""]
+    });
   }
 
 
-  
   onSubmit() {
     this.submitted = true;
     return this.cmspageService.contactForm(this.model).subscribe(
@@ -86,7 +127,6 @@ export class SupportsFormComponent implements OnInit {
       error => this.error = error
     );
     this._location.back();
-
   }
 
   gotoHome() {
