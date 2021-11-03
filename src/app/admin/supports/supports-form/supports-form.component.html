@@ -9,19 +9,28 @@
 
       <p-card>
 
+
+        <div class="p-field p-grid" *ngIf="support">
+          <div class="p-col-12 p-md-9">
+              <h3>{{support.title}}</h3>
+          </div>
+          <div class="p-col-12 p-md-12">
+
+
+
+          </div>
+      </div>
+      <hr class="full">
+
+
+
         <div *ngIf="support">
-          <div>
-            <label><b>id </b></label> {{support.id}}
-          </div>
-          <div>
-            <label><b>First Name: </b></label> {{support.message}}
-          </div>
-          <div>
-            <label><b>Last Name: </b></label> {{support.date}}
-          </div>
-          <div>
-            <label><b>Email Id: </b></label> {{support.title}}
-          </div>
+          <p-tag severity="warning" value="{{support.date}}" class="p-mr-2"></p-tag>
+          <br>
+         <p>{{support.message}}</p>
+     
+     
+
         </div>
 
         <hr class="full">
@@ -70,7 +79,7 @@
   <p-card>
 
     <p-tabView>
-      <p-tabPanel header="History">
+      <p-tabPanel header="Timeline">
         <div class="blog-form">
 
           <p-timeline [value]="supportsList">
@@ -80,12 +89,14 @@
               <p-card>
                 <div class="p-grid">
                   <div class="p-col-12 p-md-12">
-                    <strong>{{item.title}}</strong><br>
                     {{item.message}}
-                    <br><br>
+                    <br>
                     <hr class="full">
-                    <p-tag severity="warning" value="{{item.date}}" class="p-mr-2"></p-tag>            <p-tag severity="default" value="da {{currentUser.first_name}} {{currentUser.last_name}}"></p-tag> 
-                  
+                    <p-tag severity="warning" value="{{item.date}}" class="p-mr-2"></p-tag>
+                    
+                    <p-tag severity="default" *ngIf="item.sender_id !== 'admin'" value="Inviato da {{currentUser.first_name}} {{currentUser.last_name}}"></p-tag> 
+                    <p-tag severity="success" *ngIf="item.sender_id == 'admin'" value="Ricevuto da {{item.sender_id}}"></p-tag> 
+
                   </div>
                 
                 </div>
