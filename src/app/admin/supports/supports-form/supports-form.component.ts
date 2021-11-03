@@ -70,7 +70,7 @@ export class SupportsFormComponent implements OnInit {
 
       const id = this.route.snapshot.paramMap.get("id");
 
-      this.supportsService.find_billing_client(+id).subscribe(
+      this.supportsService.find_tickets_support_id(+id).subscribe(
         (data: Billings) => (this.supportsList = data),
         (error) => (this.error = error)
       );
