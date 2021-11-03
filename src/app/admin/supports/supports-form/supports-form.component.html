@@ -88,20 +88,30 @@
 
               <p-card>
                 <div class="p-grid">
+
+                  <div class="p-col-12 p-md-12">
+
+                    <p-tag severity="warning" value="{{item.date}}" class="p-mr-2"></p-tag>
+                      
+                      <p-tag severity="default" *ngIf="item.sender_id !== 'admin'" value="Inviato da {{currentUser.first_name}} {{currentUser.last_name}}"></p-tag> 
+                      <p-tag severity="success" *ngIf="item.sender_id == 'admin'" value="Ricevuto da {{item.sender_id}}"></p-tag> 
+                    </div>
+                </div>
+                <hr class="full">
+
+                <div class="p-field p-grid">
+
                   <div class="p-col-12 p-md-12">
                     {{item.message}}
-                    <br>
-                    <hr class="full">
-                    <p-tag severity="warning" value="{{item.date}}" class="p-mr-2"></p-tag>
-                    
-                    <p-tag severity="default" *ngIf="item.sender_id !== 'admin'" value="Inviato da {{currentUser.first_name}} {{currentUser.last_name}}"></p-tag> 
-                    <p-tag severity="success" *ngIf="item.sender_id == 'admin'" value="Ricevuto da {{item.sender_id}}"></p-tag> 
-
                   </div>
                 
+          
+
                 </div>
               </p-card>
+
             </ng-template>
+     
           </p-timeline>
         </div>
       </p-tabPanel>
