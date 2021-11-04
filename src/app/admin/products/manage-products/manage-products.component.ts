@@ -29,6 +29,8 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { TagsService } from 'src/app/services/tags.service';
 import { Tags } from 'src/app/models/tags';
 import { KeyValue } from '@angular/common';
+import { Technical_data } from 'src/app/models/technical_data';
+import { TechnicalDataService } from 'src/app/services/technical_data.service';
 
 @Component({
   selector: 'app-manage-products',
@@ -76,6 +78,8 @@ export class ManageProductsComponent implements OnInit {
   category_id: any;
   status: any;
   currentUser: any;
+  technical_datas: any = [];
+  technical_data: Technical_data;
   skills:  any[] = [];
   batches: any[];
   showDialog() {
@@ -102,6 +106,7 @@ trackByFn(index, item) {
     private comuniService: ComuniService,
     private brandService: BrandService,
     private tagsService: TagsService,
+    private technicalDataService: TechnicalDataService,
     private spinner: NgxSpinnerService,
     private categoryService: CategoryService, 
     private confirmationService: ConfirmationService,) { 
@@ -147,8 +152,10 @@ trackByFn(index, item) {
       error => this.error = error
     );
 
-
-
+    this.technicalDataService.getAllListbyUser().subscribe(
+      (data: Technical_data) => (this.technical_datas = data),
+      (error) => (this.error = error)
+    );
     this.brandService.getAllListbyUser().subscribe(
       (data: Brand) => this.brands = data,
       error => this.error = error
@@ -181,6 +188,11 @@ trackByFn(index, item) {
 
   getCategoryItem(category_id: string, id: string) {
     return this.categories.find(item => item.id === category_id);
+  }
+
+
+  getTechnicalDataItem(category_id: string, id: string) {
+    return this.technical_datas.find(item => item.id === category_id);
   }
 
 

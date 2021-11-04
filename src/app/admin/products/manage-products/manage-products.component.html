@@ -5,30 +5,44 @@
             <div class="p-field p-grid" *ngFor="let col of cols" [ngSwitch]="col.field">
                 <div class="p-col-12">
 
-                    <input *ngSwitchCase="'title'" [ngModel]="dt.filters['title']? dt.filters['title'].value : ''" 
-                     placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                    <input *ngSwitchCase="'code'" [ngModel]="dt.filters['code']? dt.filters['code'].value : ''"  placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                    <input *ngSwitchCase="'code_int'" [ngModel]="dt.filters['code_int']? dt.filters['code_int'].value : ''"  placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                    <p-dropdown *ngSwitchCase="'status'" placeholder="Scegli Status" [ngModel]="dt.filters['status']? dt.filters['status'].value : ''" [showClear]="true" optionLabel="label" optionValue="label" [options]="status" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')">
+                    <input *ngSwitchCase="'title'" [ngModel]="dt.filters['title']? dt.filters['title'].value : ''"
+                        placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }"
+                        (input)="dt.filter($event.target.value, col.field, 'contains')">
+                    <input *ngSwitchCase="'code'" [ngModel]="dt.filters['code']? dt.filters['code'].value : ''"
+                        placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }"
+                        (input)="dt.filter($event.target.value, col.field, 'contains')">
+                    <input *ngSwitchCase="'code_int'"
+                        [ngModel]="dt.filters['code_int']? dt.filters['code_int'].value : ''"
+                        placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }"
+                        (input)="dt.filter($event.target.value, col.field, 'contains')">
+                    <p-dropdown *ngSwitchCase="'status'" placeholder="Scegli Status"
+                        [ngModel]="dt.filters['status']? dt.filters['status'].value : ''" [showClear]="true"
+                        optionLabel="label" optionValue="label" [options]="status" [style]="{'width':'100%'}"
+                        (onChange)="dt.filter($event.value, col.field, 'equals')">
                     </p-dropdown>
 
-                    <p-dropdown *ngSwitchCase="'category_id'" placeholder="Scegli Status" [ngModel]="dt.filters['category_id']? dt.filters['category_id'].value : ''" [showClear]="true" optionLabel="name" optionValue="name" [options]="categories" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'contains')">
+                    <p-dropdown *ngSwitchCase="'category_id'" placeholder="Scegli Status"
+                        [ngModel]="dt.filters['category_id']? dt.filters['category_id'].value : ''" [showClear]="true"
+                        optionLabel="name" optionValue="name" [options]="categories" [style]="{'width':'100%'}"
+                        (onChange)="dt.filter($event.value, col.field, 'contains')">
                     </p-dropdown>
-                    <p-dropdown *ngSwitchCase="'brand_id'" placeholder="Scegli Marca" [ngModel]="dt.filters['brand_id']? dt.filters['brand_id'].value : ''" [showClear]="true" optionLabel="name" optionValue="name" [options]="brands" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')">
+                    <p-dropdown *ngSwitchCase="'brand_id'" placeholder="Scegli Marca"
+                        [ngModel]="dt.filters['brand_id']? dt.filters['brand_id'].value : ''" [showClear]="true"
+                        optionLabel="name" optionValue="name" [options]="brands" [style]="{'width':'100%'}"
+                        (onChange)="dt.filter($event.value, col.field, 'equals')">
                     </p-dropdown>
-          
+
                 </div>
 
             </div>
-       
-   
+
         </div>
     </ng-template>
 </p-overlayPanel>
 
 <div *ngFor="let col of cols" [ngSwitch]="col.field">
 
-<div class="tag" *ngIf="dt.filters[col.field]">{{dt.filters[col.field]? dt.filters[col.field].value : ''}}</div>
+    <div class="tag" *ngIf="dt.filters[col.field]">{{dt.filters[col.field]? dt.filters[col.field].value : ''}}</div>
 </div>
 <div class="dash-header">
     <div class="dash-title">
@@ -38,9 +52,12 @@
                 <h3>Prodotti</h3>
             </div>
             <div class="p-col-12 p-md-6">
-                <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/products/create']" label="Aggiungi" class="p-button p-button-primary p-mr-2 pull-right"></button>
-                <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()" class="p-button-warning p-mr-2 pull-right" pTooltip="PDF" tooltipPosition="bottom"></button>
-                <button type="text" pButton label="Filter" icon="pi pi-filter" class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
+                <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/products/create']" label="Aggiungi"
+                    class="p-button p-button-primary p-mr-2 pull-right"></button>
+                <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()"
+                    class="p-button-warning p-mr-2 pull-right" pTooltip="PDF" tooltipPosition="bottom"></button>
+                <button type="text" pButton label="Filter" icon="pi pi-filter"
+                    class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
             </div>
         </div>
     </div>
@@ -52,8 +69,9 @@
 
             <p-card>
 
-                <p-table #dt [columns]="cols" [value]="products" [globalFilterFields]="['name', 'description']" currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [loading]="loading"
-                    [totalRecords]="totalRecords">
+                <p-table #dt [columns]="cols" [value]="products" [globalFilterFields]="['name', 'description']"
+                    currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true"
+                    [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
 
                     <ng-template pTemplate="header" let-columns>
                         <tr>
@@ -67,52 +85,48 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-rowData let-columns="columns">
                         <tr>
-                            <td *ngIf="rowData.image"><img [src]="rowData.image" [routerLink]="['/admin/products/edit', rowData.id]" class="img-responsive"></td>
+                            <td *ngIf="rowData.image"><img [src]="rowData.image"
+                                    [routerLink]="['/admin/products/edit', rowData.id]" class="img-responsive"></td>
                             <td *ngFor="let col of cols" [ngSwitch]="col.field">
                                 {{rowData[col.field]}}
                             </td>
 
-
                             <td class="action">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/products/edit', rowData.id]"></button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
+                                    [routerLink]="['/admin/products/edit', rowData.id]"></button>
                                 <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
-                                (click)="edit(rowData)"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(rowData.id)"></button>
+                                    (click)="edit(rowData)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
+                                    (click)="onDelete(rowData.id)"></button>
                             </td>
                         </tr>
                     </ng-template>
                 </p-table>
-
-
-
 
             </p-card>
         </div>
     </div>
 </div>
 
-
-
-<p-sidebar [(visible)]="productDialog" position="right"  [style]="{width:'60%'}">
+<p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'60%'}">
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
 
-            
             <h3>{{product.title}}</h3>
             <p [innerHTML]="product.description"></p>
 
-         
+            <p-tabView>
+                <p-tabPanel header="Date tecnici">
+                <table class="billings-list">
+                    <tr *ngFor="let entry of selectedSkills | keys">
+                        <td>
+                            {{ getTechnicalDataItem(entry.value.qty)?.name }}</td>
+                        <td>{{entry.value.price}}</td>
+                    </tr>
 
-
-              
-
-                <table class="table">
-            <tr *ngFor="let entry of selectedSkills | keys">           
-                <td>{{entry.value.qty}}</td> <td>{{entry.value.price}}</td>
-              </tr>
-       
-            </table>
-   </div>
+                </table>
+                </p-tabPanel></p-tabView>
+        </div>
     </ng-template>
 
 </p-sidebar>

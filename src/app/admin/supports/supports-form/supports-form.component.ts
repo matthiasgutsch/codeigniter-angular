@@ -44,6 +44,7 @@ export class SupportsFormComponent implements OnInit {
   id: number;
   blogForm: FormGroup;
   currentUser: any;
+  contactForm: FormGroup;
 
   support: Supports;
   supports: Observable<Supports[]>;
@@ -63,7 +64,7 @@ export class SupportsFormComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle(this.title);
-
+    
     const id = this.route.snapshot.paramMap.get("id");
 
 

@@ -241,10 +241,9 @@
                             <table formArrayName="skills" style="width: 100%">
                               
                                 <tr *ngFor="let quantity of skills.controls; let i=index" [formGroupName]="i">
-                                    <td>Quantity :</td>
-                                  <td>
+                                  <td width="40%">
                                       
-                                    <p-dropdown [options]="technical_datas" [virtualScroll]="true" filter="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" formControlName="qty" optionLabel="name" optionValue="name">
+                                    <p-dropdown [options]="technical_datas" [virtualScroll]="true" filter="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" formControlName="qty" optionLabel="name" optionValue="id">
                                         <ng-template let-option pTemplate="item">
 
                                             {{option.name}}
@@ -256,10 +255,9 @@
 
                                       
                                   </td>
-                                  <td>Price:</td>
                                   <td>
                                     
-                                      <input ttype="text" [style]="{ width: '100%' }" pInputText  formControlName="price">
+                                      <input ttype="text" placeholder="Valore" [style]="{ width: '100%' }" pInputText  formControlName="price">
                                   </td>
                                   <td>
                                       <button pButton (click)="removeQuantity(i)" icon="pi pi-trash" class="p-button p-button-danger p-mr-2"></button>

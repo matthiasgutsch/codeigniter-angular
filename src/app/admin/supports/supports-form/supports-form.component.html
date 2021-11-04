@@ -9,115 +9,143 @@
 
       <p-card>
 
-
         <div class="p-field p-grid" *ngIf="support">
           <div class="p-col-12 p-md-9">
-              <h3>{{support.title}}</h3>
+            <h3>{{support.title}}</h3>
           </div>
           <div class="p-col-12 p-md-12">
 
-
-
           </div>
-      </div>
-      <hr class="full">
-
-
+        </div>
+        <hr class="full">
 
         <div *ngIf="support">
           <p-tag severity="warning" value="{{support.date}}" class="p-mr-2"></p-tag>
           <br>
-         <p>{{support.message}}</p>
-     
-     
+          <p>{{support.message}}</p>
 
         </div>
 
         <hr class="full">
         <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
-          <div class="form-group">
-            <input type="text" name="name" id="name" pInputText [(ngModel)]="model.name" placeholder="Name" required
-              #name="ngModel">
-            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
-              <div *ngIf="name.errors.required">
-                Name is required.
+
+            <div class="p-field p-grid">
+              <div class="p-col-12 p-md-12">
+                <label>Nome <span class="required">*</span></label>
+              </div>
+              <div class="p-col-12 p-md-12">
+
+                <input type="text" name="name" id="name" pInputText [(ngModel)]="model.name" placeholder="Name" required
+                  #name="ngModel">
+                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                  <div *ngIf="name.errors.required">
+                    Name is required.
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="form-group">
-            <input type="text" name="email" id="email" [(ngModel)]="model.email" pInputText placeholder="E-Mail"
-              required email #email="ngModel">
-            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error">
-              <div *ngIf="email.errors.required">Email is required.</div>
-              <div *ngIf="email.errors.email">Email must be a valid email
-                address.</div>
-            </div>
-          </div>
-          <div class="form-group">
-            <input type="text" name="phone" id="phone" [(ngModel)]="model.phone" pInputText placeholder="Phone">
-          </div>
 
-          <div class="form-group">
-            <textarea name="message" id="message" [(ngModel)]="model.message" rows="5" class="form-control"
-              placeholder="Message" required #message="ngModel"></textarea>
-            <div *ngIf="message.invalid && (message.dirty || message.touched)" class="error">
-              <div *ngIf="message.errors.required">Message is required.</div>
+            <div class="p-field p-grid">
+              <div class="p-col-12 p-md-12">
+                <label>Email <span class="required">*</span></label>
+              </div>
+              <div class="p-col-12 p-md-12">
+
+                <input type="text" name="email" id="email" [(ngModel)]="model.email" pInputText placeholder="E-Mail"
+                  required email #email="ngModel">
+                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error">
+                  <div *ngIf="email.errors.required">Email is required.</div>
+                  <div *ngIf="email.errors.email">Email must be a valid email
+                    address.</div>
+                </div>
+              </div>
             </div>
+
+        
+            <div class="p-field p-grid">
+              <div class="p-col-12 p-md-12">
+                <label>Telefono <span class="required">*</span></label>
+              </div>
+              <div class="p-col-12 p-md-12">
+
+                <input type="text" name="phone" id="phone" [(ngModel)]="model.phone" pInputText placeholder="Phone">
+
+              </div>
+            </div>
+
+
+            <div class="p-field p-grid">
+              <div class="p-col-12 p-md-12">
+                <label>Messaggio <span class="required">*</span></label>
+              </div>
+              <div class="p-col-12 p-md-12">
+
+                <textarea pInputTextarea name="message" rows="6" placeholder="Message" required #message="ngModel" id="message"
+                [(ngModel)]="model.message"></textarea>
+  
+              <div *ngIf="message.invalid && (message.dirty || message.touched)" class="error">
+                <div *ngIf="message.errors.required">Message is required.</div>
+              </div>
+
+              </div>
+            </div>
+
+       
+            <div class="p-field p-grid">
+              <div class="p-col-12 p-md-12">
+
+              <button pButton pRipple icon="pi pi-save" label="Invia Richiesta" class="p-button pull-right p-button-success p-mr-2" [disabled]="!contactForm.form.valid"></button>
           </div>
-          <div class="form-group">
-            <button [disabled]="!contactForm.form.valid" class="btn
-              btn-success">Send Message</button>
-          </div>
+            </div>
         </form>
       </p-card>
 
     </div>
 
+    <div class="p-col-12 p-md-6">
+      <p-card>
 
+        <p-tabView>
+          <p-tabPanel header="Timeline">
+            <div class="blog-form">
 
-<div class="p-col-12 p-md-6">
-  <p-card>
+              <p-timeline [value]="supportsList">
 
-    <p-tabView>
-      <p-tabPanel header="Timeline">
-        <div class="blog-form">
+                <ng-template pTemplate="content" let-item>
 
-          <p-timeline [value]="supportsList">
+                  <p-card>
+                    <div class="p-grid">
 
-            <ng-template pTemplate="content" let-item>
+                      <div class="p-col-12 p-md-12">
+                        {{numbers}}
+                        <p-tag severity="warning" value="{{item.date}}" class="p-mr-2"></p-tag>
 
-              <p-card>
-                <div class="p-grid">
-
-                  <div class="p-col-12 p-md-12">
-
-                    <p-tag severity="warning" value="{{item.date}}" class="p-mr-2"></p-tag>
-                      
-                      <p-tag severity="default" *ngIf="item.sender_id !== 'admin'" value="Inviato da {{currentUser.first_name}} {{currentUser.last_name}}"></p-tag> 
-                      <p-tag severity="success" *ngIf="item.sender_id == 'admin'" value="Ricevuto da {{item.sender_id}}"></p-tag> 
+                        <p-tag severity="default" *ngIf="item.sender_id !== 'admin'"
+                          value="Inviato da {{currentUser.first_name}} {{currentUser.last_name}}"></p-tag>
+                        <p-tag severity="success" *ngIf="item.sender_id == 'admin'"
+                          value="Ricevuto da {{item.sender_id}}">
+                        </p-tag>
+                      </div>
                     </div>
-                </div>
-                <hr class="full">
+                    <hr class="full">
 
-                <div class="p-field p-grid">
+                    <div class="p-field p-grid">
 
-                  <div class="p-col-12 p-md-12">
-                    {{item.message}}
-                  </div>
-                
-          
+                      <div class="p-col-12 p-md-12">
+                        {{item.message}}
+                      </div>
 
-                </div>
-              </p-card>
+                    </div>
+                  </p-card>
 
-            </ng-template>
-     
-          </p-timeline>
-        </div>
-      </p-tabPanel>
-    </p-tabView>
-  </p-card>
-</div>
+                </ng-template>
+
+              </p-timeline>
+            </div>
+          </p-tabPanel>
+        </p-tabView>
+      </p-card>
+    </div>
   </div>
 </div>
 
