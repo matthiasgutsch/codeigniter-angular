@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppointmentsService } from '../../../services/appointments.service';
 import { Blog } from '../../../models/blog';
 import { ConfirmationService, SelectItem } from 'primeng/api';
@@ -22,6 +22,7 @@ import "jspdf-autotable";
 import { NgxSpinnerService } from "ngx-spinner";
 import { Appointment_type } from 'src/app/models/appointment_type';
 import { AppointmentTypeService } from 'src/app/services/appointment_type.service';
+import { CalendarComponent } from 'ng-fullcalendar';
 
 @Component({
   selector: 'app-manage-appointments',
@@ -33,6 +34,7 @@ export class ManageAppointmentsComponent implements OnInit {
 
   works: any = [];
   work: Works;
+  events: any;
 
   locations: any = [];
   location: Locations;
@@ -40,6 +42,8 @@ export class ManageAppointmentsComponent implements OnInit {
   exportColumns: any[];
   _selectedColumns: any[];
   selectedWorks: any[];
+  calendarOptions: any;
+  displayEvent: any;
 
   employees: any = [];
   employee: Employees;
@@ -58,11 +62,13 @@ export class ManageAppointmentsComponent implements OnInit {
   appointment_typ: Appointment_type;
   comuni: any = [];
   productDialog: boolean = false;
+  calendarDialog: boolean = false;
+
   works_id: any;
   showDialog() {
     this.productDialog = true;
   }
-  currentUser: any ;
+  currentUser: any;
 
   myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en');
 
@@ -70,6 +76,7 @@ export class ManageAppointmentsComponent implements OnInit {
     return item.id;
   }
 
+  @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
   constructor(
     private clientsService: ClientsService,
@@ -99,31 +106,59 @@ export class ManageAppointmentsComponent implements OnInit {
     }));
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    
   }
 
   ngOnInit() {
-   
+
 
     this.spinner.show();
     const userId = this.currentUser.user_id;
-      this.appointmentsService.getAllListbyUser().subscribe(data => {
-        this.appointments = data;
-        this.getClients();
-        this.getWorks();
-        this.getAppointmentType();
-        this.spinner.hide();
-      });
+    this.appointmentsService.getAllListbyUser().subscribe(data => {
+      
+      
+      this.appointments = data;
+      this.getClients();
+      this.getWorks();
+      this.getAppointmentType();
+
+
+      this.calendarOptions = {
+
+        editable: false,
+        eventLimit: false,
+        timeFormat: 'HH:mm',
+        weekNumbers: true,
+        header: {
+          right: 'prev,next',
+          left: 'title',
+
+        },
+
+        events: data,
+        locale: 'it',
+        timezone: 'UTC',
+        selectable: false,
+      };
+
+
+      
+      this.spinner.hide();
+
+
+    });
   }
+
 
 
 
 
   getClients() {
-  const userId = this.currentUser.user_id;
-  this.clientsService.getAllListbyUser().subscribe(
-    (data: Clients) => this.clients = data,
-    error => this.error = error
-  );
+    const userId = this.currentUser.user_id;
+    this.clientsService.getAllListbyUser().subscribe(
+      (data: Clients) => this.clients = data,
+      error => this.error = error
+    );
 
   }
 
@@ -167,13 +202,13 @@ export class ManageAppointmentsComponent implements OnInit {
   }
 
   getAppointmentType() {
-  this.appointmentTypeService.getAllListbyUser().subscribe(
-    (data: Appointment_type) => this.appointmenttype = data,
-    error => this.error = error
+    this.appointmentTypeService.getAllListbyUser().subscribe(
+      (data: Appointment_type) => this.appointmenttype = data,
+      error => this.error = error
     );
   }
 
- 
+
 
   getCategoryItem(category_id: string, id: string) {
     return this.clients.find(item => item.id === category_id);
@@ -217,6 +252,42 @@ export class ManageAppointmentsComponent implements OnInit {
     doc['autoTable'](this.exportColumns, this.appointments);
     // doc.autoTable(this.exportColumns, this.products);
     doc.save("appointments.pdf");
+  }
+
+
+  showCalendar() {
+    this.calendarDialog = true;
+
+  }
+
+  clickButton(model: any) {
+    this.displayEvent = model;
+
+  }
+  eventClick(model: any) {
+    model = {
+      event: {
+        id: model.event.id,
+        start: model.event.start,
+        title: model.event.title,
+        works_id: model.event.works_id.split(','),
+        location_id: model.event.location_id,
+        employee_id: model.event.employee_id,
+        allDay: model.event.allDay,
+        description: model.event.description,
+        category_id: model.event.category_id
+
+        // other params
+      },
+      duration: {}
+    }
+    this.displayEvent = model;
+    this.productDialog = true;
+
+  }
+
+  dayClick(event) {
+    console.log('dayClick', event);
   }
 
 

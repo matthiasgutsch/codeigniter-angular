@@ -10,8 +10,9 @@
                         (onChange)="dt.filter($event.value, col.field, 'equals')">
                     </p-dropdown>
 
-                    <p-dropdown *ngSwitchCase="'category_id'" filter="true" [required]="true" placeholder="Scegli"  placeholder="Scegli" [showClear]="true" optionLabel="username"
-                        optionValue="id" [options]="clients" [style]="{'width':'100%'}"
+                    <p-dropdown *ngSwitchCase="'category_id'" filter="true" [required]="true" placeholder="Scegli"
+                        placeholder="Scegli" [showClear]="true" optionLabel="username" optionValue="id"
+                        [options]="clients" [style]="{'width':'100%'}"
                         (onChange)="dt.filter($event.value, col.field, 'equals')">
 
                         <ng-template let-option pTemplate="item">
@@ -48,6 +49,9 @@
                     class="p-button-warning p-mr-2 pull-right" pTooltip="PDF" tooltipPosition="bottom"></button>
                 <button type="text" pButton label="Filter" icon="pi pi-filter"
                     class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
+
+                    <button type="text" pButton label="Calendario" icon="pi pi-calendar"
+                    class="p-button p-button-default p-mr-2 pull-right" (click)="showCalendar()"></button>
 
             </div>
         </div>
@@ -132,6 +136,15 @@
     </div>
 </div>
 
+<p-sidebar [(visible)]="calendarDialog" position="right" [style]="{width:'70%'}">
+
+        <div *ngIf="calendarOptions">
+            <ng-fullcalendar #ucCalendar [options]="calendarOptions">
+        </ng-fullcalendar>        </div>
+
+
+</p-sidebar>
+
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'50%'}">
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
@@ -143,7 +156,7 @@
                         <h3>{{appointment.title}}</h3>
 
                         {{ getLocationItem(appointment.location_id)?.name }}
-                        <br> {{ getEmployeeItem(appointment.employee_id)?.name }} 
+                        <br> {{ getEmployeeItem(appointment.employee_id)?.name }}
 
                         <p [innerHTML]="appointment.description"></p>
 
@@ -168,7 +181,8 @@
         <div class="p-col-12 p-md-12">
 
             <p-card>
-                <strong>{{ getCategoryItem(appointment.category_id)?.name }} {{ getCategoryItem(appointment.category_id)?.surname }}</strong>
+                <strong>{{ getCategoryItem(appointment.category_id)?.name }}
+                    {{ getCategoryItem(appointment.category_id)?.surname }}</strong>
 
                 <p>{{ getCategoryItem(appointment.category_id)?.address }}<br>
                     {{ getCategoryItem(appointment.category_id)?.zip }} -
