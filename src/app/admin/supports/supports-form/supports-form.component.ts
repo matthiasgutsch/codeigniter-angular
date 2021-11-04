@@ -45,6 +45,7 @@ export class SupportsFormComponent implements OnInit {
   blogForm: FormGroup;
   currentUser: any;
   contactForm: FormGroup;
+  uploadError: string;
 
   support: Supports;
   supports: Observable<Supports[]>;
@@ -57,14 +58,21 @@ export class SupportsFormComponent implements OnInit {
     protected route: ActivatedRoute,
     private supportsService: SupportsService,
     private fb: FormBuilder,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService,
     private _location: Location,
   ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    const id = this.route.snapshot.paramMap.get("id");
+
   }
 
   ngOnInit() {
     this.titleService.setTitle(this.title);
-    
+
+    const userId = this.currentUser.user_id;
+
+
     const id = this.route.snapshot.paramMap.get("id");
 
 
@@ -73,6 +81,10 @@ export class SupportsFormComponent implements OnInit {
         if (res.user_id == this.currentUser.user_id) {
           this.blogForm.patchValue({
             title: res.title,
+            phone: res.phone,
+            email: res.email,
+            name: res.name,
+            ref_id: res.id,
             id: res.id,
             data: res.data
           });
@@ -105,29 +117,81 @@ export class SupportsFormComponent implements OnInit {
     this.blogForm = this.fb.group({
       id: [""],
       title: ["", Validators.required],
-      description: [""],
-      description_full: [""],
-      is_featured: ["0"],
-      category_id: [""],
-      status: [""],
-      works_id: [""],
-      brand_id: [""],
-      is_active: ["0"],
-      image: [""],
-      code: [""],
+      phone: [""],
+      message: [""],
+      name: [this.currentUser.first_name + this.currentUser.last_name],
+      email: [""],
+      ref_id: [this.id],
       user_id: [this.currentUser.user_id],
-      code_int: [""]
     });
   }
 
+  
+
+  onDelete(id: number, title: string) {
+
+    this.confirmationService.confirm({
+      message: 'Are you sure want to delete it = ' + id,
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.supportsService.delete(+id).subscribe(
+          res => {
+            console.log(res);
+            this.ngOnInit();
+            this.messageService.add({ key: 'myKey1', severity: 'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo' });
+
+          },
+          error => this.error = error
+        );
+      },
+    });
+  }
 
   onSubmit() {
+    const formData = new FormData();
+
+    formData.append("title", this.blogForm.get("title").value);
+    formData.append("email", this.blogForm.get("email").value);
+    formData.append("message", this.blogForm.get("message").value);
+    formData.append("name", this.blogForm.get("name").value);
+
+    formData.append("ref_id", this.blogForm.get("ref_id").value);
+    formData.append("phone", this.blogForm.get("phone").value);
+    formData.append('user_id', this.blogForm.get('user_id').value);
+    const id = this.blogForm.get("id").value;
+
+    if (id) {
+      this.supportsService.create(formData, +id).subscribe(
+        (res) => {
+          if (res.status == "error") {
+            this.uploadError = res.message;
+          } else {
+            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
+            this.supportsService.find_tickets_support_id(+id).subscribe(
+              (data: Billings) => (this.supportsList = data),
+              (error) => (this.error = error)
+            );
+            this.router.navigate(['/admin/support']);
+
+          }
+        },
+        (error) => (this.error = error)
+      );
+    } else {
+     
+    }
+  }
+
+
+  onSubmit_old() {
     this.submitted = true;
     return this.cmspageService.contactForm(this.model).subscribe(
       data => this.success = data,
       error => this.error = error
     );
-    this._location.back();
+    this.router.navigate(['/admin/support/']);
+
   }
 
   gotoHome() {

@@ -10,6 +10,10 @@ export class Supports {
     category_id: string;
     works_id: string;
     location_id: string;
+    phone: string;
+    name: string;
+    ref_id: string;
+    email: string;
     brand_id: string;
     is_featured: boolean;
     is_active: boolean;
