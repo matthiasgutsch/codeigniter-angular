@@ -50,8 +50,7 @@
                 <button type="text" pButton label="Filter" icon="pi pi-filter"
                     class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
 
-                    <button type="text" pButton label="Calendario" icon="pi pi-calendar"
-                    class="p-button p-button-default p-mr-2 pull-right" (click)="showCalendar()"></button>
+
 
             </div>
         </div>
@@ -136,14 +135,7 @@
     </div>
 </div>
 
-<p-sidebar [(visible)]="calendarDialog" position="right" [style]="{width:'70%'}">
 
-        <div *ngIf="calendarOptions">
-            <ng-fullcalendar #ucCalendar [options]="calendarOptions">
-        </ng-fullcalendar>        </div>
-
-
-</p-sidebar>
 
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'50%'}">
     <ng-template pTemplate="content">

@@ -121,28 +121,7 @@ export class ManageAppointmentsComponent implements OnInit {
       this.getClients();
       this.getWorks();
       this.getAppointmentType();
-
-
-      this.calendarOptions = {
-
-        editable: false,
-        eventLimit: false,
-        timeFormat: 'HH:mm',
-        weekNumbers: true,
-        header: {
-          right: 'prev,next',
-          left: 'title',
-
-        },
-
-        events: data,
-        locale: 'it',
-        timezone: 'UTC',
-        selectable: false,
-      };
-
-
-      
+    
       this.spinner.hide();
 
 
