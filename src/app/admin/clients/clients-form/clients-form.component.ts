@@ -216,6 +216,7 @@ export class ClientsFormComponent implements OnInit {
           res => {
             console.log(res);
             this.messageService.add({ key: 'cancel', severity: 'success', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo' });
+           this._location.back();
 
           },
           error => {

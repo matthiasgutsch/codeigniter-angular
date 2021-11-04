@@ -304,8 +304,9 @@
 
             <p-card *ngIf="deleteButton">
                 
-                <button pButton pRipple label="Cancella Cliente"  class="p-button p-button-danger p-mr-2"
+                <button pButton pRipple label="Cancella Cliente"  [disabled]="appointments.length > 0 || billings.length > 0" class="p-button p-button-danger p-mr-2"
 (click)="onDelete(id)"></button> 
+                    <p *ngIf="appointments.length > 0 || billings.length > 0">Il cliente non puo essere cancellato. Cancella prima appuntamenti e fattture</p>
             </p-card>
         </div>
 
