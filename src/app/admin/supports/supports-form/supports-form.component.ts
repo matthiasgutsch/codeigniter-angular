@@ -126,7 +126,7 @@ export class SupportsFormComponent implements OnInit {
     });
   }
 
-  
+
 
   onDelete(id: number, title: string) {
 
@@ -162,18 +162,18 @@ export class SupportsFormComponent implements OnInit {
     const id = this.blogForm.get("id").value;
 
     if (id) {
-      this.supportsService.create(formData, +id).subscribe(
+      this.supportsService.create(formData).subscribe(
         (res) => {
           if (res.status == "error") {
             this.uploadError = res.message;
           } else {
-            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
             this.supportsService.find_tickets_support_id(+id).subscribe(
               (data: Billings) => (this.supportsList = data),
               (error) => (this.error = error)
             );
-            this.router.navigate(['/admin/support']);
+            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Richiesta inviata con sucesso' });
 
+  
           }
         },
         (error) => (this.error = error)
