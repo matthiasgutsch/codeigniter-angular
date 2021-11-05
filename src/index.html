@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>DeskiPro</title>
+  <title>cuberto</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,13 +30,13 @@
 <script>
   function toggleNav() {
       var element = document.getElementById("mySidebar");
-      if (element.className == "sidebar-main open") {
-          element.className = "sidebar-main close";
-          document.getElementById("main").className = "open";
-
-      } else {
+      if (element.className == "sidebar-main close") {
           element.className = "sidebar-main open";
           document.getElementById("main").className = "close";
+
+      } else {
+          element.className = "sidebar-main close";
+          document.getElementById("main").className = "open";
 
       }
   }

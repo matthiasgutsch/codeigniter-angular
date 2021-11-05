@@ -50,6 +50,7 @@ export class SupportsFormComponent implements OnInit {
   support: Supports;
   supports: Observable<Supports[]>;
   supportsList: any;
+  supportsCount: Supports;
 
   constructor(
     private router: Router,
@@ -120,8 +121,8 @@ export class SupportsFormComponent implements OnInit {
       id: [""],
       title: ["", Validators.required],
       phone: [""],
-      message: [""],
-      name: [this.currentUser.first_name + this.currentUser.last_name],
+      message: ["", Validators.required],
+      name: [this.currentUser.first_name + ' ' + this.currentUser.last_name],
       sender_id: [this.currentUser.user_id],
       email: [""],
       ref_id: [this.id],
@@ -176,7 +177,7 @@ export class SupportsFormComponent implements OnInit {
               (error) => (this.error = error)
             );
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Richiesta inviata con sucesso' });
-
+            this.blogForm.get('message').reset();
   
           }
         },
@@ -192,6 +193,7 @@ export class SupportsFormComponent implements OnInit {
           } else {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Richiesta inviata con sucesso' });
             this.router.navigate(['/admin/support']);
+            this.getSupportsCount();
 
   
           }
@@ -213,6 +215,13 @@ export class SupportsFormComponent implements OnInit {
 
   }
 
+  getSupportsCount() {
+    this.supportsService.count().subscribe(data => {
+      this.supportsCount = data;
+      error => this.error = error
+    });
+  }
+  
   gotoHome() {
     this.router.navigate(['/']);
   }

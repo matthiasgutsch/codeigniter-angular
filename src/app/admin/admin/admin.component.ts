@@ -44,7 +44,7 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     this.spinner.show();
     const userId = this.currentUser.user_id;
-    this.getProductsCount();
+    this.getSupportsCount();
 
     setTimeout(() => {
       this.spinner.hide();
@@ -65,7 +65,7 @@ export class AdminComponent implements OnInit {
     }
 
 
-    getProductsCount() {
+    getSupportsCount() {
       this.supportsService.count().subscribe(data => {
         this.supportsCount = data;
         error => this.error = error

@@ -1,5 +1,5 @@
 
-<div class="sidebar"  id="mySidebar" [ngClass]=" flag ? 'close' : 'open'">
+<div class="sidebar"  id="mySidebar" [ngClass]=" flag ? 'open' : 'close'">
  
 
   <ul class="nav-menu">
@@ -29,7 +29,7 @@
   </div>
 
   <div class="logo-wrapper" routerLink="/admin">
-    Deski<span class="color-dot">Pro.</span>
+    numo<span class="color-dot">.</span>
   </div>
 
 
@@ -46,7 +46,7 @@
 </div>
 
 
-<div id="main" [ngClass]=" flag ? 'open' : 'close'">  
+<div id="main" [ngClass]=" flag ? 'close' : 'open'">  
 
           <router-outlet></router-outlet>
       </div>
