@@ -28,12 +28,17 @@
     <i class="pi pi-list"></i>
   </div>
 
-  <div class="logo-wrapper">
+  <div class="logo-wrapper" routerLink="/admin">
     Deski<span class="color-dot">Pro.</span>
   </div>
 
 
-  <div class="user-menu"><ul><li routerLink="/admin/settings/company"><i class="pi pi-user"></i> {{currentUser.first_name}} {{currentUser.last_name}}
+  <div class="user-menu"><ul>
+    
+    
+    <li routerLink="/admin/support"><i class="pi pi-info-circle"></i> <span class="support-tag">{{supportsCount}}</span></li>
+
+    <li routerLink="/admin/settings/company"><i class="pi pi-user"></i> {{currentUser.first_name}} {{currentUser.last_name}}
     </li></ul></div>
 
    

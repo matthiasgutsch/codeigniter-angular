@@ -54,7 +54,7 @@ const routes: Routes = [
 
           { path: "support", component: ManageSupportsComponent },
           { path: "support/create", component: SupportsFormComponent },
-          { path: "support/edit/:id",component: SupportsFormComponent,},
+          { path: "support/:id",component: SupportsFormComponent,},
 
           { path: "products", component: ManageProductsComponent },
           { path: "products/create", component: ProductsFormComponent },

@@ -24,6 +24,7 @@ export class Supports {
     data: JSON;
     status: StringMap;
     skills: ISkill[];
+    sender_id: string;
 }
 
 

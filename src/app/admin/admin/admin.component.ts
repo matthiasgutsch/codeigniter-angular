@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PAGES } from '../constants/constants';
 import { NgxSpinnerService } from "ngx-spinner";
+import { SupportsService } from 'src/app/services/supports.service';
 
 @Component({
   selector: 'app-admin',
@@ -24,8 +25,11 @@ export class AdminComponent implements OnInit {
 
   firstName = "John";
   lastName = "Doe";
+  supportsCount: any;
   
-  constructor(  private spinner: NgxSpinnerService) { 
+  constructor(  private spinner: NgxSpinnerService,
+    private supportsService: SupportsService,
+    ) { 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     //console.log(this.currentUser);
 
@@ -40,6 +44,7 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     this.spinner.show();
     const userId = this.currentUser.user_id;
+    this.getProductsCount();
 
     setTimeout(() => {
       this.spinner.hide();
@@ -58,6 +63,17 @@ export class AdminComponent implements OnInit {
       var color = this.stringToHslColor(this.firstName + " " + this.lastName, l, s);
       return color;
     }
+
+
+    getProductsCount() {
+      this.supportsService.count().subscribe(data => {
+        this.supportsCount = data;
+        error => this.error = error
+      });
+    }
+
+
+
     getInitialsTextColor(firstName: string, lastName: string): string {
       var s = this.getSaturationByName(firstName, lastName);
       var l = this.getLightnessByName(firstName, lastName);

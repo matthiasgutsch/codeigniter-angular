@@ -10,14 +10,14 @@
                 <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/support/create']" label="Aggiungi Ticket" class="p-button p-button-success pull-right"></button>
 
             </div>
-            
+
         </div>
     </div>
 </div>
 
 <div class="p-fluid">
     <div class="p-field p-grid">
-        <div class="p-col-12 p-md-6">
+        <div class="p-col-12 p-md-12">
 
             <p-card>
 
@@ -37,7 +37,7 @@
 
 
                             <td class="action">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/support/edit', support.id]"></button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/support', support.id]"></button>
                                 <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(support.id)"></button>
 
                             </td>
@@ -47,9 +47,7 @@
             </p-card>
         </div>
 
-        <div class="p-col-12 p-md-6">
-            <p-card></p-card>
-        </div>
+        
 
         </div>
 </div>

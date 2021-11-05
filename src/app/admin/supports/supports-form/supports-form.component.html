@@ -22,7 +22,7 @@
         <div *ngIf="support">
           <p-tag severity="warning" value="{{support.date}}" class="p-mr-2"></p-tag>
           <br>
-          <p>{{support.message}}</p>
+          <p [innerHTML]="support.message"></p>
 
         </div>
 
@@ -42,12 +42,7 @@
                     <div class="p-col-12 p-md-9">
                       <h3>{{pageTitle}}</h3>
                     </div>
-                    <div class="p-col-12 p-md-3">
-
-                      <button pButton pRipple icon="pi pi-save" label="salva"
-                        class="p-button pull-right p-button-success p-mr-2" [disabled]="!blogForm.valid"></button>
-
-                    </div>
+                    
                   </div>
                   <hr class="full">
 
@@ -136,13 +131,21 @@
                   <div class="form-group form-row">
                     <label class="col-md-3"></label>
                     <div class="col-md-9">
-                      <input type="text" formControlName="id">
-                      <input type="text" formControlName="ref_id">
-                      <input type="text" formControlName="user_id" value="{{currentUser.user_id}}">
+                      <input type="hidden" formControlName="id">
+                      <input type="hidden" formControlName="ref_id">
+                      <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
 
                     </div>
                   </div>
 
+                    <div class="p-field p-grid">
+
+                  <div class="p-col-12 p-md-12">
+
+                    <button pButton pRipple icon="pi pi-save" label="Invia Richiesta"
+                      class="p-button pull-right p-button-success btn-block" [disabled]="!blogForm.valid"></button>
+                  </div>
+                  </div>
                 </div>
 
               </div>
@@ -186,7 +189,8 @@
                     <div class="p-field p-grid">
 
                       <div class="p-col-12 p-md-12">
-                        {{item.message}}
+                        <h3> Re: {{item.title}}</h3>
+                        <p [innerHTML]="item.message"></p>
 
                         
                       </div>

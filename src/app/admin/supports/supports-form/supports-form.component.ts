@@ -84,6 +84,7 @@ export class SupportsFormComponent implements OnInit {
             phone: res.phone,
             email: res.email,
             name: res.name,
+            sender_id: res.sender_id,
             user_id: this.currentUser.user_id,
             ref_id: res.id,
             id: res.id,
@@ -121,6 +122,7 @@ export class SupportsFormComponent implements OnInit {
       phone: [""],
       message: [""],
       name: [this.currentUser.first_name + this.currentUser.last_name],
+      sender_id: [this.currentUser.user_id],
       email: [""],
       ref_id: [this.id],
       user_id: [this.currentUser.user_id],
@@ -156,6 +158,7 @@ export class SupportsFormComponent implements OnInit {
     formData.append("email", this.blogForm.get("email").value);
     formData.append("message", this.blogForm.get("message").value);
     formData.append("name", this.blogForm.get("name").value);
+    formData.append("sender_id", this.blogForm.get("sender_id").value);
 
     formData.append("ref_id", this.blogForm.get("ref_id").value);
     formData.append("phone", this.blogForm.get("phone").value);
