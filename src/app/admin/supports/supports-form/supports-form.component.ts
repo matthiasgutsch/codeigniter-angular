@@ -84,6 +84,7 @@ export class SupportsFormComponent implements OnInit {
             phone: res.phone,
             email: res.email,
             name: res.name,
+            user_id: this.currentUser.user_id,
             ref_id: res.id,
             id: res.id,
             data: res.data
@@ -179,7 +180,22 @@ export class SupportsFormComponent implements OnInit {
         (error) => (this.error = error)
       );
     } else {
-     
+      formData.append("ref_id", '0');
+
+      this.supportsService.create(formData).subscribe(
+        (res) => {
+          if (res.status == "error") {
+            this.uploadError = res.message;
+          } else {
+            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Richiesta inviata con sucesso' });
+            this.router.navigate(['/admin/support']);
+
+  
+          }
+        },
+        (error) => (this.error = error)
+      );
+
     }
   }
 
