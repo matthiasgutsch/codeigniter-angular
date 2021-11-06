@@ -94,6 +94,11 @@ export class AdminDashboardComponent implements OnInit {
   }
   
   myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en')  ;
+  myMonth = formatDate(new Date(), 'dd/MM/yyyy', 'en')  ;
+
+  currentDate: moment.Moment = moment();
+  currentTime: string = moment().format(' MM/YY');
+
   @ViewChild('mychart') mychart;
 
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
@@ -176,34 +181,45 @@ export class AdminDashboardComponent implements OnInit {
       
       data: {
         datasets: [{
-          label: 'Fatturazione',
+          label: 'Fatturazione' + this.currentTime,
           backgroundColor: "rgba(64, 162, 191,0.4)",
           borderColor: "rgb(64, 162, 191, 0.8)",
           fill: true,
           data: this.data1,
+          steppedLine: false,
         }]
       },
       options: {
         responsive: true,
         title: {
           display: false,
-          text: 'Fatturato questo mese'
+          text: 'Fatturato',
         },
         scales: {
           xAxes: [{
             type: 'linear',
             position: 'bottom',
 
-            scaleLabel: {
-              labelString: 'Länge',
-              display: false,
-            }
+            tooltips: {
+              mode: 'index',
+              intersect: false,
+            },
+
+            ticks: {
+              beginAtZero: false,
+              max: 31,
+              min: 1,
+              autoSkip: true,
+              stepSize: 1
+            },  
+
+          
           }],
           yAxes: [{
             type: 'linear',
             ticks: {
               userCallback: function (tick) {
-                return tick.toString();
+                return tick.toString() + '€';
               }
             },
 
@@ -223,11 +239,7 @@ export class AdminDashboardComponent implements OnInit {
 
     this.chartsService.countCharts().subscribe(data => {
       this.chartsCount = data;
-      this.chartsCountData = JSON.stringify(this.chartsCount);
-      this.chartsCountDataTotal = this.chartsCountData.toString()
-
-      var StringifyData=JSON.stringify(this.chartsCount)
-      console.log(this.chartsCount)
+      var StringifyData = JSON.stringify(this.chartsCount)
       this.chartsCount.forEach((item,index)=>{
           var obj;
           obj={
