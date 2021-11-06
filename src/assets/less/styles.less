@@ -240,7 +240,7 @@ body {
           transition: visibility 0.1s;
         }
         &:hover {
-          color: #f1f1f1;
+         
         }
         i {
           float: left;
@@ -250,6 +250,8 @@ body {
           height: 40px;
           margin-right: 20px;
           text-align: center;
+          border: 1px solid transparent;
+
         }
         &:hover {
           i {
@@ -258,9 +260,10 @@ body {
             width: 40px;
             height: 40px;
             color: @white;
-            background-color: @ness_color_2;
             border-radius: @radius;
             text-align: center;
+            color: @white;
+            border: 1px solid @ness_color_3;
           }
         }
         &.active {
@@ -273,6 +276,7 @@ body {
             background-color: @ness_color_3;
             border-radius: @radius;
             text-align: center;
+            border: 1px solid @ness_color_3;
           }
         }
       }
