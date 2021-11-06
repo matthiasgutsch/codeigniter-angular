@@ -63,8 +63,8 @@
         <div class="p-col-12 p-md-12">
 
             <p-card>
-                <p-table #dt [value]="appointments" [pageLinks]="3" [responsive]="true"
-                    [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10"
+                <p-table #dt [value]="appointments" [pageLinks]="3" [responsive]="true" (onLazyLoad)="loadmore($event)"
+                    [globalFilterFields]="['title','status','category.name']" [loading]="loading" [paginator]="true" [rows]="10"
                     [showCurrentPageReport]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                     [totalRecords]="true">

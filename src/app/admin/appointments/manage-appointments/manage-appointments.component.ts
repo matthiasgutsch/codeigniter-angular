@@ -23,6 +23,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { Appointment_type } from 'src/app/models/appointment_type';
 import { AppointmentTypeService } from 'src/app/services/appointment_type.service';
 import { CalendarComponent } from 'ng-fullcalendar';
+import { LazyLoadEvent } from 'primeng/api';
 
 @Component({
   selector: 'app-manage-appointments',
@@ -35,6 +36,7 @@ export class ManageAppointmentsComponent implements OnInit {
   works: any = [];
   work: Works;
   events: any;
+  virtualDatabase: Appointments[];
 
   locations: any = [];
   location: Locations;
@@ -63,6 +65,7 @@ export class ManageAppointmentsComponent implements OnInit {
   comuni: any = [];
   productDialog: boolean = false;
   calendarDialog: boolean = false;
+  loading: boolean;
 
   works_id: any;
   showDialog() {
@@ -131,6 +134,20 @@ export class ManageAppointmentsComponent implements OnInit {
 
 
 
+  loadmore(event: LazyLoadEvent) {
+    this.loading = true;
+
+    // in real world scenario when the loadCustomers will be called we will make a call to the real database
+    //to fetch the required records
+    //event.first = offset of the first row. For example in our case it will be 1 for the first page, 11 for the second page and so on.
+    //event.rows = Rows to be displayed per page in the datatable. In our case it will be 10
+    setTimeout(() => {
+      if (this.virtualDatabase) {
+        this.appointments = this.virtualDatabase.slice(event.first, (event.first + event.rows));
+        this.loading = false;
+      }
+    }, 1000);
+  }
 
   getClients() {
     const userId = this.currentUser.user_id;
