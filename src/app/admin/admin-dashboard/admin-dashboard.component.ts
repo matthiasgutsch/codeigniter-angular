@@ -120,7 +120,6 @@ export class AdminDashboardComponent implements OnInit {
     this.events = this.appointments;
     this.items = DASHBOARD;
 
-    this.getChartsCount();
 
     
   }
@@ -141,7 +140,8 @@ export class AdminDashboardComponent implements OnInit {
        this.getAppointmentsToday();
        this.getAppointmentsCount();
        this.getWorks();
-        
+       this.getChartsCount();
+
       this.calendarOptions = {
     
         editable: true,
@@ -183,6 +183,8 @@ export class AdminDashboardComponent implements OnInit {
           data: this.data1,
         }]
       },
+
+      
       options: {
         responsive: true,
         title: {
