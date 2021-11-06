@@ -183,8 +183,6 @@ export class AdminDashboardComponent implements OnInit {
           data: this.data1,
         }]
       },
-
-      
       options: {
         responsive: true,
         title: {
