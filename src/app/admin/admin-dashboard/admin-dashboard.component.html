@@ -22,6 +22,10 @@
 
             <div class="p-col-6 p-md-3">
 
+
+
+
+
                 <p-card>
 
                    <div class="p-grid">
@@ -120,7 +124,9 @@
     </div>
 
     <div class="p-col-12 p-md-6">
-        <p-card>
+        <p-card> 
+            <canvas id="myChart"  width="600" height="300" #mychart></canvas>
+
             <div *ngIf="calendarOptions">
                 <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)"
                     (dayClick)="dayClick($event.detail)">

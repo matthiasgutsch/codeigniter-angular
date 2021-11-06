@@ -51,6 +51,13 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     );
   }
 
+  countCharts() {
+    const userId = this.currentUser.user_id;
+    return this._http.get<T>(this._base + '/user/' + userId).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   getToday(userId: number) {
     return this._http.get<T>(this._base + '/today/' + userId).pipe(
       catchError(this.handleError)

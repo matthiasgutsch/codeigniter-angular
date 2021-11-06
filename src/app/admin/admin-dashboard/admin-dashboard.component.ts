@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
+import { Chart } from 'chart.js';
 import { BlogService } from '../../services/blog.service';
 import { Blog } from '../../models/blog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -31,6 +29,8 @@ import { Products } from 'src/app/models/products';
 import { BillingsService } from 'src/app/services/billings.service';
 import { Billings } from 'src/app/models/billings';
 import { NgxSpinnerService } from "ngx-spinner";
+import { ChartsService } from 'src/app/services/charts.service';
+import { Charts } from 'src/app/models/charts';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -52,6 +52,7 @@ export class AdminDashboardComponent implements OnInit {
   works: any = [];
   work: Works;
   clientsCount: any;
+
   productsCount: any;
   error: string;
   blogForm: FormGroup;
@@ -79,12 +80,21 @@ export class AdminDashboardComponent implements OnInit {
   billingsCount: Billings;
   billingsCountTotal:  Billings;
   category_id: string;
+  canvas: any;
+  ctx: any;
+  yAxes: [];
+  xAxes: [];
+  chartsCount: any;
+  chartsCountData: any = [];
+  chartsCountDataTotal: string;
+  data1=[];
 
   trackByFn(index, item) {
     return item.id;
   }
   
   myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en')  ;
+  @ViewChild('mychart') mychart;
 
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
@@ -92,6 +102,7 @@ export class AdminDashboardComponent implements OnInit {
     private clientsService: ClientsService,
     private appointmentsService: AppointmentsService,
     private billingsService: BillingsService,
+    private chartsService: ChartsService,
     private spinner: NgxSpinnerService,
     private fb: FormBuilder,
     private comuniService: ComuniService,
@@ -109,6 +120,7 @@ export class AdminDashboardComponent implements OnInit {
     this.events = this.appointments;
     this.items = DASHBOARD;
 
+    this.getChartsCount();
 
     
   }
@@ -118,8 +130,7 @@ export class AdminDashboardComponent implements OnInit {
     this.spinner.show();
     const userId = this.currentUser.user_id;
 
-   
-
+  
     this.appointmentsService.getAllListbyUser().subscribe(data => {
 
       this.getClientsCount();
@@ -130,7 +141,7 @@ export class AdminDashboardComponent implements OnInit {
        this.getAppointmentsToday();
        this.getAppointmentsCount();
        this.getWorks();
-       
+        
       this.calendarOptions = {
     
         editable: true,
@@ -155,14 +166,91 @@ export class AdminDashboardComponent implements OnInit {
 
 
 
+
+  ngAfterViewInit() {
+    this.canvas = this.mychart.nativeElement; 
+    this.ctx = this.canvas.getContext('2d');
+
+    let myChart = new Chart(this.ctx, {
+      type: 'line',
+      
+      data: {
+        datasets: [{
+          label: 'Fatturazione',
+          backgroundColor: "rgba(64, 162, 191,0.4)",
+          borderColor: "rgb(64, 162, 191, 0.8)",
+          fill: true,
+          data: this.data1,
+        }]
+      },
+      options: {
+        responsive: true,
+        title: {
+          display: false,
+          text: 'Fatturato questo mese'
+        },
+        scales: {
+          xAxes: [{
+            type: 'linear',
+            position: 'bottom',
+
+            scaleLabel: {
+              labelString: 'Länge',
+              display: false,
+            }
+          }],
+          yAxes: [{
+            type: 'linear',
+            ticks: {
+              userCallback: function (tick) {
+                return tick.toString() + 'milla ';
+              }
+            },
+
+     
+            scaleLabel: {
+              labelString: 'Höhe',
+              display: true
+            }
+          }]
+        }
+      }
+    });
+  }
+
   
-    getClientsCount() {
-    const userId = this.currentUser.user_id; 
-    this.clientsService.count().subscribe(
-      (data: Clients) => this.clientsCount = data,
+  getChartsCount() {
+
+    this.chartsService.countCharts().subscribe(data => {
+      this.chartsCount = data;
+      this.chartsCountData = JSON.stringify(this.chartsCount);
+      this.chartsCountDataTotal = this.chartsCountData.toString()
+
+      var StringifyData=JSON.stringify(this.chartsCount)
+      console.log(this.chartsCount)
+      this.chartsCount.forEach((item,index)=>{
+          var obj;
+          obj={
+            x:item.x,
+            y:item.y,
+          }
+        this.data1.push(obj)
+    });
+
+      console.log(this.chartsCountData)
       error => this.error = error
-      );
+    });
     }
+
+    getClientsCount() {
+      const userId = this.currentUser.user_id; 
+      this.clientsService.count().subscribe(
+        (data: Clients) => this.clientsCount = data,
+        error => this.error = error
+        );
+      }
+
+      
 
     getClients() {
       this.clientsService.getAllListbyUser().subscribe(data => {
