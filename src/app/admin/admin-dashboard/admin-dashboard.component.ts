@@ -203,14 +203,14 @@ export class AdminDashboardComponent implements OnInit {
             type: 'linear',
             ticks: {
               userCallback: function (tick) {
-                return tick.toString() + 'milla ';
+                return tick.toString();
               }
             },
 
      
             scaleLabel: {
               labelString: 'Höhe',
-              display: true
+              display: false
             }
           }]
         }
