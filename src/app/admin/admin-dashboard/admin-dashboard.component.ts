@@ -31,6 +31,8 @@ import { Billings } from 'src/app/models/billings';
 import { NgxSpinnerService } from "ngx-spinner";
 import { ChartsService } from 'src/app/services/charts.service';
 import { Charts } from 'src/app/models/charts';
+import 'moment/locale/it'  // without this line it didn't work
+moment.locale('it')
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -97,7 +99,7 @@ export class AdminDashboardComponent implements OnInit {
   myMonth = formatDate(new Date(), 'dd/MM/yyyy', 'en')  ;
 
   currentDate: moment.Moment = moment();
-  currentTime: string = moment().format(' MM/YY');
+  currentTime: string = moment().format(' MMMM YYYY');
 
   @ViewChild('mychart') mychart;
 
