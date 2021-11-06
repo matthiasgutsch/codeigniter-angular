@@ -32,6 +32,8 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { ChartsService } from 'src/app/services/charts.service';
 import { Charts } from 'src/app/models/charts';
 import 'moment/locale/it'  // without this line it didn't work
+import { SupportsService } from 'src/app/services/supports.service';
+import { Supports } from 'src/app/models/supports';
 moment.locale('it')
 
 @Component({
@@ -54,7 +56,8 @@ export class AdminDashboardComponent implements OnInit {
   works: any = [];
   work: Works;
   clientsCount: any;
-
+  supports: any = [];
+  support: Supports;
   productsCount: any;
   error: string;
   blogForm: FormGroup;
@@ -120,6 +123,7 @@ export class AdminDashboardComponent implements OnInit {
     private router: Router,
     private productsService: ProductsService,
     private messageService: MessageService,
+    private supportsService: SupportsService,
     private route: ActivatedRoute
   ) {
     this.typeList = TYPE_LIST;
@@ -148,7 +152,7 @@ export class AdminDashboardComponent implements OnInit {
        this.getAppointmentsCount();
        this.getWorks();
        this.getChartsCount();
-
+       this.getSupports();
       this.calendarOptions = {
     
         editable: true,
@@ -235,6 +239,16 @@ export class AdminDashboardComponent implements OnInit {
       }
     });
   }
+
+
+  getSupports() {
+    this.supportsService.getAllListbyUser().subscribe(
+      (data: Supports) => this.supports = data,
+      error => this.error = error
+    );
+  }
+
+
 
   
   getChartsCount() {

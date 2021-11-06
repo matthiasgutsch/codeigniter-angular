@@ -5,6 +5,7 @@
             <div class="p-col-12 p-md-12">
                 <div class="welcome-banner">
                     <h3>Benvenuto, {{currentUser.first_name}} {{currentUser.last_name}}</h3>
+                    <span>{{myDate }}</span>
                 </div>
             </div>
             <div class="p-col-12 p-md-3">
@@ -158,8 +159,7 @@
 
             <div class="p-field p-grid">
                 <div class="p-col-12 p-md-12">
-                    <h6>Appuntamenti Oggi</h6>
-                    <h3 class="date"> {{myDate }}</h3>
+                    <h3>Appuntamenti Oggi</h3>
                 </div>
 
             </div>
@@ -202,26 +202,22 @@
             </div>
             <hr class="full">
 
-            <p-table #dt1 [value]="appointmentsToday" [paginator]="false" [rows]="10">
+            <p-table #dt1 [value]="supports" [paginator]="false" [rows]="10">
 
-                <ng-template pTemplate="body" let-appointment>
+                <ng-template pTemplate="body" let-support>
                     <tr >
                         <td width="100">
-                            <p-tag value="{{appointment.date | date: 'HH:mm' }}" severity="warning"></p-tag>
+                            <p-tag value="{{support.date | date: 'dd/MM/yyyy' }}" severity="warning"></p-tag>
                         </td>
-                        
-
-                        <td width="50" >
-                            <app-initials-avatar  (click)="editProduct(appointment)"
-                                firstName="{{ getCategoryItem(appointment.category_id)?.name | slice:0:1}}"
-                                lastName="{{ getCategoryItem(appointment.category_id)?.surname | slice:0:1}}">
-                            </app-initials-avatar>
-                        </td>
-                        <td> {{ getCategoryItem(appointment.category_id)?.name }}
-                            {{ getCategoryItem(appointment.category_id)?.surname }}</td>
-
+    
                           
-                            <td>{{appointment.title}}</td>
+                            <td>{{support.title}}</td>
+
+                            <td width="60">
+                                <button pButton pRipple icon="pi pi-eye"
+                    class="p-button p-button-primary p-mr-2"
+                    [routerLink]="['/admin/support', support.id]"></button>
+                            </td>
                     </tr>
                 </ng-template>
             </p-table>

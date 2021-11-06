@@ -43,9 +43,6 @@ export class ManageSupportsComponent implements OnInit {
   _selectedColumns: any[];
   selectedWorks: any[];
 
-  employees: any = [];
-  employee: Employees;
-
   appointments: any = [];
   appointment: Appointments;
   date: Date;
@@ -118,12 +115,7 @@ export class ManageSupportsComponent implements OnInit {
 
   }
 
-  getEmployees() {
-    this.employeesService.getAllList().subscribe(
-      (data: Employees) => this.employees = data,
-      error => this.error = error
-    );
-  }
+
 
   getWorks() {
     this.worksService.getAllList().subscribe(
