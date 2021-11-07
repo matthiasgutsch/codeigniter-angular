@@ -180,6 +180,8 @@ export class AdminDashboardComponent implements OnInit {
 
   ngAfterViewInit() {
     this.canvas = this.mychart.nativeElement; 
+    this.canvas = this.mychart.nativeElement; 
+
     this.ctx = this.canvas.getContext('2d');
 
     let myChart = new Chart(this.ctx, {
@@ -187,7 +189,6 @@ export class AdminDashboardComponent implements OnInit {
       
       data: {
         datasets: [{
-          label: 'Fatturazione' + this.currentTime,
           backgroundColor: "rgba(64, 162, 191,0.4)",
           borderColor: "rgb(64, 162, 191, 0.8)",
           fill: true,
@@ -196,6 +197,9 @@ export class AdminDashboardComponent implements OnInit {
         }]
       },
       options: {
+        legend: {
+          display: false
+        },
         responsive: true,
         title: {
           display: false,
@@ -208,14 +212,18 @@ export class AdminDashboardComponent implements OnInit {
 
             tooltips: {
               mode: 'index',
-              intersect: false,
+              intersect: true,
+              callbacks: {
+                label: function(tooltipItem) {
+                       return tooltipItem.yLabel;
+                }
+             }
             },
 
             ticks: {
               beginAtZero: false,
-              max: 31,
+              max: 12,
               min: 1,
-              autoSkip: true,
               stepSize: 1
             },  
 
@@ -238,6 +246,8 @@ export class AdminDashboardComponent implements OnInit {
         }
       }
     });
+
+
   }
 
 

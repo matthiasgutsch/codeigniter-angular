@@ -139,7 +139,6 @@
                 </p-tabPanel>
 
                 <p-tabPanel header="Statistiche Fatturazione">
-                    <h3>{{currentTime}}</h3>
                     <canvas id="myChart"  width="600" height="350" #mychart></canvas>
 
                 </p-tabPanel>
@@ -202,7 +201,7 @@
             </div>
             <hr class="full">
 
-            <p-table #dt1 [value]="supports" [paginator]="false" [rows]="10">
+            <p-table #dt1 [value]="supports"  [paginator]="false" [rows]="10">
 
                 <ng-template pTemplate="body" let-support>
                     <tr >
