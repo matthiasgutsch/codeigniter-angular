@@ -122,6 +122,7 @@ trackByFn(index, item) {
       { field: "title", header: "titolo" },
       { field: "code", header: "Codice" },
       { field: "status", header: "Status" },
+      { field: "price", header: "Prezzo" },
       { field: "category_id", header: "Categoria" },
       { field: "code_int", header: "Codice interno" },
       { field: "brand_id", header: "Brand" }

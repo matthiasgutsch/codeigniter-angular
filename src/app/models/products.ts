@@ -17,6 +17,8 @@ export class Products {
     code: string;
     code_int: string;
     files: string;
+    price: string;
+    price_extra: string;
     data: JSON;
     status: StringMap;
     skills: ISkill[];

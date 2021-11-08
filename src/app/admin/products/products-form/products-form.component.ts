@@ -209,6 +209,8 @@ export class ProductsFormComponent implements OnInit {
           user_id: this.currentUser.user_id,
           description_full: res.description_full,
           code_int: res.code_int,
+          price: res.price,
+          price_extra: res.price_extra,
           id: res.id,
           data: res.data,
           skills: this.skillsValues,
@@ -243,6 +245,8 @@ export class ProductsFormComponent implements OnInit {
       code: [""],
       user_id: [this.currentUser.user_id],
       code_int: [""],
+      price: [""],
+      price_extra: [""],
       skills: this.initSkill(),
       
   });
@@ -373,6 +377,8 @@ export class ProductsFormComponent implements OnInit {
     formData.append("image", this.blogForm.get("image").value);
     formData.append("code", this.blogForm.get("code").value);
     formData.append("code_int", this.blogForm.get("code_int").value);
+    formData.append("price", this.blogForm.get("price").value);
+    formData.append("price_extra", this.blogForm.get("price_extra").value);
     formData.append("status", this.blogForm.get("status").value);
     formData.append('user_id', this.blogForm.get('user_id').value);
     formData.append('skills', JSON.stringify(this.blogForm.get('skills').value));

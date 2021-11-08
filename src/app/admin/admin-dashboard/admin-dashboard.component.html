@@ -249,6 +249,7 @@
                     </div>
 
                 </div>
+                <div class="clearfix"></div><br>
                 <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento"
                     class="p-button p-button-success p-mr-2"
                     [routerLink]="['/admin/appointments/edit', displayEvent.event.id]"></button>
@@ -272,6 +273,8 @@
                 <p>{{ getCategoryItem(displayEvent.event.category_id)?.phone }}<br>
                     {{ getCategoryItem(displayEvent.event.category_id)?.email }}</p>
                 <div class="clearfix"></div>
+                <div class="clearfix"></div><br>
+
                 <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente"
                     class="p-button p-button-primary p-mr-2"
                     [routerLink]="['/admin/clients/edit', displayEvent.event.category_id]"></button>
@@ -307,6 +310,8 @@
                     </div>
 
                 </div>
+                <div class="clearfix"></div><br>
+
                 <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento"
                     class="p-button p-button-success p-mr-2"
                     [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
@@ -330,6 +335,8 @@
                 <p>{{ getCategoryItem(appointment.category_id)?.phone }}<br>
                     {{ getCategoryItem(appointment.category_id)?.email }}</p>
                 <div class="clearfix"></div>
+                <div class="clearfix"></div><br>
+
                 <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente"
                     class="p-button p-button-primary p-mr-2"
                     [routerLink]="['/admin/clients/edit', appointment.category_id]"></button>
