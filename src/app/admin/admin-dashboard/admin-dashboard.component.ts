@@ -180,7 +180,6 @@ export class AdminDashboardComponent implements OnInit {
 
   ngAfterViewInit() {
     this.canvas = this.mychart.nativeElement; 
-    this.canvas = this.mychart.nativeElement; 
 
     this.ctx = this.canvas.getContext('2d');
 
