@@ -16,7 +16,7 @@ export class Supports {
     email: string;
     brand_id: string;
     is_featured: boolean;
-    is_active: boolean;
+    is_active: string;
     created_at: Date;
     code: string;
     code_int: string;

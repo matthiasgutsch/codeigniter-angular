@@ -42,6 +42,7 @@ export class SupportsFormComponent implements OnInit {
   error = {};
   success: any;
   id: number;
+  is_active: string;
   blogForm: FormGroup;
   currentUser: any;
   contactForm: FormGroup;
@@ -89,6 +90,7 @@ export class SupportsFormComponent implements OnInit {
             user_id: this.currentUser.user_id,
             ref_id: res.id,
             id: res.id,
+            is_active: res.is_active,
             data: res.data
           });
 
@@ -112,6 +114,8 @@ export class SupportsFormComponent implements OnInit {
           this.router.navigate(['/admin/products']);
         }
         this.id = res.id;
+        this.is_active = res.is_active;
+
       });
     } else {
     }
@@ -204,6 +208,53 @@ export class SupportsFormComponent implements OnInit {
     }
   }
 
+
+  close() {
+    const formData = new FormData();
+    formData.set('is_active', '0');
+
+    const id = this.blogForm.get("id").value;
+    if (id) {
+      this.supportsService.update(formData, +id).subscribe(
+        (res) => {
+          if (res.status == "error") {
+            this.uploadError = res.message;
+          } else {
+            this.messageService.add({ key: 'myKey1', severity: 'warn', summary: 'Informazioni', detail: 'Ticket chiuso con sucesso' });
+            this.blogForm.get('message').reset();
+            this.ngOnInit();
+
+          }
+        },
+        (error) => (this.error = error)
+      );
+    } else {
+  
+    }
+  }
+
+  open() {
+    const formData = new FormData();
+    formData.set('is_active', '1');
+
+    const id = this.blogForm.get("id").value;
+    if (id) {
+      this.supportsService.update(formData, +id).subscribe(
+        (res) => {
+          if (res.status == "error") {
+            this.uploadError = res.message;
+          } else {
+            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'ticket aperto con sucesso' });
+            this.blogForm.get('message').reset();
+            this.ngOnInit();
+          }
+        },
+        (error) => (this.error = error)
+      );
+    } else {
+  
+    }
+  }
 
   onSubmit_old() {
     this.submitted = true;
