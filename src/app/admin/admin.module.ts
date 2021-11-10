@@ -91,6 +91,7 @@ import { QuotesFormComponent } from './quotes/quotes-form/quotes-form.component'
 import { ManageQuotesComponent } from './quotes/manage-quotes/manage-quotes.component';
 import { ManageOrdersComponent } from './orders/manage-orders/manage-orders.component';
 import { OrdersFormComponent } from './orders/orders-form/orders-form.component';
+import { ReportsDashboardComponent } from './reports/reports-dashboard.component';
 
 
 @NgModule({
@@ -134,6 +135,7 @@ import { OrdersFormComponent } from './orders/orders-form/orders-form.component'
     AppointmentsFormComponent,
     CategoryFormComponent,
     SettingsComponent,
+    ReportsDashboardComponent,
     ProductsFormComponent,
     ManageProductsComponent,
     EmployeesFormComponent,

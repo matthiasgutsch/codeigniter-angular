@@ -26,11 +26,6 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": false,
-            "optimization": true,
-            "sourceMap": false,
-            "extractCss": true,
-            "vendorChunk": false,
-            "buildOptimizer": false,
             "assets": [
               "src/assets"
             ],
@@ -65,10 +60,10 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
+              "aot": false,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
+              "buildOptimizer": false,
               "budgets": [
                 {
                   "type": "initial",
