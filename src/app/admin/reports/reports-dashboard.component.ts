@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 import { BlogService } from '../../services/blog.service';
 import { Blog } from '../../models/blog';
@@ -40,7 +40,7 @@ moment.locale('it')
   selector: 'app-reports-dashboard',
   templateUrl: './reports-dashboard.component.html'
 })
-export class ReportsDashboardComponent implements OnInit {
+export class ReportsDashboardComponent implements AfterViewInit, OnInit {
 
   calendarOptions: any;
   events: any;
@@ -101,12 +101,9 @@ export class ReportsDashboardComponent implements OnInit {
   myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en')  ;
   myMonth = formatDate(new Date(), 'dd/MM/yyyy', 'en')  ;
 
-  currentDate: moment.Moment = moment();
-  currentTime: string = moment().format(' MMMM YYYY');
 
-  @ViewChild('mychart') mychart;
 
-  @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
+
 
   constructor(private blogService: BlogService,
     private clientsService: ClientsService,
@@ -128,7 +125,6 @@ export class ReportsDashboardComponent implements OnInit {
   ) {
     this.typeList = TYPE_LIST;
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-    this.events = this.appointments;
     this.items = DASHBOARD;
     const userId = this.currentUser.user_id;
 
@@ -136,27 +132,16 @@ export class ReportsDashboardComponent implements OnInit {
     
   }
 
-  ngOnInit() {
 
-    this.spinner.show();
-      this.getClientsCount();
-      this.getClients();
-       this.getProductsCount();
-       this.getBillingsCountTotal();
-       this.getBillingsCount();
-       this.getAppointmentsToday();
-       this.getAppointmentsCount();
-       this.getWorks();
-       this.getChartsCount();
 
-    this.spinner.hide();
 
-  }
-
+  @ViewChild('mychart') mychart;
 
 
 
   ngAfterViewInit() {
+
+    
     this.canvas = this.mychart.nativeElement; 
 
     this.ctx = this.canvas.getContext('2d');
@@ -227,7 +212,22 @@ export class ReportsDashboardComponent implements OnInit {
 
   }
 
+  ngOnInit() {
 
+    this.spinner.show();
+      this.getClientsCount();
+      this.getClients();
+       this.getProductsCount();
+       this.getBillingsCountTotal();
+       this.getBillingsCount();
+       this.getAppointmentsToday();
+       this.getAppointmentsCount();
+       this.getWorks();
+       this.getChartsCount();
+
+    this.spinner.hide();
+
+  }
   
   getChartsCount() {
 
@@ -243,7 +243,7 @@ export class ReportsDashboardComponent implements OnInit {
         this.data1.push(obj)
     });
 
-      console.log(this.chartsCountData)
+      console.log(this.chartsCount)
       error => this.error = error
     });
     }
