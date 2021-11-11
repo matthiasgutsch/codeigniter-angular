@@ -147,6 +147,8 @@ export class AdminDashboardComponent implements OnInit {
       this.getClients();
        this.getProductsCount();
        this.getBillingsCountTotal();
+       this.getBillingsCountTotalNotPaid();
+
        this.getBillingsCount();
        this.getAppointmentsToday();
        this.getAppointmentsCount();
@@ -251,7 +253,8 @@ export class AdminDashboardComponent implements OnInit {
 
 
   getSupports() {
-    this.supportsService.getAllListbyUser().subscribe(
+    const userId = this.currentUser.user_id; 
+    this.supportsService.getActive(+userId).subscribe(
       (data: Supports) => this.supports = data,
       error => this.error = error
     );
@@ -334,6 +337,15 @@ export class AdminDashboardComponent implements OnInit {
       const userId = this.currentUser.user_id; 
     this.billingsService.countTotal(+userId).subscribe(
       (data: Billings) => this.billingsCountTotal = data,
+      error => this.error = error
+      );
+    }
+
+
+    getBillingsCountTotalNotPaid() {
+      const userId = this.currentUser.user_id; 
+    this.billingsService.countTotalNotPaid(+userId).subscribe(
+      (data: Billings) => this.billingsCountTotalNotPaid = data,
       error => this.error = error
       );
     }

@@ -59,7 +59,7 @@
                    
                     <ng-template pTemplate="header">
                         <tr>
-
+                            <th>Stato</th>
                             <th width="80px">Numero
 
                             </th>
@@ -75,6 +75,12 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-billing>
                         <tr>
+                            <td>
+                                <p-tag severity="success" *ngIf="billing.is_paid === '1'" value="Pagata"
+                                    class="p-mr-2"></p-tag>
+                                <p-tag severity="danger" *ngIf="billing.is_paid === '0'" value="non pagata"
+                                    class="p-mr-2"></p-tag>
+                            </td>
                             <td>{{billing.id}}</td>
 
                             <td><i class="pi pi-calendar"></i> {{billing.date}}

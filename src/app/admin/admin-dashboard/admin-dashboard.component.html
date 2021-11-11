@@ -80,12 +80,12 @@
                 <p-card>
 
                     <div class="p-grid">
-                        <div class="p-col-6 p-md-6">
+                        <div class="p-col-6 p-md-8">
                     <h4 class="mb-0">Fatturazione</h4>
-                    {{billingsCountTotal | currency :'EUR':'symbol':'1.2-2'}}
+                    {{billingsCountTotal | currency :'EUR':'symbol':'1.2-2'}} / <strong>{{billingsCountTotalNotPaid |  currency :'EUR':'symbol':'1.2-2'}}</strong> 
                     
                         </div>
-                        <div class="p-col-6 p-md-6">
+                        <div class="p-col-6 p-md-4">
 
                       
                         
@@ -202,7 +202,14 @@
 
                 <ng-template pTemplate="body" let-support>
                     <tr >
-                        <td width="100">
+
+                        <td width="200">
+
+                            <p-tag severity="success" *ngIf="support.is_active === '1'" value="Ticket aperto"
+                            class="p-mr-2"></p-tag>
+                        <p-tag severity="danger" *ngIf="support.is_active === '0'" value="Ticket chiuso"
+                            class="p-mr-2"></p-tag>
+
                             <p-tag value="{{support.date | date: 'dd/MM/yyyy' }}" severity="warning"></p-tag>
                         </td>
     

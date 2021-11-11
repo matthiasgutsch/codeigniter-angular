@@ -65,6 +65,12 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
 
+  getActive(userId: number) {
+    return this._http.get<T>(this._base + '/active/' + userId).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   getAllListCalendar() {
     return this._http.get<T>(this._base + 'appointments/calendar/').pipe(
       catchError(this.handleError)
@@ -119,7 +125,12 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     );
   }
 
-
+  countTotalNotPaid(id: ID) {
+    const userId = this.currentUser.user_id;
+    return this._http.get<T>(this._base + '/count_total_no_paid/' + userId).pipe(
+      catchError(this.handleError)
+    );
+  }
   getId(id: ID) {
     const userId = this.currentUser.user_id;
     return this._http.get<T>(this._base + '/id/' + id + '/' + userId).pipe(
