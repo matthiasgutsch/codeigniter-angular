@@ -1,5 +1,18 @@
 <div class="dash-header">
   <div class="dash-title">
+      <div class="p-field p-grid">
+          <div class="p-col-12 p-md-6">
+      <h3>Ticket {{id}}</h3>
+
+          </div>
+
+          <div class="p-col-12 p-md-6">
+            <button pButton pRipple label="chiudi ticket" [disabled]="is_active == '0'" class="p-button p-button-danger pull-right p-mr-2" (click)="close(id)"></button>
+            <button pButton pRipple label="apri ticket" [disabled]="is_active == '1'" class="p-button p-button-primary pull-right p-mr-2" (click)="open(id)"></button>
+    
+          </div>
+
+      </div>
   </div>
 </div>
 
@@ -10,12 +23,16 @@
       <p-card>
 
     
-        <button pButton pRipple label="chiudi ticket" [disabled]="is_active == '0'" class="p-button p-button-danger p-mr-2" (click)="close(id)"></button>
-        <button pButton pRipple label="apri ticket" [disabled]="is_active == '1'" class="p-button p-button-success p-mr-2" (click)="open(id)"></button>
-
+      
 
         <div class="p-field p-grid" *ngIf="support">
           <div class="p-col-12 p-md-9">
+            <p-tag severity="default" value="{{support.date}}" class="p-mr-2"></p-tag>
+
+            <p-tag severity="success"  *ngIf="is_active === '1'" value="Ticket aperto" class="p-mr-2"></p-tag>
+            <p-tag severity="danger" *ngIf="is_active === '0'" value="Ticket chiuso" class="p-mr-2"></p-tag>
+
+
             <h3>{{support.title}}</h3>
           </div>
           <div class="p-col-12 p-md-12">
@@ -25,7 +42,6 @@
         <hr class="full">
 
         <div *ngIf="support">
-          <p-tag severity="warning" value="{{support.date}}" class="p-mr-2"></p-tag>
           <br>
           <p [innerHTML]="support.message"></p>
 
@@ -56,7 +72,7 @@
                     <div class="p-field p-grid">
                       <label class="p-col-12">Titolo<span class="required">*</span></label>
                       <div class="p-col-12">
-                        <input type="text" [style]="{ width: '100%' }" pInputText formControlName="title" [disabled]="is_active == '0'">
+                        <input type="text" [style]="{ width: '100%' }" pInputText formControlName="title">
 
                         <!-- <input type="text" [style]="{ width: '100%' }" [(ngModel)]="data" value="{{rows.value | json}}" pInputText formControlName="data" >-->
 
@@ -147,7 +163,7 @@
                   <div class="p-col-12 p-md-12">
 
                     <button pButton pRipple icon="pi pi-save" label="Invia Richiesta"
-                      class="p-button pull-right p-button-success btn-block" [disabled]="!blogForm.valid"></button>
+                      class="p-button pull-right p-button-success btn-block" [disabled]="!blogForm.valid || is_active === '0'"></button>
                   </div>
                   </div>
                 </div>

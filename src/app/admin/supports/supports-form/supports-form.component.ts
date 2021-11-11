@@ -93,22 +93,18 @@ export class SupportsFormComponent implements OnInit {
             is_active: res.is_active,
             data: res.data
           });
-
-
           this.route.paramMap.subscribe((params) => {
             this.supportsService.getId(+id)
               .subscribe(data => {
                 this.support = data;
               }, error => console.log(error));
           });
-
-
           this.supportsService.find_tickets_support_id(+id).subscribe(
             (data: Billings) => (this.supportsList = data),
             (error) => (this.error = error)
           );
 
-
+          
         }
         else {
           this.router.navigate(['/admin/products']);
@@ -116,9 +112,15 @@ export class SupportsFormComponent implements OnInit {
         this.id = res.id;
         this.is_active = res.is_active;
 
+
+       
+
       });
     } else {
+
     }
+
+    
 
 
     this.blogForm = this.fb.group({
@@ -212,9 +214,7 @@ export class SupportsFormComponent implements OnInit {
   close() {
     const formData = new FormData();
     formData.set('is_active', '0');
-
     const id = this.blogForm.get("id").value;
-    if (id) {
       this.supportsService.update(formData, +id).subscribe(
         (res) => {
           if (res.status == "error") {
@@ -223,22 +223,16 @@ export class SupportsFormComponent implements OnInit {
             this.messageService.add({ key: 'myKey1', severity: 'warn', summary: 'Informazioni', detail: 'Ticket chiuso con sucesso' });
             this.blogForm.get('message').reset();
             this.ngOnInit();
-
           }
         },
         (error) => (this.error = error)
       );
-    } else {
-  
-    }
   }
 
   open() {
     const formData = new FormData();
     formData.set('is_active', '1');
-
     const id = this.blogForm.get("id").value;
-    if (id) {
       this.supportsService.update(formData, +id).subscribe(
         (res) => {
           if (res.status == "error") {
@@ -251,9 +245,6 @@ export class SupportsFormComponent implements OnInit {
         },
         (error) => (this.error = error)
       );
-    } else {
-  
-    }
   }
 
   onSubmit_old() {

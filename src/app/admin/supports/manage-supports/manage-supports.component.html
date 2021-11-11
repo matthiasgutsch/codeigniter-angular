@@ -2,12 +2,13 @@
     <div class="dash-title">
         <div class="p-field p-grid">
             <div class="p-col-12 p-md-6">
-        <h3>Helpdesk</h3>
+                <h3>Helpdesk</h3>
 
             </div>
 
             <div class="p-col-12 p-md-6">
-                <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/support/create']" label="Aggiungi Ticket" class="p-button p-button-success pull-right"></button>
+                <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/support/create']"
+                    label="Aggiungi Ticket" class="p-button p-button-success pull-right"></button>
 
             </div>
 
@@ -21,24 +22,29 @@
 
             <p-card>
 
+                <p-table #dt1 [value]="supports" [pageLinks]="3" [responsive]="true"
+                    [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10"
+                    [showCurrentPageReport]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [totalRecords]="true">
 
-                <p-table #dt1 [value]="supports" [pageLinks]="3" [responsive]="true" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
-                   
-                   
-                   
                     <ng-template pTemplate="body" let-support>
                         <tr>
+                            <td>
+                                <p-tag severity="success" *ngIf="support.is_active === '1'" value="Ticket aperto"
+                                    class="p-mr-2"></p-tag>
+                                <p-tag severity="danger" *ngIf="support.is_active === '0'" value="Ticket chiuso"
+                                    class="p-mr-2"></p-tag>
+                            </td>
                             <td><strong>{{support.date | date:'dd/MM/yyyy'}}</strong><br>
-                          
-                            <td> {{support.title}}<div class="read" [ngClass]="{'no': support.status === '1', 'yes' : support.status === '0' }"></div></td>
 
-                  
-
-
+                            <td> {{support.title}}</td>
 
                             <td class="action">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/support', support.id]"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(support.id)"></button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
+                                    [routerLink]="['/admin/support', support.id]"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
+                                    (click)="onDelete(support.id)"></button>
 
                             </td>
                         </tr>
@@ -47,9 +53,7 @@
             </p-card>
         </div>
 
-        
-
-        </div>
+    </div>
 </div>
 
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'50%'}">
@@ -58,15 +62,14 @@
             <p-card>
                 <div class="p-grid">
                     <div class="p-col-12 p-md-6">
-                <strong>{{appointment.date | date:'dd/MM/yyyy HH:mm'}}</strong>
+                        <strong>{{appointment.date | date:'dd/MM/yyyy HH:mm'}}</strong>
 
-                <h3>{{appointment.title}}</h3>
-          
-                
-            {{ getLocationItem(appointment.location_id)?.name }}
-                <br> {{ getEmployeeItem(appointment.employee_id)?.name }} 
+                        <h3>{{appointment.title}}</h3>
 
-                <p [innerHTML]="appointment.description"></p>
+                        {{ getLocationItem(appointment.location_id)?.name }}
+                        <br> {{ getEmployeeItem(appointment.employee_id)?.name }}
+
+                        <p [innerHTML]="appointment.description"></p>
 
                     </div>
                     <div class="p-col-12 p-md-6">
@@ -75,13 +78,12 @@
                             {{ getWorksItem(item)?.name }}
                         </div>
 
-    
-            </div>
+                    </div>
 
-
-
-        </div>
-                <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
+                </div>
+                <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento"
+                    class="p-button p-button-success p-mr-2"
+                    [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
 
             </p-card>
         </div>
@@ -92,20 +94,24 @@
             <p-card>
                 <strong>{{ getCategoryItem(appointment.category_id)?.name }}</strong>
 
-                <p>{{ getCategoryItem(appointment.category_id)?.address }}<br> {{ getCategoryItem(appointment.category_id)?.zip }} - {{ getCategoryItem(appointment.category_id)?.city }} ({{ getCategoryItem(appointment.category_id)?.province }})<br>
+                <p>{{ getCategoryItem(appointment.category_id)?.address }}<br>
+                    {{ getCategoryItem(appointment.category_id)?.zip }} -
+                    {{ getCategoryItem(appointment.category_id)?.city }}
+                    ({{ getCategoryItem(appointment.category_id)?.province }})<br>
                 </p>
                 <hr>
-                <p>{{ getCategoryItem(appointment.category_id)?.phone }}<br> {{ getCategoryItem(appointment.category_id)?.email }}</p>
+                <p>{{ getCategoryItem(appointment.category_id)?.phone }}<br>
+                    {{ getCategoryItem(appointment.category_id)?.email }}</p>
                 <div class="clearfix"></div>
-                <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente" class="p-button p-button-primary p-mr-2" [routerLink]="['/admin/clients/edit', appointment.category_id]"></button>
+                <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente"
+                    class="p-button p-button-primary p-mr-2"
+                    [routerLink]="['/admin/clients/edit', appointment.category_id]"></button>
             </p-card>
         </div>
 
     </ng-template>
 
 </p-sidebar>
-
-
 
 {{error}}
 
