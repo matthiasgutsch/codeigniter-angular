@@ -84,6 +84,8 @@ export class AdminDashboardComponent implements OnInit {
   appointmentsCount: Appointments;
   billingsCount: Billings;
   billingsCountTotal:  Billings;
+
+  billingsCountTotalNotPaid: Billing;
   category_id: string;
   canvas: any;
   ctx: any;
