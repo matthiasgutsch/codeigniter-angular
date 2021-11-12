@@ -18,6 +18,11 @@
                         [routerLink]="['/admin/appointments/edit', numberAppointments]" label="Visualizza Appuntamento"
                         class="p-button p-button-secondary  pull-right p-mr-2"></button>
 
+
+                        <button pButton pRipple label="fattura pagata" type="button" *ngIf="is_paid == '1'" class="p-button p-button-secondary pull-right p-mr-2" (click)="close(id)"></button>
+                        <button pButton pRipple label="fattura non pagata" type="button" *ngIf="is_paid == '0'" class="p-button p-button-secondary pull-right p-mr-2" (click)="open(id)"></button>
+    
+                        
                 </div>
             </div>
 
@@ -35,7 +40,7 @@
 
                         <div class="p-field p-grid">
                             <div class="p-col-12 p-md-12">
-                                <h3>Informazioni</h3>
+                                <h3>Informazioni</h3> 
                             </div>
 
                         </div>

@@ -76,7 +76,8 @@ export class BillingsFormComponent implements OnInit {
   subTotal: any;
   vat: any;
   grandTotal: any;
-
+  is_paid: string;
+  id: number;
   cities: Blog[];
   format1: string = "";
   format2: string = "";
@@ -201,14 +202,17 @@ export class BillingsFormComponent implements OnInit {
           skills: this.skillsValues,
           subtotal: res.subtotal,
           vat: res.vat,
+          is_paid: res.is_paid,
           total: res.total,
-
         });
     
+        this.id = res.id;
+        this.is_paid = res.is_paid;
 
       });
     } else {
       this.pageTitle = "Aggiungi Fattura / Ricevuta";
+      
     }
 
     this.blogForm = this.fb.group({
@@ -364,6 +368,38 @@ export class BillingsFormComponent implements OnInit {
 
   }
 
+
+  close() {
+    const formData = new FormData();
+    formData.set('is_paid', '0');
+    const id = this.blogForm.get("id").value;
+      this.billingsService.billingStatus(formData, +id).subscribe(
+        (res) => {
+          if (res.status == "error") {
+            this.uploadError = res.message;
+          } else {
+            this.messageService.add({ key: 'myKey1', severity: 'warn', summary: 'Informazioni', detail: 'Ticket chiuso con sucesso' });
+          }
+        },
+        (error) => (this.error = error)
+      );
+  }
+
+  open() {
+    const formData = new FormData();
+    formData.set('is_paid', '1');
+    const id = this.blogForm.get("id").value;
+      this.billingsService.billingStatus(formData, +id).subscribe(
+        (res) => {
+          if (res.status == "error") {
+            this.uploadError = res.message;
+          } else {
+            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'ticket aperto con sucesso' });
+          }
+        },
+        (error) => (this.error = error)
+      );
+  }
   
   newQuantity(): FormGroup {
     const numberPatern = '^[0-9.,]+$';

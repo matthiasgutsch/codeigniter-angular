@@ -167,6 +167,14 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     );
   }
 
+
+  billingStatus(blog, id: number) {
+    const userId = this.currentUser.user_id;
+    return this._http.post<any>(this._base + '/billing_status/' + id + '/' + userId, blog).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   delete(id: number) {
     const userId = this.currentUser.user_id;
     return this._http.delete(this._base + '/delete/' + id + '/' + userId).pipe(

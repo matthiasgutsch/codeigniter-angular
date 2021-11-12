@@ -18,4 +18,5 @@ export class Billings {
     subtotal: string;
     vat: string;
     total: string;
+    is_paid: string;
 }
