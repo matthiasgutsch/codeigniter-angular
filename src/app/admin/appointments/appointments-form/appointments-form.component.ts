@@ -253,6 +253,7 @@ createBilling() {
   formData.append("image", this.blogForm.get("image").value);
   formData.append("date", this.blogForm.get("date").value);
   formData.append("user_id", this.blogForm.get("user_id").value);
+  formData.append("is_paid", '0');
 
   const id = this.blogForm.get("id").value;
   this.billingsService
