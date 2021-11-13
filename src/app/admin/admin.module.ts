@@ -33,6 +33,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import {SelectButtonModule} from 'primeng/selectbutton';
+
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { FileUploadModule } from 'primeng/fileupload';
 import { HttpClientModule, HttpClient} from '@angular/common/http';
@@ -154,6 +156,7 @@ import { ReportsDashboardComponent } from './reports/reports-dashboard.component
     MessagesModule,
     SumPipeModule,
     TooltipModule,
+    SelectButtonModule,
     NgxSpinnerModule,
     InputTextareaModule,
     ToastModule,

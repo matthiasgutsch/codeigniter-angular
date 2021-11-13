@@ -139,11 +139,11 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit() {
 
-    this.spinner.show();
     const userId = this.currentUser.user_id;
 
   
     this.appointmentsService.getAllListbyUser().subscribe(data => {
+      this.spinner.show();
 
       this.getClientsCount();
       this.getClients();
@@ -174,8 +174,9 @@ export class AdminDashboardComponent implements OnInit {
         timezone: 'UTC',
         selectable: true,
       };
+      this.spinner.hide();
+
     });
-    this.spinner.hide();
 
   }
 
