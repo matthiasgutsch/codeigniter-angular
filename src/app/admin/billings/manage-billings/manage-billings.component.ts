@@ -33,11 +33,10 @@ export class ManageBillingsComponent implements OnInit {
   selectedSkills: any[];
   skills:  any[] = [];
   skillsArray: any = [];
-
   cols: any[];
   exportColumns: any[];
   _selectedColumns: any[];
-
+  statuses: any[];
   
   @ViewChild("content", { static: false }) content: ElementRef;
   currentUser: any;
@@ -60,16 +59,12 @@ export class ManageBillingsComponent implements OnInit {
     private spinner: NgxSpinnerService,
   ) {
 
-
   }
 
   ngOnInit() {
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     const userId = this.currentUser.user_id;
-
-    
-
 
     this.spinner.show();
     this.billingsService.getAllListbyUser().subscribe(data => {
@@ -85,7 +80,6 @@ export class ManageBillingsComponent implements OnInit {
       }));
       this.getComuni();
       this.getClients();
-
       this.spinner.hide();
     });
 
@@ -120,6 +114,34 @@ export class ManageBillingsComponent implements OnInit {
   }
 
   
+
+  closeBilling(billing: Billings) {
+    const formData = new FormData();
+    formData.set('is_paid', '0');
+      this.billingsService.billingStatus(formData, billing.id).subscribe(
+        (res) => {
+          this.billingsService.getAllListbyUser().subscribe(data => {
+            this.billings = data;
+          });
+        },
+        (error) => (this.error = error)
+      );
+  }
+
+  openBilling(billing: Billings) {
+    const formData = new FormData();
+    formData.set('is_paid', '1');
+      this.billingsService.billingStatus(formData, billing.id).subscribe(
+        (res) => {
+          this.billingsService.getAllListbyUser().subscribe(data => {
+            this.billings = data;
+          });
+        },
+        (error) => (this.error = error)
+      );
+  }
+
+
 
 
 edit(billing: Billings) {

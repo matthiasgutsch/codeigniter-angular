@@ -267,6 +267,8 @@ export class BillingsFormComponent implements OnInit {
       this.descriptionAppointments = value.target.value
     }
 
+    
+
   changeTime(value){
       this.dateAppointments = value.target.value
     }
@@ -369,7 +371,7 @@ export class BillingsFormComponent implements OnInit {
   }
 
 
-  close() {
+  closeBilling() {
     const formData = new FormData();
     formData.set('is_paid', '0');
     const id = this.blogForm.get("id").value;
@@ -385,7 +387,7 @@ export class BillingsFormComponent implements OnInit {
       );
   }
 
-  open() {
+  openBilling() {
     const formData = new FormData();
     formData.set('is_paid', '1');
     const id = this.blogForm.get("id").value;

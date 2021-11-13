@@ -55,11 +55,12 @@
         <div class="p-col-12 p-md-12">
 
             <p-card>
-                <p-table #dt [value]="billings" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
+                <p-table #dt [value]="billings" editMode="row" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
                    
                     <ng-template pTemplate="header">
                         <tr>
                             <th>Stato</th>
+
                             <th width="80px">Numero
 
                             </th>
@@ -76,9 +77,9 @@
                     <ng-template pTemplate="body" let-billing>
                         <tr>
                             <td>
-                                <p-tag severity="success" *ngIf="billing.is_paid === '1'" value="Pagata"
+                                <p-tag severity="success" *ngIf="billing.is_paid === '1'" (click)="closeBilling(billing)" value="Pagata"
                                     class="p-mr-2"></p-tag>
-                                <p-tag severity="danger" *ngIf="billing.is_paid === '0'" value="non pagata"
+                                <p-tag severity="danger" *ngIf="billing.is_paid === '0'" (click)="openBilling(billing)" value="non pagata"
                                     class="p-mr-2"></p-tag>
                             </td>
                             <td>{{billing.id}}</td>
@@ -104,11 +105,13 @@
                                 getCategoryItem(billing.category_id)?.city }}</td>
                             <td>{{billing.total | currency :'EUR':'symbol':'1.2-2'}}</td>
 
+
+                          
+
                             <td class="action">
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/billings/edit', billing.id]"></button>
                                 <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2" (click)="edit(billing)"></button>
                                 <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(billing.id)"></button>
-                  
                             </td>
                         </tr>
                     </ng-template>
@@ -129,7 +132,13 @@
             <app-initials-avatar class="pull-right"  [routerLink]="['/admin/clients/edit', getCategoryItem(billing.category_id)?.id]" firstName="{{ getCategoryItem(billing.category_id)?.name | slice:0:1}}" lastName="{{ getCategoryItem(billing.category_id)?.surname | slice:0:1}}"></app-initials-avatar>
 
             <h3>Dettaglio Fattura {{billing.id}}</h3>
-            <p-tag severity="default" value="{{billing.date}}"></p-tag>
+            <p-tag severity="default" value="{{billing.date}}"  class="p-mr-2"></p-tag>
+
+            <p-tag severity="success" *ngIf="billing.is_paid === '1'" class="p-mr-2"  value="Pagata"
+            class="p-mr-2"></p-tag>
+        <p-tag severity="danger" *ngIf="billing.is_paid === '0'" class="p-mr-2"  value="non pagata"
+            class="p-mr-2"></p-tag>
+
             <hr class="full">
 
                 <strong>{{ getCategoryItem(billing.category_id)?.username }}</strong><br>
