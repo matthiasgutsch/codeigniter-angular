@@ -59,6 +59,8 @@ export class ManageBillingsComponent implements OnInit {
     private spinner: NgxSpinnerService,
   ) {
 
+    this.statuses = [{label: 'Pagato', value: '1'},{label: 'Non Pagato', value: '0'}]
+
   }
 
   ngOnInit() {
@@ -70,8 +72,10 @@ export class ManageBillingsComponent implements OnInit {
     this.billingsService.getAllListbyUser().subscribe(data => {
       this.billings = data;
       this.cols = [
+        { field: "is_paid", header: "Stato" },
         { field: "category_id", header: "Cliente" },
         { field: "id", header: "Numero Fattura" },
+
       ];
       this._selectedColumns = this.cols;
       this.exportColumns = this.cols.map(col => ({

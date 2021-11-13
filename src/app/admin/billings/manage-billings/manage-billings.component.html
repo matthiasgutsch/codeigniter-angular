@@ -6,6 +6,20 @@
             <div class="p-field p-grid" *ngFor="let col of cols" [ngSwitch]="col.field">
                 <div class="p-col-12">
 
+
+                    <p-dropdown *ngSwitchCase="'is_paid'" filter="true" [required]="true" placeholder="Stato"  [showClear]="true" optionLabel="label"
+                    optionValue="value" [options]="statuses" [style]="{'width':'100%'}"
+                    (onChange)="dt.filter($event.value, col.field, 'equals')">
+
+                    <ng-template let-option pTemplate="item">
+
+                        {{option.label}}
+
+                    </ng-template>
+
+                </p-dropdown>
+
+
                     <p-dropdown *ngSwitchCase="'category_id'" filter="true" [required]="true" placeholder="Cliente"  [showClear]="true" optionLabel="username"
                         optionValue="id" [options]="clients" [style]="{'width':'100%'}"
                         (onChange)="dt.filter($event.value, col.field, 'equals')">
