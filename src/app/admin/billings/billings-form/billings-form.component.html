@@ -19,9 +19,10 @@
                         class="p-button p-button-secondary  pull-right p-mr-2"></button>
 
 
-                        <button pButton pRipple label="fattura pagata" type="button" *ngIf="is_paid == '1'" class="p-button p-button-secondary pull-right p-mr-2" (click)="close(id)"></button>
-                        <button pButton pRipple label="fattura non pagata" type="button" *ngIf="is_paid == '0'" class="p-button p-button-secondary pull-right p-mr-2" (click)="open(id)"></button>
-    
+
+                  
+
+       
                         
                 </div>
             </div>
@@ -39,10 +40,16 @@
                     <div class="blog-form">
 
                         <div class="p-field p-grid">
-                            <div class="p-col-12 p-md-12">
+                            <div class="p-col-12 p-md-8">
                                 <h3>Informazioni</h3> 
                             </div>
+                            <div class="p-col-12 p-md-4">
 
+                            <p-tag severity="success" *ngIf="is_paid === '1'" (click)="closeBilling(id)" value="Pagata"
+                            class="pull-right"></p-tag>
+                        <p-tag severity="danger" *ngIf="is_paid === '0'" (click)="openBilling(id)" value="non pagata"
+                            class="pull-right"></p-tag>
+                        </div>
                         </div>
                         <hr class="full">
 

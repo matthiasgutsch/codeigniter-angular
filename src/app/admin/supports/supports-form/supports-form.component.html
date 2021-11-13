@@ -7,8 +7,8 @@
           </div>
 
           <div class="p-col-12 p-md-6">
-            <button pButton pRipple label="chiudi ticket" [disabled]="is_active == '0'" class="p-button p-button-danger pull-right p-mr-2" (click)="close(id)"></button>
-            <button pButton pRipple label="apri ticket" [disabled]="is_active == '1'" class="p-button p-button-primary pull-right p-mr-2" (click)="open(id)"></button>
+            <button pButton pRipple label="chiudi ticket" *ngIf="is_active == '1'" class="p-button p-button-danger pull-right p-mr-2" (click)="close(id)"></button>
+            <button pButton pRipple label="apri ticket" *ngIf="is_active == '0'" class="p-button p-button-primary pull-right p-mr-2" (click)="open(id)"></button>
     
           </div>
 

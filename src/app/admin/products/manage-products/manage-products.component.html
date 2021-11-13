@@ -20,7 +20,9 @@
                         optionLabel="label" optionValue="label" [options]="status" [style]="{'width':'100%'}"
                         (onChange)="dt.filter($event.value, col.field, 'equals')">
                     </p-dropdown>
-
+                    <input *ngSwitchCase="'price'" [ngModel]="dt.filters['price']? dt.filters['price'].value : ''"
+                        placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }"
+                        (input)="dt.filter($event.target.value, col.field, 'contains')">
                     <p-dropdown *ngSwitchCase="'category_id'" placeholder="Scegli Status"
                         [ngModel]="dt.filters['category_id']? dt.filters['category_id'].value : ''" [showClear]="true"
                         optionLabel="name" optionValue="name" [options]="categories" [style]="{'width':'100%'}"
@@ -32,18 +34,27 @@
                         (onChange)="dt.filter($event.value, col.field, 'equals')">
                     </p-dropdown>
 
+
+                  
+
                 </div>
-
+                
             </div>
+            <div class="p-grid">
+                <div class="p-col-12">
 
+            <button pButton pRipple label="reset ricerca"
+            class="p-button p-button-primary btn-block"></button>
+                </div>
+        </div>
         </div>
     </ng-template>
 </p-overlayPanel>
 
-<div *ngFor="let col of cols" [ngSwitch]="col.field">
+<!-- <div *ngFor="let col of cols" [ngSwitch]="col.field">
 
     <div class="tag" *ngIf="dt.filters[col.field]">{{dt.filters[col.field]? dt.filters[col.field].value : ''}}</div>
-</div>
+</div> -->
 <div class="dash-header">
     <div class="dash-title">
 
@@ -117,15 +128,16 @@
 
             <p-tabView>
                 <p-tabPanel header="Date tecnici">
-                <table class="billings-list">
-                    <tr *ngFor="let entry of selectedSkills | keys">
-                        <td>
-                            {{ getTechnicalDataItem(entry.value.qty)?.name }}</td>
-                        <td>{{entry.value.price}}</td>
-                    </tr>
+                    <table class="billings-list">
+                        <tr *ngFor="let entry of selectedSkills | keys">
+                            <td>
+                                {{ getTechnicalDataItem(entry.value.qty)?.name }}</td>
+                            <td>{{entry.value.price}}</td>
+                        </tr>
 
-                </table>
-                </p-tabPanel></p-tabView>
+                    </table>
+                </p-tabPanel>
+            </p-tabView>
         </div>
     </ng-template>
 
