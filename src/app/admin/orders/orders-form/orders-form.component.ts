@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { BillingsService } from '../../../services/billings.service';
+import { OrdersService } from '../../../services/orders.service';
 import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
@@ -112,7 +112,7 @@ export class OrdersFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private billingsService: BillingsService,
+    private ordersService: OrdersService,
     private messageService: MessageService,
     private clientsService: ClientsService,
     private _location: Location,
@@ -170,7 +170,7 @@ export class OrdersFormComponent implements OnInit {
 
     const id = this.route.snapshot.paramMap.get("id");
 
-    this.billingsService.skills(+id).subscribe(value => {
+    this.ordersService.skills(+id).subscribe(value => {
       this.skillsValues = value;
     });
 
@@ -178,7 +178,7 @@ export class OrdersFormComponent implements OnInit {
 
     if (id) {
       this.pageTitle = "Modifica Ordine";
-      this.billingsService.getId(+id).subscribe((res) => {
+      this.ordersService.getId(+id).subscribe((res) => {
         this.imagePath = res.image;
         this.idAppointments = res.id;
         this.categoryAppointments = res.category_id;
@@ -311,7 +311,7 @@ export class OrdersFormComponent implements OnInit {
     const formArray = new FormArray([]);
     const id = this.route.snapshot.paramMap.get("id");
 
-    this.billingsService.skills(+id).subscribe(
+    this.ordersService.skills(+id).subscribe(
       (res)=>{
         this.skillsValues = res;
 
@@ -415,7 +415,7 @@ export class OrdersFormComponent implements OnInit {
     const id = this.blogForm.get("id").value;
 
     if (id) {
-      this.billingsService.update(formData, +id).subscribe(
+      this.ordersService.update(formData, +id).subscribe(
         (res) => {
           if (res.status == "error") {
             this.uploadError = res.message;
@@ -427,7 +427,7 @@ export class OrdersFormComponent implements OnInit {
         (error) => (this.error = error)
       ); 
     } else {
-      this.billingsService.create(formData).subscribe(
+      this.ordersService.create(formData).subscribe(
         (res) => {
           if (res.status === "error") {
             this.uploadError = res.message;
