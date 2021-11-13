@@ -210,8 +210,6 @@ trackByFn(index, item) {
     return this.works.find(item => item.id === works_id);
   }
 
-
-  
   
   view(product: Products) {
     this.product = {...this.product};
