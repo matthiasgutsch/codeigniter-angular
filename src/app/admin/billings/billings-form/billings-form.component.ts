@@ -105,6 +105,7 @@ export class BillingsFormComponent implements OnInit {
   total: number;
   viewMode = '1';
   fiscaltype: '22';
+  editForm: boolean = true;
 
   
   trackByFn(index, item) {
@@ -296,7 +297,11 @@ export class BillingsFormComponent implements OnInit {
   }
 
 
-  
+  editFormItems() {
+    this.editForm = ! this.editForm;
+
+  }
+
 
   removeImageFile() {
     this.imagePath = "";
@@ -452,6 +457,7 @@ export class BillingsFormComponent implements OnInit {
     const id = this.blogForm.get("id").value;
 
     if (id) {
+
       this.billingsService.update(formData, +id).subscribe(
         (res) => {
           if (res.status == "error") {

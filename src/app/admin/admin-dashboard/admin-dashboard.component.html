@@ -82,7 +82,7 @@
                     <div class="p-grid">
                         <div class="p-col-6 p-md-8">
                     <h4 class="mb-0">Fatturazione</h4>
-                    {{billingsCountTotal | currency :'EUR':'symbol':'1.2-2'}} <strong><span *ngIf="billingsCountTotalNotPaid > 0"> / {{billingsCountTotalNotPaid |  currency :'EUR':'symbol':'1.2-2'}}</span></strong> 
+                    {{billingsCountTotal | currency :'EUR':'symbol':'1.2-2'}} <strong><span class="red" *ngIf="billingsCountTotalNotPaid > 0"> ({{billingsCountTotalNotPaid |  currency :'EUR':'symbol':'1.2-2'}})</span></strong> 
                     
                         </div>
                         <div class="p-col-6 p-md-4">
