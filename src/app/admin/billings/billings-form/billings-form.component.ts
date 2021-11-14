@@ -87,6 +87,7 @@ export class BillingsFormComponent implements OnInit {
   works_id: any;
   page: string;
   idAppointments: number;
+  idBilling: number;
   categoryAppointments: string;
   works_idAppointments:any;
   company: Company;
@@ -184,6 +185,7 @@ export class BillingsFormComponent implements OnInit {
       this.billingsService.getId(+id).subscribe((res) => {
         this.imagePath = res.image;
         this.idAppointments = res.id;
+        this.idBilling = res.number;
         this.categoryAppointments = res.category_id;
         this.descriptionAppointments = res.description;
         this.dateAppointments = res.date;
@@ -206,6 +208,7 @@ export class BillingsFormComponent implements OnInit {
           skills: this.skillsValues,
           subtotal: res.subtotal,
           vat: res.vat,
+          number: res.number,
           is_paid: res.is_paid,
           total: res.total,
         });
@@ -232,6 +235,7 @@ export class BillingsFormComponent implements OnInit {
       skills: this.initSkill(this.skillsValues),
       subtotal: [""],
       vat: [""],
+      number: [""],
       total: [this.grandTotal],
     });
   }
@@ -310,7 +314,7 @@ export class BillingsFormComponent implements OnInit {
                 
               },
               { 
-                text: 'Numero Fattura: ' + this.idAppointments + '/'+ formattedDateYear + '',
+                text: 'Numero Fattura: ' + this.idBilling + '/'+ formattedDateYear + '',
                 bold: true,
                 alignment: 'right',
                 
@@ -416,9 +420,11 @@ export class BillingsFormComponent implements OnInit {
     
   changed(value){
       this.descriptionAppointments = value.target.value
-    }
+  }
 
-    
+  changedNumber(value){
+    this.idBilling = value.target.value;
+}  
 
   changeTime(value){
       this.dateAppointments = value.target.value
@@ -599,6 +605,7 @@ export class BillingsFormComponent implements OnInit {
     formData.append("works_id", this.blogForm.get("works_id").value);
     formData.append("date", this.blogForm.get("date").value);
     formData.append('user_id', this.blogForm.get('user_id').value);
+    formData.append('number', this.blogForm.get('number').value);
     formData.append('skills', JSON.stringify(this.blogForm.get('skills').value));
     formData.append('subtotal', this.subTotal);
     formData.append('vat', this.vat);
