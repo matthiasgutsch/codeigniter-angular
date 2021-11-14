@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AuthService {
   serverUrl = environment.baseUrl;
   errorData: {};
-  endTime = 1;
+  endTime = 60;
   unsubscribe$: Subject<void> = new Subject();
   timerSubscription: Subscription;
   minutesDisplay = 0;
