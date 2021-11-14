@@ -304,18 +304,18 @@ export class BillingsFormComponent implements OnInit {
             ],
             [
               {
-                text: `Date: ${new Date().toLocaleString()}`,
+                text: `Data: ${new Date().toLocaleString()}`,
                 alignment: 'right'
               },
               { 
-                text: `Numero Fattura No : ${((Math.random() *1000).toFixed(0))}`,
+                text: 'Numero Fattura No : ' + this.idAppointments + ' / 2021',
                 alignment: 'right'
               }
             ]
           ]
         },
         {
-          text: 'Order Details',
+          text: 'Dettagli Ordine',
           style: 'sectionHeader'
         },
         {
