@@ -29,6 +29,12 @@ import { Billings } from 'src/app/models/billings';
 import { map, tap } from 'rxjs/operators';
 import { ISkill } from 'src/app/models/products';
 
+
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+import { Skills } from 'src/app/models/skills';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 @Component({
   selector: "app-billings-form",
   templateUrl: "./billings-form.component.html",
@@ -108,6 +114,13 @@ export class BillingsFormComponent implements OnInit {
   editForm: boolean = true;
 
   
+  customerName: string;
+  address: string;
+  contactNo: number;
+  email: string;
+  products: Skills[] = [];
+  additionalDetails: string;
+
   trackByFn(index, item) {
     return item.id;
   }
@@ -258,7 +271,113 @@ export class BillingsFormComponent implements OnInit {
 
   }
 
+  generatePDF(action = 'open') {
+    let docDefinition = {
+      content: [
+        {
+          text: '' + this.company.name + '',
+          fontSize: 16,
+          alignment: 'left',
+          color: '#111'
+        },
+        {
+          text: 'Fattura ' + this.idAppointments + '',
+          fontSize: 16,
+          bold: true,
+          alignment: 'left',
+          color: '#111'
+        },
+        {
+          text: 'Customer Details',
+          style: 'sectionHeader'
+        },
+        {
+          columns: [
+            [
+              {
+                text: this.customerName,
+                bold:true
+              },
+              { text: this.address },
+              { text: this.email },
+              { text: this.contactNo }
+            ],
+            [
+              {
+                text: `Date: ${new Date().toLocaleString()}`,
+                alignment: 'right'
+              },
+              { 
+                text: `Numero Fattura No : ${((Math.random() *1000).toFixed(0))}`,
+                alignment: 'right'
+              }
+            ]
+          ]
+        },
+        {
+          text: 'Order Details',
+          style: 'sectionHeader'
+        },
+        {
+          table: {
+            headerRows: 1,
+            widths: ['*', 'auto', 'auto', 'auto'],
+            body: [
+              ['Posizione', 'Qty', 'Prezzo', 'Totale'],
+              ...this.skillsValues.map(p => ([p.description, p.qty, p.price, (p.price*p.qty).toFixed(2)])),
+              [{text: 'Totale senza Iva', colSpan: 3}, {}, {}, (Math.round(this.subTotal * 100) / 100).toFixed(2)],
+              [{text: 'Iva', colSpan: 3}, {}, {}, (Math.round(this.vat * 100) / 100).toFixed(2)],
+              [{text: 'Totale', colSpan: 3}, {}, {}, (Math.round(this.grandTotal * 100) / 100).toFixed(2)]
+            ]
+          }
+        },
+        {
+          text: 'Additional Details',
+          style: 'sectionHeader'
+        },
+        {
+            text: this.additionalDetails,
+            margin: [0, 0 ,0, 15]          
+        },
+        {
+          columns: [
+            [{ qr: `${this.description}`, fit: '50' }],
+            [{ text: 'Signature', alignment: 'right', italics: true}],
+          ]
+        },
+        {
+          text: 'Terms and Conditions',
+          style: 'sectionHeader'
+        },
+        {
+            ul: [
+              'Order can be return in max 10 days.',
+              'Warrenty of the product will be subject to the manufacturer terms and conditions.',
+              'This is system generated invoice.',
+            ],
+        }
+      ],
+      styles: {
+        sectionHeader: {
+          bold: true,
+          decoration: 'underline',
+          fontSize: 14,
+          margin: [0, 15,0, 15]          
+        }
+      }
+    };
 
+    if(action==='download'){
+      pdfMake.createPdf(docDefinition).download();
+    }else if(action === 'print'){
+      pdfMake.createPdf(docDefinition).print();      
+    }else{
+      pdfMake.createPdf(docDefinition).open();      
+    }
+
+  }
+
+  
   getselectedWorks() {
     this.selectedWorks = this.works_id.split(',');
     }

@@ -19,6 +19,6 @@ export class Skills {
     files: string;
     data: JSON;
     status: StringMap;
-    price: string;
-    qty: string;
+    price: any;
+    qty: any;
 }

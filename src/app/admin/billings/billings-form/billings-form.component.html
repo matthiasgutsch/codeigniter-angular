@@ -11,7 +11,7 @@
                     <button pButton pRipple icon="pi pi-save" [disabled]="!blogForm.valid" label="Salva"
                         class="p-button pull-right p-button-success"></button>
 
-                    <button pButton pRipple icon="pi pi-save" (click)="downloadPDF()" label="Genera PDF"
+                    <button pButton pRipple icon="pi pi-save" (click)="generatePDF('download')" type="button" label="Genera PDF"
                         class="p-button p-button-primary pull-right p-mr-2"></button>
 
                     <button pButton pRipple *ngIf="numberAppointments > 0"
@@ -24,7 +24,7 @@
                             class="p-button p-button-secondary  pull-right p-mr-2"></button>
                   
 
-       
+             
                         
                 </div>
             </div>
