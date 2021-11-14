@@ -17,6 +17,8 @@ import { AppointmentsService } from 'src/app/services/appointments.service';
 import { Appointments } from 'src/app/models/appointments';
 import { BillingsService } from 'src/app/services/billings.service';
 import { Billings } from 'src/app/models/billings';
+import { PersonalDataService } from 'src/app/services/personal_data.service';
+import { Personal_data } from 'src/app/models/personal_data';
 
 
 
@@ -63,7 +65,10 @@ export class ClientsFormComponent implements OnInit {
   skillsForm: FormGroup;
   skillsValues: any = [];
 
-  
+  personal_datas: any = [];
+  personal_data: Personal_data;
+
+
   trackByFn(index, item) {
     return item.id;
   }
@@ -72,6 +77,7 @@ export class ClientsFormComponent implements OnInit {
     private fb: FormBuilder,
     private clientsService: ClientsService,
     private messageService: MessageService,
+    private personalDataService: PersonalDataService,
     private categoryService: CategoryService,
     private comuniService: ComuniService,
     private _location: Location,
@@ -97,6 +103,15 @@ export class ClientsFormComponent implements OnInit {
       (data: Comuni) => (this.comuni = data),
       (error) => (this.error = error)
     );
+
+
+
+    this.personalDataService.getAllListbyUser().subscribe(
+      (data: Personal_data) => (this.personal_datas = data),
+      (error) => (this.error = error)
+    );
+
+
 
     const id = this.route.snapshot.paramMap.get("id");
 

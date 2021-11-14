@@ -118,7 +118,7 @@ export class PersonalDataFormComponent implements OnInit {
           if (res.status == 'error') {
             this.uploadError = res.message;
           } else {
-            this.router.navigate(['/admin/settings/technical-data']);
+            this.router.navigate(['/admin/settings/personal-data']);
           }
         },
         error => this.error = error
@@ -129,7 +129,7 @@ export class PersonalDataFormComponent implements OnInit {
           if (res.status === 'error') {
             this.uploadError = res.message;
           } else {
-            this.router.navigate(['/admin/settings/technical-data']);
+            this.router.navigate(['/admin/settings/personal-data']);
           }
         },
         error => this.error = error

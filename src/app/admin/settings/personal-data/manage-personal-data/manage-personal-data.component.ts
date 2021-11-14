@@ -4,6 +4,8 @@ import {ConfirmationService} from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Technical_data } from 'src/app/models/technical_data';
 import { TechnicalDataService } from 'src/app/services/technical_data.service';
+import { Personal_data } from 'src/app/models/personal_data';
+import { PersonalDataService } from 'src/app/services/personal_data.service';
 
 @Component({
   selector: 'app-manage-personal-data',
@@ -11,8 +13,8 @@ import { TechnicalDataService } from 'src/app/services/technical_data.service';
 })
 export class ManagePersonalDataComponent implements OnInit {
   title = 'Dati Personali aggiuntivi';
-  technical_data: Technical_data;
-  technical_dat: Technical_data;
+  personal_data: Personal_data;
+  personal_dat: Personal_data;
   error: string;
   loading: boolean;
   public cols: any[];
@@ -21,7 +23,7 @@ export class ManagePersonalDataComponent implements OnInit {
 
   @ViewChild('dt', { static: true }) dt: Table;
 
-  constructor(private technicalDataService: TechnicalDataService, 
+  constructor(private personalDataService: PersonalDataService, 
     private confirmationService: ConfirmationService,) {
 
     this.cols = [
@@ -39,8 +41,8 @@ export class ManagePersonalDataComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.technicalDataService.getAllListbyUser().subscribe(
-      (data: Technical_data) => this.technical_data = data,
+    this.personalDataService.getAllListbyUser().subscribe(
+      (data: Personal_data) => this.personal_data = data,
       error => this.error = error
     );
   }
@@ -60,8 +62,8 @@ export class ManagePersonalDataComponent implements OnInit {
 
 
   
-  editProduct(technical_dat: Technical_data) {
-    this.technical_dat = {...technical_dat};
+  editProduct(personal_dat: Personal_data) {
+    this.personal_dat = {...personal_dat};
 }
 
 
@@ -73,7 +75,7 @@ onDelete(id: number, category_name: string) {
     header: 'Confirmation',
     icon: 'pi pi-exclamation-triangle',
     accept: () => {
-      this.technicalDataService.delete(+id).subscribe(
+      this.personalDataService.delete(+id).subscribe(
         res => {
           console.log(res);
           this.ngOnInit();

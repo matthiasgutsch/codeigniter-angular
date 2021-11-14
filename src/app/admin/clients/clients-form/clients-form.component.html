@@ -224,29 +224,41 @@
 
                                 <button pButton pRipple icon="pi pi-plus" label="Aggiungi Dati technici" type="button" class="p-button pull-right p-button-success p-mr-2" (click)="addQuantity()"></button>
 
+                                <button pButton pRipple icon="pi pi-cog" label="Configura Dati aggiuntivi"
+                                class="p-button pull-left p-button-primary p-mr-2"
+                                routerLink="/admin/settings/personal-data"></button>
                                 </div>
-                            <table formArrayName="skills" style="width: 100%">
-                              
-                                <tr *ngFor="let quantity of skills.controls; let i=index" [formGroupName]="i">
-                                    <td>Quantity :</td>
-                                  <td>
-                                    <input ttype="text" [style]="{ width: '100%' }" pInputText  formControlName="qty">
 
-                                
+                                <table formArrayName="skills" style="width: 100%">
 
+                                    <tr *ngFor="let quantity of skills.controls; let i=index" [formGroupName]="i">
+                                        <td width="40%">
 
-                                      
-                                  </td>
-                                  <td>Price:</td>
-                                  <td>
-                                    
-                                      <input ttype="text" [style]="{ width: '100%' }" pInputText  formControlName="price">
-                                  </td>
-                                  <td>
-                                      <button pButton (click)="removeQuantity(i)" icon="pi pi-trash" class="p-button p-button-danger p-mr-2"></button>
-                                  </td>
-                                </tr>
-                              </table>
+                                            <p-dropdown [options]="personal_datas" [virtualScroll]="true" filter="true"
+                                                [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }"
+                                                formControlName="qty" optionLabel="name" optionValue="id">
+                                                <ng-template let-option pTemplate="item">
+
+                                                    {{option.name}}
+
+                                                </ng-template>
+
+                                            </p-dropdown>
+
+                                        </td>
+                                        <td>
+
+                                            <input ttype="text" placeholder="Valore" [style]="{ width: '100%' }"
+                                                pInputText formControlName="price">
+                                        </td>
+                                        <td>
+                                            <button pButton (click)="removeQuantity(i)" icon="pi pi-trash"
+                                                class="p-button p-button-danger p-mr-2"></button>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                           
                             </p-tabPanel>
 
 
