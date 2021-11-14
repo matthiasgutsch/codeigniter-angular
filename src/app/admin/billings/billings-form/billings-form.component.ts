@@ -282,10 +282,10 @@ export class BillingsFormComponent implements OnInit {
           columns: [
             [
               {
-                text: this.categoryAppointments,
+                text: this.getCategoryItem(this.categoryAppointments, '222')?.username,
                 bold:true
               },
-              { text: this.address },
+              { text: this.getCategoryItem(this.categoryAppointments, '222')?.zip + ' ' + this.getCategoryItem(this.categoryAppointments, '222')?.city },
               { text: this.email },
               { text: this.contactNo }
             ],
@@ -304,6 +304,8 @@ export class BillingsFormComponent implements OnInit {
         {
           text: 'Note',
           bold: true,
+          margin: [0, 20 ,0, 0],        
+
         },
         {
           text: this.descriptionAppointments,
