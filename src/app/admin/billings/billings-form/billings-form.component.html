@@ -190,7 +190,7 @@
                             <div class="p-field p-grid">
 
                                 <div class="p-col-12 p-md-12">
-                                    <h3>Note</h3>
+                                    <h3 *ngIf="descriptionAppointments.length > 0">Note</h3>
 
                         
                                     <p [innerHTML]="descriptionAppointments"></p>
