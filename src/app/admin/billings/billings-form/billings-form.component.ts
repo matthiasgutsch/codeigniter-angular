@@ -309,6 +309,7 @@ export class BillingsFormComponent implements OnInit {
               },
               { 
                 text: 'Numero Fattura: ' + this.idAppointments + ' / 2021',
+                bold: true,
                 alignment: 'right',
                 
               }
