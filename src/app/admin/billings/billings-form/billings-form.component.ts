@@ -245,11 +245,29 @@ export class BillingsFormComponent implements OnInit {
     console.log(formattedDate)
 
     let docDefinition = {
+      layout: 'headerLineOnly', // optional
+
+      
       content: [
+
+        {
+          "canvas": [{
+            "lineColor": "gray",
+            "type": "line",
+            "x1": 0,
+            "y1": 0,
+            "x2": 515,
+            "y2": 0,
+            "lineWidth": 1
+          }]
+        },
+
         {
           text: '' + this.company.name + '',
-          fontSize: 14,
+          fontSize: 12,
           alignment: 'left',
+          margin: [0, 20 ,0, 0],        
+
           bold: true,
 
           color: '#111'
@@ -263,14 +281,6 @@ export class BillingsFormComponent implements OnInit {
         {
           text: '' + this.company.fiscalcode + ' ' + this.company.fiscalnumber + '',
           fontSize: 12,
-          alignment: 'left',
-          color: '#111'
-        },
-        {
-          text: 'Fattura ' + this.idAppointments + '',
-          fontSize: 16,
-          margin: [0, 20 ,20, 15],        
-          bold: true,
           alignment: 'left',
           color: '#111'
         },
@@ -294,15 +304,18 @@ export class BillingsFormComponent implements OnInit {
             [
               {
                 text: 'Data: '+ formattedDate +'',
-                alignment: 'right'
+                alignment: 'right',
+                
               },
               { 
                 text: 'Numero Fattura: ' + this.idAppointments + ' / 2021',
-                alignment: 'right'
+                alignment: 'right',
+                
               }
             ]
           ]
         },
+      
         {
           text: 'Note',
           bold: true,
@@ -317,6 +330,7 @@ export class BillingsFormComponent implements OnInit {
           text: 'Dettagli Ordine',
           style: 'sectionHeader'
         },
+        
         {
           table: {
             headerRows: 1,
