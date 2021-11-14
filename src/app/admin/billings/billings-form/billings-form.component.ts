@@ -275,14 +275,14 @@ export class BillingsFormComponent implements OnInit {
           color: '#111'
         },
         {
-          text: 'Customer Details',
+          text: 'Cliente',
           style: 'sectionHeader'
         },
         {
           columns: [
             [
               {
-                text: this.customerName,
+                text: this.categoryAppointments,
                 bold:true
               },
               { text: this.address },
