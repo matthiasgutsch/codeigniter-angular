@@ -41,6 +41,8 @@ import { ManageQuotesComponent } from './quotes/manage-quotes/manage-quotes.comp
 import { ManageOrdersComponent } from './orders/manage-orders/manage-orders.component';
 import { OrdersFormComponent } from './orders/orders-form/orders-form.component';
 import { ReportsDashboardComponent } from './reports/reports-dashboard.component';
+import { ManagePersonalDataComponent } from './settings/personal-data/manage-personal-data/manage-personal-data.component';
+import { PersonalDataFormComponent } from './settings/personal-data/personal-data-form/personal-data-form.component';
 
 const routes: Routes = [
   {
@@ -111,6 +113,11 @@ const routes: Routes = [
           { path: "settings/technical-data", component: ManageTechnicalDataComponent },
           { path: "settings/technical-data/edit/:id", component: TechnicalDataFormComponent },
           { path: "settings/technical-data/create", component: TechnicalDataFormComponent },
+
+          { path: "settings/personal-data", component: ManagePersonalDataComponent },
+          { path: "settings/personal-data/edit/:id", component: PersonalDataFormComponent },
+          { path: "settings/personal-data/create", component: PersonalDataFormComponent },
+
 
           { path: "settings/employees", component: ManageEmployeesComponent },
           { path: "settings/employees/edit/:id", component: EmployeesFormComponent },

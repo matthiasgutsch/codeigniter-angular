@@ -94,7 +94,8 @@ import { ManageQuotesComponent } from './quotes/manage-quotes/manage-quotes.comp
 import { ManageOrdersComponent } from './orders/manage-orders/manage-orders.component';
 import { OrdersFormComponent } from './orders/orders-form/orders-form.component';
 import { ReportsDashboardComponent } from './reports/reports-dashboard.component';
-
+import { ManagePersonalDataComponent } from './settings/personal-data/manage-personal-data/manage-personal-data.component';
+import { PersonalDataFormComponent } from './settings/personal-data/personal-data-form/personal-data-form.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,8 @@ import { ReportsDashboardComponent } from './reports/reports-dashboard.component
     QuotesFormComponent,
     OrdersFormComponent,
     ManageOrdersComponent,
+    ManagePersonalDataComponent,
+    PersonalDataFormComponent,
     ManageTagsComponent,
     TagsFormComponent,
     ManageTypeComponent,

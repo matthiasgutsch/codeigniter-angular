@@ -1,0 +1,83 @@
+<div class="dash-header">
+    <div class="p-fluid">
+
+    </div>
+</div>
+
+<form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+
+    <div class="p-fluid">
+        <div class="p-field p-grid">
+            <div class="p-col-12 p-md-9">
+
+                <p-card>
+                    <div class class="blog-form">
+
+                        <div class="p-field p-grid">
+                            <div class="p-col-10 p-md-10">
+                                <h3>{{pageTitle}}</h3>
+                            </div>
+                            <div class="p-col-2 p-md-2">
+
+                                <button pButton pRipple label="salva" class="p-button p-button-success p-mr-2"
+                                    type="submit" [disabled]="!categoryForm.valid"></button>
+
+                            </div>
+                        </div>
+
+                        <div class="p-fluid">
+                            <div class="p-field p-grid">
+                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Name <span
+                                        class="required">*</span></label>
+                                <div class="p-col-12 p-md-10">
+                                    <input type="text" [style]="{ width: '100%' }" pInputText
+                                        formControlName="category_name" placeholder="Name" required />
+                                    <div *ngIf="category_name.invalid && (category_name.dirty || category_name.touched)"
+                                        class="error">
+                                        <div *ngIf="category_name.errors">
+                                            Title is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    
+
+                        <div class="p-fluid">
+                            <div class="p-field p-grid">
+                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Descrizione <span
+                                        class="required">*</span></label>
+                                <div class="p-col-12 p-md-10">
+
+                                    <input type="text" [style]="{ width: '100%' }" pInputText
+                                        formControlName="category_description" placeholder="Name" />
+
+                                 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-row">
+                            <label class="col-md-3"></label>
+                            <div class="col-md-9">
+                                <input type="hidden" formControlName="id">
+                                <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </p-card>
+            </div>
+
+            <div class="p-col-12 p-md-3">
+
+                <p-card>
+                fffddf
+                </p-card>
+            </div>
+        </div>
+
+    </div>
+</form>

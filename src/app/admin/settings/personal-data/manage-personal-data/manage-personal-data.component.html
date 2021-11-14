@@ -1,0 +1,82 @@
+<p-overlayPanel #op>
+    <ng-template pTemplate>
+        <div class="p-col-12">
+        
+                <div class="p-field p-grid" *ngFor="let col of cols" >
+                    <div class="p-col-12">
+
+                    <input placeholder="{{col.header}}" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+            </div>
+                </div>
+            </div>
+    </ng-template>
+</p-overlayPanel>
+
+
+<div class="dash-header">
+    <div class="p-fluid">
+        <div class="p-field p-grid">
+            <div class="p-col-8 p-md-8">
+        <h3>{{title}}</h3>
+            </div>
+            <div class="p-col-4 p-md-4">
+    
+                <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/settings/technical-data/create']" label="Aggiungi" class="p-button p-button-primary p-mr-2 pull-right"></button> 
+                <button type="text" pButton label="Filter"  icon="pi pi-filter" class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
+    
+    </div>
+        </div>
+    </div>
+</div>
+
+<div class="p-fluid">
+    <div class="p-field p-grid">
+        <div class="p-col-12 p-md-12">
+
+     
+<p-card>
+   
+
+
+    
+       <!-- <p-multiSelect [options]="columnOptions" [showToggleAll]="false" (onChange)="selectionItemForFilter($event)" [(ngModel)]="cols" maxSelectedLabels="{0} columns selected">
+        </p-multiSelect>-->
+
+
+    <p-table #dt [columns]="cols" [value]="technical_data" [globalFilterFields]="['name', 'description']" currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
+
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of cols">
+                {{col.header}} 
+            </th>
+            <th width="140"></th>
+        </tr>
+       
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let col of cols">
+                {{rowData[col.field]}}
+            </td>
+
+            <td class="action">
+                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/settings/technical-data/edit', rowData.id]"></button>
+                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(rowData.id)"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table> 
+
+
+
+</p-card>
+        </div></div></div>
+
+
+
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
+
+{{error}}

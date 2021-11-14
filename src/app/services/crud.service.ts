@@ -139,12 +139,7 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
 
-  getr_products_data(id: ID) {
-    const userId = this.currentUser.user_id;
-    return this._http.get<T>(this._base + '/products_data/' + id + '/' + userId).pipe(
-      catchError(this.handleError)
-    );
-  }
+
 
 
   getAppointmentId(id: ID) {
