@@ -279,14 +279,16 @@ export class BillingsFormComponent implements OnInit {
           style: 'sectionHeader'
         },
         {
+
           columns: [
             [
               {
                 text: this.getCategoryItem(this.categoryAppointments, '222')?.username,
                 bold:true
               },
+              { text: this.getCategoryItem(this.categoryAppointments, '222')?.address },
               { text: this.getCategoryItem(this.categoryAppointments, '222')?.zip + ' ' + this.getCategoryItem(this.categoryAppointments, '222')?.city },
-              { text: this.email },
+              { text: this.getCategoryItem(this.categoryAppointments, '222')?.fiscalcode + ' ' + this.getCategoryItem(this.categoryAppointments, '222')?.fiscalnumber },
               { text: this.contactNo }
             ],
             [
