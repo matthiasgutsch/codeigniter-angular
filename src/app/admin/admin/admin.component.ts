@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PAGES } from '../constants/constants';
 import { NgxSpinnerService } from "ngx-spinner";
 import { SupportsService } from 'src/app/services/supports.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-admin',
@@ -29,6 +30,7 @@ export class AdminComponent implements OnInit {
   
   constructor(  private spinner: NgxSpinnerService,
     private supportsService: SupportsService,
+    private authService: AuthService,
     ) { 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     //console.log(this.currentUser);
@@ -72,7 +74,9 @@ export class AdminComponent implements OnInit {
       });
     }
 
-
+    logout() {
+      this.authService.logout();
+    }
 
     getInitialsTextColor(firstName: string, lastName: string): string {
       var s = this.getSaturationByName(firstName, lastName);
