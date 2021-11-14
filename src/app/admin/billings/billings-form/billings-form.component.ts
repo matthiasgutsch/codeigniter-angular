@@ -28,6 +28,7 @@ import "jspdf-autotable";
 import { Billings } from 'src/app/models/billings';
 import { map, tap } from 'rxjs/operators';
 import { ISkill } from 'src/app/models/products';
+import { formatDate } from "@angular/common";
 
 
 import pdfMake from "pdfmake/build/pdfmake";
@@ -272,6 +273,12 @@ export class BillingsFormComponent implements OnInit {
   }
 
   generatePDF(action = 'open') {
+    const format = 'dd/MM/yyyy';
+    const locale = 'en-US';
+
+    const formattedDate = formatDate(this.dateAppointments, format, locale);
+    console.log(formattedDate)
+
     let docDefinition = {
       content: [
         {
@@ -304,15 +311,23 @@ export class BillingsFormComponent implements OnInit {
             ],
             [
               {
-                text: `Data: ${new Date().toLocaleString()}`,
+                text: 'Data: '+ formattedDate +'',
                 alignment: 'right'
               },
               { 
-                text: 'Numero Fattura No : ' + this.idAppointments + ' / 2021',
+                text: 'Numero Fattura: ' + this.idAppointments + ' / 2021',
                 alignment: 'right'
               }
             ]
           ]
+        },
+        {
+          text: 'Note',
+          bold: true,
+        },
+        {
+          text: this.descriptionAppointments,
+          fontSize: 12,
         },
         {
           text: 'Dettagli Ordine',
