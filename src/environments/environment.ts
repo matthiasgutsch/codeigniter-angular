@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://api.typopress.it'
+  baseUrl: 'https://api.typopress.it',
+  supportUrl: 'https://support.api.typopress.it'
+
 };
 
 

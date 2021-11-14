@@ -239,10 +239,12 @@ export class BillingsFormComponent implements OnInit {
 
   generatePDF(action = 'open') {
     const format = 'dd/MM/yyyy';
+    const formatYear = 'yyyy';
+
     const locale = 'en-US';
 
     const formattedDate = formatDate(this.dateAppointments, format, locale);
-    console.log(formattedDate)
+    const formattedDateYear = formatDate(this.dateAppointments, formatYear, locale);
 
     let docDefinition = {
       layout: 'headerLineOnly', // optional
@@ -308,7 +310,7 @@ export class BillingsFormComponent implements OnInit {
                 
               },
               { 
-                text: 'Numero Fattura: ' + this.idAppointments + ' / 2021',
+                text: 'Numero Fattura: ' + this.idAppointments + '/'+ formattedDateYear + '',
                 bold: true,
                 alignment: 'right',
                 
@@ -612,7 +614,10 @@ export class BillingsFormComponent implements OnInit {
             this.uploadError = res.message;
           } else {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
-            this.ngOnInit();
+            this.billingsService.skills(+id).subscribe(value => {
+              this.skillsValues = value;
+            });
+            this.editForm = true;
           }
         },
         (error) => (this.error = error)
