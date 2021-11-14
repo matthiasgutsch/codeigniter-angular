@@ -154,7 +154,7 @@
         <p-card>
             <app-initials-avatar class="pull-right"  [routerLink]="['/admin/clients/edit', getCategoryItem(billing.category_id)?.id]" firstName="{{ getCategoryItem(billing.category_id)?.name | slice:0:1}}" lastName="{{ getCategoryItem(billing.category_id)?.surname | slice:0:1}}"></app-initials-avatar>
 
-            <h3>Dettaglio Fattura {{billing.id}}</h3>
+            <h3>Dettaglio Fattura {{billing.number}}/{{billing.date | date:'yyyy'}}</h3>
             <p-tag severity="default" value="{{billing.date}}"  class="p-mr-2"></p-tag>
 
             <p-tag severity="success" *ngIf="billing.is_paid === '1'" class="p-mr-2"  value="Pagata"

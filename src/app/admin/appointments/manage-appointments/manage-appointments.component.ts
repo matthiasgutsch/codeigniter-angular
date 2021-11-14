@@ -107,27 +107,18 @@ export class ManageAppointmentsComponent implements OnInit {
       title: col.header,
       dataKey: col.field
     }));
-
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-    
   }
 
   ngOnInit() {
-
-
     this.spinner.show();
     const userId = this.currentUser.user_id;
     this.appointmentsService.getAllListbyUser().subscribe(data => {
-      
-      
       this.appointments = data;
       this.getClients();
       this.getWorks();
       this.getAppointmentType();
-    
       this.spinner.hide();
-
-
     });
   }
 
