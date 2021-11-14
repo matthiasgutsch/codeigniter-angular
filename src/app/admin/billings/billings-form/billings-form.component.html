@@ -14,14 +14,17 @@
                     <button pButton pRipple icon="pi pi-save" (click)="generatePDF('download')" type="button" label="Genera PDF"
                         class="p-button p-button-primary pull-right p-mr-2"></button>
 
+                        <button pButton pRipple icon="pi pi-print" type="button" label="Stampa"
+                        (click)="generatePDF('print')" class="p-button p-button-primary pull-right p-mr-2"></button>
+
                     <button pButton pRipple *ngIf="numberAppointments > 0"
                         [routerLink]="['/admin/appointments/edit', numberAppointments]" label="Visualizza Appuntamento"
                         class="p-button p-button-secondary  pull-right p-mr-2"></button>
 
 
                         <button pButton pRipple type="button"
-                        (click)="editFormItems()" label="Modifica Fattura"
-                            class="p-button p-button-secondary  pull-right p-mr-2"></button>
+                        (click)="editFormItems()" label="Modifica"
+                            class="p-button p-button-success  pull-right p-mr-2"></button>
                   
 
              
