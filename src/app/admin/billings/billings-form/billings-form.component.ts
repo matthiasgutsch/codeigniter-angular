@@ -286,16 +286,16 @@ export class BillingsFormComponent implements OnInit {
         },
         {
           text: 'Cliente',
-          style: 'sectionHeader'
+          bold: true,
+          margin: [0, 20 ,0, 0],        
+
         },
         {
 
           columns: [
             [
               {
-                text: this.getCategoryItem(this.categoryAppointments, '222')?.username,
-                bold:true
-              },
+                text: this.getCategoryItem(this.categoryAppointments, '222')?.username},
               { text: this.getCategoryItem(this.categoryAppointments, '222')?.address },
               { text: this.getCategoryItem(this.categoryAppointments, '222')?.zip + ' ' + this.getCategoryItem(this.categoryAppointments, '222')?.city },
               { text: this.getCategoryItem(this.categoryAppointments, '222')?.fiscalcode + ' ' + this.getCategoryItem(this.categoryAppointments, '222')?.fiscalnumber },
@@ -331,9 +331,10 @@ export class BillingsFormComponent implements OnInit {
           style: 'sectionHeader'
         },
         
-        {
+        { layout: 'lightHorizontalLines',
           table: {
             headerRows: 1,
+  
             widths: ['*', 'auto', 'auto', 'auto'],
             body: [
               ['Posizione', 'Qty', 'Prezzo', 'Totale'],
@@ -345,29 +346,43 @@ export class BillingsFormComponent implements OnInit {
           }
         },
         {
-          text: 'Additional Details',
-          style: 'sectionHeader'
-        },
-        {
             text: this.additionalDetails,
-            margin: [0, 0 ,0, 15]          
+            margin: [0, 0 ,0, 25]          
         },
+       
+        {
+          "canvas": [{
+            "lineColor": "gray",
+            "type": "line",
+            "x1": 0,
+            "y1": 0,
+            "x2": 200,
+            "y2": 0,
+            "lineWidth": 1
+          }]
+        },
+
         {
           columns: [
             //[{ qr: `${this.description}`, fit: '50' }],
-            [{ text: 'Firma', alignment: 'right', italics: true}],
+            [{ text: 'Firma', 
+            alignment: 'left', 
+            italics: false,
+            margin: [0, 5 ,15, 0]          
+          }],
           ]
         },
         {
-          text: 'Terms and Conditions',
-          style: 'sectionHeader'
+          text: 'Condizioni',
+          fontSize: 12,
+          bold: true,
+          margin: [0, 25 ,15, 0]          
+
         },
         {
-            ul: [
-              'Order can be return in max 10 days.',
-              'Warrenty of the product will be subject to the manufacturer terms and conditions.',
-              'This is system generated invoice.',
-            ],
+          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
+            fontSize: 9,
+
         }
       ],
       styles: {
