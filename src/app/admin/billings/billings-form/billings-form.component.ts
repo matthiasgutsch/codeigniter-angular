@@ -234,6 +234,7 @@ export class BillingsFormComponent implements OnInit {
       date: ["", Validators.required],
       skills: this.initSkill(this.skillsValues),
       subtotal: [""],
+      is_paid: [""],
       vat: [""],
       number: [""],
       total: [this.grandTotal],
@@ -610,6 +611,7 @@ export class BillingsFormComponent implements OnInit {
     formData.append('subtotal', this.subTotal);
     formData.append('vat', this.vat);
     formData.append('total', this.grandTotal);
+    formData.append('is_paid', this.blogForm.get('is_paid').value);
 
     const id = this.blogForm.get("id").value;
 
