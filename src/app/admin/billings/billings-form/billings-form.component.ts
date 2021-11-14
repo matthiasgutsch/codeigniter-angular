@@ -23,8 +23,6 @@ import { LocationsService } from 'src/app/services/locations.service';
 import { EmployeesService } from 'src/app/services/employees.service';
 import { CompanyService } from 'src/app/services/company.service';
 import { Company } from 'src/app/models/company';
-import jsPDF from "jspdf";
-import "jspdf-autotable";
 import { Billings } from 'src/app/models/billings';
 import { map, tap } from 'rxjs/operators';
 import { ISkill } from 'src/app/models/products';
@@ -53,25 +51,18 @@ export class BillingsFormComponent implements OnInit {
   itemTotal: any
   appointments: Appointments;
   appointment: Appointments;
-
   billing: Billings;
   billings: Billings;
-
-
   categories: any = [];
   category: Category;
-
   works: any = [];
   work: Works;
-
   checked: boolean = true;
   selectedValue: string;
-
   typeList: any[];
   clients: any = [];
   client: Clients;
   arrString: string;
-
   employees: any = [];
   employee: Employees;
   skillsArray: any = [];
@@ -146,11 +137,9 @@ export class BillingsFormComponent implements OnInit {
       this.selectedDate = new Date(this.date);
     }
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-
     this.typeList = TYPE_LIST;
-   
-    
   }
+
   @ViewChild('reportContent') reportContent: ElementRef;
 
   ngOnInit() {
@@ -248,30 +237,6 @@ export class BillingsFormComponent implements OnInit {
   }
 
 
-
-  
-  @ViewChild('content', {static: false}) content: ElementRef;
-
-
-  public downloadPDF() {
-    const doc = new jsPDF();
-    const specialElementHandlers = {
-      '#editor': function (element, renderer) {
-        return true;
-      }
-    };
-
-    const content = this.reportContent.nativeElement;
-
-    doc.fromHTML(content.innerHTML, 15, 15, {
-      'width': 190,
-      'elementHandlers': specialElementHandlers
-    });
-
-    doc.save('Fattura-' + this.idAppointments + '.pdf');
-
-  }
-
   generatePDF(action = 'open') {
     const format = 'dd/MM/yyyy';
     const locale = 'en-US';
@@ -283,13 +248,28 @@ export class BillingsFormComponent implements OnInit {
       content: [
         {
           text: '' + this.company.name + '',
-          fontSize: 16,
+          fontSize: 14,
+          alignment: 'left',
+          bold: true,
+
+          color: '#111'
+        },
+        {
+          text: '' + this.company.address + ' ' + this.company.zip + ' ' + this.company.city + '',
+          fontSize: 12,
+          alignment: 'left',
+          color: '#111'
+        },
+        {
+          text: '' + this.company.fiscalcode + ' ' + this.company.fiscalnumber + '',
+          fontSize: 12,
           alignment: 'left',
           color: '#111'
         },
         {
           text: 'Fattura ' + this.idAppointments + '',
           fontSize: 16,
+          margin: [0, 20 ,20, 15],        
           bold: true,
           alignment: 'left',
           color: '#111'
@@ -341,7 +321,7 @@ export class BillingsFormComponent implements OnInit {
               ['Posizione', 'Qty', 'Prezzo', 'Totale'],
               ...this.skillsValues.map(p => ([p.description, p.qty, p.price, (p.price*p.qty).toFixed(2)])),
               [{text: 'Totale senza Iva', colSpan: 3}, {}, {}, (Math.round(this.subTotal * 100) / 100).toFixed(2)],
-              [{text: 'Iva', colSpan: 3}, {}, {}, (Math.round(this.vat * 100) / 100).toFixed(2)],
+              [{text: 'Iva (22%)', colSpan: 3}, {}, {}, (Math.round(this.vat * 100) / 100).toFixed(2)],
               [{text: 'Totale', colSpan: 3}, {}, {}, (Math.round(this.grandTotal * 100) / 100).toFixed(2)]
             ]
           }
@@ -356,8 +336,8 @@ export class BillingsFormComponent implements OnInit {
         },
         {
           columns: [
-            [{ qr: `${this.description}`, fit: '50' }],
-            [{ text: 'Signature', alignment: 'right', italics: true}],
+            //[{ qr: `${this.description}`, fit: '50' }],
+            [{ text: 'Firma', alignment: 'right', italics: true}],
           ]
         },
         {
