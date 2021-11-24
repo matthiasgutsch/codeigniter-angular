@@ -9,7 +9,7 @@ import { FormControl } from '@angular/forms';
 import { CategoryService } from '../../../services/categories.service';
 import { ConfirmationService, MessageService, SelectItem } from "primeng/api";
 import * as moment from 'moment';
-import { TYPE_LIST, STATUS_PRODUCTS } from '../../constants/constants';
+import { TYPE_LIST, STATUS_PRODUCTS, STATE_LIST } from '../../constants/constants';
 import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
 import { Location } from '@angular/common';
@@ -68,6 +68,7 @@ export class ProductsFormComponent implements OnInit {
   blogForm: FormGroup;
   typeList: any[];
   status: any[];
+  stateOptions: any[];
 
   clients: any = [];
   client: Clients;
@@ -138,6 +139,7 @@ export class ProductsFormComponent implements OnInit {
     }
     this.typeList = TYPE_LIST;
     this.status = STATUS_PRODUCTS;
+    this.stateOptions = STATE_LIST;
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
   }
 
