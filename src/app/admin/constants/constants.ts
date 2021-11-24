@@ -59,6 +59,18 @@ export const STATUS_PRODUCTS: SelectItem[] = [
 
 
 
+
+  export const STATE_LIST = [
+  {label: "Si", value: "1"}, 
+  {label: "No", value: "0"}];
+  
+
+  export const BUSINESS_STATE_LIST = [
+    {label: "Business", value: "1"}, 
+    {label: "Privato", value: "0"}];
+
+  
+
 export const SEX_LIST: SelectItem[] = [
   { label: "Tutte", value: null },
   { label: "Uomo", value: "Uomo" },

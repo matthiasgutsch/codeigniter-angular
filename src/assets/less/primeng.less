@@ -1,15 +1,14 @@
 @import "colors.less";
-
 .p-sm-1, .p-sm-2, .p-sm-3, .p-sm-4, .p-sm-5, .p-sm-6, .p-sm-7, .p-sm-8, .p-sm-9, .p-sm-10, .p-sm-11, .p-sm-12, .p-md-1, .p-md-2, .p-md-3, .p-md-4, .p-md-5, .p-md-6, .p-md-7, .p-md-8, .p-md-9, .p-md-10, .p-md-11, .p-md-12, .p-lg-1, .p-lg-2, .p-lg-3, .p-lg-4, .p-lg-5, .p-lg-6, .p-lg-7, .p-lg-8, .p-lg-9, .p-lg-10, .p-lg-11, .p-lg-12, .p-xl-1, .p-xl-2, .p-xl-3, .p-xl-4, .p-xl-5, .p-xl-6, .p-xl-7, .p-xl-8, .p-xl-9, .p-xl-10, .p-xl-11, .p-xl-12 {
-    padding: 0px 15px;
+  padding: 0px 15px;
 }
 
 .p-grid {
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
-    margin-top: 0rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  margin-top: 0rem;
 }
 
 .p-datatable .p-datatable-tbody > tr > td {
@@ -20,244 +19,227 @@
 }
 
 .p-overlaypanel .p-overlaypanel-content {
+  min-width: 200px;
+}
 
-min-width: 200px;
-  
+.p-selectbutton {
+  width: auto;
+  display: inline !important;
+  .p-button {
+    color: @ness_color_2 !important;
+    &.p-highlight {
+      background: @ness_color_3;
+      border-color: @ness_color_3;
+      color: #ffffff !important;
+    }
+  }
 }
 
 .p-datatable .p-datatable-tbody > tr {
   color: @text-color;
 }
+
 .p-button {
-    color: @white !important;
-    background: #ddd;
-    border: 1px solid #ddd;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
-    border-radius: @radius;
-    font-family: "Circular", sans-serif;
-
-    &:hover {
-      background: #333 !important;
-      border: 1px solid #333 !important;
-      color: @white;
-    }
+  color: @white !important;
+  background: #ddd;
+  border: 1px solid #ddd;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  border-radius: @radius;
+  font-family: "Circular", sans-serif;
+  &:hover {
+    background: #333 !important;
+    border: 1px solid #333 !important;
+    color: @white;
   }
-
-
+}
 
 .p-datatable .p-sortable-column.p-highlight {
-    background: #f8f9fa;
-    color: @red !important;
-  }
-  
-  .p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
-    color: @red !important;
-  }
-  
-  .p-radiobutton .p-radiobutton-box.p-highlight {
-    border-color: @red !important;
-    background: @red !important;
-  }
-  
-  .p-button.p-button-danger, .p-buttonset.p-button-danger > .p-button, .p-splitbutton.p-button-danger > .p-button {
-    color: @white !important;
-    background: @red;
+  background: #f8f9fa;
+  color: @red !important;
+}
+
+.p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
+  color: @red !important;
+}
+
+.p-radiobutton .p-radiobutton-box.p-highlight {
+  border-color: @red !important;
+  background: @red !important;
+}
+
+.p-button.p-button-danger, .p-buttonset.p-button-danger > .p-button, .p-splitbutton.p-button-danger > .p-button {
+  color: @white !important;
+  background: @red;
+  border-radius: @radius;
+  border: 1px solid @red !important;
+  &:hover {
+    color: @ness_color_2;
+    background: darken(@red, 20%) !important;
     border-radius: @radius;
     border: 1px solid @red !important;
-
-    &:hover {
-        color: @ness_color_2;
-        background: darken(@red,20%) !important;
-        border-radius: @radius;
-      
-        border: 1px solid @red !important;
-    }
-
   }
+}
 
-  .p-button.p-button-default, .p-buttonset.p-button-default > .p-button, .p-splitbutton.p-button-default > .p-button {
-    color: @white !important;
-    background: @ness_color_2;
+.p-button.p-button-default, .p-buttonset.p-button-default > .p-button, .p-splitbutton.p-button-default > .p-button {
+  color: @white !important;
+  background: @ness_color_2;
+  border-radius: @radius;
+  border: 1px solid @ness_color_2 !important;
+  &:hover {
+    color: @ness_color_2 !important;
+    background: @white !important;
     border-radius: @radius;
     border: 1px solid @ness_color_2 !important;
-
-    &:hover {
-        color: @ness_color_2 !important;
-        background: @white !important;
-        border-radius: @radius;
-      
-        border: 1px solid @ness_color_2 !important;
-    }
-
   }
+}
 
-
-  .p-button.p-button-blue {
-    color: @white !important;
-    background: #5c6b84;
+.p-button.p-button-blue {
+  color: @white !important;
+  background: #5c6b84;
+  border-radius: @radius;
+  border: 1px solid #5c6b84 !important;
+  &:hover {
+    color: @ness_color_2;
+    background: darken(@red, 20%) !important;
     border-radius: @radius;
-    border: 1px solid #5c6b84 !important;
-
-    &:hover {
-        color: @ness_color_2;
-        background: darken(@red,20%) !important;
-        border-radius: @radius;
-      
-        border: 1px solid @red !important;
-    }
-
+    border: 1px solid @red !important;
   }
+}
 
-  .btn-block {
-    display: block;
-    width: 100% !important;
-  } 
+.btn-block {
+  display: block;
+  width: 100% !important;
+}
 
-  .p-button.p-button-dark {
-    color: @white !important;
-    background: @ness_color_2;
+.p-button.p-button-dark {
+  color: @white !important;
+  background: @ness_color_2;
+  border-radius: @radius;
+  border: 1px solid @ness_color_2 !important;
+  &:hover {
+    color: @white;
+    background: @ness_color_2 !important;
     border-radius: @radius;
     border: 1px solid @ness_color_2 !important;
-
-    &:hover {
-        color: @white;
-        background: @ness_color_2 !important;
-        border-radius: @radius;
-        border: 1px solid @ness_color_2 !important;
-    }
-
   }
-  
-  .p-button.p-button-success, .p-buttonset.p-button-success > .p-button, .p-splitbutton.p-button-success > .p-button {
+}
+
+.p-button.p-button-success, .p-buttonset.p-button-success > .p-button, .p-splitbutton.p-button-success > .p-button {
+  color: @white;
+  background: @green;
+  border-radius: @radius;
+  border: 1px solid @green !important;
+  &:hover {
+    color: @ness_color_2;
+    background: darken(@green, 20%) !important;
+    border-radius: @radius;
+    border: 1px solid @green !important;
+  }
+}
+
+.p-button.p-button-info, .p-buttonset.p-button-info > .p-button, .p-splitbutton.p-button-info > .p-button {
+  color: @white;
+  background: @ness_color_6;
+  border-radius: @radius;
+  border: 1px solid @ness_color_6 !important;
+  &:hover {
+    color: @ness_color_2;
+    background: darken(@ness_color_6, 20%) !important;
+    border-radius: @radius;
+    border: 1px solid @ness_color_6 !important;
+  }
+}
+
+.p-button.p-button-primary, .p-buttonset.p-button-primary > .p-button, .p-splitbutton.p-button-primary > .p-button {
+  color: @white !important;
+  background: @ness_color_3;
+  border: 1px solid @ness_color_3 !important;
+  border-radius: @radius;
+}
+
+.p-dialog-footer {
+  .p-button {
     color: @white;
     background: @green;
     border-radius: @radius;
     border: 1px solid @green !important;
-
     &:hover {
-        color: @ness_color_2;
-        background: darken(@green,20%) !important;
-        border-radius: @radius;
-      
-        border: 1px solid @green !important;
-    }
-  }
-  
-  
-  .p-button.p-button-info, .p-buttonset.p-button-info > .p-button, .p-splitbutton.p-button-info > .p-button {
-    color: @white;
-    background: @ness_color_6;
-    border-radius: @radius;
-    border: 1px solid @ness_color_6 !important;
-
-    &:hover {
-        color: @ness_color_2;
-        background: darken(@ness_color_6,20%) !important;
-        border-radius: @radius;
-      
-        border: 1px solid @ness_color_6 !important;
-    }
-  }
-
-  .p-button.p-button-primary, .p-buttonset.p-button-primary > .p-button, .p-splitbutton.p-button-primary > .p-button {
-    color: @white !important;
-    background: @ness_color_3;
-    border: 1px solid @ness_color_3 !important;
-    border-radius: @radius;
-  
-  }
-  
-  .p-dialog-footer {
-    .p-button {
-      color: @white;
-      background: @green;
+      color: @ness_color_2;
+      background: darken(@green, 20%) !important;
       border-radius: @radius;
       border: 1px solid @green !important;
-  
-      &:hover {
-          color: @ness_color_2;
-          background: darken(@green,20%) !important;
-          border-radius: @radius;
-        
-          border: 1px solid @green !important;
-      }
     }
-
-    .p-confirm-dialog-reject {
-      color: @white !important;
+  }
+  .p-confirm-dialog-reject {
+    color: @white !important;
     background: @red;
     border-radius: @radius;
     border: 1px solid @red !important;
-
     &:hover {
-        color: @ness_color_2;
-        background: darken(@red,20%) !important;
-        border-radius: @radius;
-      
-        border: 1px solid @red !important;
+      color: @ness_color_2;
+      background: darken(@red, 20%) !important;
+      border-radius: @radius;
+      border: 1px solid @red !important;
     }
-
-    }
-
   }
-  
-  /* checkbox */
-
-  .p-tag.p-tag-success {
-    background-color: @green !important;
-    color: #ffffff;
 }
 
 
-.p-tag.p-tag-danger {
-  background-color:  @red !important;
+/* checkbox */
+
+.p-tag.p-tag-success {
+  background-color: @green !important;
   color: #ffffff;
 }
 
-  .p-checkbox .p-checkbox-box.p-highlight {
-    border-color: @red;
-    background: @red;
-    &:hover {
-      border-color: @red;
-      background: @red;
-    }
-  }
-  
-    /* table */
-
-    .fc-toolbar h2 {
-        font-size: 1.375em;
-        margin: 0;
-    }
-
-  .p-datatable .p-datatable-tbody > tr > td:first-child {
-    padding: 10px 5px !important;
-  }
-  
-  .p-datatable .p-datatable-tbody > tr > td:last-child {
-  padding: 10px 5px !important;
-  }
-  
-  .p-datatable .p-datatable-header {
-      padding: 0px 0px 20px 0px !important;
-  }
-
-
-  .fc-icon {
-    font-family: 'primeicons' !important;
-    speak: none;
-    font-style: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    width: 1em;
-    height: 1em;
+.p-tag.p-tag-danger {
+  background-color: @red !important;
+  color: #ffffff;
 }
 
+.p-checkbox .p-checkbox-box.p-highlight {
+  border-color: @red;
+  background: @red;
+  &:hover {
+    border-color: @red;
+    background: @red;
+  }
+}
+
+
+/* table */
+
+.fc-toolbar h2 {
+  font-size: 1.375em;
+  margin: 0;
+}
+
+.p-datatable .p-datatable-tbody > tr > td:first-child {
+  padding: 10px 5px !important;
+}
+
+.p-datatable .p-datatable-tbody > tr > td:last-child {
+  padding: 10px 5px !important;
+}
+
+.p-datatable .p-datatable-header {
+  padding: 0px 0px 20px 0px !important;
+}
+
+.fc-icon {
+  font-family: 'primeicons' !important;
+  speak: none;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 1em;
+  height: 1em;
+}
 
 label {
   font-size: 14px;
@@ -277,19 +259,15 @@ label {
     font-size: 16px;
     color: @ness_color_2 !important;
   }
-
   h1 {
     margin-top: 0px;
   }
   h4 {
     margin-top: 0px;
   }
-
   h3.date {
     color: @ness_color_3 !important;
-
   }
-
   p {
     margin: 0px !important;
     padding: 0px !important;

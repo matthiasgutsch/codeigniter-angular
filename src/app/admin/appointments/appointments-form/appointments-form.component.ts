@@ -9,7 +9,7 @@ import { FormControl } from '@angular/forms';
 import { CategoryService } from '../../../services/categories.service';
 import { ConfirmationService, MessageService, SelectItem } from "primeng/api";
 import * as moment from 'moment';
-import { TYPE_LIST } from '../../constants/constants';
+import { TYPE_LIST, STATE_LIST} from '../../constants/constants';
 import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
 import { Location } from '@angular/common';
@@ -51,6 +51,7 @@ export class AppointmentsFormComponent implements OnInit {
 
   checked: boolean = true;
   selectedValue: string;
+  stateOptions: any[];
 
   blogForm: FormGroup;
   typeList: any[];
@@ -111,6 +112,7 @@ export class AppointmentsFormComponent implements OnInit {
     }
     this.typeList = TYPE_LIST;
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    this.stateOptions = STATE_LIST;
 
   }
 

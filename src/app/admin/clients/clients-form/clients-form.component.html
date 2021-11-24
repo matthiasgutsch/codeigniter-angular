@@ -37,8 +37,9 @@
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
                                             
-                                            <input type="radio" formControlName="is_featured" [(ngModel)]="is_featured" value="1" /> Business
-                                            <input type="radio" formControlName="is_featured" [(ngModel)]="is_featured" value="0" /> Privato
+                                            <p-selectButton [options]="businessStateOptions" formControlName="is_featured" optionLabel="label" optionValue="value"></p-selectButton>
+
+                                  
                                         </div>
                                     </div>
                                 </div>
@@ -195,8 +196,8 @@
                                         <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Attivo <span
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
-                                            <input type="radio" formControlName="is_active" value="1" /> Si
-                                            <input type="radio" formControlName="is_active" value="0" /> No
+
+                                            <p-selectButton [options]="stateOptions" formControlName="is_active" optionLabel="label" optionValue="value"></p-selectButton>
                                         </div>
                                     </div>
                                 </div>
