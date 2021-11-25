@@ -37,6 +37,11 @@ export class ClientsFormComponent implements OnInit {
   clients: Clients;
   client: Clients;
 
+
+  clientsList: any = [];
+  clientList: Clients;
+
+
   categories: any = [];
   category: Category;
   checked: boolean = true;
@@ -65,11 +70,13 @@ export class ClientsFormComponent implements OnInit {
   skillsForm: FormGroup;
   skillsValues: any = [];
   stateOptions: any[];
-
+  cols: any[];
+  exportColumns: any[];
+  _selectedColumns: any[];
   businessStateOptions: any[]; 
   personal_datas: any = [];
   personal_data: Personal_data;
-
+  personName: string;
 
   trackByFn(index, item) {
     return item.id;
@@ -81,7 +88,7 @@ export class ClientsFormComponent implements OnInit {
     private messageService: MessageService,
     private personalDataService: PersonalDataService,
     private categoryService: CategoryService,
-    private comuniService: ComuniService,
+    private comuniService: ComuniService,    
     private _location: Location,
     private appointmentsService: AppointmentsService,
     private billingsService: BillingsService,
@@ -101,7 +108,7 @@ export class ClientsFormComponent implements OnInit {
 
   ngOnInit() {
     const userId = this.currentUser.user_id;
-
+    this.getClientList();
 
     this.comuniService.getAllList().subscribe(
       (data: Comuni) => (this.comuni = data),
@@ -115,7 +122,9 @@ export class ClientsFormComponent implements OnInit {
       (error) => (this.error = error)
     );
 
+    
 
+    this.route.paramMap.subscribe((params) => {
 
     const id = this.route.snapshot.paramMap.get("id");
 
@@ -162,11 +171,16 @@ export class ClientsFormComponent implements OnInit {
 
         }
         this.imagePath = res.image;
+        this.personName = res.name + ' ' + res.surname;
+
       });
     } else {
       this.deleteButton = false;
       this.pageTitle = "Aggiungi Cliente";
     }
+
+
+
 
     this.blogForm = this.fb.group({
       id: [""],
@@ -191,7 +205,10 @@ export class ClientsFormComponent implements OnInit {
       date: ["", Validators.required],
       skills: this.initSkill(),
     });
+
+  });
   }
+  
 
   onSelectedFile(event) {
     if (event.target.files.length > 0) {
@@ -204,6 +221,22 @@ export class ClientsFormComponent implements OnInit {
         this.imagePath = reader.result;
       };
     }
+  }
+
+
+  getClientList() {
+  this.clientsService.getAllListbyUser().subscribe(data => {
+    this.clientsList = data;
+    this.cols = [
+      { field: "name", header: "Nome" },
+      { field: "surname", header: "Cognome" },  
+    ];
+    this._selectedColumns = this.cols;
+    this.exportColumns = this.cols.map(col => ({
+      title: col.header,
+      dataKey: col.field
+    }));
+  });
   }
 
 
@@ -313,6 +346,8 @@ export class ClientsFormComponent implements OnInit {
     return this.blogForm.get("title");
   }
 
+  
+
   get id() {
     return this.blogForm.get("id").value;
   }
@@ -355,6 +390,8 @@ export class ClientsFormComponent implements OnInit {
           } else {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
            // this._location.back();
+           this.getClientList();
+
           }
         },
         (error) => (this.error = error)
