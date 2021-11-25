@@ -408,7 +408,7 @@ export class ProductsFormComponent implements OnInit {
             this.uploadError = res.message;
           } else {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
-            //this.router.navigate(['/admin/products']);
+            this.router.navigate(['/admin/products']);
 
           }
         },

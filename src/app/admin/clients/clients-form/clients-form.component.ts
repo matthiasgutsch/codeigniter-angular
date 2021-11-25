@@ -402,7 +402,8 @@ export class ClientsFormComponent implements OnInit {
             this.uploadError = res.message;
           } else {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
-            this._location.back();
+            this.router.navigate(['/admin/clients']);
+
           }
         },
         (error) => (this.error = error)
