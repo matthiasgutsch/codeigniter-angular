@@ -228,8 +228,7 @@ export class ClientsFormComponent implements OnInit {
   this.clientsService.getAllListbyUser().subscribe(data => {
     this.clientsList = data;
     this.cols = [
-      { field: "name", header: "Nome" },
-      { field: "surname", header: "Cognome" },  
+      { field: "username", header: "Nome" },
     ];
     this._selectedColumns = this.cols;
     this.exportColumns = this.cols.map(col => ({

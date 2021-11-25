@@ -27,14 +27,20 @@
                 </div>
                 <hr class="full">
          
+                <div *ngFor="let col of cols" [ngSwitch]="col.field">
 
+                        <input *ngSwitchCase="'username'" [ngModel]="dt.filters['username']? dt.filters['username'].value : ''" 
+                        placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                    
+                </div>
+                <hr class="full">
 
                 <p-table #dt [columns]="cols" [value]="clientsList" [globalFilterFields]="['name', 'description']"  [responsive]="true" [paginator]="true" [rows]="10" [showCurrentPageReport]="false" [loading]="loading" [totalRecords]="totalRecords">
     
                    
                     <ng-template pTemplate="body" let-rowData let-columns="columns">
                         <tr>
-                            <td>
+                            <td  width="60">
                                 <app-initials-avatar firstName="{{ rowData['name'] | slice:0:1}}" lastName="{{ rowData['surname'] | slice:0:1}}"></app-initials-avatar>
 
                             </td>
