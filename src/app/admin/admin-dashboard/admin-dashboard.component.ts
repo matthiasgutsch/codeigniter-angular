@@ -92,9 +92,11 @@ export class AdminDashboardComponent implements OnInit {
   yAxes: [];
   xAxes: [];
   chartsCount: any;
+  chartsCountNone: any;
   chartsCountData: any = [];
   chartsCountDataTotal: string;
   data1=[];
+  data2=[];
 
   trackByFn(index, item) {
     return item.id;
@@ -156,6 +158,7 @@ export class AdminDashboardComponent implements OnInit {
        this.getAppointmentsCount();
        this.getWorks();
        this.getChartsCount();
+       this.getChartsCountNone();
        this.getSupports();
       this.calendarOptions = {
     
@@ -193,17 +196,26 @@ export class AdminDashboardComponent implements OnInit {
       
       data: {
         datasets: [{
-          backgroundColor: "rgba(64, 162, 191,0.4)",
-          borderColor: "rgb(64, 162, 191, 0.8)",
-          fill: true,
+          type:  'line',
+          backgroundColor: "rgba(99, 162, 241,0.4)",
+          borderColor: "rgb(99, 162, 241, 0.8)",
+          fill: false,
+          label: 'Fatturato',
           data: this.data1,
           steppedLine: false,
-        }]
+        },
+        {
+          type:  'line',
+          backgroundColor: "rgba(255, 99, 71,0.4)",
+          borderColor: "rgb(255, 99, 71, 0.8)",
+          fill: false,
+          label: 'Non incassato',
+          data: this.data2,
+          steppedLine: false,
+        }
+      ]
       },
       options: {
-        legend: {
-          display: false
-        },
         responsive: true,
         title: {
           display: false,
@@ -284,6 +296,26 @@ export class AdminDashboardComponent implements OnInit {
       error => this.error = error
     });
     }
+
+
+    getChartsCountNone() {
+
+      this.chartsService.countChartsNone().subscribe(data => {
+        this.chartsCountNone = data;
+        var StringifyData = JSON.stringify(this.chartsCountNone)
+        this.chartsCountNone.forEach((item,index)=>{
+            var obj;
+            obj={
+              x:item.x,
+              y:item.y,
+            }
+          this.data2.push(obj)
+      });
+  
+        console.log(this.chartsCountData)
+        error => this.error = error
+      });
+      }
 
     getClientsCount() {
       const userId = this.currentUser.user_id; 

@@ -19,6 +19,7 @@ import { BillingsService } from 'src/app/services/billings.service';
 import { Billings } from 'src/app/models/billings';
 import { PersonalDataService } from 'src/app/services/personal_data.service';
 import { Personal_data } from 'src/app/models/personal_data';
+import { NgxSpinnerService } from "ngx-spinner";
 
 
 
@@ -92,6 +93,7 @@ export class ClientsFormComponent implements OnInit {
     private _location: Location,
     private appointmentsService: AppointmentsService,
     private billingsService: BillingsService,
+    private spinner: NgxSpinnerService,
 
     private confirmationService: ConfirmationService,
     private router: Router,
@@ -107,6 +109,9 @@ export class ClientsFormComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.spinner.show();
+
     const userId = this.currentUser.user_id;
     this.getClientList();
 
@@ -125,12 +130,12 @@ export class ClientsFormComponent implements OnInit {
     
 
     this.route.paramMap.subscribe((params) => {
-
     const id = this.route.snapshot.paramMap.get("id");
 
     if (id) {
       this.pageTitle = "Modifica Cliente";
       this.deleteButton = true;
+      
       this.appointmentsService.find_client(+id).subscribe(
         (data: Appointments) => (this.appointments = data),
         (error) => (this.error = error)
@@ -207,6 +212,8 @@ export class ClientsFormComponent implements OnInit {
     });
 
   });
+  this.spinner.hide();
+
   }
   
 
