@@ -59,6 +59,8 @@ import { AppointmentsFormComponent } from './appointments/appointments-form/appo
 import {TimelineModule} from 'primeng/timeline';
 import { TagModule } from 'primeng/tag';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { DragDropModule } from 'primeng/dragdrop';
+import {PanelModule} from 'primeng/panel';
 
 import { ManageBillingsComponent } from './billings/manage-billings/manage-billings.component';
 import { BillingsFormComponent } from './billings/billings-form/billings-form.component';
@@ -96,6 +98,7 @@ import { OrdersFormComponent } from './orders/orders-form/orders-form.component'
 import { ReportsDashboardComponent } from './reports/reports-dashboard.component';
 import { ManagePersonalDataComponent } from './settings/personal-data/manage-personal-data/manage-personal-data.component';
 import { PersonalDataFormComponent } from './settings/personal-data/personal-data-form/personal-data-form.component';
+import { DragDashboardComponent } from './drag/drag-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -120,6 +123,7 @@ import { PersonalDataFormComponent } from './settings/personal-data/personal-dat
     BrandsFormComponent,
     TypeFormComponent,
     ManagePagesComponent,
+    DragDashboardComponent,
     MomentPipe,
     DateValidPipe,
     ManageAppointmentTypeComponent,
@@ -162,6 +166,7 @@ import { PersonalDataFormComponent } from './settings/personal-data/personal-dat
     SelectButtonModule,
     NgxSpinnerModule,
     InputTextareaModule,
+    DragDropModule,
     ToastModule,
     TabViewModule,
     OverlayPanelModule,
@@ -169,6 +174,7 @@ import { PersonalDataFormComponent } from './settings/personal-data/personal-dat
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
+    PanelModule,
     FullCalendarModule,
     CheckboxModule,
     EditorModule,
