@@ -281,6 +281,17 @@ label {
   height: 60vh;
   border-radius: 4px;
   padding: 10px;
+  position: relative;
+
+
+  &::after {
+    content: "Drop Here";
+    text-align: center;
+    position: absolute;
+    color: #ccc;
+    top: 45%;
+    width: calc(100% - 60px);
+  }
 
 }
 
@@ -293,15 +304,9 @@ label {
   overflow-y: auto;
   height: 100%;
   position: relative;
+  z-index: 100;
 
-  &::after {
-    content: "Drop Here";
-    text-align: center;
-    position: absolute;
-    color: #ccc;
-    top: 45%;
-    width: calc(100% - 60px);
-  }
+  
 
   &.p-draggable-enter {
     border-color: #ddd;
