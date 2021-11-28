@@ -106,6 +106,12 @@ export class ClientsFormComponent implements OnInit {
     this.typeList = SEX_LIST;
     this.stateOptions = STATE_LIST;
     this.businessStateOptions = BUSINESS_STATE_LIST;
+
+
+    this.route.paramMap.subscribe((params) => {
+      this.ngOnInit();
+    });
+
   }
 
   ngOnInit() {
@@ -120,18 +126,15 @@ export class ClientsFormComponent implements OnInit {
       (error) => (this.error = error)
     );
 
-
-
     this.personalDataService.getAllListbyUser().subscribe(
       (data: Personal_data) => (this.personal_datas = data),
       (error) => (this.error = error)
     );
 
-    
-
-    this.route.paramMap.subscribe((params) => {
     const id = this.route.snapshot.paramMap.get("id");
 
+
+    
     if (id) {
       this.pageTitle = "Modifica Cliente";
       this.deleteButton = true;
@@ -211,8 +214,10 @@ export class ClientsFormComponent implements OnInit {
       skills: this.initSkill(),
     });
 
-  });
+
   this.spinner.hide();
+ 
+
 
   }
   
