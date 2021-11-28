@@ -191,68 +191,7 @@ export class DragDashboardComponent implements OnInit {
     }
   }
 
-  dragStart(product: Products) {
-    this.draggedProduct = product;
-  }
-
-  dragEnd() {
-    this.draggedProduct = null;
-  }
-
-  drop() {
-    if (this.draggedProduct) {
-      let draggedProductIndex = this.findIndex(this.draggedProduct);
-      this.selectedProducts = [...this.selectedProducts, this.draggedProduct];
-      this.availableProducts = this.availableProducts.filter(
-        (val, i) => i != draggedProductIndex
-      );
-    }
-  }
-
-  dragCancel() {
-    if (this.draggedProduct) {
-      let draggedProductIndex = this.findIndex(this.draggedProduct);
-      this.selectedProducts = [...this.selectedProducts, this.draggedProduct];
-      this.availableProducts = this.availableProducts.filter(
-        (val, i) => i != draggedProductIndex
-      );
-    }
-  }
-
-  findIndex(product: Products) {
-    let index = -1;
-    for (let i = 0; i < this.availableProducts.length; i++) {
-      if (product.id === this.availableProducts[i].id) {
-        index = i;
-        break;
-      }
-    }
-    return index;
-  }
-
-
-
-  deleteProduct(product: Products) {
-    this.confirmationService.confirm({
-      message: 'Are you sure you want to delete ' + product.title + '?',
-      header: 'Confirm',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.selectedProducts = this.selectedProducts.filter(
-          (val) => val.id !== product.id
-        );
-        this.products = {};
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Product Deleted',
-          life: 3000,
-        });
-        this.getProducts();
-      },
-    });
-  }
-  
+ 
   getProducts() {
 
     this.productsService.getAllListbyUser().subscribe(
