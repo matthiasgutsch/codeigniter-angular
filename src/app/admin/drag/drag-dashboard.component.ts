@@ -25,7 +25,7 @@ import { EmployeesService } from 'src/app/services/employees.service';
 import { Works } from 'src/app/models/works';
 import * as moment from 'moment';
 import { ProductsService } from 'src/app/services/products.service';
-import { Products } from 'src/app/models/products';
+import { Projects } from 'src/app/models/projects';
 import { BillingsService } from 'src/app/services/billings.service';
 import { Billings } from 'src/app/models/billings';
 import { NgxSpinnerService } from "ngx-spinner";
@@ -34,6 +34,7 @@ import { Charts } from 'src/app/models/charts';
 import 'moment/locale/it'  // without this line it didn't work
 import { SupportsService } from 'src/app/services/supports.service';
 import { Supports } from 'src/app/models/supports';
+import { ProjectsService } from 'src/app/services/projects.service';
 moment.locale('it')
 
 
@@ -113,13 +114,14 @@ export class DragDashboardComponent implements OnInit {
   myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en')  ;
   myMonth = formatDate(new Date(), 'dd/MM/yyyy', 'en')  ;
 
-  products: any = [];
+  projects: any = [];
   availableProducts:  any = [];
   selectedProducts: any = [];
   draggedProduct: any;
-  product: Products;
+  project: Projects;
+  boardData: any = [];
+  skills = [];
 
-  public boardData: BoardCol[] = [];
   public currentColIndex: number;
   public currentTaskDragged: Task;
 
@@ -139,7 +141,7 @@ export class DragDashboardComponent implements OnInit {
     private categoryService: CategoryService,
     private router: Router,
     private confirmationService: ConfirmationService,
-    private productsService: ProductsService,
+    private projectsService: ProjectsService,
     private messageService: MessageService,
     private supportsService: SupportsService,
     private route: ActivatedRoute
@@ -159,23 +161,70 @@ export class DragDashboardComponent implements OnInit {
   ngOnInit() {
 
     this.spinner.show();
-    this.getProducts();
     this.spinner.hide();
+    
+    this.getChartsCount();
     this.initializeBoardData();
 
-  }
 
+    if (100000) {
+      
+      this.projectsService.getId(100000).subscribe((res) => {
 
-  public initializeBoardData(): void {
-    this.boardData =
-      [
-        { heading: "Started",  tasks: [{ id: 1, value: "Task 1" }, { id: 2, value: "Task 2" }, { id: 3, value: "Task 3" }] },
-        { heading: "25% Done", tasks: [{ id: 4, value: "Task 4" }, { id: 5, value: "Task 5" }, { id: 6, value: "Task 6" }] },
-        { heading: "75% Done", tasks: [{ id: 7, value: "Task 7" }, { id: 8, value: "Task 8" }, { id: 9, value: "Task 9" }] },
-        { heading: "Finished", tasks: [{ id: 10, value: "Task 10" }, { id: 11, value: "Task 11" }, { id: 12, value: "Task 12" }] },
         
-      ]
+        if (res.user_id == this.currentUser.user_id) {
+        this.blogForm.patchValue({
+      
+          skills: this.boardData,
+        });
+
+        
+      }
+      else {
+        this.router.navigate(['/admin/products']);
+      }
+       
+      });
+    } else {
+    }
+
+
+
+    this.blogForm = this.fb.group({
+      id: [""],
+      skills: this.boardData,
+  });
+
+
   }
+
+
+
+  getChartsCount() {
+
+    this.projectsService.skills(100000).subscribe(data => {
+      this.chartsCount = data;
+      var StringifyData = JSON.stringify(this.chartsCount)
+      this.chartsCount.forEach((item,index)=>{
+          var obj;
+          obj={
+            heading:item.heading,
+            tasks:item.tasks,
+          }
+        this.skills.push(obj)
+    });
+
+      console.log(this.chartsCountData)
+      error => this.error = error
+    });
+    }
+
+
+
+   public initializeBoardData(): void {
+    this.boardData = this.skills;
+     
+  } 
 
   public onTaskDragStart(event: any, task: Task, colIndex: number): void {
     this.currentColIndex = colIndex;
@@ -186,22 +235,49 @@ export class DragDashboardComponent implements OnInit {
     if(this.currentColIndex != colIndex){
       this.boardData[this.currentColIndex].tasks.splice(this.boardData[this.currentColIndex].tasks.indexOf(this.currentTaskDragged),1);
       this.boardData[colIndex].tasks.unshift(this.currentTaskDragged);
+      this.onSubmit();
     }else{
       
     }
   }
 
+    onSubmit() {
+      const formData = new FormData();
+  
+      formData.append('skills', JSON.stringify(this.blogForm.get('skills').value));
+  
+      if (100000) {
+        this.projectsService.update(formData, 100000).subscribe(
+          (res) => {
+            if (res.status == "error") {
+              this.uploadError = res.message;
+            } else {
+              this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
+              //this.router.navigate(['/admin/products']);
+  
+            }
+          },
+          (error) => (this.error = error)
+        );
+      } else {
+        this.projectsService.create(formData).subscribe(
+          (res) => {
+            if (res.status === "error") {
+              this.uploadError = res.message;
+            } else {
+              this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
+              this.router.navigate(['/admin/products']);
+  
+            }
+          },
+          (error) => (this.error = error)
+        );
+      }
+    }
+
+
  
 
-  getProducts() {
-
-    this.productsService.getAllListbyUser().subscribe(
-      (products: Products) => this.availableProducts = products,
-      error => this.error = error
-    );
-    
-  
-    }
 
     
 
