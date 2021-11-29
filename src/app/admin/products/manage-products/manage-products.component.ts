@@ -117,9 +117,7 @@ trackByFn(index, item) {
 
   ngOnInit() {
     const userId = this.currentUser.user_id;
-
-
-
+    this.spinner.show();
 
     this.productsService.getAllListbyUser().subscribe(data => {
       this.products = data;
@@ -147,6 +145,7 @@ trackByFn(index, item) {
       this.getBrands();
       this.getTechnicalData();
       this.spinner.hide();
+
     });
 
 
