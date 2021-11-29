@@ -118,61 +118,73 @@ trackByFn(index, item) {
   ngOnInit() {
     const userId = this.currentUser.user_id;
 
-    this.cols = [
-      { field: "title", header: "titolo" },
-      { field: "code", header: "Codice" },
-      { field: "status", header: "Status" },
-      { field: "price", header: "Prezzo" },
-      { field: "category_id", header: "Categoria" },
-      { field: "code_int", header: "Codice interno" },
-      { field: "brand_id", header: "Brand" }
 
-    ];
 
-    this.colsData = [
-      { field: "title", header: "titolo" },
-      { field: "description", header: "Codice" },
 
-    ];
-
-    this._selectedColumns = this.cols;
-    this.exportColumns = this.cols.map(col => ({
-      title: col.header,
-      dataKey: col.field
-    }));
-
-    this.spinner.show();
-
-    this.productsService.getAllListbyUser().subscribe(
-      (data: Products) => this.products = data,
-      error => this.error = error
-    );
-
-    this.categoryService.getAllListbyUser().subscribe(
-      (data: Category) => this.categories = data,
-      error => this.error = error
-    );
-
-    this.technicalDataService.getAllListbyUser().subscribe(
-      (data: Technical_data) => (this.technical_datas = data),
-      (error) => (this.error = error)
-    );
-    this.brandService.getAllListbyUser().subscribe(
-      (data: Brand) => this.brands = data,
-      error => this.error = error
-    );
-
+    this.productsService.getAllListbyUser().subscribe(data => {
+      this.products = data;
+      this.cols = [
+        { field: "title", header: "titolo" },
+        { field: "code", header: "Codice" },
+        { field: "status", header: "Status" },
+        { field: "price", header: "Prezzo" },
+        { field: "category_id", header: "Categoria" },
+        { field: "code_int", header: "Codice interno" },
+        { field: "brand_id", header: "Brand" }
+      ];
+      this.colsData = [
+        { field: "title", header: "titolo" },
+        { field: "description", header: "Codice" },
   
+      ];
+      this._selectedColumns = this.cols;
+      this.exportColumns = this.cols.map(col => ({
+        title: col.header,
+        dataKey: col.field
+      }));
+      this.getTags();
+      this.getCategories();
+      this.getBrands();
+      this.getTechnicalData();
+      this.spinner.hide();
+    });
+
+
+  }
+
+
+  getBrands() {
+  this.brandService.getAllListbyUser().subscribe(
+    (data: Brand) => this.brands = data,
+    error => this.error = error
+  );
+  }
+
+
+  getTechnicalData() {
+  this.technicalDataService.getAllListbyUser().subscribe(
+    (data: Technical_data) => (this.technical_datas = data),
+    (error) => (this.error = error)
+  );
+  }
+
+
+  getTags() {
     this.tagsService.getAllListbyUser().subscribe(
       (data: Tags) => this.tags = data,
       error => this.error = error
     );
-
-    this.spinner.hide();
-
   }
 
- 
+  getCategories() {
+
+  this.categoryService.getAllListbyUser().subscribe(
+    (data: Category) => this.categories = data,
+    error => this.error = error
+    );
+  }
+
+
   clear(table: any) 
   {
     
