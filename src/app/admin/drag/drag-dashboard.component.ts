@@ -161,7 +161,6 @@ export class DragDashboardComponent implements OnInit {
   ngOnInit() {
 
     this.spinner.show();
-    this.spinner.hide();
     
     this.getChartsCount();
     this.initializeBoardData();
@@ -195,6 +194,7 @@ export class DragDashboardComponent implements OnInit {
       skills: this.boardData,
   });
 
+  this.spinner.hide();
 
   }
 

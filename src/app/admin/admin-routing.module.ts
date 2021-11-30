@@ -44,6 +44,8 @@ import { ReportsDashboardComponent } from './reports/reports-dashboard.component
 import { ManagePersonalDataComponent } from './settings/personal-data/manage-personal-data/manage-personal-data.component';
 import { PersonalDataFormComponent } from './settings/personal-data/personal-data-form/personal-data-form.component';
 import { DragDashboardComponent } from './drag/drag-dashboard.component';
+import { ManageProjectsComponent } from './projects/manage-projects/manage-projects.component';
+import { ProjectsFormComponent } from './projects/projects-form/projects-form.component';
 
 const routes: Routes = [
   {
@@ -63,6 +65,11 @@ const routes: Routes = [
           { path: "products", component: ManageProductsComponent },
           { path: "products/create", component: ProductsFormComponent },
           { path: "products/edit/:id",component: ProductsFormComponent,},
+
+
+          { path: "projects", component: ManageProjectsComponent },
+          { path: "projects/create", component: ProjectsFormComponent },
+          { path: "projects/edit/:id",component: ProjectsFormComponent,},
 
           { path: "appointments", component: ManageAppointmentsComponent },
           { path: "appointments/create", component: AppointmentsFormComponent },

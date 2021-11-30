@@ -99,9 +99,13 @@ import { ReportsDashboardComponent } from './reports/reports-dashboard.component
 import { ManagePersonalDataComponent } from './settings/personal-data/manage-personal-data/manage-personal-data.component';
 import { PersonalDataFormComponent } from './settings/personal-data/personal-data-form/personal-data-form.component';
 import { DragDashboardComponent } from './drag/drag-dashboard.component';
+import { ManageProjectsComponent } from './projects/manage-projects/manage-projects.component';
+import { ProjectsFormComponent } from './projects/projects-form/projects-form.component';
 
 @NgModule({
   declarations: [
+    ManageProjectsComponent,
+    ProjectsFormComponent,   
     AdminDashboardComponent,
     AdminComponent,
     ManageBillingsComponent,
