@@ -175,6 +175,7 @@ export class DragDashboardComponent implements OnInit {
         this.blogForm.patchValue({
       
           skills: this.boardData,
+          user_id: this.currentUser.user_id,
         });
 
         
@@ -192,6 +193,8 @@ export class DragDashboardComponent implements OnInit {
     this.blogForm = this.fb.group({
       id: [""],
       skills: this.boardData,
+      user_id: [this.currentUser.user_id],
+
   });
 
   this.spinner.hide();
@@ -247,7 +250,7 @@ export class DragDashboardComponent implements OnInit {
       formData.append('skills', JSON.stringify(this.blogForm.get('skills').value));
   
       if (100000) {
-        this.projectsService.update(formData, 100000).subscribe(
+        this.projectsService.update_skills(formData, 100000).subscribe(
           (res) => {
             if (res.status == "error") {
               this.uploadError = res.message;
