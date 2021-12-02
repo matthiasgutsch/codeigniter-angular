@@ -16,32 +16,35 @@
     <div class="p-col-12 p-md-12">
         <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
 
-        
-    <p-card>
-        <div class="p-field p-grid" formArrayName="skills" >
-    
-    <div *ngFor="let col of boardData; let colIndex = index;" class="p-col-3"
-    pDroppable="task" (onDrop)="onTaskDrop($event, colIndex)">
-    
-    <h4>{{col.heading}}</h4>
-    
-    <div class="drop-wrapper">
-        <div class="drop-column">
-    <div pDraggable="task" *ngFor="let task of col.tasks" class="product-item"
-      (onDragStart)="onTaskDragStart($event,task, colIndex)">
- 
-            <div class="product-list-detail">
-           <div class="icon">{{ task.value | slice: 0:1 }}</div>
-           <h5>{{ task.value }}</h5>
-           <div class="drag-me"></div>
-      </div>
-      <br />
-    </div>
-    </div></div></div></div></p-card>
+            <p-card>
+                <div class="p-field p-grid" formArrayName="skills">
+
+                    <div *ngFor="let col of boardData; let colIndex = index;" class="p-col-3" pDroppable="task"
+                        (onDrop)="onTaskDrop($event, colIndex)">
+
+                        <h4>{{col.heading}}</h4>
+
+                        <div class="drop-wrapper">
+                            <div class="drop-column">
+                                <div pDraggable="task" *ngFor="let task of col.tasks" class="product-item"
+                                    (onDragStart)="onTaskDragStart($event,task, colIndex)">
+
+                                    <div class="product-list-detail">
+                                        <div class="icon">{{ task.value | slice: 0:1 }}</div>
+                                        <h5>{{ task.value }}</h5>
+                                        <div class="drag-me"></div>
+                                    </div>
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </p-card>
         </form>
-</div></div>
+    </div>
+</div>
 
 {{skills}}
 
-
-            <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

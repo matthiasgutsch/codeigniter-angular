@@ -226,6 +226,7 @@ export class DragDashboardComponent implements OnInit {
 
    public initializeBoardData(): void {
     this.boardData = this.skills;
+    
      
   } 
 
