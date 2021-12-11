@@ -11,58 +11,7 @@
 
 
 
-        <div class="p-col-12 p-md-4">
-
-            <p-card>
-                <div class="p-field p-grid">
-                    <div class="p-col-8 p-md-6">
-                        <h3>Elenco clienti</h3>
-                        
-                    </div>
-                    <div class="p-col-4 p-md-6">
-
-                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']" class="p-button p-button-primary -mr-2  pull-right"></button>
-
-                   
-                    </div>
-                </div>
-                <hr class="full">
-         
-                <div *ngFor="let col of cols" [ngSwitch]="col.field">
-
-                        <input *ngSwitchCase="'username'" [ngModel]="dt.filters['username']? dt.filters['username'].value : ''" 
-                        placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                    
-                </div>
-                <hr class="full">
-
-                <p-table #dt [columns]="cols" [value]="clientsList" [globalFilterFields]="['name', 'description']"  [responsive]="true" [paginator]="true" [rows]="10" [showCurrentPageReport]="false" [loading]="loading" [totalRecords]="totalRecords">
-    
-                   
-                    <ng-template pTemplate="body" let-rowData let-columns="columns">
-                        <tr>
-                            <td  width="60">
-                                <app-initials-avatar firstName="{{ rowData['name'] | slice:0:1}}" lastName="{{ rowData['surname'] | slice:0:1}}"></app-initials-avatar>
-
-                            </td>
-                            <td *ngFor="let col of cols">
-                                {{rowData[col.field]}}
-                            </td>
-                
-                            <td class="action" width="60">
-                                <button type="button" pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
-                                [routerLink]="['/admin/clients/edit', rowData.id]"></button>
-        
-                                              
-                            </td>
-                        </tr>
-                    </ng-template>
-                </p-table> 
-
-
-              
-            </p-card>
-        </div>
+      
 
 
 
@@ -357,72 +306,7 @@
                     </p-tabPanel>
              
 
-                    <p-tabPanel header="History Appuntamenti">
-                        <div class="blog-form">
-    
-                            
-                            <div *ngIf="!appointments || hasNoSelectedAppointments()">
-                                <p-message severity="info"  text="Non ci sono Appuntamenti"></p-message>
-                            </div>
-            
-                            <p-timeline [value]="appointments">
-            
-                                <ng-template pTemplate="content" let-appointment>
-            
-                                   
-                                    <p-card>
-                                        <div class="p-grid clearfix">
-                                            <div class="p-col-12 p-md-10">  
-                                    <strong>{{appointment.title}}</strong><br>
-                                    <i class="pi pi-calendar"></i> {{appointment.date}}
-                                            </div>
-                                            <div class="p-col-12 p-md-2">  
-                                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
-            
-                                            </div>
-                                        </div>
-                                        
-                                </p-card>
-                                </ng-template>
-                            </p-timeline>
-            
-                            
-                          
-            
-                        </div>
-                   
-                    </p-tabPanel>
-    
-    
-                    <p-tabPanel header="History Fatture">
-    
-    
-                        <div *ngIf="!billings || hasNoSelectedBillings()">
-                            <p-message severity="info"  text="Non ci sono Fatture"></p-message>
-                        </div>
-        
-    
-    
-                        <p-timeline [value]="billings">
-            
-                            <ng-template pTemplate="content" let-billing>
-        
-                               
-                                <p-card>
-                                    <div class="p-grid">
-                                        <div class="p-col-12 p-md-10">  
-                                <strong>Fattura {{billing.number}}/{{billing.date | date:'yyyy'}}</strong><br>
-                                <i class="pi pi-calendar"></i> {{billing.date}}
-                                        </div>
-                                        <div class="p-col-12 p-md-2">  
-                                            <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/billings/edit', billing.id]"></button>
-        
-                                        </div>
-                                    </div>
-                            </p-card>
-                            </ng-template>
-                        </p-timeline>
-                    </p-tabPanel>
+             
                 </p-tabView>
 
                        
@@ -451,6 +335,89 @@
             </form>
         </div>
 
+
+        <div class="p-col-12 p-md-4">
+
+            <p-card>
+    
+                <p-tabView>
+
+                <p-tabPanel header="History Appuntamenti">
+                    <div class="blog-form">
+
+                        
+                        <div *ngIf="!appointments || hasNoSelectedAppointments()">
+                            <p-message severity="info"  text="Non ci sono Appuntamenti"></p-message>
+                        </div>
+        
+                        <p-timeline [value]="appointments">
+        
+                            <ng-template pTemplate="content" let-appointment>
+        
+                               
+                                <p-card>
+                                    <div class="p-grid clearfix">
+                                        <div class="p-col-12 p-md-10">  
+                                <strong>{{appointment.title}}</strong><br>
+                                <i class="pi pi-calendar"></i> {{appointment.date}}
+                                        </div>
+                                        <div class="p-col-12 p-md-2">  
+                                            <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
+        
+                                        </div>
+                                    </div>
+                                    
+                            </p-card>
+                            </ng-template>
+                        </p-timeline>
+        
+                        
+                      
+        
+                    </div>
+               
+                </p-tabPanel>
+
+
+                <p-tabPanel header="History Fatture">
+
+
+                    <div *ngIf="!billings || hasNoSelectedBillings()">
+                        <p-message severity="info"  text="Non ci sono Fatture"></p-message>
+                    </div>
+    
+
+
+                    <p-timeline [value]="billings">
+        
+                        <ng-template pTemplate="content" let-billing>
+    
+                           
+                            <p-card>
+                                <div class="p-grid">
+                                    <div class="p-col-12 p-md-10">  
+                            <strong>Fattura {{billing.number}}/{{billing.date | date:'yyyy'}}</strong><br>
+                            <i class="pi pi-calendar"></i> {{billing.date}}
+                                    </div>
+                                    <div class="p-col-12 p-md-2">  
+                                        <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/billings/edit', billing.id]"></button>
+    
+                                    </div>
+                                </div>
+                        </p-card>
+                        </ng-template>
+                    </p-timeline>
+                </p-tabPanel>
+        
+         
+                </p-tabView>
+
+                
+
+
+              
+            </p-card>
+        </div>
     </div>
 </div>
 
