@@ -59,8 +59,8 @@ import { AppointmentsFormComponent } from './appointments/appointments-form/appo
 import {TimelineModule} from 'primeng/timeline';
 import { TagModule } from 'primeng/tag';
 import { NgxSpinnerModule } from "ngx-spinner";
-import { DragDropModule } from 'primeng/dragdrop';
 import {PanelModule} from 'primeng/panel';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { ManageBillingsComponent } from './billings/manage-billings/manage-billings.component';
 import { BillingsFormComponent } from './billings/billings-form/billings-form.component';
@@ -101,6 +101,9 @@ import { PersonalDataFormComponent } from './settings/personal-data/personal-dat
 import { DragDashboardComponent } from './drag/drag-dashboard.component';
 import { ManageProjectsComponent } from './projects/manage-projects/manage-projects.component';
 import { ProjectsFormComponent } from './projects/projects-form/projects-form.component';
+import { TasksComponent } from './tasks/tasks.component';
+import { TaskDetailsComponent } from './tasks/task-details/task-details.component';
+import { BusyConfig, NgBusyModule } from 'ng-busy';
 
 @NgModule({
   declarations: [
@@ -128,6 +131,8 @@ import { ProjectsFormComponent } from './projects/projects-form/projects-form.co
     TypeFormComponent,
     ManagePagesComponent,
     DragDashboardComponent,
+    TasksComponent,
+    TaskDetailsComponent,
     MomentPipe,
     DateValidPipe,
     ManageAppointmentTypeComponent,
@@ -160,6 +165,7 @@ import { ProjectsFormComponent } from './projects/projects-form/projects-form.co
       LimitPipe,
       KeysPipe,
       TotalPipe,
+      DragDropModule,
     ],
   imports: [
     CommonModule,
@@ -200,7 +206,13 @@ import { ProjectsFormComponent } from './projects/projects-form/projects-form.co
     ButtonModule,
     InputSwitchModule,
     AutoCompleteModule,
-    SidebarModule
+    SidebarModule,
+    NgBusyModule,
+    NgBusyModule.forRoot(new BusyConfig({
+      message: 'Loading ...',
+      backdrop: true
+  }))
+    
   ],
   providers: [ConfirmationService, MessageService, SumPipeModule,  NgxSpinnerService]
 })

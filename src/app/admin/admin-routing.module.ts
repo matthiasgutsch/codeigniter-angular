@@ -46,6 +46,7 @@ import { PersonalDataFormComponent } from './settings/personal-data/personal-dat
 import { DragDashboardComponent } from './drag/drag-dashboard.component';
 import { ManageProjectsComponent } from './projects/manage-projects/manage-projects.component';
 import { ProjectsFormComponent } from './projects/projects-form/projects-form.component';
+import { TasksComponent } from './tasks/tasks.component';
 
 const routes: Routes = [
   {
@@ -142,6 +143,9 @@ const routes: Routes = [
           { path: "", component: AdminDashboardComponent },
           { path: "reports", component: ReportsDashboardComponent },
           { path: "drag", component: DragDashboardComponent },
+
+          { path: "tasks", component: TasksComponent },
+
 
         ],
       },
