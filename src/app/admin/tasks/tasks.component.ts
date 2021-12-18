@@ -189,7 +189,22 @@ export class TasksComponent implements OnInit, OnDestroy {
   }
 
 
-onSubmit(task: Task) {
+
+  deleteFromLocalData(type, index) {
+    // This is used to avoid unnecessary API call for getTasks() which will result in better performance
+   
+      this.highPriorityTasks.splice(index);
+      this.backupHighPriorityTasks.splice(index);
+      this.mediumPriorityTasks.splice(index);
+      this.backupMediumPriorityTasks.splice(index);
+      this.lowPriorityTasks.splice(index);
+      this.backupLowPriorityTasks.splice(index);
+  
+  }
+
+
+
+onSubmit(task: Task, index) {
   const formData = new FormData();
 
   formData.append("title", this.blogForm.get("title").value);
@@ -205,8 +220,8 @@ onSubmit(task: Task) {
         } else {
           this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
           //this.router.navigate(['/admin/products']);
+          this.deleteFromLocalData(task, index);
           this.getTasks();
-
         }
       },
       (error) => (this.error = error)
@@ -255,7 +270,7 @@ onSubmit(task: Task) {
     this.backupMediumPriorityTasks = this.mediumPriorityTasks;
   }
 
-  deleteTask(event) {
+  deleteTask(event, task: Task, index) {
     this.confirmationService.confirm({
       message: 'Are you sure want to delete it = ' + event.title,
       header: 'Confirmation',
@@ -265,6 +280,8 @@ onSubmit(task: Task) {
           next: (response: any) => {
             if (response.error) {
             } else {
+              this.deleteFromLocalData(task, index);
+
               this.getTasks();
               
             this.messageService.add({key: 'myKey1', severity:'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo'});
