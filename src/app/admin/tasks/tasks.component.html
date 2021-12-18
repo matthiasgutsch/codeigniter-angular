@@ -20,7 +20,7 @@
         <p-card>
             <div class="p-field p-grid" [ngBusy]="[busy, busy1, busy2]">
 
-                <div class="p-col-3">
+                <div class="p-col-3">{{lowPriorityTasks.length | json}}
                     <h4>Started</h4>
                     <div class="drop-wrapper">
                         <div class="drop-column" cdkDropList #lowPriorityTasksList="cdkDropList"
@@ -33,7 +33,7 @@
                     </div>
                 </div>
 
-                <div class="p-col-3">
+                <div class="p-col-3">{{mediumPriorityTasks.length | json}} 
                     <h4>25% Done</h4>
                     <div class="drop-wrapper">
                         <div class="drop-column" cdkDropList #mediumPriorityTasksList="cdkDropList"
@@ -46,7 +46,7 @@
                     </div>
                 </div>
 
-                <div class="p-col-3">
+                <div class="p-col-3"> {{highPriorityTasks.length | json}}
                     <h4>75% Done</h4>
                     <div class="drop-wrapper">
                         <div class="drop-column" cdkDropList #highPriorityTasksList="cdkDropList"
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="p-col-3">
+                <div class="p-col-3">{{highPriorityTasks.length | json}}
                     <h4>Done</h4>
                     <div class="drop-wrapper">
                         <div class="drop-column" cdkDropList #highPriorityTasksList="cdkDropList"

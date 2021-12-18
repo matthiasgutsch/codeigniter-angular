@@ -368,7 +368,12 @@ onSubmitAdd(task: Task, index) {
     this.productDialog = true;
   }
 
-
+  getPerformaceCount():number{
+    let pendingTasks = JSON.parse(localStorage.getItem('pendingTaskList')).length;
+    let inProgressTasks = JSON.parse(localStorage.getItem('inProgressTaskList')).length;
+    let completedTasks = JSON.parse(localStorage.getItem('completedTaskList')).length;
+    return Math.round((completedTasks / (pendingTasks + inProgressTasks + completedTasks)) * 100);
+  }
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
