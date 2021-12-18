@@ -7,7 +7,7 @@ import {
 import { BlogService } from '../../services/blog.service';
 import { Blog } from '../../models/blog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DASHBOARD, PAGES, TYPE_LIST } from '../constants/constants';
+import { DASHBOARD, PAGES, PRIORITY_LIST, TYPE_LIST } from '../constants/constants';
 import { CategoryService } from 'src/app/services/categories.service';
 import { Category } from 'src/app/models/category';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -72,6 +72,8 @@ export class TasksComponent implements OnInit, OnDestroy {
   error: string;
   blogForm: FormGroup;
   typeList: any;
+  priorityList: any;
+
   cities: Blog[];
   format1: string = "";
   format2: string = "";
@@ -165,6 +167,8 @@ export class TasksComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute
   ) {
     this.typeList = TYPE_LIST;
+    this.priorityList = PRIORITY_LIST;
+
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     this.items = DASHBOARD;
     const userId = this.currentUser.user_id;
@@ -216,6 +220,8 @@ onSubmit(task: Task, index) {
   const formData = new FormData();
 
   formData.append("title", this.blogForm.get("title").value);
+  formData.append("priority", this.blogForm.get("priority").value);
+
   formData.append('user_id', this.blogForm.get('user_id').value);
 
   const id = task.id;
@@ -265,8 +271,8 @@ onSubmitAdd(task: Task, index) {
           this.uploadError = res.message;
         } else {
           this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
-          this.cd.detectChanges()
-
+          this.deleteFromLocalData(task, index);
+          this.getTasks();
         }
       },
     );
@@ -279,6 +285,8 @@ onSubmitAdd(task: Task, index) {
     }  
 
     getTasks() {
+      this.spinner.show();
+
       this.subscription = this.tasksService.getAllListbyUser().subscribe({
       next: (response: any) => {
         if (response.error) {
@@ -299,6 +307,8 @@ onSubmitAdd(task: Task, index) {
     this.backupHighPriorityTasks = this.highPriorityTasks;
     this.backupLowPriorityTasks = this.lowPriorityTasks;
     this.backupMediumPriorityTasks = this.mediumPriorityTasks;
+    this.spinner.hide();
+
   }
 
   deleteTask(event, task: Task, index) {
@@ -334,6 +344,7 @@ onSubmitAdd(task: Task, index) {
         if (res.user_id == this.currentUser.user_id) {
           this.blogForm.patchValue({
           title: res.title,
+          priority: res.priority,
           user_id: this.currentUser.user_id,
         });
       }
@@ -349,6 +360,7 @@ onSubmitAdd(task: Task, index) {
     this.blogForm = this.fb.group({
         id: [""],
         title: ["", Validators.required],
+        priority: ["", Validators.required],
         user_id: [this.currentUser.user_id],
 
     });

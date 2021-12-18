@@ -48,6 +48,17 @@ export const TYPE_LIST: SelectItem[] = [
   { label: "Altro", value: "Altro" }
 ];
 
+
+export const PRIORITY_LIST: SelectItem[] = [
+  { label: "Da Fare", value: "1" },
+  { label: "25 %", value: "2" },
+  { label: "75 %", value: "3" },
+  { label: "Done", value: "4" }
+
+];
+
+
+
 export const STATUS_PRODUCTS: SelectItem[] = [
   { label: "Disponibile", value: "1" },
   { label: "Esaurito", value: "2" },
