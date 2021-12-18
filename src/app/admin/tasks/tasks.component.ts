@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -49,7 +49,7 @@ import { Task } from 'src/app/models/tasks';
   selector: 'app-tasks',
   templateUrl: './tasks.component.html'
 })
-export class TasksComponent implements OnInit {
+export class TasksComponent implements OnInit, OnDestroy {
 
   calendarOptions: any;
   events: any;
@@ -112,7 +112,9 @@ export class TasksComponent implements OnInit {
   lowPriorityTasks: Task[] = [];
   backupLowPriorityTasks: Task[] = [];
 
-
+  busy: Subscription;
+  busy1: Subscription;
+  busy2: Subscription;
 
   trackByFn(index, item) {
     return item.id;
@@ -151,6 +153,7 @@ export class TasksComponent implements OnInit {
     private locationsService: LocationsService, 
     private employeesService: EmployeesService,
     private categoryService: CategoryService,
+    private cd: ChangeDetectorRef,
     private router: Router,
     private confirmationService: ConfirmationService,
     private projectsService: ProjectsService,
@@ -203,6 +206,7 @@ onSubmit(task: Task) {
         } else {
           this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
           //this.router.navigate(['/admin/products']);
+          this.cd.detectChanges()
 
         }
       },
@@ -215,6 +219,7 @@ onSubmit(task: Task) {
           this.uploadError = res.message;
         } else {
           this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
+          this.cd.detectChanges()
 
         }
       },
@@ -225,7 +230,7 @@ onSubmit(task: Task) {
 
 
   getTasks() {
-    this.tasksService.getAllListbyUser().subscribe({
+    this.busy = this.tasksService.getAllListbyUser().subscribe({
       next: (response: any) => {
         if (response.error) {
           
@@ -253,12 +258,11 @@ onSubmit(task: Task) {
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.tasksService.delete(event.id).subscribe({
+        this.busy1 = this.tasksService.delete(event.id).subscribe({
           next: (response: any) => {
             if (response.error) {
             } else {
               this.getTasks();
-              this.deleteFromLocalData(event.type, event.index);
               
             this.messageService.add({key: 'myKey1', severity:'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo'});
           }
@@ -346,7 +350,7 @@ onSubmit(task: Task) {
     const id = event.item.data.id;
     const formData = new FormData();
     formData.set('priority', event.item.data.priority);
-    this.tasksService.update_priority(formData, +id).subscribe({
+    this.busy2 = this.tasksService.update_priority(formData, +id).subscribe({
       next: (response: any) => {
         if (response.error) {
         } else {
@@ -366,7 +370,11 @@ onSubmit(task: Task) {
     this.updatePriority(event);
   }
 
-
+  ngOnDestroy() {
+    this.busy1 ? this.busy1.unsubscribe() : '';
+    this.busy2 ? this.busy2.unsubscribe(): '';
+    this.busy ? this.busy.unsubscribe(): '';
+  }
 
   search(event) {
     this.highPriorityTasks = this.backupHighPriorityTasks.filter((task) => {

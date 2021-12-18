@@ -103,6 +103,7 @@ import { ManageProjectsComponent } from './projects/manage-projects/manage-proje
 import { ProjectsFormComponent } from './projects/projects-form/projects-form.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { TaskDetailsComponent } from './tasks/task-details/task-details.component';
+import { BusyConfig, NgBusyModule } from 'ng-busy';
 
 @NgModule({
   declarations: [
@@ -205,8 +206,12 @@ import { TaskDetailsComponent } from './tasks/task-details/task-details.componen
     ButtonModule,
     InputSwitchModule,
     AutoCompleteModule,
-    SidebarModule
-    
+    SidebarModule,
+    NgBusyModule,
+    NgBusyModule.forRoot(new BusyConfig({
+      message: 'Loading ...',
+      backdrop: true
+  }))
   ],
   providers: [ConfirmationService, MessageService, SumPipeModule,  NgxSpinnerService]
 })

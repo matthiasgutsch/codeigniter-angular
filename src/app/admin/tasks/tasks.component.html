@@ -17,11 +17,9 @@
     <div class="p-col-12 p-md-12">
       
         <p-card>
-            <div class="p-field p-grid">
+            <div class="p-field p-grid" [ngBusy]="[busy, busy1, busy2]">
                    
-              
-                   
-                        <div class="p-col-3">
+                      <div class="p-col-3">
                             <h4>Started</h4>
                             <div class="drop-wrapper">
                             <div class="drop-column" cdkDropList #lowPriorityTasksList="cdkDropList"
