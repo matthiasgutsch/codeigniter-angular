@@ -3,16 +3,15 @@
     <div class="product-list-detail">
         <div class="icon">{{ task.title | slice: 0:1 }}</div>
         <h5>{{ task.title }}</h5>
-        <p>{{task.description}}</p>
 
-        <hr>
+        <hr class="full">
         <div class="float-right">
-            <i class="fa fa-pencil" aria-hidden="true" (click)="editTask(task)"></i>
-            <i class="fa fa-trash-o ml-2" aria-hidden="true" (click)="deleteTask(task.id, task.title, 'high', i)"></i>
+            <a (click)="editTask(task)" class="p-button p-button-primary p-mr-2"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            <a (click)="deleteTask(task.id, task.title, 'high', i)" class="p-button p-button-primary"><i class="fa fa-trash-o ml-2" aria-hidden="true" ></i></a>
         </div>
         <div class="card-text fs-small" *ngIf="task.due_date">Due date:
             {{task.due_date}}
-        </div> {{task.id}}
+        </div>
         <div class="drag-me"></div>
     </div>
 </div>

@@ -61,7 +61,8 @@ export class TasksComponent implements OnInit {
 
   employees: any = [];
   employee: Employees;
-  
+  task: Task;
+
   works: any = [];
   work: Works;
   clientsCount: any;
@@ -110,9 +111,7 @@ export class TasksComponent implements OnInit {
   backupMediumPriorityTasks: Task[] = [];
   lowPriorityTasks: Task[] = [];
   backupLowPriorityTasks: Task[] = [];
-  busy: Subscription;
-  busy1: Subscription;
-  busy2: Subscription;
+
 
 
   trackByFn(index, item) {
@@ -130,8 +129,15 @@ export class TasksComponent implements OnInit {
   boardData: any = [];
   skills = [];
 
+  taskId: string;
 
-  
+  taskForm = this.fb.group({
+    title: ['', Validators.required],
+    due_date: [''],
+    priority: [''],
+    assigned_to: [''],
+  });
+
   constructor(private blogService: BlogService,
     private clientsService: ClientsService,
     private appointmentsService: AppointmentsService,
@@ -174,7 +180,7 @@ export class TasksComponent implements OnInit {
   }
 
   getTasks() {
-    this.busy = this.tasksService.getAllListbyUser().subscribe({
+    this.tasksService.getAllListbyUser().subscribe({
       next: (response: any) => {
         if (response.error) {
           
@@ -202,12 +208,13 @@ export class TasksComponent implements OnInit {
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.busy1 = this.tasksService.delete(event.id).subscribe({
+        this.tasksService.delete(event.id).subscribe({
           next: (response: any) => {
             if (response.error) {
             } else {
               this.getTasks();
               this.deleteFromLocalData(event.type, event.index);
+              
             this.messageService.add({key: 'myKey1', severity:'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo'});
           }
         },
@@ -216,10 +223,15 @@ export class TasksComponent implements OnInit {
   });
   };
 
-  editItem(task) {
-    window.localStorage.setItem('task', JSON.stringify(task));
-    this.router.navigate(['/edit-task']);
+
+  editItem(task: Task) {
+    this.task = { ...task };
+
+    this.productDialog = true;
   }
+
+
+
 
   deleteFromLocalData(type, index) {
     // This is used to avoid unnecessary API call for getTasks() which will result in better performance
@@ -261,7 +273,7 @@ export class TasksComponent implements OnInit {
     const id = event.item.data.id;
     const formData = new FormData();
     formData.set('priority', event.item.data.priority);
-    this.busy2 = this.tasksService.update_priority(formData, +id).subscribe({
+    this.tasksService.update_priority(formData, +id).subscribe({
       next: (response: any) => {
         if (response.error) {
         } else {
@@ -281,11 +293,6 @@ export class TasksComponent implements OnInit {
     this.updatePriority(event);
   }
 
-  ngOnDestroy() {
-    this.busy1 ? this.busy1.unsubscribe() : '';
-    this.busy2 ? this.busy2.unsubscribe(): '';
-    this.busy ? this.busy.unsubscribe(): '';
-  }
 
 
   search(event) {

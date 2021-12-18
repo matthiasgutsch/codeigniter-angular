@@ -16,14 +16,13 @@
 <div class="p-field p-grid">
     <div class="p-col-12 p-md-12">
       
-        
         <p-card>
-            <div class="p-field p-grid" [ngBusy]="[busy, busy1, busy2]">
+            <div class="p-field p-grid">
                    
               
                    
                         <div class="p-col-3">
-                            <h2 class="text-info text-center mt-2">Started</h2>
+                            <h4>Started</h4>
                             <div class="drop-wrapper">
                             <div class="drop-column" cdkDropList #lowPriorityTasksList="cdkDropList"
                                 [cdkDropListData]="lowPriorityTasks"
@@ -36,7 +35,7 @@
                         </div>
 
                         <div class="p-col-3">
-                            <h2 class="text-warning text-center mt-2">25% Done</h2>
+                            <h4>25% Done</h4>
                             <div class="drop-wrapper">
                             <div class="drop-column" cdkDropList #mediumPriorityTasksList="cdkDropList"
                                 [cdkDropListData]="mediumPriorityTasks"
@@ -49,7 +48,7 @@
                         </div>
 
                         <div class="p-col-3">
-                            <h2 class="text-danger text-center mt-2">75% Done</h2>
+                            <h4>75% Done</h4>
                             <div class="drop-wrapper">
                             <div class="drop-column" cdkDropList #highPriorityTasksList="cdkDropList"
                                 [cdkDropListData]="highPriorityTasks"
@@ -60,10 +59,36 @@
                             </div>
                         </div>
                         </div>
-                  
+                        <div class="p-col-3">
+                            <h4>Done</h4>
+                            <div class="drop-wrapper">
+                            <div class="drop-column" cdkDropList #highPriorityTasksList="cdkDropList"
+                                [cdkDropListData]="highPriorityTasks"
+                                [cdkDropListConnectedTo]="[mediumPriorityTasksList, lowPriorityTasksList]"
+                                (cdkDropListDropped)="dropHighPriorityTasksList($event, $id)">
+                                <app-task-details (deleteItem)="deleteTask($event)" (editItem)="editItem($event)"
+                                    [tasks]="highPriorityTasks" [borderColor]="'border-danger'"></app-task-details>
+                            </div>
+                        </div>
+                        </div>
             </div>
         </p-card>
     </div>
 </div>
+
+
+<p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'60%'}">
+    <ng-template pTemplate="content">
+       
+
+        <h3>{{task.title}}</h3>
+        <p>{{task.priority}}</p>
+        <p>{{task.description}}</p>
+
+    </ng-template>
+
+</p-sidebar>
+
+
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
 </p-confirmDialog>
