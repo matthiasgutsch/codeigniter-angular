@@ -183,9 +183,17 @@ export class TasksComponent implements OnInit, OnDestroy {
 
 
 
-  goToAddTaskPage(task: Task) {
-    this.task = { ...task };
+  goToAddTaskPage() {
     this.productDialogAdd = true;
+
+    this.blogForm = this.fb.group({
+      id: [""],
+      title: ["", Validators.required],
+      priority: [""],
+      user_id: [this.currentUser.user_id],
+
+  });
+
   }
 
 
@@ -241,6 +249,29 @@ onSubmit(task: Task, index) {
     );
   }
 }
+
+
+onSubmitAdd(task: Task, index) {
+  const formData = new FormData();
+
+  formData.append("title", this.blogForm.get("title").value);
+  formData.append("priority", this.blogForm.get("priority").value);
+  formData.append('user_id', this.blogForm.get('user_id').value);
+
+  
+    this.tasksService.create(formData).subscribe(
+      (res) => {
+        if (res.status === "error") {
+          this.uploadError = res.message;
+        } else {
+          this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
+          this.cd.detectChanges()
+
+        }
+      },
+    );
+}
+
 
 
     changedNumber(value){
@@ -300,8 +331,6 @@ onSubmit(task: Task, index) {
     if (id) {
       
       this.tasksService.getId(+id).subscribe((res) => {
-
-        
         if (res.user_id == this.currentUser.user_id) {
           this.blogForm.patchValue({
           title: res.title,
