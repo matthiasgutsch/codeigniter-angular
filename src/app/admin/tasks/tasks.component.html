@@ -83,7 +83,43 @@
 
 
         <input type="text" [style]="{ width: '100%' }" pInputText
-        formControlName="title"  (keyup)="changedNumber($event)">
+        formControlName="title" >
+
+        <button pButton pRipple icon="pi pi-save" label="salva"
+        class="p-button pull-right p-button-success p-mr-2"
+        [disabled]="!blogForm.valid"></button>
+
+        <h3>{{task.title}}</h3>
+        <p>{{task.priority}}</p>
+        <p>{{task.description}}</p>
+
+        <div class="form-group form-row">
+            <label class="col-md-3"></label>
+            <div class="col-md-9">
+                <input type="hidden" formControlName="id">
+                <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
+
+                {{currentUser.user_id}}
+            </div>
+        </div>
+
+        
+        </form>
+    </ng-template>
+
+</p-sidebar>
+
+
+
+<p-sidebar [(visible)]="productDialogAdd" position="right" [style]="{width:'60%'}">
+    <ng-template pTemplate="content">
+Add
+        <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+
+
+
+        <input type="text" [style]="{ width: '100%' }" pInputText
+        formControlName="title" >
 
         <button pButton pRipple icon="pi pi-save" label="salva"
         class="p-button pull-right p-button-success p-mr-2"

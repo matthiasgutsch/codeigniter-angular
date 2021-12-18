@@ -84,6 +84,8 @@ export class TasksComponent implements OnInit, OnDestroy {
   categories: any = [];
   category: Category;
   productDialog: boolean = false;
+  productDialogAdd: boolean = false;
+
   appointmentsDialog: boolean = false;
   clients: any = [];
   client: Clients;
@@ -183,12 +185,8 @@ export class TasksComponent implements OnInit, OnDestroy {
 
   goToAddTaskPage(task: Task) {
     this.task = { ...task };
-    this.productDialog = true;
+    this.productDialogAdd = true;
   }
-
-  saveProduct() {
-    this.productDialog = false;
-}
 
 
 onSubmit(task: Task) {
@@ -230,12 +228,9 @@ onSubmit(task: Task) {
 }
 
 
-    
-
     changedNumber(value){
     this.task.title = value.item.data.title;
     }  
-
 
     getTasks() {
       this.subscription = this.tasksService.getAllListbyUser().subscribe({
@@ -284,6 +279,7 @@ onSubmit(task: Task) {
   editItem(task: Task) {
     this.task = { ...task };
     const id = task.id;
+
     if (id) {
       
       this.tasksService.getId(+id).subscribe((res) => {
@@ -301,10 +297,9 @@ onSubmit(task: Task) {
         this.task.id = res.id;
       });
     } else {
+
     }
-
-
-
+    
     this.blogForm = this.fb.group({
         id: [""],
         title: ["", Validators.required],
@@ -316,21 +311,6 @@ onSubmit(task: Task) {
   }
 
 
-
-
-  deleteFromLocalData(type, index) {
-    // This is used to avoid unnecessary API call for getTasks() which will result in better performance
-    if (type === 'high') {
-      this.highPriorityTasks.splice(index, 1);
-      this.backupHighPriorityTasks.splice(index, 1);
-    } else if (type === 'medium') {
-      this.mediumPriorityTasks.splice(index, 1);
-      this.backupMediumPriorityTasks.splice(index, 1);
-    } else {
-      this.lowPriorityTasks.splice(index, 1);
-      this.backupLowPriorityTasks.splice(index, 1);
-    }
-  }
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -354,6 +334,17 @@ onSubmit(task: Task) {
     this.updatePriority(event);
   }
 
+  dropMediumPriorityTasksList(event: CdkDragDrop<string[]>, id) {
+    event.item.data.priority = 2;
+    this.updatePriority(event);
+  }
+
+  dropLowPriorityTasksList(event: CdkDragDrop<string[]>) {
+    event.item.data.priority = 1;
+    this.updatePriority(event);
+  }
+
+
   updatePriority(event) {
     const id = event.item.data.id;
     const formData = new FormData();
@@ -368,16 +359,6 @@ onSubmit(task: Task) {
     });
   }
 
-  dropMediumPriorityTasksList(event: CdkDragDrop<string[]>, id) {
-    event.item.data.priority = 2;
-    this.updatePriority(event);
-  }
-
-  dropLowPriorityTasksList(event: CdkDragDrop<string[]>) {
-    event.item.data.priority = 1;
-    this.updatePriority(event);
-  }
-
   ngOnDestroy() {
     this.busy1 ? this.busy1.unsubscribe() : '';
     this.busy2 ? this.busy2.unsubscribe(): '';
@@ -385,22 +366,5 @@ onSubmit(task: Task) {
     this.subscription.unsubscribe();
   }
 
-  search(event) {
-    this.highPriorityTasks = this.backupHighPriorityTasks.filter((task) => {
-      return task.message
-        .toLowerCase()
-        .includes(event.target.value.toLowerCase());
-    });
-    this.lowPriorityTasks = this.backupLowPriorityTasks.filter((task) => {
-      return task.message
-        .toLowerCase()
-        .includes(event.target.value.toLowerCase());
-    });
-    this.mediumPriorityTasks = this.backupMediumPriorityTasks.filter((task) => {
-      return task.message
-        .toLowerCase()
-        .includes(event.target.value.toLowerCase());
-    });
-  }
 
 }
