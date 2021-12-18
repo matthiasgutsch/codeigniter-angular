@@ -83,7 +83,7 @@
 
 
         <input type="text" [style]="{ width: '100%' }" pInputText
-        formControlName="title">
+        formControlName="title"  (keyup)="changedNumber($event)">
 
         <button pButton pRipple icon="pi pi-save" label="salva"
         class="p-button pull-right p-button-success p-mr-2"

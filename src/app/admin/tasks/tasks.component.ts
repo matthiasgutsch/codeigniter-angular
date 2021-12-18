@@ -115,6 +115,7 @@ export class TasksComponent implements OnInit, OnDestroy {
   busy: Subscription;
   busy1: Subscription;
   busy2: Subscription;
+  subscription: Subscription;
 
   trackByFn(index, item) {
     return item.id;
@@ -199,14 +200,14 @@ onSubmit(task: Task) {
   const id = task.id;
 
   if (id) {
-    this.tasksService.update(formData, +id).subscribe(
+    this.busy1 = this.tasksService.update(formData, +id).subscribe(
       (res) => {
         if (res.status == "error") {
           this.uploadError = res.message;
         } else {
           this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
           //this.router.navigate(['/admin/products']);
-          this.cd.detectChanges()
+          this.getTasks();
 
         }
       },
@@ -229,8 +230,15 @@ onSubmit(task: Task) {
 }
 
 
-  getTasks() {
-    this.busy = this.tasksService.getAllListbyUser().subscribe({
+    
+
+    changedNumber(value){
+    this.task.title = value.item.data.title;
+    }  
+
+
+    getTasks() {
+      this.subscription = this.tasksService.getAllListbyUser().subscribe({
       next: (response: any) => {
         if (response.error) {
           
@@ -374,6 +382,7 @@ onSubmit(task: Task) {
     this.busy1 ? this.busy1.unsubscribe() : '';
     this.busy2 ? this.busy2.unsubscribe(): '';
     this.busy ? this.busy.unsubscribe(): '';
+    this.subscription.unsubscribe();
   }
 
   search(event) {

@@ -1,7 +1,7 @@
 <div class="product-item" [ngClass]="borderColor" *ngFor="let task of tasks; let i = index" cdkDrag [cdkDragData]="task">
 
     <div class="product-list-detail">
-        <div class="icon">{{ task.title | slice: 0:1 }}</div>
+        <div class="icon">{{ task.priority}}</div>
         <h5>{{ task.title }}</h5>
 
         <hr class="full">
