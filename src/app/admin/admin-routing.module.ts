@@ -43,7 +43,6 @@ import { OrdersFormComponent } from './orders/orders-form/orders-form.component'
 import { ReportsDashboardComponent } from './reports/reports-dashboard.component';
 import { ManagePersonalDataComponent } from './settings/personal-data/manage-personal-data/manage-personal-data.component';
 import { PersonalDataFormComponent } from './settings/personal-data/personal-data-form/personal-data-form.component';
-import { DragDashboardComponent } from './drag/drag-dashboard.component';
 import { ManageProjectsComponent } from './projects/manage-projects/manage-projects.component';
 import { ProjectsFormComponent } from './projects/projects-form/projects-form.component';
 import { TasksComponent } from './tasks/tasks.component';
@@ -142,7 +141,6 @@ const routes: Routes = [
           { path: "pages", component: ManagePagesComponent },
           { path: "", component: AdminDashboardComponent },
           { path: "reports", component: ReportsDashboardComponent },
-          { path: "drag", component: DragDashboardComponent },
 
           { path: "tasks", component: TasksComponent },
 
