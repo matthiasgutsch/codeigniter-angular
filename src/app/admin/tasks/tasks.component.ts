@@ -163,10 +163,12 @@ export class TasksComponent implements OnInit {
     this.items = DASHBOARD;
     const userId = this.currentUser.user_id;
     this.selectedProducts = [];
+    
   }
 
 
   ngOnInit() {
+    
     this.spinner.show();
     this.getTasks();
      this.spinner.hide();
@@ -175,9 +177,52 @@ export class TasksComponent implements OnInit {
 
 
 
-  goToAddTaskPage() {
-    this.router.navigate(['/add-task']);
+  goToAddTaskPage(task: Task) {
+    this.task = { ...task };
+    this.productDialog = true;
   }
+
+  saveProduct() {
+    this.productDialog = false;
+}
+
+
+onSubmit(task: Task) {
+  const formData = new FormData();
+
+  formData.append("title", this.blogForm.get("title").value);
+  formData.append('user_id', this.blogForm.get('user_id').value);
+
+  const id = task.id;
+
+  if (id) {
+    this.tasksService.update(formData, +id).subscribe(
+      (res) => {
+        if (res.status == "error") {
+          this.uploadError = res.message;
+        } else {
+          this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
+          //this.router.navigate(['/admin/products']);
+
+        }
+      },
+      (error) => (this.error = error)
+    );
+  } else {
+    this.tasksService.create(formData).subscribe(
+      (res) => {
+        if (res.status === "error") {
+          this.uploadError = res.message;
+        } else {
+          this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
+
+        }
+      },
+      (error) => (this.error = error)
+    );
+  }
+}
+
 
   getTasks() {
     this.tasksService.getAllListbyUser().subscribe({
@@ -226,6 +271,34 @@ export class TasksComponent implements OnInit {
 
   editItem(task: Task) {
     this.task = { ...task };
+    const id = task.id;
+    if (id) {
+      
+      this.tasksService.getId(+id).subscribe((res) => {
+
+        
+        if (res.user_id == this.currentUser.user_id) {
+          this.blogForm.patchValue({
+          title: res.title,
+          user_id: this.currentUser.user_id,
+        });
+      }
+      else {
+        this.productDialog = false;
+      }
+        this.task.id = res.id;
+      });
+    } else {
+    }
+
+
+
+    this.blogForm = this.fb.group({
+        id: [""],
+        title: ["", Validators.required],
+        user_id: [this.currentUser.user_id],
+
+    });
 
     this.productDialog = true;
   }
