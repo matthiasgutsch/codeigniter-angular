@@ -109,6 +109,8 @@ export class TasksComponent implements OnInit, OnDestroy {
   data1=[];
 
 
+  donePriorityTasks: Task[] = [];
+  backupDonePriorityTasks: Task[] = [];
   highPriorityTasks: Task[] = [];
   backupHighPriorityTasks: Task[] = [];
   mediumPriorityTasks: Task[] = [];
@@ -173,6 +175,7 @@ export class TasksComponent implements OnInit, OnDestroy {
     this.items = DASHBOARD;
     const userId = this.currentUser.user_id;
     this.selectedProducts = [];
+    
     }
 
 
@@ -204,13 +207,14 @@ export class TasksComponent implements OnInit, OnDestroy {
   deleteFromLocalData(type, index) {
     // This is used to avoid unnecessary API call for getTasks() which will result in better performance
    
+      this.donePriorityTasks.splice(index);
+      this.backupDonePriorityTasks.splice(index);
       this.highPriorityTasks.splice(index);
       this.backupHighPriorityTasks.splice(index);
       this.mediumPriorityTasks.splice(index);
       this.backupMediumPriorityTasks.splice(index);
       this.lowPriorityTasks.splice(index);
       this.backupLowPriorityTasks.splice(index);
-  
       
   }
 
@@ -293,7 +297,9 @@ onSubmitAdd(task: Task, index) {
           
         } else {
           response.forEach((task) => {
-            if (task.priority === '3') {
+            if (task.priority === '4') {
+              this.donePriorityTasks.push(task);
+            } else if (task.priority === '3') {
               this.highPriorityTasks.push(task);
             } else if (task.priority === '2') {
               this.mediumPriorityTasks.push(task);
@@ -304,9 +310,15 @@ onSubmitAdd(task: Task, index) {
         }
       },
     });
+
+    this.backupDonePriorityTasks = this.donePriorityTasks;
     this.backupHighPriorityTasks = this.highPriorityTasks;
     this.backupLowPriorityTasks = this.lowPriorityTasks;
     this.backupMediumPriorityTasks = this.mediumPriorityTasks;
+
+
+
+
     this.spinner.hide();
 
   }
@@ -391,6 +403,13 @@ onSubmitAdd(task: Task, index) {
       );
     }
   }
+
+
+  dropDonePriorityTasksList(event: CdkDragDrop<string[]>) {
+    event.item.data.priority = 4;
+    this.updatePriority(event);
+  }
+
 
   dropHighPriorityTasksList(event: CdkDragDrop<string[]>) {
     event.item.data.priority = 3;
