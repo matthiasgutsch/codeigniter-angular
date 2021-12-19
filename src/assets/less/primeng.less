@@ -42,11 +42,20 @@
 }
 
 .p-progressbar {
-
+  max-width: 200px;
+  overflow: hidden !important;
+  height: 15px;
+  line-height: 15px !important;
   .p-progressbar-value {
     background-color: @ness_color_3;
   }
-
+  .p-progressbar-label {
+    position: relative !important;
+    font-size: 10px;
+    line-height: 15px;
+    float: right !important;
+    right: 0px !important;
+  }
 }
 .p-datatable .p-datatable-tbody > tr {
   color: @text-color;
