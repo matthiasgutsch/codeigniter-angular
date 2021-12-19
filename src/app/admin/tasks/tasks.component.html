@@ -15,7 +15,7 @@
 
 <div class="p-field p-grid">
     <div class="p-col-12 p-md-12">
-<p-progressBar [value]="highPriorityTasks.length / (lowPriorityTasks.length + mediumPriorityTasks.length + highPriorityTasks.length) * 100"></p-progressBar>
+<p-progressBar [value]="donePriorityTasks.length / (lowPriorityTasks.length + mediumPriorityTasks.length + highPriorityTasks.length + donePriorityTasks.length) * 100"></p-progressBar>
 
         <p-card>
             <div class="p-field p-grid" [ngBusy]="[busy, busy1, busy2]">
@@ -27,7 +27,7 @@
                     <div class="drop-wrapper">
                         <div class="drop-column" cdkDropList #lowPriorityTasksList="cdkDropList"
                             [cdkDropListData]="lowPriorityTasks"
-                            [cdkDropListConnectedTo]="[mediumPriorityTasksList, highPriorityTasksList]"
+                            [cdkDropListConnectedTo]="[donePriorityTasksList, mediumPriorityTasksList, highPriorityTasksList]"
                             (cdkDropListDropped)="dropLowPriorityTasksList($event)">
                             <app-task-details (deleteItem)="deleteTask($event)" (editItem)="editItem($event)"
                                 [tasks]="lowPriorityTasks" [borderColor]="'border-info'"></app-task-details>
@@ -40,7 +40,7 @@
                     <div class="drop-wrapper">
                         <div class="drop-column" cdkDropList #mediumPriorityTasksList="cdkDropList"
                             [cdkDropListData]="mediumPriorityTasks"
-                            [cdkDropListConnectedTo]="[highPriorityTasksList, lowPriorityTasksList]"
+                            [cdkDropListConnectedTo]="[donePriorityTasksList, highPriorityTasksList, lowPriorityTasksList]"
                             (cdkDropListDropped)="dropMediumPriorityTasksList($event)">
                             <app-task-details (deleteItem)="deleteTask($event)" (editItem)="editItem($event)"
                                 [tasks]="mediumPriorityTasks" [borderColor]="'border-warning'"></app-task-details>
@@ -53,22 +53,22 @@
                     <div class="drop-wrapper">
                         <div class="drop-column" cdkDropList #highPriorityTasksList="cdkDropList"
                             [cdkDropListData]="highPriorityTasks"
-                            [cdkDropListConnectedTo]="[mediumPriorityTasksList, lowPriorityTasksList]"
+                            [cdkDropListConnectedTo]="[donePriorityTasksList, mediumPriorityTasksList, lowPriorityTasksList]"
                             (cdkDropListDropped)="dropHighPriorityTasksList($event, $id)">
                             <app-task-details (deleteItem)="deleteTask($event)" (editItem)="editItem($event)"
                                 [tasks]="highPriorityTasks" [borderColor]="'border-danger'"></app-task-details>
                         </div>
                     </div>
                 </div>
-                <div class="p-col-3">{{highPriorityTasks.length}}
+                <div class="p-col-3">{{donePriorityTasks.length}}
                     <h4>Done</h4>
                     <div class="drop-wrapper">
-                        <div class="drop-column" cdkDropList #highPriorityTasksList="cdkDropList"
-                            [cdkDropListData]="highPriorityTasks"
-                            [cdkDropListConnectedTo]="[mediumPriorityTasksList, lowPriorityTasksList]"
-                            (cdkDropListDropped)="dropHighPriorityTasksList($event, $id)">
+                        <div class="drop-column" cdkDropList #donePriorityTasksList="cdkDropList"
+                            [cdkDropListData]="donePriorityTasks"
+                            [cdkDropListConnectedTo]="[highPriorityTasksList, mediumPriorityTasksList, lowPriorityTasksList]"
+                            (cdkDropListDropped)="dropDonePriorityTasksList($event, $id)">
                             <app-task-details (deleteItem)="deleteTask($event)" (editItem)="editItem($event)"
-                                [tasks]="highPriorityTasks" [borderColor]="'border-danger'"></app-task-details>
+                                [tasks]="donePriorityTasks" [borderColor]="'border-danger'"></app-task-details>
                         </div>
                     </div>
                 </div>
