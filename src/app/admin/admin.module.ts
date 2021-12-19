@@ -104,6 +104,9 @@ import { TasksComponent } from './tasks/tasks.component';
 import { TaskDetailsComponent } from './tasks/task-details/task-details.component';
 import { BusyConfig, NgBusyModule } from 'ng-busy';
 import {ProgressBarModule} from 'primeng/progressbar';
+import { ManageTimesheetsComponent } from './timesheets/manage-timeheets/manage-timesheets.component';
+import { TimesheetsFormComponent } from './timesheets/timesheets-form/timesheets-form.component';
+
 
 @NgModule({
   declarations: [
@@ -118,6 +121,8 @@ import {ProgressBarModule} from 'primeng/progressbar';
     InitialsAvatarComponent,
     ClientsFormComponent,
     ManageQuotesComponent,
+    ManageTimesheetsComponent,
+    TimesheetsFormComponent,
     QuotesFormComponent,
     OrdersFormComponent,
     ManageOrdersComponent,

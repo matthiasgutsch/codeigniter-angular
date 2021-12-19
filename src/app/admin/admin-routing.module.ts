@@ -46,6 +46,8 @@ import { PersonalDataFormComponent } from './settings/personal-data/personal-dat
 import { ManageProjectsComponent } from './projects/manage-projects/manage-projects.component';
 import { ProjectsFormComponent } from './projects/projects-form/projects-form.component';
 import { TasksComponent } from './tasks/tasks.component';
+import { ManageTimesheetsComponent } from './timesheets/manage-timeheets/manage-timesheets.component';
+import { TimesheetsFormComponent } from './timesheets/timesheets-form/timesheets-form.component';
 
 const routes: Routes = [
   {
@@ -65,6 +67,10 @@ const routes: Routes = [
           { path: "products", component: ManageProductsComponent },
           { path: "products/create", component: ProductsFormComponent },
           { path: "products/edit/:id",component: ProductsFormComponent,},
+
+          { path: "timesheets", component: ManageTimesheetsComponent },
+          { path: "timesheets/create", component: TimesheetsFormComponent },
+          { path: "timesheets/edit/:id",component: TimesheetsFormComponent,},
 
 
           { path: "projects", component: ManageProjectsComponent },
