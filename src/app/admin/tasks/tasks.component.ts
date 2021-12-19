@@ -127,7 +127,7 @@ export class TasksComponent implements OnInit, OnDestroy {
   
   myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en')  ;
   myMonth = formatDate(new Date(), 'dd/MM/yyyy', 'en')  ;
-
+  valueProcess: number;
   projects: any = [];
   availableProducts:  any = [];
   selectedProducts: any = [];
@@ -173,8 +173,7 @@ export class TasksComponent implements OnInit, OnDestroy {
     this.items = DASHBOARD;
     const userId = this.currentUser.user_id;
     this.selectedProducts = [];
-    
-  }
+    }
 
 
   ngOnInit() {
@@ -212,6 +211,7 @@ export class TasksComponent implements OnInit, OnDestroy {
       this.lowPriorityTasks.splice(index);
       this.backupLowPriorityTasks.splice(index);
   
+      
   }
 
 

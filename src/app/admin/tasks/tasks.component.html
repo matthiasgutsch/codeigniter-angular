@@ -13,14 +13,16 @@
     </div>
 </div>
 
-{{performanceCount | json}}
 <div class="p-field p-grid">
     <div class="p-col-12 p-md-12">
+<p-progressBar [value]="highPriorityTasks.length / (lowPriorityTasks.length + mediumPriorityTasks.length + highPriorityTasks.length) * 100"></p-progressBar>
 
         <p-card>
             <div class="p-field p-grid" [ngBusy]="[busy, busy1, busy2]">
 
-                <div class="p-col-3">{{lowPriorityTasks.length | json}}
+
+
+                <div class="p-col-3">{{lowPriorityTasks.length}}
                     <h4>Started</h4>
                     <div class="drop-wrapper">
                         <div class="drop-column" cdkDropList #lowPriorityTasksList="cdkDropList"
@@ -33,7 +35,7 @@
                     </div>
                 </div>
 
-                <div class="p-col-3">{{mediumPriorityTasks.length | json}} 
+                <div class="p-col-3">{{mediumPriorityTasks.length}} 
                     <h4>25% Done</h4>
                     <div class="drop-wrapper">
                         <div class="drop-column" cdkDropList #mediumPriorityTasksList="cdkDropList"
@@ -46,7 +48,7 @@
                     </div>
                 </div>
 
-                <div class="p-col-3"> {{highPriorityTasks.length | json}}
+                <div class="p-col-3"> {{highPriorityTasks.length}}
                     <h4>75% Done</h4>
                     <div class="drop-wrapper">
                         <div class="drop-column" cdkDropList #highPriorityTasksList="cdkDropList"
@@ -58,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="p-col-3">{{highPriorityTasks.length | json}}
+                <div class="p-col-3">{{highPriorityTasks.length}}
                     <h4>Done</h4>
                     <div class="drop-wrapper">
                         <div class="drop-column" cdkDropList #highPriorityTasksList="cdkDropList"

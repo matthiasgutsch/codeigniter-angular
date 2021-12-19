@@ -103,6 +103,7 @@ import { ProjectsFormComponent } from './projects/projects-form/projects-form.co
 import { TasksComponent } from './tasks/tasks.component';
 import { TaskDetailsComponent } from './tasks/task-details/task-details.component';
 import { BusyConfig, NgBusyModule } from 'ng-busy';
+import {ProgressBarModule} from 'primeng/progressbar';
 
 @NgModule({
   declarations: [
@@ -172,6 +173,7 @@ import { BusyConfig, NgBusyModule } from 'ng-busy';
     SumPipeModule,
     TooltipModule,
     SelectButtonModule,
+    ProgressBarModule,
     NgxSpinnerModule,
     InputTextareaModule,
     DragDropModule,
