@@ -90,6 +90,7 @@ export class TasksComponent implements OnInit, OnDestroy {
 
   appointmentsDialog: boolean = false;
   clients: any = [];
+  project_id: string;
   client: Clients;
   comuni: any = [];
   displayEvent: any;
@@ -195,6 +196,7 @@ export class TasksComponent implements OnInit, OnDestroy {
     this.blogForm = this.fb.group({
       id: [""],
       title: ["", Validators.required],
+      description: [""],
       priority: [""],
       user_id: [this.currentUser.user_id],
 
@@ -225,7 +227,7 @@ onSubmit(task: Task, index) {
 
   formData.append("title", this.blogForm.get("title").value);
   formData.append("priority", this.blogForm.get("priority").value);
-
+  formData.append("description", this.blogForm.get("description").value);
   formData.append('user_id', this.blogForm.get('user_id').value);
 
   const id = task.id;
@@ -265,6 +267,7 @@ onSubmitAdd(task: Task, index) {
   const formData = new FormData();
 
   formData.append("title", this.blogForm.get("title").value);
+  formData.append("description", this.blogForm.get("description").value);
   formData.append("priority", this.blogForm.get("priority").value);
   formData.append('user_id', this.blogForm.get('user_id').value);
 
@@ -356,6 +359,7 @@ onSubmitAdd(task: Task, index) {
         if (res.user_id == this.currentUser.user_id) {
           this.blogForm.patchValue({
           title: res.title,
+          description: res.description,
           priority: res.priority,
           user_id: this.currentUser.user_id,
         });
@@ -372,6 +376,7 @@ onSubmitAdd(task: Task, index) {
     this.blogForm = this.fb.group({
         id: [""],
         title: ["", Validators.required],
+        description: ["", Validators.required],
         priority: ["", Validators.required],
         user_id: [this.currentUser.user_id],
 

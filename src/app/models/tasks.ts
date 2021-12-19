@@ -7,6 +7,7 @@ export interface Task {
     taskid?: number;
     user_id?: number;
     id: number;
+    description: string;
     assigned_name: string;
   }
   

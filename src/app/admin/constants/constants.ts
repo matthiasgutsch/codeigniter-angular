@@ -17,7 +17,6 @@ export const PAGES: SelectItem[] = [
   { label: "Tipo di Appuntamento", value: "/admin/settings/appointment-type", icon: "pi pi-list" },
   { label: "Dipendenti / Personale", value: "/admin/settings/employees", icon: "pi pi-list" },
   { label: "Luogo di lavorazione", value: "/admin/settings/locations", icon: "pi pi-list" },
-  { label: "Dati aziendali", value: "/admin/settings/company", icon: "pi pi-list" },
   { label: "Dati clienti aggiuntivi", value: "/admin/settings/personal-data", icon: "pi pi-list" },
 
 ];
@@ -32,6 +31,12 @@ export const PAGES_PRODUCT: SelectItem[] = [
 
 ];
 
+export const PAGES_COMPANY: SelectItem[] = [
+  
+  { label: "Dati aziendali", value: "/admin/settings/company", icon: "pi pi-list" },
+
+
+];
 
 export const DASHBOARD: SelectItem[] = [
   { label: "Clienti", value: "./clients", icon: "" },

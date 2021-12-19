@@ -15,15 +15,25 @@
 
 <div class="p-field p-grid">
     <div class="p-col-12 p-md-12">
-<p-progressBar [value]="donePriorityTasks.length / (lowPriorityTasks.length + mediumPriorityTasks.length + highPriorityTasks.length + donePriorityTasks.length) * 100"></p-progressBar>
+<p-progressBar [value]="donePriorityTasks.length / (lowPriorityTasks.length + mediumPriorityTasks.length + highPriorityTasks.length + donePriorityTasks.length) * 100 | number: '1.0-0'"></p-progressBar>
 
         <p-card>
             <div class="p-field p-grid" [ngBusy]="[busy, busy1, busy2]">
 
 
 
-                <div class="p-col-3">{{lowPriorityTasks.length}}
-                    <h4>Started</h4>
+                <div class="p-col-3">
+                    <div class="p-col-12">
+
+                    <div class="p-grid">
+                        <div class="p-col-9">
+                            <h4>Da Fare</h4>
+                        </div>
+                        <div class="p-col-3">
+                            <p-tag class="pull-right"  severity="warning" icon="pi pi-clone" [value]="lowPriorityTasks.length"></p-tag> 
+                        </div>
+                    </div>
+                    </div>
                     <div class="drop-wrapper">
                         <div class="drop-column" cdkDropList #lowPriorityTasksList="cdkDropList"
                             [cdkDropListData]="lowPriorityTasks"
@@ -35,8 +45,20 @@
                     </div>
                 </div>
 
-                <div class="p-col-3">{{mediumPriorityTasks.length}} 
-                    <h4>25% Done</h4>
+                <div class="p-col-3">
+                    
+                    <div class="p-col-12">
+
+                        <div class="p-grid">
+                            <div class="p-col-9">
+                                <h4>25% Fatto</h4>
+                            </div>
+                            <div class="p-col-3">
+                                <p-tag class="pull-right"  severity="warning" icon="pi pi-clone" [value]="mediumPriorityTasks.length"></p-tag> 
+                            </div>
+                        </div>
+                        </div>
+           
                     <div class="drop-wrapper">
                         <div class="drop-column" cdkDropList #mediumPriorityTasksList="cdkDropList"
                             [cdkDropListData]="mediumPriorityTasks"
@@ -48,8 +70,20 @@
                     </div>
                 </div>
 
-                <div class="p-col-3"> {{highPriorityTasks.length}}
-                    <h4>75% Done</h4>
+                <div class="p-col-3"> 
+                    
+                    <div class="p-col-12">
+
+                        <div class="p-grid">
+                            <div class="p-col-9">
+                                <h4>75% Fatto</h4>
+                            </div>
+                            <div class="p-col-3">
+                                <p-tag class="pull-right"  severity="warning" icon="pi pi-clone" [value]="highPriorityTasks.length"></p-tag> 
+                            </div>
+                        </div>
+                        </div>
+   
                     <div class="drop-wrapper">
                         <div class="drop-column" cdkDropList #highPriorityTasksList="cdkDropList"
                             [cdkDropListData]="highPriorityTasks"
@@ -60,8 +94,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="p-col-3">{{donePriorityTasks.length}}
-                    <h4>Done</h4>
+                <div class="p-col-3">
+                    <div class="p-col-12">
+
+                        <div class="p-grid">
+                            <div class="p-col-9">
+                                <h4>Finito</h4>
+                            </div>
+                            <div class="p-col-3">
+                                <p-tag class="pull-right" severity="success" icon="pi pi-clone" [value]="donePriorityTasks.length"></p-tag> 
+                            </div>
+                        </div>
+                        </div>
+               
                     <div class="drop-wrapper">
                         <div class="drop-column" cdkDropList #donePriorityTasksList="cdkDropList"
                             [cdkDropListData]="donePriorityTasks"
@@ -103,6 +148,14 @@
                 </div>
             </div>
 
+            <div class="p-field p-grid">
+                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Descrizione Task <span class="required">*</span></label>
+                <div class="p-col-12 p-md-10">
+                    <input type="text" [style]="{ width: '100%' }" pInputText formControlName="description">
+                </div>
+            </div>
+
+
 
             <button pButton pRipple icon="pi pi-save" label="salva" class="p-button pull-right p-button-success p-mr-2"
                 [disabled]="!blogForm.valid"></button>
@@ -142,6 +195,18 @@
                     </div>
                 </div>
 
+                <div class="p-field p-grid">
+                    <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Descrizione Task <span class="required">*</span></label>
+                    <div class="p-col-12 p-md-10">
+                        <input type="text" [style]="{ width: '100%' }" pInputText formControlName="description">
+                    </div>
+                </div>
+
+                <p-multiSelect [options]="categories" display="chip"
+                formControlName="works_id" [(ngModel)]="selectedCategories"
+                optionLabel="name" optionValue="name">
+                </p-multiSelect>
+
                         <button pButton pRipple icon="pi pi-save" label="salva"
                             class="p-button pull-right p-button-success p-mr-2" [disabled]="!blogForm.valid"></button>
 
@@ -156,6 +221,18 @@
 
                     </div>
         </form>
+    </ng-template>
+
+</p-sidebar>
+
+
+<p-sidebar [(visible)]="productDialogView" position="right" [style]="{width:'40%'}">
+    <ng-template pTemplate="content">
+       
+
+
+        {{task.title}}
+
     </ng-template>
 
 </p-sidebar>

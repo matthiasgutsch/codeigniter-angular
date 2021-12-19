@@ -1,16 +1,28 @@
 <div class="product-item" [ngClass]="borderColor" *ngFor="let task of tasks; let i = index" cdkDrag [cdkDragData]="task">
 
     <div class="product-list-detail">
+        <div class="p-grid">
+            <div class="p-col-12 p-md-10">
         <h5>{{ task.title }}</h5>
-
-        <hr class="full">
-        <div class="float-right">
-            <a (click)="editTask(task)" class="p-button p-button-primary p-mr-2"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-            <a (click)="deleteTask(task.id, task.title, 'high', i)" class="p-button p-button-primary"><i class="fa fa-trash-o ml-2" aria-hidden="true" ></i></a>
-        </div>
+       
         <div class="card-text fs-small" *ngIf="task.due_date">Due date:
             {{task.due_date}}
         </div>
+    </div>
+    <div class="p-col-12 p-md-2">
+
         <div class="drag-me"></div>
     </div>
+
+    <div class="p-col-12 p-md-12">
+
+        <hr class="full">
+
+
+            <a (click)="editTask(task)" class="p-button p-button-primary p-mr-2"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            <a (click)="deleteTask(task.id, task.title, 'high', i)" class="p-button p-button-danger"><i class="fa fa-trash-o ml-2" aria-hidden="true" ></i></a>
+
+    </div>
+    </div>
+</div>
 </div>
