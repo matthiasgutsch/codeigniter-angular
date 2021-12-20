@@ -17,8 +17,8 @@ import { BillingsFormComponent } from './billings/billings-form/billings-form.co
 import { WorksFormComponent } from './settings/works/works-form/works-form.component';
 import { ManageWorksComponent } from './settings/works/manage-works/manage-works.component';
 import { SettingsComponent } from './settings/settings.component';
-import { EmployeesFormComponent } from './settings/employees/employees-form/employees-form.component';
-import { ManageEmployeesComponent } from './settings/employees/manage-employees/manage-employees.component';
+import { EmployeesFormComponent } from './employees/employees-form/employees-form.component';
+import { ManageEmployeesComponent } from './employees/manage-employees/manage-employees.component';
 import { LocationsFormComponent } from './settings/locations/locations-form/locations-form.component';
 import { ManageLocationsComponent } from './settings/locations/manage-locations/manage-locations.component';
 import { ManageTypeComponent } from './settings/type/manage-type/manage-type.component';
@@ -85,6 +85,10 @@ const routes: Routes = [
           { path: "billings/edit/:id",component: BillingsFormComponent,},
           { path: "billings/create", component: BillingsFormComponent },
 
+          { path: "employees", component: ManageEmployeesComponent },
+          { path: "employees/edit/:id", component: EmployeesFormComponent },
+          { path: "employees/create", component: EmployeesFormComponent },
+
 
           { path: "orders", component: ManageOrdersComponent },
           { path: "orders/edit/:id",component: OrdersFormComponent,},
@@ -133,9 +137,7 @@ const routes: Routes = [
           { path: "settings/personal-data/create", component: PersonalDataFormComponent },
 
 
-          { path: "settings/employees", component: ManageEmployeesComponent },
-          { path: "settings/employees/edit/:id", component: EmployeesFormComponent },
-          { path: "settings/employees/create", component: EmployeesFormComponent },
+
 
 
           { path: "settings/appointment-type", component: ManageAppointmentTypeComponent },

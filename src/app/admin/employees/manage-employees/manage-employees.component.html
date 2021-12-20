@@ -1,0 +1,153 @@
+<p-overlayPanel #op>
+    <ng-template pTemplate>
+        <div class="p-col-12">
+        
+            <div class="p-field p-grid" *ngFor="let col of cols" [ngSwitch]="col.field">
+                <div class="p-col-12">
+
+                    <input *ngSwitchCase="'name'" [ngModel]="dt.filters['name']? dt.filters['name'].value : ''" 
+                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
+             
+                    <input *ngSwitchCase="'surname'" [ngModel]="dt.filters['surname']? dt.filters['surname'].value : ''" 
+                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
+             
+
+
+                    <input *ngSwitchCase="'date'" [ngModel]="dt.filters['date']? dt.filters['date'].value : ''" 
+                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
+
+
+                    <input *ngSwitchCase="'phone'" [ngModel]="dt.filters['phone']? dt.filters['phone'].value : ''" 
+                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
+
+
+                    <input *ngSwitchCase="'city'" [ngModel]="dt.filters['city']? dt.filters['city'].value : ''" 
+                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
+
+
+                    <input *ngSwitchCase="'fiscalcode'" [ngModel]="dt.filters['fiscalcode']? dt.filters['fiscalcode'].value : ''" 
+                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
+
+            </div>
+                </div>
+
+                <div class="p-grid">
+                <div class="p-col-12">
+
+                    <button pButton pRipple label="reset ricerca"
+                    class="p-button p-button-primary btn-block"  (click)="dt.reset()" ></button>
+                        </div>
+                    </div>
+            </div>
+            
+
+            
+    </ng-template>
+</p-overlayPanel>
+
+
+<div class="dash-header">
+    <div class="dash-title">
+
+        <div class="p-field p-grid">
+            <div class="p-col-12 p-md-6">
+                <h3>Dipendenti</h3>
+            </div>
+            <div class="p-col-12 p-md-6">
+
+                <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/employees/create']" label="Aggiungi" class="p-button p-button-primary -mr-2  pull-right"></button>
+            <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()" class="p-button-warning p-mr-2 pull-right" pTooltip="PDF" tooltipPosition="bottom"></button>
+            <button type="text" pButton label="Filter"  icon="pi pi-filter" class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="p-fluid">
+    <div class="p-field p-grid">
+        <div class="p-col-12 p-md-12">
+
+            <p-card>
+
+         
+
+
+                <p-table #dt [columns]="cols" [value]="clients" [globalFilterFields]="['name', 'description']"  [responsive]="true" currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
+    
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th width="50"></th>
+                            <th *ngFor="let col of cols">
+                                {{col.header}} 
+                            </th>
+                            <th width="200"></th>
+                        </tr>
+                       
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr>
+                            <td>
+                                <app-initials-avatar firstName="{{ rowData['name'] | slice:0:1}}" lastName="{{ rowData['surname'] | slice:0:1}}"></app-initials-avatar>
+
+                            </td>
+                            <td *ngFor="let col of cols">
+                                {{rowData[col.field]}}
+                            </td>
+                
+                            <td class="action">
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
+                                [routerLink]="['/admin/employees/edit', rowData.id]"></button>
+                            <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
+                                (click)="edit(rowData)"></button>
+                                              
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table> 
+
+
+              
+            </p-card>
+        </div>
+
+       
+    </div>
+</div>
+<p-sidebar [(visible)]="productDialog" position="right"  [style]="{width:'50%'}">
+    <ng-template pTemplate="content">
+        <div class="p-col-12 p-md-12">
+        <p-card>
+
+            <strong>{{client.name}} {{client.surname}}</strong>
+
+            <p>{{ client.address }}<br> {{ client.zip }} - {{ client.city }} ({{ client.province }})<br>
+            </p>
+            <hr>
+            <p>{{ client.phone }}<br> {{ client.email }}</p>
+            <div class="clearfix"></div><br>
+            <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente" class="p-button p-button-primary p-mr-2" [routerLink]="['/admin/employees/edit', client.id]"></button>
+   
+
+
+       
+    </p-card>    </div>
+    </ng-template>
+
+</p-sidebar>
+
+
+
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
+
+<p-toast key="myKey1"></p-toast>
+
+<p-toast key="myKey2">{{error}}</p-toast>
+
+
+

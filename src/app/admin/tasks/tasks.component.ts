@@ -436,11 +436,14 @@ onSubmitAdd(task: Task, index) {
     const id = event.item.data.id;
     const formData = new FormData();
     formData.set('priority', event.item.data.priority);
+    
     this.busy2 = this.tasksService.update_priority(formData, +id).subscribe({
       next: (response: any) => {
         if (response.error) {
         } else {
           this.drop(event);
+          this.messageService.add({key: 'myKey1', severity:'success', summary: 'Conferma', detail: 'Salvato con successo'});
+
         }
       },
     });

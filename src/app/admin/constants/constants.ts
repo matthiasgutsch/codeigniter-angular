@@ -15,7 +15,6 @@ export const FISCAL_CODE_VALIDATOR_REGEX =
 export const PAGES: SelectItem[] = [
   { label: "Tipo di lavorazione", value: "/admin/settings/works", icon: "pi pi-list" },
   { label: "Tipo di Appuntamento", value: "/admin/settings/appointment-type", icon: "pi pi-list" },
-  { label: "Dipendenti / Personale", value: "/admin/settings/employees", icon: "pi pi-list" },
   { label: "Luogo di lavorazione", value: "/admin/settings/locations", icon: "pi pi-list" },
   { label: "Dati clienti aggiuntivi", value: "/admin/settings/personal-data", icon: "pi pi-list" },
 

@@ -67,8 +67,8 @@ import { BillingsFormComponent } from './billings/billings-form/billings-form.co
 import { WorksFormComponent } from './settings/works/works-form/works-form.component';
 import { ManageWorksComponent } from './settings/works/manage-works/manage-works.component';
 import { SettingsComponent } from './settings/settings.component';
-import { EmployeesFormComponent } from './settings/employees/employees-form/employees-form.component';
-import { ManageEmployeesComponent } from './settings/employees/manage-employees/manage-employees.component';
+import { EmployeesFormComponent } from './employees/employees-form/employees-form.component';
+import { ManageEmployeesComponent } from './employees/manage-employees/manage-employees.component';
 import { LocationsFormComponent } from './settings/locations/locations-form/locations-form.component';
 import { ManageLocationsComponent } from './settings/locations/manage-locations/manage-locations.component';
 import { ManageTypeComponent } from './settings/type/manage-type/manage-type.component';
