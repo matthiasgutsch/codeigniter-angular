@@ -68,7 +68,7 @@ export class TagsFormComponent implements OnInit {
     if (id) {
 
 
-      this.pageTitle = 'Modifica Tipo di lavorazione';
+      this.pageTitle = 'Modifica Tags';
       this.tagsService.getId(+id).subscribe(
         res => {
           this.categoryForm.patchValue({

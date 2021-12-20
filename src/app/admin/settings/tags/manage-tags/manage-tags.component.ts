@@ -10,7 +10,7 @@ import { TagsService } from 'src/app/services/tags.service';
   templateUrl: './manage-tags.component.html'
 })
 export class ManageTagsComponent implements OnInit {
-  title = 'Tipo di lavorazione';
+  title = 'Tags';
   tags: Tags;
   tag: Tags;
   error: string;
