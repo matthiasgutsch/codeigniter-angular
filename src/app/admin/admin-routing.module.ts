@@ -147,7 +147,7 @@ const routes: Routes = [
           { path: "reports", component: ReportsDashboardComponent },
 
           { path: "tasks", component: TasksComponent },
-          { path: "task/:id/:project_id", component: TasksComponent },
+          { path: "task/:project_id", component: TasksComponent },
 
 
         ],

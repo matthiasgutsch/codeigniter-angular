@@ -196,13 +196,21 @@ export class TasksComponent implements OnInit, OnDestroy {
 
     });
     this.getTasks();
-
+    this.getEmployees();
 
     this.spinner.hide();
 
   }
 
 
+
+  getEmployees() {
+    this.employeesService.getAllListbyUser().subscribe(data => {
+      this.clients = data;
+    });
+
+
+  }
 
   goToAddTaskPage() {
     this.productDialogAdd = true;

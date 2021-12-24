@@ -126,10 +126,6 @@ trackByFn(index, item) {
         { field: "title", header: "titolo" },
         { field: "code", header: "Codice" },
         { field: "status", header: "Status" },
-        { field: "price", header: "Prezzo" },
-        { field: "category_id", header: "Categoria" },
-        { field: "code_int", header: "Codice interno" },
-        { field: "brand_id", header: "Brand" }
       ];
       this.colsData = [
         { field: "title", header: "titolo" },
@@ -232,8 +228,6 @@ trackByFn(index, item) {
 
 edit(project: Projects) {
   this.project = { ...project };
-  
-  this.selectedSkills = JSON.parse("" + this.project.skills + "");
 
   
   this.productDialog = true;

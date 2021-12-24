@@ -203,10 +203,21 @@
                     </div>
                 </div>
 
-                <p-multiSelect [options]="categories" display="chip"
-                formControlName="works_id" [(ngModel)]="selectedCategories"
-                optionLabel="name" optionValue="name">
-                </p-multiSelect>
+
+
+                <div class="p-field p-grid">
+                    <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Dipendente</label>
+                    <div class="p-col-12 p-md-10">
+                        <p-dropdown [options]="clients" placeholder="Scegli"
+                        [style]="{ width: '100%' }" formControlName="priority" optionLabel="username"
+                        optionValue="id">
+                    </p-dropdown>
+                    </div>
+                </div>
+
+      
+
+              
 
                         <button pButton pRipple icon="pi pi-save" label="salva"
                             class="p-button pull-right p-button-success p-mr-2" [disabled]="!blogForm.valid"></button>

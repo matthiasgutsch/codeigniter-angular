@@ -21,6 +21,8 @@ export class Projects {
     price_extra: string;
     data: JSON;
     status: StringMap;
+    client_id: string;
+    employee_id: string;
     skills: ISkill[];
 }
 

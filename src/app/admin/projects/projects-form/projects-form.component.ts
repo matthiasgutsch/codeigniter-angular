@@ -25,8 +25,6 @@ import { ProductsService } from 'src/app/services/products.service';
 import { Projects } from 'src/app/models/projects';
 import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brands.service';
-import { TagsService } from 'src/app/services/tags.service';
-import { Tags } from 'src/app/models/tags';
 import { SkillsService } from 'src/app/services/skills.service';
 import { map, tap } from 'rxjs/operators';
 import { Technical_data } from 'src/app/models/technical_data';
@@ -73,6 +71,9 @@ export class ProjectsFormComponent implements OnInit {
 
   clients: any = [];
   client: Clients;
+
+  employee: any = [];
+  employees: Employees;
   arrString: string;
 
   brands: any = [];
@@ -124,6 +125,7 @@ export class ProjectsFormComponent implements OnInit {
     private technicalDataService: TechnicalDataService,
     private messageService: MessageService,
     private clientsService: ClientsService,
+    private employeesService: EmployeesService,
     private _location: Location,
     private projectsService: ProjectsService,
     private skillsService: SkillsService,
@@ -132,7 +134,6 @@ export class ProjectsFormComponent implements OnInit {
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,
     private router: Router,
-    private tagsService: TagsService,
     private route: ActivatedRoute
   ) {
     if (this.date) {
@@ -171,23 +172,22 @@ export class ProjectsFormComponent implements OnInit {
     );
 
 
+    this.employeesService.getAllListbyUser().subscribe(
+      (data: Employees) => (this.employees = data),
+      (error) => (this.error = error)
+    );
+
+
+
     this.categoryService.getAllListbyUser().subscribe(
       (data: Category) => (this.categories = data),
       (error) => (this.error = error)
     );
 
 
-    this.tagsService.getAllListbyUser().subscribe(
-      (data: Tags) => this.tags = data,
-      error => this.error = error
-    );
-
-
     const id = this.route.snapshot.paramMap.get("id");
 
-    this.projectsService.skills(+id).subscribe(value => {
-      this.skillsValues = value;
-    });
+
 
 
 
@@ -204,8 +204,8 @@ export class ProjectsFormComponent implements OnInit {
           description: res.description.split(','),
           category_id: res.category_id.split(','),
           status: res.status,
-          works_id: res.works_id.split(','),
-          brand_id: res.brand_id,
+          employee_id: res.employee_id,
+          client_id: res.client_id,
           is_featured: res.is_featured,
           is_active: res.is_active,
           code: res.code,
@@ -216,7 +216,6 @@ export class ProjectsFormComponent implements OnInit {
           price_extra: res.price_extra,
           id: res.id,
           data: res.data,
-          skills: this.skillsValues,
         });
 
         
@@ -250,7 +249,6 @@ export class ProjectsFormComponent implements OnInit {
       code_int: [""],
       price: [""],
       price_extra: [""],
-      skills: this.initSkill(),
       
   });
 
@@ -384,7 +382,6 @@ export class ProjectsFormComponent implements OnInit {
     formData.append("price_extra", this.blogForm.get("price_extra").value);
     formData.append("status", this.blogForm.get("status").value);
     formData.append('user_id', this.blogForm.get('user_id').value);
-    formData.append('skills', JSON.stringify(this.blogForm.get('skills').value));
 
 
     const id = this.blogForm.get("id").value;
