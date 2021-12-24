@@ -4,9 +4,12 @@
         <div class="p-grid">
             <div class="p-col-12 p-md-10">
         <h5>{{ task.title }}</h5>
-       
+        {{task.employee_id}}
         <div class="card-text fs-small" *ngIf="task.due_date">Due date:
             {{task.due_date}}
+
+         
+
         </div>
     </div>
     <div class="p-col-12 p-md-2">

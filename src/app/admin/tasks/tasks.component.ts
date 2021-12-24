@@ -220,6 +220,7 @@ export class TasksComponent implements OnInit, OnDestroy {
       title: ["", Validators.required],
       description: [""],
       priority: [""],
+      employee_id: [""],
       user_id: [this.currentUser.user_id],
 
   });
@@ -251,6 +252,8 @@ onSubmit(task: Task, index) {
   formData.append("priority", this.blogForm.get("priority").value);
   formData.append("description", this.blogForm.get("description").value);
   formData.append('user_id', this.blogForm.get('user_id').value);
+  formData.append('employee_id', this.blogForm.get('employee_id').value);
+
   formData.append('project_id', this.projects.id);
   const id = task.id;
 
@@ -291,6 +294,8 @@ onSubmitAdd(task: Task, index) {
   formData.append("title", this.blogForm.get("title").value);
   formData.append("description", this.blogForm.get("description").value);
   formData.append("priority", this.blogForm.get("priority").value);
+  formData.append("employee_id", this.blogForm.get("employee_id").value);
+
   formData.append('user_id', this.blogForm.get('user_id').value);
   formData.append('project_id', this.projects.id);
 
@@ -383,6 +388,8 @@ onSubmitAdd(task: Task, index) {
           title: res.title,
           description: res.description,
           priority: res.priority,
+          employee_id: res.employee_id,
+
           user_id: this.currentUser.user_id,
         });
       }
@@ -400,6 +407,7 @@ onSubmitAdd(task: Task, index) {
         title: ["", Validators.required],
         description: ["", Validators.required],
         priority: ["", Validators.required],
+        employee_id: [""],
         user_id: [this.currentUser.user_id],
 
     });

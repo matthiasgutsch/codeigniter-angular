@@ -157,6 +157,16 @@
             </div>
 
 
+            <div class="p-field p-grid">
+                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Employee <span class="required">*</span></label>
+                <div class="p-col-12 p-md-10">
+                    <p-dropdown [options]="clients" placeholder="Scegli"
+                        [style]="{ width: '100%' }" formControlName="employee_id" optionLabel="username"
+                        optionValue="id">
+                    </p-dropdown>
+                </div>
+            </div>
+
 
             <button pButton pRipple icon="pi pi-save" label="salva" class="p-button pull-right p-button-success p-mr-2"
                 [disabled]="!blogForm.valid"></button>
@@ -209,7 +219,7 @@
                     <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Dipendente</label>
                     <div class="p-col-12 p-md-10">
                         <p-dropdown [options]="clients" placeholder="Scegli"
-                        [style]="{ width: '100%' }" formControlName="priority" optionLabel="username"
+                        [style]="{ width: '100%' }" formControlName="employee_id" optionLabel="username"
                         optionValue="id">
                     </p-dropdown>
                     </div>

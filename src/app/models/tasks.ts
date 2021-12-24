@@ -9,6 +9,7 @@ export interface Task {
     id: number;
     description: string;
     project_id: number;
+    employee_id: string;
     assigned_name: string;
   }
   
