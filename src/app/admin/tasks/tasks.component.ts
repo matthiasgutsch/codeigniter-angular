@@ -212,7 +212,6 @@ export class TasksComponent implements OnInit, OnDestroy {
       title: ["", Validators.required],
       description: [""],
       priority: [""],
-      project_id: [""],
       user_id: [this.currentUser.user_id],
 
   });
@@ -244,7 +243,7 @@ onSubmit(task: Task, index) {
   formData.append("priority", this.blogForm.get("priority").value);
   formData.append("description", this.blogForm.get("description").value);
   formData.append('user_id', this.blogForm.get('user_id').value);
-
+  formData.append('project_id', this.projects.id);
   const id = task.id;
 
   if (id) {
@@ -285,6 +284,7 @@ onSubmitAdd(task: Task, index) {
   formData.append("description", this.blogForm.get("description").value);
   formData.append("priority", this.blogForm.get("priority").value);
   formData.append('user_id', this.blogForm.get('user_id').value);
+  formData.append('project_id', this.projects.id);
 
   
     this.tasksService.create(formData).subscribe(

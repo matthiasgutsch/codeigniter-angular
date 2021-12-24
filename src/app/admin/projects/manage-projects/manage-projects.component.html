@@ -90,6 +90,8 @@
                                 {{col.header}}
                             </th>
                             <th width="200"></th>
+
+                            <th width="200"></th>
                         </tr>
 
                     </ng-template>
@@ -100,11 +102,12 @@
                                 {{rowData[col.field]}}
                             </td>
 
+                            <td>        <button pButton pRipple label="Project Board" class="p-button p-button-secondary p-mr-2"
+                                [routerLink]="['/admin/task/1', rowData.id]"></button></td>
                             <td class="action">
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
                                     [routerLink]="['/admin/projects/edit', rowData.id]"></button>
-                                    <button pButton pRipple label="Project Board" class="p-button p-button-success p-mr-2"
-                                    [routerLink]="['/admin/task/1', rowData.id]"></button>
+                            
                                 <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
                                     (click)="edit(rowData)"></button>
                                 <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"

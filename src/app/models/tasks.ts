@@ -8,6 +8,7 @@ export interface Task {
     user_id?: number;
     id: number;
     description: string;
+    project_id: number;
     assigned_name: string;
   }
   
