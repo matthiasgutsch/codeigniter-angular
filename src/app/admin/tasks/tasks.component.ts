@@ -183,8 +183,22 @@ export class TasksComponent implements OnInit, OnDestroy {
   ngOnInit() {
     
     this.spinner.show();
+
+    
+    this.projects ={
+      id:this.route.snapshot.params['project_id'],
+    }
+
+    this.projectsService.getId(this.projects.id).subscribe(value => {
+      this.project = value;
+
+
+
+    });
     this.getTasks();
-     this.spinner.hide();
+
+
+    this.spinner.hide();
 
   }
 
@@ -198,6 +212,7 @@ export class TasksComponent implements OnInit, OnDestroy {
       title: ["", Validators.required],
       description: [""],
       priority: [""],
+      project_id: [""],
       user_id: [this.currentUser.user_id],
 
   });
@@ -293,8 +308,7 @@ onSubmitAdd(task: Task, index) {
 
     getTasks() {
       this.spinner.show();
-
-      this.subscription = this.tasksService.getAllListbyUser().subscribe({
+      this.subscription = this.tasksService.getAllTasksListbyUser(this.projects.id).subscribe({
       next: (response: any) => {
         if (response.error) {
           

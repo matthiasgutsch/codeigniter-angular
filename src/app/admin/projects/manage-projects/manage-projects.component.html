@@ -63,7 +63,7 @@
                 <h3>Progetti</h3>
             </div>
             <div class="p-col-12 p-md-6">
-                <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/products/create']" label="Aggiungi"
+                <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/projects/create']" label="Aggiungi"
                     class="p-button p-button-primary p-mr-2 pull-right"></button>
                 <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()"
                     class="p-button-warning p-mr-2 pull-right" pTooltip="PDF" tooltipPosition="bottom"></button>
@@ -86,7 +86,6 @@
 
                     <ng-template pTemplate="header" let-columns>
                         <tr>
-                            <th width="80px"></th>
                             <th *ngFor="let col of cols">
                                 {{col.header}}
                             </th>
@@ -96,8 +95,7 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-rowData let-columns="columns">
                         <tr>
-                            <td *ngIf="rowData.image"><img [src]="rowData.image"
-                                    [routerLink]="['/admin/projects/edit', rowData.id]" class="img-responsive"></td>
+                           
                             <td *ngFor="let col of cols" [ngSwitch]="col.field">
                                 {{rowData[col.field]}}
                             </td>
@@ -105,6 +103,8 @@
                             <td class="action">
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
                                     [routerLink]="['/admin/projects/edit', rowData.id]"></button>
+                                    <button pButton pRipple label="Project Board" class="p-button p-button-success p-mr-2"
+                                    [routerLink]="['/admin/task/1', rowData.id]"></button>
                                 <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
                                     (click)="edit(rowData)"></button>
                                 <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"

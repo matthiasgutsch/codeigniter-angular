@@ -136,10 +136,6 @@ const routes: Routes = [
           { path: "settings/personal-data/edit/:id", component: PersonalDataFormComponent },
           { path: "settings/personal-data/create", component: PersonalDataFormComponent },
 
-
-
-
-
           { path: "settings/appointment-type", component: ManageAppointmentTypeComponent },
           { path: "settings/appointment-type/edit/:id", component: AppointmentTypeFormComponent },
           { path: "settings/appointment-type/create", component: AppointmentTypeFormComponent },
@@ -151,6 +147,7 @@ const routes: Routes = [
           { path: "reports", component: ReportsDashboardComponent },
 
           { path: "tasks", component: TasksComponent },
+          { path: "task/:id/:project_id", component: TasksComponent },
 
 
         ],

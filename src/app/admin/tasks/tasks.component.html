@@ -3,7 +3,7 @@
 
         <div class="p-field p-grid">
             <div class="p-col-12 p-md-6">
-                <h3>Progetto Cantiere 1</h3>
+                <h3 *ngIf="project">{{project.title}}</h3>
                 <p-progressBar [value]="donePriorityTasks.length / (lowPriorityTasks.length + mediumPriorityTasks.length + highPriorityTasks.length + donePriorityTasks.length) * 100 | number: '1.0-0'"></p-progressBar>
 
             </div>
@@ -216,7 +216,9 @@
                             <div class="col-md-9">
                                 <input type="hidden" formControlName="id">
                                 <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
+                                <input type="hidden" formControlName="project_id" value="{{project.id}}">
 
+                                
                             </div>
                         </div>
 
@@ -242,3 +244,6 @@
 </p-confirmDialog>
 
 <p-toast key="myKey1"></p-toast>
+
+
+

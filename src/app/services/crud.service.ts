@@ -42,6 +42,13 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     );
   }
 
+  getAllTasksListbyUser(project_id: number) {
+    const userId = this.currentUser.user_id;
+    return this._http.get<T>(this._base + '/user_project/' + project_id + '/' + userId).pipe(
+      catchError(this.handleError)
+    );
+  }
+
 
 
   count() {
