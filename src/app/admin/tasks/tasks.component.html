@@ -152,7 +152,10 @@
             <div class="p-field p-grid">
                 <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Descrizione Task <span class="required">*</span></label>
                 <div class="p-col-12 p-md-10">
-                    <input type="text" [style]="{ width: '100%' }" pInputText formControlName="description">
+
+                    <textarea [rows]="5" [cols]="30" [style]="{ width: '100%' }" pInputTextarea formControlName="description"></textarea>
+
+
                 </div>
             </div>
 
@@ -209,7 +212,8 @@
                 <div class="p-field p-grid">
                     <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Descrizione Task <span class="required">*</span></label>
                     <div class="p-col-12 p-md-10">
-                        <input type="text" [style]="{ width: '100%' }" pInputText formControlName="description">
+                        <textarea [rows]="5" [cols]="30" [style]="{ width: '100%' }" pInputTextarea formControlName="description"></textarea>
+
                     </div>
                 </div>
 
@@ -256,8 +260,10 @@
        
 
 
-        {{task.title}}
-        {{task.employee_id}}
+        <h4>{{task.title}}</h4>
+        {{task.description}}
+        <hr class="full">
+        {{ getEmployeeItem(task.employee_id)?.username }}
 
     </ng-template>
 
