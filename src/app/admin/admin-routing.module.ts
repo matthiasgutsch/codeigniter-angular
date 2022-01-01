@@ -150,6 +150,7 @@ const routes: Routes = [
           { path: "task/:project_id", component: TasksComponent },
 
 
+
         ],
       },
     ],

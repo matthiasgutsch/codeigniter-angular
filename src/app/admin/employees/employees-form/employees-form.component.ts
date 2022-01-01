@@ -20,6 +20,8 @@ import { Billings } from 'src/app/models/billings';
 import { PersonalDataService } from 'src/app/services/personal_data.service';
 import { Personal_data } from 'src/app/models/personal_data';
 import { NgxSpinnerService } from "ngx-spinner";
+import { Task } from 'src/app/models/tasks';
+import { TasksService } from 'src/app/services/tasks.service';
 
 
 @Component({
@@ -76,7 +78,8 @@ export class EmployeesFormComponent implements OnInit {
   personal_datas: any = [];
   personal_data: Personal_data;
   personName: string;
-
+  tasks: any = [];
+  
   trackByFn(index, item) {
     return item.id;
   }
@@ -90,7 +93,7 @@ export class EmployeesFormComponent implements OnInit {
     private comuniService: ComuniService,    
     private _location: Location,
     private appointmentsService: AppointmentsService,
-    private billingsService: BillingsService,
+    private tasksService: TasksService,
     private spinner: NgxSpinnerService,
 
     private confirmationService: ConfirmationService,
@@ -129,10 +132,18 @@ export class EmployeesFormComponent implements OnInit {
       (error) => (this.error = error)
     );
 
+
+
     const id = this.route.snapshot.paramMap.get("id");
 
 
-    
+    this.tasksService.find_tasks_employee(+id).subscribe(
+      (data: Task) => (this.tasks = data),
+      (error) => (this.error = error)
+    );
+
+
+
     if (id) {
       this.pageTitle = "Modifica Dipendente";
       this.deleteButton = true;
@@ -248,13 +259,7 @@ export class EmployeesFormComponent implements OnInit {
     return this.categories.find((item) => item.id === category_id);
   }
 
-  hasNoSelectedAppointments(){
-    return this.appointments.filter(appointment => appointment.title).length===0;
-  }
 
-  hasNoSelectedBillings(){
-    return this.billings.filter(billing => billing.title).length===0;
-  }
 
   onDelete(id: number, title: string) {
 

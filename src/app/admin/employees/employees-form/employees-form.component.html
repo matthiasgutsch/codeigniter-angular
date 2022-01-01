@@ -295,7 +295,29 @@
 
             <p-card>
     
-            
+                <p-timeline [value]="tasks">
+        
+                    <ng-template pTemplate="content" let-task>
+
+                       
+                        <p-card>
+                            <div class="p-grid">
+                                <div class="p-col-12 p-md-12">  
+
+                        <strong>{{task.title}}</strong><br>
+                        <p>{{task.description}}</p>
+                                    <br>
+
+                                    <p-tag class="p-mr-2">{{task.created_at | date:"dd/MM/yy"}}</p-tag> 
+
+                        <button pButton pRipple label="modifica" class="p-button p-button-small p-button-success p-mr-2" [routerLink]="['/admin/task/', task.project_id]"></button>
+
+                                </div>
+                    
+                            </div>
+                    </p-card>
+                    </ng-template>
+                </p-timeline>
 
               
             </p-card>

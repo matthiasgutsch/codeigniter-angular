@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { CrudOperations } from './crud-operations.interface';
 import { catchError } from 'rxjs/operators';
 import { Billings } from '../models/billings';
+import { Task } from '../models/tasks';
 
 export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   currentUser: any ;
@@ -116,6 +117,15 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   find_billings_by_appointment_id(id: number) {
     return this._http.get<Billings>(this._base + '/billings_by_appointment_id/' + id)
   }
+  
+
+  find_tasks_employee(id: ID ) {
+    const userId = this.currentUser.user_id;
+    return this._http.get<T>(this._base + '/tasks_by_employee/' + id + '/' + userId).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   
 
   find(id: ID) {
