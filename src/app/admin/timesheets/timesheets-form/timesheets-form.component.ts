@@ -21,16 +21,14 @@ import { Locations } from 'src/app/models/locations';
 import { LocationsService } from 'src/app/services/locations.service';
 import { Appointments } from 'src/app/models/appointments';
 import { SumPipe } from '../../pipe/sum.pipe';
-import { ProductsService } from 'src/app/services/products.service';
+import { TimesheetsService } from 'src/app/services/timesheets.service';
 import { Products } from 'src/app/models/products';
-import { Brand } from 'src/app/models/brand';
-import { BrandService } from 'src/app/services/brands.service';
-import { TagsService } from 'src/app/services/tags.service';
-import { Tags } from 'src/app/models/tags';
 import { SkillsService } from 'src/app/services/skills.service';
 import { map, tap } from 'rxjs/operators';
 import { Technical_data } from 'src/app/models/technical_data';
 import { TechnicalDataService } from 'src/app/services/technical_data.service';
+import { ProjectsService } from 'src/app/services/projects.service';
+import { Projects } from 'src/app/models/projects';
 
 
 export interface fPairs {
@@ -67,20 +65,15 @@ export class TimesheetsFormComponent implements OnInit {
   product: Products;
   blogForm: FormGroup;
   typeList: any[];
-  status: any[];
+  projects: any = [];
   stateOptions: any[];
 
   clients: any = [];
   client: Clients;
   arrString: string;
 
-  brands: any = [];
-  brand: Brand;
-  technical_datas: any = [];
-  technical_data: Technical_data;
-
-  tags: any = [];
-
+  employees: any = [];
+  employee: Employees;
 
   description: any;
   selectedWorks: SelectItem[] = [];
@@ -124,21 +117,21 @@ export class TimesheetsFormComponent implements OnInit {
     private messageService: MessageService,
     private clientsService: ClientsService,
     private _location: Location,
-    private productsService: ProductsService,
+    private timesheetsService: TimesheetsService,
     private skillsService: SkillsService,
-    private brandsService: BrandService,
+    private employeesService: EmployeesService,
     private worksService: WorksService,
     private categoryService: CategoryService,
+    private projectsService: ProjectsService,
+
     private confirmationService: ConfirmationService,
     private router: Router,
-    private tagsService: TagsService,
     private route: ActivatedRoute
   ) {
     if (this.date) {
       this.selectedDate = new Date(this.date);
     }
     this.typeList = TYPE_LIST;
-    this.status = STATUS_PRODUCTS;
     this.stateOptions = STATE_LIST;
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
   }
@@ -151,15 +144,14 @@ export class TimesheetsFormComponent implements OnInit {
 
    
 
-
-    this.technicalDataService.getAllListbyUser().subscribe(
-      (data: Technical_data) => (this.technical_datas = data),
+    this.projectsService.getAllListbyUser().subscribe(
+      (data: Projects) => (this.projects = data),
       (error) => (this.error = error)
     );
 
 
-    this.brandsService.getAllListbyUser().subscribe(
-      (data: Brand) => (this.brands = data),
+    this.employeesService.getAllListbyUser().subscribe(
+      (data: Employees) => (this.employees = data),
       (error) => (this.error = error)
     );
 
@@ -176,15 +168,11 @@ export class TimesheetsFormComponent implements OnInit {
     );
 
 
-    this.tagsService.getAllListbyUser().subscribe(
-      (data: Tags) => this.tags = data,
-      error => this.error = error
-    );
 
 
     const id = this.route.snapshot.paramMap.get("id");
 
-    this.productsService.skills(+id).subscribe(value => {
+    this.timesheetsService.skills(+id).subscribe(value => {
       this.skillsValues = value;
     });
 
@@ -194,7 +182,7 @@ export class TimesheetsFormComponent implements OnInit {
     if (id) {
       this.pageTitle = "Modifica Prodotto";
       
-      this.productsService.getId(+id).subscribe((res) => {
+      this.timesheetsService.getId(+id).subscribe((res) => {
 
         
         if (res.user_id == this.currentUser.user_id) {
@@ -203,8 +191,7 @@ export class TimesheetsFormComponent implements OnInit {
           description: res.description.split(','),
           category_id: res.category_id.split(','),
           status: res.status,
-          works_id: res.works_id.split(','),
-          brand_id: res.brand_id,
+          employee_id: res.employee_id,
           is_featured: res.is_featured,
           is_active: res.is_active,
           code: res.code,
@@ -215,7 +202,6 @@ export class TimesheetsFormComponent implements OnInit {
           price_extra: res.price_extra,
           id: res.id,
           data: res.data,
-          skills: this.skillsValues,
         });
 
         
@@ -240,8 +226,7 @@ export class TimesheetsFormComponent implements OnInit {
       is_featured: ["0"],
       category_id: [""],
       status: [""],
-      works_id: [""],
-      brand_id: [""],
+      employee_id: [""],
       is_active: ["0"],
       image: [""],
       code: [""],
@@ -249,67 +234,13 @@ export class TimesheetsFormComponent implements OnInit {
       code_int: [""],
       price: [""],
       price_extra: [""],
-      skills: this.initSkill(),
       
   });
 
   }
 
-  initSkill() {
-    var formArray = this.fb.array([]);
-    const id = this.route.snapshot.paramMap.get("id");
 
-    this.productsService.skills(+id).subscribe(
-      (res)=>{
-        this.skillsValues = res;
-
-        this.skillsValues.forEach((e)=>{
-          formArray.push(this.fb.group({
-            qty: [e.qty],
-            price: [e.price]
-          }))
-        })
-      }
-    )
-
-    /*formArray.push(this.fb.group({
-      qty: [''],
-      price: ['']
-    })) */
-    
-
-    return formArray;
-  }
-
-   
-  private createSkillFormGroup(skill:any): FormGroup{
-    return new FormGroup({'qty':new FormControl(skill.qty),'price':new FormControl(skill.price)})
-  }
-
-  public addSkill(skill:any){
-    this.skills.push(this.createSkillFormGroup(skill));
-  }
-
-
-  get skills() {
-    return this.blogForm.get('skills') as FormArray;
-  }
-   
-
-  newQuantity(): FormGroup {
-    return this.fb.group({
-      qty: "",
-      price: "",
-    })
-  }
-   
-  addQuantity() {
-    this.skills.push(this.newQuantity());
-  }
-   
-  removeQuantity(i:number) {
-    this.skills.removeAt(i);
-  }
+  
 
   getWorksItem(works_id: string, id: string) {
     return this.works.find(item => item.id === works_id);
@@ -373,8 +304,7 @@ export class TimesheetsFormComponent implements OnInit {
     formData.append("description_full", this.blogForm.get("description_full").value);
     formData.append("is_featured", this.blogForm.get("is_featured").value);
     formData.append("category_id", this.blogForm.get("category_id").value);
-    formData.append("works_id", this.blogForm.get("works_id").value);
-    formData.append("brand_id", this.blogForm.get("brand_id").value);
+    formData.append("employee_id", this.blogForm.get("employee_id").value);
     formData.append("is_active", this.blogForm.get("is_active").value);
     formData.append("image", this.blogForm.get("image").value);
     formData.append("code", this.blogForm.get("code").value);
@@ -383,13 +313,12 @@ export class TimesheetsFormComponent implements OnInit {
     formData.append("price_extra", this.blogForm.get("price_extra").value);
     formData.append("status", this.blogForm.get("status").value);
     formData.append('user_id', this.blogForm.get('user_id').value);
-    formData.append('skills', JSON.stringify(this.blogForm.get('skills').value));
 
 
     const id = this.blogForm.get("id").value;
 
     if (id) {
-      this.productsService.update(formData, +id).subscribe(
+      this.timesheetsService.update(formData, +id).subscribe(
         (res) => {
           if (res.status == "error") {
             this.uploadError = res.message;
@@ -402,7 +331,7 @@ export class TimesheetsFormComponent implements OnInit {
         (error) => (this.error = error)
       );
     } else {
-      this.productsService.create(formData).subscribe(
+      this.timesheetsService.create(formData).subscribe(
         (res) => {
           if (res.status === "error") {
             this.uploadError = res.message;

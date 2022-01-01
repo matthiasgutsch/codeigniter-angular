@@ -22,18 +22,21 @@
 <div class="p-fluid">
     <div class="p-field p-grid">
         <div class="p-col-12 p-md-12">
-            <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)"
-            (dayClick)="dayClick($event.detail)">
-        </ng-fullcalendar>
+      
+
+
+
             <p-card>
 
-                <p-table #dt [columns]="cols" [value]="products" [globalFilterFields]="['name', 'description']"
+
+
+                
+                <p-table #dt [columns]="cols" [value]="timesheets" [globalFilterFields]="['name', 'description']"
                     currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true"
                     [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
 
                     <ng-template pTemplate="header" let-columns>
                         <tr>
-                            <th width="80px"></th>
                             <th *ngFor="let col of cols">
                                 {{col.header}}
                             </th>
@@ -43,8 +46,6 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-rowData let-columns="columns">
                         <tr>
-                            <td *ngIf="rowData.image"><img [src]="rowData.image"
-                                    [routerLink]="['/admin/products/edit', rowData.id]" class="img-responsive"></td>
                             <td *ngFor="let col of cols" [ngSwitch]="col.field">
                                 {{rowData[col.field]}}
                             </td>

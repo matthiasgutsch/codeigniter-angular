@@ -97,13 +97,13 @@
                                 <div class="p-fluid">
 
                                     <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Marca <span
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Employee <span
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
 
-                                            <p-dropdown [options]="brands" [virtualScroll]="true" filter="true"
+                                            <p-dropdown [options]="employees" [virtualScroll]="true" filter="true"
                                                 [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }"
-                                                formControlName="brand_id" optionLabel="name" optionValue="name">
+                                                formControlName="employee_id" optionLabel="username" optionValue="id">
 
                                             </p-dropdown>
 
@@ -152,12 +152,12 @@
                                         <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Status <span
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
-                                            <p-dropdown [options]="status" [virtualScroll]="true" filter="true"
+                                            <p-dropdown [options]="projects" [virtualScroll]="true" filter="true"
                                                 [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }"
-                                                formControlName="status" optionLabel="label" optionValue="label">
+                                                formControlName="status" optionLabel="title" optionValue="id">
                                                 <ng-template let-option pTemplate="item">
 
-                                                    {{option.label}}
+                                                    {{option.title}}
 
                                                 </ng-template>
 
@@ -191,19 +191,7 @@
                                     </div>
                                 </div>
 
-                                <div class="p-fluid">
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Tags <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-
-                                            <p-multiSelect [options]="tags" display="chip" formControlName="works_id"
-                                                [(ngModel)]="selectedWorks" optionLabel="name" optionValue="id">
-                                            </p-multiSelect>
-
-                                        </div>
-                                    </div>
-                                </div>
+                               
 
                                 <div class="form-group form-row">
                                     <label class="col-md-3"></label>
@@ -216,50 +204,7 @@
 
                             </p-tabPanel>
 
-                            <p-tabPanel header="Dati tecnici">
-                                <div class="form-group form-row">
-
-                                    <button pButton pRipple icon="pi pi-plus" label="Aggiungi Dati technici"
-                                        class="p-button pull-right p-button-success p-mr-2"
-                                        (click)="addQuantity()"></button>
-
-                                    <button pButton pRipple icon="pi pi-cog" label="Configura Dati technici"
-                                        class="p-button pull-left p-button-primary p-mr-2"
-                                        routerLink="/admin/settings/technical-data"></button>
-                                </div>
-                                <table formArrayName="skills" style="width: 100%">
-
-                                    <tr *ngFor="let quantity of skills.controls; let i=index" [formGroupName]="i">
-                                        <td width="40%">
-
-                                            <p-dropdown [options]="technical_datas" [virtualScroll]="true" filter="true"
-                                                [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }"
-                                                formControlName="qty" optionLabel="name" optionValue="id">
-                                                <ng-template let-option pTemplate="item">
-
-                                                    {{option.name}}
-
-                                                </ng-template>
-
-                                            </p-dropdown>
-
-                                        </td>
-                                        <td>
-
-                                            <input ttype="text" placeholder="Valore" [style]="{ width: '100%' }"
-                                                pInputText formControlName="price">
-                                        </td>
-                                        <td>
-                                            <button pButton (click)="removeQuantity(i)" icon="pi pi-trash"
-                                                class="p-button p-button-danger p-mr-2"></button>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </p-tabPanel>
-
-                            <p-tabPanel header="Allegati">
-
-                            </p-tabPanel>
+                          
 
                         </p-tabView>
 

@@ -11,7 +11,7 @@
                 <button type="button" pButton pRipple label="Project Board" class="p-button p-button-secondary pull-right  p-mr-2"
                 [routerLink]="['/admin/task/', id]"></button>
 
-                <button pButton pRipple icon="pi pi-save" label="salva"
+                <button pButton pRipple icon="pi pi-save" type="submit" label="salva"
                     class="p-button pull-right p-button-success p-mr-2"
                     [disabled]="!blogForm.valid"></button>
           
@@ -24,7 +24,7 @@
     <div class="p-fluid">
         <div class="p-field p-grid">
 
-            <div class="p-col-12 p-md-12">
+            <div class="p-col-12 p-md-8">
                 <p-card>
                     <div class="blog-form">
                 
@@ -231,6 +231,12 @@
 
             </div>
 
+            <div class="p-col-12 p-md-4">
+                <p-card>
+                    
+                </p-card>
+
+            </div>
 
         </div>
 

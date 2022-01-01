@@ -19,7 +19,7 @@ import { Appointments } from 'src/app/models/appointments';
 import {formatDate} from '@angular/common';
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import { ProductsService } from 'src/app/services/products.service';
+import { TimesheetsService } from 'src/app/services/timesheets.service';
 import { Products } from 'src/app/models/products';
 import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brands.service';
@@ -33,6 +33,7 @@ import { Technical_data } from 'src/app/models/technical_data';
 import { TechnicalDataService } from 'src/app/services/technical_data.service';
 import { CalendarComponent } from 'ng-fullcalendar';
 import 'moment/locale/it'  // without this line it didn't work
+import { Timesheets } from 'src/app/models/timesheets';
 
 @Component({
   selector: 'app-manage-timesheets',
@@ -67,8 +68,8 @@ export class ManageTimesheetsComponent implements OnInit {
   displayEvent: any;
 
   productsData: any = [];
-  products: any = [];
-  product: Products;
+  timesheets: any = [];
+  timesheet: Timesheets;
   date: Date;
   skillsArray: any = [];
   categories: any = [];
@@ -97,13 +98,20 @@ trackByFn(index, item) {
 }
 
 
+startDate: Date;
+bsValue: Date = new Date();
+tues = new Date();
+
+weekNo: number;
+
+
 
 @ViewChild("dt", { static: false }) public dt: Table;
 @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
   constructor(
     private clientsService: ClientsService,
-    private productsService: ProductsService,
+    private timesheetsService: TimesheetsService,
     private worksService: WorksService,
     private locationsService: LocationsService, 
     private messageService: MessageService,
@@ -127,88 +135,14 @@ trackByFn(index, item) {
 
     const userId = this.currentUser.user_id;
     this.spinner.show();
-    this.calendarOptions = {
-    
-      editable: false,
-      eventLimit: false,
-      timeFormat: 'HH:mm', 
-      weekNumbers: true,
-      slotDuration: '00:15:00',
-      allDaySlot: false,
-      displayEventTime: false,
-      
-      header: {
-        right: 'prev,next',
-        left: 'title',
-
-      },
-      
-      events: [{
-        title: 'All Day Event',
-        start: yearMonth + '-01'
-    },
-    {
-        title: 'Long Event',
-        start: yearMonth + '-07',
-        end: yearMonth + '-10'
-    },
-    {
-        id: 999,
-        title: 'Repeating Event',
-        start: yearMonth + '-09T16:00:00'
-    },
-    {
-        id: 999,
-        title: 'Repeating Event',
-        start: yearMonth + '-16T16:00:00'
-    },
-    {
-        title: 'Conference',
-        start: yearMonth + '-11',
-        end: yearMonth + '-13'
-    },
-    {
-        title: 'Meeting',
-        start: yearMonth + '-12T10:30:00',
-        end: yearMonth + '-12T12:30:00'
-    },
-    {
-        title: 'Lunch',
-        start: yearMonth + '-12T12:00:00'
-    },
-    {
-        title: 'Meeting',
-        start: yearMonth + '-12T14:30:00'
-    },
-    {
-        title: 'Happy Hour',
-        start: yearMonth + '-12T17:30:00'
-    },
-    {
-        title: 'Dinner',
-        start: yearMonth + '-12T20:00:00'
-    },
-    {
-        title: 'Birthday Party',
-        start: yearMonth + '-13T07:00:00'
-    },
-    {
-        title: 'Click for Google',
-        url: 'http://google.com/',
-        start: yearMonth + '-28'
-    }],
-      locale: 'it',
-      timezone: 'UTC',
-      selectable: false,
-    };
-    this.productsService.getAllListbyUser().subscribe(data => {
-      this.products = data;
+   
+    this.timesheetsService.getAllListbyUser().subscribe(data => {
+      this.timesheets = data;
       this.cols = [
         { field: "title", header: "titolo" },
         { field: "code", header: "Codice" },
         { field: "status", header: "Status" },
-        { field: "price", header: "Prezzo" },
-        { field: "category_id", header: "Categoria" },
+        { field: "price", header: "Ore" },
         { field: "code_int", header: "Codice interno" },
         { field: "brand_id", header: "Brand" }
       ];
@@ -336,17 +270,17 @@ trackByFn(index, item) {
   }
 
   
-  view(product: Products) {
-    this.product = {...this.product};
+  view(timesheet: Timesheets) {
+    this.timesheet = {...this.timesheet};
     this.productDialog = true;
 }
 
 
 
-edit(product: Products) {
-  this.product = { ...product };
+edit(timesheet: Timesheets) {
+  this.timesheet = { ...timesheet };
   
-  this.selectedSkills = JSON.parse("" + this.product.skills + "");
+  this.selectedSkills = JSON.parse("" + this.timesheet.skills + "");
 
   
   this.productDialog = true;
@@ -359,7 +293,7 @@ edit(product: Products) {
 exportPdf() {
   // const doc = new jsPDF();
   const doc = new jsPDF('l','pt','A4');
-  doc['autoTable'](this.exportColumns, this.products);
+  doc['autoTable'](this.exportColumns, this.timesheets);
   // doc.autoTable(this.exportColumns, this.products);
   doc.save("prodotti.pdf");
 }
@@ -376,7 +310,7 @@ hideDialog() {
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.productsService.delete(+id).subscribe(
+        this.timesheetsService.delete(+id).subscribe(
           res => {
             console.log(res);
             this.ngOnInit();
