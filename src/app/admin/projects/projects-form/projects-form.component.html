@@ -1,9 +1,25 @@
-<div class="dash-header">
+<form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+    <div class="dash-header">
     <div class="dash-title">
+
+        <div class="p-field p-grid">
+            <div class="p-col-12 p-md-6">
+                <h3>{{pageTitle}}</h3>
+
+            </div>
+            <div class="p-col-12 p-md-6">
+                <button type="button" pButton pRipple label="Project Board" class="p-button p-button-secondary pull-right  p-mr-2"
+                [routerLink]="['/admin/task/', id]"></button>
+
+                <button pButton pRipple icon="pi pi-save" label="salva"
+                    class="p-button pull-right p-button-success p-mr-2"
+                    [disabled]="!blogForm.valid"></button>
+          
+            </div>
+        </div>
     </div>
 </div>
 
-<form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
 
     <div class="p-fluid">
         <div class="p-field p-grid">
@@ -11,21 +27,8 @@
             <div class="p-col-12 p-md-12">
                 <p-card>
                     <div class="blog-form">
-                        <div class="p-field p-grid">
-                            <div class="p-col-12 p-md-9">
-                                <h3>{{pageTitle}}</h3>
-                            </div>
-                            <div class="p-col-12 p-md-3">
-                                <button type="button" pButton pRipple label="Project Board" class="p-button p-button-secondary pull-right  p-mr-2"
-                                [routerLink]="['/admin/task/', id]"></button>
-
-                                <button pButton pRipple icon="pi pi-save" label="salva"
-                                    class="p-button pull-right p-button-success p-mr-2"
-                                    [disabled]="!blogForm.valid"></button>
-
-                            </div>
-                        </div>
-                        <hr class="full">
+                
+                     
 
                         <p-tabView>
                             <p-tabPanel header="Informazioni">

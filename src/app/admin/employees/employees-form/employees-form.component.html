@@ -294,7 +294,9 @@
         <div class="p-col-12 p-md-4">
 
             <p-card>
-    
+                <p-tabView>
+
+                    <p-tabPanel header="Elenco Tasks">
                 <p-timeline [value]="tasks">
         
                     <ng-template pTemplate="content" let-task>
@@ -311,6 +313,7 @@
                                     <p-tag class="p-mr-2">{{task.created_at | date:"dd/MM/yy"}}</p-tag> 
 
                         <button pButton pRipple label="modifica" class="p-button p-button-small p-button-success p-mr-2" [routerLink]="['/admin/task/', task.project_id]"></button>
+                        <button pButton pRipple label="visualizza" class="p-button p-button-small p-button-primary p-mr-2" (click)="viewItem(task)"></button>
 
                                 </div>
                     
@@ -318,7 +321,8 @@
                     </p-card>
                     </ng-template>
                 </p-timeline>
-
+                    </p-tabPanel>
+                </p-tabView>
               
             </p-card>
         </div>
@@ -326,6 +330,18 @@
 </div>
 
 
+<p-sidebar [(visible)]="productDialogView" position="right" [style]="{width:'40%'}">
+    <ng-template pTemplate="content">
+       
+
+
+        <h4>{{task.title}}</h4>
+        {{task.description}}
+        <hr class="full">
+
+    </ng-template>
+
+</p-sidebar>
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
 </p-confirmDialog>
 

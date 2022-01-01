@@ -10,6 +10,9 @@
             <div class="p-col-12 p-md-6">
                 <button pButton class="p-button-primary pull-right" (click)="goToAddTaskPage()">Aggiungi
                     task</button>
+                <button type="button" pButton class="p-button-secondary pull-right p-mr-2"  [routerLink]="['/admin/projects/edit/', project.id]">Modifica Progetto</button>
+
+          
             </div>
         </div>
     </div>
@@ -258,6 +261,7 @@
 <p-sidebar [(visible)]="productDialogView" position="right" [style]="{width:'40%'}">
     <ng-template pTemplate="content">
        
+        <app-initials-avatar firstName="{{ getEmployeeItem(task.employee_id)?.name | slice:0:1}}" lastName="{{ getEmployeeItem(task.employee_id)?.surname | slice:0:1}}"></app-initials-avatar>
 
 
         <h4>{{task.title}}</h4>

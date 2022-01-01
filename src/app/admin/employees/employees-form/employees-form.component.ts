@@ -79,7 +79,11 @@ export class EmployeesFormComponent implements OnInit {
   personal_data: Personal_data;
   personName: string;
   tasks: any = [];
+  task: Task;
+
   
+  productDialogView:  boolean = false;
+
   trackByFn(index, item) {
     return item.id;
   }
@@ -235,6 +239,20 @@ export class EmployeesFormComponent implements OnInit {
   }
 
 
+
+  
+  viewItem(task: Task) {
+    this.task = { ...task };
+    const id = task.id;
+    
+    this.tasksService.getId(+id).subscribe((data) => {
+     this.task = data,
+      error => this.error = error
+     });
+
+    this.productDialogView = true;
+  }
+
   getClientList() {
   this.employeesService.getAllListbyUser().subscribe(data => {
     this.clientsList = data;
@@ -339,6 +357,8 @@ export class EmployeesFormComponent implements OnInit {
     this.skills.push(this.newQuantity());
   }
   
+
+
   removeImageFile() {
     this.imagePath = "";
     console.log(this.myInputVariable.nativeElement.files);
