@@ -87,7 +87,7 @@ export class TasksComponent implements OnInit, OnDestroy {
   category: Category;
   productDialog: boolean = false;
   productDialogAdd: boolean = false;
-
+  productDialogView: boolean = false;
   appointmentsDialog: boolean = false;
   clients: any = [];
   project_id: string;
@@ -415,6 +415,22 @@ onSubmitAdd(task: Task, index) {
     this.productDialog = true;
   }
 
+
+
+
+  
+  viewItem(task: Task) {
+    this.task = { ...task };
+    const id = task.id;
+    
+    this.tasksService.getId(+id).subscribe((data) => {
+     this.task = data,
+      error => this.error = error
+     });
+
+    this.productDialogView = true;
+  }
+
   getPerformaceCount():number{
     let pendingTasks = JSON.parse(localStorage.getItem('pendingTaskList')).length;
     let inProgressTasks = JSON.parse(localStorage.getItem('inProgressTaskList')).length;
@@ -486,5 +502,9 @@ onSubmitAdd(task: Task, index) {
     this.subscription.unsubscribe();
   }
 
+
+  getEmployeeItem(task: Task, id: string) {
+    return this.clients.find((item) => item.id === task);
+  }
 
 }

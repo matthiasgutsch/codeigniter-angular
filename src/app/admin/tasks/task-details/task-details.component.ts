@@ -11,6 +11,8 @@ export class TaskDetailsComponent {
   @Input() borderColor: String;
   @Output() deleteItem = new EventEmitter<any>();
   @Output() editItem = new EventEmitter<any>();
+  @Output() viewItem = new EventEmitter<any>();
+  @Output() getEmployeeItem = new EventEmitter<any>();
 
   deleteTask(id, title, type, index) {
     this.deleteItem.emit({id, title, type, index});
@@ -19,4 +21,14 @@ export class TaskDetailsComponent {
   editTask(task) {
     this.editItem.emit(task);
   }
+
+  viewTask(task) {
+    this.viewItem.emit(task);
+  }
+
+  getCategoryItem(task) {
+    this.getEmployeeItem.emit(task.employee_id);
+  }
+
+  
 }

@@ -6,7 +6,7 @@
         <h5>{{ task.title }}</h5>
 
 
-        <p class="q"> {{task.employee_id}}</p>
+       <!--  <p class="q"> {{task.employee_id}}</p>-->
         
         <div class="card-text fs-small" *ngIf="task.due_date">Due date:
             {{task.due_date}}
@@ -15,18 +15,16 @@
 
         </div>
     </div>
-    <div class="p-col-12 p-md-2">
 
-        <div class="drag-me"></div>
-    </div>
 
     <div class="p-col-12 p-md-12">
 
         <hr class="full">
 
 
-            <a (click)="editTask(task)" class="p-button p-button-primary p-mr-2"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-            <a (click)="deleteTask(task.id, task.title, 'high', i)" class="p-button p-button-danger"><i class="fa fa-trash-o ml-2" aria-hidden="true" ></i></a>
+        <button type="button" (click)="editTask(task)" class="p-button p-button-small p-button-success p-mr-2" pButton icon="fa fa-pencil" label="modifica"></button>
+        <button type="button" (click)="viewTask(task)" class="p-button p-button-small p-button-primary p-mr-2" pButton icon="fa fa-eye" label="visualizza"></button>
+        <button type="button" (click)="deleteTask(task.id, task.title, 'high', i)" class="p-button p-button-small  p-button-danger" pButton icon="fa fa-trash-o" label="cancella"></button>
 
     </div>
     </div>

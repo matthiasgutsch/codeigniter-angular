@@ -40,7 +40,7 @@
                             [cdkDropListData]="lowPriorityTasks"
                             [cdkDropListConnectedTo]="[donePriorityTasksList, mediumPriorityTasksList, highPriorityTasksList]"
                             (cdkDropListDropped)="dropLowPriorityTasksList($event)">
-                            <app-task-details (deleteItem)="deleteTask($event)" (editItem)="editItem($event)"
+                            <app-task-details (deleteItem)="deleteTask($event)" (editItem)="editItem($event)" (viewItem)="viewItem($event)"
                                 [tasks]="lowPriorityTasks" [borderColor]="'border-info'"></app-task-details>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                             [cdkDropListData]="mediumPriorityTasks"
                             [cdkDropListConnectedTo]="[donePriorityTasksList, highPriorityTasksList, lowPriorityTasksList]"
                             (cdkDropListDropped)="dropMediumPriorityTasksList($event)">
-                            <app-task-details (deleteItem)="deleteTask($event)" (editItem)="editItem($event)"
+                            <app-task-details (deleteItem)="deleteTask($event)" (editItem)="editItem($event)" (viewItem)="viewItem($event)"
                                 [tasks]="mediumPriorityTasks" [borderColor]="'border-warning'"></app-task-details>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                             [cdkDropListData]="highPriorityTasks"
                             [cdkDropListConnectedTo]="[donePriorityTasksList, mediumPriorityTasksList, lowPriorityTasksList]"
                             (cdkDropListDropped)="dropHighPriorityTasksList($event, $id)">
-                            <app-task-details (deleteItem)="deleteTask($event)" (editItem)="editItem($event)"
+                            <app-task-details (deleteItem)="deleteTask($event)" (editItem)="editItem($event)"  (viewItem)="viewItem($event)"
                                 [tasks]="highPriorityTasks" [borderColor]="'border-danger'"></app-task-details>
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                             [cdkDropListData]="donePriorityTasks"
                             [cdkDropListConnectedTo]="[highPriorityTasksList, mediumPriorityTasksList, lowPriorityTasksList]"
                             (cdkDropListDropped)="dropDonePriorityTasksList($event, $id)">
-                            <app-task-details (deleteItem)="deleteTask($event)" (editItem)="editItem($event)"
+                            <app-task-details (deleteItem)="deleteTask($event)" (editItem)="editItem($event)" (viewItem)="viewItem($event)"
                                 [tasks]="donePriorityTasks" [borderColor]="'border-danger'"></app-task-details>
                         </div>
                     </div>
@@ -249,12 +249,15 @@
 </p-sidebar>
 
 
+
+
 <p-sidebar [(visible)]="productDialogView" position="right" [style]="{width:'40%'}">
     <ng-template pTemplate="content">
        
 
 
         {{task.title}}
+        {{task.employee_id}}
 
     </ng-template>
 
