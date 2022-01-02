@@ -106,6 +106,7 @@ import { BusyConfig, NgBusyModule } from 'ng-busy';
 import {ProgressBarModule} from 'primeng/progressbar';
 import { ManageTimesheetsComponent } from './timesheets/manage-timeheets/manage-timesheets.component';
 import { TimesheetsFormComponent } from './timesheets/timesheets-form/timesheets-form.component';
+import { EmployeesTasksComponent } from './employees/employees-tasks/employees-tasks.component';
 
 
 @NgModule({
@@ -125,6 +126,7 @@ import { TimesheetsFormComponent } from './timesheets/timesheets-form/timesheets
     TimesheetsFormComponent,
     QuotesFormComponent,
     OrdersFormComponent,
+    EmployeesTasksComponent,
     ManageOrdersComponent,
     ManagePersonalDataComponent,
     PersonalDataFormComponent,

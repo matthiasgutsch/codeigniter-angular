@@ -156,12 +156,7 @@ weekNo: number;
         title: col.header,
         dataKey: col.field
       }));
-      this.getTags();
-      this.getCategories();
-      this.getBrands();
-      this.getTechnicalData();
 
-      
       this.spinner.hide();
 
     });

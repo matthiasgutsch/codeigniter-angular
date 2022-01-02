@@ -71,7 +71,6 @@ export class ManageEmployeesComponent implements OnInit {
 
         { field: "date", header: "Data di nascità" },
         { field: "phone", header: "Cellulare" },
-        { field: "city", header: "Indirizzo" }
   
       ];
       this._selectedColumns = this.cols;

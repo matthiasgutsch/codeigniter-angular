@@ -84,6 +84,9 @@
                             <th *ngFor="let col of cols">
                                 {{col.header}} 
                             </th>
+                            <th></th>
+                            <th></th>
+
                             <th width="200"></th>
                         </tr>
                        
@@ -97,8 +100,16 @@
                             <td *ngFor="let col of cols">
                                 {{rowData[col.field]}}
                             </td>
-                
+
+                            <td> <button pButton pRipple label="Timesheet" class="p-button p-button-primary p-mr-2"
+                                [routerLink]="['/admin/employee/timesheets/', rowData.id]"></button></td>
+                            
+
+                            <td> <button pButton pRipple label="Tasks" class="p-button p-button-secondary p-mr-2"
+                                [routerLink]="['/admin/employee/task/', rowData.id]"></button></td>
+                            
                             <td class="action">
+                               
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
                                 [routerLink]="['/admin/employees/edit', rowData.id]"></button>
                             <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
