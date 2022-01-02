@@ -49,6 +49,7 @@ import { TasksComponent } from './tasks/tasks.component';
 import { ManageTimesheetsComponent } from './timesheets/manage-timeheets/manage-timesheets.component';
 import { TimesheetsFormComponent } from './timesheets/timesheets-form/timesheets-form.component';
 import { EmployeesTasksComponent } from './employees/employees-tasks/employees-tasks.component';
+import { EmployeesTimesheetsComponent } from './employees/employees-timeheets/employees-timeheets.component';
 
 const routes: Routes = [
   {
@@ -73,7 +74,6 @@ const routes: Routes = [
           { path: "timesheets/create", component: TimesheetsFormComponent },
           { path: "timesheets/edit/:id",component: TimesheetsFormComponent,},
 
-          { path: "employee/timesheets/:id", component: ManageTimesheetsComponent },
 
           { path: "projects", component: ManageProjectsComponent },
           { path: "projects/create", component: ProjectsFormComponent },
@@ -91,6 +91,8 @@ const routes: Routes = [
           { path: "employees/edit/:id", component: EmployeesFormComponent },
           { path: "employees/create", component: EmployeesFormComponent },
 
+          { path: "employee/timesheets/:id", component: EmployeesTimesheetsComponent },
+          { path: "employee/task/:id", component: EmployeesTasksComponent },
 
           { path: "orders", component: ManageOrdersComponent },
           { path: "orders/edit/:id",component: OrdersFormComponent,},
@@ -151,7 +153,6 @@ const routes: Routes = [
           { path: "tasks", component: TasksComponent },
           { path: "task/:project_id", component: TasksComponent },
 
-          { path: "employee/task/:id", component: EmployeesTasksComponent },
 
 
         ],
