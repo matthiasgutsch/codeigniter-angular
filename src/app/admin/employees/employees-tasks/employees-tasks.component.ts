@@ -22,6 +22,7 @@ import { Personal_data } from 'src/app/models/personal_data';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Task } from 'src/app/models/tasks';
 import { TasksService } from 'src/app/services/tasks.service';
+import { Employees } from 'src/app/models/employees';
 
 
 @Component({
@@ -81,7 +82,9 @@ export class EmployeesTasksComponent implements OnInit {
   tasks: any = [];
   task: Task;
 
-  
+  employees: any = [];
+  employee: Employees;
+
   productDialogView:  boolean = false;
 
   trackByFn(index, item) {
@@ -125,6 +128,18 @@ export class EmployeesTasksComponent implements OnInit {
 
     const userId = this.currentUser.user_id;
     this.getClientList();
+
+    this.employees = {
+      id:this.route.snapshot.params['id'],
+    }
+
+    this.employeesService.getId(this.employees.id).subscribe(value => {
+      this.employee = value;
+
+
+
+    });
+
 
     this.comuniService.getAllList().subscribe(
       (data: Comuni) => (this.comuni = data),
