@@ -18,38 +18,45 @@
         </p-card>
 
         </div>
-    </div>
-    <div class="p-field p-grid">
+  
 
-        <div class="p-col-12 p-md-3" *ngFor="let task of tasks">
+        
 
+        <div class="p-col-12 p-md-12">  
 
             <p-card>
-                <div class="p-grid">
-                    <div class="p-col-12 p-md-12">  
 
-            <strong>{{task.title}}</strong><br>
-            <p>{{task.description}}</p>
-                        <br>
+                <p-table #dt [columns]="cols" [value]="tasks" [globalFilterFields]="['name', 'description']"  [responsive]="true" currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
+    
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Titolo</th>
+                              <th>Descrizione</th>
 
-                        <p-tag class="p-mr-2" severity="warning" *ngIf="task.priority === '1'">Da Fare</p-tag> 
-                        <p-tag class="p-mr-2" severity="warning" *ngIf="task.priority === '2'">25%</p-tag> 
-                        <p-tag class="p-mr-2" severity="warning" *ngIf="task.priority === '3'">75%</p-tag> 
-                        <p-tag class="p-mr-2" severity="warning" *ngIf="task.priority === '4'">Finito</p-tag> 
+                            <th>Status</th>
+                        </tr>
+                       
+                    </ng-template>
+                    <ng-template pTemplate="body" let-task>
+                        <tr>
+                         
+                            <td>
+                                {{task.title}}
+                            </td>
+                            <td>{{task.description}}</td>
+                            <td>
+                                <p-tag class="p-mr-2" severity="warning" *ngIf="task.priority === '1'">Da Fare</p-tag> 
+                                <p-tag class="p-mr-2" severity="warning" *ngIf="task.priority === '2'">25%</p-tag> 
+                                <p-tag class="p-mr-2" severity="warning" *ngIf="task.priority === '3'">75%</p-tag> 
+                                <p-tag class="p-mr-2" severity="success" *ngIf="task.priority === '4'">Finito</p-tag> 
+                            </td>
+                           
+                        </tr>
+                    </ng-template>
+                </p-table> 
 
-                        <p-tag class="p-mr-2">{{task.created_at | date:"dd/MM/yy"}}</p-tag> 
-
-            <button pButton pRipple label="modifica" class="p-button p-button-small p-button-success p-mr-2" [routerLink]="['/admin/task/', task.project_id]"></button>
-            <button pButton pRipple label="visualizza" class="p-button p-button-small p-button-primary p-mr-2" (click)="viewItem(task)"></button>
-
-                    </div>
-        
-                </div>
-        </p-card>
-
-          
-        </div>
-    </div>
+            </p-card>
+        </div></div>
 </div>
 
 

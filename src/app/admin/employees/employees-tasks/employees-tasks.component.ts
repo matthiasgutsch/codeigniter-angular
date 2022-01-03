@@ -156,11 +156,26 @@ export class EmployeesTasksComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get("id");
 
 
-    this.tasksService.find_tasks_employee(+id).subscribe(
-      (data: Task) => (this.tasks = data),
-      (error) => (this.error = error)
-    );
+    this.tasksService.find_tasks_employee(+id).subscribe(data => {
+      this.tasks = data;
 
+
+      this.cols = [
+        { field: "title", header: "titolo" },
+        { field: "code", header: "Codice" },
+        { field: "status", header: "Status" },
+        { field: "price", header: "Ore" },
+        { field: "code_int", header: "Codice interno" },
+        { field: "brand_id", header: "Brand" }
+      ];
+     
+      this._selectedColumns = this.cols;
+      this.exportColumns = this.cols.map(col => ({
+        title: col.header,
+        dataKey: col.field
+      }));
+  
+    });
 
 
     if (id) {
