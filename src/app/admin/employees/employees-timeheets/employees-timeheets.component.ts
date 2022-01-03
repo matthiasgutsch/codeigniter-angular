@@ -107,6 +107,7 @@ bsValue: Date = new Date();
 tues = new Date();
 
 weekNo: number;
+timesheetCountTotalEmployee: Timesheets;
 
 employees: any = [];
 employee: Employees;
@@ -154,7 +155,7 @@ employee: Employees;
         { field: "title", header: "titolo" },
         { field: "code", header: "Codice" },
         { field: "status", header: "Status" },
-        { field: "price", header: "Ore" },
+        { field: "hours", header: "Ore" },
         { field: "code_int", header: "Codice interno" },
         { field: "brand_id", header: "Brand" }
       ];
@@ -163,6 +164,12 @@ employee: Employees;
         { field: "description", header: "Codice" },
   
       ];
+
+      this.timesheetsService.count_total_timesheets_employee(+id).subscribe(
+        (data: Timesheets) => this.timesheetCountTotalEmployee = data,
+        error => this.error = error
+        );
+
       this._selectedColumns = this.cols;
       this.exportColumns = this.cols.map(col => ({
         title: col.header,
@@ -188,6 +195,8 @@ employee: Employees;
 
   }
 
+
+  
 
   getBrands() {
   this.brandService.getAllListbyUser().subscribe(

@@ -135,6 +135,14 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
 
+  count_total_timesheets_employee(id: ID) {
+    const userId = this.currentUser.user_id;
+    return this._http.get<T>(this._base + '/count_total_timesheets_employee/' + id + '/' + userId).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
   find(id: ID) {
     return this._http.get<T>(this._base + 'appointments/' + id).pipe(
       catchError(this.handleError)
@@ -156,6 +164,8 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
       catchError(this.handleError)
     );
   }
+
+  
 
   countTotalNotPaid(id: ID) {
     const userId = this.currentUser.user_id;
