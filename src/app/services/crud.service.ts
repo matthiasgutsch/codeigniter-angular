@@ -93,12 +93,13 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     );
   }
 
+
+
   find_client(id: ID) {
     return this._http.get<T>(this._base + '/appointments_by_client/id/' + id).pipe(
       catchError(this.handleError)
     );
   }
-
   
   find_billing_client(id: number, ) {
     return this._http.get<Billings>(this._base + '/billings_by_client/' + id)
@@ -126,7 +127,13 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     );
   }
 
-  
+  find_timesheets_employee(id: ID) {
+    const userId = this.currentUser.user_id;
+    return this._http.get<T>(this._base + '/timesheets_by_employee/' + id + '/' + userId).pipe(
+      catchError(this.handleError)
+    );
+  }
+
 
   find(id: ID) {
     return this._http.get<T>(this._base + 'appointments/' + id).pipe(

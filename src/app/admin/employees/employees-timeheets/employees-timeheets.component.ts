@@ -144,7 +144,11 @@ employee: Employees;
     const userId = this.currentUser.user_id;
     this.spinner.show();
    
-    this.timesheetsService.getAllListbyUser().subscribe(data => {
+
+    const id = this.route.snapshot.paramMap.get("id");
+
+
+    this.timesheetsService.find_timesheets_employee(+id).subscribe(data => {
       this.timesheets = data;
       this.cols = [
         { field: "title", header: "titolo" },
