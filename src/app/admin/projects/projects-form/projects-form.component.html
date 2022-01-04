@@ -233,7 +233,18 @@
 
             <div class="p-col-12 p-md-4">
                 <p-card>
-                    
+
+                    <table class="billings-list">
+                        <tr *ngFor="let entry of timesheetsEmployee | keys">
+                            <td>
+                                {{ getTechnicalDataItem(entry.value.id)?.username }}
+                                </td>
+                            <td>{{entry.value.value}}</td>
+                        </tr>
+
+                    </table>
+
+
                 </p-card>
 
             </div>

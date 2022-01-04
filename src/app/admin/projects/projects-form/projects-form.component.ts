@@ -30,7 +30,9 @@ import { map, tap } from 'rxjs/operators';
 import { Technical_data } from 'src/app/models/technical_data';
 import { TechnicalDataService } from 'src/app/services/technical_data.service';
 import { ProjectsService } from 'src/app/services/projects.service';
-
+import { Timesheets } from 'src/app/models/timesheets';
+import { TimesheetsService } from 'src/app/services/timesheets.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 export interface fPairs {
   qty: number,
@@ -71,12 +73,13 @@ export class ProjectsFormComponent implements OnInit {
 
   clients: any = [];
   client: Clients;
+  brands: any = [];
 
   employee: any = [];
-  employees: Employees;
+  employees: any = [];
   arrString: string;
 
-  brands: any = [];
+  timesheetsEmployee: any = [];
   brand: Brand;
   technical_datas: any = [];
   technical_data: Technical_data;
@@ -92,13 +95,13 @@ export class ProjectsFormComponent implements OnInit {
 
   locations: any = [];
   location: Locations;
-  
+
   cities: Blog[];
   format1: string = "";
   format2: string = "";
   selectedCity: Blog;
   selectedClients: SelectItem[];
-  
+
   selectedDate: Date;
   date: Date;
   works_id: any;
@@ -112,16 +115,16 @@ export class ProjectsFormComponent implements OnInit {
   itemForm: FormGroup;
   skillsForm: FormGroup;
   skillsValues: any = [];
-  
+
   trackByFn(index, item) {
     return item.id;
   }
 
- 
+
 
   constructor(
     private fb: FormBuilder,
-    private appointmentsService: AppointmentsService,
+    private timesheetsService: TimesheetsService,
     private technicalDataService: TechnicalDataService,
     private messageService: MessageService,
     private clientsService: ClientsService,
@@ -132,6 +135,7 @@ export class ProjectsFormComponent implements OnInit {
     private brandsService: BrandService,
     private worksService: WorksService,
     private categoryService: CategoryService,
+    private spinner: NgxSpinnerService,
     private confirmationService: ConfirmationService,
     private router: Router,
     private route: ActivatedRoute
@@ -147,82 +151,48 @@ export class ProjectsFormComponent implements OnInit {
 
   ngOnInit() {
     const userId = this.currentUser.user_id;
+    this.spinner.show();
 
-    this.getselectedWorks;
-    this.getselectedCategories;
-
-   
-
-
-    this.technicalDataService.getAllListbyUser().subscribe(
-      (data: Technical_data) => (this.technical_datas = data),
-      (error) => (this.error = error)
-    );
-
-
-    this.brandsService.getAllListbyUser().subscribe(
-      (data: Brand) => (this.brands = data),
-      (error) => (this.error = error)
-    );
-
-
-    this.worksService.getAllListbyUser().subscribe(
-      (data: Works) => (this.works = data),
-      (error) => (this.error = error)
-    );
-
-
-    this.employeesService.getAllListbyUser().subscribe(
-      (data: Employees) => (this.employees = data),
-      (error) => (this.error = error)
-    );
-
-
-
-    this.categoryService.getAllListbyUser().subscribe(
-      (data: Category) => (this.categories = data),
-      (error) => (this.error = error)
-    );
 
 
     const id = this.route.snapshot.paramMap.get("id");
 
 
-
-
-
-
     if (id) {
       this.pageTitle = "Modifica Progetto";
-      
+
       this.projectsService.getId(+id).subscribe((res) => {
 
-        
-        if (res.user_id == this.currentUser.user_id) {
-        this.blogForm.patchValue({
-          title: res.title,
-          description: res.description.split(','),
-          category_id: res.category_id.split(','),
-          status: res.status,
-          employee_id: res.employee_id,
-          client_id: res.client_id,
-          is_featured: res.is_featured,
-          is_active: res.is_active,
-          code: res.code,
-          user_id: this.currentUser.user_id,
-          description_full: res.description_full,
-          code_int: res.code_int,
-          price: res.price,
-          price_extra: res.price_extra,
-          id: res.id,
-          data: res.data,
-        });
+        this.timesheetsService.timesheet_by_project_employee(+id).subscribe(
+          (data: Timesheets) => (this.timesheetsEmployee = data),
+          (error) => (this.error = error)
+        );
 
-        
-      }
-      else {
-        this.router.navigate(['/admin/products']);
-      }
+        if (res.user_id == this.currentUser.user_id) {
+          this.blogForm.patchValue({
+            title: res.title,
+            description: res.description.split(','),
+            category_id: res.category_id.split(','),
+            status: res.status,
+            employee_id: res.employee_id,
+            client_id: res.client_id,
+            is_featured: res.is_featured,
+            is_active: res.is_active,
+            code: res.code,
+            user_id: this.currentUser.user_id,
+            description_full: res.description_full,
+            code_int: res.code_int,
+            price: res.price,
+            price_extra: res.price_extra,
+            id: res.id,
+            data: res.data,
+          });
+
+
+        }
+        else {
+          this.router.navigate(['/admin/products']);
+        }
         this.imagePath = res.image;
         this.id = res.id;
       });
@@ -249,8 +219,15 @@ export class ProjectsFormComponent implements OnInit {
       code_int: [""],
       price: [""],
       price_extra: [""],
-      
-  });
+
+    });
+
+    this.getselectedWorks;
+    this.getselectedCategories;
+    this.getBrands();
+    this.getCategories();
+    this.getEmployees();
+    this.spinner.hide();
 
   }
 
@@ -259,10 +236,10 @@ export class ProjectsFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get("id");
 
     this.projectsService.skills(+id).subscribe(
-      (res)=>{
+      (res) => {
         this.skillsValues = res;
 
-        this.skillsValues.forEach((e)=>{
+        this.skillsValues.forEach((e) => {
           formArray.push(this.fb.group({
             qty: [e.qty],
             price: [e.price]
@@ -275,17 +252,17 @@ export class ProjectsFormComponent implements OnInit {
       qty: [''],
       price: ['']
     })) */
-    
+
 
     return formArray;
   }
 
-   
-  private createSkillFormGroup(skill:any): FormGroup{
-    return new FormGroup({'qty':new FormControl(skill.qty),'price':new FormControl(skill.price)})
+
+  private createSkillFormGroup(skill: any): FormGroup {
+    return new FormGroup({ 'qty': new FormControl(skill.qty), 'price': new FormControl(skill.price) })
   }
 
-  public addSkill(skill:any){
+  public addSkill(skill: any) {
     this.skills.push(this.createSkillFormGroup(skill));
   }
 
@@ -293,7 +270,13 @@ export class ProjectsFormComponent implements OnInit {
   get skills() {
     return this.blogForm.get('skills') as FormArray;
   }
-   
+
+
+
+  getTechnicalDataItem(employee_id: string, id: string) {
+    return this.employees.find(item => item.id === employee_id);
+  }
+
 
   newQuantity(): FormGroup {
     return this.fb.group({
@@ -301,12 +284,12 @@ export class ProjectsFormComponent implements OnInit {
       price: "",
     })
   }
-   
+
   addQuantity() {
     this.skills.push(this.newQuantity());
   }
-   
-  removeQuantity(i:number) {
+
+  removeQuantity(i: number) {
     this.skills.removeAt(i);
   }
 
@@ -315,8 +298,48 @@ export class ProjectsFormComponent implements OnInit {
   }
 
   getselectedWorks() {
-  this.selectedWorks = this.works_id.split(',');
+    this.selectedWorks = this.works_id.split(',');
   }
+
+
+
+
+  getTechnicalDatas() {
+    this.technicalDataService.getAllListbyUser().subscribe(
+      (data: Technical_data) => (this.technical_datas = data),
+      (error) => (this.error = error)
+    )
+  };
+
+  getBrands() {
+    this.brandsService.getAllListbyUser().subscribe(
+      (data: Brand) => (this.brands = data),
+      (error) => (this.error = error)
+    )
+  };
+
+
+  getWorks() {
+    this.worksService.getAllListbyUser().subscribe(
+      (data: Works) => (this.works = data),
+      (error) => (this.error = error)
+    )
+  };
+
+  getEmployees() {
+    this.employeesService.getAllListbyUser().subscribe(
+      (data: Employees) => (this.employees = data),
+      (error) => (this.error = error)
+    )
+  };
+
+
+  getCategories() {
+    this.categoryService.getAllListbyUser().subscribe(
+      (data: Category) => (this.categories = data),
+      (error) => (this.error = error)
+    )
+  };
 
 
 
@@ -327,13 +350,13 @@ export class ProjectsFormComponent implements OnInit {
 
   getselectedCategories() {
     this.selectedCategories = this.category_id.split(',');
-    }
+  }
 
   goback() {
     this._location.back();
   }
 
-  
+
 
 
   onSelectedFile(event) {
