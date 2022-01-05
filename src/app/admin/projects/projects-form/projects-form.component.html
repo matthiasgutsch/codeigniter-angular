@@ -235,16 +235,29 @@
                 <p-card>
                     <h3>Resoconto per Progetto</h3>
                     <table class="billings-list">
-                        <tr *ngFor="let entry of timesheetsEmployee | keys">
-                            <td>
-                                {{ getTechnicalDataItem(entry.value.id)?.username }}
+                        <tr *ngFor="let entry of timesheetsEmployee">
+                            <td> 
+                                {{ getTechnicalDataItem(entry.id)?.username }}
                                 </td>
                             <td>
-                                {{entry.value.value * getTechnicalDataItem(entry.value.id)?.id | currency :'EUR':'symbol':'1.2-2'}}
+                                {{entry.value * 45 | currency :'EUR':'symbol':'1.2-2'}}
                                 </td>
-                                <td>{{entry.value.value}}</td>
+                                <td>{{entry.value}}</td>
                         </tr>
 
+                        <tr>
+                            <td></td>
+                            <td>{{getTotal(timesheetsEmployee) | currency :'EUR':'symbol':'1.2-2'}}</td>
+                            <td>{{getTotal(timesheetsEmployee)}}</td>
+
+                        </tr>
+
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>{{code - getTotal(timesheetsEmployee) | currency :'EUR':'symbol':'1.2-2'}}</td>
+
+                        </tr>
                     </table>
 
 

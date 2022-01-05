@@ -52,7 +52,8 @@ export class ProjectsFormComponent implements OnInit {
   imagePath: any;
   blogs: Blog;
   blog: Blog;
-  id: number
+  id: number;
+  code: string;
   appointments: Appointments;
   appointment: any;
 
@@ -95,6 +96,7 @@ export class ProjectsFormComponent implements OnInit {
 
   locations: any = [];
   location: Locations;
+  total:number;
 
   cities: Blog[];
   format1: string = "";
@@ -163,11 +165,9 @@ export class ProjectsFormComponent implements OnInit {
 
       this.projectsService.getId(+id).subscribe((res) => {
 
-        this.timesheetsService.timesheet_by_project_employee(+id).subscribe(
-          (data: Timesheets) => (this.timesheetsEmployee = data),
-          (error) => (this.error = error)
-        );
+       
 
+        
         if (res.user_id == this.currentUser.user_id) {
           this.blogForm.patchValue({
             title: res.title,
@@ -195,6 +195,8 @@ export class ProjectsFormComponent implements OnInit {
         }
         this.imagePath = res.image;
         this.id = res.id;
+        this.code = res.code;
+
       });
     } else {
       this.pageTitle = "Aggiungi Prodotto";
@@ -222,15 +224,43 @@ export class ProjectsFormComponent implements OnInit {
 
     });
 
+    
     this.getselectedWorks;
     this.getselectedCategories;
     this.getBrands();
     this.getCategories();
     this.getEmployees();
     this.spinner.hide();
+    this.getTimesheet_by_project_employee(id);
+   
+   
+
+
 
   }
 
+  getTimesheet_by_project_employee(id) {
+  this.timesheetsService.timesheet_by_project_employee(+id).subscribe(
+    (data: Timesheets) => (this.timesheetsEmployee = data),
+    (error) => (this.error = error)
+  )};
+
+
+  getTotal(entry) {
+    let total = 0;
+  
+    entry.forEach((item) => {
+      total += Number(item.value * 45);
+    });
+
+    return total;
+  }
+
+
+  public locationsSum() {
+    return this.timesheetsEmployee.map(data => data.id).reduce((a, b) => a + b);
+  }
+  
   initSkill() {
     var formArray = this.fb.array([]);
     const id = this.route.snapshot.paramMap.get("id");
@@ -416,6 +446,8 @@ export class ProjectsFormComponent implements OnInit {
             this.uploadError = res.message;
           } else {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
+            this.getTimesheet_by_project_employee(id);
+            this.getTotal;
             //this.router.navigate(['/admin/products']);
 
           }
