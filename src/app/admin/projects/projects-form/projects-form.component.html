@@ -239,7 +239,9 @@
                             <td>
                                 {{ getTechnicalDataItem(entry.value.id)?.username }}
                                 </td>
-                            <td>{{entry.value.value}}</td>
+                            <td>
+                                {{entry.value.value * 43.40 | currency :'EUR':'symbol':'1.2-2'}}
+                                </td>
                         </tr>
 
                     </table>
