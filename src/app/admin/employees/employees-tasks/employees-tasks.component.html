@@ -128,40 +128,8 @@
                 </div>
             </p-card>
 
+
             
-            <p-card>
-
-                
-                <p-table #dt [columns]="cols" [value]="tasks" [globalFilterFields]="['name', 'description']"  [responsive]="true" currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
-    
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th>Titolo</th>
-                              <th>Descrizione</th>
-
-                            <th>Status</th>
-                        </tr>
-                       
-                    </ng-template>
-                    <ng-template pTemplate="body" let-task>
-                        <tr>
-                         
-                            <td>
-                                {{task.title}}
-                            </td>
-                            <td>{{task.description}}</td>
-                            <td>
-                                <p-tag class="p-mr-2" severity="warning" *ngIf="task.priority === '1'">Da Fare</p-tag> 
-                                <p-tag class="p-mr-2" severity="warning" *ngIf="task.priority === '2'">25%</p-tag> 
-                                <p-tag class="p-mr-2" severity="warning" *ngIf="task.priority === '3'">75%</p-tag> 
-                                <p-tag class="p-mr-2" severity="success" *ngIf="task.priority === '4'">Finito</p-tag> 
-                            </td>
-                           
-                        </tr>
-                    </ng-template>
-                </p-table> 
-
-            </p-card>
         </div></div>
 </div>
 
