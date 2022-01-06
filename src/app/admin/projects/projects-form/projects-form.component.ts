@@ -53,7 +53,7 @@ export class ProjectsFormComponent implements OnInit {
   blogs: Blog;
   blog: Blog;
   id: number;
-  code: string;
+  price: any;
   appointments: Appointments;
   appointment: any;
 
@@ -76,7 +76,7 @@ export class ProjectsFormComponent implements OnInit {
   client: Clients;
   brands: any = [];
 
-  employee: any = [];
+  employee: Employees;
   employees: any = [];
   arrString: string;
 
@@ -162,10 +162,7 @@ export class ProjectsFormComponent implements OnInit {
 
     if (id) {
       this.pageTitle = "Modifica Progetto";
-
       this.projectsService.getId(+id).subscribe((res) => {
-
-       
 
         
         if (res.user_id == this.currentUser.user_id) {
@@ -195,7 +192,9 @@ export class ProjectsFormComponent implements OnInit {
         }
         this.imagePath = res.image;
         this.id = res.id;
-        this.code = res.code;
+        this.price = res.price;
+
+        this.getTotalPercent(this.price);
 
       });
     } else {
@@ -232,8 +231,7 @@ export class ProjectsFormComponent implements OnInit {
     this.getEmployees();
     this.spinner.hide();
     this.getTimesheet_by_project_employee(id);
-   
-   
+    this.getTotal();
 
 
 
@@ -246,16 +244,34 @@ export class ProjectsFormComponent implements OnInit {
   )};
 
 
-  getTotal(entry) {
+  getTotal() {
     let total = 0;
-  
-    entry.forEach((item) => {
-      total += Number(item.value * 45);
+    this.timesheetsEmployee.forEach((item) => {
+      total += Number(item.value * this.getTechnicalDataItem(item.id)?.contract);
     });
 
-    return total;
+    return total; 
   }
 
+  getTotalPercent(price: any) {
+    let total = 0;
+    this.timesheetsEmployee.forEach((item) => {
+      total += Number(item.value * this.getTechnicalDataItem(item.id)?.contract);
+    });
+
+    return total / this.price * 100;
+     
+  }
+
+
+  getTotalHours() {
+    let total = 0;
+    this.timesheetsEmployee.forEach((item) => {
+      total += Number(item.value);
+    });
+
+    return total; 
+  }
 
   public locationsSum() {
     return this.timesheetsEmployee.map(data => data.id).reduce((a, b) => a + b);
@@ -303,7 +319,7 @@ export class ProjectsFormComponent implements OnInit {
 
 
 
-  getTechnicalDataItem(employee_id: string, id: string) {
+  getTechnicalDataItem(employee_id: string) {
     return this.employees.find(item => item.id === employee_id);
   }
 
@@ -447,7 +463,7 @@ export class ProjectsFormComponent implements OnInit {
           } else {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
             this.getTimesheet_by_project_employee(id);
-            this.getTotal;
+            this.getTotal();
             //this.router.navigate(['/admin/products']);
 
           }

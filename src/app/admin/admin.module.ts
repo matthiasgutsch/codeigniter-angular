@@ -74,6 +74,7 @@ import { ManageLocationsComponent } from './settings/locations/manage-locations/
 import { ManageTypeComponent } from './settings/type/manage-type/manage-type.component';
 import { TypeFormComponent } from './settings/type/type-form/type-form.component';
 import { SumPipeModule } from './pipe/sum.pipe';
+import { ShortNumberPipe } from './pipe/short-number.pipe';
 
 import { CompanyFormComponent } from './settings/company/company-form/company-form.component';
 import { ProductsFormComponent } from './products/products-form/products-form.component';
@@ -147,6 +148,7 @@ import { EmployeesTimesheetsComponent } from './employees/employees-timeheets/em
     AppointmentTypeFormComponent,
     JoinPipe,
     KeysPipe,
+    ShortNumberPipe,
     LimitPipe,
     TotalPipe,
     SplitCommaStringPipe,
@@ -172,6 +174,7 @@ import { EmployeesTimesheetsComponent } from './employees/employees-timeheets/em
     exports: [
       LimitPipe,
       KeysPipe,
+      ShortNumberPipe,
       TotalPipe,
       DragDropModule,
     ],

@@ -103,10 +103,8 @@ export class BillingsFormComponent implements OnInit {
   skillsValues: any = [];
   total: number;
   viewMode = '1';
-  fiscaltype: '22';
   editForm: boolean = true;
-
-  
+  company_tax: any;
   customerName: string;
   address: string;
   contactNo: number;
@@ -153,6 +151,8 @@ export class BillingsFormComponent implements OnInit {
     this.getselectedWorks;
   
 
+
+    
     this.worksService.getAllListbyUser().subscribe(
       (data: Works) => (this.works = data),
       (error) => (this.error = error)
@@ -348,7 +348,7 @@ export class BillingsFormComponent implements OnInit {
               ['Posizione', 'Qty', 'Prezzo', 'Totale'],
               ...this.skillsValues.map(p => ([p.description, p.qty, p.price, (p.price*p.qty).toFixed(2)])),
               [{text: 'Totale senza Iva', colSpan: 3}, {}, {}, (Math.round(this.subTotal * 100) / 100).toFixed(2)],
-              [{text: 'Iva (22%)', colSpan: 3}, {}, {}, (Math.round(this.vat * 100) / 100).toFixed(2)],
+              [{text: 'Iva (' + this.company.fiscaltype + '%)', colSpan: 3}, {}, {}, (Math.round(this.vat * 100) / 100).toFixed(2)],
               [{bold: true, fontSize: 14, text: 'Totale', colSpan: 3}, {}, {}, (Math.round(this.grandTotal * 100) / 100).toFixed(2)]
             ]
           }
@@ -527,7 +527,7 @@ export class BillingsFormComponent implements OnInit {
       }
     }
     this.subTotal = total;
-    this.vat = this.subTotal / 100 * 22;
+    this.vat = this.subTotal / 100 * this.company.fiscaltype;
     this.grandTotal = this.subTotal + this.vat;
 
   }
@@ -586,7 +586,7 @@ export class BillingsFormComponent implements OnInit {
   removeQuantity(i: number): void {
     let totalCostOfItem = this.blogForm.get('skills')?.value[i].qty * this.blogForm.get('skills')?.value[i].price;
     this.subTotal = this.subTotal - totalCostOfItem;
-    this.vat = this.subTotal / 100 * 22;
+    this.vat = this.subTotal / 100 * this.company.fiscaltype;
     this.grandTotal = this.subTotal + this.vat;
     (<FormArray>this.blogForm.get('skills')).removeAt(i);
   }

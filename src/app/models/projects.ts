@@ -14,7 +14,7 @@ export class Projects {
     is_featured: boolean;
     is_active: boolean;
     created_at: Date;
-    code: string;
+    code: any;
     code_int: string;
     files: string;
     price: string;

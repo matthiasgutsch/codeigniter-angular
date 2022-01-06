@@ -132,10 +132,11 @@ export class TasksComponent implements OnInit, OnDestroy {
   myMonth = formatDate(new Date(), 'dd/MM/yyyy', 'en')  ;
   valueProcess: number;
   projects: any = [];
+  project: Projects;
   availableProducts:  any = [];
   selectedProducts: any = [];
   draggedProduct: any;
-  project: Projects;
+
   boardData: any = [];
   skills = [];
 
@@ -422,7 +423,7 @@ onSubmitAdd(task: Task, index) {
   viewItem(task: Task) {
     this.task = { ...task };
     const id = task.id;
-    
+
     this.tasksService.getId(+id).subscribe((data) => {
      this.task = data,
       error => this.error = error

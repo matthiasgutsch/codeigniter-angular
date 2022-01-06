@@ -22,4 +22,6 @@ export class Employees {
   fiscalcode: string;
   date: string;
   fiscalnumber: string;
+  contract: number;
+
 }
