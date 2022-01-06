@@ -50,7 +50,6 @@ import { Task } from 'src/app/models/tasks';
   templateUrl: './tasks.component.html'
 })
 export class TasksComponent implements OnInit, OnDestroy {
-
   calendarOptions: any;
   events: any;
   appointments: any = [];
@@ -58,11 +57,9 @@ export class TasksComponent implements OnInit, OnDestroy {
   appointmentsToday: any = [];
   locations: any = [];
   location: Locations;
-
   employees: any = [];
   employee: Employees;
   task: Task;
-
   works: any = [];
   work: Works;
   clientsCount: any;
@@ -73,7 +70,6 @@ export class TasksComponent implements OnInit, OnDestroy {
   blogForm: FormGroup;
   typeList: any;
   priorityList: any;
-
   cities: Blog[];
   format1: string = "";
   format2: string = "";

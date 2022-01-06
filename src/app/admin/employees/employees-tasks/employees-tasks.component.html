@@ -24,8 +24,114 @@
 
         <div class="p-col-12 p-md-12">  
 
+
+            <p-card>
+                <div class="p-field p-grid" [ngBusy]="[busy, busy1, busy2]">
+    
+    
+    
+                    <div class="p-col-3">
+                        <div class="p-col-12">
+    
+                        <div class="p-grid">
+                            <div class="p-col-9">
+                                <h4>Da Fare</h4>
+                            </div>
+                            <div class="p-col-3">
+                                <p-tag class="pull-right"  severity="warning" icon="pi pi-clone" [value]="lowPriorityTasks.length"></p-tag> 
+                            </div>
+                        </div>
+                        </div>
+                        <div class="drop-wrapper">
+                            <div class="drop-column" cdkDropList #lowPriorityTasksList="cdkDropList"
+                                [cdkDropListData]="lowPriorityTasks"
+                                [cdkDropListConnectedTo]="[donePriorityTasksList, mediumPriorityTasksList, highPriorityTasksList]"
+                                (cdkDropListDropped)="dropLowPriorityTasksList($event)">
+                                <app-task-details (deleteItem)="deleteTask($event)" (editItem)="editItem($event)" (viewItem)="viewItem($event)"
+                                    [tasks]="lowPriorityTasks" [borderColor]="'border-info'"></app-task-details>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="p-col-3">
+                        
+                        <div class="p-col-12">
+    
+                            <div class="p-grid">
+                                <div class="p-col-9">
+                                    <h4>25% Fatto</h4>
+                                </div>
+                                <div class="p-col-3">
+                                    <p-tag class="pull-right"  severity="warning" icon="pi pi-clone" [value]="mediumPriorityTasks.length"></p-tag> 
+                                </div>
+                            </div>
+                            </div>
+               
+                        <div class="drop-wrapper">
+                            <div class="drop-column" cdkDropList #mediumPriorityTasksList="cdkDropList"
+                                [cdkDropListData]="mediumPriorityTasks"
+                                [cdkDropListConnectedTo]="[donePriorityTasksList, highPriorityTasksList, lowPriorityTasksList]"
+                                (cdkDropListDropped)="dropMediumPriorityTasksList($event)">
+                                <app-task-details (deleteItem)="deleteTask($event)" (editItem)="editItem($event)" (viewItem)="viewItem($event)"
+                                    [tasks]="mediumPriorityTasks" [borderColor]="'border-warning'"></app-task-details>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="p-col-3"> 
+                        
+                        <div class="p-col-12">
+    
+                            <div class="p-grid">
+                                <div class="p-col-9">
+                                    <h4>75% Fatto</h4>
+                                </div>
+                                <div class="p-col-3">
+                                    <p-tag class="pull-right"  severity="warning" icon="pi pi-clone" [value]="highPriorityTasks.length"></p-tag> 
+                                </div>
+                            </div>
+                            </div>
+       
+                        <div class="drop-wrapper">
+                            <div class="drop-column" cdkDropList #highPriorityTasksList="cdkDropList"
+                                [cdkDropListData]="highPriorityTasks"
+                                [cdkDropListConnectedTo]="[donePriorityTasksList, mediumPriorityTasksList, lowPriorityTasksList]"
+                                (cdkDropListDropped)="dropHighPriorityTasksList($event, $id)">
+                                <app-task-details (deleteItem)="deleteTask($event)" (editItem)="editItem($event)"  (viewItem)="viewItem($event)"
+                                    [tasks]="highPriorityTasks" [borderColor]="'border-danger'"></app-task-details>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-col-3">
+                        <div class="p-col-12">
+    
+                            <div class="p-grid">
+                                <div class="p-col-9">
+                                    <h4>Finito</h4>
+                                </div>
+                                <div class="p-col-3">
+                                    <p-tag class="pull-right" severity="success" icon="pi pi-clone" [value]="donePriorityTasks.length"></p-tag> 
+                                </div>
+                            </div>
+                            </div>
+                   
+                        <div class="drop-wrapper">
+                            <div class="drop-column" cdkDropList #donePriorityTasksList="cdkDropList"
+                                [cdkDropListData]="donePriorityTasks"
+                                [cdkDropListConnectedTo]="[highPriorityTasksList, mediumPriorityTasksList, lowPriorityTasksList]"
+                                (cdkDropListDropped)="dropDonePriorityTasksList($event, $id)">
+                                <app-task-details (deleteItem)="deleteTask($event)" (editItem)="editItem($event)" (viewItem)="viewItem($event)"
+                                    [tasks]="donePriorityTasks" [borderColor]="'border-danger'"></app-task-details>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </p-card>
+
+            
             <p-card>
 
+                
                 <p-table #dt [columns]="cols" [value]="tasks" [globalFilterFields]="['name', 'description']"  [responsive]="true" currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
     
                     <ng-template pTemplate="header">

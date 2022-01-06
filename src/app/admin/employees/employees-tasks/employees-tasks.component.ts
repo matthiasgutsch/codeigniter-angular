@@ -1,8 +1,12 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { EmployeesService } from '../../../services/employees.service';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ViewChild } from '@angular/core';
 import { Clients } from '../../../models/clients';
 import { Category } from '../../../models/category';
 import { FormControl } from '@angular/forms';
@@ -23,14 +27,13 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { Task } from 'src/app/models/tasks';
 import { TasksService } from 'src/app/services/tasks.service';
 import { Employees } from 'src/app/models/employees';
-
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-employees-tasks',
   templateUrl: './employees-tasks.component.html'
 })
 export class EmployeesTasksComponent implements OnInit {
-  @ViewChild("myInput", { static: false }) myInputVariable: ElementRef;
 
   pageTitle: string;
   error: string;
@@ -39,7 +42,21 @@ export class EmployeesTasksComponent implements OnInit {
   clients: Clients;
   client: Clients;
 
+  donePriorityTasks: Task[] = [];
+  backupDonePriorityTasks: Task[] = [];
+  highPriorityTasks: Task[] = [];
+  backupHighPriorityTasks: Task[] = [];
+  mediumPriorityTasks: Task[] = [];
+  backupMediumPriorityTasks: Task[] = [];
+  lowPriorityTasks: Task[] = [];
+  backupLowPriorityTasks: Task[] = [];
 
+  busy: Subscription;
+  busy1: Subscription;
+  busy2: Subscription;
+  subscription: Subscription;
+
+  
   clientsList: any = [];
   clientList: Clients;
 
@@ -115,11 +132,6 @@ export class EmployeesTasksComponent implements OnInit {
     this.stateOptions = STATE_LIST;
     this.businessStateOptions = BUSINESS_STATE_LIST;
 
-
-    this.route.paramMap.subscribe((params) => {
-      this.ngOnInit();
-    });
-
   }
 
   ngOnInit() {
@@ -127,7 +139,6 @@ export class EmployeesTasksComponent implements OnInit {
     this.spinner.show();
 
     const userId = this.currentUser.user_id;
-    this.getClientList();
 
     this.employees = {
       id:this.route.snapshot.params['id'],
@@ -135,9 +146,6 @@ export class EmployeesTasksComponent implements OnInit {
 
     this.employeesService.getId(this.employees.id).subscribe(value => {
       this.employee = value;
-
-
-
     });
 
 
@@ -155,119 +163,116 @@ export class EmployeesTasksComponent implements OnInit {
 
     const id = this.route.snapshot.paramMap.get("id");
 
-
-    this.tasksService.find_tasks_employee(+id).subscribe(data => {
-      this.tasks = data;
-
-
-      this.cols = [
-        { field: "title", header: "titolo" },
-        { field: "code", header: "Codice" },
-        { field: "status", header: "Status" },
-        { field: "price", header: "Ore" },
-        { field: "code_int", header: "Codice interno" },
-        { field: "brand_id", header: "Brand" }
-      ];
-     
-      this._selectedColumns = this.cols;
-      this.exportColumns = this.cols.map(col => ({
-        title: col.header,
-        dataKey: col.field
-      }));
-  
-    });
-
-
-    if (id) {
-      this.pageTitle = "Modifica Dipendente";
-      this.deleteButton = true;
-      
-     
-
-      this.employeesService.getId(+id).subscribe((res) => {
-        if (res.user_id == this.currentUser.user_id) {
-        this.blogForm.patchValue({
-          name: res.name,
-          surname: res.surname,
-          username: res.name + ' ' + res.surname,
-          city: res.city,
-          zip: res.zip,
-          address: res.address,
-          province: res.province,
-          region: res.region,
-          email: res.email,
-          phone: res.phone,
-          fiscalcode: res.fiscalcode,
-          fiscalnumber: res.fiscalnumber,
-          description: res.description,
-          user_id: this.currentUser.user_id,
-          category_id: res.category_id,
-          is_featured: res.is_featured,
-          is_active: res.is_active,
-          date: res.date,
-          id: res.id,
-        });
-        }
-        else {
-          this.router.navigate(['/admin/employees']);
-
-        }
-        this.imagePath = res.image;
-        this.personName = res.name + ' ' + res.surname;
-
-      });
-    } else {
-      this.deleteButton = false;
-      this.pageTitle = "Aggiungi Dipendente";
-    }
-
-
-
-
-    this.blogForm = this.fb.group({
-      id: [""],
-      name: ["", Validators.required],
-      surname: ["", Validators.required],
-      username: [""],
-      city: ["", Validators.required],
-      zip: ["", Validators.required],
-      address: ["", Validators.required],
-      province: ["", Validators.required],
-      region: [""],
-      email: ["", Validators.required],
-      phone: ["", Validators.required],
-      fiscalcode: new FormControl("",Validators.compose([codFisc])),
-      fiscalnumber: new FormControl(""),
-      description: [""],
-      is_featured: ["0"],
-      user_id: [this.currentUser.user_id],
-      category_id: ["", Validators.required],
-      is_active: ["0"],
-      image: [""],
-      date: ["", Validators.required],
-    });
-
-
-  this.spinner.hide();
+    this.getTasks(id);
+    this.spinner.hide();
  
 
 
   }
   
 
-  onSelectedFile(event) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.blogForm.get("image").setValue(file);
+  dropDonePriorityTasksList(event: CdkDragDrop<string[]>) {
+    event.item.data.priority = 4;
+    this.updatePriority(event);
+  }
 
-      let reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = (_event) => {
-        this.imagePath = reader.result;
-      };
+
+  dropHighPriorityTasksList(event: CdkDragDrop<string[]>) {
+    event.item.data.priority = 3;
+    this.updatePriority(event);
+  }
+
+  dropMediumPriorityTasksList(event: CdkDragDrop<string[]>, id) {
+    event.item.data.priority = 2;
+    this.updatePriority(event);
+  }
+
+  dropLowPriorityTasksList(event: CdkDragDrop<string[]>) {
+    event.item.data.priority = 1;
+    this.updatePriority(event);
+  }
+
+
+  updatePriority(event) {
+    const id = event.item.data.id;
+    const formData = new FormData();
+    formData.set('priority', event.item.data.priority);
+    
+    this.busy2 = this.tasksService.update_priority(formData, +id).subscribe({
+      next: (response: any) => {
+        if (response.error) {
+        } else {
+          this.drop(event);
+          this.messageService.add({key: 'myKey1', severity:'success', summary: 'Conferma', detail: 'Salvato con successo'});
+
+        }
+      },
+    });
+  }
+
+
+  getPerformaceCount():number{
+    let pendingTasks = JSON.parse(localStorage.getItem('pendingTaskList')).length;
+    let inProgressTasks = JSON.parse(localStorage.getItem('inProgressTaskList')).length;
+    let completedTasks = JSON.parse(localStorage.getItem('completedTaskList')).length;
+    return Math.round((completedTasks / (pendingTasks + inProgressTasks + completedTasks)) * 100);
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
     }
   }
 
+
+  ngOnDestroy() {
+    this.busy1 ? this.busy1.unsubscribe() : '';
+    this.busy2 ? this.busy2.unsubscribe(): '';
+    this.busy ? this.busy.unsubscribe(): '';
+    this.subscription.unsubscribe();
+  }
+
+
+  getTasks(id) {
+    this.spinner.show();
+    this.subscription = this.tasksService.find_tasks_employee(+id).subscribe({
+    next: (response: any) => {
+      if (response.error) {
+        
+      } else {
+        response.forEach((task) => {
+          if (task.priority === '4') {
+            this.donePriorityTasks.push(task);
+          } else if (task.priority === '3') {
+            this.highPriorityTasks.push(task);
+          } else if (task.priority === '2') {
+            this.mediumPriorityTasks.push(task);
+          } else if (task.priority === '1') {
+            this.lowPriorityTasks.push(task);
+          }
+        });
+      }
+    },
+  });
+
+  this.backupDonePriorityTasks = this.donePriorityTasks;
+  this.backupHighPriorityTasks = this.highPriorityTasks;
+  this.backupLowPriorityTasks = this.lowPriorityTasks;
+  this.backupMediumPriorityTasks = this.mediumPriorityTasks;
+
+ }
+  
 
 
   
@@ -283,26 +288,7 @@ export class EmployeesTasksComponent implements OnInit {
     this.productDialogView = true;
   }
 
-  getClientList() {
-  this.employeesService.getAllListbyUser().subscribe(data => {
-    this.clientsList = data;
-    this.cols = [
-      { field: "username", header: "Nome" },
-    ];
-    this._selectedColumns = this.cols;
-    this.exportColumns = this.cols.map(col => ({
-      title: col.header,
-      dataKey: col.field
-    }));
-  });
-  }
 
-
-  removeQuantity(i:number) {
-    
-    this.skills.removeAt(i);
-  }
-  
   getCategoryItem(category_id: string, id: string) {
     return this.categories.find((item) => item.id === category_id);
   }
@@ -335,66 +321,7 @@ export class EmployeesTasksComponent implements OnInit {
   }
 
 
-  initSkill() {
-    var formArray = this.fb.array([]);
-    const id = this.route.snapshot.paramMap.get("id");
-
-    this.employeesService.skills(+id).subscribe(
-      (res)=>{
-        this.skillsValues = res;
-
-        this.skillsValues.forEach((e)=>{
-          formArray.push(this.fb.group({
-            qty: [e.qty],
-            price: [e.price]
-          }))
-        })
-      }
-    )
-
-    /*formArray.push(this.fb.group({
-      qty: [''],
-      price: ['']
-    })) */
-    
-
-    return formArray;
-  }
-
    
-  private createSkillFormGroup(skill:any): FormGroup{
-    return new FormGroup({'qty':new FormControl(skill.qty),'price':new FormControl(skill.price)})
-  }
-
-  public addSkill(skill:any){
-    this.skills.push(this.createSkillFormGroup(skill));
-  }
-
-
-  get skills() {
-    return this.blogForm.get('skills') as FormArray;
-  }
-   
-
-  newQuantity(): FormGroup {
-    return this.fb.group({
-      qty: "",
-      price: "",
-    })
-  }
-   
-  addQuantity() {
-    this.skills.push(this.newQuantity());
-  }
-  
-
-
-  removeImageFile() {
-    this.imagePath = "";
-    console.log(this.myInputVariable.nativeElement.files);
-    this.myInputVariable.nativeElement.value = "";
-    console.log(this.myInputVariable.nativeElement.files);
-  }
 
   get title() {
     return this.blogForm.get("title");
@@ -443,7 +370,6 @@ export class EmployeesTasksComponent implements OnInit {
           } else {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
            // this._location.back();
-           this.getClientList();
 
           }
         },
