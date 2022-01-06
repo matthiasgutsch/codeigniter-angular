@@ -109,7 +109,6 @@ import { ManageTimesheetsComponent } from './timesheets/manage-timeheets/manage-
 import { TimesheetsFormComponent } from './timesheets/timesheets-form/timesheets-form.component';
 import { EmployeesTasksComponent } from './employees/employees-tasks/employees-tasks.component';
 import { EmployeesTimesheetsComponent } from './employees/employees-timeheets/employees-timeheets.component';
-import { ProjectsViewComponent } from './projects/projects-view/projects-view.component';
 
 
 @NgModule({
@@ -161,7 +160,6 @@ import { ProjectsViewComponent } from './projects/projects-view/projects-view.co
     LocationsFormComponent,
     CompanyFormComponent,
     ManageLocationsComponent,
-    ProjectsViewComponent,
     AppointmentsFormComponent,
     CategoryFormComponent,
     SettingsComponent,
