@@ -167,6 +167,7 @@ export class EmployeesFormComponent implements OnInit {
           region: res.region,
           email: res.email,
           phone: res.phone,
+          contract: res.contract,
           fiscalcode: res.fiscalcode,
           fiscalnumber: res.fiscalnumber,
           description: res.description,
@@ -214,6 +215,7 @@ export class EmployeesFormComponent implements OnInit {
       category_id: ["", Validators.required],
       is_active: ["0"],
       image: [""],
+      contract: [""],
       date: ["", Validators.required],
     });
 
@@ -402,6 +404,7 @@ export class EmployeesFormComponent implements OnInit {
     formData.append("is_active", this.blogForm.get("is_active").value);
     formData.append("image", this.blogForm.get("image").value);
     formData.append("date", this.blogForm.get("date").value);
+    formData.append("contract", this.blogForm.get("contract").value);
 
     const id = this.blogForm.get("id").value;
 
