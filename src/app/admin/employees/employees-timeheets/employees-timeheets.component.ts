@@ -35,6 +35,8 @@ import { CalendarComponent } from 'ng-fullcalendar';
 import 'moment/locale/it'  // without this line it didn't work
 import { Timesheets } from 'src/app/models/timesheets';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ProjectsService } from 'src/app/services/projects.service';
+import { Projects } from 'src/app/models/projects';
 
 
 @Component({
@@ -91,6 +93,9 @@ export class EmployeesTimesheetsComponent implements OnInit {
   technical_data: Technical_data;
   skills:  any[] = [];
   batches: any[];
+  projects: any = [];
+  project: Projects;
+  
   showDialog() {
     this.productDialog = true;
 }
@@ -119,7 +124,7 @@ employee: Employees;
   constructor(
     private clientsService: ClientsService,
     private timesheetsService: TimesheetsService,
-    private worksService: WorksService,
+    private projectsService: ProjectsService,
     private locationsService: LocationsService, 
     private messageService: MessageService,
     private employeesService: EmployeesService,
@@ -182,11 +187,14 @@ employee: Employees;
   
       this.employeesService.getId(this.employees.id).subscribe(value => {
         this.employee = value;
-  
-  
-  
       });
 
+
+      this.projectsService.getAllListbyUser().subscribe(data => {
+        this.projects = data;
+      });
+
+      
     });
 
 
@@ -271,8 +279,8 @@ employee: Employees;
     return this.brands.find(item => item.id === brand_id);
   }
 
-  getCategoryItem(category_id: string, id: string) {
-    return this.categories.find(item => item.id === category_id);
+  getProjectItem(project_id: string, id: string) {
+    return this.projects.find(item => item.id === project_id);
   }
 
 
@@ -304,10 +312,7 @@ employee: Employees;
 
 edit(timesheet: Timesheets) {
   this.timesheet = { ...timesheet };
-  
-  this.selectedSkills = JSON.parse("" + this.timesheet.skills + "");
 
-  
   this.productDialog = true;
 }
 

@@ -39,28 +39,40 @@
                         [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [loading]="loading"
                         [totalRecords]="totalRecords">
 
-                        <ng-template pTemplate="header" let-columns>
+                        <ng-template pTemplate="header" let-timesheet>
                             <tr>
                                 <th *ngFor="let col of cols">
                                     {{col.header}}
                                 </th>
+                                <th></th>
                                 <th width="200"></th>
                             </tr>
 
                         </ng-template>
-                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <ng-template pTemplate="body" let-timesheet>
                             <tr>
-                                <td *ngFor="let col of cols" [ngSwitch]="col.field">
-                                    {{rowData[col.field]}}
+                                <td>
+                                    {{timesheet.created_at  | date:'d-MM-yyyy hh:mm'}}
                                 </td>
-
+                                <td>
+                                    {{timesheet.hours}}
+                                </td>
+                                
+                                <td>
+                                    {{employee.name}} {{employee.surname}}
+                                </td>
+                                <td>
+    
+                                    {{ getProjectItem(timesheet.project_id)?.title }}
+                                                                
+                                </td>
                                 <td class="action">
                                     <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
-                                        [routerLink]="['/admin/timesheets/edit', rowData.id]"></button>
+                                        [routerLink]="['/admin/timesheets/edit', timesheet.id]"></button>
                                     <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
-                                        (click)="edit(rowData)"></button>
+                                     (click)="edit(timesheet)"></button>
                                     <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
-                                        (click)="onDelete(rowData.id)"></button>
+                                        (click)="onDelete(timesheet.id)"></button>
                                 </td>
                             </tr>
                         </ng-template>
