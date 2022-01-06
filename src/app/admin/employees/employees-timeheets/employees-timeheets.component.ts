@@ -153,11 +153,8 @@ employee: Employees;
       this.timesheets = data;
       this.cols = [
         { field: "title", header: "titolo" },
-        { field: "code", header: "Codice" },
         { field: "status", header: "Status" },
         { field: "hours", header: "Ore" },
-        { field: "code_int", header: "Codice interno" },
-        { field: "brand_id", header: "Brand" }
       ];
       this.colsData = [
         { field: "title", header: "titolo" },
