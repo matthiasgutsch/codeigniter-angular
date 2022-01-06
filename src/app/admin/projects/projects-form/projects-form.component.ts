@@ -232,6 +232,7 @@ export class ProjectsFormComponent implements OnInit {
     this.spinner.hide();
     this.getTimesheet_by_project_employee(id);
     this.getTotal();
+    this.getTotalPercent;
 
 
 
@@ -463,7 +464,7 @@ export class ProjectsFormComponent implements OnInit {
           } else {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
             this.getTimesheet_by_project_employee(id);
-            this.getTotal();
+            this.ngOnInit();
             //this.router.navigate(['/admin/products']);
 
           }
