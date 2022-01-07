@@ -1,0 +1,315 @@
+<form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+    <div class="dash-header">
+    <div class="dash-title">
+
+        <div class="p-field p-grid">
+            <div class="p-col-12 p-md-6">
+                <h3>{{pageTitle}}</h3>
+
+            </div>
+            <div class="p-col-12 p-md-6">
+                <button type="button" pButton pRipple label="Project Board" class="p-button p-button-secondary pull-right  p-mr-2"
+                [routerLink]="['/admin/task/', id]"></button>
+
+                <button pButton pRipple icon="pi pi-save" type="submit" label="salva"
+                    class="p-button pull-right p-button-success p-mr-2"
+                    [disabled]="!blogForm.valid"></button>
+          
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div class="p-fluid">
+        <div class="p-field p-grid">
+
+            <div class="p-col-12 p-md-7">
+                <p-card>
+                    <div class="blog-form">
+                
+                        <canvas id="myChart"  width="600" height="350" #mychart></canvas>
+
+
+                        <p-tabView>
+                            <p-tabPanel header="Informazioni">
+
+                                <div class="p-fluid">
+
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Nome Prodotto<span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+
+                                            <input type="text" [style]="{ width: '100%' }" pInputText
+                                                formControlName="title">
+
+                                            <!-- <input type="text" [style]="{ width: '100%' }" [(ngModel)]="data" value="{{rows.value | json}}" pInputText formControlName="data" >-->
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-fluid">
+
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Codice <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+                                            <div class="p-grid">
+                                                <div class="p-col-12 p-md-5">
+                                                    <input type="text" [style]="{ width: '100%' }" pInputText
+                                                        formControlName="code">
+                                                </div>
+                                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Codice interno <span
+                                                        class="required">*</span></label>
+                                                <div class="p-col-4 p-md-5">
+
+                                                    <input type="text" [style]="{ width: '100%' }" pInputText
+                                                        formControlName="code_int">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-fluid">
+
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Prezzo <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+                                            <div class="p-grid">
+                                                <div class="p-col-12 p-md-5">
+                                                    <input type="text" [style]="{ width: '100%' }" pInputText
+                                                        formControlName="price">
+                                                </div>
+                                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Prezzo scontato<span
+                                                        class="required">*</span></label>
+                                                <div class="p-col-4 p-md-5">
+
+                                                    <input type="text" [style]="{ width: '100%' }" pInputText
+                                                        formControlName="price_extra">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-fluid">
+
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Marca <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+
+                                            <p-dropdown [options]="brands" [virtualScroll]="true" filter="true"
+                                                [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }"
+                                                formControlName="brand_id" optionLabel="name" optionValue="name">
+
+                                            </p-dropdown>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Categories <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+
+                                            <p-multiSelect [options]="categories" display="chip"
+                                                formControlName="category_id" [(ngModel)]="selectedCategories"
+                                                optionLabel="name" optionValue="name">
+                                            </p-multiSelect>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                               
+
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Status <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+                                            <p-dropdown [options]="status" [virtualScroll]="true" filter="true"
+                                                [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }"
+                                                formControlName="status" optionLabel="label" optionValue="label">
+                                                <ng-template let-option pTemplate="item">
+
+                                                    {{option.label}}
+
+                                                </ng-template>
+
+                                            </p-dropdown>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Descrizione <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+
+                                            <textarea pInputTextarea formControlName="description"></textarea>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Descrizione Completa <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+
+                                            <textarea pInputTextarea formControlName="description_full"></textarea>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">In evidenzia <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+
+                                            <p-selectButton [options]="stateOptions" formControlName="is_featured" optionLabel="label" optionValue="value"></p-selectButton>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Attivo <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+                                            <p-selectButton [options]="stateOptions" formControlName="is_active" optionLabel="label" optionValue="value"></p-selectButton>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group form-row">
+                                    <label class="col-md-3"></label>
+                                    <div class="col-md-9">
+                                        <input type="hidden" formControlName="id">
+                                        <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
+
+                                    </div>
+                                </div>
+
+                            </p-tabPanel>
+
+                           
+
+                        </p-tabView>
+
+                    </div>
+
+                </p-card>
+
+            </div>
+
+            <div class="p-col-12 p-md-5">
+                <p-card>
+                    <h3>Timesheet / Progetto</h3>
+                    <table class="billings-list" *ngIf="timesheetsEmployee.length > 0">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Dipendente</th>
+                            <th>Prezzo/h</th>
+
+                            <th>Importo</th>
+                            <th>Ore</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor="let entry of timesheetsEmployee">
+                            <td width="50"> 
+                                <app-initials-avatar 
+                                firstName="{{ getTechnicalDataItem(entry.id)?.name | slice:0:1}}"
+                                lastName="{{ getTechnicalDataItem(entry.id)?.surname | slice:0:1}}">
+                            </app-initials-avatar>
+                            </td>
+                            <td> 
+                                {{ getTechnicalDataItem(entry.id)?.username }}
+                                </td>
+                                <td>
+                                    <p-tag [value]="getTechnicalDataItem(entry.id)?.contract | currency :'EUR':'symbol':'1.2-2'"></p-tag>
+                                </td>
+                            <td>
+                                {{entry.value * getTechnicalDataItem(entry.id)?.contract | currency :'EUR':'symbol':'1.2-2'}}
+                                </td>
+                                <td><i class="pi pi-clock"></i> {{entry.value}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"> Totali</td>
+                    
+                            <td>{{getTotal() | currency :'EUR':'symbol':'1.2-2'}}</td>
+                            <td><i class="pi pi-clock"></i> {{getTotalHours()}}</td>
+
+                        </tr>
+                    </tbody>
+                    </table>
+                </p-card>
+
+                <p-card>
+
+                    <div class="p-grid">
+                        <div class="p-col-12 p-md-12">
+                        <h3>Produttività /  Progetto</h3>
+                    </div>                        <div class="p-col-12 p-md-12">
+
+                        <p-progressBar [value]="getTotalPercent() | shortNumber:2"></p-progressBar>
+                        </div>
+                    </div>
+                    <br>
+                    <table class="billings-list">
+
+                        <tr>
+                            <td>Importo pianificato</td>
+                            <td>{{price | currency :'EUR':'symbol':'1.2-2'}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Gia consumato</td>
+                            <td>{{getTotal() | currency :'EUR':'symbol':'1.2-2'}}</td>
+                            
+                        </tr>
+                        
+
+                        <tr>
+                            <td><strong>Importo Rimanente</strong></td>
+                            <td><strong>{{price - getTotal() | currency :'EUR':'symbol':'1.2-2'}}</strong></td>
+
+                        </tr>
+                        
+                       
+                    </table>
+
+
+                </p-card>
+
+            </div>
+
+        </div>
+
+    </div>
+</form>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
+
+<p-toast key="myKey1"></p-toast>
