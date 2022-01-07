@@ -90,8 +90,7 @@
                                 {{col.header}}
                             </th>
                             <th></th>
-               
-
+                            <th></th>
 
                             <th width="200"></th>
                         </tr>
@@ -104,8 +103,12 @@
                                 {{rowData[col.field]}}
                             </td>
 
-                         
-                            <td>        <button pButton pRipple label="Tasks" class="p-button p-button-secondary p-mr-2"
+                         <td>  <button pButton pRipple label="Produttività" icon="pi pi-chart-line" class="p-button p-button-secondary p-mr-2"
+                            [routerLink]="['/admin/projects/productivity/', rowData.id]"></button>  </td>
+                            <td>      
+                              
+                                
+                                <button pButton pRipple label="Tasks" class="p-button p-button-warning p-mr-2"
                                 [routerLink]="['/admin/projects/task/', rowData.id]"></button>
                             
                                 <button pButton pRipple label="Timesheet" class="p-button p-button-primary p-mr-2"

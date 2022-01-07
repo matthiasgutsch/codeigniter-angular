@@ -194,8 +194,6 @@ export class ProjectsFormComponent implements OnInit {
         this.id = res.id;
         this.price = res.price;
 
-        this.getTotalPercent(this.price);
-
       });
     } else {
       this.pageTitle = "Aggiungi Prodotto";
@@ -230,9 +228,7 @@ export class ProjectsFormComponent implements OnInit {
     this.getCategories();
     this.getEmployees();
     this.spinner.hide();
-    this.getTimesheet_by_project_employee(id);
-    this.getTotal();
-    this.getTotalPercent;
+
 
 
 
@@ -245,34 +241,6 @@ export class ProjectsFormComponent implements OnInit {
   )};
 
 
-  getTotal() {
-    let total = 0;
-    this.timesheetsEmployee.forEach((item) => {
-      total += Number(item.value * this.getTechnicalDataItem(item.id)?.contract);
-    });
-
-    return total; 
-  }
-
-  getTotalPercent(price: any) {
-    let total = 0;
-    this.timesheetsEmployee.forEach((item) => {
-      total += Number(item.value * this.getTechnicalDataItem(item.id)?.contract);
-    });
-
-    return total / this.price * 100;
-     
-  }
-
-
-  getTotalHours() {
-    let total = 0;
-    this.timesheetsEmployee.forEach((item) => {
-      total += Number(item.value);
-    });
-
-    return total; 
-  }
 
   public locationsSum() {
     return this.timesheetsEmployee.map(data => data.id).reduce((a, b) => a + b);
@@ -463,8 +431,6 @@ export class ProjectsFormComponent implements OnInit {
             this.uploadError = res.message;
           } else {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
-            this.getTimesheet_by_project_employee(id);
-            this.ngOnInit();
             //this.router.navigate(['/admin/products']);
 
           }

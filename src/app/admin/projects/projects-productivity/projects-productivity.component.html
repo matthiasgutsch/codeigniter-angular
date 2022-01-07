@@ -1,0 +1,128 @@
+<form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+    <div class="dash-header">
+    <div class="dash-title">
+
+        <div class="p-field p-grid">
+            <div class="p-col-12 p-md-6">
+                <h3>{{pageTitle}}</h3>
+
+            </div>
+            <div class="p-col-12 p-md-6">
+                <button type="button" pButton pRipple label="Project Board" class="p-button p-button-secondary pull-right  p-mr-2"
+                [routerLink]="['/admin/task/', id]"></button>
+
+        
+          
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div class="p-fluid">
+        <div class="p-field p-grid">
+
+            <div class="p-col-12 p-md-7">
+                <p-card>
+                
+                        <canvas id="myChart"  width="600" height="350" #mychart></canvas>
+
+
+         
+                </p-card>
+
+            </div>
+
+            <div class="p-col-12 p-md-5">
+                <p-card>
+                    <h3>Timesheet / Progetto</h3>
+                    <table class="billings-list" *ngIf="timesheetsEmployee.length > 0">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Dipendente</th>
+                            <th>Prezzo/h</th>
+
+                            <th>Importo</th>
+                            <th>Ore</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor="let entry of timesheetsEmployee">
+                            <td width="50"> 
+                                <app-initials-avatar 
+                                firstName="{{ getTechnicalDataItem(entry.id)?.name | slice:0:1}}"
+                                lastName="{{ getTechnicalDataItem(entry.id)?.surname | slice:0:1}}">
+                            </app-initials-avatar>
+                            </td>
+                            <td> 
+                                {{ getTechnicalDataItem(entry.id)?.username }}
+                                </td>
+                                <td>
+                                    <p-tag [value]="getTechnicalDataItem(entry.id)?.contract | currency :'EUR':'symbol':'1.2-2'"></p-tag>
+                                </td>
+                            <td>
+                                {{entry.value * getTechnicalDataItem(entry.id)?.contract | currency :'EUR':'symbol':'1.2-2'}}
+                                </td>
+                                <td><i class="pi pi-clock"></i> {{entry.value}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"> Totali</td>
+                    
+                            <td>{{getTotal() | currency :'EUR':'symbol':'1.2-2'}}</td>
+                            <td><i class="pi pi-clock"></i> {{getTotalHours()}}</td>
+
+                        </tr>
+                    </tbody>
+                    </table>
+                </p-card>
+
+                <p-card>
+
+                    <div class="p-grid">
+                        <div class="p-col-12 p-md-12">
+                        <h3>Produttività /  Progetto</h3>
+                    </div>                        <div class="p-col-12 p-md-12">
+
+                        <p-progressBar [value]="getTotalPercent() | shortNumber:2"></p-progressBar>
+                        </div>
+                    </div>
+                    <br>
+                    <table class="billings-list">
+
+                        <tr>
+                            <td>Importo pianificato</td>
+                            <td>{{price | currency :'EUR':'symbol':'1.2-2'}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Gia consumato</td>
+                            <td>{{getTotal() | currency :'EUR':'symbol':'1.2-2'}}</td>
+                            
+                        </tr>
+                        
+
+                        <tr>
+                            <td><strong>Importo Rimanente</strong></td>
+                            <td><strong>{{price - getTotal() | currency :'EUR':'symbol':'1.2-2'}}</strong></td>
+
+                        </tr>
+                        
+                       
+                    </table>
+
+
+                </p-card>
+
+            </div>
+
+        </div>
+
+    </div>
+</form>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
+
+<p-toast key="myKey1"></p-toast>

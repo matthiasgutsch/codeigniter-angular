@@ -44,10 +44,10 @@ export interface fPairs {
 }
 
 @Component({
-  selector: "app-projects-form",
-  templateUrl: "./projects-form.component.html",
+  selector: "app-projects-productivity",
+  templateUrl: "./projects-productivity.component.html",
 })
-export class ProjectsFormComponent implements OnInit {
+export class ProjectsProductivityComponent implements OnInit {
   @ViewChild("myInput", { static: false }) myInputVariable: ElementRef;
 
   pageTitle: string;
@@ -170,7 +170,6 @@ export class ProjectsFormComponent implements OnInit {
     this.spinner.show();
 
 
-
     const id = this.route.snapshot.paramMap.get("id");
 
 
@@ -237,11 +236,6 @@ export class ProjectsFormComponent implements OnInit {
 
     });
 
-    
-    this.getselectedWorks;
-    this.getselectedCategories;
-    this.getBrands();
-    this.getCategories();
     this.getEmployees();
     this.getTimesheet_by_project_employee(id);
     this.getTotal();
