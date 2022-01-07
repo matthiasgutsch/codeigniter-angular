@@ -123,9 +123,11 @@ trackByFn(index, item) {
     this.projectsService.getAllListbyUser().subscribe(data => {
       this.projects = data;
       this.cols = [
-        { field: "title", header: "titolo" },
+        { field: "title", header: "Nome Progetto" },
         { field: "code", header: "Codice" },
         { field: "status", header: "Status" },
+        { field: "price", header: "Prezzo" },
+
       ];
       this.colsData = [
         { field: "title", header: "titolo" },

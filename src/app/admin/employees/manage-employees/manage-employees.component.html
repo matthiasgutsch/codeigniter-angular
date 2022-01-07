@@ -85,7 +85,6 @@
                                 {{col.header}} 
                             </th>
                             <th></th>
-                            <th></th>
 
                             <th width="200"></th>
                         </tr>
@@ -101,11 +100,12 @@
                                 {{rowData[col.field]}}
                             </td>
 
-                            <td> <button pButton pRipple label="Timesheet" class="p-button p-button-primary p-mr-2"
-                                [routerLink]="['/admin/employee/timesheets/', rowData.id]"></button></td>
-                            
+            
 
-                            <td> <button pButton pRipple label="Tasks" class="p-button p-button-secondary p-mr-2"
+                            <td> <button pButton pRipple label="Timesheet" class="p-button p-button-primary p-mr-2"
+                                [routerLink]="['/admin/employee/timesheets/', rowData.id]"></button>
+                                
+                                <button pButton pRipple label="Tasks" class="p-button p-button-secondary p-mr-2"
                                 [routerLink]="['/admin/employee/task/', rowData.id]"></button></td>
                             
                             <td class="action">
@@ -114,7 +114,10 @@
                                 [routerLink]="['/admin/employees/edit', rowData.id]"></button>
                             <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
                                 (click)="edit(rowData)"></button>
-                                              
+                                  
+                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
+                                (click)="onDelete(rowData.id)"></button>
+
                             </td>
                         </tr>
                     </ng-template>

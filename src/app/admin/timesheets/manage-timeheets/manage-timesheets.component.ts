@@ -139,10 +139,10 @@ weekNo: number;
     this.timesheetsService.getAllListbyUser().subscribe(data => {
       this.timesheets = data;
       this.cols = [
-        { field: "title", header: "titolo" },
+        { field: "project_id", header: "titolo" },
         { field: "code", header: "Codice" },
         { field: "status", header: "Status" },
-        { field: "price", header: "Ore" },
+        { field: "employee_id", header: "Ore" },
         { field: "code_int", header: "Codice interno" },
         { field: "brand_id", header: "Brand" }
       ];
