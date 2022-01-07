@@ -8,6 +8,8 @@ export class Timesheets {
     description_full: string;
     image: string;
     category_id: string;
+    data_from: string;
+    data_to: string;
     works_id: string;
     location_id: string;
     employee_id: string;

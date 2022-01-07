@@ -77,9 +77,9 @@
                                 </td>
                                 <td class="action">
                                     <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
-                                        [routerLink]="['/admin/timesheets/edit', timesheet.id]"></button>
+                                    (click)="edit(timesheet)"></button>
                                     <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
-                                     (click)="edit(timesheet)"></button>
+                                     (click)="view(timesheet)"></button>
                                     <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
                                         (click)="onDelete(timesheet.id)"></button>
                                 </td>
@@ -189,21 +189,17 @@
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
 
-            <h3>{{product.title}}</h3>
-            <p [innerHTML]="product.description"></p>
-
-            <p-tabView>
-                <p-tabPanel header="Date tecnici">
-                    <table class="billings-list">
-                        <tr *ngFor="let entry of selectedSkills | keys">
-                            <td>
-                                {{ getTechnicalDataItem(entry.value.qty)?.name }}</td>
-                            <td>{{entry.value.price}}</td>
-                        </tr>
-
-                    </table>
-                </p-tabPanel>
-            </p-tabView>
+            <h3>Dettaglio Timesheet   {{timesheet.id}}</h3>
+           
+           <div class="p-grid">
+            <div class="p-col-6">
+                {{timesheet.date_from}}
+            </div>
+            <div class="p-col-6">
+                {{timesheet.date_to}}
+            </div>
+           </div> 
+          
         </div>
     </ng-template>
 

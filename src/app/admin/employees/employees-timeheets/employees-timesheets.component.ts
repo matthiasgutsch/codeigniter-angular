@@ -201,7 +201,6 @@ employee: Employees;
       project_id: ["", Validators.required],
       hours: ["", Validators.required],
       hours_extra: ["", Validators.required],
-
       employee_id: [this.employee.id],
       user_id: [this.currentUser.user_id],
     });
@@ -309,20 +308,22 @@ employee: Employees;
   }
 
   
-  view(timesheet: Timesheets) {
-    this.timesheet = {...this.timesheet};
-    this.productDialog = true;
-}
+
 
 
 
 edit(timesheet: Timesheets) {
   this.timesheet = { ...timesheet };
 
-  this.productDialog = true;
+  this.productDialogAdd = true;
 }
 
 
+view(timesheet: Timesheets) {
+  this.timesheet = { ...timesheet };
+
+  this.productDialog = true;
+}
 
 
 
