@@ -111,6 +111,7 @@ import { TimesheetsFormComponent } from './timesheets/timesheets-form/timesheets
 import { EmployeesTasksComponent } from './employees/employees-tasks/employees-tasks.component';
 import { EmployeesTimesheetsComponent } from './employees/employees-timeheets/employees-timesheets.component';
 import { ProjectsProductivityComponent } from './projects/projects-productivity/projects-productivity.component';
+import { ProjectsTimesheetsComponent } from './projects/projects-timeheets/projects-timesheets.component';
 
 @NgModule({
   declarations: [
@@ -125,6 +126,7 @@ import { ProjectsProductivityComponent } from './projects/projects-productivity/
     InitialsAvatarComponent,
     ClientsFormComponent,
     ManageQuotesComponent,
+    ProjectsTimesheetsComponent,
     ProjectsProductivityComponent,
     EmployeesTimesheetsComponent,
     ManageTimesheetsComponent,

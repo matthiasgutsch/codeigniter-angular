@@ -51,6 +51,7 @@ import { TimesheetsFormComponent } from './timesheets/timesheets-form/timesheets
 import { EmployeesTasksComponent } from './employees/employees-tasks/employees-tasks.component';
 import { EmployeesTimesheetsComponent } from './employees/employees-timeheets/employees-timesheets.component';
 import { ProjectsProductivityComponent } from './projects/projects-productivity/projects-productivity.component';
+import { ProjectsTimesheetsComponent } from './projects/projects-timeheets/projects-timesheets.component';
 
 const routes: Routes = [
   {
@@ -153,7 +154,7 @@ const routes: Routes = [
 
           { path: "tasks", component: TasksComponent },
           { path: "projects/task/:project_id", component: TasksComponent },
-          { path: "projects/timesheet/:id", component: TasksComponent },
+          { path: "projects/timesheet/:id", component: ProjectsTimesheetsComponent },
           { path: "projects/productivity/:id", component: ProjectsProductivityComponent },
 
 
