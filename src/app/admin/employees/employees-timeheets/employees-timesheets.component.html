@@ -8,7 +8,7 @@
                     <div class="p-col-12 p-md-6">
                     </div>
                     <div class="p-col-12 p-md-6">
-                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/products/create']"
+                        <button pButton pRipple icon="pi pi-plus" (click)="createTimesheets()"
                             label="Aggiungi" class="p-button p-button-primary p-mr-2 pull-right"></button>
 
                     </div>
@@ -31,7 +31,7 @@
             </div>
 
             <div class="p-field p-grid">
-                <div class="p-col-12 p-md-9">
+                <div class="p-col-12 p-md-12">
                 <p-card>
 
                     <p-table #dt [columns]="cols" [value]="timesheets" [globalFilterFields]="['name', 'description']"
@@ -41,10 +41,18 @@
 
                         <ng-template pTemplate="header" let-timesheet>
                             <tr>
-                                <th *ngFor="let col of cols">
-                                    {{col.header}}
+                                <th>
+                                  Data da
                                 </th>
-                                <th></th>
+                                <th>
+                                    Data a
+                                  </th>
+                                  <th>
+                                    Ore
+                                  </th>
+                                  <th>
+                                    Progetto
+                                  </th>
                                 <th width="200"></th>
                             </tr>
 
@@ -52,15 +60,16 @@
                         <ng-template pTemplate="body" let-timesheet>
                             <tr>
                                 <td>
-                                    {{timesheet.created_at  | date:'d-MM-yyyy hh:mm'}}
+                                    {{timesheet.date_from  | date:'d-MM-yyyy hh:mm'}}
+                                </td>
+
+                                <td>
+                                    {{timesheet.date_to  | date:'d-MM-yyyy hh:mm'}}
                                 </td>
                                 <td>
                                     {{timesheet.hours}}
                                 </td>
                                 
-                                <td>
-                                    {{employee.name}} {{employee.surname}}
-                                </td>
                                 <td>
     
                                     {{ getProjectItem(timesheet.project_id)?.title }}
@@ -81,16 +90,100 @@
                     </p-card>
                 </div>
 
-                <div class="p-col-12 p-md-3">
-                    <p-card>
-                        <p-calendar [(ngModel)]="date14" [inline]="true" [showWeek]="true"></p-calendar>
-
-                    </p-card>
-                </div>
+                
             </div>
         </div>
     </div>
 </div>
+
+
+
+<p-sidebar [(visible)]="productDialogAdd" position="right" [style]="{width:'60%'}">
+    <ng-template pTemplate="content">
+
+
+        {{employee.name}} {{employee.surname}}
+        
+<form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+
+  
+
+                                <button pButton pRipple icon="pi pi-save" label="salva"
+                                    class="p-button pull-right p-button-success p-mr-2"
+                                    [disabled]="!blogForm.valid"></button>
+
+
+
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Data dal<span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+                                            <p-calendar [stepMinute]="15" formControlName="date_from" dataType="string" [(ngModel)]="selectedDateFrom" hourFormat="24" dateFormat="yy-mm-dd" showTime="true" appendTo="body"></p-calendar>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Data al<span
+                                            class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+                                            <p-calendar [stepMinute]="15" formControlName="date_to" dataType="string" [(ngModel)]="selectedDateTo" hourFormat="24" dateFormat="yy-mm-dd" showTime="true" appendTo="body"></p-calendar>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Progetto</label>
+                                        <div class="p-col-12 p-md-10">
+                                            <p-dropdown [options]="projects" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true"
+                                                placeholder="Scegli" [style]="{ width: '100%' }" formControlName="project_id" optionLabel="title"
+                                                optionValue="id">
+                                                <ng-template let-option pTemplate="item">
+                                                    {{option.title}}
+                                                </ng-template>
+                                            </p-dropdown>
+                                        </div>
+                                    </div>
+
+
+        
+                                        <div class="p-field p-grid">
+                                            <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Ore <span
+                                                    class="required">*</span></label>
+                                            <div class="p-col-12 p-md-10">
+                                                <input type="text" pInputText formControlName="hours"/>
+            
+                             
+            
+                                            </div>
+                                        </div>
+
+        
+                                        <div class="p-field p-grid">
+                                            <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Ore extra <span
+                                                    class="required">*</span></label>
+                                            <div class="p-col-12 p-md-10">
+                                                <input type="text" pInputText formControlName="hours_extra"/>
+            
+                             
+            
+                                            </div>
+                                    </div>
+
+                                    <div class="form-group form-row">
+                                        <label class="col-md-3"></label>
+                                        <div class="col-md-9">
+                                            <input type="hidden" formControlName="id"> 
+                                            <input type="hidden" formControlName="employee_id" value="">
+                                            <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
+            
+                                            
+                                        </div>
+                                    </div>
+                                                                    
+</form>
+
+    </ng-template>
+</p-sidebar>
+
 
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'60%'}">
     <ng-template pTemplate="content">

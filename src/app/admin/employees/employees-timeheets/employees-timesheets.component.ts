@@ -37,6 +37,7 @@ import { Timesheets } from 'src/app/models/timesheets';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { Projects } from 'src/app/models/projects';
+import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 
 
 @Component({
@@ -48,10 +49,12 @@ import { Projects } from 'src/app/models/projects';
 export class EmployeesTimesheetsComponent implements OnInit {
   blogs: Blog;
   blog: Blog;
-
+  error: string;
+  uploadError: string;
   works: any = [];
   work: Works;
   calendarOptions: any;
+  blogForm: FormGroup;
 
   locations: any = [];
   location: Locations;
@@ -80,11 +83,11 @@ export class EmployeesTimesheetsComponent implements OnInit {
   skillsArray: any = [];
   categories: any = [];
   category: Category;
-  error: string;
   private id: number;
   clients: any = [];
   client: Clients;
   productDialog:boolean = false;
+  productDialogAdd: boolean = false;
   works_id: any;
   category_id: any;
   status: any;
@@ -127,6 +130,7 @@ employee: Employees;
     private projectsService: ProjectsService,
     private locationsService: LocationsService, 
     private messageService: MessageService,
+    private fb: FormBuilder,
     private employeesService: EmployeesService,
     private router: Router,
     private route: ActivatedRoute,
@@ -153,33 +157,8 @@ employee: Employees;
 
     const id = this.route.snapshot.paramMap.get("id");
 
-
-    this.timesheetsService.find_timesheets_employee(+id).subscribe(data => {
-      this.timesheets = data;
-      this.cols = [
-        { field: "title", header: "titolo" },
-        { field: "status", header: "Status" },
-        { field: "hours", header: "Ore" },
-      ];
-      this.colsData = [
-        { field: "title", header: "titolo" },
-        { field: "description", header: "Codice" },
-  
-      ];
-
-      this.timesheetsService.count_total_timesheets_employee(+id).subscribe(
-        (data: Timesheets) => this.timesheetCountTotalEmployee = data,
-        error => this.error = error
-        );
-
-      this._selectedColumns = this.cols;
-      this.exportColumns = this.cols.map(col => ({
-        title: col.header,
-        dataKey: col.field
-      }));
-
-      this.spinner.hide();
-
+    this.getTimesheetsEmployee(+id);
+ 
 
       this.employees = {
         id:this.route.snapshot.params['id'],
@@ -189,19 +168,46 @@ employee: Employees;
         this.employee = value;
       });
 
-
       this.projectsService.getAllListbyUser().subscribe(data => {
         this.projects = data;
       });
 
       
+  
+
+    this.spinner.hide();
+
+  }
+
+  getTimesheetsEmployee(id) {
+  this.timesheetsService.find_timesheets_employee(+id).subscribe(data => {
+    this.timesheets = data;
+    this.timesheetsService.count_total_timesheets_employee(+id).subscribe(
+      (data: Timesheets) => this.timesheetCountTotalEmployee = data,
+      error => this.error = error
+      );
+   
+    });
+  };
+
+  createTimesheets(employee: Employees) {
+    this.productDialogAdd = true;
+    
+
+    this.blogForm = this.fb.group({
+      id: [""],
+      date_from: ["", Validators.required],
+      date_to: ["", Validators.required],
+      project_id: ["", Validators.required],
+      hours: ["", Validators.required],
+      hours_extra: ["", Validators.required],
+
+      employee_id: [this.employee.id],
+      user_id: [this.currentUser.user_id],
     });
 
 
   }
-
-
-  
 
   getBrands() {
   this.brandService.getAllListbyUser().subscribe(
@@ -332,6 +338,36 @@ exportPdf() {
 hideDialog() {
   this.productDialog = false;
 }
+
+
+
+onSubmit() {
+  const formData = new FormData();
+  formData.append("date_from", this.blogForm.get("date_from").value);
+  formData.append("date_to", this.blogForm.get("date_to").value);
+  formData.append('user_id', this.blogForm.get('user_id').value);
+  formData.append("project_id", this.blogForm.get("project_id").value);
+  formData.append("hours", this.blogForm.get("hours").value);
+  formData.append("hours_extra", this.blogForm.get("hours_extra").value);
+  formData.append('employee_id', this.blogForm.get('employee_id').value);
+
+
+    this.timesheetsService.create(formData).subscribe(
+      (res) => {
+        if (res.status === "error") {
+          this.uploadError = res.message;
+        } else {
+          this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
+          this.productDialogAdd = false;
+          this.ngOnInit();
+
+        }
+      },
+      (error) => (this.error = error)
+    );
+  
+}
+
 
   onDelete(id: number, title: string) {
 

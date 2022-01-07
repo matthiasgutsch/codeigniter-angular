@@ -49,7 +49,7 @@ import { TasksComponent } from './tasks/tasks.component';
 import { ManageTimesheetsComponent } from './timesheets/manage-timeheets/manage-timesheets.component';
 import { TimesheetsFormComponent } from './timesheets/timesheets-form/timesheets-form.component';
 import { EmployeesTasksComponent } from './employees/employees-tasks/employees-tasks.component';
-import { EmployeesTimesheetsComponent } from './employees/employees-timeheets/employees-timeheets.component';
+import { EmployeesTimesheetsComponent } from './employees/employees-timeheets/employees-timesheets.component';
 
 const routes: Routes = [
   {
