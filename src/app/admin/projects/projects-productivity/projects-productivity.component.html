@@ -23,7 +23,46 @@
     <div class="p-fluid">
         <div class="p-field p-grid">
 
-            <div class="p-col-12 p-md-7">
+            <div class="p-col-12 p-md-9">
+
+                <p-card>
+
+                    <div class="p-grid">
+                        <div class="p-col-12 p-md-8">
+                        <h3>Produttività /  Progetto</h3>
+                    </div>                        <div class="p-col-12 p-md-4">
+                        <br>
+                        <p-progressBar  [value]="getTotalPercent() | shortNumber:2"></p-progressBar>
+                        </div>
+                    </div>
+                    <br>
+                    <table class="billings-list">
+
+                        <tr>
+                            <td>Importo pianificato</td>
+                            <td>{{price | currency :'EUR':'symbol':'1.2-2'}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Gia consumato</td>
+                            <td>{{getTotal() | currency :'EUR':'symbol':'1.2-2'}}</td>
+                            
+                        </tr>
+                        
+
+                        <tr>
+                            <td><strong>Importo Rimanente</strong></td>
+                            <td><strong>{{price - getTotal() | currency :'EUR':'symbol':'1.2-2'}}</strong></td>
+
+                        </tr>
+                        
+                       
+                    </table>
+
+
+                </p-card>
+
+
                 <p-card>
                     <h3>Timesheet / Progetto</h3>
                     <table class="billings-list" *ngIf="timesheetsEmployee.length > 0">
@@ -71,45 +110,12 @@
 
             </div>
 
-            <div class="p-col-12 p-md-5">
+            <div class="p-col-12 p-md-3">
                
-
                 <p-card>
 
-                    <div class="p-grid">
-                        <div class="p-col-12 p-md-12">
-                        <h3>Produttività /  Progetto</h3>
-                    </div>                        <div class="p-col-12 p-md-12">
-
-                        <p-progressBar [value]="getTotalPercent() | shortNumber:2"></p-progressBar>
-                        </div>
-                    </div>
-                    <br>
-                    <table class="billings-list">
-
-                        <tr>
-                            <td>Importo pianificato</td>
-                            <td>{{price | currency :'EUR':'symbol':'1.2-2'}}</td>
-
-                        </tr>
-                        <tr>
-                            <td>Gia consumato</td>
-                            <td>{{getTotal() | currency :'EUR':'symbol':'1.2-2'}}</td>
-                            
-                        </tr>
-                        
-
-                        <tr>
-                            <td><strong>Importo Rimanente</strong></td>
-                            <td><strong>{{price - getTotal() | currency :'EUR':'symbol':'1.2-2'}}</strong></td>
-
-                        </tr>
-                        
-                       
-                    </table>
-
-
                 </p-card>
+               
 
             </div>
 
