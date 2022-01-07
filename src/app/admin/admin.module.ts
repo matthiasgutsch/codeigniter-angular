@@ -75,6 +75,7 @@ import { ManageTypeComponent } from './settings/type/manage-type/manage-type.com
 import { TypeFormComponent } from './settings/type/type-form/type-form.component';
 import { SumPipeModule } from './pipe/sum.pipe';
 import { ShortNumberPipe } from './pipe/short-number.pipe';
+import {SplitButtonModule} from 'primeng/splitbutton';
 
 import { CompanyFormComponent } from './settings/company/company-form/company-form.component';
 import { ProductsFormComponent } from './products/products-form/products-form.component';
@@ -190,6 +191,7 @@ import { ProjectsProductivityComponent } from './projects/projects-productivity/
     NgxSpinnerModule,
     InputTextareaModule,
     DragDropModule,
+    SplitButtonModule,
     ToastModule,
     TabViewModule,
     OverlayPanelModule,

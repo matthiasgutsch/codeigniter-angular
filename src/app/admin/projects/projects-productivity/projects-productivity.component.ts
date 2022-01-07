@@ -125,10 +125,13 @@ export class ProjectsProductivityComponent implements OnInit {
   skillsForm: FormGroup;
   skillsValues: any = [];
   data1=[];
+  project_id: string;
   chartsCount: any;
   chartsCountNone: any;
   chartsCountData: any = [];
-  
+  projects: any = [];
+  project: Projects;
+
   trackByFn(index, item) {
     return item.id;
   }
@@ -177,6 +180,7 @@ export class ProjectsProductivityComponent implements OnInit {
     this.spinner.show();
 
 
+    
     const id = this.route.snapshot.paramMap.get("id");
 
 
@@ -184,6 +188,7 @@ export class ProjectsProductivityComponent implements OnInit {
       this.pageTitle = "Modifica Progetto";
       this.projectsService.getId(+id).subscribe((res) => {
 
+        this.project = res;
         
         if (res.user_id == this.currentUser.user_id) {
           this.blogForm.patchValue({
@@ -401,13 +406,6 @@ export class ProjectsProductivityComponent implements OnInit {
     )
   };
 
-
-  getCategories() {
-    this.categoryService.getAllListbyUser().subscribe(
-      (data: Category) => (this.categories = data),
-      (error) => (this.error = error)
-    )
-  };
 
 
 

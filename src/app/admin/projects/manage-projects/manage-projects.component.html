@@ -89,10 +89,9 @@
                             <th *ngFor="let col of cols">
                                 {{col.header}}
                             </th>
-                            <th></th>
-                            <th></th>
+                            <th width="460"></th>
 
-                            <th width="200"></th>
+                            <th width="140"></th>
                         </tr>
 
                     </ng-template>
@@ -103,11 +102,11 @@
                                 {{rowData[col.field]}}
                             </td>
 
-                         <td>  <button pButton pRipple label="Produttività" icon="pi pi-chart-line" class="p-button p-button-secondary p-mr-2"
-                            [routerLink]="['/admin/projects/productivity/', rowData.id]"></button>  </td>
+                     
                             <td>      
                               
-                                
+                                <button pButton pRipple label="Produttività" icon="pi pi-chart-line" class="p-button p-button-secondary p-mr-2"
+                            [routerLink]="['/admin/projects/productivity/', rowData.id]"></button>
                                 <button pButton pRipple label="Tasks" class="p-button p-button-warning p-mr-2"
                                 [routerLink]="['/admin/projects/task/', rowData.id]"></button>
                             
@@ -117,9 +116,7 @@
                             <td class="action">
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
                                     [routerLink]="['/admin/projects/edit', rowData.id]"></button>
-                            
-                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
-                                [routerLink]="['/admin/projects/edit', rowData.id]"></button>
+                        
                                 <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
                                     (click)="onDelete(rowData.id)"></button>
                             </td>
