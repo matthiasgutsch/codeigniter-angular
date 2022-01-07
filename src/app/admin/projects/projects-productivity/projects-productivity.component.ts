@@ -134,7 +134,6 @@ export class ProjectsProductivityComponent implements OnInit {
   }
 
 
-  @ViewChild('mychart') mychart;
 
   constructor(
     private fb: FormBuilder,
@@ -164,6 +163,14 @@ export class ProjectsProductivityComponent implements OnInit {
     this.stateOptions = STATE_LIST;
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
   }
+
+
+
+  @ViewChild('mychart') mychart;
+
+
+
+  
 
   ngOnInit() {
     const userId = this.currentUser.user_id;
@@ -240,31 +247,13 @@ export class ProjectsProductivityComponent implements OnInit {
     this.getTimesheet_by_project_employee(id);
     this.getTotal();
     this.getTotalPercent;
-    this.getChartsCount;
     this.spinner.hide();
 
 
   }
 
-
-  getChartsCount() {
-
-    this.chartsService.countCharts().subscribe(data => {
-      this.chartsCount = data;
-      var StringifyData = JSON.stringify(this.chartsCount)
-      this.chartsCount.forEach((item,index)=>{
-          var obj;
-          obj={
-            x:item.x,
-            y:item.y,
-          }
-        this.data1.push(obj)
-    });
-
-      console.log(this.chartsCountData)
-      error => this.error = error
-    });
-    }
+  
+ 
 
 
   getTimesheet_by_project_employee(id) {
@@ -274,76 +263,7 @@ export class ProjectsProductivityComponent implements OnInit {
   )};
 
 
-  ngAfterViewInit() {
-    this.canvas = this.mychart.nativeElement; 
-
-    this.ctx = this.canvas.getContext('2d');
-
-    let myChart = new Chart(this.ctx, {
-      type: 'line',
-      
-      data: {
-        datasets: [{
-          type:  'line',
-          backgroundColor: "rgba(99, 162, 241,0.4)",
-          borderColor: "rgb(99, 162, 241, 0.8)",
-          fill: false,
-          label: 'Fatturato',
-          data: this.data1,
-          steppedLine: false,
-        }
-      ]
-      },
-      options: {
-        responsive: true,
-        title: {
-          display: false,
-          text: 'Fatturato',
-        },
-        scales: {
-          xAxes: [{
-            type: 'linear',
-            position: 'bottom',
-
-            tooltips: {
-              mode: 'index',
-              intersect: true,
-              callbacks: {
-                label: function(tooltipItem) {
-                       return tooltipItem.yLabel;
-                }
-             }
-            },
-
-            ticks: {
-              beginAtZero: false,
-              max: 12,
-              min: 1,
-              stepSize: 1
-            },  
-
-          
-          }],
-          yAxes: [{
-            type: 'linear',
-            ticks: {
-              userCallback: function (tick) {
-                return tick.toString() + '€';
-              }
-            },
-
-     
-            scaleLabel: {
-              labelString: 'Höhe',
-              display: false
-            }
-          }]
-        }
-      }
-    });
-
-
-  }
+  
 
 
   getTotal() {
