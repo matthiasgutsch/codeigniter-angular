@@ -81,7 +81,7 @@
 
                         <tr *ngFor="let entry of timesheetsEmployee">
                             <td width="50"> 
-                                <app-initials-avatar 
+                                <app-initials-avatar [routerLink]="['/admin/employees/edit/', entry.id]"
                                 firstName="{{ getTechnicalDataItem(entry.id)?.name | slice:0:1}}"
                                 lastName="{{ getTechnicalDataItem(entry.id)?.surname | slice:0:1}}">
                             </app-initials-avatar>
