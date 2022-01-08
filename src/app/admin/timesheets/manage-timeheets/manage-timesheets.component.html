@@ -53,7 +53,7 @@
                             <th>
                                 Progetto
                             </th>
-                            <th width="200"></th>
+                            <th width="100"></th>
                         </tr>
 
                     </ng-template>
@@ -89,12 +89,10 @@
                        
 
                             <td class="action">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
-                                    [routerLink]="['/admin/timesheets/edit', timesheet.id]"></button>
+                        
                                 <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
-                                    (click)="edit(rowData)"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
-                                    (click)="onDelete(rowData.id)"></button>
+                                    (click)="edit(timesheet)"></button>
+          
                             </td>
                         </tr>
                     </ng-template>
@@ -105,30 +103,40 @@
     </div>
 </div>
 
-<p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'60%'}">
+
+<p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'400px'}">
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
+            <p-tag [value]="timesheet.id"></p-tag>
+            <h3>Dettaglio Timesheet</h3>
+            <p>{{timesheet.created_at | date:'d-MM-yyyy' }} | {{timesheet.created_at | date:'hh:mm' }}</p>
+            <hr class="full">
+            <div class="p-grid">
+                <div class="p-col-4">
+                    Entrata
+                </div>
+                <div class="p-col-8">
 
-            <h3>{{product.title}}</h3>
-            <p [innerHTML]="product.description"></p>
+                    <button pButton pRipple [label]="timesheet.date_from | date:'d-MM-yyyy hh:mm'"
+                        class="p-button p-button-primary btn-block"></button>
+                </div>
+            </div><br>
+            <div class="p-grid">
+                <div class="p-col-4">
+            Uscita
+                </div>
+                <div class="p-col-8">
 
-            <p-tabView>
-                <p-tabPanel header="Date tecnici">
-                    <table class="billings-list">
-                        <tr *ngFor="let entry of selectedSkills | keys">
-                            <td>
-                                {{ getTechnicalDataItem(entry.value.qty)?.name }}</td>
-                            <td>{{entry.value.price}}</td>
-                        </tr>
+            <button pButton pRipple [label]="timesheet.date_to | date:'d-MM-yyyy hh:mm'"
+                class="p-button p-button-success btn-block"></button>
+                </div>
+            </div>
 
-                    </table>
-                </p-tabPanel>
-            </p-tabView>
+
         </div>
     </ng-template>
 
 </p-sidebar>
-
 {{error}}
 
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">

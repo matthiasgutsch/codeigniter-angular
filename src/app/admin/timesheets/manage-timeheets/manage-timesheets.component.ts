@@ -313,9 +313,6 @@ weekNo: number;
 edit(timesheet: Timesheets) {
   this.timesheet = { ...timesheet };
   
-  this.selectedSkills = JSON.parse("" + this.timesheet.skills + "");
-
-  
   this.productDialog = true;
 }
 
