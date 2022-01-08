@@ -34,6 +34,8 @@ import { TechnicalDataService } from 'src/app/services/technical_data.service';
 import { CalendarComponent } from 'ng-fullcalendar';
 import 'moment/locale/it'  // without this line it didn't work
 import { Timesheets } from 'src/app/models/timesheets';
+import { Projects } from 'src/app/models/projects';
+import { ProjectsService } from 'src/app/services/projects.service';
 
 @Component({
   selector: 'app-manage-timesheets',
@@ -87,6 +89,10 @@ export class ManageTimesheetsComponent implements OnInit {
   technical_data: Technical_data;
   skills:  any[] = [];
   batches: any[];
+
+  projects: any = [];
+  project: Projects;
+  
   showDialog() {
     this.productDialog = true;
 }
@@ -122,6 +128,7 @@ weekNo: number;
     private technicalDataService: TechnicalDataService,
     private spinner: NgxSpinnerService,
     private categoryService: CategoryService, 
+    private projectsService: ProjectsService,
     private confirmationService: ConfirmationService,) { 
       this.status = STATUS_PRODUCTS;
       this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
@@ -135,7 +142,7 @@ weekNo: number;
 
     const userId = this.currentUser.user_id;
     this.spinner.show();
-   
+    this.getProjects();
     this.timesheetsService.getAllListbyUser().subscribe(data => {
       this.timesheets = data;
       this.cols = [
@@ -159,6 +166,8 @@ weekNo: number;
 
       this.spinner.hide();
 
+
+      
     });
 
 
@@ -179,6 +188,21 @@ weekNo: number;
     (error) => (this.error = error)
   );
   }
+
+  getProjects() {
+
+  this.projectsService.getAllListbyUser().subscribe(
+    (data: Projects) => this.projects = data,
+    );
+  }
+
+
+  getProjectItem(project_id: string, id: string) {
+    return this.projects.find(item => item.id === project_id);
+  }
+
+
+  
 
   clickButton(model: any) {
     this.displayEvent = model;

@@ -35,22 +35,37 @@
 
                     <ng-template pTemplate="header" let-columns>
                         <tr>
-                            <th *ngFor="let col of cols">
-                                {{col.header}}
+                            <th>
+                                Progetto
                             </th>
                             <th width="200"></th>
                         </tr>
 
                     </ng-template>
-                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <ng-template pTemplate="body" let-timesheet>
                         <tr>
-                            <td *ngFor="let col of cols" [ngSwitch]="col.field">
-                                {{rowData[col.field]}}
+
+                            <td>
+
+                                <p-tag severity="info" [value]="timesheet.hours + ' ore'"></p-tag>
+
+
+                          
                             </td>
+                            <td>
+                               <i class="pi pi-calendar"></i> {{timesheet.date_from | date:'d-MM-yyyy hh:mm'}}
+
+                            </td>
+
+                            <td><i class="pi pi-calendar"></i> {{timesheet.date_to | date:'d-MM-yyyy hh:mm'}}
+                            </td>
+                            
+                           <td>   {{ getProjectItem(timesheet.project_id)?.title }}</td>
+                       
 
                             <td class="action">
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
-                                    [routerLink]="['/admin/timesheets/edit', rowData.id]"></button>
+                                    [routerLink]="['/admin/timesheets/edit', timesheet.id]"></button>
                                 <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
                                     (click)="edit(rowData)"></button>
                                 <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
