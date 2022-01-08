@@ -35,6 +35,21 @@
 
                     <ng-template pTemplate="header" let-columns>
                         <tr>
+                            <th width="100">
+                                Ore
+                            </th>
+                            <th>
+                                Entrata
+                            </th>
+                            <th>
+                                Uscita
+                            </th>
+                            <th width="50">
+                                
+                            </th>
+                            <th>
+                                Dipendente
+                            </th>
                             <th>
                                 Progetto
                             </th>
@@ -52,6 +67,8 @@
 
                           
                             </td>
+                       
+
                             <td>
                                <i class="pi pi-calendar"></i> {{timesheet.date_from | date:'d-MM-yyyy hh:mm'}}
 
@@ -59,7 +76,15 @@
 
                             <td><i class="pi pi-calendar"></i> {{timesheet.date_to | date:'d-MM-yyyy hh:mm'}}
                             </td>
-                            
+
+                            <td width="50">
+                                <app-initials-avatar
+                                    firstName="{{ getEmployeeItem(timesheet.employee_id)?.name | slice:0:1}}"
+                                    lastName="{{ getEmployeeItem(timesheet.employee_id)?.surname | slice:0:1}}">
+                                </app-initials-avatar>
+                            </td>
+
+                            <td>   {{ getEmployeeItem(timesheet.employee_id)?.username }}</td>
                            <td>   {{ getProjectItem(timesheet.project_id)?.title }}</td>
                        
 

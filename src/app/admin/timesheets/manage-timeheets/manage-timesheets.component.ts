@@ -93,6 +93,9 @@ export class ManageTimesheetsComponent implements OnInit {
   projects: any = [];
   project: Projects;
   
+  employees: any = [];
+  employee: Employees;
+
   showDialog() {
     this.productDialog = true;
 }
@@ -143,6 +146,8 @@ weekNo: number;
     const userId = this.currentUser.user_id;
     this.spinner.show();
     this.getProjects();
+    this.getEmployees();
+
     this.timesheetsService.getAllListbyUser().subscribe(data => {
       this.timesheets = data;
       this.cols = [
@@ -197,12 +202,21 @@ weekNo: number;
   }
 
 
+  getEmployees() {
+    this.employeesService.getAllListbyUser().subscribe(
+      (data: Employees) => this.employees = data,
+      );
+    }
+
+
   getProjectItem(project_id: string, id: string) {
     return this.projects.find(item => item.id === project_id);
   }
 
 
-  
+  getEmployeeItem(employee_id: string, id: string) {
+    return this.employees.find(item => item.id === employee_id);
+  }
 
   clickButton(model: any) {
     this.displayEvent = model;
