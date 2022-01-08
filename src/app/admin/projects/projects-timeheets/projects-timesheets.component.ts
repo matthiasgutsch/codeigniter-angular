@@ -275,10 +275,14 @@ project: Projects;
   }
 
   
+
+
   view(timesheet: Timesheets) {
-    this.timesheet = {...this.timesheet};
+    this.timesheet = { ...timesheet };
+  
     this.productDialog = true;
-}
+  }
+  
 
 
 
