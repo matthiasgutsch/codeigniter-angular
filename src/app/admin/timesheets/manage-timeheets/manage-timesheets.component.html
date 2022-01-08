@@ -78,7 +78,7 @@
                             </td>
 
                             <td width="50">
-                                <app-initials-avatar
+                                <app-initials-avatar [routerLink]="['/admin/employees/edit', timesheet.employee_id]"
                                     firstName="{{ getEmployeeItem(timesheet.employee_id)?.name | slice:0:1}}"
                                     lastName="{{ getEmployeeItem(timesheet.employee_id)?.surname | slice:0:1}}">
                                 </app-initials-avatar>
