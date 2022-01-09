@@ -49,6 +49,7 @@ export interface fPairs {
 })
 export class ProjectsProductivityComponent implements OnInit {
   @ViewChild("myInput", { static: false }) myInputVariable: ElementRef;
+  @ViewChild('mychart') mychart;
 
   pageTitle: string;
   error: string;
@@ -166,10 +167,6 @@ export class ProjectsProductivityComponent implements OnInit {
     this.stateOptions = STATE_LIST;
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
   }
-
-
-
-  @ViewChild('mychart') mychart;
 
 
 

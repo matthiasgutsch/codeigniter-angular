@@ -8,13 +8,18 @@
 
             </div>
             <div class="p-col-12 p-md-6">
-                <button type="button" pButton pRipple label="Project Board" class="p-button p-button-secondary pull-right  p-mr-2"
-                [routerLink]="['/admin/task/', id]"></button>
-
                 <button pButton pRipple icon="pi pi-save" type="submit" label="salva"
-                    class="p-button pull-right p-button-success p-mr-2"
-                    [disabled]="!blogForm.valid"></button>
-          
+                class="p-button pull-right p-button-success p-mr-2"
+                [disabled]="!blogForm.valid"></button>
+                
+                <button type="button" pButton pRipple label="tasks" icon="pi pi-clone" class="p-button p-button-warning pull-right  p-mr-2"
+                [routerLink]="['/admin/projects/task/', id]"></button>
+
+                <button type="button" pButton pRipple label="Timesheets" icon="pi pi-clone" class="p-button p-button-primary pull-right  p-mr-2"
+                [routerLink]="['/admin/projects/timesheet/', id]"></button>
+
+                <button type="button" pButton pRipple label="Produttivita" icon="pi pi-chart-line" class="p-button p-button-secondary pull-right  p-mr-2"
+                [routerLink]="['/admin/projects/productivity/', id]"></button>
             </div>
         </div>
     </div>

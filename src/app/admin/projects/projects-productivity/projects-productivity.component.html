@@ -8,8 +8,13 @@
 
             </div>
             <div class="p-col-12 p-md-6">
-                <button type="button" pButton pRipple label="Modifica Progetto" class="p-button p-button-success pull-right  p-mr-2"
-                [routerLink]="['/admin/projects/edit/', id]"></button>
+        
+
+                <button type="button" pButton pRipple label="tasks" icon="pi pi-clone" class="p-button p-button-warning pull-right  p-mr-2"
+                [routerLink]="['/admin/projects/task/', id]"></button>
+
+                <button type="button" pButton pRipple label="Timesheets" icon="pi pi-clone" class="p-button p-button-primary pull-right  p-mr-2"
+                [routerLink]="['/admin/projects/timesheet/', id]"></button>
 
                 <button type="button" pButton pRipple label="Torna indietro" class="p-button p-button-secondary pull-right  p-mr-2"
                 [routerLink]="['/admin/projects/']"></button>
@@ -113,6 +118,9 @@
             <div class="p-col-12 p-md-5">
                
                 <p-card>
+                    <canvas id="myChart" width="600" height="350" #mychart></canvas>
+
+
 
                 </p-card>
                
