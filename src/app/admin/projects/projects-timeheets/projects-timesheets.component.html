@@ -1,46 +1,35 @@
-
-  <div class="p-field p-grid">
-    <div class="p-col-12 p-md-12">
-        
 <div class="dash-header">
     <div class="dash-title">
 
         <div class="p-field p-grid">
             <div class="p-col-12 p-md-6">
                 <h3>Timesheets / {{project.title}}</h3>
-    
 
             </div>
             <div class="p-col-12 p-md-6">
-                <button type="button" pButton pRipple label="Modifica Progetto" class="p-button p-button-success pull-right  p-mr-2"
-                [routerLink]="['/admin/projects/edit/', id]"></button>
+                <button type="button" pButton pRipple label="Modifica Progetto"
+                    class="p-button p-button-success pull-right  p-mr-2"
+                    [routerLink]="['/admin/projects/edit/', id]"></button>
 
-                <button type="button" pButton pRipple label="Torna indietro" class="p-button p-button-secondary pull-right  p-mr-2"
-                [routerLink]="['/admin/projects/']"></button>
+                <button type="button" pButton pRipple label="Torna indietro"
+                    class="p-button p-button-secondary pull-right  p-mr-2" [routerLink]="['/admin/projects/']"></button>
 
-               <!--  <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/products/create']" label="Aggiungi"
-                class="p-button p-button-primary p-mr-2 pull-right"></button>--> 
-          
+                <!--  <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/products/create']" label="Aggiungi"
+                class="p-button p-button-primary p-mr-2 pull-right"></button>-->
+
             </div>
-              
 
-
-                    
-            </div>
         </div>
     </div>
 </div>
 
+
 <div class="p-fluid">
     <div class="p-field p-grid">
         <div class="p-col-12 p-md-9">
-      
 
             <p-card>
 
-
-
-                
                 <p-table #dt [columns]="cols" [value]="timesheets" [globalFilterFields]="['name', 'description']"
                     currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true"
                     [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
@@ -53,12 +42,12 @@
                             <th>
                                 Entrata
                             </th>
-                            <th >
+                            <th>
                                 Uscita
                             </th>
-                       
-                        
-                            <th width="200"></th>
+                            <th width="50"></th>
+                            <th></th>
+                            <th width="160"></th>
                         </tr>
 
                     </ng-template>
@@ -69,26 +58,33 @@
 
                                 <p-tag severity="info" [value]="timesheet.hours + ' ore'"></p-tag>
 
-
-                          
                             </td>
                             <td>
-                               <i class="pi pi-calendar"></i> {{timesheet.date_from | date:'d-MM-yyyy hh:mm'}}
+                                <i class="pi pi-calendar"></i> {{timesheet.date_from | date:'d-MM-yyyy hh:mm'}}
 
                             </td>
 
                             <td><i class="pi pi-calendar"></i> {{timesheet.date_to | date:'d-MM-yyyy hh:mm'}}
                             </td>
-                         
 
-                         
+                            <td width="50">
+                                <app-initials-avatar
+                                    firstName="{{ getTechnicalDataItem(timesheet.employee_id)?.name | slice:0:1}}"
+                                    lastName="{{ getTechnicalDataItem(timesheet.employee_id)?.surname | slice:0:1}}">
+                                </app-initials-avatar>
+                            </td>
+                            <td>
+
+                                {{ getTechnicalDataItem(timesheet.employee_id)?.name }}
+                                {{ getTechnicalDataItem(timesheet.employee_id)?.surname }}
+                            </td>
+
                             <td class="action">
-                                <button pButton pRipple icon="pi pi-pencil"
-                                    class="p-button p-button-success p-mr-2" (click)="createTimesheets(timesheet.id)"></button>
-                                <button pButton pRipple icon="pi pi-eye"
-                                    class="p-button p-button-primary p-mr-2" (click)="view(timesheet)"></button>
-                                <button pButton pRipple icon="pi pi-trash"
-                                    class="p-button p-button-danger p-mr-2"
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
+                                    (click)="createTimesheets(timesheet.id)"></button>
+                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
+                                    (click)="view(timesheet)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
                                     (click)="onDelete(timesheet.id)"></button>
                             </td>
                         </tr>
@@ -100,10 +96,8 @@
         <div class="p-col-12 p-md-3">
             <p-card></p-card>
         </div>
-
     </div>
 </div>
-
 
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'400px'}">
     <ng-template pTemplate="content">
@@ -124,15 +118,14 @@
             </div><br>
             <div class="p-grid">
                 <div class="p-col-4">
-            Uscita
+                    Uscita
                 </div>
                 <div class="p-col-8">
 
-            <button pButton pRipple [label]="timesheet.date_to | date:'d-MM-yyyy hh:mm'"
-                class="p-button p-button-success btn-block"></button>
+                    <button pButton pRipple [label]="timesheet.date_to | date:'d-MM-yyyy hh:mm'"
+                        class="p-button p-button-success btn-block"></button>
                 </div>
             </div>
-
 
         </div>
     </ng-template>

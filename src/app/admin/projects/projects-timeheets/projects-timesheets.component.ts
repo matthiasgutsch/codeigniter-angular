@@ -54,7 +54,8 @@ export class ProjectsTimesheetsComponent implements OnInit {
   location: Locations;
   cols: any[];
   colsData: any[];
-
+  employee: Employees;
+  employees: any = [];
   exportColumns: any[];
   _selectedColumns: any[];
   selectedWorks: any[];
@@ -154,24 +155,7 @@ project: Projects;
 
     this.timesheetsService.getAllTimesheetsbyProject(+id).subscribe(data => {
       this.timesheets = data;
-      this.cols = [
-        { field: "project_id", header: "titolo" },
-        { field: "code", header: "Codice" },
-        { field: "status", header: "Status" },
-        { field: "employee_id", header: "Ore" },
-        { field: "code_int", header: "Codice interno" },
-        { field: "brand_id", header: "Brand" }
-      ];
-      this.colsData = [
-        { field: "title", header: "titolo" },
-        { field: "description", header: "Codice" },
-  
-      ];
-      this._selectedColumns = this.cols;
-      this.exportColumns = this.cols.map(col => ({
-        title: col.header,
-        dataKey: col.field
-      }));
+      this.getEmployees();
 
       this.spinner.hide();
 
@@ -180,6 +164,10 @@ project: Projects;
 
   }
 
+
+  getEmployeeItem(employee_id: string, id: string) {
+    return this.employees.find((item) => item.id === employee_id);
+  }
 
   getBrands() {
   this.brandService.getAllListbyUser().subscribe(
@@ -246,6 +234,12 @@ project: Projects;
 	} 
     
  
+  getEmployees() {
+    this.employeesService.getAllListbyUser().subscribe(
+      (data: Employees) => (this.employees = data),
+      (error) => (this.error = error)
+    )
+  };
 
   getBrandItem(brand_id: string, id: string) {
     return this.brands.find(item => item.id === brand_id);
@@ -256,8 +250,8 @@ project: Projects;
   }
 
 
-  getTechnicalDataItem(category_id: string, id: string) {
-    return this.technical_datas.find(item => item.id === category_id);
+  getTechnicalDataItem(employee_id: string) {
+    return this.employees.find(item => item.id === employee_id);
   }
 
 
