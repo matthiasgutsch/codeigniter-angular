@@ -180,6 +180,13 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     );
   }
 
+
+  get_projects_timesheets_chart(id: ID) {
+    const userId = this.currentUser.user_id;
+    return this._http.get<T>(this._base + '/get_projects_timesheets_chart/' + id).pipe(
+      catchError(this.handleError)
+    );
+  }
   
 
   countTotalNotPaid(id: ID) {

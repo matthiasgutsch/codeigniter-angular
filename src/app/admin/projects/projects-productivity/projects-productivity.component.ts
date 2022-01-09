@@ -3,7 +3,7 @@ import { AppointmentsService } from '../../../services/appointments.service';
 import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
-import { Chart } from 'chart.js';
+import { Chart } from "chart.js";
 
 import { Blog } from '../../../models/blog';
 import { Category } from '../../../models/category';
@@ -47,9 +47,13 @@ export interface fPairs {
   selector: "app-projects-productivity",
   templateUrl: "./projects-productivity.component.html",
 })
+
+
+
 export class ProjectsProductivityComponent implements OnInit {
+  
   @ViewChild("myInput", { static: false }) myInputVariable: ElementRef;
-  @ViewChild('mychart') mychart;
+
 
   pageTitle: string;
   error: string;
@@ -108,8 +112,6 @@ export class ProjectsProductivityComponent implements OnInit {
   format2: string = "";
   selectedCity: Blog;
   selectedClients: SelectItem[];
-  canvas: any;
-  ctx: any;
   yAxes: [];
   xAxes: [];
   selectedDate: Date;
@@ -125,14 +127,17 @@ export class ProjectsProductivityComponent implements OnInit {
   itemForm: FormGroup;
   skillsForm: FormGroup;
   skillsValues: any = [];
-  data1=[];
+  data1: any = [];
   project_id: string;
   chartsCount: any;
   chartsCountNone: any;
   chartsCountData: any = [];
   projects: any = [];
   project: Projects;
-
+  dataChart: any = [];
+  canvas: any;
+  ctx: any;
+  dataChart1: any;
   trackByFn(index, item) {
     return item.id;
   }
@@ -166,20 +171,26 @@ export class ProjectsProductivityComponent implements OnInit {
     this.status = STATUS_PRODUCTS;
     this.stateOptions = STATE_LIST;
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    
   }
 
 
+  @ViewChild("mychart") mychart;
 
-  
 
   ngOnInit() {
     const userId = this.currentUser.user_id;
     this.spinner.show();
 
 
-    
+
     const id = this.route.snapshot.paramMap.get("id");
 
+
+    this.projectsService.get_projects_timesheets_chart(+id).subscribe((res) => {
+      this.dataChart = res;
+      this.dataChart1 = JSON.stringify(this.dataChart)
+    });
 
     if (id) {
       this.pageTitle = "Modifica Progetto";
@@ -248,6 +259,7 @@ export class ProjectsProductivityComponent implements OnInit {
     this.getEmployees();
     this.getTimesheet_by_project_employee(id);
     this.getTotal();
+    this.getChartsCount(id);
     this.getTotalPercent;
     this.spinner.hide();
 
@@ -255,8 +267,58 @@ export class ProjectsProductivityComponent implements OnInit {
   }
 
   
- 
+  
+  ngAfterViewInit() {
+    this.canvas = this.mychart.nativeElement;
+    this.ctx = this.canvas.getContext("2d");
 
+    let myChart = new Chart(this.ctx, {
+      type: 'line',
+      data: {
+        label: '(dist: linear)',
+        datasets: [{
+        label: '',
+        data: [{"x":"2022-01-05 00:00","y":"6.00"},{"x":"2022-01-09 00:00","y":"9.00"},{"x":"2022-01-10 00:00","y":"37.00"},{"x":"2022-01-11 00:00","y":"12.00"},{"x":"2022-01-12 00:00","y":"30.00"},{"x":"2022-01-17 00:00","y":"16.00"},{"x":"2022-02-25 00:00","y":"6.00"}],
+        lineTension: 0,
+        backgroundColor: 'rgba(60, 160, 220, 0.3)',
+        borderColor: 'rgba(60, 160, 220, 0.8)'
+      }]
+    },
+      options: {
+        title: {
+        display: false,
+        text: 'Angular & Chart.js'
+        },
+        tooltips: {
+          mode: 'index',
+          intersect: false,
+        },
+        scales: {
+          xAxes: [{
+            type: 'time',
+            distribution: 'linear',
+            scaleLabel: {
+              labelString: 'Giornate',
+              display: true,
+            },
+            ticks: {
+              source: 'auto'
+            },
+          }],
+          yAxes: [{
+              ticks: {
+                  beginAtZero:true
+              },
+              scaleLabel: {
+                labelString: 'Ore di lavoro',
+                display: true,
+              }
+          }]
+        }
+      }
+    });
+  }
+  
 
   getTimesheet_by_project_employee(id) {
   this.timesheetsService.timesheet_by_project_employee(+id).subscribe(
@@ -265,7 +327,22 @@ export class ProjectsProductivityComponent implements OnInit {
   )};
 
 
-  
+  getChartsCount(id) {
+
+    this.projectsService.get_projects_timesheets_chart(+id).subscribe(data => {
+      this.chartsCount = data;
+      this.chartsCount.forEach((item, index) => {
+        var obj;
+        obj = {
+          x: item.x,
+          y: item.y,
+        }
+        this.data1.push(obj)
+      });
+
+      error => this.error = error
+    });
+  }
 
 
   getTotal() {
