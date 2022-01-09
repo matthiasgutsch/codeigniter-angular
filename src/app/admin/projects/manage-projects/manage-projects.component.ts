@@ -138,6 +138,9 @@ trackByFn(index, item) {
         title: col.header,
         dataKey: col.field
       }));
+
+    
+
       this.getTags();
       this.getCategories();
       this.getBrands();

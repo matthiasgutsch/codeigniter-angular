@@ -16,7 +16,7 @@ import { Appointments } from 'src/app/models/appointments';
 import { AppointmentsService } from 'src/app/services/appointments.service';
 import { CalendarComponent } from 'ng-fullcalendar';
 import * as $ from 'jquery';
-import {formatDate} from '@angular/common';
+import { formatDate } from '@angular/common';
 import { Locations } from 'src/app/models/locations';
 import { Employees } from 'src/app/models/employees';
 import { WorksService } from 'src/app/services/works.service';
@@ -34,6 +34,8 @@ import { Charts } from 'src/app/models/charts';
 import 'moment/locale/it'  // without this line it didn't work
 import { SupportsService } from 'src/app/services/supports.service';
 import { Supports } from 'src/app/models/supports';
+import { ProjectsService } from 'src/app/services/projects.service';
+import { Projects } from 'src/app/models/projects';
 moment.locale('it')
 
 @Component({
@@ -52,7 +54,7 @@ export class AdminDashboardComponent implements OnInit {
 
   employees: any = [];
   employee: Employees;
-  
+
   works: any = [];
   work: Works;
   clientsCount: any;
@@ -79,12 +81,13 @@ export class AdminDashboardComponent implements OnInit {
   client: Clients;
   comuni: any = [];
   displayEvent: any;
-  currentUser: any ;
+  currentUser: any;
   items: any;
   appointmentsCount: Appointments;
   billingsCount: Billings;
-  billingsCountTotal:  Billings;
-
+  billingsCountTotal: Billings;
+  projects: any = [];
+  project: Projects;
   billingsCountTotalNotPaid: Billings;
   category_id: string;
   canvas: any;
@@ -95,15 +98,15 @@ export class AdminDashboardComponent implements OnInit {
   chartsCountNone: any;
   chartsCountData: any = [];
   chartsCountDataTotal: string;
-  data1=[];
-  data2=[];
+  data1 = [];
+  data2 = [];
 
   trackByFn(index, item) {
     return item.id;
   }
-  
-  myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en')  ;
-  myMonth = formatDate(new Date(), 'dd/MM/yyyy', 'en')  ;
+
+  myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en');
+  myMonth = formatDate(new Date(), 'dd/MM/yyyy', 'en');
 
   currentDate: moment.Moment = moment();
   currentTime: string = moment().format(' MMMM YYYY');
@@ -119,11 +122,8 @@ export class AdminDashboardComponent implements OnInit {
     private chartsService: ChartsService,
     private spinner: NgxSpinnerService,
     private fb: FormBuilder,
-    private comuniService: ComuniService,
+    private projectsService: ProjectsService,
     private worksService: WorksService,
-    private locationsService: LocationsService, 
-    private employeesService: EmployeesService,
-    private categoryService: CategoryService,
     private router: Router,
     private productsService: ProductsService,
     private messageService: MessageService,
@@ -136,42 +136,44 @@ export class AdminDashboardComponent implements OnInit {
     this.items = DASHBOARD;
 
 
-    
+
   }
 
   ngOnInit() {
 
     const userId = this.currentUser.user_id;
 
-  
+
     this.appointmentsService.getAllListbyUser().subscribe(data => {
       this.spinner.show();
 
       this.getClientsCount();
       this.getClients();
-       this.getProductsCount();
-       this.getBillingsCountTotal();
-       this.getBillingsCountTotalNotPaid();
+      this.getProductsCount();
+      this.getBillingsCountTotal();
+      this.getBillingsCountTotalNotPaid();
 
-       this.getBillingsCount();
-       this.getAppointmentsToday();
-       this.getAppointmentsCount();
-       this.getWorks();
-       this.getChartsCount();
-       this.getChartsCountNone();
-       this.getSupports();
+      this.getBillingsCount();
+      this.getAppointmentsToday();
+      this.getAppointmentsCount();
+      this.getWorks();
+      this.getProjects();
+
+      this.getChartsCount();
+      this.getChartsCountNone();
+      this.getSupports();
       this.calendarOptions = {
-    
+
         editable: true,
         eventLimit: false,
-        timeFormat: 'HH:mm', 
+        timeFormat: 'HH:mm',
         weekNumbers: true,
         header: {
           right: 'prev,next',
           left: 'title',
 
         },
-        
+
         events: data,
         locale: 'it',
         timezone: 'UTC',
@@ -187,16 +189,16 @@ export class AdminDashboardComponent implements OnInit {
 
 
   ngAfterViewInit() {
-    this.canvas = this.mychart.nativeElement; 
+    this.canvas = this.mychart.nativeElement;
 
     this.ctx = this.canvas.getContext('2d');
 
     let myChart = new Chart(this.ctx, {
       type: 'line',
-      
+
       data: {
         datasets: [{
-          type:  'line',
+          type: 'line',
           backgroundColor: "rgba(99, 162, 241,0.4)",
           borderColor: "rgb(99, 162, 241, 0.8)",
           fill: false,
@@ -205,7 +207,7 @@ export class AdminDashboardComponent implements OnInit {
           steppedLine: false,
         },
         {
-          type:  'line',
+          type: 'line',
           backgroundColor: "rgba(255, 99, 71,0.4)",
           borderColor: "rgb(255, 99, 71, 0.8)",
           fill: false,
@@ -213,7 +215,7 @@ export class AdminDashboardComponent implements OnInit {
           data: this.data2,
           steppedLine: false,
         }
-      ]
+        ]
       },
       options: {
         responsive: true,
@@ -230,10 +232,10 @@ export class AdminDashboardComponent implements OnInit {
               mode: 'index',
               intersect: true,
               callbacks: {
-                label: function(tooltipItem) {
-                       return tooltipItem.yLabel;
+                label: function (tooltipItem) {
+                  return tooltipItem.yLabel;
                 }
-             }
+              }
             },
 
             ticks: {
@@ -241,9 +243,9 @@ export class AdminDashboardComponent implements OnInit {
               max: 12,
               min: 1,
               stepSize: 1
-            },  
+            },
 
-          
+
           }],
           yAxes: [{
             type: 'linear',
@@ -253,7 +255,7 @@ export class AdminDashboardComponent implements OnInit {
               }
             },
 
-     
+
             scaleLabel: {
               labelString: 'Höhe',
               display: false
@@ -267,8 +269,14 @@ export class AdminDashboardComponent implements OnInit {
   }
 
 
+  getProjects() {
+    this.projectsService.getAllListbyUser().subscribe(data => {
+      this.projects = data;
+    });
+  }
+
   getSupports() {
-    const userId = this.currentUser.user_id; 
+    const userId = this.currentUser.user_id;
     this.supportsService.getActive(+userId).subscribe(
       (data: Supports) => this.supports = data,
       error => this.error = error
@@ -277,158 +285,158 @@ export class AdminDashboardComponent implements OnInit {
 
 
 
-  
+
   getChartsCount() {
 
     this.chartsService.countCharts().subscribe(data => {
       this.chartsCount = data;
       var StringifyData = JSON.stringify(this.chartsCount)
-      this.chartsCount.forEach((item,index)=>{
-          var obj;
-          obj={
-            x:item.x,
-            y:item.y,
-          }
+      this.chartsCount.forEach((item, index) => {
+        var obj;
+        obj = {
+          x: item.x,
+          y: item.y,
+        }
         this.data1.push(obj)
-    });
+      });
 
       console.log(this.chartsCountData)
       error => this.error = error
     });
-    }
+  }
 
 
-    getChartsCountNone() {
+  getChartsCountNone() {
 
-      this.chartsService.countChartsNone().subscribe(data => {
-        this.chartsCountNone = data;
-        var StringifyData = JSON.stringify(this.chartsCountNone)
-        this.chartsCountNone.forEach((item,index)=>{
-            var obj;
-            obj={
-              x:item.x,
-              y:item.y,
-            }
-          this.data2.push(obj)
+    this.chartsService.countChartsNone().subscribe(data => {
+      this.chartsCountNone = data;
+      var StringifyData = JSON.stringify(this.chartsCountNone)
+      this.chartsCountNone.forEach((item, index) => {
+        var obj;
+        obj = {
+          x: item.x,
+          y: item.y,
+        }
+        this.data2.push(obj)
       });
-  
-        console.log(this.chartsCountData)
-        error => this.error = error
-      });
-      }
 
-    getClientsCount() {
-      const userId = this.currentUser.user_id; 
-      this.clientsService.count().subscribe(
-        (data: Clients) => this.clientsCount = data,
-        error => this.error = error
-        );
-      }
+      console.log(this.chartsCountData)
+      error => this.error = error
+    });
+  }
 
-      
-
-    getClients() {
-      this.clientsService.getAllListbyUser().subscribe(data => {
-        this.clients = data;
-        error => this.error = error
-      });
-    }
-
-    getWorks() {
-      this.worksService.getAllListbyUser().subscribe(
-        (data: Works) => this.works = data,
-        error => this.error = error
-      );
-    }
+  getClientsCount() {
+    const userId = this.currentUser.user_id;
+    this.clientsService.count().subscribe(
+      (data: Clients) => this.clientsCount = data,
+      error => this.error = error
+    );
+  }
 
 
-    getProductsCount() {
-      this.productsService.count().subscribe(data => {
-        this.productsCount = data;
-        error => this.error = error
-      });
-    }
 
-  
+  getClients() {
+    this.clientsService.getAllListbyUser().subscribe(data => {
+      this.clients = data;
+      error => this.error = error
+    });
+  }
 
-    getAppointmentsCount() {
-      const userId = this.currentUser.user_id; 
+  getWorks() {
+    this.worksService.getAllListbyUser().subscribe(
+      (data: Works) => this.works = data,
+      error => this.error = error
+    );
+  }
+
+
+  getProductsCount() {
+    this.productsService.count().subscribe(data => {
+      this.productsCount = data;
+      error => this.error = error
+    });
+  }
+
+
+
+  getAppointmentsCount() {
+    const userId = this.currentUser.user_id;
     this.appointmentsService.count().subscribe(
       (data: Appointments) => this.appointmentsCount = data,
       error => this.error = error
-      );
-    }
+    );
+  }
 
-    getBillingsCount() {
-      const userId = this.currentUser.user_id; 
+  getBillingsCount() {
+    const userId = this.currentUser.user_id;
     this.billingsService.count().subscribe(
       (data: Billings) => this.billingsCount = data,
       error => this.error = error
-      );
-    }
+    );
+  }
 
 
-    getBillingsCountTotal() {
-      const userId = this.currentUser.user_id; 
+  getBillingsCountTotal() {
+    const userId = this.currentUser.user_id;
     this.billingsService.countTotal(+userId).subscribe(
       (data: Billings) => this.billingsCountTotal = data,
       error => this.error = error
-      );
-    }
+    );
+  }
 
 
-    getBillingsCountTotalNotPaid() {
-      const userId = this.currentUser.user_id; 
+  getBillingsCountTotalNotPaid() {
+    const userId = this.currentUser.user_id;
     this.billingsService.countTotalNotPaid(+userId).subscribe(
       (data: Billings) => this.billingsCountTotalNotPaid = data,
       error => this.error = error
-      );
-    }
+    );
+  }
 
 
-    getAppointmentsToday() {
-      const userId = this.currentUser.user_id; 
+  getAppointmentsToday() {
+    const userId = this.currentUser.user_id;
     this.appointmentsService.getToday(+userId).subscribe(
       (data: Appointments) => this.appointmentsToday = data,
       error => this.error = error
-      );
-    }
+    );
+  }
 
 
 
 
 
-    getCategoryItem(category_id: string, id: string) {
-      return this.clients.find(item => item.id === category_id);
-    }
+  getCategoryItem(category_id: string, id: string) {
+    return this.clients.find(item => item.id === category_id);
+  }
 
 
-    getComuniItem(province: string, id: string) {
-      return this.comuni.find(item => item.id === province);
-    }
+  getComuniItem(province: string, id: string) {
+    return this.comuni.find(item => item.id === province);
+  }
 
-    getEmployeeItem(employee_id: string, id: string) {
-      return this.employees.find(item => item.id === employee_id);
-    }
-
-    
-
-    getLocationItem(location_id: string, id: string) {
-      return this.locations.find(item => item.id === location_id);
-    }
+  getEmployeeItem(employee_id: string, id: string) {
+    return this.employees.find(item => item.id === employee_id);
+  }
 
 
 
-    getWorksItem(works_id: string, id: string) {
-      return this.works.find(item => item.id === works_id);
-    }
+  getLocationItem(location_id: string, id: string) {
+    return this.locations.find(item => item.id === location_id);
+  }
 
-    
+
+
+  getWorksItem(works_id: string, id: string) {
+    return this.works.find(item => item.id === works_id);
+  }
+
+
   editProduct(appointment: Appointments) {
-    this.appointment = {...appointment};
+    this.appointment = { ...appointment };
     this.selectedWorks = this.appointment.works_id.split(',');
     this.appointmentsDialog = true;
-}
+  }
 
 
 

@@ -61,6 +61,7 @@ import { TagModule } from 'primeng/tag';
 import { NgxSpinnerModule } from "ngx-spinner";
 import {PanelModule} from 'primeng/panel';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import {KnobModule} from 'primeng/knob';
 
 import { ManageBillingsComponent } from './billings/manage-billings/manage-billings.component';
 import { BillingsFormComponent } from './billings/billings-form/billings-form.component';
@@ -191,6 +192,7 @@ import { ProjectsTimesheetsComponent } from './projects/projects-timeheets/proje
     SelectButtonModule,
     ProgressBarModule,
     NgxSpinnerModule,
+    KnobModule,
     InputTextareaModule,
     DragDropModule,
     SplitButtonModule,

@@ -88,9 +88,11 @@
                         <tr>
                             <th width="50"></th>
  
-                            <th width="360"></th>
-                            <th></th>
-                            <th></th>
+                            <th width="360">Nome Progetto</th>
+                            <th width="200"></th>
+                            <th width="100">Ore</th>
+
+                            <th>Importo Progetto</th>
 
                             <th width="140"></th>
                         </tr>
@@ -108,24 +110,32 @@
                             <td>
 
 
-                                {{project.title}}
+                                <strong>{{project.title}}</strong><br>{{project.code_int}}
+                                <div class="clearifix"></div>
+                                
+
                             </td>
 
-                            <td>
-                                {{project.price | currency :'EUR':'symbol':'1.2-2'}}
-                            </td>
                             <td>      
                               
-                                <button pButton pRipple label="Produttività" icon="pi pi-chart-line" class="p-button p-button-secondary p-mr-2"
+                                <button pButton pRipple  icon="pi pi-chart-line" class="p-button p-button-secondary p-mr-2"
                             [routerLink]="['/admin/projects/productivity/', project.id]"></button>
                                 
                             
-                                <button pButton pRipple label="Timesheets" icon="pi pi-clock" class="p-button p-button-primary p-mr-2"
+                                <button pButton pRipple  icon="pi pi-clock" class="p-button p-button-primary p-mr-2"
                                 [routerLink]="['/admin/projects/timesheet/', project.id]"></button>  
 
-                                <button pButton pRipple label="Tasks" icon="pi pi-clone" class="p-button p-button-warning p-mr-2"
+                                <button pButton pRipple  icon="pi pi-clone" class="p-button p-button-warning p-mr-2"
                                 [routerLink]="['/admin/projects/task/', project.id]"></button>
                             </td>
+
+
+                            <td><i class="pi pi-clock"></i> {{project.time}}</td>
+                            
+                            <td><p-tag value="{{project.price | currency :'EUR':'symbol':'1.2-2'}}"></p-tag>
+                     
+                            </td>
+                           
                             <td class="action">
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
                                     [routerLink]="['/admin/projects/edit', project.id]"></button>

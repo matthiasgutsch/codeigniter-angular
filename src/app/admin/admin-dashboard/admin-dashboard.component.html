@@ -23,29 +23,25 @@
 
             <div class="p-col-6 p-md-3">
 
-
-
-
-
                 <p-card>
 
-                   <div class="p-grid">
-                    <div class="p-col-12 p-md-6">
+                    <div class="p-grid">
+                        <div class="p-col-12 p-md-6">
 
-                    <h4 class="mb-0">Clienti</h4>
-                    Totale:  {{clientsCount}}
+                            <h4 class="mb-0">Clienti</h4>
+                            Totale: {{clientsCount}}
 
-                    </div>
-                    
-                    <div class="p-col-12 p-md-6">
+                        </div>
 
-                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']"
-                        routerLinkActive="active" class="p-button p-button-success pull-right"></button>
+                        <div class="p-col-12 p-md-6">
 
-                    <button pButton pRipple  icon="pi pi-list" [routerLink]="['/admin/clients']"
-                        routerLinkActive="active" class="p-button p-button-primary pull-right p-mr-2"></button>
-           
-                    </div>
+                            <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']"
+                                routerLinkActive="active" class="p-button p-button-success pull-right"></button>
+
+                            <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/clients']"
+                                routerLinkActive="active" class="p-button p-button-primary pull-right p-mr-2"></button>
+
+                        </div>
                     </div>
                 </p-card>
             </div>
@@ -53,22 +49,18 @@
 
                 <p-card>
 
-            
-
                     <div class="p-grid">
                         <div class="p-col-6 p-md-6">
-                    <h4 class="mb-0">Appuntamenti</h4>
-                    Totale:  {{appointmentsCount}}
+                            <h4 class="mb-0">Appuntamenti</h4>
+                            Totale: {{appointmentsCount}}
 
-                    
                         </div>
                         <div class="p-col-6 p-md-6">
 
-             
-                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']"
-                        routerLinkActive="active" class="p-button p-button-success pull-right"></button>
-                        <button pButton pRipple icon="pi pi-list"  [routerLink]="['/admin/appointments']"
-                        routerLinkActive="active" class="p-button p-button-primary p-mr-2 pull-right"></button>
+                            <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']"
+                                routerLinkActive="active" class="p-button p-button-success pull-right"></button>
+                            <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/appointments']"
+                                routerLinkActive="active" class="p-button p-button-primary p-mr-2 pull-right"></button>
                         </div>
                     </div>
                 </p-card>
@@ -81,19 +73,17 @@
 
                     <div class="p-grid">
                         <div class="p-col-6 p-md-6">
-                    <h4 class="mb-0">Fatturazione</h4>
-                    {{billingsCountTotal | currency :'EUR':'symbol':'1.2-2'}} <strong></strong> 
-                    
-                    <!-- <span class="red" *ngIf="billingsCountTotalNotPaid > 0"> ({{billingsCountTotalNotPaid |  currency :'EUR':'symbol':'1.2-2'}})</span> -->
+                            <h4 class="mb-0">Fatturazione</h4>
+                            {{billingsCountTotal | currency :'EUR':'symbol':'1.2-2'}} <strong></strong>
+
+                            <!-- <span class="red" *ngIf="billingsCountTotalNotPaid > 0"> ({{billingsCountTotalNotPaid |  currency :'EUR':'symbol':'1.2-2'}})</span> -->
                         </div>
                         <div class="p-col-6 p-md-6">
 
-                      
-                        
-                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/billings/create']"
-                        routerLinkActive="active" class="p-button p-button-success pull-right"></button>
-                        <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/billings']"
-                        routerLinkActive="active" class="p-button p-button-primary p-mr-2 pull-right"></button>
+                            <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/billings/create']"
+                                routerLinkActive="active" class="p-button p-button-success pull-right"></button>
+                            <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/billings']"
+                                routerLinkActive="active" class="p-button p-button-primary p-mr-2 pull-right"></button>
                         </div>
                     </div>
                 </p-card>
@@ -104,18 +94,18 @@
 
                     <div class="p-grid">
                         <div class="p-col-12 p-md-6">
-    
-                        <h4 class="mb-0">Prodotti</h4>
-                        Totale: {{productsCount}}
+
+                            <h4 class="mb-0">Prodotti</h4>
+                            Totale: {{productsCount}}
 
                         </div>
-                        
+
                         <div class="p-col-12 p-md-6">
-                   
-                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/products/create']"
-                        routerLinkActive="active" class="p-button p-button-success pull-right"></button>
-                        <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/products']"
-                        routerLinkActive="active" class="p-button p-button-primary pull-right p-mr-2"></button>
+
+                            <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/products/create']"
+                                routerLinkActive="active" class="p-button p-button-success pull-right"></button>
+                            <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/products']"
+                                routerLinkActive="active" class="p-button p-button-primary pull-right p-mr-2"></button>
                         </div>
                     </div>
                 </p-card>
@@ -126,27 +116,26 @@
     </div>
 
     <div class="p-col-12 p-md-6">
-        <p-card> 
+        <p-card>
 
             <p-tabView>
                 <p-tabPanel header="Calendario">
 
                     <div *ngIf="calendarOptions">
-                        <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)"
-                            (dayClick)="dayClick($event.detail)">
+                        <ng-fullcalendar #ucCalendar [options]="calendarOptions"
+                            (eventClick)="eventClick($event.detail)" (dayClick)="dayClick($event.detail)">
                         </ng-fullcalendar>
                     </div>
 
                 </p-tabPanel>
 
                 <p-tabPanel header="Report Fatturazione mensile">
-                    <canvas id="myChart"  width="600" height="350" #mychart></canvas>
+                    <canvas id="myChart" width="600" height="350" #mychart></canvas>
 
                 </p-tabPanel>
 
             </p-tabView>
 
-          
         </p-card>
     </div>
 
@@ -165,14 +154,13 @@
             <p-table #dt1 [value]="appointmentsToday" [paginator]="false" [rows]="10">
 
                 <ng-template pTemplate="body" let-appointment>
-                    <tr >
+                    <tr>
                         <td width="100">
                             <p-tag value="{{appointment.date | date: 'HH:mm' }}" severity="warning"></p-tag>
                         </td>
-                        
 
-                        <td width="50" >
-                            <app-initials-avatar  (click)="editProduct(appointment)"
+                        <td width="50">
+                            <app-initials-avatar (click)="editProduct(appointment)"
                                 firstName="{{ getCategoryItem(appointment.category_id)?.name | slice:0:1}}"
                                 lastName="{{ getCategoryItem(appointment.category_id)?.surname | slice:0:1}}">
                             </app-initials-avatar>
@@ -180,51 +168,100 @@
                         <td> {{ getCategoryItem(appointment.category_id)?.name }}
                             {{ getCategoryItem(appointment.category_id)?.surname }}</td>
 
-                          
-                            <td>{{appointment.title}}</td>
+                        <td>{{appointment.title}}</td>
                     </tr>
                 </ng-template>
             </p-table>
 
         </p-card>
 
-
         <p-card>
 
             <div class="p-field p-grid">
+
                 <div class="p-col-12 p-md-12">
-                    <h3>Helpdesk</h3>
+
+                    <p-tabView>
+                        <p-tabPanel header="Progetti">
+                            <p-table #dt1 [value]="projects" [paginator]="false" [rows]="10">
+
+                                <ng-template pTemplate="body" let-project>
+                                    <tr>
+
+                                        <td width="50">
+                                            <app-initials-avatar firstName="{{project.code_int | slice: 0:1}}"
+                                                lastName="{{project.code_int | slice: 1:2}}">
+                                            </app-initials-avatar>
+                                        </td>
+
+                                        <td>
+
+                                            <strong>{{project.title}}</strong><br>{{project.code_int}}
+                                            <div class="clearifix"></div>
+
+                                        </td>
+
+                                        <td width="120"><i class="pi pi-clock"></i> {{project.time}}</td>
+
+                                        <td>
+
+                                            <button pButton pRipple icon="pi pi-chart-line"
+                                                class="p-button p-button-secondary p-mr-2"
+                                                [routerLink]="['/admin/projects/productivity/', project.id]"></button>
+
+                                            <button pButton pRipple icon="pi pi-clock"
+                                                class="p-button p-button-primary p-mr-2"
+                                                [routerLink]="['/admin/projects/timesheet/', project.id]"></button>
+
+                                            <button pButton pRipple icon="pi pi-clone"
+                                                class="p-button p-button-warning p-mr-2"
+                                                [routerLink]="['/admin/projects/task/', project.id]"></button>
+
+                                            <button pButton pRipple icon="pi pi-pencil"
+                                                class="p-button p-button-success p-mr-2"
+                                                [routerLink]="['/admin/projects/edit/', project.id]"></button>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+
+                        </p-tabPanel>
+
+                        <p-tabPanel header="Helpdesk">
+
+                            <p-table #dt1 [value]="supports" [paginator]="false" [rows]="10">
+
+                                <ng-template pTemplate="body" let-support>
+                                    <tr>
+
+                                        <td width="200">
+
+                                            <p-tag severity="success" *ngIf="support.is_active === '1'"
+                                                value="Ticket aperto" class="p-mr-2"></p-tag>
+                                            <p-tag severity="danger" *ngIf="support.is_active === '0'"
+                                                value="Ticket chiuso" class="p-mr-2"></p-tag>
+
+                                            <p-tag value="{{support.date | date: 'dd/MM/yyyy' }}" severity="warning">
+                                            </p-tag>
+                                        </td>
+
+                                        <td>{{support.title}}</td>
+
+                                        <td width="60">
+                                            <button pButton pRipple icon="pi pi-eye"
+                                                class="p-button p-button-primary p-mr-2"
+                                                [routerLink]="['/admin/support', support.id]"></button>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </p-tabPanel>
+
+                    </p-tabView>
+
                 </div>
 
             </div>
-            <hr class="full">
-
-            <p-table #dt1 [value]="supports"  [paginator]="false" [rows]="10">
-
-                <ng-template pTemplate="body" let-support>
-                    <tr >
-
-                        <td width="200">
-
-                            <p-tag severity="success" *ngIf="support.is_active === '1'" value="Ticket aperto"
-                            class="p-mr-2"></p-tag>
-                        <p-tag severity="danger" *ngIf="support.is_active === '0'" value="Ticket chiuso"
-                            class="p-mr-2"></p-tag>
-
-                            <p-tag value="{{support.date | date: 'dd/MM/yyyy' }}" severity="warning"></p-tag>
-                        </td>
-    
-                          
-                            <td>{{support.title}}</td>
-
-                            <td width="60">
-                                <button pButton pRipple icon="pi pi-eye"
-                    class="p-button p-button-primary p-mr-2"
-                    [routerLink]="['/admin/support', support.id]"></button>
-                            </td>
-                    </tr>
-                </ng-template>
-            </p-table>
 
         </p-card>
     </div>
