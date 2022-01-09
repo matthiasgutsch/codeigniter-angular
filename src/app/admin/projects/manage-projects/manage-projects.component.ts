@@ -124,7 +124,6 @@ trackByFn(index, item) {
       this.projects = data;
       this.cols = [
         { field: "title", header: "Nome Progetto" },
-        { field: "code", header: "Codice" },
         { field: "status", header: "Status" },
         { field: "price", header: "Prezzo" },
 

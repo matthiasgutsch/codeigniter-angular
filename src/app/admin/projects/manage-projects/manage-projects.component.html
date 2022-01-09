@@ -86,39 +86,41 @@
 
                     <ng-template pTemplate="header" let-columns>
                         <tr>
-                            <th *ngFor="let col of cols">
-                                {{col.header}}
-                            </th>
-                            <th width="460"></th>
+                            
+                            <th width="360"></th>
+                            <th></th>
+                            <th></th>
 
                             <th width="140"></th>
                         </tr>
 
                     </ng-template>
-                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <ng-template pTemplate="body" let-project>
                         <tr>
                            
-                            <td *ngFor="let col of cols" [ngSwitch]="col.field">
-                                {{rowData[col.field]}}
+                            <td>
+                                {{project.title}}
                             </td>
 
-                     
+                            <td>
+                                {{project.price | currency :'EUR':'symbol':'1.2-2'}}
+                            </td>
                             <td>      
                               
                                 <button pButton pRipple label="Produttività" icon="pi pi-chart-line" class="p-button p-button-secondary p-mr-2"
-                            [routerLink]="['/admin/projects/productivity/', rowData.id]"></button>
+                            [routerLink]="['/admin/projects/productivity/', project.id]"></button>
                                 <button pButton pRipple label="Tasks" class="p-button p-button-warning p-mr-2"
-                                [routerLink]="['/admin/projects/task/', rowData.id]"></button>
+                                [routerLink]="['/admin/projects/task/', project.id]"></button>
                             
                                 <button pButton pRipple label="Timesheets" class="p-button p-button-primary p-mr-2"
-                                [routerLink]="['/admin/projects/timesheet/', rowData.id]"></button>  
+                                [routerLink]="['/admin/projects/timesheet/', project.id]"></button>  
                             </td>
                             <td class="action">
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
-                                    [routerLink]="['/admin/projects/edit', rowData.id]"></button>
+                                    [routerLink]="['/admin/projects/edit', project.id]"></button>
                         
                                 <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
-                                    (click)="onDelete(rowData.id)"></button>
+                                    (click)="onDelete(project.id)"></button>
                             </td>
                         </tr>
                     </ng-template>
