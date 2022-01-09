@@ -65,7 +65,7 @@
                                                     <input type="text" [style]="{ width: '100%' }" pInputText
                                                         formControlName="code">
                                                 </div>
-                                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Codice interno <span
+                                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Luogo <span
                                                         class="required">*</span></label>
                                                 <div class="p-col-4 p-md-5">
 
@@ -90,7 +90,7 @@
                                                     <input type="text" [style]="{ width: '100%' }" pInputText
                                                         formControlName="price">
                                                 </div>
-                                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Prezzo scontato<span
+                                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Prezzo interno<span
                                                         class="required">*</span></label>
                                                 <div class="p-col-4 p-md-5">
 
@@ -107,13 +107,13 @@
                                 <div class="p-fluid">
 
                                     <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Marca <span
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Regione <span
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
 
-                                            <p-dropdown [options]="brands" [virtualScroll]="true" filter="true"
+                                            <p-dropdown [options]="comuni" [virtualScroll]="true" filter="true"
                                                 [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }"
-                                                formControlName="brand_id" optionLabel="name" optionValue="name">
+                                                formControlName="brand_id" optionLabel="nome" optionValue="id">
 
                                             </p-dropdown>
 
@@ -123,7 +123,7 @@
 
                                 <div class="p-fluid">
                                     <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Categories <span
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Categoria <span
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
 

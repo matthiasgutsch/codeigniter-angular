@@ -9,7 +9,7 @@ import { FormControl } from '@angular/forms';
 import { CategoryService } from '../../../services/categories.service';
 import { ConfirmationService, MessageService, SelectItem } from "primeng/api";
 import * as moment from 'moment';
-import { TYPE_LIST, STATUS_PRODUCTS, STATE_LIST } from '../../constants/constants';
+import { TYPE_LIST, STATUS_PRODUCTS, STATE_LIST, STATUS_PROJECTS } from '../../constants/constants';
 import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
 import { Location } from '@angular/common';
@@ -33,6 +33,8 @@ import { ProjectsService } from 'src/app/services/projects.service';
 import { Timesheets } from 'src/app/models/timesheets';
 import { TimesheetsService } from 'src/app/services/timesheets.service';
 import { NgxSpinnerService } from "ngx-spinner";
+import { ComuniService } from 'src/app/services/comuni.service';
+import { Comuni } from 'src/app/models/comuni';
 
 export interface fPairs {
   qty: number,
@@ -103,6 +105,7 @@ export class ProjectsFormComponent implements OnInit {
   format2: string = "";
   selectedCity: Blog;
   selectedClients: SelectItem[];
+  comuni: Comuni;
 
   selectedDate: Date;
   date: Date;
@@ -135,6 +138,7 @@ export class ProjectsFormComponent implements OnInit {
     private projectsService: ProjectsService,
     private skillsService: SkillsService,
     private brandsService: BrandService,
+    private comuniService: ComuniService,    
     private worksService: WorksService,
     private categoryService: CategoryService,
     private spinner: NgxSpinnerService,
@@ -146,7 +150,7 @@ export class ProjectsFormComponent implements OnInit {
       this.selectedDate = new Date(this.date);
     }
     this.typeList = TYPE_LIST;
-    this.status = STATUS_PRODUCTS;
+    this.status = STATUS_PROJECTS;
     this.stateOptions = STATE_LIST;
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
   }
@@ -196,7 +200,7 @@ export class ProjectsFormComponent implements OnInit {
 
       });
     } else {
-      this.pageTitle = "Aggiungi Prodotto";
+      this.pageTitle = "Aggiungi Progetto";
     }
 
 
@@ -226,6 +230,7 @@ export class ProjectsFormComponent implements OnInit {
     this.getselectedCategories;
     this.getBrands();
     this.getCategories();
+    this.getComuni();
     this.getEmployees();
     this.spinner.hide();
 
@@ -233,6 +238,16 @@ export class ProjectsFormComponent implements OnInit {
 
 
   }
+
+
+  getComuni() {
+    const userId = this.currentUser.user_id;
+    this.comuniService.getAllList().subscribe(
+      (data: Comuni) => this.comuni = data,
+      error => this.error = error
+    );
+  }
+
 
   getTimesheet_by_project_employee(id) {
   this.timesheetsService.timesheet_by_project_employee(+id).subscribe(

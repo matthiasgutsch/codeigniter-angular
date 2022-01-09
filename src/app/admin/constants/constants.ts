@@ -53,6 +53,17 @@ export const TYPE_LIST: SelectItem[] = [
 ];
 
 
+export const STATUS_PROJECTS: SelectItem[] = [
+  { label: "Tutte", value: null },
+  { label: "Fase di Esecuzione", value: "Esecuzione" },
+  { label: "Fase di Contrattazione", value: "Contrattazione" },
+  { label: "Fase di Elaborazione", value: "Elaborazione" },
+  { label: "Amministrazione", value: "Amministrazione" },
+  { label: "Altro", value: "Altro" }
+];
+
+
+
 export const PRIORITY_LIST: SelectItem[] = [
   { label: "Da Fare", value: "1" },
   { label: "25 %", value: "2" },
