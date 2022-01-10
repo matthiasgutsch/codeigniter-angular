@@ -9,7 +9,7 @@ import { FormControl } from '@angular/forms';
 import { CategoryService } from '../../../services/categories.service';
 import { ConfirmationService, MessageService, SelectItem } from "primeng/api";
 import * as moment from 'moment';
-import { FISCAL_CODE_VALIDATOR_REGEX, SEX_LIST, STATE_LIST, BUSINESS_STATE_LIST } from '../../constants/constants';
+import { FISCAL_CODE_VALIDATOR_REGEX, SEX_LIST, STATE_LIST, BUSINESS_STATE_LIST, EMPLOYEE_TYPE_LIST } from '../../constants/constants';
 import { ComuniService } from 'src/app/services/comuni.service';
 import { Comuni } from 'src/app/models/comuni';
 import {Location} from '@angular/common';
@@ -110,7 +110,7 @@ export class EmployeesFormComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     this.typeList = SEX_LIST;
     this.stateOptions = STATE_LIST;
-    this.businessStateOptions = BUSINESS_STATE_LIST;
+    this.businessStateOptions = EMPLOYEE_TYPE_LIST;
 
 
     this.route.paramMap.subscribe((params) => {

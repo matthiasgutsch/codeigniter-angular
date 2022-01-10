@@ -95,7 +95,9 @@ export const STATUS_PRODUCTS: SelectItem[] = [
     {label: "Business", value: "1"}, 
     {label: "Privato", value: "0"}];
 
-  
+    export const EMPLOYEE_TYPE_LIST = [
+      {label: "Dipendente", value: "0"}, 
+      {label: "Socio", value: "1"}];
 
 export const SEX_LIST: SelectItem[] = [
   { label: "Tutte", value: null },
