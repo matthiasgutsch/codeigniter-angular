@@ -51,7 +51,7 @@ export interface fPairs {
 
 
 export class ProjectsProductivityComponent implements OnInit {
-  
+
   @ViewChild("myInput", { static: false }) myInputVariable: ElementRef;
 
 
@@ -105,7 +105,7 @@ export class ProjectsProductivityComponent implements OnInit {
 
   locations: any = [];
   location: Locations;
-  total:number;
+  total: number;
 
   cities: Blog[];
   format1: string = "";
@@ -127,7 +127,7 @@ export class ProjectsProductivityComponent implements OnInit {
   itemForm: FormGroup;
   skillsForm: FormGroup;
   skillsValues: any = [];
-  data1: any = [];
+  data1 = [];
   project_id: string;
   chartsCount: any;
   chartsCountNone: any;
@@ -171,7 +171,7 @@ export class ProjectsProductivityComponent implements OnInit {
     this.status = STATUS_PRODUCTS;
     this.stateOptions = STATE_LIST;
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-    
+
   }
 
 
@@ -180,94 +180,36 @@ export class ProjectsProductivityComponent implements OnInit {
 
   ngOnInit() {
     const userId = this.currentUser.user_id;
+
+
     this.spinner.show();
-
-
 
     const id = this.route.snapshot.paramMap.get("id");
 
 
-    this.projectsService.get_projects_timesheets_chart(+id).subscribe((res) => {
-      this.dataChart = res;
-      this.dataChart1 = JSON.stringify(this.dataChart)
-    });
-
-    if (id) {
-      this.pageTitle = "Modifica Progetto";
-      this.projectsService.getId(+id).subscribe((res) => {
-
-        this.project = res;
-        
-        if (res.user_id == this.currentUser.user_id) {
-          this.blogForm.patchValue({
-            title: res.title,
-            description: res.description.split(','),
-            category_id: res.category_id.split(','),
-            status: res.status,
-            employee_id: res.employee_id,
-            client_id: res.client_id,
-            is_featured: res.is_featured,
-            is_active: res.is_active,
-            code: res.code,
-            user_id: this.currentUser.user_id,
-            description_full: res.description_full,
-            code_int: res.code_int,
-            price: res.price,
-            price_extra: res.price_extra,
-            id: res.id,
-            data: res.data,
-          });
-
-
-        }
-        else {
-          this.router.navigate(['/admin/products']);
-        }
-        this.imagePath = res.image;
-        this.id = res.id;
-        this.price = res.price;
-
-        this.getTotalPercent(this.price);
-
-      });
-    } else {
-      this.pageTitle = "Aggiungi Prodotto";
-    }
-
-
-
-    this.blogForm = this.fb.group({
-      id: [""],
-      title: ["", Validators.required],
-      description: [""],
-      description_full: [""],
-      is_featured: ["0"],
-      category_id: [""],
-      status: [""],
-      works_id: [""],
-      brand_id: [""],
-      is_active: ["0"],
-      image: [""],
-      code: [""],
-      user_id: [this.currentUser.user_id],
-      code_int: [""],
-      price: [""],
-      price_extra: [""],
-
-    });
-
-    this.getEmployees();
-    this.getTimesheet_by_project_employee(id);
-    this.getTotal();
     this.getChartsCount(id);
-    this.getTotalPercent;
-    this.spinner.hide();
+
+    this.projectsService.getId(+id).subscribe((res) => {
+
+      this.project = res;
+      this.id = res.id;
+      this.price = res.price;
+      this.getTotalPercent(this.price);
+      this.getEmployees();
+      this.getTimesheet_by_project_employee(id);
+      this.getTotal();
+      this.getTotalPercent;
+
+    });
+
+
+      this.spinner.hide();
 
 
   }
 
-  
-  
+
+
   ngAfterViewInit() {
     this.canvas = this.mychart.nativeElement;
     this.ctx = this.canvas.getContext("2d");
@@ -277,17 +219,17 @@ export class ProjectsProductivityComponent implements OnInit {
       data: {
         label: '(dist: linear)',
         datasets: [{
-        label: '',
-        data: [{"x":"2022-01-05 00:00","y":"6.00"},{"x":"2022-01-09 00:00","y":"9.00"},{"x":"2022-01-10 00:00","y":"37.00"},{"x":"2022-01-11 00:00","y":"12.00"},{"x":"2022-01-12 00:00","y":"30.00"},{"x":"2022-01-17 00:00","y":"16.00"},{"x":"2022-02-25 00:00","y":"6.00"}],
-        lineTension: 0,
-        backgroundColor: 'rgba(60, 160, 220, 0.3)',
-        borderColor: 'rgba(60, 160, 220, 0.8)'
-      }]
-    },
+          label: '',
+          data: [{"x":"2022-01-05 00:00","y":"6.00"},{"x":"2022-01-09 00:00","y":"9.00"},{"x":"2022-01-10 00:00","y":"37.00"},{"x":"2022-01-11 00:00","y":"12.00"},{"x":"2022-01-12 00:00","y":"36.00"},{"x":"2022-01-17 00:00","y":"16.00"},{"x":"2022-01-19 00:00","y":"15.00"},{"x":"2022-02-25 00:00","y":"6.00"},{"x":"2022-03-09 00:00","y":"24.00"}],
+          lineTension: 0,
+          backgroundColor: 'rgba(60, 160, 220, 0.3)',
+          borderColor: 'rgba(60, 160, 220, 0.8)'
+        }]
+      },
       options: {
         title: {
-        display: false,
-        text: 'Angular & Chart.js'
+          display: false,
+          text: 'Angular & Chart.js'
         },
         tooltips: {
           mode: 'index',
@@ -298,15 +240,15 @@ export class ProjectsProductivityComponent implements OnInit {
             type: 'time',
             time: {
               displayFormats: {
-                 'millisecond': 'MMM DD',
-                 'second': 'MMM DD',
-                 'minute': 'MMM DD',
-                 'hour': 'MMM DD',
-                 'day': 'MMM DD',
-                 'week': 'MMM DD',
-                 'month': 'MMM DD',
-                 'quarter': 'MMM DD',
-                 'year': 'MMM DD',
+                'millisecond': 'MMM DD',
+                'second': 'MMM DD',
+                'minute': 'MMM DD',
+                'hour': 'MMM DD',
+                'day': 'MMM DD',
+                'week': 'MMM DD',
+                'month': 'MMM DD',
+                'quarter': 'MMM DD',
+                'year': 'MMM DD',
               }
             },
             distribution: 'linear',
@@ -319,31 +261,33 @@ export class ProjectsProductivityComponent implements OnInit {
             },
           }],
           yAxes: [{
-              ticks: {
-                  beginAtZero:true
-              },
-              scaleLabel: {
-                labelString: 'Ore di lavoro',
-                display: true,
-              }
+            ticks: {
+              beginAtZero: true
+            },
+            scaleLabel: {
+              labelString: 'Ore di lavoro',
+              display: true,
+            }
           }]
         }
       }
     });
   }
-  
+
 
   getTimesheet_by_project_employee(id) {
-  this.timesheetsService.timesheet_by_project_employee(+id).subscribe(
-    (data: Timesheets) => (this.timesheetsEmployee = data),
-    (error) => (this.error = error)
-  )};
+    this.timesheetsService.timesheet_by_project_employee(+id).subscribe(
+      (data: Timesheets) => (this.timesheetsEmployee = data),
+      (error) => (this.error = error)
+    )
+  };
 
 
   getChartsCount(id) {
 
     this.projectsService.get_projects_timesheets_chart(+id).subscribe(data => {
       this.chartsCount = data;
+      var StringifyData = JSON.stringify(this.chartsCount)
       this.chartsCount.forEach((item, index) => {
         var obj;
         obj = {
@@ -364,7 +308,7 @@ export class ProjectsProductivityComponent implements OnInit {
       total += Number(item.value * this.getTechnicalDataItem(item.id)?.contract);
     });
 
-    return total; 
+    return total;
   }
 
   getTotalPercent(price: any) {
@@ -374,7 +318,7 @@ export class ProjectsProductivityComponent implements OnInit {
     });
 
     return total / this.price * 100;
-     
+
   }
 
 
@@ -384,51 +328,11 @@ export class ProjectsProductivityComponent implements OnInit {
       total += Number(item.value);
     });
 
-    return total; 
+    return total;
   }
 
   public locationsSum() {
     return this.timesheetsEmployee.map(data => data.id).reduce((a, b) => a + b);
-  }
-  
-  initSkill() {
-    var formArray = this.fb.array([]);
-    const id = this.route.snapshot.paramMap.get("id");
-
-    this.projectsService.skills(+id).subscribe(
-      (res) => {
-        this.skillsValues = res;
-
-        this.skillsValues.forEach((e) => {
-          formArray.push(this.fb.group({
-            qty: [e.qty],
-            price: [e.price]
-          }))
-        })
-      }
-    )
-
-    /*formArray.push(this.fb.group({
-      qty: [''],
-      price: ['']
-    })) */
-
-
-    return formArray;
-  }
-
-
-  private createSkillFormGroup(skill: any): FormGroup {
-    return new FormGroup({ 'qty': new FormControl(skill.qty), 'price': new FormControl(skill.price) })
-  }
-
-  public addSkill(skill: any) {
-    this.skills.push(this.createSkillFormGroup(skill));
-  }
-
-
-  get skills() {
-    return this.blogForm.get('skills') as FormArray;
   }
 
 
@@ -436,31 +340,6 @@ export class ProjectsProductivityComponent implements OnInit {
   getTechnicalDataItem(employee_id: string) {
     return this.employees.find(item => item.id === employee_id);
   }
-
-
-  newQuantity(): FormGroup {
-    return this.fb.group({
-      qty: "",
-      price: "",
-    })
-  }
-
-  addQuantity() {
-    this.skills.push(this.newQuantity());
-  }
-
-  removeQuantity(i: number) {
-    this.skills.removeAt(i);
-  }
-
-  getWorksItem(works_id: string, id: string) {
-    return this.works.find(item => item.id === works_id);
-  }
-
-  getselectedWorks() {
-    this.selectedWorks = this.works_id.split(',');
-  }
-
 
 
 
@@ -493,9 +372,6 @@ export class ProjectsProductivityComponent implements OnInit {
     )
   };
 
-
-
-
   getCategoryItem(category_id: string, id: string) {
     return this.categories.find((item) => item.id === category_id);
   }
@@ -510,86 +386,4 @@ export class ProjectsProductivityComponent implements OnInit {
   }
 
 
-
-
-  onSelectedFile(event) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.blogForm.get("image").setValue(file);
-
-      let reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = (_event) => {
-        this.imagePath = reader.result;
-      };
-    }
-  }
-
-
-
-
-  removeImageFile() {
-    this.imagePath = "";
-    console.log(this.myInputVariable.nativeElement.files);
-    this.myInputVariable.nativeElement.value = "";
-    console.log(this.myInputVariable.nativeElement.files);
-  }
-
-  get title() {
-    return this.blogForm.get("title");
-  }
-
-
-  onSubmit() {
-    const formData = new FormData();
-
-    formData.append("title", this.blogForm.get("title").value);
-    formData.append("description", this.blogForm.get("description").value);
-    formData.append("description_full", this.blogForm.get("description_full").value);
-    formData.append("is_featured", this.blogForm.get("is_featured").value);
-    formData.append("category_id", this.blogForm.get("category_id").value);
-    formData.append("works_id", this.blogForm.get("works_id").value);
-    formData.append("brand_id", this.blogForm.get("brand_id").value);
-    formData.append("is_active", this.blogForm.get("is_active").value);
-    formData.append("image", this.blogForm.get("image").value);
-    formData.append("code", this.blogForm.get("code").value);
-    formData.append("code_int", this.blogForm.get("code_int").value);
-    formData.append("price", this.blogForm.get("price").value);
-    formData.append("price_extra", this.blogForm.get("price_extra").value);
-    formData.append("status", this.blogForm.get("status").value);
-    formData.append('user_id', this.blogForm.get('user_id').value);
-
-
-    const id = this.blogForm.get("id").value;
-
-    if (id) {
-      this.projectsService.update(formData, +id).subscribe(
-        (res) => {
-          if (res.status == "error") {
-            this.uploadError = res.message;
-          } else {
-            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
-            this.getTimesheet_by_project_employee(id);
-            this.ngOnInit();
-            //this.router.navigate(['/admin/products']);
-
-          }
-        },
-        (error) => (this.error = error)
-      );
-    } else {
-      this.projectsService.create(formData).subscribe(
-        (res) => {
-          if (res.status === "error") {
-            this.uploadError = res.message;
-          } else {
-            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
-            this.router.navigate(['/admin/products']);
-
-          }
-        },
-        (error) => (this.error = error)
-      );
-    }
-  }
 }
