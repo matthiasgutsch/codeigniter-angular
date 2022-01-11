@@ -182,14 +182,14 @@ export class ProjectsProductivityComponent implements OnInit {
     const userId = this.currentUser.user_id;
 
 
-    this.spinner.show();
 
     const id = this.route.snapshot.paramMap.get("id");
 
 
-    this.getChartsCount(id);
+    //this.getChartsCount(id);
 
     this.projectsService.getId(+id).subscribe((res) => {
+      this.spinner.show();
 
       this.project = res;
       this.id = res.id;
@@ -199,11 +199,11 @@ export class ProjectsProductivityComponent implements OnInit {
       this.getTimesheet_by_project_employee(id);
       this.getTotal();
       this.getTotalPercent;
+      this.spinner.hide();
 
     });
 
 
-      this.spinner.hide();
 
 
   }
