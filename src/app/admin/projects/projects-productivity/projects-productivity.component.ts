@@ -37,6 +37,7 @@ import { TimesheetsService } from 'src/app/services/timesheets.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { ChartsService } from 'src/app/services/charts.service';
 import { Charts } from 'src/app/models/charts';
+import { Subscription } from 'rxjs';
 
 export interface fPairs {
   qty: number,
@@ -53,6 +54,9 @@ export interface fPairs {
 export class ProjectsProductivityComponent implements OnInit {
 
   @ViewChild("myInput", { static: false }) myInputVariable: ElementRef;
+
+  @ViewChild("mychart") mychart;
+  @ViewChild('canvas') canvasEl: ElementRef;
 
 
   pageTitle: string;
@@ -141,8 +145,9 @@ export class ProjectsProductivityComponent implements OnInit {
   trackByFn(index, item) {
     return item.id;
   }
+  subscription: Subscription;
 
-
+  chart: [];
 
   constructor(
     private fb: FormBuilder,
@@ -175,7 +180,7 @@ export class ProjectsProductivityComponent implements OnInit {
   }
 
 
-  @ViewChild("mychart") mychart;
+
 
 
   ngOnInit() {
@@ -185,12 +190,12 @@ export class ProjectsProductivityComponent implements OnInit {
 
     const id = this.route.snapshot.paramMap.get("id");
 
+    this.getChartsCount(id);
 
-    //this.getChartsCount(id);
 
     this.projectsService.getId(+id).subscribe((res) => {
-      this.spinner.show();
 
+      this.spinner.show();
       this.project = res;
       this.id = res.id;
       this.price = res.price;
@@ -209,10 +214,18 @@ export class ProjectsProductivityComponent implements OnInit {
   }
 
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+  
 
-  ngAfterViewInit() {
+  chartCanvas() {
+
+    this.ngOnDestroy();
+
     this.canvas = this.mychart.nativeElement;
-    this.ctx = this.canvas.getContext("2d");
+
+    this.ctx = this.canvas.getContext('2d');
 
     let myChart = new Chart(this.ctx, {
       type: 'line',
@@ -220,7 +233,7 @@ export class ProjectsProductivityComponent implements OnInit {
         label: '(dist: linear)',
         datasets: [{
           label: '',
-          data: [{"x":"2022-01-05 00:00","y":"6.00"},{"x":"2022-01-09 00:00","y":"9.00"},{"x":"2022-01-10 00:00","y":"37.00"},{"x":"2022-01-11 00:00","y":"12.00"},{"x":"2022-01-12 00:00","y":"36.00"},{"x":"2022-01-17 00:00","y":"16.00"},{"x":"2022-01-19 00:00","y":"15.00"},{"x":"2022-02-25 00:00","y":"6.00"},{"x":"2022-03-09 00:00","y":"24.00"}],
+          data: this.data1,
           lineTension: 0,
           backgroundColor: 'rgba(60, 160, 220, 0.3)',
           borderColor: 'rgba(60, 160, 220, 0.8)'
@@ -271,9 +284,8 @@ export class ProjectsProductivityComponent implements OnInit {
           }]
         }
       }
-    });
-  }
-
+	  });
+	}
 
   getTimesheet_by_project_employee(id) {
     this.timesheetsService.timesheet_by_project_employee(+id).subscribe(
@@ -283,9 +295,10 @@ export class ProjectsProductivityComponent implements OnInit {
   };
 
 
+ 
   getChartsCount(id) {
 
-    this.projectsService.get_projects_timesheets_chart(+id).subscribe(data => {
+    this.subscription = this.projectsService.get_projects_timesheets_chart(+id).subscribe(data => {
       this.chartsCount = data;
       var StringifyData = JSON.stringify(this.chartsCount)
       this.chartsCount.forEach((item, index) => {
@@ -294,7 +307,8 @@ export class ProjectsProductivityComponent implements OnInit {
           x: item.x,
           y: item.y,
         }
-        this.data1.push(obj)
+        this.data1.push(obj);
+        this.chartCanvas();
       });
 
       error => this.error = error
