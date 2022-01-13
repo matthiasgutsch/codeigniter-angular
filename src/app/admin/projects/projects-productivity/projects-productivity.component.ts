@@ -219,6 +219,8 @@ export class ProjectsProductivityComponent implements OnInit {
   }
   
 
+  
+
   chartCanvas() {
 
     this.ngOnDestroy();
@@ -239,18 +241,22 @@ export class ProjectsProductivityComponent implements OnInit {
           borderColor: 'rgba(60, 160, 220, 0.8)'
         }]
       },
-      
+      intersect: false,
+
       options: {
+        
         legend: {
           labels: {
             boxWidth: 0,
           }
          },
         maintainAspectRatio: false,
-        intersect: false,
-      
-        tooltips: {enabled: true},
-        hover: {mode: null},
+        responsive: true,
+        animations: false,
+        tooltips: {enabled: true,  intersect: false},
+        hover: {
+          mode: 'index',
+        intersect: false },
         scales: {
           xAxes: [{
             type: 'time',
