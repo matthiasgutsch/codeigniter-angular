@@ -4,14 +4,34 @@
     <div class="p-field p-grid" *ngIf="employee">
         <div class="p-col-12 p-md-6">
             <h3>Tasks / {{employee.name}} {{employee.surname}}</h3>   
-            <p-tag value="{{employee.fiscalnumber}}"></p-tag> {{employee.address}} - {{employee.city}}      
         </div>
         <div class="p-col-12 p-md-6">
+            <button type="button" pButton pRipple label="Timesheets" icon="pi pi-clock" class="p-button p-button-warning pull-right  p-mr-2"
+            [routerLink]="['/admin/employee/timesheets/', employee.id]"></button>
 
-         
+
+            <button type="button" pButton pRipple label="Torna indietro" class="p-button p-button-secondary pull-right  p-mr-2"
+            [routerLink]="['/admin/employees/']"></button>
+
+
+            
         </div>
     </div>
 
+
+
+    <p-card *ngIf="employee">
+        <div class="p-field p-grid">
+            <div class="p-col-12 p-md-3">
+                Numero Dipendente<br>
+                <strong>{{employee.fiscalnumber}}</strong>
+            </div>
+            <div class="p-col-12 p-md-4">
+                Indirizzo<br>
+
+            <strong>{{employee.address}} - {{employee.city}}</strong>
+            </div>
+        </div></p-card>
 </div>
 
 
@@ -32,7 +52,7 @@
     
     
     
-                    <div class="p-col-3">
+                    <div class="p-col-12 p-md-3">
                         <div class="p-col-12">
     
                         <div class="p-grid">
@@ -55,7 +75,7 @@
                         </div>
                     </div>
     
-                    <div class="p-col-3">
+                    <div class="p-col-12 p-md-3">
                         
                         <div class="p-col-12">
     
@@ -80,7 +100,7 @@
                         </div>
                     </div>
     
-                    <div class="p-col-3"> 
+                    <div class="p-col-12 p-md-3">
                         
                         <div class="p-col-12">
     
@@ -104,7 +124,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="p-col-3">
+                    <div class="p-col-12 p-md-3">
                         <div class="p-col-12">
     
                             <div class="p-grid">

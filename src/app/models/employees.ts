@@ -23,5 +23,7 @@ export class Employees {
   date: string;
   fiscalnumber: string;
   contract: number;
+  vacations: number;
+  permissions: number;
 
 }

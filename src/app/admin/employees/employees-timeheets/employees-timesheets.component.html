@@ -6,26 +6,24 @@
 
                 <div class="p-field p-grid" *ngIf="employee">
                     <div class="p-col-12 p-md-6">
-                        <h3 >Timesheet / {{employee.username}}</h3>
+                        <h3>Timesheet / {{employee.username}}</h3>
 
                     </div>
                     <div class="p-col-12 p-md-6">
                         <button pButton pRipple icon="pi pi-plus" (click)="createTimesheets()" label="Aggiungi"
-                            class="p-button p-button-primary p-mr-2 pull-right"></button>
+                            class="p-button p-button-primary pull-right"></button>
 
-
-                            <button type="button" pButton pRipple label="tasks" icon="pi pi-clone" class="p-button p-button-warning pull-right  p-mr-2"
+                        <button type="button" pButton pRipple label="tasks" icon="pi pi-clone"
+                            class="p-button p-button-warning pull-right  p-mr-2"
                             [routerLink]="['/admin/employee/task/', employee.id]"></button>
 
-
-                            <button type="button" pButton pRipple label="Torna indietro" class="p-button p-button-secondary pull-right  p-mr-2"
+                        <button type="button" pButton pRipple label="Torna indietro"
+                            class="p-button p-button-secondary pull-right  p-mr-2"
                             [routerLink]="['/admin/employees/']"></button>
 
                     </div>
                 </div>
             </div>
-
-          
 
             <p-card *ngIf="employee">
                 <div class="p-field p-grid">
@@ -36,29 +34,45 @@
                     <div class="p-col">
                         Indirizzo<br>
 
-                    <strong>{{employee.address}} - {{employee.city}}</strong>
+                        <strong>{{employee.address}} - {{employee.city}}</strong>
                     </div>
 
                     <div class="p-col">
-                        Permessi Richieste<br>
+                        <div class="p-field p-grid">
+                            <div class="p-col">
+                                Permessi Goduti<br>
 
-                        <strong>{{permissionsCount}} </strong>
+                                <strong>{{permissionsCount}} </strong>
+                            </div>
+                            <div class="p-col">
+                                Permessi Maturati<br>
 
+                                <strong>{{employee.permissions}} </strong>
+                            </div>
                         </div>
 
-                        <div class="p-col">
-                            Ferie Richieste<br>
-                            <strong>{{vacationsCount}}</strong>
-    
-                            </div>
-                    
+                    </div>
+                    <div class="p-col">
+                        <div class="p-field p-grid">
+                            <div class="p-col">
+                                Ferie Goduti<br>
 
+                                <strong>{{vacationsCount}} </strong>
+                            </div>
+                            <div class="p-col">
+                                Ferie Maturati<br>
+
+                                <strong>{{employee.vacations}} </strong>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </p-card>
         </div>
 
         <div class="p-fluid">
-       
+
             <div class="p-field p-grid">
                 <div class="p-col-12 p-md-12">
                     <p-card>
@@ -81,10 +95,10 @@
                                     <th>
                                         Entrata
                                     </th>
-                                    <th >
+                                    <th>
                                         Uscita
                                     </th>
-                               
+
                                     <th>
                                         Progetto
                                     </th>
@@ -95,28 +109,30 @@
                             <ng-template pTemplate="body" let-timesheet>
                                 <tr>
                                     <td>
-                                        <p-tag severity="info" *ngIf="timesheet.timesheets_type == '1'" value="Lavoro"></p-tag>
-                                        <p-tag severity="success" *ngIf="timesheet.timesheets_type == '2'" value="Ferie"></p-tag>
-                                        <p-tag severity="warning" *ngIf="timesheet.timesheets_type == '3'" value="Permesso"></p-tag>
-                                        <p-tag severity="warning" *ngIf="timesheet.timesheets_type == '4'" value="Straordinari"></p-tag>
-                                        <p-tag severity="warning" *ngIf="timesheet.timesheets_type == '4'" value="Altro"></p-tag>
+                                        <p-tag severity="info" *ngIf="timesheet.timesheets_type == '1'" value="Lavoro">
+                                        </p-tag>
+                                        <p-tag severity="success" *ngIf="timesheet.timesheets_type == '2'"
+                                            value="Ferie"></p-tag>
+                                        <p-tag severity="warning" *ngIf="timesheet.timesheets_type == '3'"
+                                            value="Permesso"></p-tag>
+                                        <p-tag severity="warning" *ngIf="timesheet.timesheets_type == '4'"
+                                            value="Straordinari"></p-tag>
+                                        <p-tag severity="warning" *ngIf="timesheet.timesheets_type == '4'"
+                                            value="Altro"></p-tag>
 
                                     </td>
                                     <td>
 
                                         <p-tag severity="default" [value]="timesheet.hours + ' ore'"></p-tag>
-                                     
 
-                                  
                                     </td>
                                     <td>
-                                       <i class="pi pi-calendar"></i> {{timesheet.date_from | date:'d-MM-yyyy hh:mm'}}
+                                        <i class="pi pi-calendar"></i> {{timesheet.date_from | date:'d-MM-yyyy hh:mm'}}
 
                                     </td>
 
                                     <td><i class="pi pi-calendar"></i> {{timesheet.date_to | date:'d-MM-yyyy hh:mm'}}
                                     </td>
-                                 
 
                                     <td>
 
@@ -125,7 +141,8 @@
                                     </td>
                                     <td class="action">
                                         <button pButton pRipple icon="pi pi-pencil"
-                                            class="p-button p-button-success p-mr-2" (click)="createTimesheets(timesheet.id)"></button>
+                                            class="p-button p-button-success p-mr-2"
+                                            (click)="createTimesheets(timesheet.id)"></button>
                                         <button pButton pRipple icon="pi pi-eye"
                                             class="p-button p-button-primary p-mr-2" (click)="view(timesheet)"></button>
                                         <button pButton pRipple icon="pi pi-trash"
@@ -139,7 +156,6 @@
                     </p-card>
                 </div>
 
-          
             </div>
         </div>
     </div>
@@ -149,109 +165,109 @@
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
 
-       <h3>Nuovo Timesheet</h3> 
-       <p>{{employee.name}} {{employee.surname}}</p>
+            <h3>Nuovo Timesheet</h3>
+            <p>{{employee.name}} {{employee.surname}}</p>
             <hr class="full">
-        <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
-           
-            <div class="p-field p-grid">
-                <div class="p-col-12 p-md-12">
+            <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
 
-                <label>Tipo</label>
-                </div>
-                <div class="p-col-12 p-md-12">
-                    <p-dropdown [options]="timesheets_type" [virtualScroll]="true" filter="true" [required]="true"
-                        [showClear]="true" [autoDisplayFirst]=true [style]="{ width: '100%' }" [(ngModel)]="selectedTimesheetsType" formControlName="timesheets_type"
-                        optionLabel="label" optionValue="value">
-                        <ng-template let-option pTemplate="item">
-                            {{option.label}}
-                        </ng-template>
-                    </p-dropdown>
-                </div>
-            </div>
+                <div class="p-field p-grid">
+                    <div class="p-col-12 p-md-12">
 
-            <div class="p-field p-grid">
-                <div class="p-col-12 p-md-12">
-                    <label >Data dal<span class="required">*</span></label>
-            </div>
-                <div class="p-col-12 p-md-12">
-                    <p-calendar [stepMinute]="15" formControlName="date_from" dataType="string"
-                        [(ngModel)]="selectedDateFrom" hourFormat="24" [style]="{width:'100%'}" dateFormat="yy-mm-dd" showTime="true"
-                        appendTo="body"></p-calendar>
-                </div>
-            </div>
-
-            <div class="p-field p-grid">
-                <div class="p-col-12 p-md-12">
-
-                <label>Data al<span class="required">*</span></label>
-                </div>
-                <div class="p-col-12 p-md-12">
-                    <p-calendar [stepMinute]="15" formControlName="date_to" dataType="string"
-                        [(ngModel)]="selectedDateTo" hourFormat="24" [style]="{width:'100%'}" dateFormat="yy-mm-dd" showTime="true"
-                        appendTo="body"></p-calendar>
-                </div>
-            </div>
-
-            <div class="p-field p-grid">
-                <div class="p-col-12 p-md-12">
-
-                <label>Progetto</label>
-                </div>
-                <div class="p-col-12 p-md-12">
-                    <p-dropdown [options]="projects" [virtualScroll]="true" filter="true" [required]="true"
-                        [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" formControlName="project_id"
-                        optionLabel="title" optionValue="id">
-                        <ng-template let-option pTemplate="item">
-                            {{option.title}}
-                        </ng-template>
-                    </p-dropdown>
-                </div>
-            </div>
-
-            <div class="p-field p-grid">
-                <div class="p-col-12 p-md-12">
-
-                <label>Ore <span class="required">*</span></label>
-                </div>
-                <div class="p-col-12 p-md-12">
-                    <input type="text" pInputText [style]="{width:'100%'}" formControlName="hours" />
-
-                </div>
-            </div>
-
-            <div class="p-field p-grid">
-                <div class="p-col-12 p-md-12">
-
-                    <label>Ore extra <span class="required">*</span></label>
+                        <label>Tipo</label>
                     </div>
                     <div class="p-col-12 p-md-12">
-                    <input type="text" pInputText [style]="{width:'100%'}" formControlName="hours_extra" />
-
-                </div>
-            </div>
-
-            <div class="form-group form-row">
-                <label class="col-md-3"></label>
-                <div class="col-md-9">
-                    <input type="hidden" formControlName="id">
-                    <input type="hidden" formControlName="employee_id" value="">
-                    <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
-
-                </div>
-            </div>
-
-
-            <div class="p-field p-grid">
-
-                <div class="p-col-12 p-md-12">
-    
-                <button pButton pRipple icon="pi pi-save" label="salva" class="p-button p-button-success btn-block"
-                    [disabled]="!blogForm.valid"></button>
-                </div>
+                        <p-dropdown [options]="timesheets_type" [virtualScroll]="true" filter="true" [required]="true"
+                            [showClear]="true" [autoDisplayFirst]=true [style]="{ width: '100%' }"
+                            [(ngModel)]="selectedTimesheetsType" formControlName="timesheets_type" optionLabel="label"
+                            optionValue="value">
+                            <ng-template let-option pTemplate="item">
+                                {{option.label}}
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
                 </div>
 
-        </form>
+                <div class="p-field p-grid">
+                    <div class="p-col-12 p-md-12">
+                        <label>Data dal<span class="required">*</span></label>
+                    </div>
+                    <div class="p-col-12 p-md-12">
+                        <p-calendar [stepMinute]="15" formControlName="date_from" dataType="string"
+                            [(ngModel)]="selectedDateFrom" hourFormat="24" [style]="{width:'100%'}"
+                            dateFormat="yy-mm-dd" showTime="true" appendTo="body"></p-calendar>
+                    </div>
+                </div>
+
+                <div class="p-field p-grid">
+                    <div class="p-col-12 p-md-12">
+
+                        <label>Data al<span class="required">*</span></label>
+                    </div>
+                    <div class="p-col-12 p-md-12">
+                        <p-calendar [stepMinute]="15" formControlName="date_to" dataType="string"
+                            [(ngModel)]="selectedDateTo" hourFormat="24" [style]="{width:'100%'}" dateFormat="yy-mm-dd"
+                            showTime="true" appendTo="body"></p-calendar>
+                    </div>
+                </div>
+
+                <div class="p-field p-grid">
+                    <div class="p-col-12 p-md-12">
+
+                        <label>Progetto</label>
+                    </div>
+                    <div class="p-col-12 p-md-12">
+                        <p-dropdown [options]="projects" [virtualScroll]="true" filter="true" [required]="true"
+                            [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }"
+                            formControlName="project_id" optionLabel="title" optionValue="id">
+                            <ng-template let-option pTemplate="item">
+                                {{option.title}}
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
+                </div>
+
+                <div class="p-field p-grid">
+                    <div class="p-col-12 p-md-12">
+
+                        <label>Ore <span class="required">*</span></label>
+                    </div>
+                    <div class="p-col-12 p-md-12">
+                        <input type="text" pInputText [style]="{width:'100%'}" formControlName="hours" />
+
+                    </div>
+                </div>
+
+                <div class="p-field p-grid">
+                    <div class="p-col-12 p-md-12">
+
+                        <label>Ore extra <span class="required">*</span></label>
+                    </div>
+                    <div class="p-col-12 p-md-12">
+                        <input type="text" pInputText [style]="{width:'100%'}" formControlName="hours_extra" />
+
+                    </div>
+                </div>
+
+                <div class="form-group form-row">
+                    <label class="col-md-3"></label>
+                    <div class="col-md-9">
+                        <input type="hidden" formControlName="id">
+                        <input type="hidden" formControlName="employee_id" value="">
+                        <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
+
+                    </div>
+                </div>
+
+                <div class="p-field p-grid">
+
+                    <div class="p-col-12 p-md-12">
+
+                        <button pButton pRipple icon="pi pi-save" label="salva"
+                            class="p-button p-button-success btn-block" [disabled]="!blogForm.valid"></button>
+                    </div>
+                </div>
+
+            </form>
         </div>
     </ng-template>
 </p-sidebar>
@@ -275,15 +291,14 @@
             </div>
             <div class="p-grid">
                 <div class="p-col-4">
-            Uscita
+                    Uscita
                 </div>
                 <div class="p-col-8">
 
-            <button pButton pRipple [label]="timesheet.date_to | date:'d-MM-yyyy hh:mm'"
-                class="p-button p-button-success btn-block"></button>
+                    <button pButton pRipple [label]="timesheet.date_to | date:'d-MM-yyyy hh:mm'"
+                        class="p-button p-button-success btn-block"></button>
                 </div>
             </div>
-
 
         </div>
     </ng-template>

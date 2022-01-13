@@ -113,6 +113,8 @@ import { EmployeesTasksComponent } from './employees/employees-tasks/employees-t
 import { EmployeesTimesheetsComponent } from './employees/employees-timeheets/employees-timesheets.component';
 import { ProjectsProductivityComponent } from './projects/projects-productivity/projects-productivity.component';
 import { ProjectsTimesheetsComponent } from './projects/projects-timeheets/projects-timesheets.component';
+import { ManageWordpressOrdersComponent } from './wordpress-orders/manage-wordpress-orders/manage-wordpress-orders.component';
+import { WordpressOrdersFormComponent } from './wordpress-orders/wordpress-orders-form/wordpress-orders-form.component';
 
 @NgModule({
   declarations: [
@@ -126,6 +128,8 @@ import { ProjectsTimesheetsComponent } from './projects/projects-timeheets/proje
     ManageClientsComponent,
     InitialsAvatarComponent,
     ClientsFormComponent,
+    ManageWordpressOrdersComponent,
+    WordpressOrdersFormComponent,
     ManageQuotesComponent,
     ProjectsTimesheetsComponent,
     ProjectsProductivityComponent,
