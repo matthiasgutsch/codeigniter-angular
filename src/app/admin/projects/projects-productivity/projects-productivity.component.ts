@@ -239,15 +239,18 @@ export class ProjectsProductivityComponent implements OnInit {
           borderColor: 'rgba(60, 160, 220, 0.8)'
         }]
       },
+      
       options: {
-        title: {
-          display: false,
-          text: 'Angular & Chart.js'
-        },
-        tooltips: {
-          mode: 'index',
-          intersect: false,
-        },
+        legend: {
+          labels: {
+            boxWidth: 0,
+          }
+         },
+        maintainAspectRatio: false,
+        intersect: false,
+      
+        tooltips: {enabled: true},
+        hover: {mode: null},
         scales: {
           xAxes: [{
             type: 'time',
