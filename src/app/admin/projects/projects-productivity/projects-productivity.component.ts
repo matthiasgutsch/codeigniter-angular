@@ -219,33 +219,34 @@ export class ProjectsProductivityComponent implements OnInit {
     this.canvas = this.mychart.nativeElement;
     this.ctx = this.canvas.getContext('2d');
     let myChart = new Chart(this.ctx, {
-      type: 'line',
+      type: 'bar',
       data: {
         label: '(dist: linear)',
         datasets: [{
           label: '',
           data: this.data1,
           lineTension: 0,
-          backgroundColor: 'rgba(60, 160, 220, 0.3)',
+          backgroundColor: 'rgba(255, 83, 83, 0.7)',
           borderColor: 'rgba(60, 160, 220, 0.8)'
         }]
       },
-      intersect: false,
-
       options: {
-        
+        responsive: true,
+
         legend: {
           labels: {
             boxWidth: 0,
           }
          },
         maintainAspectRatio: false,
-        responsive: true,
-        animations: false,
-        tooltips: {enabled: false,  intersect: false},
-        hover: {
-          mode: 'index',
-        intersect: false },
+        tooltips: {
+          mode: 'x-axis',
+          intersect: false,
+        },
+       hover: {
+          mode: 'nearest',
+          intersect: true
+        },
         scales: {
           xAxes: [{
             type: 'time',
