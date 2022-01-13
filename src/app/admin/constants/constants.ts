@@ -83,6 +83,13 @@ export const STATUS_PRODUCTS: SelectItem[] = [
 ];
 
 
+export const TIMESHEETS_TYPE: SelectItem[] = [
+  { label: "Lavoro", value: "1" },
+  { label: "Ferie", value: "2" },
+  { label: "Permesso", value: "3" },
+  { label: "Straordinari", value: "4" },
+  { label: "Altro", value: "5" }
+];
 
 
 

@@ -22,7 +22,7 @@
         <div class="p-fluid">
        
             <div class="p-field p-grid">
-                <div class="p-col-12 p-md-9">
+                <div class="p-col-12 p-md-12">
                     <p-card>
 
                         <p-table #dt [columns]="cols" [value]="timesheets"
@@ -34,6 +34,10 @@
                             <ng-template pTemplate="header" let-timesheet>
                                 <tr>
                                     <th width="80">
+                                        Tipo
+                                    </th>
+
+                                    <th width="100">
                                         Ore
                                     </th>
                                     <th>
@@ -52,11 +56,18 @@
                             </ng-template>
                             <ng-template pTemplate="body" let-timesheet>
                                 <tr>
+                                    <td>
+                                        <p-tag severity="info" *ngIf="timesheet.timesheets_type == '1'" value="Lavoro"></p-tag>
+                                        <p-tag severity="success" *ngIf="timesheet.timesheets_type == '2'" value="Ferie"></p-tag>
+                                        <p-tag severity="warning" *ngIf="timesheet.timesheets_type == '3'" value="Permesso"></p-tag>
+                                        <p-tag severity="warning" *ngIf="timesheet.timesheets_type == '4'" value="Straordinari"></p-tag>
+                                        <p-tag severity="warning" *ngIf="timesheet.timesheets_type == '4'" value="Altro"></p-tag>
 
+                                    </td>
                                     <td>
 
-                                        <p-tag severity="info" [value]="timesheet.hours + ' ore'"></p-tag>
-
+                                        <p-tag severity="default" [value]="timesheet.hours + ' ore'"></p-tag>
+                                     
 
                                   
                                     </td>
@@ -90,11 +101,7 @@
                     </p-card>
                 </div>
 
-                <div class="p-col-12 p-md-3">
-                    <p-card>
-              <!--  <p-tag class="pull-right" [value]="timesheetCountTotalEmployee + ' ore'"></p-tag>-->
-            </p-card>
-                </div>
+          
             </div>
         </div>
     </div>
@@ -104,11 +111,26 @@
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
 
-       <h3>Aggiungi nuovo Timesheet</h3> 
+       <h3>Nuovo Timesheet</h3> 
        <p>{{employee.name}} {{employee.surname}}</p>
             <hr class="full">
         <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
            
+            <div class="p-field p-grid">
+                <div class="p-col-12 p-md-12">
+
+                <label>Tipo</label>
+                </div>
+                <div class="p-col-12 p-md-12">
+                    <p-dropdown [options]="timesheets_type" [virtualScroll]="true" filter="true" [required]="true"
+                        [showClear]="true" [autoDisplayFirst]=true [style]="{ width: '100%' }" [(ngModel)]="selectedTimesheetsType" formControlName="timesheets_type"
+                        optionLabel="label" optionValue="value">
+                        <ng-template let-option pTemplate="item">
+                            {{option.label}}
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+            </div>
 
             <div class="p-field p-grid">
                 <div class="p-col-12 p-md-12">
@@ -200,7 +222,6 @@
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
             <p-tag [value]="timesheet.id"></p-tag>
-
             <h3>Dettaglio Timesheet</h3>
             <p>{{timesheet.created_at | date:'d-MM-yyyy' }} | {{timesheet.created_at | date:'hh:mm' }}</p>
             <hr class="full">

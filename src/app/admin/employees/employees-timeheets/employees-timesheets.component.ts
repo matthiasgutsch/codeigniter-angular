@@ -23,7 +23,7 @@ import { TimesheetsService } from 'src/app/services/timesheets.service';
 import { Products } from 'src/app/models/products';
 import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brands.service';
-import { STATUS_PRODUCTS } from '../../constants/constants';
+import { STATUS_PRODUCTS, TIMESHEETS_TYPE } from '../../constants/constants';
 import { Table } from 'primeng/table';
 import { NgxSpinnerService } from "ngx-spinner";
 import { TagsService } from 'src/app/services/tags.service';
@@ -75,7 +75,7 @@ export class EmployeesTimesheetsComponent implements OnInit {
   loading: boolean;
   currentIndex = 1;
   displayEvent: any;
-
+  timesheets_type: any;
   productsData: any = [];
   timesheets: any = [];
   timesheet: Timesheets;
@@ -109,6 +109,7 @@ trackByFn(index, item) {
   return item.id;
 }
 
+selectedTimesheetsType = '1';
 
 startDate: Date;
 bsValue: Date = new Date();
@@ -142,6 +143,7 @@ employee: Employees;
     private categoryService: CategoryService, 
     private confirmationService: ConfirmationService,) { 
       this.status = STATUS_PRODUCTS;
+      this.timesheets_type = TIMESHEETS_TYPE;
       this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
   }
@@ -197,6 +199,7 @@ employee: Employees;
     
     this.blogForm = this.fb.group({
       id: [""],
+      timesheets_type: ["", Validators.required],
       date_from: ["", Validators.required],
       date_to: ["", Validators.required],
       project_id: ["", Validators.required],
@@ -345,6 +348,8 @@ hideDialog() {
 
 onSubmit() {
   const formData = new FormData();
+
+  formData.append("timesheets_type", this.blogForm.get("timesheets_type").value);
   formData.append("date_from", this.blogForm.get("date_from").value);
   formData.append("date_to", this.blogForm.get("date_to").value);
   formData.append('user_id', this.blogForm.get('user_id').value);
