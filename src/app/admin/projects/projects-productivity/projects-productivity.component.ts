@@ -214,21 +214,10 @@ export class ProjectsProductivityComponent implements OnInit {
   }
 
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-  
-
-  
 
   chartCanvas() {
-
-    this.ngOnDestroy();
-
     this.canvas = this.mychart.nativeElement;
-
     this.ctx = this.canvas.getContext('2d');
-
     let myChart = new Chart(this.ctx, {
       type: 'line',
       data: {
@@ -253,7 +242,7 @@ export class ProjectsProductivityComponent implements OnInit {
         maintainAspectRatio: false,
         responsive: true,
         animations: false,
-        tooltips: {enabled: true,  intersect: false},
+        tooltips: {enabled: false,  intersect: false},
         hover: {
           mode: 'index',
         intersect: false },
@@ -293,8 +282,10 @@ export class ProjectsProductivityComponent implements OnInit {
           }]
         }
       }
+      
 	  });
-	}
+    myChart.update();
+  }
 
   getTimesheet_by_project_employee(id) {
     this.timesheetsService.timesheet_by_project_employee(+id).subscribe(
@@ -307,7 +298,7 @@ export class ProjectsProductivityComponent implements OnInit {
  
   getChartsCount(id) {
 
-    this.subscription = this.projectsService.get_projects_timesheets_chart(+id).subscribe(data => {
+    this.projectsService.get_projects_timesheets_chart(+id).subscribe(data => {
       this.chartsCount = data;
       var StringifyData = JSON.stringify(this.chartsCount)
       this.chartsCount.forEach((item, index) => {
