@@ -98,7 +98,9 @@ export class EmployeesTimesheetsComponent implements OnInit {
   batches: any[];
   projects: any = [];
   project: Projects;
-  
+  vacationsCount: any;
+  permissionsCount: any;
+
   showDialog() {
     this.productDialog = true;
 }
@@ -175,7 +177,8 @@ employee: Employees;
       });
 
       
-  
+    this.getVacationsCountEmployee(+id);
+    this.getPermissionsCountEmployee(+id);
 
     this.spinner.hide();
 
@@ -210,6 +213,24 @@ employee: Employees;
     });
 
 
+  }
+
+
+
+  getVacationsCountEmployee(id) {
+    const userId = this.currentUser.user_id;
+    this.timesheetsService.count_total_vacations_timesheets_employee(id).subscribe(
+      (data: Timesheets) => this.vacationsCount = data,
+      error => this.error = error
+    );
+  }
+
+  getPermissionsCountEmployee(id) {
+    const userId = this.currentUser.user_id;
+    this.timesheetsService.count_total_permissions_timesheets_employee(id).subscribe(
+      (data: Timesheets) => this.permissionsCount = data,
+      error => this.error = error
+    );
   }
 
   getBrands() {
