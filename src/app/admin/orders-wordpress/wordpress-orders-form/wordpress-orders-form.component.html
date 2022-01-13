@@ -204,7 +204,7 @@
                                       
                                         
                                         <input type="text" [style]="{ width: '100%' }" pInputText
-                                            formControlName="description" (input)="itemsChanged()">
+                                            formControlName="id" (input)="itemsChanged()">
                                     </td>
                                     <td width="150px">
                                         <input type="text" [style]="{ width: '100%' }" pInputText formControlName="qty"
@@ -275,4 +275,21 @@
 
 </form>
 
+{{order | json}}
+
+<br>sadsdadsasd
+
+<table *ngFor="let o of order">
+	<tr>
+		<td>{{o.id}}</td>
+		<td>-</td>
+	</tr>
+	<tr *ngFor="let prod of o.line_items">
+		<td></td>
+		<td> {{ prod.id }} {{ prod.product_id }} {{ prod.name }} {{prod.quantity}}</td>
+    <div *ngFor="let subject of prod.subjects" >
+      {{subject.title}}
+    </div>
+	</tr>
+</table>
 <p-toast key="myKey1"></p-toast>
