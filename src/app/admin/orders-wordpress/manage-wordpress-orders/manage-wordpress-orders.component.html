@@ -64,10 +64,7 @@
 
                             </th>
                             <th>Data emissione</th>
-                            <th width="50"></th>
 
-                            <th>Cliente</th>
-                            <th>Residente</th>
 
                             <th>Prezzo</th>
                             <th></th>
@@ -80,22 +77,7 @@
                             <td><i class="pi pi-calendar"></i> {{order.created_at}}
                             </td>
 
-                            <td width="50">
-
-                                <app-initials-avatar  [routerLink]="['/admin/clients/edit', getCategoryItem(order.category_id)?.id]" firstName="{{ getCategoryItem(order.category_id)?.name | slice:0:1}}" lastName="{{ getCategoryItem(order.category_id)?.surname | slice:0:1}}"></app-initials-avatar>
-
-                               
-                            </td>
-
-                            <td>
-
-                                {{ getCategoryItem(order.category_id)?.name }}
-                                {{ getCategoryItem(order.category_id)?.surname }}
-                            </td>
-
-                            <td>{{
-                                getCategoryItem(order.category_id)?.zip }} - {{
-                                getCategoryItem(order.category_id)?.city }}</td>
+                    
                             <td>{{order.total | currency :'EUR':'symbol':'1.2-2'}}</td>
 
                             <td class="action">
