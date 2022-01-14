@@ -54,6 +54,7 @@ import { ProjectsProductivityComponent } from './projects/projects-productivity/
 import { ProjectsTimesheetsComponent } from './projects/projects-timeheets/projects-timesheets.component';
 import { ManageWordpressOrdersComponent } from './orders-wordpress/manage-wordpress-orders/manage-wordpress-orders.component';
 import { WordpressOrdersFormComponent } from './orders-wordpress/wordpress-orders-form/wordpress-orders-form.component';
+import { EmployeesTimesheetsCalendarComponent } from './employees/employees-timeheets-calendar/employees-timesheets-calendar.component';
 
 const routes: Routes = [
   {
@@ -96,6 +97,8 @@ const routes: Routes = [
           { path: "employees/create", component: EmployeesFormComponent },
 
           { path: "employee/timesheets/:id", component: EmployeesTimesheetsComponent },
+          { path: "employee/timesheets/calendar/:id", component: EmployeesTimesheetsCalendarComponent },
+
           { path: "employee/task/:id", component: EmployeesTasksComponent },
 
           { path: "orders", component: ManageOrdersComponent },

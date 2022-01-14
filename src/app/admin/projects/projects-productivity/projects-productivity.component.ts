@@ -190,12 +190,11 @@ export class ProjectsProductivityComponent implements OnInit {
 
     const id = this.route.snapshot.paramMap.get("id");
 
-    this.getChartsCount(id);
 
 
     this.projectsService.getId(+id).subscribe((res) => {
-
       this.spinner.show();
+
       this.project = res;
       this.id = res.id;
       this.price = res.price;
@@ -204,6 +203,8 @@ export class ProjectsProductivityComponent implements OnInit {
       this.getTimesheet_by_project_employee(id);
       this.getTotal();
       this.getTotalPercent;
+      this.getChartsCount(id);
+
       this.spinner.hide();
 
     });
