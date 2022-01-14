@@ -146,7 +146,7 @@
                                     <td class="action">
                                         <button pButton pRipple icon="pi pi-pencil"
                                             class="p-button p-button-success p-mr-2"
-                                            (click)="createTimesheets(timesheet.id)"></button>
+                                            (click)="editItem(timesheet)"></button>
                                         <button pButton pRipple icon="pi pi-eye"
                                             class="p-button p-button-primary p-mr-2" (click)="view(timesheet)"></button>
                                         <button pButton pRipple icon="pi pi-trash"
@@ -169,14 +169,14 @@
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
 
-            <h3>Nuovo Timesheet</h3>
+            <h3>{{pageTitle}}</h3>
             <p>{{employee.name}} {{employee.surname}}</p>
             <hr class="full">
             <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
 
                 <div class="p-field p-grid">
                     <div class="p-col-12 p-md-12">
-
+                        
                         <label>Tipo</label>
                     </div>
                     <div class="p-col-12 p-md-12">

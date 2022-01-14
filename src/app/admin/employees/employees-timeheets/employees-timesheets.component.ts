@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppointmentsService } from '../../../services/appointments.service';
 import { Blog } from '../../../models/blog';
-import {ConfirmationService, SelectItem} from 'primeng/api';
+import { ConfirmationService, SelectItem } from 'primeng/api';
 import { CategoryService } from '../../../services/categories.service';
 import { Category } from '../../../models/category';
-import {MessageService} from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
 import { ComuniService } from 'src/app/services/comuni.service';
@@ -16,7 +16,7 @@ import { Locations } from 'src/app/models/locations';
 import { Employees } from 'src/app/models/employees';
 import { EmployeesService } from 'src/app/services/employees.service';
 import { Appointments } from 'src/app/models/appointments';
-import {formatDate} from '@angular/common';
+import { formatDate } from '@angular/common';
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { TimesheetsService } from 'src/app/services/timesheets.service';
@@ -70,6 +70,7 @@ export class EmployeesTimesheetsComponent implements OnInit {
 
   tags: any = [];
   tag: Tags;
+  pageTitle: string;
 
   selectedBrands: Brand;
   loading: boolean;
@@ -86,7 +87,7 @@ export class EmployeesTimesheetsComponent implements OnInit {
   private id: number;
   clients: any = [];
   client: Clients;
-  productDialog:boolean = false;
+  productDialog: boolean = false;
   productDialogAdd: boolean = false;
   works_id: any;
   category_id: any;
@@ -94,7 +95,7 @@ export class EmployeesTimesheetsComponent implements OnInit {
   currentUser: any;
   technical_datas: any = [];
   technical_data: Technical_data;
-  skills:  any[] = [];
+  skills: any[] = [];
   batches: any[];
   projects: any = [];
   project: Projects;
@@ -103,35 +104,35 @@ export class EmployeesTimesheetsComponent implements OnInit {
 
   showDialog() {
     this.productDialog = true;
-}
+  }
 
-myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en')  ;
+  myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en');
 
-trackByFn(index, item) {
-  return item.id;
-}
+  trackByFn(index, item) {
+    return item.id;
+  }
 
-selectedTimesheetsType = '1';
+  selectedTimesheetsType = '1';
 
-startDate: Date;
-bsValue: Date = new Date();
-tues = new Date();
+  startDate: Date;
+  bsValue: Date = new Date();
+  tues = new Date();
 
-weekNo: number;
-timesheetCountTotalEmployee: Timesheets;
+  weekNo: number;
+  timesheetCountTotalEmployee: Timesheets;
 
-employees: any = [];
-employee: Employees;
+  employees: any = [];
+  employee: Employees;
 
 
-@ViewChild("dt", { static: false }) public dt: Table;
-@ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
+  @ViewChild("dt", { static: false }) public dt: Table;
+  @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
   constructor(
     private clientsService: ClientsService,
     private timesheetsService: TimesheetsService,
     private projectsService: ProjectsService,
-    private locationsService: LocationsService, 
+    private locationsService: LocationsService,
     private messageService: MessageService,
     private fb: FormBuilder,
     private employeesService: EmployeesService,
@@ -142,11 +143,11 @@ employee: Employees;
     private tagsService: TagsService,
     private technicalDataService: TechnicalDataService,
     private spinner: NgxSpinnerService,
-    private categoryService: CategoryService, 
-    private confirmationService: ConfirmationService,) { 
-      this.status = STATUS_PRODUCTS;
-      this.timesheets_type = TIMESHEETS_TYPE;
-      this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    private categoryService: CategoryService,
+    private confirmationService: ConfirmationService,) {
+    this.status = STATUS_PRODUCTS;
+    this.timesheets_type = TIMESHEETS_TYPE;
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
   }
 
@@ -157,26 +158,26 @@ employee: Employees;
 
     const userId = this.currentUser.user_id;
     this.spinner.show();
-   
+
 
     const id = this.route.snapshot.paramMap.get("id");
 
     this.getTimesheetsEmployee(+id);
- 
 
-      this.employees = {
-        id:this.route.snapshot.params['id'],
-      }
-  
-      this.employeesService.getId(this.employees.id).subscribe(value => {
-        this.employee = value;
-      });
 
-      this.projectsService.getAllListbyUser().subscribe(data => {
-        this.projects = data;
-      });
+    this.employees = {
+      id: this.route.snapshot.params['id'],
+    }
 
-      
+    this.employeesService.getId(this.employees.id).subscribe(value => {
+      this.employee = value;
+    });
+
+    this.projectsService.getAllListbyUser().subscribe(data => {
+      this.projects = data;
+    });
+
+
     this.getVacationsCountEmployee(+id);
     this.getPermissionsCountEmployee(+id);
 
@@ -185,21 +186,21 @@ employee: Employees;
   }
 
   getTimesheetsEmployee(id) {
-  this.timesheetsService.find_timesheets_employee(+id).subscribe(data => {
-    this.timesheets = data;
-    this.timesheetsService.count_total_timesheets_employee(+id).subscribe(
-      (data: Timesheets) => this.timesheetCountTotalEmployee = data,
-      error => this.error = error
+    this.timesheetsService.find_timesheets_employee(+id).subscribe(data => {
+      this.timesheets = data;
+      this.timesheetsService.count_total_timesheets_employee(+id).subscribe(
+        (data: Timesheets) => this.timesheetCountTotalEmployee = data,
+        error => this.error = error
       );
-   
+
     });
   };
 
   createTimesheets(employee: Employees) {
     this.productDialogAdd = true;
-    
 
-    
+
+
     this.blogForm = this.fb.group({
       id: [""],
       timesheets_type: ["", Validators.required],
@@ -234,18 +235,18 @@ employee: Employees;
   }
 
   getBrands() {
-  this.brandService.getAllListbyUser().subscribe(
-    (data: Brand) => this.brands = data,
-    error => this.error = error
-  );
+    this.brandService.getAllListbyUser().subscribe(
+      (data: Brand) => this.brands = data,
+      error => this.error = error
+    );
   }
 
 
   getTechnicalData() {
-  this.technicalDataService.getAllListbyUser().subscribe(
-    (data: Technical_data) => (this.technical_datas = data),
-    (error) => (this.error = error)
-  );
+    this.technicalDataService.getAllListbyUser().subscribe(
+      (data: Technical_data) => (this.technical_datas = data),
+      (error) => (this.error = error)
+    );
   }
 
   clickButton(model: any) {
@@ -288,22 +289,21 @@ employee: Employees;
 
   getCategories() {
 
-  this.categoryService.getAllListbyUser().subscribe(
-    (data: Category) => this.categories = data,
-    error => this.error = error
+    this.categoryService.getAllListbyUser().subscribe(
+      (data: Category) => this.categories = data,
+      error => this.error = error
     );
   }
 
 
-  clear(table: any) 
-  {
-    
-      //  THIS DOES NOT WORK!!   Filter stops working after clearing
-      table.clear();
-      
-	} 
-    
- 
+  clear(table: any) {
+
+    //  THIS DOES NOT WORK!!   Filter stops working after clearing
+    table.clear();
+
+  }
+
+
 
   getBrandItem(brand_id: string, id: string) {
     return this.brands.find(item => item.id === brand_id);
@@ -332,69 +332,122 @@ employee: Employees;
     return this.works.find(item => item.id === works_id);
   }
 
-  
 
 
 
+  editItem(timesheet: Timesheets) {
+    this.timesheet = { ...timesheet };
+    const id = timesheet.id;
 
-edit(timesheet: Timesheets) {
-  this.timesheet = { ...timesheet };
+    if (id) {
+      this.pageTitle = "Modifica Timesheet";
+      this.timesheetsService.getId(+id).subscribe((res) => {
+        this.blogForm.patchValue({
+          timesheets_type: res.timesheets_type,
+          date_from: res.date_from,
+          date_to: res.date_to,
+          project_id: res.project_id,
+          hours: res.hours,
+          employee_id: res.employee_id,
+          hours_extra: res.hours_extra,
+          user_id: this.currentUser.user_id,
+        });
 
-  this.productDialogAdd = true;
-}
+        this.id = res.id;
+      });
+    } else {
 
+    }
 
-view(timesheet: Timesheets) {
-  this.timesheet = { ...timesheet };
+    this.blogForm = this.fb.group({
+      id: [""],
+      timesheets_type: ["", Validators.required],
+      date_from: ["", Validators.required],
+      date_to: ["", Validators.required],
+      project_id: ["", Validators.required],
+      hours: ["", Validators.required],
+      hours_extra: ["", Validators.required],
+      employee_id: [this.employee.id],
+      user_id: [this.currentUser.user_id],
+    });
 
-  this.productDialog = true;
-}
-
-
-
-exportPdf() {
-  // const doc = new jsPDF();
-  const doc = new jsPDF('l','pt','A4');
-  doc['autoTable'](this.exportColumns, this.timesheets);
-  // doc.autoTable(this.exportColumns, this.products);
-  doc.save("prodotti.pdf");
-}
-
-
-hideDialog() {
-  this.productDialog = false;
-}
-
-
-
-onSubmit() {
-  const formData = new FormData();
-
-  formData.append("timesheets_type", this.blogForm.get("timesheets_type").value);
-  formData.append("date_from", this.blogForm.get("date_from").value);
-  formData.append("date_to", this.blogForm.get("date_to").value);
-  formData.append('user_id', this.blogForm.get('user_id').value);
-  formData.append("project_id", this.blogForm.get("project_id").value);
-  formData.append("hours", this.blogForm.get("hours").value);
-  formData.append("hours_extra", this.blogForm.get("hours_extra").value);
-  formData.append('employee_id', this.blogForm.get('employee_id').value);
+    this.productDialogAdd = true;
+  }
 
 
-    this.timesheetsService.create(formData).subscribe(
-      (res) => {
-        if (res.status === "error") {
-          this.uploadError = res.message;
-        } else {
-          this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
-          this.productDialogAdd = false;
-          this.ngOnInit();
 
-        }
-      },
-      (error) => (this.error = error)
-    );
-  
-}
+  view(timesheet: Timesheets) {
+    this.timesheet = { ...timesheet };
+
+    this.productDialog = true;
+  }
+
+
+
+  exportPdf() {
+    // const doc = new jsPDF();
+    const doc = new jsPDF('l', 'pt', 'A4');
+    doc['autoTable'](this.exportColumns, this.timesheets);
+    // doc.autoTable(this.exportColumns, this.products);
+    doc.save("prodotti.pdf");
+  }
+
+
+  hideDialog() {
+    this.productDialog = false;
+  }
+
+
+
+  onSubmit() {
+    const formData = new FormData();
+
+    formData.append("timesheets_type", this.blogForm.get("timesheets_type").value);
+    formData.append("date_from", this.blogForm.get("date_from").value);
+    formData.append("date_to", this.blogForm.get("date_to").value);
+    formData.append('user_id', this.blogForm.get('user_id').value);
+    formData.append("project_id", this.blogForm.get("project_id").value);
+    formData.append("hours", this.blogForm.get("hours").value);
+    formData.append("hours_extra", this.blogForm.get("hours_extra").value);
+    formData.append('employee_id', this.blogForm.get('employee_id').value);
+
+
+
+    const id = this.blogForm.get("id").value;
+
+    if (id) {
+      this.timesheetsService.update(formData, +id).subscribe(
+        (res) => {
+          if (res.status == "error") {
+            this.uploadError = res.message;
+          } else {
+            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
+            //this.router.navigate(['/admin/products']);
+
+          }
+        },
+        (error) => (this.error = error)
+      );
+    } else {
+      this.timesheetsService.create(formData).subscribe(
+        (res) => {
+          if (res.status === "error") {
+            this.uploadError = res.message;
+          } else {
+            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
+            this.productDialogAdd = false;
+            this.getTimesheetsEmployee(this.employee.id);
+
+          }
+        },
+        (error) => (this.error = error)
+      );
+    }
+
+  }
+
+
+
 
 
   onDelete(id: number, title: string) {
@@ -408,16 +461,16 @@ onSubmit() {
           res => {
             console.log(res);
             this.ngOnInit();
-            this.messageService.add({key: 'myKey1', severity:'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo'});
+            this.messageService.add({ key: 'myKey1', severity: 'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo' });
 
           },
           error => this.error = error
         );
       },
-     
-  });
 
-   
+    });
+
+
   }
 
 }

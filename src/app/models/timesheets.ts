@@ -22,8 +22,12 @@ export class Timesheets {
     price: string;
     price_extra: string;
     data: JSON;
+    project_id: string;
+    timesheets_type: string;
     status: StringMap;
     skills: ISkill[];
+    hours: string;
+    hours_extra: string;
 }
 
 
