@@ -149,11 +149,21 @@ export class QuotesFormComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     const userId = this.currentUser.user_id;
     this.page = history.state;
+    const id = this.route.snapshot.paramMap.get("id");
 
     this.spinner.show();
 
     this.getselectedWorks;
   
+
+    this.ordersService
+    .find_orders_by_quotes_id(+id)
+    .subscribe(data => {
+      this.pages = data[0];
+      return data.id;
+    }, err => {
+     });
+
 
     this.worksService.getAllListbyUser().subscribe(
       (data: Works) => (this.works = data),
@@ -176,21 +186,13 @@ export class QuotesFormComponent implements OnInit {
       this.fiscaltype = this.company.fiscaltype;
     });
 
-    const id = this.route.snapshot.paramMap.get("id");
 
     this.quotesService.skills(+id).subscribe(value => {
       this.skillsValues = value;
     });
 
 
-    this.ordersService
-    .find_orders_by_quotes_id(+id)
-    .subscribe(data => {
-      this.pages = data[0];
-      return data.id;
-    }, err => {
-     });
-
+ 
 
 
     if (id) {

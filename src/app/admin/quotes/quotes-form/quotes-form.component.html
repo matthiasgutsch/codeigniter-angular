@@ -19,9 +19,6 @@
                     <button pButton pRipple icon="pi pi-save" (click)="downloadPDF()" label="Genera PDF"
                         class="p-button p-button-primary pull-right p-mr-2"></button>
 
-                    <button pButton pRipple *ngIf="numberAppointments > 0"
-                        [routerLink]="['/admin/appointments/edit', numberAppointments]" label="Visualizza Appuntamento"
-                        class="p-button p-button-secondary  pull-right p-mr-2"></button>
 
 
                         <button *ngIf="pages" pButton pRipple icon="pi pi-save" label="Visualizza Ordine" [routerLink]="['/admin/orders/edit', pages.id]" class="p-button p-button-primary p-mr-2 pull-right "></button>

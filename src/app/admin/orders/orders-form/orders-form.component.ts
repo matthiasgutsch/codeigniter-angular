@@ -28,6 +28,7 @@ import "jspdf-autotable";
 import { Billings } from 'src/app/models/billings';
 import { map, tap } from 'rxjs/operators';
 import { ISkill } from 'src/app/models/products';
+import { BillingsService } from 'src/app/services/billings.service';
 
 @Component({
   selector: "app-orders-form",
@@ -46,25 +47,19 @@ export class OrdersFormComponent implements OnInit {
   itemTotal: any
   appointments: Appointments;
   appointment: Appointments;
-
   billing: Billings;
   billings: Billings;
-
-
+  pages: any;
   categories: any = [];
   category: Category;
-
   works: any = [];
   work: Works;
-
   checked: boolean = true;
   selectedValue: string;
-
   typeList: any[];
   clients: any = [];
   client: Clients;
   arrString: string;
-
   employees: any = [];
   employee: Employees;
   skillsArray: any = [];
@@ -76,7 +71,6 @@ export class OrdersFormComponent implements OnInit {
   subTotal: any;
   vat: any;
   grandTotal: any;
-
   cities: Blog[];
   format1: string = "";
   format2: string = "";
@@ -104,6 +98,7 @@ export class OrdersFormComponent implements OnInit {
   total: number;
   viewMode = '1';
   fiscaltype: number;
+  editForm: boolean = true;
 
   
   trackByFn(index, item) {
@@ -120,7 +115,7 @@ export class OrdersFormComponent implements OnInit {
     private worksService: WorksService,
     private employeesService: EmployeesService,
     private companyService: CompanyService,
-
+    private billingsService: BillingsService,
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,
     private router: Router,
@@ -173,6 +168,15 @@ export class OrdersFormComponent implements OnInit {
     this.ordersService.skills(+id).subscribe(value => {
       this.skillsValues = value;
     });
+
+
+    this.billingsService
+    .find_billings_by_appointment_id(+id)
+    .subscribe(data => {
+      this.pages = data[0];
+      return data.id;
+    }, err => {
+  });
 
 
 
@@ -288,6 +292,11 @@ export class OrdersFormComponent implements OnInit {
     return this.clients.find((item) => item.id === categoryAppointments);
   }
 
+  editFormItems() {
+    this.editForm = ! this.editForm;
+
+  }
+
   
   getWorksItem(works_id: string, id: string) {
     return this.works.find(item => item.id === works_id);
@@ -394,6 +403,65 @@ export class OrdersFormComponent implements OnInit {
   
   get total_sum() {
     return this.itemTotal.reduce((total, fee) => total + fee.balance, 0);
+}
+
+
+
+createBilling() {
+  const formData = new FormData();
+
+  formData.append("title", this.blogForm.get("title").value);
+  formData.append("description", this.blogForm.get("description").value);
+  formData.append("appointment_id", this.blogForm.get("id").value);
+  formData.append("is_featured", this.blogForm.get("is_featured").value);
+  formData.append("category_id", this.blogForm.get("category_id").value);
+  formData.append("works_id", this.blogForm.get("works_id").value);
+  formData.append("location_id", this.blogForm.get("location_id").value);
+  formData.append("employee_id", this.blogForm.get("employee_id").value);
+  formData.append("is_active", this.blogForm.get("is_active").value);
+  formData.append("image", this.blogForm.get("image").value);
+  formData.append("date", this.blogForm.get("date").value);
+  formData.append("user_id", this.blogForm.get("user_id").value);
+  formData.append("is_paid", '0');
+
+  const id = this.blogForm.get("id").value;
+  this.billingsService
+      .find_billings_by_appointment_id(+id)
+      .subscribe(data => {
+        this.pages = data[0];
+        return data.id;
+        console.log(data[0])
+      }, err => {
+    });
+
+  if (id ) {
+    this.confirmationService.confirm({
+      message: 'Vorresti creare la Fattua/ Ricevuta ?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.billingsService.create(formData).subscribe(
+          (res) => {
+            if (res.status === "error") {
+              this.uploadError = res.message;
+            } else {
+              const currentUrl = this.router.url;
+    
+              
+              this.messageService.add({ key: 'myKey1', severity: 'info', summary: 'Attenzione', detail: 'Futtura / Ricevuta creata con successo' });
+              this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+                this.router.navigate([currentUrl]);
+                
+            });
+            }
+          },
+          error => this.error = error
+        );
+      },
+    });
+  } else {
+    this.router.navigate(['/admin/billings/edit/', this.pages.id]);
+  }
 }
 
 
