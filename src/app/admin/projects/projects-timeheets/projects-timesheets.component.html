@@ -34,7 +34,7 @@
 
 <div class="p-fluid">
     <div class="p-field p-grid">
-        <div class="p-col-12 p-md-9">
+        <div class="p-col-12 p-md-12">
 
             <p-card>
 
@@ -88,12 +88,12 @@
                             </td>
 
                             <td class="action">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
-                                    (click)="createTimesheets(timesheet.id)"></button>
+                               <!-- <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
+                                    (click)="createTimesheets(timesheet.id)"></button> -->
                                 <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
                                     (click)="view(timesheet)"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
-                                    (click)="onDelete(timesheet.id)"></button>
+                                <!-- <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
+                                    (click)="onDelete(timesheet.id)"></button> -->
                             </td>
                         </tr>
                     </ng-template>
@@ -101,9 +101,7 @@
 
             </p-card>
         </div>
-        <div class="p-col-12 p-md-3">
-            <p-card></p-card>
-        </div>
+    
     </div>
 </div>
 

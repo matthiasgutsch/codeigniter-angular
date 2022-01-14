@@ -351,9 +351,9 @@ export class EmployeesTimesheetsComponent implements OnInit {
           employee_id: res.employee_id,
           hours_extra: res.hours_extra,
           user_id: this.currentUser.user_id,
+          id: res.id,
         });
 
-        this.id = res.id;
       });
     } else {
 
@@ -422,8 +422,8 @@ export class EmployeesTimesheetsComponent implements OnInit {
             this.uploadError = res.message;
           } else {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
-            //this.router.navigate(['/admin/products']);
-
+            this.productDialogAdd = false;
+            this.getTimesheetsEmployee(this.employee.id);
           }
         },
         (error) => (this.error = error)
@@ -462,7 +462,7 @@ export class EmployeesTimesheetsComponent implements OnInit {
             console.log(res);
             this.ngOnInit();
             this.messageService.add({ key: 'myKey1', severity: 'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo' });
-
+            this.getTimesheetsEmployee(this.employee.id);
           },
           error => this.error = error
         );
