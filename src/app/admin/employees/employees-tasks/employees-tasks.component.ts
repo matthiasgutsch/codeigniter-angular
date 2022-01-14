@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { AfterViewInit, Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
 import { EmployeesService } from '../../../services/employees.service';
 import {
   CdkDragDrop,
@@ -34,7 +34,10 @@ import { Subscription } from 'rxjs';
   templateUrl: './employees-tasks.component.html'
 })
 export class EmployeesTasksComponent implements OnInit {
+  @Input() cancel: boolean = false;
+  @Input() edit: boolean = false;
 
+  
   pageTitle: string;
   error: string;
   uploadError: string;
