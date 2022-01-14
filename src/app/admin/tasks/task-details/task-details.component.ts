@@ -14,6 +14,9 @@ export class TaskDetailsComponent {
   @Output() viewItem = new EventEmitter<any>();
   @Output() getEmployeeItem = new EventEmitter<any>();
 
+  @Input() edit: boolean = true;
+  @Input() cancel: boolean = true;
+
   deleteTask(id, title, type, index) {
     this.deleteItem.emit({id, title, type, index});
   }

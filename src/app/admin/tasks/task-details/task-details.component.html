@@ -23,9 +23,9 @@
         <hr class="full">
 
 
-        <button type="button" (click)="editTask(task)" class="p-button p-button-small p-button-success p-mr-2" pButton icon="fa fa-pencil" label="modifica"></button>
+        <button type="button" (click)="editTask(task)" class="p-button p-button-small p-button-success p-mr-2" pButton icon="fa fa-pencil" *ngIf="edit == true" label="modifica"></button>
         <button type="button" (click)="viewTask(task)" class="p-button p-button-small p-button-primary p-mr-2" pButton icon="fa fa-eye" label="visualizza"></button>
-        <button type="button" (click)="deleteTask(task.id, task.title, 'high', i)" class="p-button p-button-small  p-button-danger" pButton icon="fa fa-trash-o" label="cancella"></button>
+        <button type="button" (click)="deleteTask(task.id, task.title, 'high', i)" class="p-button p-button-small  p-button-danger" pButton *ngIf="cancel == true" icon="fa fa-trash-o" label="cancella"></button>
 
     </div>
     </div>

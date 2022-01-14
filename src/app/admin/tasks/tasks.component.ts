@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { AfterViewInit, Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -50,6 +50,11 @@ import { Task } from 'src/app/models/tasks';
   templateUrl: './tasks.component.html'
 })
 export class TasksComponent implements OnInit, OnDestroy {
+
+  @Input() cancel: boolean = false;
+  @Input() edit: boolean = false;
+
+  
   calendarOptions: any;
   events: any;
   appointments: any = [];
