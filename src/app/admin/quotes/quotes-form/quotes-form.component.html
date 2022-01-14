@@ -8,6 +8,11 @@
                     <h3>{{pageTitle}}</h3>
                 </div>
                 <div class="p-col-12 p-md-6">
+
+
+
+
+
                     <button pButton pRipple icon="pi pi-save" [disabled]="!blogForm.valid" label="Salva"
                         class="p-button pull-right p-button-success"></button>
 
@@ -18,6 +23,11 @@
                         [routerLink]="['/admin/appointments/edit', numberAppointments]" label="Visualizza Appuntamento"
                         class="p-button p-button-secondary  pull-right p-mr-2"></button>
 
+
+                        <button *ngIf="pages" pButton pRipple icon="pi pi-save" label="Visualizza Ordine" [routerLink]="['/admin/orders/edit', pages.id]" class="p-button p-button-primary p-mr-2 pull-right "></button>
+    
+                        <button *ngIf="!pages" type="button" pButton pRipple icon="pi pi-save" label="Transforma in Ordine" (click)="createOrder()" class="p-button p-button-primary p-mr-2 pull-right "></button>
+                        
                 </div>
             </div>
 
@@ -120,8 +130,8 @@
                             <label class="col-md-3"></label>
                             <div class="col-md-9">
                                 <input type="hidden" formControlName="id">
-                                <input type="hidden" value="{{idAppointments}}" *ngIf="idAppointments"
-                                    formControlName="appointment_id">
+                                <input type="hidden" value="{{idQuotes}}" *ngIf="idQuotes"
+                                    formControlName="quotes_id">
                                 <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
 
                             </div>
@@ -208,7 +218,7 @@
                                     </td>
                                     <td width="150px">
                                         <input type="text" [style]="{ width: '100%' }" pInputText formControlName="qty"
-                                            (input)="itemsChanged()">
+                                            (input)="itemsChanged()"  >
 
                                     </td>
                                     <td width="150px">
@@ -274,5 +284,15 @@
     </div>
 
 </form>
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" #cd>
+
+    <p-footer>
+        <button type="button" pButton icon="fa fa-close" class="p-button p-button-danger p-mr-2" label="No" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="fa fa-check" class="p-button p-button-success p-mr-2" label="Si" (click)="cd.accept()"></button>
+    </p-footer>
+
+</p-confirmDialog>
+
 
 <p-toast key="myKey1"></p-toast>

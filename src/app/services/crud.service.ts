@@ -5,6 +5,8 @@ import { CrudOperations } from './crud-operations.interface';
 import { catchError } from 'rxjs/operators';
 import { Billings } from '../models/billings';
 import { Task } from '../models/tasks';
+import { Orders } from '../models/orders';
+import { Quotes } from '../models/quotes';
 
 export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   currentUser: any ;
@@ -124,6 +126,10 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     return this._http.get<Billings>(this._base + '/billings_by_appointment_id/' + id)
   }
   
+
+  find_orders_by_quotes_id(id: number) {
+    return this._http.get<Orders>(this._base + '/get_order_by_quotes_id/' + id)
+  }
 
   find_tasks_employee(id: ID ) {
     const userId = this.currentUser.user_id;

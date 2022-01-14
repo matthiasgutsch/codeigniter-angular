@@ -29,6 +29,8 @@ import { map, tap } from 'rxjs/operators';
 import { ISkill } from 'src/app/models/products';
 import { Quotes } from 'src/app/models/quotes';
 import { QuotesService } from 'src/app/services/quotes.service';
+import { OrdersService } from 'src/app/services/orders.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: "app-quotes-form",
@@ -88,13 +90,13 @@ export class QuotesFormComponent implements OnInit {
   date: Date;
   works_id: any;
   page: string;
-  idAppointments: number;
-  categoryAppointments: string;
-  works_idAppointments:any;
+  idQuotes: number;
+  categoryQuotes: string;
+  works_idQuotes:any;
   company: Company;
-  descriptionAppointments: string;
-  dateAppointments: string;
-  numberAppointments: number;
+  descriptionQuotes: string;
+  dateQuotes: string;
+  numberQuotes: number;
   currentUser: any;
   public dataValues: object;
   addForm: FormGroup;
@@ -104,7 +106,8 @@ export class QuotesFormComponent implements OnInit {
   skillsValues: any = [];
   total: number;
   viewMode = '1';
-  fiscaltype: number;
+  fiscaltype: any = [];
+  pages: any;
 
   
   trackByFn(index, item) {
@@ -123,7 +126,8 @@ export class QuotesFormComponent implements OnInit {
     private worksService: WorksService,
     private employeesService: EmployeesService,
     private companyService: CompanyService,
-
+    private ordersService: OrdersService,
+    private spinner: NgxSpinnerService,
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,
     private router: Router,
@@ -146,6 +150,7 @@ export class QuotesFormComponent implements OnInit {
     const userId = this.currentUser.user_id;
     this.page = history.state;
 
+    this.spinner.show();
 
     this.getselectedWorks;
   
@@ -178,28 +183,37 @@ export class QuotesFormComponent implements OnInit {
     });
 
 
+    this.ordersService
+    .find_orders_by_quotes_id(+id)
+    .subscribe(data => {
+      this.pages = data[0];
+      return data.id;
+    }, err => {
+     });
+
+
 
     if (id) {
       this.pageTitle = "Modifica Preventivo";
       this.quotesService.getId(+id).subscribe((res) => {
         this.imagePath = res.image;
-        this.idAppointments = res.id;
-        this.categoryAppointments = res.category_id;
-        this.descriptionAppointments = res.description;
-        this.dateAppointments = res.date;
+        this.idQuotes = res.id;
+        this.categoryQuotes = res.category_id;
+        this.descriptionQuotes = res.description;
+        this.dateQuotes = res.date;
         this.grandTotal = res.total;
         this.vat = res.vat;
         this.subTotal = res.subtotal;
 
-        this.numberAppointments = res.appointment_id;
+        this.numberQuotes = res.quotes_id;
 
-        this.works_idAppointments = res.works_id.split(',');
+        this.works_idQuotes = res.works_id.split(',');
 
         this.blogForm.patchValue({
           title: res.title,
           description: res.description.split(','),
           category_id: res.category_id,
-          appointment_id: res.appointment_id,
+          quotes_id: res.quotes_id,
           works_id: res.works_id.split(','),
           user_id: this.currentUser.user_id,
           is_featured: res.is_featured,
@@ -211,18 +225,19 @@ export class QuotesFormComponent implements OnInit {
           total: res.total,
 
         });
-    
 
       });
     } else {
       this.pageTitle = "Aggiungi Preventivo";
+
+      
     }
 
     this.blogForm = this.fb.group({
       id: [""],
       title: [""],
       description: [""],
-      appointment_id: [""],
+      quotes_id: [""],
       category_id: [""],
       works_id: [""],
       user_id: [this.currentUser.user_id],
@@ -233,6 +248,10 @@ export class QuotesFormComponent implements OnInit {
       vat: [""],
       total: [this.grandTotal],
     });
+
+
+    this.spinner.hide();
+
   }
 
 
@@ -256,7 +275,7 @@ export class QuotesFormComponent implements OnInit {
       'elementHandlers': specialElementHandlers
     });
 
-    doc.save('Fattura-' + this.idAppointments + '.pdf');
+    doc.save('Fattura-' + this.idQuotes + '.pdf');
 
   }
 
@@ -267,11 +286,11 @@ export class QuotesFormComponent implements OnInit {
   
     
   changed(value){
-      this.descriptionAppointments = value.target.value
+      this.descriptionQuotes = value.target.value
     }
 
   changeTime(value){
-      this.dateAppointments = value.target.value
+      this.dateQuotes = value.target.value
     }
     
   onSelectedFile(event) {
@@ -366,7 +385,7 @@ export class QuotesFormComponent implements OnInit {
       }
     }
     this.subTotal = total;
-    this.vat = this.subTotal / 100 * this.fiscaltype;
+    this.vat = this.subTotal / 100 * this.company.fiscaltype;
     this.grandTotal = this.subTotal + this.vat;
 
   }
@@ -390,7 +409,7 @@ export class QuotesFormComponent implements OnInit {
   removeQuantity(i: number): void {
     let totalCostOfItem = this.blogForm.get('skills')?.value[i].qty * this.blogForm.get('skills')?.value[i].price;
     this.subTotal = this.subTotal - totalCostOfItem;
-    this.vat = this.subTotal / 100 * this.fiscaltype;
+    this.vat = this.subTotal / 100 * this.company.fiscaltype;
     this.grandTotal = this.subTotal + this.vat;
     (<FormArray>this.blogForm.get('skills')).removeAt(i);
   }
@@ -399,6 +418,62 @@ export class QuotesFormComponent implements OnInit {
     return this.itemTotal.reduce((total, fee) => total + fee.balance, 0);
 }
 
+
+createOrder() {
+
+  const formData = new FormData();
+  formData.append("title", this.blogForm.get("title").value);
+  formData.append("description", this.blogForm.get("description").value);
+  formData.append("quotes_id",  this.blogForm.get("id").value);
+  formData.append("category_id", this.blogForm.get("category_id").value);
+  formData.append("is_featured", this.blogForm.get("is_featured").value);
+  formData.append("works_id", this.blogForm.get("works_id").value);
+  formData.append("date", this.blogForm.get("date").value);
+  formData.append('user_id', this.blogForm.get('user_id').value);
+  formData.append('skills', JSON.stringify(this.blogForm.get('skills').value));
+  formData.append('subtotal', this.subTotal);
+  formData.append('vat', this.vat);
+  formData.append('total', this.grandTotal);
+
+  const id = this.blogForm.get("id").value;
+  this.ordersService
+    .find_orders_by_quotes_id(+id)
+      .subscribe(data => {
+        this.pages = data[0];
+        return data.id;
+        console.log(data[0])
+      }, err => {
+    });
+
+  if (id ) {
+    this.confirmationService.confirm({
+      message: 'Trasforma il tuo preventivo in ordine ?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.ordersService.create(formData).subscribe(
+          (res) => {
+            if (res.status === "error") {
+              this.uploadError = res.message;
+            } else {
+              const currentUrl = this.router.url;
+    
+              
+              this.messageService.add({ key: 'myKey1', severity: 'info', summary: 'Attenzione', detail: 'Ordine creato con successo' });
+              this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+                this.router.navigate([currentUrl]);
+                
+            });
+            }
+          },
+          error => this.error = error
+        );
+      },
+    });
+  } else {
+    this.router.navigate(['/admin/orders/edit/', this.pages.id]);
+  }
+}
 
   onSubmit() {
     const formData = new FormData();

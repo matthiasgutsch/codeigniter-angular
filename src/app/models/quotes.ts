@@ -14,6 +14,7 @@ export class Quotes {
     date: string;
     files: string;
     appointment_id: number;
+    quotes_id: number;
     skills: any[];
     subtotal: string;
     vat: string;
