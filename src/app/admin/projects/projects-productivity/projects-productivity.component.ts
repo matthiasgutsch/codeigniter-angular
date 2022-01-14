@@ -232,6 +232,7 @@ export class ProjectsProductivityComponent implements OnInit {
         }]
       },
       options: {
+        events: [],
         responsive: true,
 
         legend: {
@@ -243,11 +244,9 @@ export class ProjectsProductivityComponent implements OnInit {
         tooltips: {
           mode: 'x-axis',
           intersect: false,
+          enabled: true,
         },
-       hover: {
-          mode: 'nearest',
-          intersect: true
-        },
+        hover: {mode: null},
         scales: {
           xAxes: [{
             type: 'time',
