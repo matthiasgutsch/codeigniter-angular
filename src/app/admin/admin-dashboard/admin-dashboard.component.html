@@ -123,7 +123,8 @@
 
                     <div *ngIf="calendarOptions">
                         <ng-fullcalendar #ucCalendar [options]="calendarOptions"
-                            (eventClick)="eventClick($event.detail)" (dayClick)="dayClick($event.detail)">
+                            (eventClick)="eventClick($event.detail)"
+                            (dayClick)="dayClick($event.detail)">
                         </ng-fullcalendar>
                     </div>
 

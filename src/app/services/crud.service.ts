@@ -140,6 +140,15 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
 
+  timesheets_by_employee_calendar(id: ID) {
+    const userId = this.currentUser.user_id;
+    return this._http.get<T>(this._base + '/timesheets_by_employee_calendar/' + id + '/' + userId).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  
+
   count_total_permissions_timesheets_employee(id: ID) {
     const userId = this.currentUser.user_id;
     return this._http.get<T>(this._base + '/count_total_permissions_timesheets_employee/' + id + '/' + userId).pipe(

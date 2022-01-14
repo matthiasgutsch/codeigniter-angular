@@ -163,17 +163,15 @@ export class AdminDashboardComponent implements OnInit {
       this.getChartsCountNone();
       this.getSupports();
       this.calendarOptions = {
-
         editable: true,
         eventLimit: false,
         timeFormat: 'HH:mm',
-        weekNumbers: true,
+        weekNumbers: false,
         header: {
           right: 'prev,next',
           left: 'title',
 
         },
-
         events: data,
         locale: 'it',
         timezone: 'UTC',

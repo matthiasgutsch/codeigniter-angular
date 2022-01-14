@@ -165,8 +165,28 @@ employee: Employees;
 
     const id = this.route.snapshot.paramMap.get("id");
 
-    this.getTimesheetsEmployee(+id);
+      this.timesheetsService.timesheets_by_employee_calendar(+id).subscribe(data => {
+        this.timesheets = data;
  
+        this.calendarOptions = {
+
+          editable: true,
+          eventLimit: true,
+          timeFormat: 'HH:mm',
+          weekNumbers: true,
+          header: {
+            right: 'prev,next',
+            left: 'title',
+    
+          },
+    
+          events: data,
+          locale: 'it',
+          timezone: 'UTC',
+          selectable: true,
+        };
+        });
+      
 
       this.employees = {
         id:this.route.snapshot.params['id'],
@@ -183,37 +203,12 @@ employee: Employees;
     
     this.getVacationsCountEmployee(+id);
     this.getPermissionsCountEmployee(+id);
-    this.calendarOptions = {
-
-      editable: true,
-      eventLimit: false,
-      timeFormat: 'HH:mm',
-      weekNumbers: true,
-      header: {
-        right: 'prev,next',
-        left: 'title',
-
-      },
-
-      events: this.timesheets,
-      locale: 'it',
-      timezone: 'UTC',
-      selectable: true,
-    };
+    
     this.spinner.hide();
 
   }
 
-  getTimesheetsEmployee(id) {
-  this.timesheetsService.find_timesheets_employee(+id).subscribe(data => {
-    this.timesheets = data;
-    this.timesheetsService.count_total_timesheets_employee(+id).subscribe(
-      (data: Timesheets) => this.timesheetCountTotalEmployee = data,
-      error => this.error = error
-      );
-   
-    });
-  };
+  
 
   createTimesheets(employee: Employees) {
     this.productDialogAdd = true;
@@ -277,6 +272,7 @@ employee: Employees;
       event: {
         id: model.event.id,
         start: model.event.start,
+        end: model.event.end,
         title: model.event.title,
         works_id: model.event.works_id.split(','),
         location_id: model.event.location_id,
