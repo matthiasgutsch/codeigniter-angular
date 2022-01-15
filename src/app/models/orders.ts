@@ -19,4 +19,5 @@ export class Orders {
     vat: string;
     order_id: number;
     total: string;
+    quotes_id: number;
 }

@@ -91,9 +91,11 @@ export class BillingsFormComponent implements OnInit {
   categoryAppointments: string;
   works_idAppointments:any;
   company: Company;
-  descriptionAppointments: string;
+  descriptionBillings: string;
   dateAppointments: string;
   numberAppointments: number;
+  numberOrders: number;
+
   currentUser: any;
   public dataValues: object;
   addForm: FormGroup;
@@ -187,12 +189,14 @@ export class BillingsFormComponent implements OnInit {
         this.idAppointments = res.id;
         this.idBilling = res.number;
         this.categoryAppointments = res.category_id;
-        this.descriptionAppointments = res.description;
+        this.descriptionBillings = res.description;
         this.dateAppointments = res.date;
         this.grandTotal = res.total;
         this.vat = res.vat;
         this.subTotal = res.subtotal;
         this.numberAppointments = res.appointment_id;
+        this.numberOrders = res.order_id;
+
         this.works_idAppointments = res.works_id.split(',');
 
         this.blogForm.patchValue({
@@ -331,7 +335,7 @@ export class BillingsFormComponent implements OnInit {
 
         },
         {
-          text: this.descriptionAppointments,
+          text: this.descriptionBillings,
           fontSize: 12,
         },
         {
@@ -420,7 +424,7 @@ export class BillingsFormComponent implements OnInit {
   
     
   changed(value){
-      this.descriptionAppointments = value.target.value
+      this.descriptionBillings = value.target.value
   }
 
   changedNumber(value){

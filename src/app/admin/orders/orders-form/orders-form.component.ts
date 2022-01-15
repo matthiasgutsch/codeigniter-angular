@@ -99,7 +99,7 @@ export class OrdersFormComponent implements OnInit {
   viewMode = '1';
   fiscaltype: number;
   editForm: boolean = true;
-
+  numberQuotes: number;
   
   trackByFn(index, item) {
     return item.id;
@@ -193,6 +193,10 @@ export class OrdersFormComponent implements OnInit {
         this.subTotal = res.subtotal;
         this.numberOrders = res.order_id;
         this.works_idOrders = res.works_id.split(',');
+        this.numberQuotes = res.quotes_id;
+
+
+        
 
         this.blogForm.patchValue({
           title: res.title,
@@ -370,7 +374,7 @@ export class OrdersFormComponent implements OnInit {
       }
     }
     this.subTotal = total;
-    this.vat = this.subTotal / 100 * this.fiscaltype;
+    this.vat = this.subTotal / 100 * this.company.fiscaltype;
     this.grandTotal = this.subTotal + this.vat;
 
   }
@@ -394,7 +398,7 @@ export class OrdersFormComponent implements OnInit {
   removeQuantity(i: number): void {
     let totalCostOfItem = this.blogForm.get('skills')?.value[i].qty * this.blogForm.get('skills')?.value[i].price;
     this.subTotal = this.subTotal - totalCostOfItem;
-    this.vat = this.subTotal / 100 * this.fiscaltype;
+    this.vat = this.subTotal / 100 * this.company.fiscaltype;
     this.grandTotal = this.subTotal + this.vat;
     (<FormArray>this.blogForm.get('skills')).removeAt(i);
   }

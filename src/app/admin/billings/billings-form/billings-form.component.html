@@ -21,13 +21,19 @@
                         [routerLink]="['/admin/appointments/edit', numberAppointments]" label="Visualizza Appuntamento"
                         class="p-button p-button-secondary  pull-right p-mr-2"></button>
 
+                        <button pButton pRipple *ngIf="numberOrders > 0"
+                            [routerLink]="['/admin/orders/edit', numberOrders]" label="Visualizza Ordine"
+                            class="p-button p-button-secondary  pull-right p-mr-2"></button>
+
 
                         <button pButton pRipple type="button"
                         (click)="editFormItems()" label="Modifica"
                             class="p-button p-button-success  pull-right p-mr-2"></button>
                   
 
-             
+                         
+        
+    
                         
                 </div>
             </div>
@@ -214,10 +220,10 @@
                             <div class="p-field p-grid">
 
                                 <div class="p-col-12 p-md-12">
-                                    <h3 *ngIf="descriptionAppointments">Note</h3>
+                                    <h3 *ngIf="descriptionBillings">Note</h3>
 
                         
-                                    <p [innerHTML]="descriptionAppointments"></p>
+                                    <p [innerHTML]="descriptionBillings"></p>
 
                                 </div>
                             </div>
