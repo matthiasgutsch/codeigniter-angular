@@ -127,6 +127,12 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
   
 
+  find_billings_by_order_id(id: number) {
+    return this._http.get<Billings>(this._base + '/get_billings_by_order_id/' + id)
+  }
+  
+
+
   find_orders_by_quotes_id(id: number) {
     return this._http.get<Orders>(this._base + '/get_order_by_quotes_id/' + id)
   }

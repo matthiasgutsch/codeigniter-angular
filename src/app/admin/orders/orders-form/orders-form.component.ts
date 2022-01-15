@@ -81,13 +81,13 @@ export class OrdersFormComponent implements OnInit {
   date: Date;
   works_id: any;
   page: string;
-  idAppointments: number;
-  categoryAppointments: string;
-  works_idAppointments:any;
+  idOrders: number;
+  categoryOrders: string;
+  works_idOrders:any;
   company: Company;
-  descriptionAppointments: string;
-  dateAppointments: string;
-  numberAppointments: number;
+  descriptionOrders: string;
+  dateOrders: string;
+  numberOrders: number;
   currentUser: any;
   public dataValues: object;
   addForm: FormGroup;
@@ -171,7 +171,7 @@ export class OrdersFormComponent implements OnInit {
 
 
     this.billingsService
-    .find_billings_by_appointment_id(+id)
+    .find_billings_by_order_id(+id)
     .subscribe(data => {
       this.pages = data[0];
       return data.id;
@@ -184,23 +184,21 @@ export class OrdersFormComponent implements OnInit {
       this.pageTitle = "Modifica Ordine";
       this.ordersService.getId(+id).subscribe((res) => {
         this.imagePath = res.image;
-        this.idAppointments = res.id;
-        this.categoryAppointments = res.category_id;
-        this.descriptionAppointments = res.description;
-        this.dateAppointments = res.date;
+        this.idOrders = res.id;
+        this.categoryOrders = res.category_id;
+        this.descriptionOrders = res.description;
+        this.dateOrders = res.date;
         this.grandTotal = res.total;
         this.vat = res.vat;
         this.subTotal = res.subtotal;
-
-        this.numberAppointments = res.appointment_id;
-
-        this.works_idAppointments = res.works_id.split(',');
+        this.numberOrders = res.order_id;
+        this.works_idOrders = res.works_id.split(',');
 
         this.blogForm.patchValue({
           title: res.title,
           description: res.description.split(','),
           category_id: res.category_id,
-          appointment_id: res.appointment_id,
+          order_id: res.order_id,
           works_id: res.works_id.split(','),
           user_id: this.currentUser.user_id,
           is_featured: res.is_featured,
@@ -223,7 +221,7 @@ export class OrdersFormComponent implements OnInit {
       id: [""],
       title: [""],
       description: [""],
-      appointment_id: [""],
+      order_id: [""],
       category_id: [""],
       works_id: [""],
       user_id: [this.currentUser.user_id],
@@ -257,7 +255,7 @@ export class OrdersFormComponent implements OnInit {
       'elementHandlers': specialElementHandlers
     });
 
-    doc.save('Fattura-' + this.idAppointments + '.pdf');
+    doc.save('Fattura-' + this.idOrders + '.pdf');
 
   }
 
@@ -268,11 +266,11 @@ export class OrdersFormComponent implements OnInit {
   
     
   changed(value){
-      this.descriptionAppointments = value.target.value
+      this.descriptionOrders = value.target.value
     }
 
   changeTime(value){
-      this.dateAppointments = value.target.value
+      this.dateOrders = value.target.value
     }
     
   onSelectedFile(event) {
@@ -297,7 +295,7 @@ export class OrdersFormComponent implements OnInit {
 
   }
 
-  
+
   getWorksItem(works_id: string, id: string) {
     return this.works.find(item => item.id === works_id);
   }
@@ -412,21 +410,20 @@ createBilling() {
 
   formData.append("title", this.blogForm.get("title").value);
   formData.append("description", this.blogForm.get("description").value);
-  formData.append("appointment_id", this.blogForm.get("id").value);
-  formData.append("is_featured", this.blogForm.get("is_featured").value);
+  formData.append("order_id",  this.blogForm.get("id").value);
   formData.append("category_id", this.blogForm.get("category_id").value);
+  formData.append("is_featured", this.blogForm.get("is_featured").value);
   formData.append("works_id", this.blogForm.get("works_id").value);
-  formData.append("location_id", this.blogForm.get("location_id").value);
-  formData.append("employee_id", this.blogForm.get("employee_id").value);
-  formData.append("is_active", this.blogForm.get("is_active").value);
-  formData.append("image", this.blogForm.get("image").value);
   formData.append("date", this.blogForm.get("date").value);
-  formData.append("user_id", this.blogForm.get("user_id").value);
-  formData.append("is_paid", '0');
+  formData.append('user_id', this.blogForm.get('user_id').value);
+  formData.append('skills', JSON.stringify(this.blogForm.get('skills').value));
+  formData.append('subtotal', this.subTotal);
+  formData.append('vat', this.vat);
+  formData.append('total', this.grandTotal);
 
   const id = this.blogForm.get("id").value;
   this.billingsService
-      .find_billings_by_appointment_id(+id)
+      .find_billings_by_order_id(+id)
       .subscribe(data => {
         this.pages = data[0];
         return data.id;
@@ -436,7 +433,7 @@ createBilling() {
 
   if (id ) {
     this.confirmationService.confirm({
-      message: 'Vorresti creare la Fattua/ Ricevuta ?',
+      message: 'Vorresti creare la Fattura ?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
@@ -469,7 +466,7 @@ createBilling() {
     const formData = new FormData();
     formData.append("title", this.blogForm.get("title").value);
     formData.append("description", this.blogForm.get("description").value);
-    formData.append("appointment_id", this.blogForm.get("appointment_id").value);
+    formData.append("appointment_id", this.blogForm.get("id").value);
     formData.append("category_id", this.blogForm.get("category_id").value);
     formData.append("is_featured", this.blogForm.get("is_featured").value);
     formData.append("works_id", this.blogForm.get("works_id").value);

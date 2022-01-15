@@ -17,5 +17,6 @@ export class Orders {
     skills: any[];
     subtotal: string;
     vat: string;
+    order_id: number;
     total: string;
 }
