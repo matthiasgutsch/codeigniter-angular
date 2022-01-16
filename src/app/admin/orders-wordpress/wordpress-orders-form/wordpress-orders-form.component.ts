@@ -37,6 +37,7 @@ import { WordpressService } from 'src/app/services/wordpress.service';
 export class WordpressOrdersFormComponent implements OnInit {
   @ViewChild("myInput", { static: false }) myInputVariable: ElementRef;
 
+  userCheck: any = [];
 
   order: any = [];
   pageTitle: string;
@@ -171,6 +172,8 @@ export class WordpressOrdersFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get("id");
 
 
+    
+   
 
     this.wordpressService.findWordpress(+id).subscribe(value => {
       this.order = value;
@@ -183,6 +186,8 @@ export class WordpressOrdersFormComponent implements OnInit {
           total = (this.order.line_items[value].quantity * this.order.line_items[value].price) + total;
         }
       }
+
+   
       
       this.subTotal = total;
       this.skillsValues = JSON.stringify(this.order.line_items.map(value => ({
@@ -193,7 +198,9 @@ export class WordpressOrdersFormComponent implements OnInit {
       })));
 
      
-      
+      this.wordpressService.search_client(this.order.billing.first_name + ' ' + this.order.billing.last_name).subscribe(value => {
+        this.userCheck = value;
+      });
       //console.log(this.order.line_items);
     });
      
