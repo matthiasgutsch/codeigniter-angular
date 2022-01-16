@@ -146,7 +146,6 @@ export class WordpressOrdersFormComponent implements OnInit {
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     const userId = this.currentUser.user_id;
-    this.page = history.state;  
 
     this.worksService.getAllListbyUser().subscribe(
       (data: Works) => (this.works = data),
@@ -177,13 +176,24 @@ export class WordpressOrdersFormComponent implements OnInit {
       this.order = value;
       this.vat = this.order.total_tax;
       this.grandTotal = this.order.total;
-
+      let total: number = 0;
+    
+      for (let value = 0; value < this.order.line_items.length; value++) {
+        if (this.order.line_items[value].quantity != '' && this.order.line_items[value].price) {
+          total = (this.order.line_items[value].quantity * this.order.line_items[value].price) + total;
+        }
+      }
+      
+      this.subTotal = total;
       this.skillsValues = JSON.stringify(this.order.line_items.map(value => ({
         description: value.name,
         qty: value.quantity,
         price: value.price,
         itemTotal: value.quantity * value.price,
       })));
+
+     
+      
       //console.log(this.order.line_items);
     });
      

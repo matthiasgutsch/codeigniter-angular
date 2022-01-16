@@ -5,7 +5,7 @@
 
             <div class="p-field p-grid">
                 <div class="p-col-12 p-md-6">
-                    <h3>Ordine / Woccommerce</h3>
+                    <h3>Ordine / Woocommerce</h3>
                 </div>
                 <div class="p-col-12 p-md-6">
                     <button pButton pRipple icon="pi pi-save" [disabled]="!blogForm.valid" label="Salva"
@@ -102,19 +102,7 @@
                             </div>
                         </div>
 
-                        <div class="p-fluid">
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Tipo di Lavorazione<span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-12">
-
-                                    <p-multiSelect [options]="works" display="chip" formControlName="works_id"
-                                        [(ngModel)]="selectedWorks" optionLabel="name" optionValue="id">
-                                    </p-multiSelect>
-
-                                </div>
-                            </div>
-                        </div>
+                      
 
                         <div class="form-group form-row">
                             <label class="col-md-3"></label>
@@ -140,13 +128,25 @@
 
                             <div class="p-field p-grid">
 
-                                <div class="p-col-12 p-md-6">
-                                    <h1>Ordine {{order.id}}</h1>
+                                <div class="p-col-12 p-md-12">   <p-tag [value]="order.status" class="pull-right p-mr-2"></p-tag> <p-tag [value]="order.order_key" class="pull-right p-mr-2"></p-tag>
+                                    <h1>Ordine {{order.id}}</h1> 
+                                    <hr class="full">
                                     <h3>{{order.date_created}}</h3>
                                 </div>
 
                             </div>
                             <div class="p-field p-grid">
+
+                                <div class="p-col-12 p-md-6">
+                                    <h3>Cliente</h3>
+
+
+                                   {{order.billing.first_name}} {{order.billing.last_name}}<br>
+                                   {{order.billing.address_1}}<br>
+                                   {{order.billing.postcode}} - {{order.billing.city}} ({{order.billing.state}})<br>
+                                  {{order.billing.email}} -  {{order.billing.phone}}
+
+                                </div>
 
                                 <div class="p-col-12 p-md-6" *ngIf="getCategoryItem">
                                     <h3>Cliente</h3>
@@ -154,6 +154,7 @@
                                     {{ getCategoryItem(categoryAppointments)?.username }}<br>{{ getCategoryItem(categoryAppointments)?.zip }}
                                     - {{ getCategoryItem(categoryAppointments)?.city }} <br>
                                     {{ getCategoryItem(categoryAppointments)?.phone }}
+
 
                                 </div>
 
@@ -182,7 +183,6 @@
                                 </div>
                        
                             </div>
-                            {{skillsValues}}
 
                             <table class="billings-list">
 
@@ -240,6 +240,19 @@
                                 </tr>
 
                                 <tr>
+                                    <td colspan="3" *ngIf="company">
+                                        Spedizione
+                                    </td>
+                                    <td>
+                                       
+
+                                        + {{order.shipping_total | currency :'EUR':'symbol':'1.2-2'}}
+                              
+                                    </td>
+                                    <td></td>
+                                </tr>
+
+                                <tr>
                                     <td colspan="3">
                                         Totale
                                     </td>
@@ -253,7 +266,6 @@
                             </table>
                      
 
-                            <br><br>
 
                         </div>
                     </div>
