@@ -28,6 +28,7 @@ import "jspdf-autotable";
 import { Billings } from 'src/app/models/billings';
 import { map, tap } from 'rxjs/operators';
 import { ISkill } from 'src/app/models/products';
+import { WordpressService } from 'src/app/services/wordpress.service';
 
 @Component({
   selector: "app-wordpress-orders-form",
@@ -37,168 +38,7 @@ export class WordpressOrdersFormComponent implements OnInit {
   @ViewChild("myInput", { static: false }) myInputVariable: ElementRef;
 
 
-  order: any = [
-    {
-      "id": 727,
-      "parent_id": 0,
-      "number": "727",
-      "order_key": "wc_order_58d2d042d1d",
-      "created_via": "rest-api",
-      "version": "3.0.0",
-      "status": "processing",
-      "currency": "USD",
-      "date_created": "2017-03-22T16:28:02",
-      "date_created_gmt": "2017-03-22T19:28:02",
-      "date_modified": "2017-03-22T16:28:08",
-      "date_modified_gmt": "2017-03-22T19:28:08",
-      "discount_total": "0.00",
-      "discount_tax": "0.00",
-      "shipping_total": "10.00",
-      "shipping_tax": "0.00",
-      "cart_tax": "1.35",
-      "total": "29.35",
-      "total_tax": "1.35",
-      "prices_include_tax": false,
-      "customer_id": 0,
-      "customer_ip_address": "",
-      "customer_user_agent": "",
-      "customer_note": "",
-      "billing": {
-        "first_name": "John",
-        "last_name": "Doe",
-        "company": "",
-        "address_1": "969 Market",
-        "address_2": "",
-        "city": "San Francisco",
-        "state": "CA",
-        "postcode": "94103",
-        "country": "US",
-        "email": "john.doe@example.com",
-        "phone": "(555) 555-5555"
-      },
-      "shipping": {
-        "first_name": "John",
-        "last_name": "Doe",
-        "company": "",
-        "address_1": "969 Market",
-        "address_2": "",
-        "city": "San Francisco",
-        "state": "CA",
-        "postcode": "94103",
-        "country": "US"
-      },
-      "payment_method": "bacs",
-      "payment_method_title": "Direct Bank Transfer",
-      "transaction_id": "",
-      "date_paid": "2017-03-22T16:28:08",
-      "date_paid_gmt": "2017-03-22T19:28:08",
-      "date_completed": null,
-      "date_completed_gmt": null,
-      "cart_hash": "",
-      "meta_data": [
-        {
-          "id": 13106,
-          "key": "_download_permissions_granted",
-          "value": "yes"
-        }
-      ],
-      "line_items": [
-        {
-          "id": 315,
-          "name": "Woo Single #1",
-          "product_id": 93,
-          "variation_id": 0,
-          "quantity": 2,
-          "tax_class": "",
-          "subtotal": "6.00",
-          "subtotal_tax": "0.45",
-          "total": "6.00",
-          "total_tax": "0.45",
-          "taxes": [
-            {
-              "id": 75,
-              "total": "0.45",
-              "subtotal": "0.45"
-            }
-          ],
-          "meta_data": [],
-          "sku": "",
-          "price": 3
-        },
-        {
-          "id": 316,
-          "name": "Ship Your Idea &ndash; Color: Black, Size: M Test",
-          "product_id": 22,
-          "variation_id": 23,
-          "quantity": 1,
-          "tax_class": "",
-          "subtotal": "12.00",
-          "subtotal_tax": "0.90",
-          "total": "12.00",
-          "total_tax": "0.90",
-          "taxes": [
-            {
-              "id": 75,
-              "total": "0.9",
-              "subtotal": "0.9"
-            }
-          ],
-          "meta_data": [
-            {
-              "id": 2095,
-              "key": "pa_color",
-              "value": "black"
-            },
-            {
-              "id": 2096,
-              "key": "size",
-              "value": "M Test"
-            }
-          ],
-          "sku": "Bar3",
-          "price": 12
-        }
-      ],
-      "tax_lines": [
-        {
-          "id": 318,
-          "rate_code": "US-CA-STATE TAX",
-          "rate_id": 75,
-          "label": "State Tax",
-          "compound": false,
-          "tax_total": "1.35",
-          "shipping_tax_total": "0.00",
-          "meta_data": []
-        }
-      ],
-      "shipping_lines": [
-        {
-          "id": 317,
-          "method_title": "Flat Rate",
-          "method_id": "flat_rate",
-          "total": "10.00",
-          "total_tax": "0.00",
-          "taxes": [],
-          "meta_data": []
-        }
-      ],
-      "fee_lines": [],
-      "coupon_lines": [],
-      "refunds": [],
-      "_links": {
-        "self": [
-          {
-            "href": "https://example.com/wp-json/wc/v3/orders/727"
-          }
-        ],
-        "collection": [
-          {
-            "href": "https://example.com/wp-json/wc/v3/orders"
-          }
-        ]
-      }
-    }
-  ];
+  order: any = [];
   pageTitle: string;
   error: string;
   uploadError: string;
@@ -239,6 +79,7 @@ export class WordpressOrdersFormComponent implements OnInit {
   subTotal: any;
   vat: any;
   grandTotal: any;
+  editForm: boolean = true;
 
   cities: Blog[];
   format1: string = "";
@@ -264,10 +105,11 @@ export class WordpressOrdersFormComponent implements OnInit {
   itemForm: FormGroup;
   skillsForm: FormGroup;
   skillsValues: any = [];
+  skillsValues1: any = [];
   total: number;
   viewMode = '1';
   fiscaltype: number;
-
+  line_items: any = []; 
   
   trackByFn(index, item) {
     return item.id;
@@ -283,7 +125,7 @@ export class WordpressOrdersFormComponent implements OnInit {
     private worksService: WorksService,
     private employeesService: EmployeesService,
     private companyService: CompanyService,
-
+    private wordpressService: WordpressService,
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,
     private router: Router,
@@ -304,11 +146,7 @@ export class WordpressOrdersFormComponent implements OnInit {
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     const userId = this.currentUser.user_id;
-    this.page = history.state;
-
-
-    this.getselectedWorks;
-  
+    this.page = history.state;  
 
     this.worksService.getAllListbyUser().subscribe(
       (data: Works) => (this.works = data),
@@ -333,50 +171,22 @@ export class WordpressOrdersFormComponent implements OnInit {
 
     const id = this.route.snapshot.paramMap.get("id");
 
-    this.ordersService.skills(+id).subscribe(value => {
-      this.skillsValues = value;
+
+
+    this.wordpressService.findWordpress(+id).subscribe(value => {
+      this.order = value;
+      this.vat = this.order.total_tax;
+      this.grandTotal = this.order.total;
+
+      this.skillsValues = JSON.stringify(this.order.line_items.map(value => ({
+        description: value.name,
+        qty: value.quantity,
+        price: value.price,
+        itemTotal: value.quantity * value.price,
+      })));
+      //console.log(this.order.line_items);
     });
-
-
-
-    if (id) {
-      this.pageTitle = "Modifica Ordine";
-      this.ordersService.getId(+id).subscribe((res) => {
-        this.imagePath = res.image;
-        this.idAppointments = res.id;
-        this.categoryAppointments = res.category_id;
-        this.descriptionAppointments = res.description;
-        this.dateAppointments = res.date;
-        this.grandTotal = res.total;
-        this.vat = res.vat;
-        this.subTotal = res.subtotal;
-
-        this.numberAppointments = res.appointment_id;
-
-        this.works_idAppointments = res.works_id.split(',');
-
-        this.blogForm.patchValue({
-          title: res.title,
-          description: res.description.split(','),
-          category_id: res.category_id,
-          appointment_id: res.appointment_id,
-          works_id: res.works_id.split(','),
-          user_id: this.currentUser.user_id,
-          is_featured: res.is_featured,
-          date: res.date,
-          id: res.id,
-          skills: this.skillsValues,
-          subtotal: res.subtotal,
-          vat: res.vat,
-          total: res.total,
-
-        });
-    
-
-      });
-    } else {
-      this.pageTitle = "Aggiungi Ordine";
-    }
+     
 
     this.blogForm = this.fb.group({
       id: [""],
@@ -387,8 +197,8 @@ export class WordpressOrdersFormComponent implements OnInit {
       works_id: [""],
       user_id: [this.currentUser.user_id],
       is_featured: ["0"],
-      date: ["", Validators.required],
-      skills: this.initSkill(this.skillsValues),
+      date: [""],
+      skills: [this.skillsValues],
       subtotal: [""],
       vat: [""],
       total: [this.grandTotal],
@@ -421,145 +231,31 @@ export class WordpressOrdersFormComponent implements OnInit {
   }
 
 
-  getselectedWorks() {
-    this.selectedWorks = this.works_id.split(',');
-    }
-  
-    
   changed(value){
       this.descriptionAppointments = value.target.value
     }
+
+    editFormItems() {
+      this.editForm = ! this.editForm;
+  
+    }
+
 
   changeTime(value){
       this.dateAppointments = value.target.value
     }
     
-  onSelectedFile(event) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.blogForm.get("image").setValue(file);
-
-      let reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = (_event) => {
-        this.imagePath = reader.result;
-      };
-    }
-  }
-
-  getCategoryItem(categoryAppointments: string, id: string) {
-    return this.clients.find((item) => item.id === categoryAppointments);
-  }
-
-  
-  getWorksItem(works_id: string, id: string) {
-    return this.works.find(item => item.id === works_id);
-  }
 
 
-  
 
-  removeImageFile() {
-    this.imagePath = "";
-    console.log(this.myInputVariable.nativeElement.files);
-    this.myInputVariable.nativeElement.value = "";
-    console.log(this.myInputVariable.nativeElement.files);
-  }
+
 
   get title() {
     return this.blogForm.get("title");
   }
 
-  initSkill(skillsValues: ISkill[]): FormArray {
-    const formArray = new FormArray([]);
-    const id = this.route.snapshot.paramMap.get("id");
 
-    this.ordersService.skills(+id).subscribe(
-      (res)=>{
-        this.skillsValues = this.order.line_items;
-
-        this.skillsValues.forEach((e)=>{
-          formArray.push(this.fb.group({
-            id: e.id,
-            name: e.name,
-            price: e.price,
-            itemTotal: e.qty * e.price,
-          }))
-        })
-      }
-    )
-
-    /*formArray.push(this.fb.group({
-      qty: [''],
-      price: ['']
-    })) */
-    
-
-    return formArray;
-  }
-
-   
-  private createSkillFormGroup(skill:any): FormGroup{
-    return new FormGroup({
-      'qty':new FormControl(skill.qty),
-      'price':new FormControl(skill.price), 
-      'itemTotal':new FormControl(skill.itemTotal)
-    })
-  }
-
-  public addSkill(skill:any){
-    this.skills.push(this.createSkillFormGroup(skill));
-  }
-
-
-  get skills() {
-    return this.blogForm.get('skills') as FormArray;
-  }
-  
-  
-  
-  itemsChanged(): void {
-    let total: number = 0;
-    for (let t = 0; t < (<FormArray>this.blogForm.get('skills')).length; t++) {
-      if (this.blogForm.get('skills')?.value[t].qty != '' && this.blogForm.get('skills')?.value[t].price) {
-        total = (this.blogForm.get('skills')?.value[t].qty * this.blogForm.get('skills')?.value[t].price) + total;
-      }
-    }
-    this.subTotal = total;
-    this.vat = this.subTotal / 100 * this.company.fiscaltype;
-    this.grandTotal = this.subTotal + this.vat;
-
-  }
-
-  
-  newQuantity(): FormGroup {
-    const numberPatern = '^[0-9.,]+$';
-    return this.fb.group({
-      description: [''],
-      qty: [1, [Validators.required, Validators.pattern(numberPatern)]],
-      price: ['', [Validators.required, Validators.pattern(numberPatern)]],
-      itemTotal: [''],
-      
-    })
-  }
-   
-  addQuantity(event) {
-    this.skills.push(this.newQuantity());
-  }
-   
-  removeQuantity(i: number): void {
-    let totalCostOfItem = this.blogForm.get('skills')?.value[i].qty * this.blogForm.get('skills')?.value[i].price;
-    this.subTotal = this.subTotal - totalCostOfItem;
-    this.vat = this.subTotal / 100 * this.company.fiscaltype;
-    this.grandTotal = this.subTotal + this.vat;
-    (<FormArray>this.blogForm.get('skills')).removeAt(i);
-  }
-  
-  get total_sum() {
-    return this.itemTotal.reduce((total, fee) => total + fee.balance, 0);
-}
-
-
+ 
   onSubmit() {
     const formData = new FormData();
     formData.append("title", this.blogForm.get("title").value);
@@ -570,7 +266,7 @@ export class WordpressOrdersFormComponent implements OnInit {
     formData.append("works_id", this.blogForm.get("works_id").value);
     formData.append("date", this.blogForm.get("date").value);
     formData.append('user_id', this.blogForm.get('user_id').value);
-    formData.append('skills', JSON.stringify(this.blogForm.get('skills').value));
+    formData.append('skills', this.skillsValues);
     formData.append('subtotal', this.subTotal);
     formData.append('vat', this.vat);
     formData.append('total', this.grandTotal);
@@ -596,7 +292,6 @@ export class WordpressOrdersFormComponent implements OnInit {
             this.uploadError = res.message;
           } else {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
-            this._location.back();
 
           }
         },

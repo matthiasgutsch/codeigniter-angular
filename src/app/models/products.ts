@@ -27,6 +27,7 @@ export class Products {
 
 export interface ISkill{
     qty: string;
+    name: string;
     price: number;
     itemTotal: string;
 }
