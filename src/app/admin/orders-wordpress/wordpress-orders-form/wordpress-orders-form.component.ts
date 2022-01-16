@@ -265,7 +265,10 @@ export class WordpressOrdersFormComponent implements OnInit {
   }
 
 
- 
+  getCategoryItem(categoryAppointments: string, id: string) {
+    return this.clients.find((item) => item.id === categoryAppointments);
+  }
+
   onSubmit() {
     const formData = new FormData();
     formData.append("title", this.blogForm.get("title").value);
