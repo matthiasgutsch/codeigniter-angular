@@ -100,8 +100,8 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     );
   }
 
-  search_client(id: string) {
-    return this._http.get<T>(this._base + '/search/?name=' + id).pipe(
+  search_client(name: string) {
+    return this._http.get<T>(this._base + '/search/?name=' + name).pipe(
       catchError(this.handleError)
     );
   }

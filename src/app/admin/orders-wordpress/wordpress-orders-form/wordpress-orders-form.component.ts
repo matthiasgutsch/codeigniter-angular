@@ -198,7 +198,7 @@ export class WordpressOrdersFormComponent implements OnInit {
       })));
 
      
-      this.wordpressService.search_client(this.order.billing.first_name + ' ' + this.order.billing.last_name).subscribe(value => {
+      this.clientsService.search_client(this.order.billing.first_name + ' ' + this.order.billing.last_name).subscribe(value => {
         this.userCheck = value;
       });
       //console.log(this.order.line_items);
