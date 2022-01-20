@@ -173,6 +173,19 @@ export class EmployeesTimesheetsComponent implements OnInit {
       this.employee = value;
     });
 
+    this.cols = [
+      { field: "date_from", header: "Da" },
+      { field: "date_from", header: "A" },
+      { field: "hours", header: "Ore" },
+      { field: "project_id", header: "Progetto" },
+    ];
+    this._selectedColumns = this.cols;
+    this.exportColumns = this.cols.map(col => ({
+      title: col.header,
+      dataKey: col.field
+    }));
+
+
     this.projectsService.getAllListbyUser().subscribe(data => {
       this.projects = data;
     });
@@ -389,7 +402,7 @@ export class EmployeesTimesheetsComponent implements OnInit {
     const doc = new jsPDF('l', 'pt', 'A4');
     doc['autoTable'](this.exportColumns, this.timesheets);
     // doc.autoTable(this.exportColumns, this.products);
-    doc.save("prodotti.pdf");
+    doc.save('timesheet-' + this.employee.name + '-' + this.employee.surname + '.pdf');
   }
 
 

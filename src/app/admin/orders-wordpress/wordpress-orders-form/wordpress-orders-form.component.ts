@@ -37,7 +37,7 @@ import { WordpressService } from 'src/app/services/wordpress.service';
 export class WordpressOrdersFormComponent implements OnInit {
   @ViewChild("myInput", { static: false }) myInputVariable: ElementRef;
 
-  userCheck: any = [];
+  userCheck:  any = [];
 
   order: any = [];
   pageTitle: string;

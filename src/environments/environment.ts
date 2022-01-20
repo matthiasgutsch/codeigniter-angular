@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   baseUrl: 'https://api.typopress.it',
-  supportUrl: 'https://support.api.typopress.it'
+  supportUrl: 'https://support.api.typopress.it',
+  apiURL: 'https://shop.migustafood.it/wp-json/wc/v3/orders/'
 
 };
 

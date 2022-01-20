@@ -21,7 +21,7 @@ import { WordpressService } from 'src/app/services/wordpress.service';
 })
 export class ManageWordpressOrdersComponent implements OnInit {
 
-  orders: any = [];
+  orders: any;
   order: Orders;
   categories: any = [];
   category: Category;
@@ -73,10 +73,10 @@ export class ManageWordpressOrdersComponent implements OnInit {
     const userId = this.currentUser.user_id;
 
     
-
-    this.wordpressService.getList().subscribe(data => {
+    this.wordpressService.getOrders(68).subscribe(data => {
       this.orders = data;
     });
+
 
     this.spinner.show();
     this.orders;

@@ -1,3 +1,48 @@
+<p-overlayPanel #op>
+    <ng-template pTemplate>
+        <div class="p-col-12">
+        
+            <div class="p-field p-grid" *ngFor="let col of cols" [ngSwitch]="col.field">
+                <div class="p-col-12">
+
+
+                    <p-dropdown *ngSwitchCase="'project_id'" placeholder="Scegli" [showClear]="true" optionLabel="title"
+                    optionValue="id" [options]="projects" [style]="{'width':'100%'}"
+                    (onChange)="dt.filter($event.value, col.field, 'equals')">
+                </p-dropdown>
+
+                <input *ngSwitchCase="'hours'" [ngModel]="dt.filters['hours']? dt.filters['hours'].value : ''" 
+                placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
+    
+             
+                    <input *ngSwitchCase="'date_from'" [ngModel]="dt.filters['date_from']? dt.filters['date_from'].value : ''" 
+                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
+             
+
+
+                    <input *ngSwitchCase="'date_to'" [ngModel]="dt.filters['date_to']? dt.filters['date_to'].value : ''" 
+                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
+
+
+                 
+
+            </div>
+                </div>
+
+                <div class="p-grid">
+                <div class="p-col-12">
+
+                    <button pButton pRipple label="reset ricerca"
+                    class="p-button p-button-primary btn-block"  (click)="dt.reset()" ></button>
+                        </div>
+                    </div>
+            </div>
+            
+
+            
+    </ng-template>
+</p-overlayPanel>
+
 <div class="p-field p-grid">
     <div class="p-col-12 p-md-12">
 
@@ -80,6 +125,13 @@
             <div class="p-field p-grid">
                 <div class="p-col-12 p-md-12">
                     <p-card>
+                        <div class="p-field p-grid">
+                            <div class="p-col-12 p-md-12">
+                        <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()" class="p-button-warning p-mr-2 pull-right" pTooltip="PDF" tooltipPosition="bottom"></button>
+                        <button type="text" pButton label="Filter"  icon="pi pi-filter" class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
+                            </div>
+                        </div>
+                        
 
                         <p-table #dt [columns]="cols" [value]="timesheets"
                             [globalFilterFields]="['name', 'description']"

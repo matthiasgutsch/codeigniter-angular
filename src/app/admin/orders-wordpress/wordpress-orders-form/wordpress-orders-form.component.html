@@ -56,16 +56,16 @@
                             </div>
                             </div>
                         </div>
-                     
+                     {{userCheck | json}}
 
                         <div class="p-fluid">
                             <div class="p-field p-grid">
                                 <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Cliente <span
                                         class="required">*</span></label>
                                 <div class="p-col-12 p-md-12">
-                                    <p-dropdown [options]="clients" [virtualScroll]="true" filter="true"
+                                    <p-dropdown [options]="userCheck" [virtualScroll]="true" filter="true"
                                         [required]="true" [showClear]="true" placeholder="Scegli"
-                                        [style]="{ width: '100%' }" [(ngModel)]="categoryAppointments"
+                                        [style]="{ width: '100%' }" [(ngModel)]="userCheck"
                                         formControlName="category_id" optionLabel="username" optionValue="id">
                                         <ng-template let-option pTemplate="item">
 
