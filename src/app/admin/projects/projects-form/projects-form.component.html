@@ -104,6 +104,34 @@
                                     </div>
                                 </div>
 
+
+                                <div class="p-fluid">
+
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Data Inizio <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+                                            <div class="p-grid">
+                                                <div class="p-col-12 p-md-5">
+                                                    <p-calendar  formControlName="date_from" dataType="string" [(ngModel)]="selectedDateFrom" dateFormat="yy-mm-dd"  appendTo="body"></p-calendar>
+
+                                                </div>
+                                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Data fine<span
+                                                        class="required">*</span></label>
+                                                <div class="p-col-4 p-md-5">
+
+                                                    <p-calendar formControlName="date_to" dataType="string" [(ngModel)]="selectedDateTo" dateFormat="yy-mm-dd"  appendTo="body"></p-calendar>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                          
                                 <div class="p-fluid">
 
                                     <div class="p-field p-grid">

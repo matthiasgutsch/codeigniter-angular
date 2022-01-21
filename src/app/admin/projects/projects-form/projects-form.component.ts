@@ -108,6 +108,9 @@ export class ProjectsFormComponent implements OnInit {
   comuni: Comuni;
 
   selectedDate: Date;
+  selectedDateFrom: Date;
+  selectedDateTo: Date;
+
   date: Date;
   works_id: any;
   category_id: any;
@@ -180,6 +183,8 @@ export class ProjectsFormComponent implements OnInit {
             is_featured: res.is_featured,
             is_active: res.is_active,
             code: res.code,
+            date_from: res.date_from,
+            date_to: res.date_to,
             user_id: this.currentUser.user_id,
             description_full: res.description_full,
             code_int: res.code_int,
@@ -214,6 +219,8 @@ export class ProjectsFormComponent implements OnInit {
       category_id: [""],
       status: [""],
       works_id: [""],
+      date_from: [""],
+      date_to: [""],
       brand_id: [""],
       is_active: ["0"],
       image: [""],
@@ -426,6 +433,8 @@ export class ProjectsFormComponent implements OnInit {
     formData.append("is_featured", this.blogForm.get("is_featured").value);
     formData.append("category_id", this.blogForm.get("category_id").value);
     formData.append("works_id", this.blogForm.get("works_id").value);
+    formData.append("date_from", this.blogForm.get("date_from").value);
+    formData.append("date_to", this.blogForm.get("date_to").value);
     formData.append("brand_id", this.blogForm.get("brand_id").value);
     formData.append("is_active", this.blogForm.get("is_active").value);
     formData.append("image", this.blogForm.get("image").value);

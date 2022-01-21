@@ -20,6 +20,8 @@ export class Projects {
     price: string;
     price_extra: string;
     data: JSON;
+    date_from: string;
+    date_to: string;
     status: StringMap;
     client_id: string;
     employee_id: string;
