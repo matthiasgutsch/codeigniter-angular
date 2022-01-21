@@ -3,6 +3,7 @@ import { PAGES } from '../constants/constants';
 import { NgxSpinnerService } from "ngx-spinner";
 import { SupportsService } from 'src/app/services/supports.service';
 import { AuthService } from 'src/app/auth/auth.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-admin',
@@ -27,7 +28,8 @@ export class AdminComponent implements OnInit {
   firstName = "John";
   lastName = "Doe";
   supportsCount: any;
-  
+  myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en');
+
   constructor(  private spinner: NgxSpinnerService,
     private supportsService: SupportsService,
     private authService: AuthService,
