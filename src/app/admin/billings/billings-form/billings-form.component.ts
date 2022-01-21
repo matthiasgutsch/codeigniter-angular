@@ -546,7 +546,7 @@ export class BillingsFormComponent implements OnInit {
           if (res.status == "error") {
             this.uploadError = res.message;
           } else {
-            this.messageService.add({ key: 'myKey1', severity: 'warn', summary: 'Informazioni', detail: 'Ticket chiuso con sucesso' });
+            this.messageService.add({ key: 'myKey1', severity: 'warn', summary: 'Informazioni', detail: 'Fattura Non Pagata' });
             this.ngOnInit();
           }
         },
@@ -563,7 +563,7 @@ export class BillingsFormComponent implements OnInit {
           if (res.status == "error") {
             this.uploadError = res.message;
           } else {
-            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'ticket aperto con sucesso' });
+            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Fattura Pagata' });
             this.ngOnInit();
 
           }

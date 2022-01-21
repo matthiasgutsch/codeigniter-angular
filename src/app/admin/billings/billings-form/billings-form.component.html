@@ -241,7 +241,17 @@
                             </div>
 
                             <table formArrayName="skills" class="billings-list">
+                                <thead>
+                                    <tr>
+                                        <th>Posizione</th>
+                                        <th>Qantità</th>
+                                        <th>Prezzo Cad.</th>
+                                        <th>Totale</th>
+                                        <th></th>
 
+                                    </tr>
+                                </thead>
+                                <tbody>
                                 <tr *ngFor="let quantity of skills.controls; let i=index" [formGroupName]="i">
 
                                     <td>
@@ -263,7 +273,7 @@
                                     <td width="150px">
                                         <input type="text" *ngIf="!editForm"  [style]="{ width: '100%' }" pInputText
                                             formControlName="price" (input)="itemsChanged()"> 
-                                            <span *ngIf="editForm">{{blogForm.get('skills').value[this.i].price}}</span>
+                                            <span *ngIf="editForm">{{blogForm.get('skills').value[this.i].price | currency :'EUR':'symbol':'1.2-2'}}</span>
                                     </td>
 
                                     <td width="150px">
@@ -312,7 +322,7 @@
                                     </td>
                                     <td></td>
                                 </tr>
-                        
+                            </tbody>
                             </table>
                      
                             <br><br>
