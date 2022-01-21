@@ -1,4 +1,3 @@
-
 <p-overlayPanel #op>
     <ng-template pTemplate>
         <div class="p-col-12">
@@ -6,23 +5,21 @@
             <div class="p-field p-grid" *ngFor="let col of cols" [ngSwitch]="col.field">
                 <div class="p-col-12">
 
+                    <p-dropdown *ngSwitchCase="'is_paid'" filter="true" [required]="true" placeholder="Stato"
+                        [showClear]="true" optionLabel="label" optionValue="value" [options]="statuses"
+                        [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')">
 
-                    <p-dropdown *ngSwitchCase="'is_paid'" filter="true" [required]="true" placeholder="Stato"  [showClear]="true" optionLabel="label"
-                    optionValue="value" [options]="statuses" [style]="{'width':'100%'}"
-                    (onChange)="dt.filter($event.value, col.field, 'equals')">
+                        <ng-template let-option pTemplate="item">
 
-                    <ng-template let-option pTemplate="item">
+                            {{option.label}}
 
-                        {{option.label}}
+                        </ng-template>
 
-                    </ng-template>
+                    </p-dropdown>
 
-                </p-dropdown>
-
-
-                    <p-dropdown *ngSwitchCase="'category_id'" filter="true" [required]="true" placeholder="Cliente"  [showClear]="true" optionLabel="username"
-                        optionValue="id" [options]="clients" [style]="{'width':'100%'}"
-                        (onChange)="dt.filter($event.value, col.field, 'equals')">
+                    <p-dropdown *ngSwitchCase="'category_id'" filter="true" [required]="true" placeholder="Cliente"
+                        [showClear]="true" optionLabel="username" optionValue="id" [options]="clients"
+                        [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')">
 
                         <ng-template let-option pTemplate="item">
 
@@ -32,23 +29,22 @@
 
                     </p-dropdown>
 
-                    <input *ngSwitchCase="'id'" [ngModel]="dt.filters['id']? dt.filters['id'].value : ''" 
-                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
-
+                    <input *ngSwitchCase="'id'" [ngModel]="dt.filters['id']? dt.filters['id'].value : ''"
+                        placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }"
+                        (input)="dt.filter($event.target.value, col.field, 'contains')">
 
                 </div>
 
             </div>
-    
 
-        <div class="p-grid">
-            <div class="p-col-12">
+            <div class="p-grid">
+                <div class="p-col-12">
 
-        <button pButton pRipple label="reset ricerca"
-        class="p-button p-button-primary btn-block"  (click)="dt.reset()" ></button>
+                    <button pButton pRipple label="reset ricerca" class="p-button p-button-primary btn-block"
+                        (click)="dt.reset()"></button>
+                </div>
             </div>
-    </div>
-</div>
+        </div>
     </ng-template>
 </p-overlayPanel>
 
@@ -60,26 +56,28 @@
                 <h3>Fatture</h3>
             </div>
             <div class="p-col-2 p-md-6">
-               
-                <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/billings/create']" label="Aggiungi" class="p-button p-button-primary pull-right"></button>
+
+                <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/billings/create']" label="Aggiungi"
+                    class="p-button p-button-primary pull-right"></button>
 
                 <button type="text" pButton label="Filter" icon="pi pi-filter"
-                class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
+                    class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
 
             </div>
         </div>
     </div>
 </div>
 
-
-
 <div class="p-fluid">
     <div class="p-field p-grid">
         <div class="p-col-12 p-md-12">
 
             <p-card>
-                <p-table #dt [value]="billings" editMode="row" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
-                   
+                <p-table #dt [value]="billings" editMode="row" [globalFilterFields]="['title','status','category.name']"
+                    [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [totalRecords]="true">
+
                     <ng-template pTemplate="header">
                         <tr>
                             <th>Stato</th>
@@ -100,21 +98,24 @@
                     <ng-template pTemplate="body" let-billing>
                         <tr>
                             <td>
-                                <p-tag severity="success" *ngIf="billing.is_paid === '1'" (click)="closeBilling(billing)" value="Pagata"
-                                    class="p-mr-2"></p-tag>
-                                <p-tag severity="danger" *ngIf="billing.is_paid === '0'" (click)="openBilling(billing)" value="non pagata"
-                                    class="p-mr-2"></p-tag>
+                                <p-tag severity="success" *ngIf="billing.is_paid === '1'"
+                                    (click)="closeBilling(billing)" value="Pagata" class="p-mr-2"></p-tag>
+                                <p-tag severity="danger" *ngIf="billing.is_paid === '0'" (click)="openBilling(billing)"
+                                    value="non pagata" class="p-mr-2"></p-tag>
                             </td>
                             <td>{{billing.number}}/{{billing.date | date:'yyyy':'-0000'}}</td>
 
-                            <td><i class="pi pi-calendar"></i> {{billing.date}}
+                            <td><i class="pi pi-calendar"></i> {{billing.date | date:'dd-MM-yyyy'}}
                             </td>
 
                             <td width="50">
 
-                                <app-initials-avatar  [routerLink]="['/admin/clients/edit', getCategoryItem(billing.category_id)?.id]" firstName="{{ getCategoryItem(billing.category_id)?.name | slice:0:1}}" lastName="{{ getCategoryItem(billing.category_id)?.surname | slice:0:1}}"></app-initials-avatar>
+                                <app-initials-avatar
+                                    [routerLink]="['/admin/clients/edit', getCategoryItem(billing.category_id)?.id]"
+                                    firstName="{{ getCategoryItem(billing.category_id)?.name | slice:0:1}}"
+                                    lastName="{{ getCategoryItem(billing.category_id)?.surname | slice:0:1}}">
+                                </app-initials-avatar>
 
-                               
                             </td>
 
                             <td>
@@ -128,13 +129,13 @@
                                 getCategoryItem(billing.category_id)?.city }}</td>
                             <td>{{billing.total | currency :'EUR':'symbol':'1.2-2'}}</td>
 
-
-                          
-
                             <td class="action">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/billings/edit', billing.id]"></button>
-                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2" (click)="edit(billing)"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(billing.id)"></button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
+                                    [routerLink]="['/admin/billings/edit', billing.id]"></button>
+                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
+                                    (click)="edit(billing)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
+                                    (click)="onDelete(billing.id)"></button>
                             </td>
                         </tr>
                     </ng-template>
@@ -142,94 +143,103 @@
             </p-card>
         </div>
 
-        
     </div>
 </div>
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'60em'}">
     <ng-template pTemplate="content">
-   
-<div id="content" #content>
 
-    <div class="p-col-12 p-md-12">
-        <p-card>
-            <app-initials-avatar class="pull-right"  [routerLink]="['/admin/clients/edit', getCategoryItem(billing.category_id)?.id]" firstName="{{ getCategoryItem(billing.category_id)?.name | slice:0:1}}" lastName="{{ getCategoryItem(billing.category_id)?.surname | slice:0:1}}"></app-initials-avatar>
+        <div id="content" #content>
 
-            <h3>Dettaglio Fattura {{billing.number}}/{{billing.date | date:'yyyy'}}</h3>
-            <p-tag severity="default" value="{{billing.date}}"  class="p-mr-2"></p-tag>
+            <div class="p-col-12 p-md-12">
+                <p-card>
+                    <app-initials-avatar class="pull-right"
+                        [routerLink]="['/admin/clients/edit', getCategoryItem(billing.category_id)?.id]"
+                        firstName="{{ getCategoryItem(billing.category_id)?.name | slice:0:1}}"
+                        lastName="{{ getCategoryItem(billing.category_id)?.surname | slice:0:1}}"></app-initials-avatar>
 
-            <p-tag severity="success" *ngIf="billing.is_paid === '1'" class="p-mr-2"  value="Pagata"
-            class="p-mr-2"></p-tag>
-        <p-tag severity="danger" *ngIf="billing.is_paid === '0'" class="p-mr-2"  value="non pagata"
-            class="p-mr-2"></p-tag>
+                    <h3>Dettaglio Fattura {{billing.number}}/{{billing.date | date:'yyyy'}}</h3>
+                    <p-tag severity="default" value="{{billing.date}}" class="p-mr-2"></p-tag>
 
-            <hr class="full">
+                    <p-tag severity="success" *ngIf="billing.is_paid === '1'" class="p-mr-2" value="Pagata"
+                        class="p-mr-2"></p-tag>
+                    <p-tag severity="danger" *ngIf="billing.is_paid === '0'" class="p-mr-2" value="non pagata"
+                        class="p-mr-2"></p-tag>
 
-                <strong>{{ getCategoryItem(billing.category_id)?.username }}</strong><br>
-                {{ getCategoryItem(billing.category_id)?.address }} - {{ getCategoryItem(billing.category_id)?.zip }} {{ getCategoryItem(billing.category_id)?.city }} <br>
-                {{ getCategoryItem(billing.category_id)?.phone }}
+                    <hr class="full">
 
-        </p-card>
-<p-card>
-       
-    <table class="billings-list">
-        <thead>
-            <tr>
-                <th>Descrizione</th>
-                <th>Prezzo</th>
-                <th>qty</th>
-                <th>Totale</th>
+                    <strong>{{ getCategoryItem(billing.category_id)?.username }}</strong><br>
+                    {{ getCategoryItem(billing.category_id)?.address }} -
+                    {{ getCategoryItem(billing.category_id)?.zip }} {{ getCategoryItem(billing.category_id)?.city }}
+                    <br>
+                    {{ getCategoryItem(billing.category_id)?.phone }}
 
-            </tr>
-        </thead>
-        <tr *ngFor="let entry of selectedSkills | keys">           
-            <td>{{entry.value.description}}</td>  <td>{{entry.value.price}}</td> <td>{{entry.value.qty}}</td><td> {{entry.value.qty * entry.value.price | currency :'EUR':'symbol':'1.2-2'}}</td>
-          </tr>
-   
-             <tr>
-                                    <td colspan="3">
-                                       Total senza Iva
-                                    </td>
+                </p-card>
+                <p-card>
 
-                                    <td>
-                                       <h4>
-                                            {{billing.subtotal | currency :'EUR':'symbol':'1.2-2'}}</h4>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">
-                                        Valore Iva
-                                    </td>
-                                    <td>{{billing.vat | currency :'EUR':'symbol':'1.2-2'}}</td>
-                                </tr>
+                    <table class="billings-list">
+                        <thead>
+                            <tr>
+                                <th>Descrizione</th>
+                                <th>Prezzo</th>
+                                <th>qty</th>
+                                <th>Totale</th>
 
-                                <tr>
-                                    <td colspan="3">
-                                        Totale
-                                    </td>
-                                    <td>
-                                        <h3>
-                                            {{billing.total | currency :'EUR':'symbol':'1.2-2'}}</h3>
-                                    </td>
-                                </tr>
-                        
-        </table>
-                                <button pButton pRipple icon="pi pi-pencil" label="modifica" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/billings/edit', billing.id]"></button>
-                            </p-card>
-    </div>
-</div>
+                            </tr>
+                        </thead>
+                        <tr *ngFor="let entry of selectedSkills | keys">
+                            <td>{{entry.value.description}}</td>
+                            <td>{{entry.value.price}}</td>
+                            <td>{{entry.value.qty}}</td>
+                            <td> {{entry.value.qty * entry.value.price | currency :'EUR':'symbol':'1.2-2'}}</td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="3">
+                                Total senza Iva
+                            </td>
+
+                            <td>
+                                <h4>
+                                    {{billing.subtotal | currency :'EUR':'symbol':'1.2-2'}}</h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                Valore Iva
+                            </td>
+                            <td>{{billing.vat | currency :'EUR':'symbol':'1.2-2'}}</td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="3">
+                                Totale
+                            </td>
+                            <td>
+                                <h3>
+                                    {{billing.total | currency :'EUR':'symbol':'1.2-2'}}</h3>
+                            </td>
+                        </tr>
+
+                    </table>
+                    <button pButton pRipple icon="pi pi-pencil" label="modifica"
+                        class="p-button p-button-success p-mr-2"
+                        [routerLink]="['/admin/billings/edit', billing.id]"></button>
+                </p-card>
+            </div>
+        </div>
     </ng-template>
 
 </p-sidebar>
-
-
 
 {{error}}
 
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" #cd>
 
     <p-footer>
-        <button type="button" pButton icon="fa fa-close" class="p-button p-button-danger p-mr-2" label="No" (click)="cd.reject()"></button>
-        <button type="button" pButton icon="fa fa-check" class="p-button p-button-success p-mr-2" label="Si" (click)="cd.accept()"></button>
+        <button type="button" pButton icon="fa fa-close" class="p-button p-button-danger p-mr-2" label="No"
+            (click)="cd.reject()"></button>
+        <button type="button" pButton icon="fa fa-check" class="p-button p-button-success p-mr-2" label="Si"
+            (click)="cd.accept()"></button>
     </p-footer>
 
 </p-confirmDialog>
