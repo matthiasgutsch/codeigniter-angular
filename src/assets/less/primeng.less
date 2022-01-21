@@ -99,6 +99,19 @@
   }
 }
 
+.p-datatable .p-datatable-thead > tr > th {
+  text-align: left;
+  padding: 0.5rem 1rem;
+  border: 1px solid #e9ecef;
+  border-width: 0 0 1px 0;
+  font-weight: 600;
+  font-size: 14px;
+  color: #495057;
+  background: #f8f9fa;
+  transition: box-shadow 0.2s;
+}
+
+
 .p-datatable .p-sortable-column.p-highlight {
   background: #f8f9fa;
   color: @red !important;
@@ -232,17 +245,39 @@
 /* checkbox */
 .p-tag {
   height: 26px;
+  background-color: @white;
+  border: 1px solid @ness_color_2;
+  color: @ness_color_2;
 }
 
 .p-tag.p-tag-success {
   background-color: @green !important;
   color: #ffffff;
+  border: 1px solid @green;
+
 }
 
 .p-tag.p-tag-danger {
   background-color: @red !important;
   color: #ffffff;
+  border: 1px solid @red;
+
 }
+
+.p-tag.p-tag-info {
+  background-color: @ness_color_6 !important;
+  color: #ffffff;
+  border: 1px solid @ness_color_6;
+
+}
+
+.p-tag.p-tag-warning {
+  background-color: @ness_color_7;
+    color: #212529;
+    border: 1px solid @ness_color_7;
+
+}
+
 
 .p-checkbox .p-checkbox-box.p-highlight {
   border-color: @red;
