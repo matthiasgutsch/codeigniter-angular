@@ -55,7 +55,7 @@
         <div class="p-col-12 p-md-12">
 
             <p-card>
-                <p-table #dt [value]="orders" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
+                <p-table #dt [value]="orders" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="15" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
                    
                     <ng-template pTemplate="header">
                         <tr>
