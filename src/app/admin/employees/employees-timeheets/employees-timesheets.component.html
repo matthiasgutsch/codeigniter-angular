@@ -163,6 +163,10 @@
                                     <th>
                                         Progetto
                                     </th>
+
+                                    <th width="140">
+                                        Data
+                                    </th>
                                     <th width="200"></th>
                                 </tr>
 
@@ -188,16 +192,21 @@
 
                                     </td>
                                     <td>
-                                        <i class="pi pi-calendar"></i> {{timesheet.date_from | date:'d-MM-yyyy hh:mm'}}
+                                        <i class="pi pi-calendar"></i> {{timesheet.date_from | date:'dd-MM-yyyy hh:mm'}}
 
                                     </td>
 
-                                    <td><i class="pi pi-calendar"></i> {{timesheet.date_to | date:'d-MM-yyyy hh:mm'}}
+                                    <td><i class="pi pi-calendar"></i> {{timesheet.date_to | date:'dd-MM-yyyy hh:mm'}}
                                     </td>
 
                                     <td>
 
                                         {{ getProjectItem(timesheet.project_id)?.title }}
+
+                                    </td>
+
+                                    <td>
+                                        <p-tag severity="default" [value]="timesheet.created_at | date:'dd-MM-yyyy'"></p-tag>
 
                                     </td>
                                     <td class="action">

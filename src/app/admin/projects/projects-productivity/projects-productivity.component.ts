@@ -146,8 +146,9 @@ export class ProjectsProductivityComponent implements OnInit {
     return item.id;
   }
   subscription: Subscription;
-
+  value: number;
   chart: [];
+  totalPrice: number;
 
   constructor(
     private fb: FormBuilder,
@@ -176,6 +177,7 @@ export class ProjectsProductivityComponent implements OnInit {
     this.status = STATUS_PRODUCTS;
     this.stateOptions = STATE_LIST;
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    this.value = this.totalPrice;
 
   }
 
@@ -331,9 +333,7 @@ export class ProjectsProductivityComponent implements OnInit {
     this.timesheetsEmployee.forEach((item) => {
       total += Number(item.value * this.getTechnicalDataItem(item.id)?.contract);
     });
-
-    return total / this.price * 100;
-
+    return this.totalPrice = this.numberRoundDecimal(total / this.price * 100,0);
   }
 
 
@@ -344,6 +344,10 @@ export class ProjectsProductivityComponent implements OnInit {
     });
 
     return total;
+  }
+
+  numberRoundDecimal(v,n) {
+    return Math.round((v+Number.EPSILON)*Math.pow(10,n))/Math.pow(10,n)
   }
 
   public locationsSum() {
