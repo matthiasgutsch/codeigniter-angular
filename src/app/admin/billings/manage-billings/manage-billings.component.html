@@ -127,7 +127,8 @@
                             <td>{{
                                 getCategoryItem(billing.category_id)?.zip }} - {{
                                 getCategoryItem(billing.category_id)?.city }}</td>
-                            <td>{{billing.total | currency :'EUR':'symbol':'1.2-2'}}</td>
+                            <td>
+                                <p-tag [value]="billing.total | currency :'EUR':'symbol':'1.2-2'"></p-tag></td>
 
                             <td class="action">
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"

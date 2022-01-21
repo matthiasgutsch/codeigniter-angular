@@ -88,14 +88,15 @@
                         <tr>
                             <th width="50"></th>
  
-                            <th width="400">Nome Progetto</th>
+                            <th width="500">Nome Progetto</th>
+                            <th ></th>
 
-                            <th></th>
                             <th width="100">Ore</th>
 
                             <th  width="160">Importo Progetto</th>
 
-                            <th  width="160"></th>
+                            <th width="100" ></th>
+
                         </tr>
 
                     </ng-template>
@@ -113,23 +114,22 @@
 
                                 <strong>{{project.title}}</strong>
                                 <div class="clearifix"></div>
-                                {{project.code_int}}
-
+                                <p class="detail">
+                                <i class="pi pi-map"></i> {{project.code_int}} - <i class="pi pi-calendar"></i> {{project.date_from}} al {{project.date_to}}
+                            </p>
                             </td>
 
-                            <td>      
-                              
+                            <td>
                                 <button pButton pRipple  icon="pi pi-chart-line" label="Produttività" class="p-button p-button-secondary p-mr-2"
-                            [routerLink]="['/admin/projects/productivity/', project.id]"></button>
+                                [routerLink]="['/admin/projects/productivity/', project.id]"></button>
+                                    
                                 
-                            
-                                <button pButton pRipple  icon="pi pi-clock" label="Timesheets" class="p-button p-button-primary p-mr-2"
-                                [routerLink]="['/admin/projects/timesheet/', project.id]"></button>  
-
-                                <button pButton pRipple  icon="pi pi-clone" label="Tasks" class="p-button p-button-warning p-mr-2"
-                                [routerLink]="['/admin/projects/task/', project.id]"></button>
+                                    <button pButton pRipple  icon="pi pi-clock" label="Timesheets" class="p-button p-button-primary p-mr-2"
+                                    [routerLink]="['/admin/projects/timesheet/', project.id]"></button>  
+    
+                                    <button pButton pRipple  icon="pi pi-clone" label="Tasks" class="p-button p-button-warning p-mr-2"
+                                    [routerLink]="['/admin/projects/task/', project.id]"></button>
                             </td>
-
 
                             <td><i class="pi pi-clock"></i> {{project.time}}</td>
                             
@@ -137,13 +137,16 @@
                      
                             </td>
                            
+                          
                             <td class="action">
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
                                     [routerLink]="['/admin/projects/edit', project.id]"></button>
                         
                                 <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
                                     (click)="onDelete(project.id)"></button>
-                            </td>
+                           
+                                  
+                                </td>
                         </tr>
                     </ng-template>
                 </p-table>
