@@ -23,7 +23,7 @@ import { TimesheetsService } from 'src/app/services/timesheets.service';
 import { Products } from 'src/app/models/products';
 import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brands.service';
-import { STATUS_PRODUCTS } from '../../constants/constants';
+import { STATUS_PRODUCTS, TIMESHEETS_TYPE } from '../../constants/constants';
 import { Table } from 'primeng/table';
 import { NgxSpinnerService } from "ngx-spinner";
 import { TagsService } from 'src/app/services/tags.service';
@@ -36,6 +36,7 @@ import 'moment/locale/it'  // without this line it didn't work
 import { Timesheets } from 'src/app/models/timesheets';
 import { Projects } from 'src/app/models/projects';
 import { ProjectsService } from 'src/app/services/projects.service';
+import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-manage-timesheets',
@@ -48,32 +49,30 @@ export class ManageTimesheetsComponent implements OnInit {
   works: any = [];
   work: Works;
   calendarOptions: any;
-
+  uploadError: string;
   locations: any = [];
   location: Locations;
   cols: any[];
   colsData: any[];
-
+  selectedWorks: any[];
   exportColumns: any[];
   _selectedColumns: any[];
-  selectedWorks: any[];
+  selectedEmployee: any[];
   selectedSkills: any[];
   brands: any = [];
   brand: Brand;
-
   tags: any = [];
   tag: Tags;
-
   selectedBrands: Brand;
   loading: boolean;
   currentIndex = 1;
   displayEvent: any;
-
   productsData: any = [];
   timesheets: any = [];
   timesheet: Timesheets;
   date: Date;
   skillsArray: any = [];
+  timesheets_type: any;
   categories: any = [];
   category: Category;
   error: string;
@@ -89,12 +88,13 @@ export class ManageTimesheetsComponent implements OnInit {
   technical_data: Technical_data;
   skills:  any[] = [];
   batches: any[];
-
+  productDialogAdd: boolean = false;
+  blogForm: FormGroup;
   projects: any = [];
   project: Projects;
-  
   employees: any = [];
   employee: Employees;
+  pageTitle: string;
 
   showDialog() {
     this.productDialog = true;
@@ -128,6 +128,7 @@ weekNo: number;
     private comuniService: ComuniService,
     private brandService: BrandService,
     private tagsService: TagsService,
+    private fb: FormBuilder,
     private technicalDataService: TechnicalDataService,
     private spinner: NgxSpinnerService,
     private categoryService: CategoryService, 
@@ -135,7 +136,7 @@ weekNo: number;
     private confirmationService: ConfirmationService,) { 
       this.status = STATUS_PRODUCTS;
       this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-
+      this.timesheets_type = TIMESHEETS_TYPE;
   }
 
   ngOnInit() {
@@ -192,6 +193,66 @@ weekNo: number;
     (data: Technical_data) => (this.technical_datas = data),
     (error) => (this.error = error)
   );
+  }
+
+
+
+  editItem(timesheet: Timesheets) {
+    this.timesheet = { ...timesheet };
+    const id = timesheet.id;
+
+    if (id) {
+      this.pageTitle = "Modifica Timesheet";
+      this.timesheetsService.getId(+id).subscribe((res) => {
+        this.blogForm.patchValue({
+          timesheets_type: res.timesheets_type,
+          date_from: res.date_from,
+          date_to: res.date_to,
+          project_id: res.project_id,
+          hours: res.hours,
+          employee_id: res.employee_id,
+          hours_extra: res.hours_extra,
+          user_id: this.currentUser.user_id,
+          id: res.id,
+        });
+
+      });
+    } else {
+
+    }
+
+    this.blogForm = this.fb.group({
+      id: [""],
+      timesheets_type: ["", Validators.required],
+      date_from: ["", Validators.required],
+      date_to: ["", Validators.required],
+      project_id: ["", Validators.required],
+      hours: ["", Validators.required],
+      hours_extra: ["", Validators.required],
+      employee_id: ["", Validators.required],
+      user_id: [this.currentUser.user_id],
+    });
+
+    this.productDialogAdd = true;
+  }
+  
+  createTimesheets(employee: Employees) {
+    this.productDialogAdd = true;
+    this.pageTitle = "Aggiungi Timesheet";
+
+    this.blogForm = this.fb.group({
+      id: [""],
+      timesheets_type: ["", Validators.required],
+      date_from: ["", Validators.required],
+      date_to: ["", Validators.required],
+      project_id: ["", Validators.required],
+      hours: ["", Validators.required],
+      hours_extra: ["", Validators.required],
+      employee_id: ["", Validators.required],
+      user_id: [this.currentUser.user_id],
+    });
+
+
   }
 
   getProjects() {
@@ -303,21 +364,14 @@ weekNo: number;
   }
 
   
-  view(timesheet: Timesheets) {
-    this.timesheet = {...this.timesheet};
-    this.productDialog = true;
-}
 
 
 
-edit(timesheet: Timesheets) {
+view(timesheet: Timesheets) {
   this.timesheet = { ...timesheet };
   
   this.productDialog = true;
 }
-
-
-
 
 
 exportPdf() {
@@ -326,6 +380,58 @@ exportPdf() {
   doc['autoTable'](this.exportColumns, this.timesheets);
   // doc.autoTable(this.exportColumns, this.products);
   doc.save("prodotti.pdf");
+}
+
+
+
+
+
+
+onSubmit() {
+  const formData = new FormData();
+
+  formData.append("timesheets_type", this.blogForm.get("timesheets_type").value);
+  formData.append("date_from", this.blogForm.get("date_from").value);
+  formData.append("date_to", this.blogForm.get("date_to").value);
+  formData.append('user_id', this.blogForm.get('user_id').value);
+  formData.append("project_id", this.blogForm.get("project_id").value);
+  formData.append("hours", this.blogForm.get("hours").value);
+  formData.append("hours_extra", this.blogForm.get("hours_extra").value);
+  formData.append('employee_id', this.blogForm.get('employee_id').value);
+
+
+
+  const id = this.blogForm.get("id").value;
+
+  if (id) {
+    this.timesheetsService.update(formData, +id).subscribe(
+      (res) => {
+        if (res.status == "error") {
+          this.uploadError = res.message;
+        } else {
+          this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
+          this.productDialogAdd = false;
+          this.ngOnInit();
+        }
+      },
+      (error) => (this.error = error)
+    );
+  } else {
+    this.timesheetsService.create(formData).subscribe(
+      (res) => {
+        if (res.status === "error") {
+          this.uploadError = res.message;
+        } else {
+          this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
+          this.productDialogAdd = false;
+          this.ngOnInit();
+
+        }
+      },
+      (error) => (this.error = error)
+    );
+  }
+
 }
 
 
