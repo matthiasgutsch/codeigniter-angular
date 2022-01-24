@@ -1,5 +1,56 @@
 
-  <div class="p-field p-grid">
+ <p-overlayPanel #op>
+    <ng-template pTemplate>
+        <div class="p-col-12">
+        
+            <div class="p-field p-grid" *ngFor="let col of cols" [ngSwitch]="col.field">
+                <div class="p-col-12">
+
+
+                    <p-dropdown *ngSwitchCase="'project_id'" placeholder="Scegli" [showClear]="true" optionLabel="title"
+                    optionValue="id" [options]="projects" [style]="{'width':'100%'}"
+                    (onChange)="dt.filter($event.value, col.field, 'equals')">
+                </p-dropdown>
+
+
+                <p-dropdown *ngSwitchCase="'employee_id'" placeholder="Scegli" [showClear]="true" optionLabel="username"
+                optionValue="id" [options]="employees" [style]="{'width':'100%'}"
+                (onChange)="dt.filter($event.value, col.field, 'equals')">
+            </p-dropdown>
+
+
+              
+             
+                    <input *ngSwitchCase="'date_from'" [ngModel]="dt.filters['date_from']? dt.filters['date_from'].value : ''" 
+                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
+             
+
+
+                    <input *ngSwitchCase="'date_to'" [ngModel]="dt.filters['date_to']? dt.filters['date_to'].value : ''" 
+                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
+
+
+                 
+
+            </div>
+                </div>
+
+                <div class="p-grid">
+                <div class="p-col-12">
+
+                    <button pButton pRipple label="reset ricerca"
+                    class="p-button p-button-primary btn-block"  (click)="dt.reset()" ></button>
+                        </div>
+                    </div>
+            </div>
+            
+
+            
+    </ng-template>
+</p-overlayPanel> 
+
+
+<div class="p-field p-grid">
     <div class="p-col-12 p-md-12">
         
 <div class="dash-header">
@@ -11,8 +62,10 @@
 
             </div>
             <div class="p-col-12 p-md-6">
+
                 <button pButton pRipple icon="pi pi-plus" (click)="createTimesheets()" label="Aggiungi"
                     class="p-button p-button-primary p-mr-2 pull-right"></button>
+                    <button type="text" pButton label="Filter"  icon="pi pi-filter" class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
 
             </div>
         </div>
@@ -31,7 +84,7 @@
                 
                 <p-table #dt [columns]="cols" [value]="timesheets" [globalFilterFields]="['name', 'description']"
                     currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true"
-                    [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
+                    [rows]="15" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
 
                     <ng-template pTemplate="header" let-columns>
                         <tr>

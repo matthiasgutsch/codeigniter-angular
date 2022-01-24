@@ -159,16 +159,17 @@ weekNo: number;
         { field: "code_int", header: "Codice interno" },
         { field: "brand_id", header: "Brand" }
       ];
-      this.colsData = [
-        { field: "title", header: "titolo" },
-        { field: "description", header: "Codice" },
-  
-      ];
-      this._selectedColumns = this.cols;
-      this.exportColumns = this.cols.map(col => ({
-        title: col.header,
-        dataKey: col.field
-      }));
+ this.cols = [
+      { field: "date_from", header: "Da" },
+      { field: "date_from", header: "A" },
+      { field: "employee_id", header: "Dipendente" },
+      { field: "project_id", header: "Progetto" },
+    ];
+    this._selectedColumns = this.cols;
+    this.exportColumns = this.cols.map(col => ({
+      title: col.header,
+      dataKey: col.field
+    }));
 
       this.spinner.hide();
 
