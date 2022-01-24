@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { PAGES } from '../constants/constants';
 import { NgxSpinnerService } from "ngx-spinner";
 import { SupportsService } from 'src/app/services/supports.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { formatDate } from '@angular/common';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-admin',
@@ -29,10 +30,12 @@ export class AdminComponent implements OnInit {
   lastName = "Doe";
   supportsCount: any;
   myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en');
+  notify$ = new Subject();
 
   constructor(  private spinner: NgxSpinnerService,
     private supportsService: SupportsService,
     private authService: AuthService,
+    private zone: NgZone
     ) { 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     //console.log(this.currentUser);
@@ -40,12 +43,35 @@ export class AdminComponent implements OnInit {
 
     this.pages = PAGES;
 
+    localStorage.setItem(
+      'expiredDate',
+      this.addMinutes(new Date(), 60).getTime().toString()
+    );
+    this.zone.runOutsideAngular(() => {
+      const i = setInterval(() => {
+        const expiredDate = +localStorage.getItem('expiredDate');
+        console.log(new Date().getTime() - expiredDate);
+
+        if (new Date().getTime() - expiredDate > 0) {
+          this.zone.run(() => {
+            this.notify$.next();
+          });
+          clearInterval(i);
+        }
+      }, 60000);
+    });
   } 
 
 
   
 
   ngOnInit() {
+    
+    this.notify$.subscribe(() => {
+      localStorage.removeItem('expiredDate');
+      this.logout();
+    });
+
     this.spinner.show();
     const userId = this.currentUser.user_id;
     this.getSupportsCount();
@@ -54,6 +80,8 @@ export class AdminComponent implements OnInit {
       this.spinner.hide();
     }, 500);
     }
+
+    
 
     public get getInitialsBgColor(): string {
       var s = 30;
@@ -68,6 +96,10 @@ export class AdminComponent implements OnInit {
       return color;
     }
 
+
+    addMinutes(date, minutes) {
+      return new Date(date.getTime() + minutes * 60000);
+    }
 
     getSupportsCount() {
       this.supportsService.count().subscribe(data => {
