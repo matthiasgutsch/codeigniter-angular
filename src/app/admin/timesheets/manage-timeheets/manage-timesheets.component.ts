@@ -37,6 +37,7 @@ import { Timesheets } from 'src/app/models/timesheets';
 import { Projects } from 'src/app/models/projects';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-manage-timesheets',
@@ -380,13 +381,28 @@ exportPdf() {
   const doc = new jsPDF('l','pt','A4');
   doc['autoTable'](this.exportColumns, this.timesheets);
   // doc.autoTable(this.exportColumns, this.products);
-  doc.save("prodotti.pdf");
+  doc.save("timesheets.pdf");
 }
 
 
 
+exportExcel() {
+  import("xlsx").then(xlsx => {
+      const worksheet = xlsx.utils.json_to_sheet(this.timesheets);
+      const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+      this.saveAsExcelFile(excelBuffer, "timesheets");
+  });
+}
 
-
+saveAsExcelFile(buffer: any, fileName: string): void {
+  let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+  let EXCEL_EXTENSION = '.xlsx';
+  const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE
+  });
+  FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+}
 
 onSubmit() {
   const formData = new FormData();
