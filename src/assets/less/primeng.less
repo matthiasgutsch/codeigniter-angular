@@ -126,6 +126,20 @@
   background: @red !important;
 }
 
+.p-button.p-button-white, .p-buttonset.p-button-white > .p-button, .p-splitbutton.p-button-white > .p-button {
+  color: @ness_color_2 !important;
+  background: @white;
+  border-radius: @radius;
+  border: 1px solid @white !important;
+  &:hover {
+    color: @white !important;
+    background: darken(@ness_color_2, 20%) !important;
+    border-radius: @radius;
+    border: 1px solid @ness_color_2 !important;
+  }
+}
+
+
 .p-button.p-button-danger, .p-buttonset.p-button-danger > .p-button, .p-splitbutton.p-button-danger > .p-button {
   color: @white !important;
   background: @red;
