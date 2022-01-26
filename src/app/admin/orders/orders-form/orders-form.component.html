@@ -57,7 +57,7 @@
                                         class="required">*</span></label>
                                 <div class="p-col-12 p-md-12">
 
-                                    <p-calendar (onClick)="changeTime($event)" formControlName="date" dataType="string"
+                                    <p-calendar (onBlur)="changeTime($event)" formControlName="date" dataType="string"
                                         [(ngModel)]="dateAppointments" dateFormat="yy-mm-dd" appendTo="body">
                                     </p-calendar>
 

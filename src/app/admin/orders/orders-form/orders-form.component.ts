@@ -87,7 +87,7 @@ export class OrdersFormComponent implements OnInit {
   works_idOrders:any;
   company: Company;
   descriptionOrders: string;
-  dateOrders: string;
+  dateOrders: any;
   numberOrders: number;
   currentUser: any;
   public dataValues: object;
@@ -300,7 +300,7 @@ export class OrdersFormComponent implements OnInit {
     }
 
   changeTime(value){
-      this.dateOrders = value.target.value
+      this.dateOrders =  new Date(this.date);
     }
     
   onSelectedFile(event) {
