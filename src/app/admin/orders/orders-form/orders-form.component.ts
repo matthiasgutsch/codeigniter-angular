@@ -259,6 +259,13 @@ export class OrdersFormComponent implements OnInit {
         if (response.error) {
         } else {
           this.messageService.add({key: 'myKey1', severity:'success', summary: 'Conferma', detail: 'Salvato con successo'});
+          this.initSkill(this.skillsValues);
+          this.blogForm.patchValue({
+         
+            skills: this.skillsValues,
+           
+          })
+
         }
       },
     });
