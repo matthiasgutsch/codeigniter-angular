@@ -29,6 +29,7 @@ import { Billings } from 'src/app/models/billings';
 import { map, tap } from 'rxjs/operators';
 import { ISkill } from 'src/app/models/products';
 import { BillingsService } from 'src/app/services/billings.service';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: "app-orders-form",
@@ -97,7 +98,7 @@ export class OrdersFormComponent implements OnInit {
   skillsValues: any = [];
   total: number;
   viewMode = '1';
-  fiscaltype: number;
+  fiscaltype: any;
   editForm: boolean = true;
   numberQuotes: number;
   
@@ -242,6 +243,10 @@ export class OrdersFormComponent implements OnInit {
 
   
   @ViewChild('content', {static: false}) content: ElementRef;
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.skillsArray, event.previousIndex, event.currentIndex);
+  }
 
 
   public downloadPDF() {

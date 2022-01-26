@@ -206,9 +206,9 @@
                                 </div>
                             </div>
 
-                            <table formArrayName="skills" class="billings-list">
+                            <table formArrayName="skills" class="billings-list" cdkDropList (cdkDropListDropped)="drop($event)">
 
-                                <tr *ngFor="let quantity of skills.controls; let i=index" [formGroupName]="i">
+                                <tr *ngFor="let quantity of skills.controls; let i=index" cdkDrag [formGroupName]="i">
 
                                     <td>
                                       
@@ -216,7 +216,7 @@
                                         <input type="text" *ngIf="!editForm" [style]="{ width: '100%' }" pInputText
                                             formControlName="description" (input)="itemsChanged()">
 
-                                            <span *ngIf="editForm">{{blogForm.get('skills').value[this.i].description}}</span>
+                                            <span *ngIf="editForm">{{i + 1 }}. {{blogForm.get('skills').value[this.i].description}}</span>
 
 
                                     </td>
@@ -295,7 +295,6 @@
     </div>
 
 </form>
-
 
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" #cd>
 
