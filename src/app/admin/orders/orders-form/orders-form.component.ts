@@ -98,7 +98,7 @@ export class OrdersFormComponent implements OnInit {
   skillsValues: any = [];
   total: number;
   viewMode = '1';
-  fiscaltype: any;
+  fiscaltype: number;
   editForm: boolean = true;
   numberQuotes: number;
   
@@ -128,7 +128,7 @@ export class OrdersFormComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
     this.typeList = TYPE_LIST;
-   
+    this.fiscaltype = 0;
     
   }
   @ViewChild('reportContent') reportContent: ElementRef;
@@ -240,12 +240,28 @@ export class OrdersFormComponent implements OnInit {
   }
 
 
-
-  
   @ViewChild('content', {static: false}) content: ElementRef;
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.skillsArray, event.previousIndex, event.currentIndex);
+    const id = this.route.snapshot.paramMap.get("id");
+    moveItemInArray(this.skillsValues, event.previousIndex, event.currentIndex);
+    this.updateSkills(event, id);
+    
+  }
+
+
+  updateSkills(event, id) {
+    const formData = new FormData();
+    formData.append('skills', JSON.stringify(this.skillsValues));
+    
+    this.ordersService.update_skills(formData, +id).subscribe({
+      next: (response: any) => {
+        if (response.error) {
+        } else {
+          this.messageService.add({key: 'myKey1', severity:'success', summary: 'Conferma', detail: 'Salvato con successo'});
+        }
+      },
+    });
   }
 
 
