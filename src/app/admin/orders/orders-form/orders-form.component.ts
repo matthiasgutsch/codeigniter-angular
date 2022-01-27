@@ -300,7 +300,7 @@ export class OrdersFormComponent implements OnInit {
     }
 
   changeTime(value){
-      this.dateOrders =  new Date(this.date);
+      this.dateOrders =  new Date();
     }
     
   onSelectedFile(event) {
@@ -516,6 +516,7 @@ createBilling() {
             this.uploadError = res.message;
           } else {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
+            this.ngOnInit();
 
           }
         },
@@ -529,7 +530,6 @@ createBilling() {
           } else {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Salvato con sucesso' });
             this._location.back();
-
           }
         },
         (error) => (this.error = error)
