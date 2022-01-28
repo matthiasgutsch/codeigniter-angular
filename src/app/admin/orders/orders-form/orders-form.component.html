@@ -207,7 +207,17 @@
                             </div>
 
                             <table formArrayName="skills" class="billings-list" cdkDropList (cdkDropListDropped)="drop($event)">
+                                <thead>
+                                    <tr>
+                                        <th>Posizione</th>
+                                        <th>Qantità</th>
+                                        <th>Prezzo Cad.</th>
+                                        <th>Totale</th>
+                                        <th></th>
 
+                                    </tr>
+                                </thead>
+                                <tbody>
                                 <tr *ngFor="let quantity of skills.controls; let i=index" cdkDrag [formGroupName]="i">
 
                                     <td>
@@ -245,7 +255,7 @@
                                     </td>
 
                                     <td width="60">
-                                        <button (click)="removeQuantity(i)" class="p-button p-button-danger p-mr-2"><i
+                                        <button (click)="removeQuantity(i)" *ngIf="!editForm"  class="p-button p-button-danger p-mr-2"><i
                                                 class="pi pi-trash"></i></button>
                                     </td>
                                 </tr>
@@ -280,7 +290,7 @@
                                     </td>
                                     <td></td>
                                 </tr>
-                        
+                                </tbody>
                             </table>
 
                             <br><br>
