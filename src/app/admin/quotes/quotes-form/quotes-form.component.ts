@@ -108,6 +108,7 @@ export class QuotesFormComponent implements OnInit {
   viewMode = '1';
   fiscaltype: any = [];
   pages: any;
+  editForm: boolean = true;
 
   
   trackByFn(index, item) {
@@ -281,6 +282,11 @@ export class QuotesFormComponent implements OnInit {
 
   }
 
+
+  editFormItems() {
+    this.editForm = ! this.editForm;
+
+  }
 
   getselectedWorks() {
     this.selectedWorks = this.works_id.split(',');

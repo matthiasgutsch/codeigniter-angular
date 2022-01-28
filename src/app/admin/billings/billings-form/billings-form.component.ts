@@ -32,6 +32,7 @@ import { formatDate } from "@angular/common";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { Skills } from 'src/app/models/skills';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -535,6 +536,36 @@ export class BillingsFormComponent implements OnInit {
     this.grandTotal = this.subTotal + this.vat;
 
   }
+
+
+
+  drop(event: CdkDragDrop<string[]>) {
+    const id = this.route.snapshot.paramMap.get("id");
+    moveItemInArray(this.skillsValues, event.previousIndex, event.currentIndex);
+    this.updateSkills(event, id);
+    
+  }
+
+
+  updateSkills(event, id) {
+    const formData = new FormData();
+    formData.append('skills', JSON.stringify(this.skillsValues));
+    
+    this.billingsService.update_skills(formData, +id).subscribe({
+      next: (response: any) => {
+        if (response.error) {
+        } else {
+          this.messageService.add({key: 'myKey1', severity:'success', summary: 'Conferma', detail: 'Salvato con successo'});
+          this.initSkill(this.skillsValues);
+          this.blogForm.patchValue({
+            skills: this.skillsValues,
+          })
+
+        }
+      },
+    });
+  }
+
 
 
   closeBilling() {

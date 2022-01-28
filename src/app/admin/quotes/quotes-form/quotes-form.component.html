@@ -24,7 +24,9 @@
                         <button *ngIf="pages" pButton pRipple icon="pi pi-save" label="Visualizza Ordine" [routerLink]="['/admin/orders/edit', pages.id]" class="p-button p-button-primary p-mr-2 pull-right "></button>
     
                         <button *ngIf="!pages" type="button" pButton pRipple icon="pi pi-save" label="Transforma in Ordine" (click)="createOrder()" class="p-button p-button-primary p-mr-2 pull-right "></button>
-                        
+                        <button pButton pRipple type="button"
+                        (click)="editFormItems()" label="Modifica"
+                            class="p-button p-button-success  pull-right p-mr-2"></button>
                 </div>
             </div>
 
@@ -210,17 +212,24 @@
                                     <td>
                                       
                                         
-                                        <input type="text" [style]="{ width: '100%' }" pInputText
+                                        <input type="text" *ngIf="!editForm" [style]="{ width: '100%' }" pInputText
                                             formControlName="description" (input)="itemsChanged()">
-                                    </td>
-                                    <td width="150px">
-                                        <input type="text" [style]="{ width: '100%' }" pInputText formControlName="qty"
-                                            (input)="itemsChanged()"  >
+
+                                            <span *ngIf="editForm">{{blogForm.get('skills').value[this.i].description}}</span>
 
                                     </td>
                                     <td width="150px">
-                                        <input type="text" [style]="{ width: '100%' }" pInputText
+                                        <input type="text" *ngIf="!editForm" [style]="{ width: '100%' }" pInputText formControlName="qty"
+                                            (input)="itemsChanged()"  >
+                                            <span *ngIf="editForm">{{blogForm.get('skills').value[this.i].qty}}</span>
+
+                                    </td>
+                                    <td width="150px">
+                                        <input type="text" *ngIf="!editForm" [style]="{ width: '100%' }" pInputText
                                             formControlName="price" (input)="itemsChanged()">
+
+                                            <span *ngIf="editForm">{{blogForm.get('skills').value[this.i].price}}</span>
+
                                     </td>
 
                                     <td width="150px">
