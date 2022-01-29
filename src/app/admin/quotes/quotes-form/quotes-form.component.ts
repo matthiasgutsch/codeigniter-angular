@@ -487,7 +487,6 @@ createOrder() {
     const formData = new FormData();
     formData.append("title", this.blogForm.get("title").value);
     formData.append("description", this.blogForm.get("description").value);
-    formData.append("appointment_id", this.blogForm.get("appointment_id").value);
     formData.append("category_id", this.blogForm.get("category_id").value);
     formData.append("is_featured", this.blogForm.get("is_featured").value);
     formData.append("works_id", this.blogForm.get("works_id").value);
