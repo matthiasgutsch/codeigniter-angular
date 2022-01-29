@@ -169,7 +169,7 @@
             </div>
             <hr class="full">
 
-            <p-table #dt1 [value]="appointmentsToday" [paginator]="false" [rows]="10">
+            <p-table #dt1 [value]="appointmentsToday" [responsive]="true" [paginator]="false" [rows]="10">
 
                 <ng-template pTemplate="body" let-appointment>
                     <tr>
@@ -201,7 +201,7 @@
 
                     <p-tabView>
                         <p-tabPanel header="Progetti">
-                            <p-table #dt1 [value]="projects" [paginator]="false" [rows]="10">
+                            <p-table #dt1 [value]="projects" [responsive]="true" [paginator]="false" [rows]="10">
 
                                 <ng-template pTemplate="body" let-project>
                                     <tr>
@@ -249,7 +249,7 @@
 
                         <p-tabPanel header="Helpdesk">
 
-                            <p-table #dt1 [value]="supports" [paginator]="false" [rows]="10">
+                            <p-table #dt1 [value]="supports" [responsive]="true" [paginator]="false" [rows]="10">
 
                                 <ng-template pTemplate="body" let-support>
                                     <tr>
