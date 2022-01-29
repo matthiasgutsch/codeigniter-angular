@@ -10,10 +10,10 @@
                         <h3>Benvenuto, {{currentUser.first_name}} {{currentUser.last_name}}</h3>
                         <span>{{myDate }}</span><br><br>
                         <div class="clearfix"></div>
-                        <button pButton pRipple icon="pi pi-calendar-plus" label="Aggiungi Appuntamento" [routerLink]="['/admin/appointments/create']"
+                        <button pButton pRipple icon="pi pi-calendar-plus" label="Appuntamento" [routerLink]="['/admin/appointments/create']"
                         routerLinkActive="active" class="p-button p-button-white p-mr-2"></button>
       
-                        <button pButton pRipple icon="pi pi-users" label="Aggiungi Cliente" [routerLink]="['/admin/clients/create']"
+                        <button pButton pRipple icon="pi pi-users" label="Cliente" [routerLink]="['/admin/clients/create']"
                         routerLinkActive="active" class="p-button p-button-white"></button>
       
                     </div>
@@ -32,19 +32,19 @@
 
         <div class="p-field p-grid">
 
-            <div class="p-col-6 p-md-3">
+            <div class="p-col-12 p-md-3">
 
                 <p-card>
 
                     <div class="p-grid">
-                        <div class="p-col-12 p-md-6">
+                        <div class="p-col-6 p-md-6">
 
                             <h4 class="mb-0">Clienti</h4>
                             Totale: {{clientsCount}}
 
                         </div>
 
-                        <div class="p-col-12 p-md-6">
+                        <div class="p-col-6 p-md-6">
 
                             <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']"
                                 routerLinkActive="active" class="p-button p-button-success pull-right"></button>
@@ -104,14 +104,14 @@
                 <p-card>
 
                     <div class="p-grid">
-                        <div class="p-col-12 p-md-6">
+                        <div class="p-col-6 p-md-6">
 
                             <h4 class="mb-0">Prodotti</h4>
                             Totale: {{productsCount}}
 
                         </div>
 
-                        <div class="p-col-12 p-md-6">
+                        <div class="p-col-6 p-md-6">
 
                             <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/products/create']"
                                 routerLinkActive="active" class="p-button p-button-success pull-right"></button>

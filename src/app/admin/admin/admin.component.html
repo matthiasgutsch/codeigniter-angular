@@ -1,6 +1,9 @@
 
 <p-overlayPanel #op>
 
+  {{currentUser.first_name}}<br>{{currentUser.last_name}}
+
+  <br><br>
 
   <button type="button" pButton pRipple label="modifica dati" icon="pi pi-clone"
   class="p-button btn-block p-button-warning"
@@ -64,10 +67,10 @@
   <div class="user-menu"><ul>
     
     
-    <li routerLink="/admin/support"> <span class="support-tag">{{supportsCount}}</span> Tickets</li>
+    <li routerLink="/admin/support"> <span class="support-tag">{{supportsCount}}</span> <span class="hidden-mobile">Tickets</span> </li>
 
-    <li (click)="op.toggle($event)"><i class="pi pi-user"></i> {{currentUser.first_name}} {{currentUser.last_name}}
-    </li><li> <i class="pi pi-clock"></i> {{myDate }}</li></ul></div>
+    <li (click)="op.toggle($event)"><i class="pi pi-user"></i>  <span class="hidden-mobile">{{currentUser.first_name}} {{currentUser.last_name}}</span>
+    </li><li> <i class="pi pi-clock"></i> <span class="hidden-mobile">{{myDate }}</span></li></ul></div>
 
    
 
