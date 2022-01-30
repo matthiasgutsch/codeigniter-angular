@@ -33,4 +33,4 @@ jobs:
           protocol: ftp
           port: 21
           dangerous-clean-slate: true
-          local-dir: /home/runner/work/startupnext/startupnext/dist/
+
