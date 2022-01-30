@@ -34,4 +34,4 @@ jobs:
           port: 21
           dangerous-clean-slate: true
           server_dir: /
-          local-dir: /dist/
+          local-dir: /angular-codeigniter-blog/dist/
