@@ -561,7 +561,12 @@ border-top: 1px solid #dee2e6;
 
   .main-inner {
     padding: 0px 30px 30px 30px;
+    
+    
+    &.with-sidebar {
+      margin-right: 70px;
 
+    }
   }
   &.open {
     margin-left: 210px;
@@ -844,6 +849,24 @@ hr.full {
 }
 }
 
+
+
+.sidebar-inner {
+  height: calc(100% - 61px);
+  width: 70px;
+  position: absolute;
+  z-index: 1;
+  top: 61px;
+  right: 0px;
+  background-color: @white;
+  border-left: 1px solid #dee2e6;
+
+  overflow-x: hidden;
+  transition: 0.1s;
+  padding-top: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
 
 
 .sidebar-main {
