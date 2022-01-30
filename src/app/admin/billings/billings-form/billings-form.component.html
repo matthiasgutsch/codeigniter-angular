@@ -1,46 +1,52 @@
 <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+
+
+    <div class="top-main-wrapper">
+        <div class="dash-header">
+            <div class="dash-title">
+    
+                <div class="p-field p-grid">
+                    <div class="p-col-12 p-md-4">
+                        <h3>{{pageTitle}}</h3>
+                    </div>
+                    <div class="p-col-12 p-md-8">
+                        <button pButton pRipple icon="pi pi-save" [disabled]="!blogForm.valid" label="Salva"
+                            class="p-button pull-right p-button-success"></button>
+    
+                        <button pButton pRipple icon="pi pi-save" (click)="generatePDF('download')" type="button" label="Genera PDF"
+                            class="p-button p-button-primary pull-right p-mr-2"></button>
+    
+                            <button pButton pRipple icon="pi pi-print" type="button" label="Stampa"
+                            (click)="generatePDF('print')" class="p-button p-button-primary pull-right p-mr-2"></button>
+    
+                        <button pButton pRipple *ngIf="numberAppointments > 0"
+                            [routerLink]="['/admin/appointments/edit', numberAppointments]" label="Visualizza Appuntamento"
+                            class="p-button p-button-secondary  pull-right p-mr-2"></button>
+    
+                            <button pButton pRipple *ngIf="numberOrders > 0"
+                                [routerLink]="['/admin/orders/edit', numberOrders]" label="Visualizza Ordine"
+                                class="p-button p-button-secondary  pull-right p-mr-2"></button>
+    
+    
+                            <button pButton pRipple type="button"
+                            (click)="editFormItems()" label="Modifica"
+                                class="p-button p-button-success  pull-right p-mr-2"></button>
+                      
+    
+                             
+            
+        
+                            
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+
+    </div>
     <div class="main-inner">
 
-    <div class="dash-header">
-        <div class="dash-title">
-
-            <div class="p-field p-grid">
-                <div class="p-col-12 p-md-4">
-                    <h3>{{pageTitle}}</h3>
-                </div>
-                <div class="p-col-12 p-md-8">
-                    <button pButton pRipple icon="pi pi-save" [disabled]="!blogForm.valid" label="Salva"
-                        class="p-button pull-right p-button-success"></button>
-
-                    <button pButton pRipple icon="pi pi-save" (click)="generatePDF('download')" type="button" label="Genera PDF"
-                        class="p-button p-button-primary pull-right p-mr-2"></button>
-
-                        <button pButton pRipple icon="pi pi-print" type="button" label="Stampa"
-                        (click)="generatePDF('print')" class="p-button p-button-primary pull-right p-mr-2"></button>
-
-                    <button pButton pRipple *ngIf="numberAppointments > 0"
-                        [routerLink]="['/admin/appointments/edit', numberAppointments]" label="Visualizza Appuntamento"
-                        class="p-button p-button-secondary  pull-right p-mr-2"></button>
-
-                        <button pButton pRipple *ngIf="numberOrders > 0"
-                            [routerLink]="['/admin/orders/edit', numberOrders]" label="Visualizza Ordine"
-                            class="p-button p-button-secondary  pull-right p-mr-2"></button>
-
-
-                        <button pButton pRipple type="button"
-                        (click)="editFormItems()" label="Modifica"
-                            class="p-button p-button-success  pull-right p-mr-2"></button>
-                  
-
-                         
-        
     
-                        
-                </div>
-            </div>
-
-        </div>
-    </div>
 
     <div class="p-fluid">
 
