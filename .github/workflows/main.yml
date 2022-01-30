@@ -33,4 +33,5 @@ jobs:
           protocol: ftp
           port: 21
           dangerous-clean-slate: true
-
+          server_dir: /
+          local-dir: /home/runner/work/angular-codeigniter-blog/angular-codeigniter-blog/dist/
