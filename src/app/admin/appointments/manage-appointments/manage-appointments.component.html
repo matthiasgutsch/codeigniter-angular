@@ -26,14 +26,17 @@
                 </div>
 
             </div>
+
+            <div class="p-grid">
+                <div class="p-col-12">
+
+                    <button pButton pRipple label="reset ricerca" class="p-button p-button-primary btn-block"
+                        (click)="dt.reset()"></button>
+                </div>
+            </div>
         </div>
     </ng-template>
 </p-overlayPanel>
-<label *ngFor="let filterRow of Symbols_Array;let l=index;">
-    <button (click)="dt.reset(); ColumnFilter(dt,filterRow.label,'symbol','')" pButton type="button"
-        [style]="{'text-transform': 'capitalize','width':'100%'}" class="button btn-xs"
-        [label]="filterRow.label"></button>
-</label>
 
 <div class="top-main-wrapper">
 

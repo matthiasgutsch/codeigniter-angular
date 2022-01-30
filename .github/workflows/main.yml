@@ -33,5 +33,5 @@ jobs:
           protocol: ftp
           port: 21
           dangerous-clean-slate: true
-          server_dir: /home2/umodocly/demo.modocloud.it/
+          server_dir: /
           local-dir: /home/runner/work/startupnext/startupnext/dist/
