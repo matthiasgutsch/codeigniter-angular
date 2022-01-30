@@ -44,27 +44,33 @@
             
     </ng-template>
 </p-overlayPanel>
+<div class="top-main-wrapper">
+    <div class="dash-header">
+        <div class="dash-title">
+    
+            <div class="p-field p-grid">
+                <div class="p-col-12 p-md-6">
+                    <h3>Dipendenti</h3>
+                </div>
+                <div class="p-col-12 p-md-6">
+    
+                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/employees/create']" label="Aggiungi" class="p-button p-button-primary -mr-2  pull-right"></button>
+                <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()" class="p-button-warning p-mr-2 pull-right" pTooltip="PDF" tooltipPosition="bottom"></button>
+                <button type="text" pButton label="Filter"  icon="pi pi-filter" class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
+    
+                </div>
+            </div>
+    
+        </div>
+    </div>
+    
+
+</div>
+
+
 
 <div class="main-inner">
 
-<div class="dash-header">
-    <div class="dash-title">
-
-        <div class="p-field p-grid">
-            <div class="p-col-12 p-md-6">
-                <h3>Dipendenti</h3>
-            </div>
-            <div class="p-col-12 p-md-6">
-
-                <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/employees/create']" label="Aggiungi" class="p-button p-button-primary -mr-2  pull-right"></button>
-            <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()" class="p-button-warning p-mr-2 pull-right" pTooltip="PDF" tooltipPosition="bottom"></button>
-            <button type="text" pButton label="Filter"  icon="pi pi-filter" class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
-
-            </div>
-        </div>
-
-    </div>
-</div>
 
 
 
