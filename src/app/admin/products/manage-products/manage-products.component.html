@@ -55,6 +55,8 @@
 
     <div class="tag" *ngIf="dt.filters[col.field]">{{dt.filters[col.field]? dt.filters[col.field].value : ''}}</div>
 </div> -->
+<div class="main-inner">
+
 <div class="dash-header">
     <div class="dash-title">
 
@@ -118,7 +120,7 @@
         </div>
     </div>
 </div>
-
+</div>
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'60%'}">
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
