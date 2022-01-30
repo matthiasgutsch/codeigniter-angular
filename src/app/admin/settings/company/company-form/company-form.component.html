@@ -1,5 +1,6 @@
 <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
 
+    <div class="main-inner">
 
     <div class="dash-header">
     <div class="dash-title">
@@ -283,7 +284,10 @@
         </div>
 
     </div>
-</div></form>
+</div>
+
+    </div>
+</form>
 
 
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" #cd>
