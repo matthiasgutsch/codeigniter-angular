@@ -85,6 +85,8 @@
         <div class="p-col-12 p-md-12">
 
             <p-card>
+                <div class="filter-options">
+
                 <div class="p-field p-grid">
                     <div class="p-col-12 p-md-12">
                 <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()"
@@ -92,6 +94,7 @@
                  <button type="text" pButton label="Filter" icon="pi pi-filter"
                 class="p-button p-button-options p-mr-2 pull-right" (click)="op.toggle($event)"></button>
                     </div>
+                </div>
                 </div>
                 <p-table #dt [columns]="cols" [value]="products" [globalFilterFields]="['name', 'description']"
                     currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true"
@@ -113,6 +116,8 @@
                                     [routerLink]="['/admin/products/edit', rowData.id]" class="img-responsive"></td>
                             <td *ngFor="let col of cols" [ngSwitch]="col.field">
                                 {{rowData[col.field]}}
+
+                                
                             </td>
 
                             <td class="action">
