@@ -51,8 +51,7 @@
                    
                     <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/quotes/create']" label="Aggiungi" class="p-button p-button-primary pull-right"></button>
     
-                    <button type="text" pButton label="Filter" icon="pi pi-filter"
-                    class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
+                   
     
                 </div>
             </div>
@@ -69,6 +68,16 @@
         <div class="p-col-12 p-md-12">
 
             <p-card>
+
+                <div class="filter-options">
+
+                    <div class="p-field p-grid">
+                        <div class="p-col-12 p-md-12">
+                            <button type="text" pButton label="Filter" icon="pi pi-filter"
+                            class="p-button p-button-options p-mr-2 pull-right" (click)="op.toggle($event)"></button>
+                        </div>
+                    </div>
+                </div>
                 <p-table #dt [value]="quotes" [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="10" [responsive]="true"  [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
                    
                     <ng-template pTemplate="header">
