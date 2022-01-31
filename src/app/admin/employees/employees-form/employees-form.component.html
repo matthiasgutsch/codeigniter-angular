@@ -18,6 +18,9 @@
                         <button pButton pRipple label="Salva" class="p-button p-button-success p-mr-2 pull-right"
                         [disabled]="!blogForm.valid"></button>
 
+                        <button type="button" pButton pRipple label="Timesheets" icon="pi pi-clock" class="p-button p-button-primary pull-right  p-mr-2"
+                        [routerLink]="['/admin/employee/timesheets/', id]"></button>
+
 
                         <button type="button" pButton pRipple label="tasks" icon="pi pi-clone"
                         class="p-button p-button-warning pull-right  p-mr-2"
