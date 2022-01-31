@@ -1,22 +1,40 @@
 <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
-    <div class="main-inner">
 
-    <div class="dash-header">
-    <div class="dash-title">
+    <div class="top-main-wrapper">
 
-        <div class="p-field p-grid">
-            <div class="p-col-10 p-md-6">
-                <h3>{{pageTitle}}</h3>
-            </div>
-            <div class="p-col-2 p-md-6">
-               
-                <button pButton pRipple label="Salva" class="p-button p-button-success p-mr-2 pull-right"
-                [disabled]="!blogForm.valid"></button>
+        <div class="dash-header">
+            <div class="dash-title">
+        
+                <div class="p-field p-grid">
+                    <div class="p-col-10 p-md-6">
+                        <h3>{{pageTitle}}</h3>
+                    </div>
+                    <div class="p-col-2 p-md-6">
+                       
+                   
 
+    
+
+                        <button pButton pRipple label="Salva" class="p-button p-button-success p-mr-2 pull-right"
+                        [disabled]="!blogForm.valid"></button>
+
+
+                        <button type="button" pButton pRipple label="tasks" icon="pi pi-clone"
+                        class="p-button p-button-warning pull-right  p-mr-2"
+                        [routerLink]="['/admin/employee/task/', id]"></button>
+
+                        <button type="button" pButton pRipple label="Torna indietro"
+                        class="p-button p-button-secondary pull-right  p-mr-2"
+                        [routerLink]="['/admin/employees/']"></button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="main-inner">
+
+   
 
 
     
@@ -24,7 +42,7 @@
     <div class="p-field p-grid">
 
 
-        <div class="p-col-12 p-md-12">
+        <div class="p-col-12 p-md-7">
 
             <p-card>
              
@@ -271,53 +289,7 @@
              
                     </p-tabPanel>
              
-                    <p-tabPanel header="Contratti">
-                             
-                        
-
-                        <div class="p-fluid">
-
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Netto / ora <span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-10">
-                                    <input type="text" pInputText  formControlName="contract"/>
-
-                 
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="p-fluid">
-
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Ferie / ore<span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-10">
-                                    <input type="text" pInputText  formControlName="vacations"/>
-
-                 
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="p-fluid">
-
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Permessi / ore<span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-10">
-                                    <input type="text" pInputText  formControlName="permissions"/>
-
-                 
-
-                                </div>
-                            </div>
-                        </div>
-     
-            </p-tabPanel>
+         
              
                 </p-tabView>
 
@@ -341,6 +313,62 @@
 
         </div>
 
+        <div class="p-col-12 p-md-5">
+            <p-card>
+                <div class="p-grid">
+
+                    <div class="p-col-12 p-md-12">
+                        <h3>Contratto</h3>
+                    </div>
+
+                    <div class="p-col-12 p-md-12">
+
+                    <hr class="full">
+                    </div>
+                </div>
+                <div class="p-fluid">
+
+                    <div class="p-field p-grid">
+                        <label class="p-col-12 p-mb-3 p-md-3 p-mb-md-0">Netto / ora <span
+                                class="required">*</span></label>
+                        <div class="p-col-12 p-md-9">
+                            <input type="text" pInputText  formControlName="contract"/>
+
+         
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-fluid">
+
+                    <div class="p-field p-grid">
+                        <label class="p-col-12 p-mb-3 p-md-3 p-mb-md-0">Ferie / ore<span
+                                class="required">*</span></label>
+                        <div class="p-col-12 p-md-9">
+                            <input type="text" pInputText  formControlName="vacations"/>
+
+         
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-fluid">
+
+                    <div class="p-field p-grid">
+                        <label class="p-col-12 p-mb-3 p-md-3 p-mb-md-0">Permessi / ore<span
+                                class="required">*</span></label>
+                        <div class="p-col-12 p-md-9">
+                            <input type="text" pInputText  formControlName="permissions"/>
+
+         
+
+                        </div>
+                    </div>
+                </div>
+            </p-card>
+        </div>
 
         
     </div>
