@@ -437,6 +437,8 @@ export class EmployeesTimesheetsComponent implements OnInit {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
             this.productDialogAdd = false;
             this.getTimesheetsEmployee(this.employee.id);
+            this.getVacationsCountEmployee(this.employee.id);
+            this.getPermissionsCountEmployee(this.employee.id);
           }
         },
         (error) => (this.error = error)
@@ -450,7 +452,8 @@ export class EmployeesTimesheetsComponent implements OnInit {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
             this.productDialogAdd = false;
             this.getTimesheetsEmployee(this.employee.id);
-
+            this.getVacationsCountEmployee(+id);
+            this.getPermissionsCountEmployee(+id);
           }
         },
         (error) => (this.error = error)
