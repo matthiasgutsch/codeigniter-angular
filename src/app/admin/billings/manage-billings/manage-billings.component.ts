@@ -9,10 +9,10 @@ import { ClientsService } from 'src/app/services/clients.service';
 import { ComuniService } from 'src/app/services/comuni.service';
 import { Comuni } from 'src/app/models/comuni';
 import { BillingsService } from 'src/app/services/billings.service';
-import { jsPDF } from "jspdf";
 import { NgxSpinnerService } from "ngx-spinner";
 import { Billings } from 'src/app/models/billings';
-
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 @Component({
   selector: "app-manage-billings",
   templateUrl: "./manage-billings.component.html",
@@ -145,7 +145,14 @@ export class ManageBillingsComponent implements OnInit {
       );
   }
 
-
+  exportPdf() {
+    // const doc = new jsPDF();
+    const doc = new jsPDF('l','pt','A4');
+    doc['autoTable'](this.exportColumns, this.billings);
+    // doc.autoTable(this.exportColumns, this.products);
+    doc.save("Fatture.pdf");
+  }
+  
 
 
 edit(billing: Billings) {
