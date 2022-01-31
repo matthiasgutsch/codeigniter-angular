@@ -31,6 +31,7 @@ import { Quotes } from 'src/app/models/quotes';
 import { QuotesService } from 'src/app/services/quotes.service';
 import { OrdersService } from 'src/app/services/orders.service';
 import { NgxSpinnerService } from "ngx-spinner";
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: "app-quotes-form",
@@ -410,6 +411,36 @@ export class QuotesFormComponent implements OnInit {
     })
   }
    
+
+
+  drop(event: CdkDragDrop<string[]>) {
+    const id = this.route.snapshot.paramMap.get("id");
+    moveItemInArray(this.skillsValues, event.previousIndex, event.currentIndex);
+    this.updateSkills(event, id);
+    
+  }
+
+
+  updateSkills(event, id) {
+    const formData = new FormData();
+    formData.append('skills', JSON.stringify(this.skillsValues));
+    
+    this.quotesService.update_skills(formData, +id).subscribe({
+      next: (response: any) => {
+        if (response.error) {
+        } else {
+          this.messageService.add({key: 'myKey1', severity:'success', summary: 'Conferma', detail: 'Salvato con successo'});
+          this.initSkill(this.skillsValues);
+          this.blogForm.patchValue({
+            skills: this.skillsValues,
+          })
+
+        }
+      },
+    });
+  }
+
+  
   addQuantity(event) {
     this.skills.push(this.newQuantity());
   }
