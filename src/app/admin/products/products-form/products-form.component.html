@@ -1,11 +1,28 @@
-<div class="main-inner">
-
-    <div class="dash-header">
-    <div class="dash-title">
-    </div>
-</div>
 
 <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+
+    <div class="top-main-wrapper">
+
+
+        <div class="dash-header">
+            <div class="dash-title">
+        
+                <div class="p-field p-grid">
+                    <div class="p-col-12 p-md-6">
+                        <h3>{{pageTitle}}</h3>
+                    </div>
+                    <div class="p-col-12 p-md-6">
+                        <button pButton pRipple icon="pi pi-save" label="salva"
+                        class="p-button pull-right p-button-success p-mr-2"
+                        [disabled]="!blogForm.valid"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<div class="main-inner">
 
     <div class="p-fluid">
         <div class="p-field p-grid">
@@ -13,19 +30,7 @@
             <div class="p-col-12 p-md-8">
                 <p-card>
                     <div class="blog-form">
-                        <div class="p-field p-grid">
-                            <div class="p-col-12 p-md-9">
-                                <h3>{{pageTitle}}</h3>
-                            </div>
-                            <div class="p-col-12 p-md-3">
-
-                                <button pButton pRipple icon="pi pi-save" label="salva"
-                                    class="p-button pull-right p-button-success p-mr-2"
-                                    [disabled]="!blogForm.valid"></button>
-
-                            </div>
-                        </div>
-                        <hr class="full">
+                    
 
                         <p-tabView>
                             <p-tabPanel header="Informazioni">
@@ -306,8 +311,9 @@
         </div>
 
     </div>
-</form>
 </div>
+</form>
+
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" #cd>
 
     <p-footer>
