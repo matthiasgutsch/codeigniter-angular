@@ -141,6 +141,21 @@
 }
 
 
+.p-button.p-button-options, .p-buttonset.p-button-options > .p-button, .p-splitbutton.p-button-options > .p-button {
+  color: @ness_color_2 !important;
+  background: fade(@ness_color_2,20%);
+  border-radius: @radius;
+  border: 0px solid @ness_color_2 !important;
+  &:hover {
+    color: @white !important;
+    background: darken(@ness_color_2, 20%) !important;
+    border-radius: @radius;
+    border: 0px solid @ness_color_2 !important;
+  }
+}
+
+
+
 .p-button.p-button-danger, .p-buttonset.p-button-danger > .p-button, .p-splitbutton.p-button-danger > .p-button {
   color: @white !important;
   background: @red;
