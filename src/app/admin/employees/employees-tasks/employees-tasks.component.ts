@@ -201,7 +201,7 @@ export class EmployeesTasksComponent implements OnInit {
     const formData = new FormData();
     formData.set('priority', event.item.data.priority);
     
-    this.busy2 = this.tasksService.update_priority(formData, +id).subscribe({
+    this.busy2 = this.tasksService.update_priority_employee(formData, +id).subscribe({
       next: (response: any) => {
         if (response.error) {
         } else {
