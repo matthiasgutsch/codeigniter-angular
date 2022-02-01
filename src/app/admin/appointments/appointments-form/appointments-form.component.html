@@ -74,24 +74,24 @@
                                 </div>
 
 
-
                                 <div class="p-fluid">
-
                                     <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Perona incaricata <span
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Cliente <span
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
+                                            <p-dropdown [options]="clients" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedClients" formControlName="category_id" optionLabel="username" optionValue="id">
+                                                <ng-template let-option pTemplate="item">
 
-                                            <p-dropdown [options]="employees" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" formControlName="employee_id" optionLabel="username" optionValue="id">
+                                                    <strong>{{option.name}} {{option.surname}}</strong><br>
+                                                    <span>{{option.address}} - {{option.zip}} {{option.city}}</span>
 
+                                                </ng-template>
 
                                             </p-dropdown>
-
-
                                         </div>
                                     </div>
                                 </div>
-
+                                
 
                                 <div class="p-fluid">
 
@@ -138,22 +138,22 @@
 
 
                                 <div class="p-fluid">
+
                                     <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Cliente <span
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Dipendente assegnato<span
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
-                                            <p-dropdown [options]="clients" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedClients" formControlName="category_id" optionLabel="username" optionValue="id">
-                                                <ng-template let-option pTemplate="item">
 
-                                                    <strong>{{option.name}} {{option.surname}}</strong><br>
-                                                    <span>{{option.address}} - {{option.zip}} {{option.city}}</span>
+                                            <p-dropdown [options]="employees" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" formControlName="employee_id" optionLabel="username" optionValue="id">
 
-                                                </ng-template>
 
                                             </p-dropdown>
+
+
                                         </div>
                                     </div>
                                 </div>
+
 
                                 <div class="p-fluid">
                                     <div class="p-field p-grid">
