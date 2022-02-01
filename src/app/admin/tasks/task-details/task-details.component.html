@@ -3,21 +3,24 @@
     <div class="product-list-detail">
         <div class="p-grid">
             <div class="p-col-12 p-md-10">
-        <h5>{{ task.title }}</h5>
+        <h4>{{ task.title }}</h4>
 
 
-       <!--  <p class="q"> {{task.employee_id}}</p>-->
-       {{ getCategoryItem(task.employee_id)?.name }}
+       <h5>{{task.project_name }}</h5> 
+
        
-        <div class="card-text fs-small" *ngIf="task.due_date">Due date:
-            {{task.due_date}}
-
-         
-
-        </div>
     </div>
 
+    <div class="p-col-12 p-md-12">
 
+        <div class="clearfix"></div>
+        <p class="small date">
+            {{task.employee_id}} | {{task.created_at}}
+         
+    
+        </p>
+    
+    </div>
     <div class="p-col-12 p-md-12">
 
         <hr class="full">
@@ -27,7 +30,10 @@
         <button type="button" (click)="viewTask(task)" class="p-button p-button-small p-button-primary p-mr-2" pButton icon="fa fa-eye" label="visualizza"></button>
         <button type="button" (click)="deleteTask(task.id, task.title, 'high', i)" class="p-button p-button-small  p-button-danger" pButton *ngIf="cancel == true" icon="fa fa-trash-o" label="cancella"></button>
 
+       
+
     </div>
+    
     </div>
 </div>
 </div>

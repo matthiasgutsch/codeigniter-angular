@@ -153,8 +153,8 @@
             <div class="p-fluid">
 
                 <div class="p-field p-grid">
-                    <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Titolo Task <span class="required">*</span></label>
-                    <div class="p-col-12 p-md-10">
+                    <label class="p-col-12 p-mb-12 p-mb-md-0">Titolo Task <span class="required">*</span></label>
+                    <div class="p-col-12 p-md-12">
                         <input type="text" [style]="{ width: '100%' }" pInputText formControlName="title">
                     </div>
                 </div>
@@ -162,8 +162,8 @@
 
 
             <div class="p-field p-grid">
-                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Priorità <span class="required">*</span></label>
-                <div class="p-col-12 p-md-10">
+                <label class="p-col-12 p-mb-12 p-mb-md-0">Priorità <span class="required">*</span></label>
+                <div class="p-col-12 p-md-12">
                     <p-dropdown [options]="priorityList" placeholder="Scegli"
                         [style]="{ width: '100%' }" formControlName="priority" optionLabel="label"
                         optionValue="value">
@@ -172,10 +172,10 @@
             </div>
 
             <div class="p-field p-grid">
-                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Descrizione Task <span class="required">*</span></label>
-                <div class="p-col-12 p-md-10">
+                <label class="p-col-12 p-mb-12 p-mb-md-0">Descrizione Task <span class="required">*</span></label>
+                <div class="p-col-12 p-md-12">
+                    <p-editor formControlName="description" [style]="{'height':'220px'}"></p-editor>
 
-                    <textarea [rows]="5" [cols]="30" [style]="{ width: '100%' }" pInputTextarea formControlName="description"></textarea>
 
 
                 </div>
@@ -183,8 +183,8 @@
 
 
             <div class="p-field p-grid">
-                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Employee <span class="required">*</span></label>
-                <div class="p-col-12 p-md-10">
+                <label class="p-col-12 p-mb-12 p-mb-md-0">Employee <span class="required">*</span></label>
+                <div class="p-col-12 p-md-12">
                     <p-dropdown [options]="clients" placeholder="Scegli"
                         [style]="{ width: '100%' }" formControlName="employee_id" optionLabel="username"
                         optionValue="id">
@@ -284,7 +284,10 @@
 
 
         <h4>{{task.title}}</h4>
-        {{task.description}}
+
+        <p [innerHTML]="task.description"></p>
+
+
         <hr class="full">
         {{ getEmployeeItem(task.employee_id)?.username }}
 
