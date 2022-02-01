@@ -283,6 +283,12 @@
         <app-initials-avatar firstName="{{ getEmployeeItem(task.employee_id)?.name | slice:0:1}}" lastName="{{ getEmployeeItem(task.employee_id)?.surname | slice:0:1}}"></app-initials-avatar>
 
 
+        <p-tag class="p-mr-2" severity="warning" *ngIf="task.priority === '1'">Da Fare</p-tag>
+        <p-tag class="p-mr-2" severity="warning" *ngIf="task.priority === '2'">25%</p-tag>
+        <p-tag class="p-mr-2" severity="warning" *ngIf="task.priority === '3'">75%</p-tag>
+        <p-tag class="p-mr-2" severity="warning" *ngIf="task.priority === '4'">Finito</p-tag>
+
+        
         <h4>{{task.title}}</h4>
 
         <p [innerHTML]="task.description"></p>

@@ -183,7 +183,7 @@
         <p-tag class="p-mr-2" severity="warning" *ngIf="task.priority === '4'">Finito</p-tag>
 
         <h4>{{task.title}}</h4>
-        {{task.description}}
+        <p [innerHTML]="task.description"></p>
         <hr class="full">
 
     </ng-template>
