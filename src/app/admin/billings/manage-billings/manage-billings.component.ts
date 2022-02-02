@@ -71,7 +71,6 @@ export class ManageBillingsComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     const userId = this.currentUser.user_id;
 
-    this.spinner.show();
 
     this.billingsService.getAllListbyUser().subscribe(data => {
       this.billings = data;
@@ -88,7 +87,6 @@ export class ManageBillingsComponent implements OnInit {
       this.getComuni();
       this.getClients();
 
-      this.spinner.hide();
     });
 
    
