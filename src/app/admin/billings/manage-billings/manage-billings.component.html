@@ -93,7 +93,7 @@
                         </div>
                     </div>
 
-                    <p-table #dt [value]="billings" [responsive]="true"  [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="15" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
+                    <p-table #dt [value]="billings" [responsive]="true"  [globalFilterFields]="['title','status','client.username']" [paginator]="true" [rows]="15" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
 
                     <ng-template pTemplate="header">
                         <tr>

@@ -75,14 +75,14 @@ export class ManageBillingsComponent implements OnInit {
     this.billingsService.getAllListbyUser().subscribe(data => {
       this.billings = data;
       this.cols = [
-        { field: "is_paid", header: "Stato" },
-        { field: "client.username", header: "Nome Cliente",  exportable: true  },
-        { field: "number", header: "Numero Fattura" },
+        { field: 'is_paid', header: 'Stato' },
+        { field: 'client.username',  header: 'Nome Cliente'  },
+        { field: 'number', header: 'Numero Fattura' },
       ];
       this._selectedColumns = this.cols;
       this.exportColumns = this.cols.map(col => ({
         title: col.header,
-        dataKey: col.field
+        dataKey: col.field,
       }));
       this.getComuni();
       this.getClients();
@@ -150,9 +150,9 @@ export class ManageBillingsComponent implements OnInit {
   exportPdf() {
     // const doc = new jsPDF();
     const doc = new jsPDF('l','pt','A4');
-    doc['autoTable'](this.exportColumns, this.billings);
+    doc['autoTable'](this.exportColumns, this.billings, this.billings.client);
     // doc.autoTable(this.exportColumns, this.products);
-    doc.save("Fatture.pdf");
+    doc.save("Fatture_"  + new Date().toLocaleString() + ".pdf");
   }
   
 
