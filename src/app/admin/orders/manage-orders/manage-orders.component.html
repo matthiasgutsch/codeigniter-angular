@@ -80,7 +80,7 @@
                         </div>
                     </div>
                 </div>
-                <p-table #dt [value]="orders" [responsive]="true"  [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="15" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
+                <p-table #dt [value]="orders" [responsive]="true"  [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="15" [showCurrentPageReport]="true" [loading]="loading" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
                    
                     <ng-template pTemplate="header">
                         <tr>
