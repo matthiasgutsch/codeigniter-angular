@@ -77,6 +77,7 @@ export class ManageOrdersComponent implements OnInit {
       this.orders = data;
       this.cols = [
         { field: "category_id", header: "Cliente" },
+        { field: 'client.username',  header: 'Nome Cliente'  },
         { field: "id", header: "Numero Fattura" },
       ];
       this._selectedColumns = this.cols;

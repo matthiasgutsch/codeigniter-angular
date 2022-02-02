@@ -6,15 +6,15 @@
             <div class="p-field p-grid" *ngFor="let col of cols" [ngSwitch]="col.field">
                 <div class="p-col-12">
 
-                    <p-dropdown *ngSwitchCase="'category_id'" filter="true" [required]="true" placeholder="Cliente"  [showClear]="true" optionLabel="username"
-                        optionValue="id" [options]="clients" [style]="{'width':'100%'}"
-                        (onChange)="dt.filter($event.value, col.field, 'equals')">
+                    <p-dropdown *ngSwitchCase="'client.username'" filter="true" [required]="true" placeholder="Cliente"
+                    [showClear]="true" optionLabel="username" optionValue="username" [options]="clients"
+                    [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')">
 
-                        <ng-template let-option pTemplate="item">
+                    <ng-template let-option pTemplate="item">
 
-                            {{option.name}} {{option.surname}}
+                        {{option.username}}
 
-                        </ng-template>
+                    </ng-template>
 
                     </p-dropdown>
 
@@ -107,20 +107,19 @@
 
                             <td width="50">
 
-                                <app-initials-avatar  [routerLink]="['/admin/clients/edit', getCategoryItem(order.category_id)?.id]" firstName="{{ getCategoryItem(order.category_id)?.name | slice:0:1}}" lastName="{{ getCategoryItem(order.category_id)?.surname | slice:0:1}}"></app-initials-avatar>
+                                <app-initials-avatar  [routerLink]="['/admin/clients/edit', order.client.id]" firstName="{{ order.client.name | slice:0:1}}" lastName="{{ order.client.surname | slice:0:1}}"></app-initials-avatar>
 
                                
                             </td>
 
                             <td>
 
-                                {{ getCategoryItem(order.category_id)?.name }}
-                                {{ getCategoryItem(order.category_id)?.surname }}
+                                {{ order.client.name }}
+                                {{ order.client.surname }}
                             </td>
 
                             <td>{{
-                                getCategoryItem(order.category_id)?.zip }} - {{
-                                getCategoryItem(order.category_id)?.city }}</td>
+                                order.client.zip }} - {{order.client.city }}</td>
                             <td>{{order.total | currency :'EUR':'symbol':'1.2-2'}}</td>
 
                             <td class="action">
@@ -146,15 +145,15 @@
 
     <div class="p-col-12 p-md-12">
         <p-card>
-            <app-initials-avatar class="pull-right"  [routerLink]="['/admin/clients/edit', getCategoryItem(order.category_id)?.id]" firstName="{{ getCategoryItem(order.category_id)?.name | slice:0:1}}" lastName="{{ getCategoryItem(order.category_id)?.surname | slice:0:1}}"></app-initials-avatar>
+            <app-initials-avatar class="pull-right"  [routerLink]="['/admin/clients/edit', order.client.id]" firstName="{{ order.client.name | slice:0:1}}" lastName="{{ order.client.surname | slice:0:1}}"></app-initials-avatar>
 
             <h3>Dettaglio Ordine {{order.id}}</h3>
             <p-tag severity="default" value="{{order.date}}"></p-tag>
             <hr class="full">
 
-                <strong>{{ getCategoryItem(order.category_id)?.username }}</strong><br>
-                {{ getCategoryItem(order.category_id)?.address }} - {{ getCategoryItem(order.category_id)?.zip }} {{ getCategoryItem(order.category_id)?.city }} <br>
-                {{ getCategoryItem(order.category_id)?.phone }}
+                <strong>{{ order.client.username }}</strong><br>
+                {{ order.client.address }} - {{ order.client.zip }} {{ order.client.city }} <br>
+                {{ order.client.phone }}
 
         </p-card>
 <p-card>
