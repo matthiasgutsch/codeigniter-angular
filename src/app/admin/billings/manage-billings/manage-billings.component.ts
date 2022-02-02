@@ -150,7 +150,7 @@ export class ManageBillingsComponent implements OnInit {
   exportPdf() {
     // const doc = new jsPDF();
     const doc = new jsPDF('l','pt','A4');
-    doc['autoTable'](this.exportColumns, this.billings, this.billings.client);
+    doc['autoTable'](this.exportColumns, this.billings);
     // doc.autoTable(this.exportColumns, this.products);
     doc.save("Fatture_"  + new Date().toLocaleString() + ".pdf");
   }
