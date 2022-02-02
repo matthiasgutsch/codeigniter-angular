@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Blog } from '../../../models/blog';
 import {ConfirmationService} from 'primeng/api';
 import { CategoryService } from '../../../services/categories.service';
@@ -38,7 +38,9 @@ export class ManageBillingsComponent implements OnInit {
   exportColumns: any[];
   _selectedColumns: any[];
   statuses: any[];
-  
+  @Input() exportable: boolean = true;
+
+
   @ViewChild("content", { static: false }) content: ElementRef;
   currentUser: any;
 
@@ -74,7 +76,7 @@ export class ManageBillingsComponent implements OnInit {
       this.billings = data;
       this.cols = [
         { field: "is_paid", header: "Stato" },
-        { field: "client.username", header: "Cliente" },
+        { field: "client.username", header: "Nome Cliente",  exportable: true  },
         { field: "number", header: "Numero Fattura" },
       ];
       this._selectedColumns = this.cols;
