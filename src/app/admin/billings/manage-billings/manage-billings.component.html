@@ -130,22 +130,21 @@
                             <td width="50">
 
                                 <app-initials-avatar
-                                    [routerLink]="['/admin/clients/edit', getCategoryItem(billing.category_id)?.id]"
-                                    firstName="{{ getCategoryItem(billing.category_id)?.name | slice:0:1}}"
-                                    lastName="{{ getCategoryItem(billing.category_id)?.surname | slice:0:1}}">
+                                    [routerLink]="['/admin/clients/edit', billing.client.id]"
+                                    firstName="{{ billing.client.name | slice:0:1}}"
+                                    lastName="{{ billing.client.surname | slice:0:1}}">
                                 </app-initials-avatar>
 
                             </td>
 
                             <td>
-
-                                {{ getCategoryItem(billing.category_id)?.name }}
-                                {{ getCategoryItem(billing.category_id)?.surname }}
+                                {{billing.client.name}}
+                                {{billing.client.surname}}
                             </td>
 
                             <td>{{
-                                getCategoryItem(billing.category_id)?.zip }} - {{
-                                getCategoryItem(billing.category_id)?.city }}</td>
+                                billing.client.zip }} - {{
+                                billing.client.city }}</td>
                             <td>
                                 <p-tag [value]="billing.total | currency :'EUR':'symbol':'1.2-2'"></p-tag></td>
 
@@ -189,11 +188,11 @@
 
                     <hr class="full">
 
-                    <strong>{{ getCategoryItem(billing.category_id)?.username }}</strong><br>
-                    {{ getCategoryItem(billing.category_id)?.address }} -
-                    {{ getCategoryItem(billing.category_id)?.zip }} {{ getCategoryItem(billing.category_id)?.city }}
+                    <strong>{{ billing.client.username }}</strong><br>
+                    {{ billing.client.address }} -
+                    {{ billing.client.zip }} {{ billing.client.city }}
                     <br>
-                    {{ getCategoryItem(billing.category_id)?.phone }}
+                    {{ billing.client.phone }}
 
                 </p-card>
                 <p-card>
