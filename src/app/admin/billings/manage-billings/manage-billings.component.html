@@ -120,7 +120,7 @@
                                 <p-tag severity="danger" *ngIf="billing.is_paid === '0'" (click)="openBilling(billing)"
                                     value="non pagata" class="p-mr-2"></p-tag>
                             </td>
-                            <td>{{billing.number}}/{{billing.date | date:'yyyy':'-0000'}}</td>
+                            <td>{{billing.number}}/{{billing.date | date:'yyyy'}}</td>
 
                             <td><i class="pi pi-calendar"></i> {{billing.date | date:'dd-MM-yyyy'}}
                             </td>

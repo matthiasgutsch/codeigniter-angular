@@ -120,7 +120,8 @@
 
                             <td>{{
                                 order.client.zip }} - {{order.client.city }}</td>
-                            <td>{{order.total | currency :'EUR':'symbol':'1.2-2'}}</td>
+                            <td><p-tag [value]="order.total | currency :'EUR':'symbol':'1.2-2'"></p-tag></td>
+
 
                             <td class="action">
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/orders/edit', order.id]"></button>
