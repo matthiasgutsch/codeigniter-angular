@@ -17,19 +17,19 @@
 
                     </p-dropdown>
 
-                    <p-dropdown *ngSwitchCase="'category_id'" filter="true" [required]="true" placeholder="Cliente"
-                        [showClear]="true" optionLabel="username" optionValue="id" [options]="clients"
+                    <p-dropdown *ngSwitchCase="'client.username'" filter="true" [required]="true" placeholder="Cliente"
+                        [showClear]="true" optionLabel="username" optionValue="username" [options]="clients"
                         [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')">
 
                         <ng-template let-option pTemplate="item">
 
-                            {{option.name}} {{option.surname}}
+                            {{option.username}}
 
                         </ng-template>
 
                     </p-dropdown>
 
-                    <input *ngSwitchCase="'id'" [ngModel]="dt.filters['id']? dt.filters['id'].value : ''"
+                    <input *ngSwitchCase="'number'" [ngModel]="dt.filters['number']? dt.filters['number'].value : ''"
                         placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }"
                         (input)="dt.filter($event.target.value, col.field, 'contains')">
 
@@ -136,8 +136,7 @@
                             </td>
 
                             <td>
-                                {{billing.client.name}}
-                                {{billing.client.surname}}
+                                {{billing.client.username}}
                             </td>
 
                             <td>{{

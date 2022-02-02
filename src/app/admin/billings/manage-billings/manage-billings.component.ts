@@ -13,6 +13,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { Billings } from 'src/app/models/billings';
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+
 @Component({
   selector: "app-manage-billings",
   templateUrl: "./manage-billings.component.html",
@@ -73,9 +74,8 @@ export class ManageBillingsComponent implements OnInit {
       this.billings = data;
       this.cols = [
         { field: "is_paid", header: "Stato" },
-        { field: "category_id", header: "Cliente" },
-        { field: "id", header: "Numero Fattura" },
-
+        { field: "client.username", header: "Cliente" },
+        { field: "number", header: "Numero Fattura" },
       ];
       this._selectedColumns = this.cols;
       this.exportColumns = this.cols.map(col => ({
