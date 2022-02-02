@@ -99,9 +99,9 @@
                     </div>
                 </div>
                 
-                <p-table #dt [columns]="cols" [value]="timesheets" [globalFilterFields]="['name', 'description']"
+                <p-table #dt [columns]="cols" [responsive]="true"   [value]="timesheets" [globalFilterFields]="['name', 'description']"
                     currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true"
-                    [rows]="15" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
+                    [rows]="15" [showCurrentPageReport]="true" [totalRecords]="totalRecords">
 
                     <ng-template pTemplate="header" let-columns>
                         <tr>
