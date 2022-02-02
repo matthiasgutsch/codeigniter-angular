@@ -75,14 +75,12 @@ export class ManageBillingsComponent implements OnInit {
       this.billings = data;
       this.cols = [
         { field: 'is_paid', header: 'Stato' },
-        { field: 'category_id',  header: 'Nome Cliente'  },
+        { field: 'client.username',  header: 'Nome Cliente'  },
         { field: 'number', header: 'Numero Fattura' },
       ];
       this._selectedColumns = this.cols;
-      this.exportColumns = this.cols.map(col => ({
-        title: col.header,
-        dataKey: col.field,
-      }));
+      this.exportColumns = this.cols.map(col => ({title: col.header, dataKey: col.field}));
+
       this.getComuni();
       this.getClients();
     });

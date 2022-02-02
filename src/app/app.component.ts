@@ -12,7 +12,6 @@ export class AppComponent {
 
   constructor(public route: Router, private spinner: NgxSpinnerService) {
 
-    this.spinner.show();
 
    }
 }
