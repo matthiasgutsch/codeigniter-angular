@@ -71,18 +71,24 @@ export class ManageBillingsComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     const userId = this.currentUser.user_id;
 
+    this.spinner.show();
+
     this.billingsService.getAllListbyUser().subscribe(data => {
       this.billings = data;
-      this.cols = [
-        { field: 'is_paid', header: 'Stato' },
-        { field: 'client.username',  header: 'Nome Cliente'  },
-        { field: 'number', header: 'Numero Fattura' },
+        this.cols = [
+          { field: 'is_paid', header: 'Stato' },
+          { field: 'client.username',  header: 'Nome Cliente'  },
+          { field: 'number', header: 'Numero Fattura' },
       ];
       this._selectedColumns = this.cols;
-      this.exportColumns = this.cols.map(col => ({title: col.header, dataKey: col.field}));
-
+      this.exportColumns = this.cols.map(col => ({
+        title: col.header,
+        dataKey: col.field
+      }));
       this.getComuni();
       this.getClients();
+
+      this.spinner.hide();
     });
 
    
