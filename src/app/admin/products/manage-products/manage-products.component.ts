@@ -57,7 +57,7 @@ export class ManageProductsComponent implements OnInit {
 
   tags: any = [];
   tag: Tags;
-
+  filterSidebar: boolean = false;
   selectedBrands: Brand;
   loading: boolean;
   currentIndex = 1;

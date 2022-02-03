@@ -1,5 +1,11 @@
 @media (max-width: 600px) {
 
+    body {
+        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
 .sidebar {
 display: none;
 }
@@ -45,20 +51,24 @@ margin: 0px;
 
 #main {
     transition: margin-left 0.1s;
-    padding: 60px 0px 30px 0px;
+    padding: 60px 0px 0px 0px;
     margin-left: 70px;
 }
 
 .top-main-wrapper {
-    background-color: #ffffff;
+    background-color: @ness_color_2;
     margin-bottom: 30px;
     padding: 10px 20px 10px 20px;
     border-bottom: 1px solid #dee2e6;
     border-top: 1px solid #dee2e6;
+
+    h3 {
+        color: @white;
+    }
 }
 
 #main .main-inner {
-    padding: 0px 10px 30px 10px;
+    padding: 0px 20px 30px 20px;
 }
 
 #main.open {
@@ -104,4 +114,39 @@ padding: 10px 0px !important;
     background-color: #efefef;
  
 }
+
+.p-toast {
+    min-width: 340px !important;
+    width: 340px !important;
+}
+
+.filter-options {
+    padding-bottom: 0px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.p-dialog {
+
+    min-width: 300px !important;
+
+}
+.p-paginator-current {
+    display: none !important;
+    visibility: hidden;
+}
+
+.p-tabview-nav {
+    width: 100%;
+    height: 50px;
+    list-style: none;
+    white-space: nowrap;
+
+
+    li {
+        display: inline-block;
+        margin-right: 20px;
+    }
+
+}
+
 }

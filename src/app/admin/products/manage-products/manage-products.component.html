@@ -1,4 +1,4 @@
-<p-overlayPanel #op>
+<p-sidebar [(visible)]="filterSidebar" #op>
     <ng-template pTemplate>
         <div class="p-col-12">
 
@@ -49,7 +49,7 @@
         </div>
         </div>
     </ng-template>
-</p-overlayPanel>
+</p-sidebar>
 
 <!-- <div *ngFor="let col of cols" [ngSwitch]="col.field">
 
@@ -63,10 +63,10 @@
         <div class="dash-title">
     
             <div class="p-field p-grid">
-                <div class="p-col-12 p-md-6">
+                <div class="p-col-6 p-md-6">
                     <h3>Prodotti</h3>
                 </div>
-                <div class="p-col-12 p-md-6">
+                <div class="p-col-6 p-md-6">
                     <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/products/create']" label="Aggiungi"
                         class="p-button p-button-primary p-mr-2 pull-right"></button>
                    
@@ -92,7 +92,7 @@
                 <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()"
                 class="p-button-options p-mr-2 pull-right"  tooltipPosition="bottom"></button>
                  <button type="text" pButton label="Filter" icon="pi pi-filter"
-                class="p-button p-button-options p-mr-2 pull-right" (click)="op.toggle($event)"></button>
+                class="p-button p-button-options p-mr-2 pull-right" (click)="filterSidebar = true"></button>
                     </div>
                 </div>
                 </div>
