@@ -130,7 +130,7 @@
     <div class="p-col-12 p-md-6">
         <p-card>
 
-            <p-tabView>
+            <p-tabView class="responsive-tab-view">
                 <p-tabPanel header="Calendario">
 
                     <div *ngIf="calendarOptions">
@@ -200,7 +200,7 @@
 
                 <div class="p-col-12 p-md-12">
 
-                    <p-tabView>
+                    <p-tabView class="responsive-tab-view">
                         <p-tabPanel header="Progetti">
                             <p-table #dt1 [value]="projects" [responsive]="true" [paginator]="false" [rows]="10">
 
