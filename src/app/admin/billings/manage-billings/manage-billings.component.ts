@@ -35,6 +35,7 @@ export class ManageBillingsComponent implements OnInit {
   skills:  any[] = [];
   skillsArray: any = [];
   cols: any[];
+  filterSidebar: boolean = false;
   exportColumns: any[];
   _selectedColumns: any[];
   statuses: any[];
