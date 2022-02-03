@@ -44,16 +44,13 @@
         <div class="dash-title">
     
             <div class="p-field p-grid">
-                <div class="p-col-12 p-md-6">
+                <div class="p-col-6 p-md-6">
                     <h3>Appuntamenti</h3>
                 </div>
-                <div class="p-col-12 p-md-6">
+                <div class="p-col-6 p-md-6">
                     <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']" label="Aggiungi"
                         class="p-button p-button-primary pull-right"></button>
-                    <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()"
-                        class="p-button-warning p-mr-2 pull-right"  tooltipPosition="bottom"></button>
-                    <button type="text" pButton label="Filter" icon="pi pi-filter"
-                        class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
+          
     
     
     
@@ -71,6 +68,18 @@
         <div class="p-col-12 p-md-12">
 
             <p-card>
+                <div class="filter-options">
+                    <div class="p-field p-grid">
+                        <div class="p-col-12 p-md-12">
+                            <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()"
+                            class="p-button-options p-mr-2 pull-right"  tooltipPosition="bottom"></button>
+                        <button type="text" pButton label="Filter" icon="pi pi-filter"
+                            class="p-button p-button-options p-mr-2 pull-right" (click)="op.toggle($event)"></button>
+                            
+                        </div>
+                    </div>
+                </div>
+
                 <p-table #dt [value]="appointments" [pageLinks]="3" [responsive]="true"
                     [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="15"
                     [showCurrentPageReport]="true"
