@@ -55,6 +55,8 @@ import { ProjectsTimesheetsComponent } from './projects/projects-timeheets/proje
 import { ManageWordpressOrdersComponent } from './orders-wordpress/manage-wordpress-orders/manage-wordpress-orders.component';
 import { WordpressOrdersFormComponent } from './orders-wordpress/wordpress-orders-form/wordpress-orders-form.component';
 import { EmployeesTimesheetsCalendarComponent } from './employees/employees-timeheets-calendar/employees-timesheets-calendar.component';
+import { ManageWarehousesComponent } from './warehouses/manage-warehouses/manage-warehouses.component';
+import { WarehousesFormComponent } from './warehouses/warehouses-form/warehouses-form.component';
 
 const routes: Routes = [
   {
@@ -87,6 +89,11 @@ const routes: Routes = [
           { path: "appointments", component: ManageAppointmentsComponent },
           { path: "appointments/create", component: AppointmentsFormComponent },
           { path: "appointments/edit/:id",component: AppointmentsFormComponent,},
+
+
+          { path: "warehouses", component: ManageWarehousesComponent },
+          { path: "warehouses/create", component: WarehousesFormComponent },
+          { path: "warehouses/edit/:id",component: WarehousesFormComponent,},
 
           { path: "billings", component: ManageBillingsComponent },
           { path: "billings/edit/:id",component: BillingsFormComponent,},
