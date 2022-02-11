@@ -157,7 +157,7 @@
                             </td>
 
                             <td>   {{ getEmployeeItem(warehouseCheckin.employee_id)?.username }}</td>
-                           <td>   {{ getProjectItem(warehouseCheckin.project_id)?.title }}</td>
+                           <td>   {{ getProjectItem(warehouseCheckin.product_id)?.title }} sdssdsd</td>
                        
 
                             <td class="action">
@@ -252,10 +252,10 @@
                 <div class="p-field p-grid">
                     <div class="p-col-12 p-md-12">
 
-                        <label>Progetto</label>
+                        <label>Prodotto</label>
                     </div>
                     <div class="p-col-12 p-md-12">
-                        <p-dropdown [options]="projects" [virtualScroll]="true" filter="true" [required]="true"
+                        <p-dropdown [options]="productsVariations" [virtualScroll]="true" filter="true" [required]="true"
                             [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }"
                             formControlName="project_id" optionLabel="title" optionValue="id">
                             <ng-template let-option pTemplate="item">

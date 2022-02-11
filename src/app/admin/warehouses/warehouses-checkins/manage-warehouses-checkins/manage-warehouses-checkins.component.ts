@@ -40,6 +40,7 @@ import { WarehouseCheckins } from 'src/app/models/warehouse_checkins';
 import { WarehousesCheckinsService } from 'src/app/services/warehouses_checkins.service';
 import { WarehousesService } from 'src/app/services/warehouses.service';
 import { Warehouses } from 'src/app/models/warehouses';
+import { ProductsVariationsService } from 'src/app/services/products_variations.service';
 
 @Component({
   selector: 'app-manage-warehouses-checkins',
@@ -99,7 +100,9 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   pageTitle: string;
   warehouses: any = [];
   warehouse: Warehouses;
+  productsVariations: any = [];
 
+  
   showDialog() {
     this.productDialog = true;
 }
@@ -127,6 +130,7 @@ weekNo: number;
     private employeesService: EmployeesService,
     private tagsService: TagsService,
     private fb: FormBuilder,
+    private productsVariationsService: ProductsVariationsService,
     private spinner: NgxSpinnerService,
     private categoryService: CategoryService, 
     private projectsService: ProjectsService,
@@ -145,10 +149,12 @@ weekNo: number;
     this.getProjects();
     this.getEmployees();
     this.getWarehouses();
+    this.getProductsVariations();
+
     this.warehousesCheckinsService.getAllListbyUser().subscribe(data => {
       this.warehouseCheckins = data;
       this.cols = [
-        { field: "project_id", header: "titolo" },
+        { field: "product_id", header: "titolo" },
         { field: "code", header: "Codice" },
         { field: "status", header: "Status" },
         { field: "employee_id", header: "Ore" },
@@ -159,7 +165,7 @@ weekNo: number;
       { field: "date_from", header: "Da" },
       { field: "date_from", header: "A" },
       { field: "employee_id", header: "Dipendente" },
-      { field: "project_id", header: "Progetto" },
+      { field: "product_id", header: "Progetto" },
     ];
     this._selectedColumns = this.cols;
     this.exportColumns = this.cols.map(col => ({
@@ -171,7 +177,11 @@ weekNo: number;
   }
 
 
-
+  getProductsVariations() {
+    this.productsVariationsService.getAllListbyUser().subscribe(data => {
+      this.productsVariations = data })
+    };
+  
   editItem(warehouseCheckin: WarehouseCheckins) {
     this.warehouseCheckin = { ...warehouseCheckin };
     const id = warehouseCheckin.id;
@@ -183,7 +193,7 @@ weekNo: number;
           warehouse_id: res.warehouse_id,
           date_from: res.date_from,
           date_to: res.date_to,
-          project_id: res.project_id,
+          product_id: res.product_id,
           hours: res.hours,
           employee_id: res.employee_id,
           hours_extra: res.hours_extra,
@@ -201,7 +211,7 @@ weekNo: number;
       warehouse_id: ["", Validators.required],
       date_from: ["", Validators.required],
       date_to: ["", Validators.required],
-      project_id: ["", Validators.required],
+      product_id: ["", Validators.required],
       hours: ["", Validators.required],
       hours_extra: ["", Validators.required],
       employee_id: ["", Validators.required],
@@ -220,7 +230,7 @@ weekNo: number;
       warehouse_id: ["", Validators.required],
       date_from: ["", Validators.required],
       date_to: ["", Validators.required],
-      project_id: ["", Validators.required],
+      product_id: ["", Validators.required],
       hours: ["", Validators.required],
       hours_extra: ["", Validators.required],
       employee_id: ["", Validators.required],
@@ -251,8 +261,8 @@ weekNo: number;
     }
 
 
-  getProjectItem(project_id: string, id: string) {
-    return this.projects.find(item => item.id === project_id);
+  getProjectItem(product_id: string, id: string) {
+    return this.projects.find(item => item.id === product_id);
   }
 
 
@@ -391,7 +401,7 @@ onSubmit() {
   formData.append("date_from", this.blogForm.get("date_from").value);
   formData.append("date_to", this.blogForm.get("date_to").value);
   formData.append('user_id', this.blogForm.get('user_id').value);
-  formData.append("project_id", this.blogForm.get("project_id").value);
+  formData.append("product_id", this.blogForm.get("product_id").value);
   formData.append("hours", this.blogForm.get("hours").value);
   formData.append("hours_extra", this.blogForm.get("hours_extra").value);
   formData.append('employee_id', this.blogForm.get('employee_id').value);

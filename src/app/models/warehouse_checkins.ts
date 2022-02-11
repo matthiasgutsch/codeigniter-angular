@@ -22,7 +22,7 @@ export class WarehouseCheckins {
     price: string;
     price_extra: string;
     data: JSON;
-    project_id: string;
+    product_id: string;
     warehouse_id: string;
     status: StringMap;
     skills: ISkill[];
