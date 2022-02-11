@@ -1,19 +1,20 @@
-$avatar-size: 36px;
+$avatar-size: 30px;
 
 .circle {
     background-color: green;
-    border-radius: 50%;
+    border-radius: 6px;
     height: #{$avatar-size};
     text-align: center;
     width: #{$avatar-size};
     float: left;
+    height: $avatar-size;
+
 }
 
 .initials {
     font-size: 14px; // 50% of parent 
     font-family: Calibri, 'Trebuchet MS', sans-serif, 'Gill Sans', 'Gill Sans MT';
-    line-height: 1;
-    position: relative;
-    top: calc(#{$avatar-size} / 4); // 25% of parent 
+    line-height: $avatar-size;
+    
     color: white !important;
 }
