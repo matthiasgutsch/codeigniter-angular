@@ -177,7 +177,7 @@ weekNo: number;
     const id = warehouseCheckin.id;
 
     if (id) {
-      this.pageTitle = "Modifica Timesheet";
+      this.pageTitle = "Modifica Ingresso Magazzino";
       this.warehousesCheckinsService.getId(+id).subscribe((res) => {
         this.blogForm.patchValue({
           warehouse_id: res.warehouse_id,

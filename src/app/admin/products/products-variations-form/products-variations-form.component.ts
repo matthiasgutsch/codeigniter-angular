@@ -31,8 +31,6 @@ import { SkillsService } from 'src/app/services/skills.service';
 import { map, tap } from 'rxjs/operators';
 import { Technical_data } from 'src/app/models/technical_data';
 import { TechnicalDataService } from 'src/app/services/technical_data.service';
-import { ProductsVariationsService } from 'src/app/services/products_variations.service';
-import { ProductsVariations } from 'src/app/models/products_variations';
 
 
 export interface fPairs {
@@ -41,10 +39,10 @@ export interface fPairs {
 }
 
 @Component({
-  selector: "app-products-form",
-  templateUrl: "./products-form.component.html",
+  selector: "app-products-variations-form",
+  templateUrl: "./products-variations-form.component.html",
 })
-export class ProductsFormComponent implements OnInit {
+export class ProductsVariationsFormComponent implements OnInit {
   @ViewChild("myInput", { static: false }) myInputVariable: ElementRef;
 
   pageTitle: string;
@@ -67,10 +65,6 @@ export class ProductsFormComponent implements OnInit {
   selectedValue: string;
   products: any = [];
   product: Products;
-
-  productsVariations: any = [];
-  productVariations: ProductsVariations;
-
   blogForm: FormGroup;
   typeList: any[];
   status: any[];
@@ -116,8 +110,7 @@ export class ProductsFormComponent implements OnInit {
   itemForm: FormGroup;
   skillsForm: FormGroup;
   skillsValues: any = [];
-  cols: any[];
-  colsData: any[];
+  
   trackByFn(index, item) {
     return item.id;
   }
@@ -132,7 +125,6 @@ export class ProductsFormComponent implements OnInit {
     private clientsService: ClientsService,
     private _location: Location,
     private productsService: ProductsService,
-    private productsVariationsService: ProductsVariationsService,
     private skillsService: SkillsService,
     private brandsService: BrandService,
     private worksService: WorksService,
@@ -197,22 +189,7 @@ export class ProductsFormComponent implements OnInit {
     });
 
 
-    this.productsVariationsService.getProducstVariations(+id).subscribe(data => {
-      this.productsVariations = data;
-      this.cols = [
-        { field: "title", header: "titolo" },
-        { field: "code", header: "Codice" },
-        { field: "price", header: "Prezzo" },
-        { field: "category_id", header: "Categoria" },
-        { field: "code_int", header: "Codice interno" },
-      ];
-      this.colsData = [
-        { field: "title", header: "titolo" },
-        { field: "description", header: "Codice" },
-  
-      ];
 
-    });
 
     if (id) {
       this.pageTitle = "Modifica Prodotto";

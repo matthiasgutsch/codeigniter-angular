@@ -31,13 +31,12 @@ import { Tags } from 'src/app/models/tags';
 import { KeyValue } from '@angular/common';
 import { Technical_data } from 'src/app/models/technical_data';
 import { TechnicalDataService } from 'src/app/services/technical_data.service';
-import { ProductsVariationsService } from 'src/app/services/products_variations.service';
 
 @Component({
-  selector: 'app-manage-products',
-  templateUrl: './manage-products.component.html'
+  selector: 'app-manage-products-variations',
+  templateUrl: './manage-products-variations.component.html'
 })
-export class ManageProductsComponent implements OnInit {
+export class ManageProductsVariationsComponent implements OnInit {
   blogs: Blog;
   blog: Blog;
 
@@ -79,7 +78,6 @@ export class ManageProductsComponent implements OnInit {
   category_id: any;
   status: any;
   currentUser: any;
-  productsVariations: any;
   technical_datas: any = [];
   technical_data: Technical_data;
   skills:  any[] = [];
@@ -111,7 +109,6 @@ trackByFn(index, item) {
     private technicalDataService: TechnicalDataService,
     private spinner: NgxSpinnerService,
     private categoryService: CategoryService, 
-    private productsVariationsService: ProductsVariationsService,
     private confirmationService: ConfirmationService,) { 
       this.status = STATUS_PRODUCTS;
       this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
@@ -237,11 +234,7 @@ edit(product: Products) {
   
   this.selectedSkills = JSON.parse("" + this.product.skills + "");
 
-  this.productsVariationsService.getProducstVariations(this.product.id).subscribe(data => {
-    this.productsVariations = data;
-   
-
-  });
+  
   this.productDialog = true;
 }
 

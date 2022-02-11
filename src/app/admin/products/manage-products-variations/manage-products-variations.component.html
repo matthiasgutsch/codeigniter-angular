@@ -140,32 +140,11 @@
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'60%'}">
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
-            <p-card>
-                <div class="p-grid">
-                    <div class="p-col-2">
 
-                        <img [src]="product.image" class="img-responsive">
-                    </div>
-                    <div class="p-col">
-                        <h3>{{product.title}}</h3>
-                        <p [innerHTML]="product.description"></p>
-                    </div>
+            <h3>{{product.title}}</h3>
+            <p [innerHTML]="product.description"></p>
 
-                </div>
-       
-            </p-card>
             <p-tabView>
-          
-                <p-tabPanel header="Variazioni">
-                    <table class="billings-list">
-                        <tr *ngFor="let variations of productsVariations">
-                            <td>{{variations.code_int}}</td>
-                        </tr>
-
-                    </table>
-
-                </p-tabPanel>
-
                 <p-tabPanel header="Date tecnici">
                     <table class="billings-list">
                         <tr *ngFor="let entry of selectedSkills | keys">
