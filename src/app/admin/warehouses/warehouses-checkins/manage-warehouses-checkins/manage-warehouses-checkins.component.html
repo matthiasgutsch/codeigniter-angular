@@ -257,9 +257,20 @@
                     <div class="p-col-12 p-md-12">
                         <p-dropdown [options]="productsVariations" [virtualScroll]="true" filter="true" [required]="true"
                             [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }"
-                            formControlName="project_id" optionLabel="title" optionValue="id">
+                            formControlName="product_id" optionLabel="title" optionValue="id">
                             <ng-template let-option pTemplate="item">
-                                {{option.title}}
+                                <div class="p-grid">
+                                    <div class="p-col-3">
+                                        {{option.title}} 
+                                    </div>
+                                    <div class="p-col-3">
+                                        {{option.code}}
+                                    </div>
+                                    <div class="p-col-3">
+                                        {{option.code_int}}
+                                    </div>
+                                </div>
+                          
                             </ng-template>
                         </p-dropdown>
                     </div>
