@@ -116,14 +116,11 @@
                                 Entrata
                             </th>
                        
-                            <th width="50">
-                                
+                            <th>
+                                Warehouse
                             </th>
                             <th>
-                                Dipendente
-                            </th>
-                            <th>
-                                Progetto
+                                Prodotti
                             </th>
                             <th width="150"></th>
                         </tr>
@@ -138,7 +135,8 @@
                             </td>
                             <td>
 
-                                <p-tag severity="default" [value]="warehouseCheckin.hours + ' ore'"></p-tag>
+                                <p-tag severity="default" [value]="warehouseCheckin.hours + ' pezzi'"></p-tag>
+                                <p-tag severity="success" [value]="warehouseCheckin.hours_extra + ' colli'"></p-tag>
 
                             </td>
 
@@ -149,15 +147,10 @@
                             </td>
 
                   
-                            <td width="50">
-                                <app-initials-avatar [routerLink]="['/admin/employees/edit', warehouseCheckin.employee_id]"
-                                    firstName="{{ getEmployeeItem(warehouseCheckin.employee_id)?.name | slice:0:1}}"
-                                    lastName="{{ getEmployeeItem(warehouseCheckin.employee_id)?.surname | slice:0:1}}">
-                                </app-initials-avatar>
-                            </td>
 
-                            <td>   {{ getEmployeeItem(warehouseCheckin.employee_id)?.username }}</td>
-                           <td>   {{ getProjectItem(warehouseCheckin.product_id)?.title }} sdssdsd</td>
+                            <td> {{warehouseCheckin.warehouse_id}}</td>
+                           <td>   {{ warehouseCheckin.product.title}}<br>
+                            <p class="small">{{ warehouseCheckin.product.code_int}} - {{ warehouseCheckin.product.code}}</p> </td>
                        
 
                             <td class="action">
@@ -255,8 +248,8 @@
                         <label>Prodotto</label>
                     </div>
                     <div class="p-col-12 p-md-12">
-                        <p-dropdown [options]="productsVariations" [virtualScroll]="true" filter="true" [required]="true"
-                            [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }"
+                        <p-dropdown [options]="productsVariations" filterBy="title,code,code_int" [virtualScroll]="true" filter="true" [required]="true"
+                            [showClear]="true" placeholder="Cerca per Codice, titolo, Codice interno" [style]="{ width: '100%' }"  [(ngModel)]="selectedProduct"
                             formControlName="product_id" optionLabel="title" optionValue="id">
                             <ng-template let-option pTemplate="item">
                                 <div class="p-grid">
@@ -277,22 +270,18 @@
                 </div>
 
                 <div class="p-field p-grid">
-                    <div class="p-col-12 p-md-12">
+                    <div class="p-col-12 p-md-6">
 
-                        <label>Ore <span class="required">*</span></label>
-                    </div>
-                    <div class="p-col-12 p-md-12">
+                        <label>Pezzi <span class="required">*</span></label>
+                    
                         <input type="text" pInputText [style]="{width:'100%'}" formControlName="hours" />
 
                     </div>
-                </div>
+               
+                    <div class="p-col-12 p-md-6">
 
-                <div class="p-field p-grid">
-                    <div class="p-col-12 p-md-12">
-
-                        <label>Ore extra <span class="required">*</span></label>
-                    </div>
-                    <div class="p-col-12 p-md-12">
+                        <label>Colli <span class="required">*</span></label>
+                   
                         <input type="text" pInputText [style]="{width:'100%'}" formControlName="hours_extra" />
 
                     </div>
@@ -312,7 +301,7 @@
                     <div class="p-col-12 p-md-12">
 
                         <button pButton pRipple icon="pi pi-save" label="salva"
-                            class="p-button p-button-success btn-block" [disabled]="!blogForm.valid"></button>
+                            class="p-button p-button-success btn-block"></button>
                     </div>
                 </div>
 

@@ -229,15 +229,13 @@ weekNo: number;
       id: [""],
       warehouse_id: ["", Validators.required],
       date_from: ["", Validators.required],
-      date_to: ["", Validators.required],
-      product_id: ["", Validators.required],
-      hours: ["", Validators.required],
-      hours_extra: ["", Validators.required],
-      employee_id: ["", Validators.required],
+      date_to: [""],
+      product_id: [""],
+      hours: [""],
+      hours_extra: [""],
+      employee_id: [""],
       user_id: [this.currentUser.user_id],
     });
-
-
   }
 
   getProjects() {
@@ -405,9 +403,7 @@ onSubmit() {
   formData.append("hours", this.blogForm.get("hours").value);
   formData.append("hours_extra", this.blogForm.get("hours_extra").value);
   formData.append('employee_id', this.blogForm.get('employee_id').value);
-
-
-
+  
   const id = this.blogForm.get("id").value;
 
   if (id) {
