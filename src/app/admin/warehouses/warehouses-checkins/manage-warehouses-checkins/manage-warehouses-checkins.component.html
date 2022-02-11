@@ -99,7 +99,7 @@
                     </div>
                 </div>
                 
-                <p-table #dt [columns]="cols" [responsive]="true"   [value]="timesheets" [globalFilterFields]="['name', 'description']"
+                <p-table #dt [columns]="cols" [responsive]="true"   [value]="warehouseCheckins" [globalFilterFields]="['name', 'description']"
                     currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true"
                     [rows]="15" [showCurrentPageReport]="true" [totalRecords]="totalRecords">
 
@@ -115,9 +115,7 @@
                             <th>
                                 Entrata
                             </th>
-                            <th>
-                                Uscita
-                            </th>
+                       
                             <th width="50">
                                 
                             </th>
@@ -127,60 +125,54 @@
                             <th>
                                 Progetto
                             </th>
-                            <th width="100"></th>
+                            <th width="150"></th>
                         </tr>
 
                     </ng-template>
-                    <ng-template pTemplate="body" let-timesheet>
+                    <ng-template pTemplate="body" let-warehouseCheckin>
                         <tr>
 
                             <td>
-                                <p-tag severity="info" *ngIf="timesheet.timesheets_type == '1'" value="Lavoro">
-                                </p-tag>
-                                <p-tag severity="success" *ngIf="timesheet.timesheets_type == '2'"
-                                    value="Ferie"></p-tag>
-                                <p-tag severity="warning" *ngIf="timesheet.timesheets_type == '3'"
-                                    value="Permesso"></p-tag>
-                                <p-tag severity="warning" *ngIf="timesheet.timesheets_type == '4'"
-                                    value="Straordinari"></p-tag>
-                                <p-tag severity="warning" *ngIf="timesheet.timesheets_type == '4'"
-                                    value="Altro"></p-tag>
+                              {{warehouseCheckin.id}}
 
                             </td>
                             <td>
 
-                                <p-tag severity="default" [value]="timesheet.hours + ' ore'"></p-tag>
+                                <p-tag severity="default" [value]="warehouseCheckin.hours + ' ore'"></p-tag>
 
                             </td>
 
                             <td>
-                               <i class="pi pi-calendar"></i> {{timesheet.date_from | date:'d-MM-yyyy hh:mm'}}
+                               <i class="pi pi-calendar"></i> {{warehouseCheckin.date_from | date:'d-MM-yyyy hh:mm'}}<br>
+                               {{warehouseCheckin.date_to | date:'d-MM-yyyy hh:mm'}}
 
                             </td>
 
-                            <td><i class="pi pi-calendar"></i> {{timesheet.date_to | date:'d-MM-yyyy hh:mm'}}
-                            </td>
-
+                  
                             <td width="50">
-                                <app-initials-avatar [routerLink]="['/admin/employees/edit', timesheet.employee_id]"
-                                    firstName="{{ getEmployeeItem(timesheet.employee_id)?.name | slice:0:1}}"
-                                    lastName="{{ getEmployeeItem(timesheet.employee_id)?.surname | slice:0:1}}">
+                                <app-initials-avatar [routerLink]="['/admin/employees/edit', warehouseCheckin.employee_id]"
+                                    firstName="{{ getEmployeeItem(warehouseCheckin.employee_id)?.name | slice:0:1}}"
+                                    lastName="{{ getEmployeeItem(warehouseCheckin.employee_id)?.surname | slice:0:1}}">
                                 </app-initials-avatar>
                             </td>
 
-                            <td>   {{ getEmployeeItem(timesheet.employee_id)?.username }}</td>
-                           <td>   {{ getProjectItem(timesheet.project_id)?.title }}</td>
+                            <td>   {{ getEmployeeItem(warehouseCheckin.employee_id)?.username }}</td>
+                           <td>   {{ getProjectItem(warehouseCheckin.project_id)?.title }}</td>
                        
 
                             <td class="action">
                         
                                 <button pButton pRipple icon="pi pi-pencil"
                                 class="p-button p-button-success p-mr-2"
-                                (click)="editItem(timesheet)"></button>
+                                (click)="editItem(warehouseCheckin)"></button>
                                 
                                 <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
-                                    (click)="view(timesheet)"></button>
+                                    (click)="view(warehouseCheckin)"></button>
           
+
+                                    <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
+                                    (click)="onDelete(warehouseCheckin.id)"></button>
+                                
                             </td>
                         </tr>
                     </ng-template>
@@ -192,7 +184,7 @@
 </div>
     </div>
 
-<p-sidebar [(visible)]="productDialogAdd" position="right" [style]="{width:'400px'}">
+<p-sidebar [(visible)]="productDialogAdd" position="right" [style]="{width:'50vw'}">
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
 
@@ -206,12 +198,12 @@
                         <label>Tipo</label>
                     </div>
                     <div class="p-col-12 p-md-12">
-                        <p-dropdown [options]="timesheets_type" [virtualScroll]="true" filter="true" [required]="true"
+                        <p-dropdown [options]="warehouses" [virtualScroll]="true" filter="true" [required]="true"
                             [showClear]="true" [autoDisplayFirst]=true [style]="{ width: '100%' }"
-                            [(ngModel)]="selectedTimesheetsType" formControlName="timesheets_type" optionLabel="label"
-                            optionValue="value">
+                            [(ngModel)]="selectedWarehouse" formControlName="warehouse_id" optionLabel="title"
+                            optionValue="id">
                             <ng-template let-option pTemplate="item">
-                                {{option.label}}
+                                {{option.title}}
                             </ng-template>
                         </p-dropdown>
                     </div>
@@ -321,11 +313,11 @@
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'400px'}">
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
-            <p-tag [value]="timesheet.id"></p-tag><br><br>
+            <p-tag [value]="warehouseCheckin.id"></p-tag><br><br>
             <h3>Dettaglio Timesheet</h3>
             <div class="well">
-            <p><strong>{{ getEmployeeItem(timesheet.employee_id)?.username }}</strong><br>
-                {{timesheet.created_at | date:'d-MM-yyyy' }} | {{timesheet.created_at | date:'hh:mm' }}</p>
+            <p><strong>{{ getEmployeeItem(warehouseCheckin.employee_id)?.username }}</strong><br>
+                {{warehouseCheckin.created_at | date:'d-MM-yyyy' }} | {{warehouseCheckin.created_at | date:'hh:mm' }}</p>
         </div>
             <hr class="full">
             <div class="p-grid">
@@ -334,7 +326,7 @@
                 </div>
                 <div class="p-col-12">
 
-                    <button pButton pRipple [label]="timesheet.date_from | date:'d-MM-yyyy hh:mm'"
+                    <button pButton pRipple [label]="warehouseCheckin.date_from | date:'d-MM-yyyy hh:mm'"
                         class="p-button p-button-primary btn-block"></button>
                 </div>
             </div><br>
@@ -344,14 +336,14 @@
                 </div>
                 <div class="p-col-12">
 
-            <button pButton pRipple [label]="timesheet.date_to | date:'d-MM-yyyy hh:mm'"
+            <button pButton pRipple [label]="warehouseCheckin.date_to | date:'d-MM-yyyy hh:mm'"
                 class="p-button p-button-success btn-block"></button>
                 </div>
             </div>
 
             <hr class="full">
             <strong>Cantiere</strong><br>
-            {{ getProjectItem(timesheet.project_id)?.title }}
+            {{ getProjectItem(warehouseCheckin.project_id)?.title }}
 
         </div>
     </ng-template>

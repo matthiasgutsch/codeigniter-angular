@@ -23,7 +23,7 @@ import { TimesheetsService } from 'src/app/services/timesheets.service';
 import { Products } from 'src/app/models/products';
 import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brands.service';
-import { STATUS_PRODUCTS, TIMESHEETS_TYPE } from '../../../constants/constants';
+import { STATUS_PRODUCTS } from '../../../constants/constants';
 import { Table } from 'primeng/table';
 import { NgxSpinnerService } from "ngx-spinner";
 import { TagsService } from 'src/app/services/tags.service';
@@ -31,13 +31,15 @@ import { Tags } from 'src/app/models/tags';
 import { KeyValue } from '@angular/common';
 import { Technical_data } from 'src/app/models/technical_data';
 import { TechnicalDataService } from 'src/app/services/technical_data.service';
-import { CalendarComponent } from 'ng-fullcalendar';
 import 'moment/locale/it'  // without this line it didn't work
-import { Timesheets } from 'src/app/models/timesheets';
 import { Projects } from 'src/app/models/projects';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import * as FileSaver from 'file-saver';
+import { WarehouseCheckins } from 'src/app/models/warehouse_checkins';
+import { WarehousesCheckinsService } from 'src/app/services/warehouses_checkins.service';
+import { WarehousesService } from 'src/app/services/warehouses.service';
+import { Warehouses } from 'src/app/models/warehouses';
 
 @Component({
   selector: 'app-manage-warehouses-checkins',
@@ -69,11 +71,10 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   currentIndex = 1;
   displayEvent: any;
   productsData: any = [];
-  timesheets: any = [];
-  timesheet: Timesheets;
+  warehouseCheckins: any = [];
+  warehouseCheckin: WarehouseCheckins;
   date: Date;
   skillsArray: any = [];
-  timesheets_type: any;
   categories: any = [];
   category: Category;
   error: string;
@@ -96,6 +97,8 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   employees: any = [];
   employee: Employees;
   pageTitle: string;
+  warehouses: any = [];
+  warehouse: Warehouses;
 
   showDialog() {
     this.productDialog = true;
@@ -107,37 +110,29 @@ trackByFn(index, item) {
   return item.id;
 }
 
-
 startDate: Date;
 bsValue: Date = new Date();
 tues = new Date();
-
 weekNo: number;
 
-
-
 @ViewChild("dt", { static: false }) public dt: Table;
-@ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
   constructor(
     private clientsService: ClientsService,
-    private timesheetsService: TimesheetsService,
+    private warehousesCheckinsService: WarehousesCheckinsService,
     private worksService: WorksService,
     private locationsService: LocationsService, 
     private messageService: MessageService,
+    private warehousesService: WarehousesService,
     private employeesService: EmployeesService,
-    private comuniService: ComuniService,
-    private brandService: BrandService,
     private tagsService: TagsService,
     private fb: FormBuilder,
-    private technicalDataService: TechnicalDataService,
     private spinner: NgxSpinnerService,
     private categoryService: CategoryService, 
     private projectsService: ProjectsService,
     private confirmationService: ConfirmationService,) { 
       this.status = STATUS_PRODUCTS;
       this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-      this.timesheets_type = TIMESHEETS_TYPE;
   }
 
   ngOnInit() {
@@ -149,9 +144,9 @@ weekNo: number;
     this.spinner.show();
     this.getProjects();
     this.getEmployees();
-
-    this.timesheetsService.getAllListbyUser().subscribe(data => {
-      this.timesheets = data;
+    this.getWarehouses();
+    this.warehousesCheckinsService.getAllListbyUser().subscribe(data => {
+      this.warehouseCheckins = data;
       this.cols = [
         { field: "project_id", header: "titolo" },
         { field: "code", header: "Codice" },
@@ -171,41 +166,21 @@ weekNo: number;
       title: col.header,
       dataKey: col.field
     }));
-    
       this.spinner.hide();
-      
     });
-
-
-  }
-
-
-  getBrands() {
-  this.brandService.getAllListbyUser().subscribe(
-    (data: Brand) => this.brands = data,
-    error => this.error = error
-  );
-  }
-
-
-  getTechnicalData() {
-  this.technicalDataService.getAllListbyUser().subscribe(
-    (data: Technical_data) => (this.technical_datas = data),
-    (error) => (this.error = error)
-  );
   }
 
 
 
-  editItem(timesheet: Timesheets) {
-    this.timesheet = { ...timesheet };
-    const id = timesheet.id;
+  editItem(warehouseCheckin: WarehouseCheckins) {
+    this.warehouseCheckin = { ...warehouseCheckin };
+    const id = warehouseCheckin.id;
 
     if (id) {
       this.pageTitle = "Modifica Timesheet";
-      this.timesheetsService.getId(+id).subscribe((res) => {
+      this.warehousesCheckinsService.getId(+id).subscribe((res) => {
         this.blogForm.patchValue({
-          timesheets_type: res.timesheets_type,
+          warehouse_id: res.warehouse_id,
           date_from: res.date_from,
           date_to: res.date_to,
           project_id: res.project_id,
@@ -223,7 +198,7 @@ weekNo: number;
 
     this.blogForm = this.fb.group({
       id: [""],
-      timesheets_type: ["", Validators.required],
+      warehouse_id: ["", Validators.required],
       date_from: ["", Validators.required],
       date_to: ["", Validators.required],
       project_id: ["", Validators.required],
@@ -242,7 +217,7 @@ weekNo: number;
 
     this.blogForm = this.fb.group({
       id: [""],
-      timesheets_type: ["", Validators.required],
+      warehouse_id: ["", Validators.required],
       date_from: ["", Validators.required],
       date_to: ["", Validators.required],
       project_id: ["", Validators.required],
@@ -262,6 +237,12 @@ weekNo: number;
     );
   }
 
+  getWarehouses() {
+
+    this.warehousesService.getAllListbyUser().subscribe(
+      (data: Warehouses) => this.warehouses = data,
+      );
+    }
 
   getEmployees() {
     this.employeesService.getAllListbyUser().subscribe(
@@ -367,17 +348,18 @@ weekNo: number;
 
 
 
-view(timesheet: Timesheets) {
-  this.timesheet = { ...timesheet };
+view(warehouseCheckin: WarehouseCheckins) {
+  this.warehouseCheckin = { ...warehouseCheckin };
   
   this.productDialog = true;
 }
 
 
+
 exportPdf() {
   // const doc = new jsPDF();
   const doc = new jsPDF('l','pt','A4');
-  doc['autoTable'](this.exportColumns, this.timesheets);
+  doc['autoTable'](this.exportColumns, this.warehouseCheckins);
   // doc.autoTable(this.exportColumns, this.products);
   doc.save("timesheets.pdf");
 }
@@ -386,7 +368,7 @@ exportPdf() {
 
 exportExcel() {
   import("xlsx").then(xlsx => {
-      const worksheet = xlsx.utils.json_to_sheet(this.timesheets);
+      const worksheet = xlsx.utils.json_to_sheet(this.warehouseCheckins);
       const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
       const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
       this.saveAsExcelFile(excelBuffer, "timesheets");
@@ -405,7 +387,7 @@ saveAsExcelFile(buffer: any, fileName: string): void {
 onSubmit() {
   const formData = new FormData();
 
-  formData.append("timesheets_type", this.blogForm.get("timesheets_type").value);
+  formData.append("warehouse_id", this.blogForm.get("warehouse_id").value);
   formData.append("date_from", this.blogForm.get("date_from").value);
   formData.append("date_to", this.blogForm.get("date_to").value);
   formData.append('user_id', this.blogForm.get('user_id').value);
@@ -419,7 +401,7 @@ onSubmit() {
   const id = this.blogForm.get("id").value;
 
   if (id) {
-    this.timesheetsService.update(formData, +id).subscribe(
+    this.warehousesCheckinsService.update(formData, +id).subscribe(
       (res) => {
         if (res.status == "error") {
           this.uploadError = res.message;
@@ -432,7 +414,7 @@ onSubmit() {
       (error) => (this.error = error)
     );
   } else {
-    this.timesheetsService.create(formData).subscribe(
+    this.warehousesCheckinsService.create(formData).subscribe(
       (res) => {
         if (res.status === "error") {
           this.uploadError = res.message;
@@ -461,7 +443,7 @@ hideDialog() {
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.timesheetsService.delete(+id).subscribe(
+        this.warehousesCheckinsService.delete(+id).subscribe(
           res => {
             console.log(res);
             this.ngOnInit();
