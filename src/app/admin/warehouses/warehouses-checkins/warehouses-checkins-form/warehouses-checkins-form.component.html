@@ -1,0 +1,235 @@
+<div class="main-inner">
+
+    <div class="dash-header">
+    <div class="dash-title">
+    </div>
+</div>
+
+<form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+
+    <div class="p-fluid">
+        <div class="p-field p-grid">
+
+            <div class="p-col-12 p-md-8">
+                <p-card>
+                    <div class="blog-form">
+                        <div class="p-field p-grid">
+                            <div class="p-col-12 p-md-9">
+                                <h3>Modifica Timesheet</h3>
+                            </div>
+                            <div class="p-col-12 p-md-3">
+
+                                <button pButton pRipple icon="pi pi-save" label="salva"
+                                    class="p-button pull-right p-button-success p-mr-2"
+                                    [disabled]="!blogForm.valid"></button>
+
+                            </div>
+                        </div>
+                        <hr class="full">
+
+                        <p-tabView>
+                            <p-tabPanel header="Informazioni">
+
+                                <div class="p-fluid">
+
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Nome Prodotto<span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+
+                                            <input type="text" [style]="{ width: '100%' }" pInputText
+                                                formControlName="title">
+
+                                            <!-- <input type="text" [style]="{ width: '100%' }" [(ngModel)]="data" value="{{rows.value | json}}" pInputText formControlName="data" >-->
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-fluid">
+
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Codice <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+                                            <div class="p-grid">
+                                                <div class="p-col-12 p-md-5">
+                                                    <input type="text" [style]="{ width: '100%' }" pInputText
+                                                        formControlName="code">
+                                                </div>
+                                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Codice interno <span
+                                                        class="required">*</span></label>
+                                                <div class="p-col-4 p-md-5">
+
+                                                    <input type="text" [style]="{ width: '100%' }" pInputText
+                                                        formControlName="code_int">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-fluid">
+
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Prezzo <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+                                            <div class="p-grid">
+                                                <div class="p-col-12 p-md-5">
+                                                    <input type="text" [style]="{ width: '100%' }" pInputText
+                                                        formControlName="price">
+                                                </div>
+                                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Prezzo scontato<span
+                                                        class="required">*</span></label>
+                                                <div class="p-col-4 p-md-5">
+
+                                                    <input type="text" [style]="{ width: '100%' }" pInputText
+                                                        formControlName="price_extra">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-fluid">
+
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Employee <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+
+                                            <p-dropdown [options]="employees" [virtualScroll]="true" filter="true"
+                                                [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }"
+                                                formControlName="employee_id" optionLabel="username" optionValue="id">
+
+                                            </p-dropdown>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Categories <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+
+                                            <p-multiSelect [options]="categories" display="chip"
+                                                formControlName="category_id" [(ngModel)]="selectedCategories"
+                                                optionLabel="name" optionValue="name">
+                                            </p-multiSelect>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">In evidenzia <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+
+                                            <p-selectButton [options]="stateOptions" formControlName="is_featured" optionLabel="label" optionValue="value"></p-selectButton>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Attivo <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+                                            <p-selectButton [options]="stateOptions" formControlName="is_active" optionLabel="label" optionValue="value"></p-selectButton>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Status <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+                                            <p-dropdown [options]="projects" [virtualScroll]="true" filter="true"
+                                                [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }"
+                                                formControlName="status" optionLabel="title" optionValue="id">
+                                                <ng-template let-option pTemplate="item">
+
+                                                    {{option.title}}
+
+                                                </ng-template>
+
+                                            </p-dropdown>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Descrizione <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+
+                                            <textarea pInputTextarea formControlName="description"></textarea>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-fluid">
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Descrizione Completa <span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+
+                                            <textarea pInputTextarea formControlName="description_full"></textarea>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                               
+
+                                <div class="form-group form-row">
+                                    <label class="col-md-3"></label>
+                                    <div class="col-md-9">
+                                        <input type="hidden" formControlName="id">
+                                        <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
+
+                                    </div>
+                                </div>
+
+                            </p-tabPanel>
+
+                          
+
+                        </p-tabView>
+
+                    </div>
+
+                </p-card>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</form>
+
+</div>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" #cd>
+
+    <p-footer>
+        <button type="button" pButton icon="fa fa-close" class="p-button p-button-danger p-mr-2" label="No" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="fa fa-check" class="p-button p-button-success p-mr-2" label="Si" (click)="cd.accept()"></button>
+    </p-footer>
+
+</p-confirmDialog>
+
+<p-toast key="myKey1"></p-toast>
