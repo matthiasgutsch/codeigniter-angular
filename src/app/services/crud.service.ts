@@ -95,7 +95,7 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
 
-  getProducstVariations(id: number, ) {
+  getProductsVariations(id: number, ) {
     const userId = this.currentUser.user_id;
     return this._http.get<Billings>(this._base + '/user/' + id + '/' + userId)
   }

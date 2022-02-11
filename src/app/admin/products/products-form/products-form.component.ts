@@ -197,7 +197,7 @@ export class ProductsFormComponent implements OnInit {
     });
 
 
-    this.productsVariationsService.getProducstVariations(+id).subscribe(data => {
+    this.productsVariationsService.getProductsVariations(+id).subscribe(data => {
       this.productsVariations = data;
       this.cols = [
         { field: "title", header: "titolo" },

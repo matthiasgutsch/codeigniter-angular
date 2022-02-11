@@ -148,6 +148,10 @@
                     </div>
                     <div class="p-col">
                         <h3>{{product.title}}</h3>
+                        <p>{{product.code}} | {{product.int}}</p>
+                        <br>
+                        <h4>{{product.price | currency :'EUR':'symbol':'1.2-2'}}</h4>
+                        <hr class="small">
                         <p [innerHTML]="product.description"></p>
                     </div>
 
@@ -158,10 +162,14 @@
           
                 <p-tabPanel header="Variazioni">
                     <table class="billings-list">
-                        <tr *ngFor="let variations of productsVariations">
-                            <td>{{variations.code_int}}</td>
+                        <tr *ngFor="let productsVariation of productsVariations">
+                            <td width="50" *ngIf="productsVariation.image"><img [src]="productsVariation.image" class="img-responsive"></td>
+                            <td>{{productsVariation.title}}</td>
+                            <td>Codice {{productsVariation.code}}</td>
+                            <td>{{productsVariation.price | currency :'EUR':'symbol':'1.2-2'}}</td>
+                            <td>{{productsVariation.code_int}}</td>
                         </tr>
-
+                       
                     </table>
 
                 </p-tabPanel>

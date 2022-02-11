@@ -32,6 +32,7 @@ import { KeyValue } from '@angular/common';
 import { Technical_data } from 'src/app/models/technical_data';
 import { TechnicalDataService } from 'src/app/services/technical_data.service';
 import { ProductsVariationsService } from 'src/app/services/products_variations.service';
+import { ProductsVariations } from 'src/app/models/products_variations';
 
 @Component({
   selector: 'app-manage-products',
@@ -53,6 +54,8 @@ export class ManageProductsComponent implements OnInit {
   _selectedColumns: any[];
   selectedWorks: any[];
   selectedSkills: any[];
+  selectedSkillsVariations: any[];
+
   brands: any = [];
   brand: Brand;
 
@@ -80,6 +83,7 @@ export class ManageProductsComponent implements OnInit {
   status: any;
   currentUser: any;
   productsVariations: any;
+  productsVariation: ProductsVariations;
   technical_datas: any = [];
   technical_data: Technical_data;
   skills:  any[] = [];
@@ -233,16 +237,21 @@ trackByFn(index, item) {
 
 
 edit(product: Products) {
+  this.spinner.show();
+
   this.product = { ...product };
   
   this.selectedSkills = JSON.parse("" + this.product.skills + "");
 
-  this.productsVariationsService.getProducstVariations(this.product.id).subscribe(data => {
+  this.productsVariationsService.getProductsVariations(this.product.id).subscribe(data => {
     this.productsVariations = data;
-   
+    this.selectedSkillsVariations = JSON.parse("" + this.productsVariation.skills + "");
+
 
   });
   this.productDialog = true;
+  this.spinner.hide();
+
 }
 
 
