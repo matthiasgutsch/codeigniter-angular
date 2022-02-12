@@ -41,6 +41,8 @@ import { WarehousesCheckinsService } from 'src/app/services/warehouses_checkins.
 import { WarehousesService } from 'src/app/services/warehouses.service';
 import { Warehouses } from 'src/app/models/warehouses';
 import { ProductsVariationsService } from 'src/app/services/products_variations.service';
+import { Suppliers } from 'src/app/models/suppliers';
+import { SuppliersService } from 'src/app/services/suppliers.service';
 
 @Component({
   selector: 'app-manage-warehouses-checkins',
@@ -62,6 +64,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   exportColumns: any[];
   _selectedColumns: any[];
   selectedEmployee: any[];
+  selectedSupplier: any[];
   selectedSkills: any[];
   brands: any = [];
   brand: Brand;
@@ -82,6 +85,10 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   private id: number;
   clients: any = [];
   client: Clients;
+
+  suppliers: any = [];
+  supplier: Suppliers;
+
   productDialog:boolean = false;
   works_id: any;
   category_id: any;
@@ -121,10 +128,8 @@ weekNo: number;
 @ViewChild("dt", { static: false }) public dt: Table;
 
   constructor(
-    private clientsService: ClientsService,
     private warehousesCheckinsService: WarehousesCheckinsService,
-    private worksService: WorksService,
-    private locationsService: LocationsService, 
+    private suppliersService: SuppliersService,
     private messageService: MessageService,
     private warehousesService: WarehousesService,
     private employeesService: EmployeesService,
@@ -150,6 +155,7 @@ weekNo: number;
     this.getEmployees();
     this.getWarehouses();
     this.getProductsVariations();
+    this.getSuppliers();
 
     this.warehousesCheckinsService.getAllListbyUser().subscribe(data => {
       this.warehouseCheckins = data;
@@ -210,6 +216,7 @@ weekNo: number;
       warehouse_id: ["", Validators.required],
       date_from: ["", Validators.required],
       product_id: ["", Validators.required],
+      supplier_id: ["", Validators.required],
       hours: ["", Validators.required],
       hours_extra: ["", Validators.required],
       employee_id: ["", Validators.required],
@@ -228,6 +235,7 @@ weekNo: number;
       warehouse_id: ["", Validators.required],
       date_from: ["", Validators.required],
       product_id: [""],
+      supplier_id: [""],
       hours: [""],
       hours_extra: [""],
       employee_id: [""],
@@ -314,6 +322,14 @@ weekNo: number;
     );
   }
 
+  getSuppliers() {
+
+    this.suppliersService.getAllListbyUser().subscribe(
+      (data: Suppliers) => this.suppliers = data,
+      error => this.error = error
+      );
+    }
+
 
   clear(table: any) 
   {
@@ -399,6 +415,7 @@ onSubmit() {
   formData.append("date_from", this.blogForm.get("date_from").value);
   formData.append('user_id', this.blogForm.get('user_id').value);
   formData.append("product_id", this.blogForm.get("product_id").value);
+  formData.append("supplier_id", this.blogForm.get("supplier_id").value);
   formData.append("hours", this.blogForm.get("hours").value);
   formData.append("hours_extra", this.blogForm.get("hours_extra").value);
   formData.append('employee_id', this.blogForm.get('employee_id').value);
