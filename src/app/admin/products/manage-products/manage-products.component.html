@@ -161,6 +161,35 @@
             <p-tabView>
           
                 <p-tabPanel header="Variazioni">
+                    <p-table #dt [columns]="cols" [value]="productsVariations" [responsive]="true"  [globalFilterFields]="['name', 'description']"
+                    currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true"
+                    [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
+
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th width="50px"></th>
+                            <th *ngFor="let col of cols">
+                                {{col.header}}
+                            </th>
+                        </tr>
+
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr>
+                            <td *ngIf="rowData.image"><img [src]="rowData.image"
+                                    [routerLink]="['/admin/products/edit', rowData.id]" class="img-responsive"></td>
+                            <td *ngFor="let col of cols" [ngSwitch]="col.field">
+                                {{rowData[col.field]}}
+
+                                
+                            </td>
+
+                         
+                        </tr>
+                    </ng-template>
+                </p-table>
+
+
                     <table class="billings-list">
                         <tr *ngFor="let productsVariation of productsVariations">
                             <td width="50"><img [src]="product.image" class="img-responsive"></td>
@@ -168,6 +197,8 @@
                             <td>Codice {{productsVariation.code}}</td>
                             <td>{{productsVariation.price | currency :'EUR':'symbol':'1.2-2'}}</td>
                             <td>{{productsVariation.code_int}}</td>
+                            <td>{{productsVariation.pieces}}</td>
+
                         </tr>
                        
                     </table>

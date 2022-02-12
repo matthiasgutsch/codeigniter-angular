@@ -197,7 +197,6 @@ weekNo: number;
           supplier_id: res.supplier_id,
           product_id: res.product_id,
           pieces: res.pieces,
-          employee_id: res.employee_id,
           boxes: res.boxes,
           user_id: this.currentUser.user_id,
           id: res.id,
@@ -215,7 +214,6 @@ weekNo: number;
       supplier_id: ["", Validators.required],
       pieces: ["", Validators.required],
       boxes: ["", Validators.required],
-      employee_id: [""],
       user_id: [this.currentUser.user_id],
     });
 
@@ -234,7 +232,6 @@ weekNo: number;
       supplier_id: ["", Validators.required],
       pieces: [""],
       boxes: [""],
-      employee_id: [""],
       user_id: [this.currentUser.user_id],
     });
 
@@ -400,6 +397,23 @@ saveAsExcelFile(buffer: any, fileName: string): void {
   FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
 }
 
+
+updateQuantity(formData) {
+  formData = new FormData();
+  const id = this.blogForm.get("product_id").value;
+  formData.set('pieces', this.blogForm.get("pieces").value);
+
+  this.productsVariationsService.update_quantity(formData, +id).subscribe({
+    next: (response: any) => {
+      if (response.error) {
+      } else {
+        this.messageService.add({key: 'myKey1', severity:'success', summary: 'Conferma', detail: 'Quantita aggiornata con successo'});
+      }
+    },
+  });
+}
+
+
 onSubmit() {
   const formData = new FormData();
 
@@ -409,7 +423,6 @@ onSubmit() {
   formData.append("supplier_id", this.blogForm.get("supplier_id").value);
   formData.append("pieces", this.blogForm.get("pieces").value);
   formData.append("boxes", this.blogForm.get("boxes").value);
-  formData.append('employee_id', this.blogForm.get('employee_id').value);
   
   const id = this.blogForm.get("id").value;
 
@@ -419,6 +432,8 @@ onSubmit() {
         if (res.status == "error") {
           this.uploadError = res.message;
         } else {
+          this.updateQuantity(formData);
+
           this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
           this.productDialogAdd = false;
           this.ngOnInit();
@@ -432,6 +447,7 @@ onSubmit() {
         if (res.status === "error") {
           this.uploadError = res.message;
         } else {
+          this.updateQuantity(formData);
           this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
           this.productDialogAdd = false;
           this.ngOnInit();

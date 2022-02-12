@@ -226,23 +226,6 @@
                     </div>
                 </div>
 
-                <div class="p-field p-grid">
-                    <div class="p-col-12 p-md-12">
-                        
-                        <label>Dipendente</label>
-                    </div>
-                    <div class="p-col-12 p-md-12">
-                        <p-dropdown [options]="employees" [virtualScroll]="true" filter="true" [required]="true"
-                            [showClear]="true" [autoDisplayFirst]=true [style]="{ width: '100%' }"
-                            [(ngModel)]="selectedEmployee" formControlName="employee_id" optionLabel="username"
-                            optionValue="id">
-                            <ng-template let-option pTemplate="item">
-                                {{option.username}}
-                            </ng-template>
-                        </p-dropdown>
-                    </div>
-                </div>
-
             
 
                 <div class="p-field p-grid">
