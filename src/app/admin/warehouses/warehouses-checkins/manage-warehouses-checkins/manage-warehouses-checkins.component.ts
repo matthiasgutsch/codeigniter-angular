@@ -43,6 +43,7 @@ import { Warehouses } from 'src/app/models/warehouses';
 import { ProductsVariationsService } from 'src/app/services/products_variations.service';
 import { Suppliers } from 'src/app/models/suppliers';
 import { SuppliersService } from 'src/app/services/suppliers.service';
+import { ProductsVariations } from 'src/app/models/products_variations';
 
 @Component({
   selector: 'app-manage-warehouses-checkins',
@@ -108,8 +109,10 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   warehouses: any = [];
   warehouse: Warehouses;
   productsVariations: any = [];
+  updateProductQuantity: any;
+  productsVariation: ProductsVariations;
+  pieces: string;
 
-  
   showDialog() {
     this.productDialog = true;
 }
@@ -220,7 +223,7 @@ weekNo: number;
     this.productDialogAdd = true;
   }
   
-  createTimesheets(employee: Employees) {
+  createTimesheets() {
     this.productDialogAdd = true;
 
     this.pageTitle = "Aggiungi Timesheet";
@@ -401,16 +404,24 @@ saveAsExcelFile(buffer: any, fileName: string): void {
 updateQuantity(formData) {
   formData = new FormData();
   const id = this.blogForm.get("product_id").value;
-  formData.set('pieces', this.blogForm.get("pieces").value);
+  
+  this.productsVariationsService.getId(+id).subscribe(data => {
+    this.productsVariation = data;
+    this.pieces = this.productsVariation.pieces;
+    this.updateProductQuantity = +this.pieces + +this.blogForm.get("pieces").value;
+    formData.append('pieces', this.updateProductQuantity);
 
-  this.productsVariationsService.update_quantity(formData, +id).subscribe({
-    next: (response: any) => {
-      if (response.error) {
-      } else {
-        this.messageService.add({key: 'myKey1', severity:'success', summary: 'Conferma', detail: 'Quantita aggiornata con successo'});
-      }
-    },
-  });
+    this.productsVariationsService.update_quantity(formData, +id).subscribe({
+      next: (response: any) => {
+        if (response.error) {
+        } else {
+          this.messageService.add({key: 'myKey1', severity:'success', summary: 'Conferma', detail: 'Quantita aggiornata con successo'});
+        }
+      },
+    });
+  })
+
+ 
 }
 
 
@@ -432,8 +443,6 @@ onSubmit() {
         if (res.status == "error") {
           this.uploadError = res.message;
         } else {
-          this.updateQuantity(formData);
-
           this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
           this.productDialogAdd = false;
           this.ngOnInit();

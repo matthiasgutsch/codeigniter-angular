@@ -198,8 +198,7 @@
                         <label>Tipo</label>
                     </div>
                     <div class="p-col-12 p-md-12">
-                        <p-dropdown [options]="warehouses" [virtualScroll]="true" filter="true" [required]="true"
-                            [showClear]="true" [autoDisplayFirst]=true [style]="{ width: '100%' }"
+                        <p-dropdown [options]="warehouses" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }"
                             [(ngModel)]="selectedWarehouse" formControlName="warehouse_id" optionLabel="title"
                             optionValue="id">
                             <ng-template let-option pTemplate="item">
@@ -215,8 +214,7 @@
                         <label>Fornitore</label>
                     </div>
                     <div class="p-col-12 p-md-12">
-                        <p-dropdown [options]="suppliers" [virtualScroll]="true" filter="true" [required]="true"
-                            [showClear]="true"  [autoDisplayFirst]=true [style]="{ width: '100%' }"
+                        <p-dropdown [options]="suppliers" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }"
                             [(ngModel)]="selectedSupplier" formControlName="supplier_id" optionLabel="company_name"
                             optionValue="id">
                             <ng-template let-option pTemplate="item">
