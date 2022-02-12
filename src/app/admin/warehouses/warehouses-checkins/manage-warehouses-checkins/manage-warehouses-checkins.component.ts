@@ -224,6 +224,7 @@ weekNo: number;
   
   createTimesheets(employee: Employees) {
     this.productDialogAdd = true;
+
     this.pageTitle = "Aggiungi Timesheet";
 
     this.blogForm = this.fb.group({
@@ -236,6 +237,8 @@ weekNo: number;
       employee_id: [""],
       user_id: [this.currentUser.user_id],
     });
+
+
   }
 
 

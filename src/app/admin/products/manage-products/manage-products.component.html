@@ -163,7 +163,7 @@
                 <p-tabPanel header="Variazioni">
                     <table class="billings-list">
                         <tr *ngFor="let productsVariation of productsVariations">
-                            <td width="50" *ngIf="productsVariation.image"><img [src]="productsVariation.image" class="img-responsive"></td>
+                            <td width="50"><img [src]="product.image" class="img-responsive"></td>
                             <td>{{productsVariation.title}}</td>
                             <td>Codice {{productsVariation.code}}</td>
                             <td>{{productsVariation.price | currency :'EUR':'symbol':'1.2-2'}}</td>
