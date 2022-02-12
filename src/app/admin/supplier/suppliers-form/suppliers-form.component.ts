@@ -20,23 +20,25 @@ import { Billings } from 'src/app/models/billings';
 import { PersonalDataService } from 'src/app/services/personal_data.service';
 import { Personal_data } from 'src/app/models/personal_data';
 import { NgxSpinnerService } from "ngx-spinner";
+import { Suppliers } from 'src/app/models/suppliers';
+import { SuppliersService } from 'src/app/services/suppliers.service';
 
 
 
 @Component({
-  selector: "app-clients-form",
-  templateUrl: "./clients-form.component.html",
+  selector: "app-suppliers-form",
+  templateUrl: "./suppliers-form.component.html",
 })
 
-export class ClientsFormComponent implements OnInit {
+export class SuppliersFormComponent implements OnInit {
   @ViewChild("myInput", { static: false }) myInputVariable: ElementRef;
 
   pageTitle: string;
   error: string;
   uploadError: string;
   imagePath: any;
-  clients: Clients;
-  client: Clients;
+  suppliers: Suppliers;
+  supplier: Suppliers;
 
 
   clientsList: any = [];
@@ -85,7 +87,7 @@ export class ClientsFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private clientsService: ClientsService,
+    private suppliersService: SuppliersService,
     private messageService: MessageService,
     private personalDataService: PersonalDataService,
     private categoryService: CategoryService,
@@ -149,7 +151,7 @@ export class ClientsFormComponent implements OnInit {
         (error) => (this.error = error)
       );
 
-      this.clientsService.getId(+id).subscribe((res) => {
+      this.suppliersService.getId(+id).subscribe((res) => {
         if (res.user_id == this.currentUser.user_id) {
         this.blogForm.patchValue({
           name: res.name,
@@ -237,7 +239,7 @@ export class ClientsFormComponent implements OnInit {
 
 
   getClientList() {
-  this.clientsService.getAllListbyUser().subscribe(data => {
+  this.suppliersService.getAllListbyUser().subscribe(data => {
     this.clientsList = data;
     this.cols = [
       { field: "username", header: "Nome" },
@@ -275,7 +277,7 @@ export class ClientsFormComponent implements OnInit {
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.clientsService.delete(+id).subscribe(
+        this.suppliersService.delete(+id).subscribe(
           res => {
             console.log(res);
             this.messageService.add({ key: 'cancel', severity: 'success', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo' });
@@ -298,7 +300,7 @@ export class ClientsFormComponent implements OnInit {
     var formArray = this.fb.array([]);
     const id = this.route.snapshot.paramMap.get("id");
 
-    this.clientsService.skills(+id).subscribe(
+    this.suppliersService.skills(+id).subscribe(
       (res)=>{
         this.skillsValues = res;
 
@@ -394,7 +396,7 @@ export class ClientsFormComponent implements OnInit {
     const id = this.blogForm.get("id").value;
 
     if (id) {
-      this.clientsService.update(formData, +id).subscribe(
+      this.suppliersService.update(formData, +id).subscribe(
         (res) => {
           if (res.status == "error") {
             this.uploadError = res.message;
@@ -408,7 +410,7 @@ export class ClientsFormComponent implements OnInit {
         (error) => (this.error = error)
       );
     } else {
-      this.clientsService.create(formData).subscribe(
+      this.suppliersService.create(formData).subscribe(
         (res) => {
           if (res.status === "error") {
             this.uploadError = res.message;

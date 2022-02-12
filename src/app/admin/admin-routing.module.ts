@@ -59,6 +59,8 @@ import { WarehousesFormComponent } from './settings/warehouses/warehouses-form/w
 import { ManageWarehousesCheckinsComponent } from './warehouses/warehouses-checkins/manage-warehouses-checkins/manage-warehouses-checkins.component';
 import { WarehousesCheckinsFormComponent } from './warehouses/warehouses-checkins/warehouses-checkins-form/warehouses-checkins-form.component';
 import { ManageWarehousesComponent } from './settings/warehouses/manage-warehouses/manage-warehouses.component';
+import { ManageSuppliersComponent } from './supplier/manage-suppliers/manage-suppliers.component';
+import { SuppliersFormComponent } from './supplier/suppliers-form/suppliers-form.component';
 
 const routes: Routes = [
   {
@@ -123,6 +125,14 @@ const routes: Routes = [
           { path: "clients", component: ManageClientsComponent },
           { path: "clients/create", component: ClientsFormComponent },
           { path: "clients/edit/:id", component: ClientsFormComponent },
+
+
+
+          { path: "suppliers", component: ManageSuppliersComponent },
+          { path: "suppliers/create", component: SuppliersFormComponent },
+          { path: "suppliers/edit/:id", component: SuppliersFormComponent },
+
+
           { path: "settings", component: SettingsComponent },
 
           { path: "settings/categories", component: ManageCategoriesComponent },

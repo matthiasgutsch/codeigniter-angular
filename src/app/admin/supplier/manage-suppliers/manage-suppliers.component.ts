@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientsService } from '../../../services/clients.service';
-import { Blog } from '../../../models/blog';
-import { Clients } from '../../../models/clients';
+import { Suppliers } from '../../../models/suppliers';
 import { ConfirmationService } from 'primeng/api';
 import { CategoryService } from '../../../services/categories.service';
 import { Category } from '../../../models/category';
@@ -11,15 +9,16 @@ import { Comuni } from 'src/app/models/comuni';
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { NgxSpinnerService } from "ngx-spinner";
+import { SuppliersService } from 'src/app/services/suppliers.service';
 
 
 @Component({
-  selector: 'app-manage-clients',
-  templateUrl: './manage-clients.component.html'
+  selector: 'app-manage-suppliers',
+  templateUrl: './manage-suppliers.component.html'
 })
-export class ManageClientsComponent implements OnInit {
-  clients: any = [];
-  client: Clients;
+export class ManageSuppliersComponent implements OnInit {
+  suppliers: any = [];
+  supplier: Suppliers;
   categories: any = [];
   category: Category;
   error: string;
@@ -46,7 +45,7 @@ export class ManageClientsComponent implements OnInit {
 
 
   constructor(
-    private clientsService: ClientsService,
+    private suppliersService: SuppliersService,
     private messageService: MessageService,
     private spinner: NgxSpinnerService,
     private comuniService: ComuniService,
@@ -63,13 +62,12 @@ export class ManageClientsComponent implements OnInit {
    
 
     this.spinner.show();
-    this.clientsService.getAllListbyUser().subscribe(data => {
-      this.clients = data;
+    this.suppliersService.getAllListbyUser().subscribe(data => {
+      this.suppliers = data;
       this.cols = [
         { field: "name", header: "Nome" },
-        { field: "surname", header: "Cognome" },
 
-        { field: "date", header: "Data di nascità" },
+        { field: "address", header: "Indirizzo" },
         { field: "phone", header: "Cellulare" },
         { field: "city", header: "Indirizzo" }
   
@@ -95,12 +93,12 @@ export class ManageClientsComponent implements OnInit {
 
 
   getCategoryItem(category_id: string, id: string) {
-    return this.clients.find(item => item.id === category_id);
+    return this.suppliers.find(item => item.id === category_id);
   }
 
 
-  edit(client: Clients) {
-    this.client = { ...client };
+  edit(supplier: Suppliers) {
+    this.supplier = { ...supplier };
     this.productDialog = true;
   }
 
@@ -112,7 +110,7 @@ export class ManageClientsComponent implements OnInit {
   exportPdf() {
     // const doc = new jsPDF();
     const doc = new jsPDF('l','pt','A4');
-    doc['autoTable'](this.exportColumns, this.clients);
+    doc['autoTable'](this.exportColumns, this.suppliers);
     // doc.autoTable(this.exportColumns, this.products);
     doc.save("clients.pdf");
   }
@@ -127,7 +125,7 @@ export class ManageClientsComponent implements OnInit {
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.clientsService.delete(+id).subscribe(
+        this.suppliersService.delete(+id).subscribe(
           res => {
             console.log(res);
             this.ngOnInit();

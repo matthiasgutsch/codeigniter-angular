@@ -52,7 +52,7 @@
     
             <div class="p-field p-grid">
                 <div class="p-col-6 p-md-6">
-                    <h3>Clienti</h3>
+                    <h3>Fornitori</h3>
                 </div>
                 <div class="p-col-6 p-md-6">
     
@@ -84,7 +84,7 @@
                         </div>
                     </div></div>
 
-                <p-table #dt [columns]="cols" [value]="clients" [globalFilterFields]="['name', 'description']"  [responsive]="true" currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
+                <p-table #dt [columns]="cols" [value]="suppliers" [globalFilterFields]="['name', 'description']"  [responsive]="true" currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
     
                     <ng-template pTemplate="header" let-columns>
                         <tr>
@@ -108,10 +108,11 @@
                 
                             <td class="action">
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
-                                [routerLink]="['/admin/clients/edit', rowData.id]"></button>
+                                [routerLink]="['/admin/suppliers/edit', rowData.id]"></button>
                             <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
                                 (click)="edit(rowData)"></button>
-                                              
+                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
+                                (click)="onDelete(rowData.id)"></button>               
                             </td>
                         </tr>
                     </ng-template>
