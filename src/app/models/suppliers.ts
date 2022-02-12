@@ -20,6 +20,7 @@ export class Suppliers {
   is_active: boolean;
   created_at: Date;
   fiscalcode: string;
+  company_name: string;
   date: string;
   fiscalnumber: string;
 }

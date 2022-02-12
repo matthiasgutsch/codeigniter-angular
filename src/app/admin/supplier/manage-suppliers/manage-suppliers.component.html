@@ -99,7 +99,7 @@
                     <ng-template pTemplate="body" let-rowData let-columns="columns">
                         <tr>
                             <td>
-                                <app-initials-avatar firstName="{{ rowData['name'] | slice:0:1}}" lastName="{{ rowData['surname'] | slice:0:1}}"></app-initials-avatar>
+                                <app-initials-avatar firstName="{{ rowData['company_name'] | slice:0:1}}" lastName="{{ rowData['company_name'] | slice:4:5}}"></app-initials-avatar>
 
                             </td>
                             <td *ngFor="let col of cols">
@@ -133,7 +133,7 @@
         <div class="p-col-12 p-md-12">
         <p-card>
 
-            <strong>{{client.name}} {{client.surname}}</strong>
+            <strong>{{client.name}}</strong>
 
             <p>{{ client.address }}<br> {{ client.zip }} - {{ client.city }} ({{ client.province }})<br>
             </p>

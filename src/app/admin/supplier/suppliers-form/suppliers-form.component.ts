@@ -138,7 +138,7 @@ export class SuppliersFormComponent implements OnInit {
 
     
     if (id) {
-      this.pageTitle = "Modifica Cliente";
+      this.pageTitle = "Modifica Fornitore";
       this.deleteButton = true;
       
       this.appointmentsService.find_client(+id).subscribe(
@@ -156,7 +156,7 @@ export class SuppliersFormComponent implements OnInit {
         this.blogForm.patchValue({
           name: res.name,
           surname: res.surname,
-          username: res.name + ' ' + res.surname,
+          company_name: res.company_name,
           city: res.city,
           zip: res.zip,
           address: res.address,
@@ -186,7 +186,7 @@ export class SuppliersFormComponent implements OnInit {
       });
     } else {
       this.deleteButton = false;
-      this.pageTitle = "Aggiungi Cliente";
+      this.pageTitle = "Aggiungi Fornitore";
     }
 
 
@@ -196,7 +196,7 @@ export class SuppliersFormComponent implements OnInit {
       id: [""],
       name: ["", Validators.required],
       surname: ["", Validators.required],
-      username: [""],
+      company_name: ["", Validators.required],
       city: ["", Validators.required],
       zip: ["", Validators.required],
       address: ["", Validators.required],
@@ -374,7 +374,7 @@ export class SuppliersFormComponent implements OnInit {
     const formData = new FormData();
     formData.append("name", this.blogForm.get("name").value);
     formData.append("surname", this.blogForm.get("surname").value);
-    formData.append("username", this.blogForm.get("username").value);
+    formData.append("company_name", this.blogForm.get("company_name").value);
     formData.append("city", this.blogForm.get("city").value);
     formData.append("zip", this.blogForm.get("zip").value);
     formData.append("address", this.blogForm.get("address").value);

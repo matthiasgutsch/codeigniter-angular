@@ -65,7 +65,7 @@ export class ManageSuppliersComponent implements OnInit {
     this.suppliersService.getAllListbyUser().subscribe(data => {
       this.suppliers = data;
       this.cols = [
-        { field: "name", header: "Nome" },
+        { field: "company_name", header: "Nome Fornitore" },
 
         { field: "address", header: "Indirizzo" },
         { field: "phone", header: "Cellulare" },
