@@ -151,7 +151,6 @@ weekNo: number;
 
     const userId = this.currentUser.user_id;
     this.spinner.show();
-    this.getProjects();
     this.getEmployees();
     this.getWarehouses();
     this.getProductsVariations();
@@ -168,8 +167,6 @@ weekNo: number;
         { field: "brand_id", header: "Brand" }
       ];
  this.cols = [
-      { field: "date_from", header: "Da" },
-      { field: "date_from", header: "A" },
       { field: "employee_id", header: "Dipendente" },
       { field: "product_id", header: "Progetto" },
     ];
@@ -197,11 +194,11 @@ weekNo: number;
       this.warehousesCheckinsService.getId(+id).subscribe((res) => {
         this.blogForm.patchValue({
           warehouse_id: res.warehouse_id,
-          date_from: res.date_from,
+          supplier_id: res.supplier_id,
           product_id: res.product_id,
-          hours: res.hours,
+          pieces: res.pieces,
           employee_id: res.employee_id,
-          hours_extra: res.hours_extra,
+          boxes: res.boxes,
           user_id: this.currentUser.user_id,
           id: res.id,
         });
@@ -214,12 +211,11 @@ weekNo: number;
     this.blogForm = this.fb.group({
       id: [""],
       warehouse_id: ["", Validators.required],
-      date_from: ["", Validators.required],
       product_id: ["", Validators.required],
       supplier_id: ["", Validators.required],
-      hours: ["", Validators.required],
-      hours_extra: ["", Validators.required],
-      employee_id: ["", Validators.required],
+      pieces: ["", Validators.required],
+      boxes: ["", Validators.required],
+      employee_id: [""],
       user_id: [this.currentUser.user_id],
     });
 
@@ -233,22 +229,15 @@ weekNo: number;
     this.blogForm = this.fb.group({
       id: [""],
       warehouse_id: ["", Validators.required],
-      date_from: ["", Validators.required],
-      product_id: [""],
-      supplier_id: [""],
-      hours: [""],
-      hours_extra: [""],
+      product_id: ["", Validators.required],
+      supplier_id: ["", Validators.required],
+      pieces: [""],
+      boxes: [""],
       employee_id: [""],
       user_id: [this.currentUser.user_id],
     });
   }
 
-  getProjects() {
-
-  this.projectsService.getAllListbyUser().subscribe(
-    (data: Projects) => this.projects = data,
-    );
-  }
 
   getWarehouses() {
     this.warehousesService.getAllListbyUser().subscribe(
@@ -412,12 +401,11 @@ onSubmit() {
   const formData = new FormData();
 
   formData.append("warehouse_id", this.blogForm.get("warehouse_id").value);
-  formData.append("date_from", this.blogForm.get("date_from").value);
   formData.append('user_id', this.blogForm.get('user_id').value);
   formData.append("product_id", this.blogForm.get("product_id").value);
   formData.append("supplier_id", this.blogForm.get("supplier_id").value);
-  formData.append("hours", this.blogForm.get("hours").value);
-  formData.append("hours_extra", this.blogForm.get("hours_extra").value);
+  formData.append("pieces", this.blogForm.get("pieces").value);
+  formData.append("boxes", this.blogForm.get("boxes").value);
   formData.append('employee_id', this.blogForm.get('employee_id').value);
   
   const id = this.blogForm.get("id").value;

@@ -18,16 +18,17 @@ export class WarehouseCheckins {
     created_at: Date;
     code: string;
     code_int: string;
+    pieces: string;
+    boxes: string;
     files: string;
     price: string;
     price_extra: string;
     data: JSON;
     product_id: string;
     warehouse_id: string;
+    supplier_id: string;
     status: StringMap;
     skills: ISkill[];
-    hours: string;
-    hours_extra: string;
 }
 
 

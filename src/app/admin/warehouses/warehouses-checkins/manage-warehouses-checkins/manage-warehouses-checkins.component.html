@@ -139,13 +139,13 @@
                             </td>
                             <td>
 
-                                <p-tag severity="default" [value]="warehouseCheckin.hours + ' pezzi'"></p-tag>
+                                <p-tag severity="default" [value]="warehouseCheckin.pieces + ' pezzi'"></p-tag>
 
                             </td>
-                            <td><p-tag severity="success" [value]="warehouseCheckin.hours_extra + ' colli'"></p-tag>
+                            <td><p-tag severity="success" [value]="warehouseCheckin.boxes + ' colli'"></p-tag>
                             </td>
                             <td>
-                               <i class="pi pi-calendar"></i> {{warehouseCheckin.date_from | date:'d-MM-yyyy hh:mm'}}
+                               <i class="pi pi-calendar"></i> {{warehouseCheckin.created_at | date:'d-MM-yyyy hh:mm'}}
 
                             </td>
 
@@ -243,18 +243,7 @@
                     </div>
                 </div>
 
-                <div class="p-field p-grid">
-                    <div class="p-col-12 p-md-12">
-                        <label>Data dal<span class="required">*</span></label>
-                    </div>
-                    <div class="p-col-12 p-md-12">
-                        <p-calendar [stepMinute]="15" formControlName="date_from" dataType="string"
-                            [(ngModel)]="selectedDateFrom" hourFormat="24" [style]="{width:'100%'}"
-                            dateFormat="yy-mm-dd" showTime="true" appendTo="body"></p-calendar>
-                    </div>
-                </div>
-
-              
+            
 
                 <div class="p-field p-grid">
                     <div class="p-col-12 p-md-12">
@@ -288,7 +277,7 @@
 
                         <label>Pezzi <span class="required">*</span></label>
                     
-                        <input type="text" pInputText [style]="{width:'100%'}" formControlName="hours" />
+                        <input type="text" pInputText [style]="{width:'100%'}" formControlName="pieces" />
 
                     </div>
                
@@ -296,7 +285,7 @@
 
                         <label>Colli <span class="required">*</span></label>
                    
-                        <input type="text" pInputText [style]="{width:'100%'}" formControlName="hours_extra" />
+                        <input type="text" pInputText [style]="{width:'100%'}" formControlName="boxes" />
 
                     </div>
                 </div>
@@ -315,7 +304,7 @@
                     <div class="p-col-12 p-md-12">
 
                         <button pButton pRipple icon="pi pi-save" label="salva"
-                            class="p-button p-button-success btn-block"></button>
+                            class="p-button p-button-success btn-block" [disabled]="!blogForm.valid"></button>
                     </div>
                 </div>
 
