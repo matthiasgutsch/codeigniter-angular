@@ -192,7 +192,6 @@ weekNo: number;
         this.blogForm.patchValue({
           warehouse_id: res.warehouse_id,
           date_from: res.date_from,
-          date_to: res.date_to,
           product_id: res.product_id,
           hours: res.hours,
           employee_id: res.employee_id,
@@ -210,7 +209,6 @@ weekNo: number;
       id: [""],
       warehouse_id: ["", Validators.required],
       date_from: ["", Validators.required],
-      date_to: ["", Validators.required],
       product_id: ["", Validators.required],
       hours: ["", Validators.required],
       hours_extra: ["", Validators.required],
@@ -229,7 +227,6 @@ weekNo: number;
       id: [""],
       warehouse_id: ["", Validators.required],
       date_from: ["", Validators.required],
-      date_to: [""],
       product_id: [""],
       hours: [""],
       hours_extra: [""],
@@ -246,7 +243,6 @@ weekNo: number;
   }
 
   getWarehouses() {
-
     this.warehousesService.getAllListbyUser().subscribe(
       (data: Warehouses) => this.warehouses = data,
       );
@@ -263,6 +259,10 @@ weekNo: number;
     return this.projects.find(item => item.id === product_id);
   }
 
+
+  getWarehouseItem(warehouse_id: string, id: string) {
+    return this.warehouses.find(item => item.id === warehouse_id);
+  }
 
   getEmployeeItem(employee_id: string, id: string) {
     return this.employees.find(item => item.id === employee_id);
@@ -397,7 +397,6 @@ onSubmit() {
 
   formData.append("warehouse_id", this.blogForm.get("warehouse_id").value);
   formData.append("date_from", this.blogForm.get("date_from").value);
-  formData.append("date_to", this.blogForm.get("date_to").value);
   formData.append('user_id', this.blogForm.get('user_id').value);
   formData.append("product_id", this.blogForm.get("product_id").value);
   formData.append("hours", this.blogForm.get("hours").value);

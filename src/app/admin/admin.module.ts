@@ -116,10 +116,10 @@ import { ProjectsTimesheetsComponent } from './projects/projects-timeheets/proje
 import { ManageWordpressOrdersComponent } from './orders-wordpress/manage-wordpress-orders/manage-wordpress-orders.component';
 import { WordpressOrdersFormComponent } from './orders-wordpress/wordpress-orders-form/wordpress-orders-form.component';
 import { EmployeesTimesheetsCalendarComponent } from './employees/employees-timeheets-calendar/employees-timesheets-calendar.component';
-import { ManageWarehousesComponent } from './warehouses/manage-warehouses/manage-warehouses.component';
-import { WarehousesFormComponent } from './warehouses/warehouses-form/warehouses-form.component';
+import { WarehousesFormComponent } from './settings/warehouses/warehouses-form/warehouses-form.component';
 import { ManageWarehousesCheckinsComponent } from './warehouses/warehouses-checkins/manage-warehouses-checkins/manage-warehouses-checkins.component';
 import { WarehousesCheckinsFormComponent } from './warehouses/warehouses-checkins/warehouses-checkins-form/warehouses-checkins-form.component';
+import { ManageWarehousesComponent } from './settings/warehouses/manage-warehouses/manage-warehouses.component';
 
 @NgModule({
   declarations: [

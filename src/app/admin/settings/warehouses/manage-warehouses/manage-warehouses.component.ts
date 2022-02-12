@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AppointmentsService } from '../../../services/appointments.service';
-import { Blog } from '../../../models/blog';
+import { AppointmentsService } from '../../../../services/appointments.service';
+import { Blog } from '../../../../models/blog';
 import { ConfirmationService, SelectItem } from 'primeng/api';
-import { CategoryService } from '../../../services/categories.service';
-import { Category } from '../../../models/category';
+import { CategoryService } from '../../../../services/categories.service';
+import { Category } from '../../../../models/category';
 import { MessageService } from 'primeng/api';
 import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';

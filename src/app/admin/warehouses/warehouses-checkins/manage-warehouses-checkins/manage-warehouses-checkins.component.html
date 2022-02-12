@@ -106,11 +106,15 @@
                     <ng-template pTemplate="header" let-columns>
                         <tr>
                             <th width="80">
-                                Tipo
+                                id
                             </th>
 
                             <th width="100">
-                                Ore
+                                Pezzi
+                            </th>
+
+                            <th width="100">
+                                Colli
                             </th>
                             <th>
                                 Entrata
@@ -136,19 +140,21 @@
                             <td>
 
                                 <p-tag severity="default" [value]="warehouseCheckin.hours + ' pezzi'"></p-tag>
-                                <p-tag severity="success" [value]="warehouseCheckin.hours_extra + ' colli'"></p-tag>
 
                             </td>
-
+                            <td><p-tag severity="success" [value]="warehouseCheckin.hours_extra + ' colli'"></p-tag>
+                            </td>
                             <td>
-                               <i class="pi pi-calendar"></i> {{warehouseCheckin.date_from | date:'d-MM-yyyy hh:mm'}}<br>
-                               {{warehouseCheckin.date_to | date:'d-MM-yyyy hh:mm'}}
+                               <i class="pi pi-calendar"></i> {{warehouseCheckin.date_from | date:'d-MM-yyyy hh:mm'}}
 
                             </td>
 
                   
 
-                            <td> {{warehouseCheckin.warehouse_id}}</td>
+                            <td>
+                               <!-- {{ getWarehouseItem(warehouseCheckin.project_id)?.title }}-->
+
+                                {{warehouseCheckin.warehouse_id.title}}</td>
                            <td>   {{ warehouseCheckin.product.title}}<br>
                             <p class="small">{{ warehouseCheckin.product.code_int}} - {{ warehouseCheckin.product.code}}</p> </td>
                        
@@ -196,7 +202,7 @@
                             [(ngModel)]="selectedWarehouse" formControlName="warehouse_id" optionLabel="title"
                             optionValue="id">
                             <ng-template let-option pTemplate="item">
-                                {{option.title}}
+                                {{option.title}} <p-tag [value]="option.id"></p-tag>
                             </ng-template>
                         </p-dropdown>
                     </div>
@@ -230,17 +236,7 @@
                     </div>
                 </div>
 
-                <div class="p-field p-grid">
-                    <div class="p-col-12 p-md-12">
-
-                        <label>Data al<span class="required">*</span></label>
-                    </div>
-                    <div class="p-col-12 p-md-12">
-                        <p-calendar [stepMinute]="15" formControlName="date_to" dataType="string"
-                            [(ngModel)]="selectedDateTo" hourFormat="24" [style]="{width:'100%'}" dateFormat="yy-mm-dd"
-                            showTime="true" appendTo="body"></p-calendar>
-                    </div>
-                </div>
+              
 
                 <div class="p-field p-grid">
                     <div class="p-col-12 p-md-12">

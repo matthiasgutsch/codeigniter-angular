@@ -1,15 +1,15 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { AppointmentsService } from '../../../services/appointments.service';
+import { AppointmentsService } from '../../../../services/appointments.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
-import { Blog } from '../../../models/blog';
-import { Category } from '../../../models/category';
+import { Blog } from '../../../../models/blog';
+import { Category } from '../../../../models/category';
 import { FormControl } from '@angular/forms';
-import { CategoryService } from '../../../services/categories.service';
+import { CategoryService } from '../../../../services/categories.service';
 import { ConfirmationService, MessageService, SelectItem } from "primeng/api";
 import * as moment from 'moment';
-import { TYPE_LIST, STATE_LIST} from '../../constants/constants';
+import { TYPE_LIST, STATE_LIST} from '../../../constants/constants';
 import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
 import { Location } from '@angular/common';
@@ -20,7 +20,7 @@ import { Employees } from 'src/app/models/employees';
 import { Locations } from 'src/app/models/locations';
 import { LocationsService } from 'src/app/services/locations.service';
 import { Appointments } from 'src/app/models/appointments';
-import { SumPipe } from '../../pipe/sum.pipe';
+import { SumPipe } from '../../../pipe/sum.pipe';
 import { BillingsService } from 'src/app/services/billings.service';
 import { Billings } from 'src/app/models/billings';
 import { AppointmentTypeService } from 'src/app/services/appointment_type.service';
@@ -150,10 +150,6 @@ export class WarehousesFormComponent implements OnInit {
         this.blogForm.patchValue({
           title: res.title,
           description: res.description.split(','),
-          category_id: res.category_id,
-          works_id: res.works_id.split(','),
-          employee_id: res.employee_id,
-          location_id: res.location_id,
           is_featured: res.is_featured,
           is_active: res.is_active,
           user_id: this.currentUser.user_id,
@@ -181,11 +177,7 @@ export class WarehousesFormComponent implements OnInit {
       title: ["", Validators.required],
       description: [""],
       is_featured: ["0"],
-      category_id: ["", Validators.required],
-      works_id: [""],
-      location_id: [""],
       user_id: [this.currentUser.user_id],
-      employee_id: [""],
       is_active: ["0"],
       image: [""],
       date: ["", Validators.required],
@@ -248,10 +240,6 @@ export class WarehousesFormComponent implements OnInit {
     formData.append("title", this.blogForm.get("title").value);
     formData.append("description", this.blogForm.get("description").value);
     formData.append("is_featured", this.blogForm.get("is_featured").value);
-    formData.append("category_id", this.blogForm.get("category_id").value);
-    formData.append("works_id", this.blogForm.get("works_id").value);
-    formData.append("location_id", this.blogForm.get("location_id").value);
-    formData.append("employee_id", this.blogForm.get("employee_id").value);
     formData.append("is_active", this.blogForm.get("is_active").value);
     formData.append("image", this.blogForm.get("image").value);
     formData.append("date", this.blogForm.get("date").value);

@@ -21,12 +21,14 @@ export const PAGES: SelectItem[] = [
 ];
 
 
+
 export const PAGES_PRODUCT: SelectItem[] = [
   
   { label: "Tags", value: "/admin/settings/tags", icon: "pi pi-list" },
   { label: "Marchi / Brands", value: "/admin/settings/brands", icon: "pi pi-list" },
   { label: "Categorie", value: "/admin/settings/categories", icon: "pi pi-list" },
   { label: "Dati technici", value: "/admin/settings/technical-data", icon: "pi pi-list" },
+  { label: "Magazzino", value: "/admin/settings/warehouses", icon: "pi pi-list" },
 
 ];
 

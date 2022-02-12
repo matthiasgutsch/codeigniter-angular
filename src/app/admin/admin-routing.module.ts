@@ -55,10 +55,10 @@ import { ProjectsTimesheetsComponent } from './projects/projects-timeheets/proje
 import { ManageWordpressOrdersComponent } from './orders-wordpress/manage-wordpress-orders/manage-wordpress-orders.component';
 import { WordpressOrdersFormComponent } from './orders-wordpress/wordpress-orders-form/wordpress-orders-form.component';
 import { EmployeesTimesheetsCalendarComponent } from './employees/employees-timeheets-calendar/employees-timesheets-calendar.component';
-import { ManageWarehousesComponent } from './warehouses/manage-warehouses/manage-warehouses.component';
-import { WarehousesFormComponent } from './warehouses/warehouses-form/warehouses-form.component';
+import { WarehousesFormComponent } from './settings/warehouses/warehouses-form/warehouses-form.component';
 import { ManageWarehousesCheckinsComponent } from './warehouses/warehouses-checkins/manage-warehouses-checkins/manage-warehouses-checkins.component';
 import { WarehousesCheckinsFormComponent } from './warehouses/warehouses-checkins/warehouses-checkins-form/warehouses-checkins-form.component';
+import { ManageWarehousesComponent } from './settings/warehouses/manage-warehouses/manage-warehouses.component';
 
 const routes: Routes = [
   {
@@ -93,14 +93,11 @@ const routes: Routes = [
           { path: "appointments/edit/:id",component: AppointmentsFormComponent,},
 
 
-          { path: "warehouses", component: ManageWarehousesComponent },
-          { path: "warehouses/create", component: WarehousesFormComponent },
-          { path: "warehouses/edit/:id",component: WarehousesFormComponent,},
 
 
-          { path: "warehouses/checkins", component: ManageWarehousesCheckinsComponent },
-          { path: "warehouses/checkins/create", component: WarehousesCheckinsFormComponent },
-          { path: "warehouses/checkins/edit/:id",component: WarehousesCheckinsFormComponent,},
+          { path: "checkins", component: ManageWarehousesCheckinsComponent },
+          { path: "checkins/create", component: WarehousesCheckinsFormComponent },
+          { path: "checkins/edit/:id",component: WarehousesCheckinsFormComponent,},
 
           { path: "billings", component: ManageBillingsComponent },
           { path: "billings/edit/:id",component: BillingsFormComponent,},
@@ -167,6 +164,13 @@ const routes: Routes = [
 
           { path: "settings/company", component: CompanyFormComponent },
           
+
+          { path: "settings/warehouses", component: ManageWarehousesComponent },
+          { path: "settings/warehouses/create", component: WarehousesFormComponent },
+          { path: "settings/warehouses/edit/:id",component: WarehousesFormComponent,},
+
+
+
           { path: "pages", component: ManagePagesComponent },
           { path: "", component: AdminDashboardComponent },
           { path: "reports", component: ReportsDashboardComponent },
