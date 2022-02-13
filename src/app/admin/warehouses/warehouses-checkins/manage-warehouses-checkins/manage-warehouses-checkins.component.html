@@ -162,9 +162,9 @@
 
                             <td class="action">
                         
-                                <button pButton pRipple icon="pi pi-pencil"
+                              <!--   <button pButton pRipple icon="pi pi-pencil"
                                 class="p-button p-button-success p-mr-2"
-                                (click)="editItem(warehouseCheckin)"></button>
+                                (click)="editItem(warehouseCheckin)"></button> -->
                                 
                                 <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
                                     (click)="view(warehouseCheckin)"></button>
@@ -297,39 +297,22 @@
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'50vw'}">
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
-            <p-tag [value]="warehouseCheckin.id"></p-tag><br><br>
-            <h3>Dettaglio Ingress Magazzino</h3>
-            <div class="well">
-            <p> 
-                {{warehouseCheckin.created_at | date:'d-MM-yyyy' }} | {{warehouseCheckin.created_at | date:'hh:mm' }}</p>
-        </div>
+            <p-tag [value]="warehouseCheckin.id" severity="success" class="p-mr-2"></p-tag> <p-tag [value]="warehouseCheckin.created_at | date:'d-MM-yyyy hh:mm'"></p-tag><br><br>
+            <h3>Dettaglio Ingresso Magazzino</h3>
+
             <hr class="full">
-            <div class="p-grid">
-                <div class="p-col-12">
-                    Entrata
-                </div>
-                <div class="p-col-12">
+            <strong>Magazzino</strong><br>
 
-                    <button pButton pRipple [label]="warehouseCheckin.date_from | date:'d-MM-yyyy hh:mm'"
-                        class="p-button p-button-primary btn-block"></button>
-                </div>
-            </div><br>
-            <div class="p-grid">
-                <div class="p-col-12">
-            Uscita
-                </div>
-                <div class="p-col-12">
+            {{warehouseCheckin.warehouse_id.title}}<br>
+            <hr class="full">
 
-            <button pButton pRipple [label]="warehouseCheckin.date_to | date:'d-MM-yyyy hh:mm'"
-                class="p-button p-button-success btn-block"></button>
-                </div>
+            <p class="small">Prodotto</p>
+
+            <h3>{{ warehouseCheckin.product.title}}</h3>
+           <p [innerHTML]="warehouseCheckin.product.description"></p><br>
+
+             <p class="small">{{ warehouseCheckin.product.code_int}} - {{ warehouseCheckin.product.code}}</p>
             </div>
-
-            <hr class="full">
-            <strong>Cantiere</strong><br>
-            {{ getProjectItem(warehouseCheckin.project_id)?.title }}
-
-        </div>
     </ng-template>
 
 </p-sidebar>
