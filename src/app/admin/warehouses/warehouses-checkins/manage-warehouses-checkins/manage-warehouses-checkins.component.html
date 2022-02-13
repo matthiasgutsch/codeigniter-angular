@@ -312,6 +312,10 @@
            <p [innerHTML]="warehouseCheckin.product.description"></p><br>
 
              <p class="small">{{ warehouseCheckin.product.code_int}} - {{ warehouseCheckin.product.code}}</p>
+             <hr class="full">
+             <p class="small">Disponibilità</p>
+
+             <p-tag [value]="warehouseCheckin.product.pieces" severity="success" class="p-mr-2"></p-tag>
             </div>
     </ng-template>
 
