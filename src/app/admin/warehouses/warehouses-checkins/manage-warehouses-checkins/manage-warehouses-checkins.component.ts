@@ -226,15 +226,15 @@ weekNo: number;
   createTimesheets() {
     this.productDialogAdd = true;
 
-    this.pageTitle = "Aggiungi Timesheet";
+    this.pageTitle = "Aggiungi Prodotti / Magazzino";
 
     this.blogForm = this.fb.group({
       id: [""],
       warehouse_id: ["", Validators.required],
       product_id: ["", Validators.required],
       supplier_id: ["", Validators.required],
-      pieces: [""],
-      boxes: [""],
+      pieces: ["",Validators.required],
+      boxes: ["",Validators.required],
       user_id: [this.currentUser.user_id],
     });
 
