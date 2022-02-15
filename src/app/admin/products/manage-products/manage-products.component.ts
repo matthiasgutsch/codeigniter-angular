@@ -49,7 +49,8 @@ export class ManageProductsComponent implements OnInit {
   location: Locations;
   cols: any[];
   colsData: any[];
-
+  colsVariations: any[];
+  colsDataVariations: any[];
   exportColumns: any[];
   _selectedColumns: any[];
   selectedWorks: any[];
@@ -137,6 +138,16 @@ trackByFn(index, item) {
         { field: "code_int", header: "Codice interno" },
         { field: "brand_id", header: "Brand" }
       ];
+
+      this.colsVariations = [
+        { field: "title", header: "titolo" },
+        { field: "code", header: "Codice" },
+        { field: "code_int", header: "Codice interno" },
+        { field: "price", header: "Prezzo" },
+        { field: "pieces", header: "Disponibili" }
+      ];
+    
+      
       this.colsData = [
         { field: "title", header: "titolo" },
         { field: "description", header: "Codice" },
@@ -247,6 +258,8 @@ edit(product: Products) {
     this.productsVariations = data;
     this.selectedSkillsVariations = JSON.parse("" + this.productsVariation.skills + "");
 
+
+   
 
   });
   this.productDialog = true;

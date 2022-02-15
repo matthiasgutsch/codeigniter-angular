@@ -61,6 +61,8 @@ import { WarehousesCheckinsFormComponent } from './warehouses/warehouses-checkin
 import { ManageWarehousesComponent } from './settings/warehouses/manage-warehouses/manage-warehouses.component';
 import { ManageSuppliersComponent } from './supplier/manage-suppliers/manage-suppliers.component';
 import { SuppliersFormComponent } from './supplier/suppliers-form/suppliers-form.component';
+import { ManageProductsVariationsComponent } from './products/manage-products-variations/manage-products-variations.component';
+import { ProductsVariationsFormComponent } from './products/products-variations-form/products-variations-form.component';
 
 const routes: Routes = [
   {
@@ -80,6 +82,12 @@ const routes: Routes = [
           { path: "products", component: ManageProductsComponent },
           { path: "products/create", component: ProductsFormComponent },
           { path: "products/edit/:id",component: ProductsFormComponent,},
+
+
+          { path: "products-variation", component: ManageProductsVariationsComponent },
+          { path: "products-variation/create/:product_id", component: ProductsVariationsFormComponent },
+          { path: "products-variation/edit/:product_id/:id",component: ProductsVariationsFormComponent,},
+
 
           { path: "timesheets", component: ManageTimesheetsComponent },
           { path: "timesheets/create", component: TimesheetsFormComponent },

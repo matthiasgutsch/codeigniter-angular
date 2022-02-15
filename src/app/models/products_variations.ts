@@ -22,6 +22,7 @@ export class ProductsVariations {
     data: JSON;
     status: StringMap;
     skills: ISkill[];
+    product_id: string;
     produtct_id: string;
     pieces: string;
 }

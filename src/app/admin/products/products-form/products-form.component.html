@@ -15,6 +15,9 @@
                         <button pButton pRipple icon="pi pi-save" label="salva"
                         class="p-button pull-right p-button-success p-mr-2"
                         [disabled]="!blogForm.valid"></button>
+
+                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/products-variation/create', id]" label="Aggiungi variante"
+                        class="p-button p-button-primary p-mr-2 pull-right"></button>
                     </div>
                 </div>
             </div>
@@ -293,7 +296,7 @@
             
                                         <td class="action">
                                             <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
-                                                [routerLink]="['/admin/products/edit', rowData.id]"></button>
+                                                [routerLink]="['/admin/products-variation/edit/100000/', rowData.id]"></button>
                                             <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
                                                 (click)="edit(rowData)"></button>
                                             <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"

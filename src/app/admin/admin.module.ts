@@ -122,6 +122,10 @@ import { WarehousesCheckinsFormComponent } from './warehouses/warehouses-checkin
 import { ManageWarehousesComponent } from './settings/warehouses/manage-warehouses/manage-warehouses.component';
 import { ManageSuppliersComponent } from './supplier/manage-suppliers/manage-suppliers.component';
 import { SuppliersFormComponent } from './supplier/suppliers-form/suppliers-form.component';
+import { ManageProductsVariationsComponent } from './products/manage-products-variations/manage-products-variations.component';
+import { ProductsVariationsFormComponent } from './products/products-variations-form/products-variations-form.component';
+
+
 @NgModule({
   declarations: [
     ManageProjectsComponent,
@@ -131,6 +135,8 @@ import { SuppliersFormComponent } from './supplier/suppliers-form/suppliers-form
     ManageSuppliersComponent,
     SuppliersFormComponent,
     WarehousesFormComponent,
+    ManageProductsVariationsComponent,
+    ProductsVariationsFormComponent,
     AdminComponent,
     ManageBillingsComponent,
     BillingsFormComponent,

@@ -268,24 +268,17 @@ project: Projects;
     return this.works.find(item => item.id === works_id);
   }
 
-  
-
 
   view(timesheet: Timesheets) {
     this.timesheet = { ...timesheet };
-  
     this.productDialog = true;
   }
   
 
 
-
 edit(timesheet: Timesheets) {
   this.timesheet = { ...timesheet };
-  
   this.selectedSkills = JSON.parse("" + this.timesheet.skills + "");
-
-  
   this.productDialog = true;
 }
 

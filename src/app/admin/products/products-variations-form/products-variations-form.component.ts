@@ -31,6 +31,8 @@ import { SkillsService } from 'src/app/services/skills.service';
 import { map, tap } from 'rxjs/operators';
 import { Technical_data } from 'src/app/models/technical_data';
 import { TechnicalDataService } from 'src/app/services/technical_data.service';
+import { ProductsVariationsService } from 'src/app/services/products_variations.service';
+import { ProductsVariations } from 'src/app/models/products_variations';
 
 
 export interface fPairs {
@@ -73,7 +75,8 @@ export class ProductsVariationsFormComponent implements OnInit {
   clients: any = [];
   client: Clients;
   arrString: string;
-
+  productsVariations: any = [];
+  productVariations: ProductsVariations;
   brands: any = [];
   brand: Brand;
   technical_datas: any = [];
@@ -128,6 +131,7 @@ export class ProductsVariationsFormComponent implements OnInit {
     private skillsService: SkillsService,
     private brandsService: BrandService,
     private worksService: WorksService,
+    private productsVariationsService: ProductsVariationsService,
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,
     private router: Router,
@@ -182,19 +186,27 @@ export class ProductsVariationsFormComponent implements OnInit {
     );
 
 
+    const product_id = this.route.snapshot.paramMap.get("product_id");
+
+    this.productsService.getId(+product_id).subscribe((res) => {
+
+      this.product = res;
+
+    });
+
+
+   
     const id = this.route.snapshot.paramMap.get("id");
 
-    this.productsService.skills(+id).subscribe(value => {
+    this.productsVariationsService.skills(+id).subscribe(value => {
       this.skillsValues = value;
     });
 
 
-
-
     if (id) {
-      this.pageTitle = "Modifica Prodotto";
+      this.pageTitle = "Modifica Variazione Prodotto";
       
-      this.productsService.getId(+id).subscribe((res) => {
+      this.productsVariationsService.getId(+id).subscribe((res) => {
 
         
         if (res.user_id == this.currentUser.user_id) {
@@ -215,6 +227,7 @@ export class ProductsVariationsFormComponent implements OnInit {
           price_extra: res.price_extra,
           id: res.id,
           data: res.data,
+          product_id: res.product_id,
           skills: this.skillsValues,
         });
 
@@ -227,7 +240,7 @@ export class ProductsVariationsFormComponent implements OnInit {
         this.id = res.id;
       });
     } else {
-      this.pageTitle = "Aggiungi Prodotto";
+      this.pageTitle = "Aggiungi Variazione / ";
     }
 
 
@@ -248,6 +261,7 @@ export class ProductsVariationsFormComponent implements OnInit {
       user_id: [this.currentUser.user_id],
       code_int: [""],
       price: [""],
+      product_id: [""],
       price_extra: [""],
       skills: this.initSkill(),
       
@@ -383,13 +397,15 @@ export class ProductsVariationsFormComponent implements OnInit {
     formData.append("price_extra", this.blogForm.get("price_extra").value);
     formData.append("status", this.blogForm.get("status").value);
     formData.append('user_id', this.blogForm.get('user_id').value);
+    formData.append('product_id', this.blogForm.get('product_id').value);
+
     formData.append('skills', JSON.stringify(this.blogForm.get('skills').value));
 
 
     const id = this.blogForm.get("id").value;
 
     if (id) {
-      this.productsService.update(formData, +id).subscribe(
+      this.productsVariationsService.update(formData, +id).subscribe(
         (res) => {
           if (res.status == "error") {
             this.uploadError = res.message;
@@ -402,7 +418,7 @@ export class ProductsVariationsFormComponent implements OnInit {
         (error) => (this.error = error)
       );
     } else {
-      this.productsService.create(formData).subscribe(
+      this.productsVariationsService.create(formData).subscribe(
         (res) => {
           if (res.status === "error") {
             this.uploadError = res.message;
