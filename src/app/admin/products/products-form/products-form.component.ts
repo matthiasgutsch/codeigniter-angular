@@ -203,8 +203,7 @@ export class ProductsFormComponent implements OnInit {
         { field: "title", header: "titolo" },
         { field: "code", header: "Codice" },
         { field: "price", header: "Prezzo" },
-        { field: "category_id", header: "Categoria" },
-        { field: "code_int", header: "Codice interno" },
+        { field: "pieces", header: "Disp." },
       ];
       this.colsData = [
         { field: "title", header: "titolo" },
@@ -374,7 +373,28 @@ export class ProductsFormComponent implements OnInit {
   }
 
 
+  onDelete(id: number, title: string) {
 
+    this.confirmationService.confirm({
+      message: 'Are you sure want to delete it = ' + id,
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.productsVariationsService.delete(+id).subscribe(
+          res => {
+            console.log(res);
+            this.ngOnInit();
+            this.messageService.add({key: 'myKey1', severity:'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo'});
+
+          },
+          error => this.error = error
+        );
+      },
+     
+  });
+
+   
+  }
 
   removeImageFile() {
     this.imagePath = "";

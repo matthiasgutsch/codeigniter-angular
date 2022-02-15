@@ -281,7 +281,7 @@
                                         <th *ngFor="let col of cols">
                                             {{col.header}}
                                         </th>
-                                        <th width="200"></th>
+                                        <th width="100"></th>
                                     </tr>
             
                                 </ng-template>
@@ -296,9 +296,7 @@
             
                                         <td class="action">
                                             <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
-                                                [routerLink]="['/admin/products-variation/edit/100000/', rowData.id]"></button>
-                                            <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
-                                                (click)="edit(rowData)"></button>
+                                                [routerLink]="['/admin/products-variation/edit/', id ,rowData.id]"></button>
                                             <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
                                                 (click)="onDelete(rowData.id)"></button>
                                         </td>
