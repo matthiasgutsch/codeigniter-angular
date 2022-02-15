@@ -197,7 +197,7 @@
                                                 class="required">*</span></label>
                                         <div class="p-col-12 p-md-10">
 
-                                            <textarea pInputTextarea formControlName="description_full"></textarea>
+                                            <textarea pInputTextarea formControlName="description_full" rows="5" cols="30"></textarea>
 
                                         </div>
                                     </div>
@@ -269,7 +269,7 @@
                                 </table>
                             </p-tabPanel>
 
-                            <p-tabPanel header="Varianti">
+                            <p-tabPanel header="Varianti" *ngIf="id">
 
                                 <p-table #dt [columns]="cols" [value]="productsVariations" [responsive]="true"  [globalFilterFields]="['name', 'description']"
                                 currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true"
@@ -278,22 +278,28 @@
                                 <ng-template pTemplate="header" let-columns>
                                     <tr>
                                         <th width="50px"></th>
+
+                                        <th width="50px"></th>
                                         <th *ngFor="let col of cols">
                                             {{col.header}}
                                         </th>
+
                                         <th width="100"></th>
                                     </tr>
             
                                 </ng-template>
                                 <ng-template pTemplate="body" let-rowData let-columns="columns">
                                     <tr>
-                                        <td *ngIf="imagePath"><img [src]="imagePath" class="img-responsive"></td>
+                                        <td>  <p-tag value="Si" severity="success" *ngIf="rowData.is_active == 1"></p-tag>
+                                            <p-tag value="No" severity="danger" *ngIf="rowData.is_active == 0"></p-tag></td>
+                                        <td *ngIf="imagePath"><img [src]="rowData.image" class="img-responsive"></td>
                                         <td *ngFor="let col of cols" [ngSwitch]="col.field">
                                             {{rowData[col.field]}}
             
                                             
                                         </td>
-            
+                                   
+
                                         <td class="action">
                                             <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
                                                 [routerLink]="['/admin/products-variation/edit/', id ,rowData.id]"></button>
