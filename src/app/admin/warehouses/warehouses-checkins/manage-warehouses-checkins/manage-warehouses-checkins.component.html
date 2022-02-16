@@ -162,8 +162,7 @@
                                 <td> <img *ngIf="warehouseCheckin.image" class="img-responsive" src="{{ warehouseCheckin.image}}"></td>
                            <td>  
                                
-                            {{ warehouseCheckin.product.title}}<br>
-                            <p class="small">{{ warehouseCheckin.product.code_int}} - {{ warehouseCheckin.product.code}}</p> 
+                            <p class="small"><strong>{{ warehouseCheckin.product.code_int}}</strong></p> 
                             <p class="small" *ngIf="warehouseCheckin.supplier_id">{{ warehouseCheckin.supplier_id.company_name}}</p></td>
                        
 
