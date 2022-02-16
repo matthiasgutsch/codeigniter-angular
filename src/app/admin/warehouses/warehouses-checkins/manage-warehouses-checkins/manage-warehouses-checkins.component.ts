@@ -86,6 +86,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   private id: number;
   clients: any = [];
   client: Clients;
+  imagePath: any;
 
   suppliers: any = [];
   supplier: Suppliers;
@@ -161,6 +162,9 @@ weekNo: number;
 
     this.warehousesCheckinsService.getAllListbyUser().subscribe(data => {
       this.warehouseCheckins = data;
+      this.imagePath = data.image;
+
+
       this.cols = [
         { field: "product_id", header: "titolo" },
         { field: "code", header: "Codice" },
