@@ -171,19 +171,24 @@
                             <th *ngFor="let col of colsVariations">
                                 {{col.header}}
                             </th>
+                            <th width="50px"></th>
+
                         </tr>
 
                     </ng-template>
                     <ng-template pTemplate="body" let-rowData let-columns="columns">
                         <tr>
                             <td *ngIf="rowData.image"><img [src]="rowData.image"
-                                    [routerLink]="['/admin/products/edit', rowData.id]" class="img-responsive"></td>
+                                    [routerLink]="['/admin/products-variation/edit',rowData.product_id, rowData.id]" class="img-responsive"></td>
                             <td *ngFor="let col of colsVariations" [ngSwitch]="col.field">
                                 {{rowData[col.field]}}
 
                                 
                             </td>
-
+                            <td>
+                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
+                                [routerLink]="['/admin/products-variation/edit',rowData.product_id, rowData.id]" ></button>
+                            </td>
                          
                         </tr>
                     </ng-template>
