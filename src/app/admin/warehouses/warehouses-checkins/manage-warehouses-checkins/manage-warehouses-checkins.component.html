@@ -94,7 +94,7 @@
                 class="p-button-options p-mr-2 pull-right" tooltipPosition="bottom"></button>
 
 
-                <button type="text" pButton label="Filter"  icon="pi pi-filter" class="p-button p-button-options p-mr-2 pull-right" (click)="op.toggle($event)"></button>
+                <!-- <button type="text" pButton label="Filter"  icon="pi pi-filter" class="p-button p-button-options p-mr-2 pull-right" (click)="op.toggle($event)"></button> -->
                         </div>
                     </div>
                 </div>
@@ -208,7 +208,7 @@
                             [(ngModel)]="selectedWarehouse" formControlName="warehouse_id" optionLabel="title"
                             optionValue="id">
                             <ng-template let-option pTemplate="item">
-                                {{option.title}} <p-tag [value]="option.id"></p-tag>
+                                {{option.title}}
                             </ng-template>
                         </p-dropdown>
                     </div>
@@ -342,7 +342,7 @@
                 <br>
                 <button pButton pRipple icon="pi pi-pencil" label="modifica"
                 class="p-button p-button-primary p-mr-2"
-                [routerLink]="['/admin/products-variation/edit', warehouseCheckin.product.id, warehouseCheckin.product.id ]"></button>
+                [routerLink]="['/admin/products-variation/edit', warehouseCheckin.product.product_id, warehouseCheckin.product.id ]"></button>
                         </div>
             </div>
             </p-card>
