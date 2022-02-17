@@ -320,24 +320,6 @@
                     </div>
 
                 </div>
-                <hr class="small">
-
-
-                <div class="p-grid">
-                    <div class="p-col-12 p-md-8">
-                        Disponibiltà totale<br>
-
-
-                    </div>
-                    <div class="p-col-12 p-md-4">
-                        <p-tag [value]="warehouseCheckin.product.pieces" severity="default" class="p-mr-2 pull-right"></p-tag>
-
-                    </div>
-
-                </div>
-
-
-
 
             </p-card>
 
@@ -355,7 +337,12 @@
                 <h3>{{ warehouseCheckin.product.title}}</h3>
                 <p [innerHTML]="warehouseCheckin.product.description"></p>
                 <p class="small">{{ warehouseCheckin.product.code_int}} - {{ warehouseCheckin.product.code}}</p>
-
+                    
+                <div class="clearfix"></div>
+                <br>
+                <button pButton pRipple icon="pi pi-pencil" label="modifica"
+                class="p-button p-button-primary p-mr-2"
+                [routerLink]="['/admin/products-variation/edit', warehouseCheckin.product.id, warehouseCheckin.product.id ]"></button>
                         </div>
             </div>
             </p-card>
