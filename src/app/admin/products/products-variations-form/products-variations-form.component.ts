@@ -33,6 +33,7 @@ import { Technical_data } from 'src/app/models/technical_data';
 import { TechnicalDataService } from 'src/app/services/technical_data.service';
 import { ProductsVariationsService } from 'src/app/services/products_variations.service';
 import { ProductsVariations } from 'src/app/models/products_variations';
+import { WarehousesCheckinsService } from 'src/app/services/warehouses_checkins.service';
 
 
 export interface fPairs {
@@ -51,6 +52,8 @@ export class ProductsVariationsFormComponent implements OnInit {
   error: string;
   uploadError: string;
   imagePath: any;
+  productTitle: any;
+  productPieces: any;
   blogs: Blog;
   blog: Blog;
   id: number
@@ -81,10 +84,7 @@ export class ProductsVariationsFormComponent implements OnInit {
   brand: Brand;
   technical_datas: any = [];
   technical_data: Technical_data;
-
   tags: any = [];
-
-
   description: any;
   selectedWorks: SelectItem[] = [];
   selectedSkills: SelectItem[] = [];
@@ -113,6 +113,7 @@ export class ProductsVariationsFormComponent implements OnInit {
   itemForm: FormGroup;
   skillsForm: FormGroup;
   skillsValues: any = [];
+  warehouseMovements: any = [];
   
   trackByFn(index, item) {
     return item.id;
@@ -133,6 +134,7 @@ export class ProductsVariationsFormComponent implements OnInit {
     private worksService: WorksService,
     private productsVariationsService: ProductsVariationsService,
     private categoryService: CategoryService,
+    private warehousesCheckinsService: WarehousesCheckinsService,
     private confirmationService: ConfirmationService,
     private router: Router,
     private tagsService: TagsService,
@@ -203,8 +205,13 @@ export class ProductsVariationsFormComponent implements OnInit {
     });
 
 
+    this.warehousesCheckinsService.warehouse_movement_by_product(+id).subscribe(value => {
+      this.warehouseMovements = value;
+    });
+
+
     if (id) {
-      this.pageTitle = "Modifica Variazione Prodotto";
+      this.pageTitle = "Modifica Variante";
       
       this.productsVariationsService.getId(+id).subscribe((res) => {
 
@@ -237,10 +244,13 @@ export class ProductsVariationsFormComponent implements OnInit {
         this.router.navigate(['/admin/products']);
       }
         this.imagePath = res.image;
+        this.productTitle = res.title;
+        this.productPieces = res.pieces;
+
         this.id = res.id;
       });
     } else {
-      this.pageTitle = "Aggiungi Variazione / ";
+      this.pageTitle = "Aggiungi Variante";
     }
 
 
@@ -273,7 +283,7 @@ export class ProductsVariationsFormComponent implements OnInit {
     var formArray = this.fb.array([]);
     const id = this.route.snapshot.paramMap.get("id");
 
-    this.productsService.skills(+id).subscribe(
+    this.productsVariationsService.skills(+id).subscribe(
       (res)=>{
         this.skillsValues = res;
 
