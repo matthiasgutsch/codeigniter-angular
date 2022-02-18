@@ -273,6 +273,10 @@
                                             <th>
                                                 Colli
                                             </th>
+
+                                            <th>
+                                                Maggazzino
+                                            </th>
                                         
                                                                                  </tr>
                 
@@ -293,12 +297,17 @@
                                                 {{warehouseMovement.boxes}}
 
                                               </td>
+
+                                              <td>
+                                                {{warehouseMovement.warehouse_id.title}}
+
+                                              </td>
                                         </tr>
                                     </ng-template>
                                 </p-table>
 
                                 </p-tabPanel>
-                                
+
                                 <p-tabPanel header="Dati tecnici">
                                     <div class="form-group form-row">
 
