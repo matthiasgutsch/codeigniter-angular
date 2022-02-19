@@ -114,6 +114,7 @@ export class ProductsVariationsFormComponent implements OnInit {
   skillsForm: FormGroup;
   skillsValues: any = [];
   warehouseMovements: any = [];
+  productName: any;
   
   trackByFn(index, item) {
     return item.id;
@@ -215,7 +216,8 @@ export class ProductsVariationsFormComponent implements OnInit {
       
       this.productsVariationsService.getId(+id).subscribe((res) => {
 
-        
+        this.productName = res.title;
+
         if (res.user_id == this.currentUser.user_id) {
         this.blogForm.patchValue({
           title: res.title,
@@ -374,6 +376,9 @@ export class ProductsVariationsFormComponent implements OnInit {
     }
   }
 
+  changeName(value){
+    this.productTitle = value.target.value;
+}  
 
 
 
@@ -422,7 +427,7 @@ export class ProductsVariationsFormComponent implements OnInit {
           } else {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
             //this.router.navigate(['/admin/products']);
-
+            this.ngOnInit;
           }
         },
         (error) => (this.error = error)

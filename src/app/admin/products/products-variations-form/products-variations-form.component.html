@@ -63,7 +63,7 @@
                                             <div class="p-col-12 p-md-10">
 
                                                 <input type="text" [style]="{ width: '100%' }" pInputText
-                                                    formControlName="title">
+                                                    formControlName="title" (keyup)="changeName($event)">
 
                                                 <!-- <input type="text" [style]="{ width: '100%' }" [(ngModel)]="data" value="{{rows.value | json}}" pInputText formControlName="data" >-->
 
