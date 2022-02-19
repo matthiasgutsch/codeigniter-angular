@@ -164,28 +164,32 @@
             </div>
 
             <div class="p-col-12 p-md-8">
+
+                <p-card class="blu-box">
+                    <div class="p-grid">
+
+                        <div class="p-col-12 p-md-6">
+                            <h1 class="no-margin">Fattura {{idBilling}}/{{dateAppointments | date:'yyyy'}}</h1>
+                        </div>
+                        <div class="p-col-12 p-md-6">
+                            <p-tag value="{{dateAppointments | date:'dd/MM/yyyy'}}" class="pull-right"></p-tag>
+
+                            <p-tag severity="success" *ngIf="is_paid === '1'" (click)="closeBilling(id)" value="Pagata"
+                            class="pull-right  p-mr-2"></p-tag>
+                        <p-tag severity="danger" *ngIf="is_paid === '0'" (click)="openBilling(id)" value="non pagata"
+                            class="pull-right  p-mr-2"></p-tag>
+                        </div>
+
+                    </div>
+                </p-card>
+                
                 <p-card>
                     <div #reportContent id="editor">
 
                         <div class="p-fluid">
 
-                            <div class="p-field p-grid">
+                            
 
-                                <div class="p-col-12 p-md-6">
-                                    <h1 class="no-margin">Fattura {{idBilling}}/{{dateAppointments | date:'yyyy'}}</h1>
-                                </div>
-                                <div class="p-col-12 p-md-6">
-                                    <p-tag value="{{dateAppointments | date:'dd/MM/yyyy'}}" class="pull-right"></p-tag>
-
-                                    <p-tag severity="success" *ngIf="is_paid === '1'" (click)="closeBilling(id)" value="Pagata"
-                                    class="pull-right  p-mr-2"></p-tag>
-                                <p-tag severity="danger" *ngIf="is_paid === '0'" (click)="openBilling(id)" value="non pagata"
-                                    class="pull-right  p-mr-2"></p-tag>
-                                </div>
-
-                            </div>
-
-                            <hr class="full">
 
                             <div class="p-field p-grid">
 

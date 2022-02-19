@@ -105,10 +105,10 @@
 
                     <ng-template pTemplate="header" let-columns>
                         <tr>
-                            <th width="80">
-                                id
+                            <th  width="200">
+                                Entrata
                             </th>
-
+                         
                             <th width="150">
                                 Pezzi
                             </th>
@@ -116,10 +116,7 @@
                             <th width="150">
                                 Colli
                             </th>
-                            <th>
-                                Entrata
-                            </th>
-                         
+                        
                             <th>
                                 Warehouse
                             </th>
@@ -137,9 +134,9 @@
                         <tr>
 
                             <td>
-                              {{warehouseCheckin.id}}
-
-                            </td>
+                                <i class="pi pi-calendar"></i> {{warehouseCheckin.created_at | date:'d-MM-yyyy hh:mm'}}
+ 
+                             </td>
                             <td>
 
                                 <p-tag severity="default" [value]="warehouseCheckin.pieces + ' pezzi'"></p-tag>
@@ -147,10 +144,7 @@
                             </td>
                             <td><p-tag severity="success" [value]="warehouseCheckin.boxes + ' colli'"></p-tag>
                             </td>
-                            <td>
-                               <i class="pi pi-calendar"></i> {{warehouseCheckin.created_at | date:'d-MM-yyyy hh:mm'}}
-
-                            </td>
+                        
 
                   
 
