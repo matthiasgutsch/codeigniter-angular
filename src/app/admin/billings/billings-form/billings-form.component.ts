@@ -27,12 +27,14 @@ import { Billings } from 'src/app/models/billings';
 import { map, tap } from 'rxjs/operators';
 import { ISkill } from 'src/app/models/products';
 import { formatDate } from "@angular/common";
+import { ProductsVariationsService } from 'src/app/services/products_variations.service';
 
 
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { Skills } from 'src/app/models/skills';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { ProductsVariations } from 'src/app/models/products_variations';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -58,6 +60,8 @@ export class BillingsFormComponent implements OnInit {
   category: Category;
   works: any = [];
   work: Works;
+  productsVariations: any = [];
+  productsVariation: ProductsVariations;
   checked: boolean = true;
   selectedValue: string;
   typeList: any[];
@@ -96,6 +100,7 @@ export class BillingsFormComponent implements OnInit {
   dateAppointments: string;
   numberAppointments: number;
   numberOrders: number;
+  filteredProductsVariations: any[];
 
   currentUser: any;
   public dataValues: object;
@@ -130,7 +135,7 @@ export class BillingsFormComponent implements OnInit {
     private worksService: WorksService,
     private employeesService: EmployeesService,
     private companyService: CompanyService,
-
+    private productsVariationsService: ProductsVariationsService,
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,
     private router: Router,
@@ -152,10 +157,9 @@ export class BillingsFormComponent implements OnInit {
     const userId = this.currentUser.user_id;
     this.page = history.state;
 
-
+    this.getProductsVariations();
     this.getselectedWorks;
   
-
 
     
     this.worksService.getAllListbyUser().subscribe(
@@ -249,6 +253,29 @@ export class BillingsFormComponent implements OnInit {
   }
 
 
+  getProductsVariations() {
+    this.productsVariationsService.getAllListbyUser().subscribe(data => {
+      this.productsVariations = data })
+    };
+
+
+
+    filterCountry(event) {
+      //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+      let filtered: any[] = [];
+      let query = event.query;
+      for (let i = 0; i < this.productsVariations.length; i++) {
+        let productsVariation = this.productsVariations[i];
+        if (productsVariation.title.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+          filtered.push(productsVariation);
+          console.log(productsVariation)
+        }
+      }
+  
+      this.filteredProductsVariations = filtered;
+    }
+
+    
   generatePDF(action = 'open') {
     const format = 'dd/MM/yyyy';
     const formatYear = 'yyyy';
