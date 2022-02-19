@@ -10,15 +10,12 @@ import { CategoryService } from '../../../services/categories.service';
 import { ConfirmationService, MessageService, SelectItem } from "primeng/api";
 import * as moment from 'moment';
 import { TYPE_LIST } from '../../constants/constants';
-import { Clients } from 'src/app/models/clients';
-import { ClientsService } from 'src/app/services/clients.service';
 import { Location } from '@angular/common';
 import { WorksService } from 'src/app/services/works.service';
 import { Works } from 'src/app/models/works';
 import { Locations } from 'src/app/models/locations';
 import { Appointments } from 'src/app/models/appointments';
 import { Employees } from 'src/app/models/employees';
-import { AppointmentsService } from 'src/app/services/appointments.service';
 import { LocationsService } from 'src/app/services/locations.service';
 import { EmployeesService } from 'src/app/services/employees.service';
 import { CompanyService } from 'src/app/services/company.service';
@@ -30,6 +27,9 @@ import { map, tap } from 'rxjs/operators';
 import { ISkill } from 'src/app/models/products';
 import { BillingsService } from 'src/app/services/billings.service';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { SuppliersService } from 'src/app/services/suppliers.service';
+import { Suppliers } from 'src/app/models/suppliers';
+import { PurchaseOrdersService } from 'src/app/services/purchase_orders.service';
 
 @Component({
   selector: "app-purchase-orders-form",
@@ -58,8 +58,8 @@ export class PurchaseOrdersFormComponent implements OnInit {
   checked: boolean = true;
   selectedValue: string;
   typeList: any[];
-  clients: any = [];
-  client: Clients;
+  suppliers: any = [];
+  supplier: Suppliers;
   arrString: string;
   employees: any = [];
   employee: Employees;
@@ -77,7 +77,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
   format2: string = "";
   selectedCity: Blog;
   selectedCategories: Category;
-  selectedClients: Clients;
+  selectedSuppliers: Suppliers;
   selectedDate: Date;
   date: Date;
   works_id: any;
@@ -101,6 +101,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
   fiscaltype: number;
   editForm: boolean = true;
   numberQuotes: number;
+  idAppointments: number;
   
   trackByFn(index, item) {
     return item.id;
@@ -108,9 +109,9 @@ export class PurchaseOrdersFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private ordersService: OrdersService,
+    private purchaseOrdersService: PurchaseOrdersService,
     private messageService: MessageService,
-    private clientsService: ClientsService,
+    private suppliersService: SuppliersService,
     private _location: Location,
     private locationsService: LocationsService,
     private worksService: WorksService,
@@ -149,8 +150,8 @@ export class PurchaseOrdersFormComponent implements OnInit {
     );
 
 
-    this.clientsService.getAllListbyUser().subscribe(
-      (data: Clients) => (this.clients = data),
+    this.suppliersService.getAllListbyUser().subscribe(
+      (data: Suppliers) => (this.suppliers = data),
       (error) => (this.error = error)
     );
 
@@ -166,7 +167,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
 
     const id = this.route.snapshot.paramMap.get("id");
 
-    this.ordersService.skills(+id).subscribe(value => {
+    this.purchaseOrdersService.skills(+id).subscribe(value => {
       this.skillsValues = value;
     });
 
@@ -183,7 +184,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
 
     if (id) {
       this.pageTitle = "Modifica Ordine Fornitore";
-      this.ordersService.getId(+id).subscribe((res) => {
+      this.purchaseOrdersService.getId(+id).subscribe((res) => {
         this.imagePath = res.image;
         this.idOrders = res.id;
         this.categoryOrders = res.category_id;
@@ -195,6 +196,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
         this.numberOrders = res.order_id;
         this.works_idOrders = res.works_id.split(',');
         this.numberQuotes = res.quotes_id;
+        this.idAppointments = res.id;
 
 
         
@@ -254,7 +256,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
     const formData = new FormData();
     formData.append('skills', JSON.stringify(this.skillsValues));
     
-    this.ordersService.update_skills(formData, +id).subscribe({
+    this.purchaseOrdersService.update_skills(formData, +id).subscribe({
       next: (response: any) => {
         if (response.error) {
         } else {
@@ -317,7 +319,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
   }
 
   getCategoryItem(categoryAppointments: string, id: string) {
-    return this.clients.find((item) => item.id === categoryAppointments);
+    return this.suppliers.find((item) => item.id === categoryAppointments);
   }
 
   editFormItems() {
@@ -348,7 +350,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
     const formArray = new FormArray([]);
     const id = this.route.snapshot.paramMap.get("id");
 
-    this.ordersService.skills(+id).subscribe(
+    this.purchaseOrdersService.skills(+id).subscribe(
       (res)=>{
         this.skillsValues = res;
 
@@ -510,7 +512,7 @@ createBilling() {
     const id = this.blogForm.get("id").value;
 
     if (id) {
-      this.ordersService.update(formData, +id).subscribe(
+      this.purchaseOrdersService.update(formData, +id).subscribe(
         (res) => {
           if (res.status == "error") {
             this.uploadError = res.message;
@@ -523,7 +525,7 @@ createBilling() {
         (error) => (this.error = error)
       ); 
     } else {
-      this.ordersService.create(formData).subscribe(
+      this.purchaseOrdersService.create(formData).subscribe(
         (res) => {
           if (res.status === "error") {
             this.uploadError = res.message;

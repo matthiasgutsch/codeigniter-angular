@@ -49,7 +49,7 @@
                 </div>
                 <div class="p-col-2 p-md-6">
                    
-                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/orders/create']" label="Aggiungi" class="p-button p-button-primary pull-right"></button>
+                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/purchase-orders/create']" label="Aggiungi" class="p-button p-button-primary pull-right"></button>
     
      
     
@@ -91,8 +91,7 @@
                             <th>Data emissione</th>
                             <th width="50"></th>
 
-                            <th>Cliente</th>
-                            <th>Residente</th>
+                            <th>Fornitore</th>
 
                             <th>Prezzo</th>
                             <th></th>
@@ -107,24 +106,21 @@
 
                             <td width="50">
 
-                                <app-initials-avatar  [routerLink]="['/admin/clients/edit', order.client.id]" firstName="{{ order.client.name | slice:0:1}}" lastName="{{ order.client.surname | slice:0:1}}"></app-initials-avatar>
+                                <app-initials-avatar  firstName="{{ order.supplier.company_name | slice:0:1}}" lastName="{{ order.supplier.company_name | slice:0:1}}"></app-initials-avatar>
 
                                
                             </td>
 
                             <td>
 
-                                {{ order.client.name }}
-                                {{ order.client.surname }}
+                                {{ order.supplier.company_name }}
                             </td>
 
-                            <td>{{
-                                order.client.zip }} - {{order.client.city }}</td>
                             <td><p-tag [value]="order.total | currency :'EUR':'symbol':'1.2-2'"></p-tag></td>
 
 
                             <td class="action">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/orders/edit', order.id]"></button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/purchase-orders/edit', order.id]"></button>
                                 <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2" (click)="edit(order)"></button>
                                 <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(order.id)"></button>
 
@@ -146,15 +142,15 @@
 
     <div class="p-col-12 p-md-12">
         <p-card>
-            <app-initials-avatar class="pull-right"  [routerLink]="['/admin/clients/edit', order.client.id]" firstName="{{ order.client.name | slice:0:1}}" lastName="{{ order.client.surname | slice:0:1}}"></app-initials-avatar>
+            <app-initials-avatar class="pull-right"  firstName="{{ order.supplier.company_name | slice:0:1}}" lastName="{{ order.supplier.company_name | slice:0:1}}"></app-initials-avatar>
 
-            <h3>Dettaglio Ordine {{order.id}}</h3>
+            <h3>Dettaglio Ordine Fornitore {{order.id}}</h3>
             <p-tag severity="default" value="{{order.date}}"></p-tag>
             <hr class="full">
 
-                <strong>{{ order.client.username }}</strong><br>
-                {{ order.client.address }} - {{ order.client.zip }} {{ order.client.city }} <br>
-                {{ order.client.phone }}
+                <strong>{{ order.supplier.company_name }}</strong><br>
+                {{ order.supplier.address }} - {{ order.supplier.zip }} {{ order.supplier.city }} <br>
+                {{ order.supplier.phone }}
 
         </p-card>
 <p-card>

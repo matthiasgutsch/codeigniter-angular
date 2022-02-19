@@ -13,6 +13,7 @@ import { jsPDF } from "jspdf";
 import { NgxSpinnerService } from "ngx-spinner";
 import { Orders } from 'src/app/models/orders';
 import { OrdersService } from 'src/app/services/orders.service';
+import { PurchaseOrdersService } from 'src/app/services/purchase_orders.service';
 
 @Component({
   selector: "app-manage-purchase-orders",
@@ -53,7 +54,7 @@ export class ManagePurchaseOrdersComponent implements OnInit {
 
   constructor(
     private clientsService: ClientsService,
-    private ordersService: OrdersService,
+    private purchaseOrdersService: PurchaseOrdersService,
     private messageService: MessageService,
     private comuniService: ComuniService,
     private categoryService: CategoryService,
@@ -73,7 +74,7 @@ export class ManagePurchaseOrdersComponent implements OnInit {
 
 
     this.spinner.show();
-    this.ordersService.getAllListbyUser().subscribe(data => {
+    this.purchaseOrdersService.getAllListbyUser().subscribe(data => {
       this.orders = data;
       this.cols = [
         { field: "category_id", header: "Cliente" },
@@ -143,7 +144,7 @@ edit(order: Orders) {
       header: "Confirmation",
       icon: "pi pi-exclamation-triangle",
       accept: () => {
-        this.ordersService.delete(+id).subscribe(
+        this.purchaseOrdersService.delete(+id).subscribe(
           (res) => {
             console.log(res);
             this.ngOnInit();

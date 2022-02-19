@@ -120,24 +120,36 @@
                                                 </div>
                                             </div>
 
+
                                             <div class="p-fluid">
 
                                                 <div class="p-field p-grid">
-                                                    <label *ngIf="is_featured"
-                                                        class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Partita Iva</label>
-                                                    <label *ngIf="!is_featured"
-                                                        class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Codice Fiscale </label>
+                                                    <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Partita Iva <span
+                                                            class="required">*</span></label>
                                                     <div class="p-col-12 p-md-10">
-                                                        <input type="text" *ngIf="is_featured"
-                                                            placeholder="Codice Fiscale" pInputText
-                                                            formControlName="fiscalcode" />
-                                                        <input type="text" *ngIf="!is_featured"
-                                                            placeholder="Partita Iva" pInputText
-                                                            formControlName="fiscalnumber" />
+                                                        <input type="text"
+                                                        placeholder="Partita Iva" pInputText
+                                                        formControlName="fiscalnumber" />
 
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <div class="p-fluid">
+
+                                                <div class="p-field p-grid">
+                                                    <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Codice Fiscale <span
+                                                            class="required">*</span></label>
+                                                    <div class="p-col-12 p-md-10">
+
+                                                        <input type="text"
+                                                        placeholder="Codice Fiscale" pInputText
+                                                        formControlName="fiscalcode" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        
 
                                             <div class="p-fluid">
 

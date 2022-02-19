@@ -15,15 +15,7 @@
                         <button pButton pRipple icon="pi pi-save" *ngIf="idOrders > 0" (click)="downloadPDF()" label="Genera PDF"
                             class="p-button p-button-primary pull-right p-mr-2"></button>
     
-    
-                            <button pButton pRipple *ngIf="numberQuotes > 0"
-                                [routerLink]="['/admin/quotes/edit', numberQuotes]" label="Visualizza Preventivo"
-                                class="p-button p-button-secondary  pull-right p-mr-2"></button>
-    
-                                <button *ngIf="pages" type="button" pButton pRipple icon="pi pi-save" label="Visualizza Fattura / Ricevuta" [routerLink]="['/admin/billings/edit', pages.id]" class="p-button pull-right p-button-primary p-mr-2"></button>
-            
-                                <button *ngIf="!pages && idOrders > 0" type="button" pButton pRipple icon="pi pi-save" label="Crea Fattura / Ricevuta"  (click)="createBilling()" class="p-button pull-right p-button-primary p-mr-2"></button>
-    
+        
                                 <button pButton pRipple type="button"
                                 (click)="editFormItems()" label="Modifica"
                                     class="p-button p-button-success  pull-right p-mr-2"></button>
@@ -71,26 +63,17 @@
                             </div>
                         </div>
 
-                        <div class="p-fluid">
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Tipo di Fattura <span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-12">
-                                    <input type="radio" formControlName="title" value="Fattura" /> Fattura
-                                    <input type="radio" formControlName="title" value="Ricevuta" /> Ricevuta
-                                </div>
-                            </div>
-                        </div>
+                    
 
                         <div class="p-fluid">
                             <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Cliente <span
+                                <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Fornitore <span
                                         class="required">*</span></label>
                                 <div class="p-col-12 p-md-12">
-                                    <p-dropdown [options]="clients" [virtualScroll]="true" filter="true"
+                                    <p-dropdown [options]="suppliers" [virtualScroll]="true" filter="true"
                                         [required]="true" [showClear]="true" placeholder="Scegli"
                                         [style]="{ width: '100%' }" [(ngModel)]="categoryAppointments"
-                                        formControlName="category_id" optionLabel="username" optionValue="id">
+                                        formControlName="category_id" optionLabel="company_name" optionValue="id">
                                         <ng-template let-option pTemplate="item">
 
                                             <strong>{{option.name}} {{option.surname}}</strong><br>
@@ -117,19 +100,7 @@
                             </div>
                         </div>
 
-                        <div class="p-fluid">
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Tipo di Lavorazione<span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-12">
-
-                                    <p-multiSelect [options]="works" display="chip" formControlName="works_id"
-                                        [(ngModel)]="selectedWorks" optionLabel="name" optionValue="id">
-                                    </p-multiSelect>
-
-                                </div>
-                            </div>
-                        </div>
+                        
 
                         <div class="form-group form-row">
                             <label class="col-md-3"></label>
@@ -157,7 +128,7 @@
                             <div class="p-field p-grid">
 
                                 <div class="p-col-12 p-md-6">
-                                    <h1>Ordine {{idAppointments}}</h1>
+                                    <h1>Ordine Fornitore {{idAppointments}}</h1>
                                     <h3>{{dateAppointments}}</h3>
                                 </div>
 
@@ -165,11 +136,13 @@
                             <div class="p-field p-grid">
 
                                 <div class="p-col-12 p-md-6" *ngIf="getCategoryItem">
-                                    <h3>Cliente</h3>
+                                    <h3>Fornitore</h3>
 
-                                    {{ getCategoryItem(categoryAppointments)?.username }}<br>{{ getCategoryItem(categoryAppointments)?.zip }}
+                                    {{ getCategoryItem(categoryAppointments)?.company_name }}<br>{{ getCategoryItem(categoryAppointments)?.zip }}
                                     - {{ getCategoryItem(categoryAppointments)?.city }} <br>
-                                    {{ getCategoryItem(categoryAppointments)?.phone }}
+                                    {{ getCategoryItem(categoryAppointments)?.phone }} <br>
+                                    {{ getCategoryItem(categoryAppointments)?.fiscalcode }} <br>
+                                    {{ getCategoryItem(categoryAppointments)?.fiscalnumber }}
 
                                 </div>
 
@@ -203,7 +176,7 @@
                             <div class="p-field p-grid">
 
                                 <div class="p-col-12 p-md-8">
-                                    <h3>Lavorazione</h3>
+                                    <h3>Prodotti</h3>
                                 </div>
                                 <div class="p-col-12 p-md-4">
 
