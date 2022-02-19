@@ -63,6 +63,8 @@ import { ManageSuppliersComponent } from './supplier/manage-suppliers/manage-sup
 import { SuppliersFormComponent } from './supplier/suppliers-form/suppliers-form.component';
 import { ManageProductsVariationsComponent } from './products/manage-products-variations/manage-products-variations.component';
 import { ProductsVariationsFormComponent } from './products/products-variations-form/products-variations-form.component';
+import { ManagePurchaseOrdersComponent } from './purchase-orders/manage-purchase-orders/manage-purchase-orders.component';
+import { PurchaseOrdersFormComponent } from './purchase-orders/purchase-orders-form/purchase-orders-form.component';
 
 const routes: Routes = [
   {
@@ -134,7 +136,9 @@ const routes: Routes = [
           { path: "clients/create", component: ClientsFormComponent },
           { path: "clients/edit/:id", component: ClientsFormComponent },
 
-
+          { path: "purchase-orders", component: ManagePurchaseOrdersComponent },
+          { path: "purchase-orders/edit/:id",component: PurchaseOrdersFormComponent,},
+          { path: "purchase-orders/create", component: PurchaseOrdersFormComponent },
 
           { path: "suppliers", component: ManageSuppliersComponent },
           { path: "suppliers/create", component: SuppliersFormComponent },

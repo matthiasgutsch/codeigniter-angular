@@ -118,6 +118,7 @@ export class ProductsFormComponent implements OnInit {
   skillsValues: any = [];
   cols: any[];
   colsData: any[];
+  productTitle: string;
   trackByFn(index, item) {
     return item.id;
   }
@@ -247,6 +248,7 @@ export class ProductsFormComponent implements OnInit {
       }
         this.imagePath = res.image;
         this.id = res.id;
+        this.productTitle = res.title;
       });
     } else {
       this.pageTitle = "Aggiungi Prodotto";

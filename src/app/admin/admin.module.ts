@@ -124,7 +124,8 @@ import { ManageSuppliersComponent } from './supplier/manage-suppliers/manage-sup
 import { SuppliersFormComponent } from './supplier/suppliers-form/suppliers-form.component';
 import { ManageProductsVariationsComponent } from './products/manage-products-variations/manage-products-variations.component';
 import { ProductsVariationsFormComponent } from './products/products-variations-form/products-variations-form.component';
-
+import { ManagePurchaseOrdersComponent } from './purchase-orders/manage-purchase-orders/manage-purchase-orders.component';
+import { PurchaseOrdersFormComponent } from './purchase-orders/purchase-orders-form/purchase-orders-form.component';
 
 @NgModule({
   declarations: [
@@ -134,6 +135,8 @@ import { ProductsVariationsFormComponent } from './products/products-variations-
     ManageWarehousesComponent,
     ManageSuppliersComponent,
     SuppliersFormComponent,
+    PurchaseOrdersFormComponent,
+    ManagePurchaseOrdersComponent,
     WarehousesFormComponent,
     ManageProductsVariationsComponent,
     ProductsVariationsFormComponent,

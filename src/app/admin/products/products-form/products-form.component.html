@@ -16,7 +16,7 @@
                         class="p-button pull-right p-button-success p-mr-2"
                         [disabled]="!blogForm.valid"></button>
 
-                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/products-variation/create', id]" label="Aggiungi variante"
+                        <button pButton pRipple icon="pi pi-plus" *ngIf="id" [routerLink]="['/admin/products-variation/create', id]" label="Aggiungi variante"
                         class="p-button p-button-primary p-mr-2 pull-right"></button>
                     </div>
                 </div>
@@ -30,8 +30,24 @@
     <div class="p-fluid">
         <div class="p-field p-grid">
 
+   
+
             <div class="p-col-12 p-md-9">
+
+                <p-card *ngIf="id" class="blu-box">
+                    <div class="p-grid">
+                        <div class="p-col-12">
+                            <label class="legend">Nome Prodotto</label>
+                            <h3>{{productTitle}}</h3>
+                        
+                        </div>
+                        
+                    </div>
+                </p-card>
+
+
                 <p-card>
+                    
                     <div class="blog-form">
                     
 
