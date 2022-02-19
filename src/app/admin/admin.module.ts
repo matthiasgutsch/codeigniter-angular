@@ -9,6 +9,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AdminComponent } from './admin/admin.component';
 import { ManageCategoriesComponent } from './settings/category/manage-categories/manage-categories.component';
 import { NgxSpinnerService } from "ngx-spinner";
+import {InputNumberModule} from 'primeng/inputnumber';
 
 import { ManageClientsComponent } from './clients/manage-clients/manage-clients.component';
 import { ClientsFormComponent } from './clients/clients-form/clients-form.component';
@@ -215,6 +216,7 @@ import { PurchaseOrdersFormComponent } from './purchase-orders/purchase-orders-f
     MessagesModule,
     SumPipeModule,
     TooltipModule,
+    InputNumberModule,
     SelectButtonModule,
     ProgressBarModule,
     NgxSpinnerModule,

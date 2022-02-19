@@ -100,6 +100,12 @@ export const TIMESHEETS_TYPE: SelectItem[] = [
   {label: "No", value: "0"}];
   
 
+  export const BILLING_LIST = [
+    {label: "Fattura", value: "Fattura"}, 
+    {label: "Ricevuta", value: "Ricevuta"}];
+
+
+
   export const BUSINESS_STATE_LIST = [
     {label: "Business", value: "1"}, 
     {label: "Privato", value: "0"}];

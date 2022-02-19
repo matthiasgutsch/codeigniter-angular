@@ -9,7 +9,7 @@ import { FormControl } from '@angular/forms';
 import { CategoryService } from '../../../services/categories.service';
 import { ConfirmationService, MessageService, SelectItem } from "primeng/api";
 import * as moment from 'moment';
-import { TYPE_LIST } from '../../constants/constants';
+import { BILLING_LIST, TYPE_LIST } from '../../constants/constants';
 import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
 import { Location } from '@angular/common';
@@ -114,6 +114,7 @@ export class BillingsFormComponent implements OnInit {
   email: string;
   products: Skills[] = [];
   additionalDetails: string;
+  billingOptions: { label: string; value: string; }[];
 
   trackByFn(index, item) {
     return item.id;
@@ -140,6 +141,7 @@ export class BillingsFormComponent implements OnInit {
     }
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     this.typeList = TYPE_LIST;
+    this.billingOptions = BILLING_LIST;
   }
 
   @ViewChild('reportContent') reportContent: ElementRef;
@@ -409,7 +411,7 @@ export class BillingsFormComponent implements OnInit {
     };
 
     if(action==='download'){
-      pdfMake.createPdf(docDefinition).download();
+      pdfMake.createPdf(docDefinition).download('Fattura-' + this.idBilling + '.pdf');
     }else if(action === 'print'){
       pdfMake.createPdf(docDefinition).print();      
     }else{

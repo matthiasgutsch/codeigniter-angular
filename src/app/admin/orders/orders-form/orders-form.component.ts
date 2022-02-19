@@ -31,6 +31,15 @@ import { ISkill } from 'src/app/models/products';
 import { BillingsService } from 'src/app/services/billings.service';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
+
+
+import { formatDate } from "@angular/common";
+
+
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 @Component({
   selector: "app-orders-form",
   templateUrl: "./orders-form.component.html",
@@ -101,7 +110,13 @@ export class OrdersFormComponent implements OnInit {
   fiscaltype: number;
   editForm: boolean = true;
   numberQuotes: number;
-  
+  dateAppointments: string;
+  categoryAppointments: string;
+  descriptionBillings: string;
+  additionalDetails: string;
+  idBilling: number;
+  contactNo: number;
+
   trackByFn(index, item) {
     return item.id;
   }
@@ -195,9 +210,11 @@ export class OrdersFormComponent implements OnInit {
         this.numberOrders = res.order_id;
         this.works_idOrders = res.works_id.split(',');
         this.numberQuotes = res.quotes_id;
+        this.dateAppointments = res.date;
+        this.categoryAppointments = res.category_id;
+        this.descriptionBillings = res.description;
+        this.idBilling = res.id;
 
-
-        
 
         this.blogForm.patchValue({
           title: res.title,
@@ -433,6 +450,177 @@ export class OrdersFormComponent implements OnInit {
     return this.itemTotal.reduce((total, fee) => total + fee.balance, 0);
 }
 
+
+generatePDF(action = 'open') {
+  const format = 'dd/MM/yyyy';
+  const formatYear = 'yyyy';
+
+  const locale = 'en-US';
+
+  const formattedDate = formatDate(this.dateAppointments, format, locale);
+  const formattedDateYear = formatDate(this.dateAppointments, formatYear, locale);
+
+  let docDefinition = {
+    layout: 'headerLineOnly', // optional
+
+    
+    content: [
+
+      {
+        "canvas": [{
+          "lineColor": "gray",
+          "type": "line",
+          "x1": 0,
+          "y1": 0,
+          "x2": 515,
+          "y2": 0,
+          "lineWidth": 1
+        }]
+      },
+
+      {
+        text: '' + this.company.name + '',
+        fontSize: 12,
+        alignment: 'left',
+        margin: [0, 20 ,0, 0],        
+
+        bold: true,
+
+        color: '#111'
+      },
+      {
+        text: '' + this.company.address + ' ' + this.company.zip + ' ' + this.company.city + '',
+        fontSize: 12,
+        alignment: 'left',
+        color: '#111'
+      },
+      {
+        text: '' + this.company.fiscalcode + ' ' + this.company.fiscalnumber + '',
+        fontSize: 12,
+        alignment: 'left',
+        color: '#111'
+      },
+      {
+        text: 'Cliente',
+        bold: true,
+        margin: [0, 20 ,0, 0],        
+
+      },
+      {
+
+        columns: [
+          [
+            {
+              text: this.getCategoryItem(this.categoryAppointments, '222')?.username},
+            { text: this.getCategoryItem(this.categoryAppointments, '222')?.address },
+            { text: this.getCategoryItem(this.categoryAppointments, '222')?.zip + ' ' + this.getCategoryItem(this.categoryAppointments, '222')?.city },
+            { text: this.getCategoryItem(this.categoryAppointments, '222')?.fiscalcode + ' ' + this.getCategoryItem(this.categoryAppointments, '222')?.fiscalnumber },
+            { text: this.contactNo }
+          ],
+          [
+            {
+              text: 'Data: '+ formattedDate +'',
+              alignment: 'right',
+              
+            },
+            { 
+              text: 'Numero Ordine: ' + this.idBilling + '/'+ formattedDateYear + '',
+              bold: true,
+              alignment: 'right',
+              
+            }
+          ]
+        ]
+      },
+    
+      {
+        text: 'Note',
+        bold: true,
+        margin: [0, 20 ,0, 0],        
+
+      },
+      {
+        text: this.descriptionBillings,
+        fontSize: 12,
+      },
+      {
+        text: 'Dettagli Ordine',
+        style: 'sectionHeader'
+      },
+      
+      { layout: 'lightHorizontalLines',
+        table: {
+          headerRows: 1,
+
+          widths: ['*', 'auto', 'auto', 'auto'],
+          body: [
+            ['Posizione', 'Qty', 'Prezzo', 'Totale'],
+            ...this.skillsValues.map(p => ([p.description, p.qty, p.price, (p.price*p.qty).toFixed(2)])),
+            [{text: 'Totale senza Iva', colSpan: 3}, {}, {}, (Math.round(this.subTotal * 100) / 100).toFixed(2)],
+            [{text: 'Iva (' + this.company.fiscaltype + '%)', colSpan: 3}, {}, {}, (Math.round(this.vat * 100) / 100).toFixed(2)],
+            [{bold: true, fontSize: 14, text: 'Totale', colSpan: 3}, {}, {}, (Math.round(this.grandTotal * 100) / 100).toFixed(2)]
+          ]
+        }
+      },
+      {
+          text: this.additionalDetails,
+          margin: [0, 0 ,0, 25]          
+      },
+     
+      {
+        "canvas": [{
+          "lineColor": "gray",
+          "type": "line",
+          "x1": 0,
+          "y1": 0,
+          "x2": 200,
+          "y2": 0,
+          "lineWidth": 1
+        }]
+      },
+
+      {
+        columns: [
+          //[{ qr: `${this.description}`, fit: '50' }],
+          [{ text: 'Firma', 
+          alignment: 'left', 
+          italics: false,
+          margin: [0, 5 ,15, 0]          
+        }],
+        ]
+      },
+      {
+        text: 'Condizioni',
+        fontSize: 12,
+        bold: true,
+        margin: [0, 25 ,15, 0]          
+
+      },
+      {
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
+          fontSize: 9,
+
+      }
+    ],
+    styles: {
+      sectionHeader: {
+        bold: true,
+        decoration: 'underline',
+        fontSize: 14,
+        margin: [0, 15,0, 15]          
+      }
+    }
+  };
+
+  if(action==='download'){
+    pdfMake.createPdf(docDefinition).download('Ordine-' + this.idBilling + '.pdf');
+  }else if(action === 'print'){
+    pdfMake.createPdf(docDefinition).print();      
+  }else{
+    pdfMake.createPdf(docDefinition).open();      
+  }
+
+}
 
 
 createBilling() {

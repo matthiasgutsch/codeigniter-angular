@@ -67,7 +67,18 @@
 
 
                         
+                        <div class="p-fluid">
+                            <div class="p-field p-grid">
+                          
+                                <div class="p-col-12 p-md-12">
 
+                                    <p-selectButton [options]="billingOptions" formControlName="title" optionLabel="label" optionValue="value"></p-selectButton>
+
+
+                              
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="p-fluid">
 
@@ -97,16 +108,7 @@
                             </div>
                         </div>
 
-                        <div class="p-fluid">
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Tipo di Fattura <span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-12">
-                                    <input type="radio" formControlName="title" value="Fattura" /> Fattura
-                                    <input type="radio" formControlName="title" value="Ricevuta" /> Ricevuta
-                                </div>
-                            </div>
-                        </div>
+                     
 
                         <div class="p-fluid">
                             <div class="p-field p-grid">
@@ -143,19 +145,7 @@
                             </div>
                         </div>
 
-                        <div class="p-fluid">
-                            <div class="p-field p-grid">
-                                <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Tipo di Lavorazione<span
-                                        class="required">*</span></label>
-                                <div class="p-col-12 p-md-12">
-
-                                    <p-multiSelect [options]="works" display="chip" formControlName="works_id"
-                                        [(ngModel)]="selectedWorks" optionLabel="name" optionValue="id">
-                                    </p-multiSelect>
-
-                                </div>
-                            </div>
-                        </div>
+                       
 
                         <div class="form-group form-row">
                             <label class="col-md-3"></label>
@@ -278,8 +268,10 @@
                                            <span *ngIf="editForm">{{blogForm.get('skills').value[this.i].qty}}</span>
                                     </td>
                                     <td width="150px">
-                                        <input type="text" *ngIf="!editForm"  [style]="{ width: '100%' }" pInputText
-                                            formControlName="price" (input)="itemsChanged()"> 
+
+                                        <p-inputNumber *ngIf="!editForm" [style]="{ width: '100%' }"  formControlName="price" (input)="itemsChanged()" inputId="locale-us" mode="decimal" locale="en-US" [minFractionDigits]="2">
+                                        </p-inputNumber>
+                                     
                                             <span *ngIf="editForm">{{blogForm.get('skills').value[this.i].price | currency :'EUR':'symbol':'1.2-2'}}</span>
                                     </td>
 
