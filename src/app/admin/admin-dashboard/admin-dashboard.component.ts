@@ -36,6 +36,10 @@ import { SupportsService } from 'src/app/services/supports.service';
 import { Supports } from 'src/app/models/supports';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { Projects } from 'src/app/models/projects';
+
+import { WarehouseCheckins } from 'src/app/models/warehouse_checkins';
+import { WarehousesCheckinsService } from 'src/app/services/warehouses_checkins.service';
+
 moment.locale('it')
 
 @Component({
@@ -54,7 +58,8 @@ export class AdminDashboardComponent implements OnInit {
 
   employees: any = [];
   employee: Employees;
-
+  warehouseCheckins: any = [];
+  warehouseCheckin: WarehouseCheckins;
   works: any = [];
   work: Works;
   clientsCount: any;
@@ -126,6 +131,7 @@ export class AdminDashboardComponent implements OnInit {
     private worksService: WorksService,
     private router: Router,
     private productsService: ProductsService,
+    private warehousesCheckinsService: WarehousesCheckinsService,
     private messageService: MessageService,
     private supportsService: SupportsService,
     private route: ActivatedRoute
@@ -152,7 +158,7 @@ export class AdminDashboardComponent implements OnInit {
       this.getProductsCount();
       this.getBillingsCountTotal();
       this.getBillingsCountTotalNotPaid();
-
+      this.getLastWarehouseCheckins();
       this.getBillingsCount();
       this.getAppointmentsToday();
       this.getAppointmentsCount();
@@ -267,9 +273,16 @@ export class AdminDashboardComponent implements OnInit {
   }
 
 
+
+  getLastWarehouseCheckins() {
+    this.warehousesCheckinsService.getAllListbyUser().subscribe(data => {
+      this.warehouseCheckins = Object.values(data).slice(0,3);
+    });
+  }
+
   getProjects() {
     this.projectsService.getAllListbyUser().subscribe(data => {
-      this.projects = data;
+      this.projects = Object.values(data).slice(0,2);
     });
   }
 

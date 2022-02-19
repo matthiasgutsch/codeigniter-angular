@@ -193,6 +193,53 @@
 
         </p-card>
 
+
+        <p-card>
+
+            <div class="p-field p-grid">
+
+                <div class="p-col-12 p-md-12">
+
+                    <p-tabView class="responsive-tab-view">
+                        <p-tabPanel header="Ultimi Movimenti Magazzino">
+
+                            <p-table #dt1 [value]="warehouseCheckins" [responsive]="true" [paginator]="false" [rows]="10">
+
+                                <ng-template pTemplate="body" let-warehouseCheckin>
+                                    <tr>
+
+                                        <td width="200">
+                                            <i class="pi pi-calendar"></i> {{warehouseCheckin.created_at | date:'d-MM-yyyy hh:mm'}}
+                                   
+
+                                         </td>
+                                   
+                                 
+            
+                              
+            
+                                        <td>
+                                            <p-tag severity="default" [value]="warehouseCheckin.pieces + ' pezzi'" class="p-mr-2"></p-tag>
+                                            <p-tag severity="success" [value]="warehouseCheckin.boxes + ' colli'"></p-tag></td>
+            
+                                            <td width="80"> <img *ngIf="warehouseCheckin.image" class="img-responsive" src="{{ warehouseCheckin.image}}"></td>
+                                       <td>  
+                                           
+                                        <p class="small"><strong>{{ warehouseCheckin.product.code_int}}</strong></p> 
+                                        <p class="small" *ngIf="warehouseCheckin.supplier_id">{{ warehouseCheckin.supplier_id.company_name}}</p></td>
+                                   
+                                   
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+
+                        </p-tabPanel>
+                    </p-tabView>
+                </div>
+            </div>
+                
+        </p-card>
+
         <p-card>
 
             <div class="p-field p-grid">
