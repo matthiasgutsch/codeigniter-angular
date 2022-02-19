@@ -266,7 +266,7 @@ export class BillingsFormComponent implements OnInit {
       let query = event.query;
       for (let i = 0; i < this.productsVariations.length; i++) {
         let productsVariation = this.productsVariations[i];
-        if (productsVariation.title.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        if (productsVariation.code.toLowerCase().indexOf(query.toLowerCase()) == 0) {
           filtered.push(productsVariation);
           console.log(productsVariation)
         }
@@ -380,7 +380,7 @@ export class BillingsFormComponent implements OnInit {
             widths: ['*', 'auto', 'auto', 'auto'],
             body: [
               ['Posizione', 'Qty', 'Prezzo', 'Totale'],
-              ...this.skillsValues.map(p => ([p.description, p.qty, p.price, (p.price*p.qty).toFixed(2)])),
+              ...this.skillsValues.map(p => ([p.description.code + ' ' + p.description.description, p.qty, p.price, (p.price*p.qty).toFixed(2)])),
               [{text: 'Totale senza Iva', colSpan: 3}, {}, {}, (Math.round(this.subTotal * 100) / 100).toFixed(2)],
               [{text: 'Iva (' + this.company.fiscaltype + '%)', colSpan: 3}, {}, {}, (Math.round(this.vat * 100) / 100).toFixed(2)],
               [{bold: true, fontSize: 14, text: 'Totale', colSpan: 3}, {}, {}, (Math.round(this.grandTotal * 100) / 100).toFixed(2)]

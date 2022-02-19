@@ -257,10 +257,12 @@
 
                                     <td>
                                       
-                                        <p-autoComplete *ngIf="!editForm" (input)="itemsChanged()"  formControlName="description" [suggestions]="filteredProductsVariations" (completeMethod)="filterCountry($event)" field="title" [minLength]="1">
+                                        <p-autoComplete *ngIf="!editForm" (input)="itemsChanged()"  formControlName="description" [suggestions]="filteredProductsVariations" (completeMethod)="filterCountry($event)" field="code" [minLength]="1">
                                             <ng-template let-productsVariation pTemplate="item">
-                                                <div class="p-d-flex p-ai-center">
-                                                <span>{{productsVariation.id}} {{productsVariation.title}} {{productsVariation.description}}</span>
+                                                <div class="grid">
+                                                <div class="p-col">{{productsVariation.code}}</div>
+                                                <div class="p-col">{{productsVariation.title}} </div>
+                                                <div class="p-col">{{productsVariation.description}}</div>
                                               </div>
                                             </ng-template>
 
@@ -271,7 +273,7 @@
 
                               
 
-                                            <span *ngIf="editForm">{{i + 1}}. {{blogForm.get('skills').value[this.i].description.title}}<br>{{blogForm.get('skills').value[this.i].description.description}}</span>
+                                            <span *ngIf="editForm">{{i + 1}}. <strong>{{blogForm.get('skills').value[this.i].description.code}}</strong> {{blogForm.get('skills').value[this.i].description.title}}<br>{{blogForm.get('skills').value[this.i].description.description}}</span>
 
 
                                     </td>
