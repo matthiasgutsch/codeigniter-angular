@@ -253,7 +253,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <tr *ngFor="let quantity of skills.controls; let i=index" [formGroupName]="i" >
+                                <tr *ngFor="let quantity of skills.controls; let i=index" [formGroupName]="i">
 
                                         <td width="20px" cdkDrag>{{i + 1}}. </td>
                                     <td>
@@ -287,11 +287,11 @@
                                     <td width="150px">
 
 
-                                        <input type="number" *ngIf="!editForm" [style]="{ width: '100%' }" pInputText formControlName="price"
-                                        (input)="itemsChanged()">
-
-                                     
-                                            <span *ngIf="editForm">{{blogForm.get('skills').value[this.i].price | currency :'EUR':'symbol':'1.2-2'}}</span>
+                                        <p-inputNumber *ngIf="!editForm" [style]="{ width: '100%' }"  formControlName="price" (ngModelChange)="itemsChanged()" inputId="locale-us" mode="decimal" locale="en-US" [minFractionDigits]="2">
+                                        </p-inputNumber>
+          
+                                        
+                                            <span *ngIf="editForm">{{blogForm.get('skills').value[this.i].price  | currency :'EUR':'symbol':'1.2-2' }}</span>
                                     </td>
 
                                     <td width="150px">

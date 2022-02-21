@@ -240,11 +240,11 @@
                                     </td>
                                     <td width="150px">
 
-                                        <p-inputNumber *ngIf="!editForm" [style]="{ width: '100%' }"  formControlName="price" (input)="itemsChanged()" inputId="locale-us" mode="decimal" locale="en-US" [minFractionDigits]="2">
+                                        <p-inputNumber *ngIf="!editForm" [style]="{ width: '100%' }"  formControlName="price" (ngModelChange)="itemsChanged()" inputId="locale-us" mode="decimal" locale="en-US" [minFractionDigits]="2">
                                         </p-inputNumber>
           
                                         
-                                            <span *ngIf="editForm">{{blogForm.get('skills').value[this.i].price}}</span>
+                                            <span *ngIf="editForm">{{blogForm.get('skills').value[this.i].price  | currency :'EUR':'symbol':'1.2-2' }}</span>
 
                                             
                                     </td>
