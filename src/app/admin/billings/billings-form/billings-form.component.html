@@ -244,7 +244,7 @@
                             <table formArrayName="skills" class="billings-list" cdkDropList (cdkDropListDropped)="drop($event)">
                                 <thead>
                                     <tr>
-                                        <th>Posizione</th>
+                                        <th>id</th>
                                         <th>Qantità</th>
                                         <th>Prezzo Cad.</th>
                                         <th>Totale</th>
@@ -253,13 +253,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <tr *ngFor="let quantity of skills.controls; let i=index" [formGroupName]="i" cdkDrag>
+                                <tr *ngFor="let quantity of skills.controls; let i=index" [formGroupName]="i" >
 
+                                        <td width="20px" cdkDrag>{{i + 1}}. </td>
                                     <td>
                                       
                                         <p-autoComplete *ngIf="!editForm" (input)="itemsChanged()"  formControlName="description" [suggestions]="filteredProductsVariations" (completeMethod)="filterCountry($event)" field="code" [minLength]="1">
                                             <ng-template let-productsVariation pTemplate="item">
-                                                <div class="grid">
+                                                <div class="p-grid">
                                                 <div class="p-col">{{productsVariation.code}}</div>
                                                 <div class="p-col">{{productsVariation.title}} </div>
                                                 <div class="p-col">{{productsVariation.description}}</div>
@@ -273,7 +274,7 @@
 
                               
 
-                                            <span *ngIf="editForm">{{i + 1}}. <strong>{{blogForm.get('skills').value[this.i].description.code}}</strong> {{blogForm.get('skills').value[this.i].description.title}}<br>{{blogForm.get('skills').value[this.i].description.description}}</span>
+                                            <span *ngIf="editForm"><strong>{{blogForm.get('skills').value[this.i].description.code}}</strong> {{blogForm.get('skills').value[this.i].description.title}}<br>{{blogForm.get('skills').value[this.i].description.description}}</span>
 
 
                                     </td>
@@ -285,8 +286,10 @@
                                     </td>
                                     <td width="150px">
 
-                                        <p-inputNumber *ngIf="!editForm" [style]="{ width: '100%' }"  formControlName="price" (input)="itemsChanged()" inputId="locale-us" mode="decimal" locale="en-US" [minFractionDigits]="2">
-                                        </p-inputNumber>
+
+                                        <input type="number" *ngIf="!editForm" [style]="{ width: '100%' }" pInputText formControlName="price"
+                                        (input)="itemsChanged()">
+
                                      
                                             <span *ngIf="editForm">{{blogForm.get('skills').value[this.i].price | currency :'EUR':'symbol':'1.2-2'}}</span>
                                     </td>
@@ -309,7 +312,7 @@
 
                                     
                                 <tr>
-                                    <td colspan="3">
+                                    <td colspan="4">
                                        Total senza Iva
                                     </td>
 
@@ -320,7 +323,7 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3" *ngIf="company">
+                                    <td colspan="4" *ngIf="company">
                                         Valore Iva ({{company.fiscaltype}} %)
                                     </td>
                                     <td>{{vat | currency :'EUR':'symbol':'1.2-2'}}</td>
@@ -328,7 +331,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td colspan="3">
+                                    <td colspan="4">
                                         Totale
                                     </td>
                                     <td>

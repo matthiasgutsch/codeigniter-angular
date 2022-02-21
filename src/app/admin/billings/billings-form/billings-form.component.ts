@@ -268,6 +268,7 @@ export class BillingsFormComponent implements OnInit {
         let productsVariation = this.productsVariations[i];
         if (productsVariation.code.toLowerCase().indexOf(query.toLowerCase()) == 0) {
           filtered.push(productsVariation);
+          
           console.log(productsVariation)
         }
       }
