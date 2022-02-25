@@ -173,7 +173,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
     this.getEmployees();
     this.getWarehouses();
     this.getSuppliers();
-
+    this.getProductsVariations();
 
 
 
@@ -234,7 +234,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
         e.value.pop();
       }
     }
-    
+
   getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
     // tslint:disable-next-line:prefer-const
     let path = PARAM_CHECKINS_PATH;
@@ -343,6 +343,11 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
 
   }
 
+  getProductsVariations() {
+    this.productsVariationsService.getAllListbyUser().subscribe(
+      (data: ProductsVariations) => this.productsVariations = data,
+    );
+  }
 
   getWarehouses() {
     this.warehousesService.getAllListbyUser().subscribe(

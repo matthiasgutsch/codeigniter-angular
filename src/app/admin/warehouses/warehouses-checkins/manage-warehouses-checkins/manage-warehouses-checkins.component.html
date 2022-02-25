@@ -79,13 +79,16 @@
                 <div class="filter-options">
 
                     <div class="p-field p-grid">
-                        <div class="p-col-12 p-md-12">
 
+                        <div class="p-col-12 p-md-8">
+                            <div class="item-size pull-left">
+                                <span class="filter-tag" *ngIf="nameFilter" >{{nameFilter}} <span class="close"><i class="pi pi-times"  (click)="reset()"></i></span> </span>
+                                <span class="filter-tag" *ngIf="descriptionFilter">{{descriptionFilter}} <span class="close"><i class="pi pi-times" (click)="reset()"></i></span> </span>
+                            </div>
+                        </div>
 
-           
-
-
-                <!-- <button type="text" pButton label="Filter"  icon="pi pi-filter" class="p-button p-button-options p-mr-2 pull-right" (click)="op.toggle($event)"></button> -->
+                        <div class="p-col-12 p-md-4">
+                          <span class="pull-right">{{count}} Items</span>  
                         </div>
                     </div>
                 </div>
