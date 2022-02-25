@@ -3,7 +3,7 @@
 
         <div class="p-field p-grid">
             <div class="p-col-12">
-                <p-calendar [(ngModel)]="nameFilter" [style]="{ width: '100%' }" placeholder="Data da" dateFormat="yy-mm-dd"  dataType="string" inputId="dateformat"></p-calendar>
+                <p-calendar [(ngModel)]="nameFilter" [style]="{ width: '100%' }" placeholder="Data da" dateFormat="yy-mm-dd" dataType="string" inputId="dateformat"></p-calendar>
             </div>
         </div>
         <div class="p-field p-grid">
@@ -11,6 +11,7 @@
                 <p-calendar [(ngModel)]="descriptionFilter" [style]="{ width: '100%' }" placeholder="Data a" dateFormat="yy-mm-dd" dataType="string" inputId="dateformat"></p-calendar>
             </div>
         </div>
+
         <div class="p-field p-grid">
             <div class="p-col-12">
                 <button pButton type="submit" icon="pi pi-search" class="p-button p-button-primary btn-block"
@@ -126,7 +127,7 @@
                         <tr>
 
                             <td>
-                                <i class="pi pi-calendar"></i> {{warehouseCheckin.created_at | date:'d-MM-yyyy hh:mm'}}
+                                <i class="pi pi-calendar"></i> {{warehouseCheckin.created_at}}
  
                              </td>
                             <td>

@@ -339,8 +339,6 @@ p a {
       }
     }
   }
-
-  
   ul.settings-menu {
     list-style: none;
     padding: 0px;
@@ -443,7 +441,6 @@ p a {
 
 .item-size {
   padding: 5px 0px;
-
 }
 
 .filter-tag {
@@ -452,14 +449,12 @@ p a {
   padding: 2px 0px 2px 8px;
   margin-right: 6px;
   color: @ness_color_2;
-
   .close {
     background-color: @ness_color_2;
     border-radius: 0px 5px 5px 0px;
     width: 8px;
     padding: 2px 6px;
     height: 8px;
-
     i {
       color: #FFF !important;
       font-size: 11px;
@@ -472,12 +467,10 @@ ul.ngx-pagination {
   width: 100%;
   padding: 10px 0px;
   text-align: center;
-
   li {
     border-radius: 4px;
     height: 30px !important;
     line-height: 30px !important;
-
     &.current {
       background: @ness_color_3;
       border-radius: 4px;
@@ -485,25 +478,29 @@ ul.ngx-pagination {
       color: #fefefe;
       cursor: default;
       padding: 0px 9px !important;
+    }
+    &.disabled {
+      background-color: transparent !important;
 
+      span {
+      &:hover {
+        background: transparent !important;
+        color: @ness_color_1;
+
+      }
+    }
+    }
+    a {
+      padding: 0px 9px !important;
+    }
+    :hover {
+      background: @ness_color_2;
+      border-radius: 4px;
+      color: #fefefe;
+      cursor: default;
+    }
   }
-
-  a {
-    padding: 0px 9px !important;
-
-  }
-
-  :hover {
-    background: @ness_color_2;
-    border-radius: 4px;
-    color: #fefefe;
-    cursor: default;
-    
 }
-
-  }
-}
-
 
 ul.nav-menu-mobile {
   list-style: none;
