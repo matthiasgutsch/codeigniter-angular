@@ -281,6 +281,24 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
     });
   }
 
+  andlePageSizeChange(event): void {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.load();
+  }
+
+  reset(): void {
+    this.nameFilter = '';
+    this.descriptionFilter = '';
+    this.load();
+    
+  }
+  
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+}
+
   private onChange(item: string): void {
     this.load();
 

@@ -1,19 +1,16 @@
-<p-overlayPanel #op>
+<p-sidebar #op  [(visible)]="displayFilter" position="right" [style]="{width:'400px'}">
     <ng-template pTemplate>
 
         <div class="p-field p-grid">
             <div class="p-col-12">
-
-                <input type="text" [style]="{ width: '100%' }" pInputText [(ngModel)]="nameFilter" placeholder="Name" />
+                <p-calendar [(ngModel)]="nameFilter" [style]="{ width: '100%' }" placeholder="Data da" dateFormat="yy-mm-dd"  dataType="string" inputId="dateformat"></p-calendar>
             </div>
         </div>
         <div class="p-field p-grid">
             <div class="p-col-12">
-                <input type="text" [style]="{ width: '100%' }" pInputText [(ngModel)]="descriptionFilter"
-                    placeholder="Descrizione" />
+                <p-calendar [(ngModel)]="descriptionFilter" [style]="{ width: '100%' }" placeholder="Data a" dateFormat="yy-mm-dd" dataType="string" inputId="dateformat"></p-calendar>
             </div>
         </div>
-
         <div class="p-field p-grid">
             <div class="p-col-12">
                 <button pButton type="submit" icon="pi pi-search" class="p-button p-button-primary btn-block"
@@ -31,7 +28,7 @@
         </div>
 
     </ng-template>
-</p-overlayPanel>
+</p-sidebar>
 
 <div class="top-main-wrapper">
 
@@ -50,7 +47,7 @@
                         class="p-button p-button-primary p-mr-2 pull-right"></button>
                       
                         <button type="text" pButton label="Filter" icon="pi pi-filter"
-                        class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
+                        class="p-button p-button-secondary p-mr-2 pull-right"  (click)="displayFilter = true"></button>
 
                         <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta"
                         (click)="exportPdf()" class="p-button-options p-mr-2 pull-right"

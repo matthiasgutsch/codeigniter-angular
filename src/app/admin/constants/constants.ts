@@ -16,6 +16,11 @@ export const FISCAL_CODE_VALIDATOR_REGEX =
   /^([A-Za-z]{6}[0-9lmnpqrstuvLMNPQRSTUV]{2}[abcdehlmprstABCDEHLMPRST]{1}[0-9lmnpqrstuvLMNPQRSTUV]{2}[A-Za-z]{1}[0-9lmnpqrstuvLMNPQRSTUV]{3}[A-Za-z]{1})$/g;
 
 
+
+export const API_DATE_FORMAT = 'yyyy-MM-DD[T]HH:mm:ss';
+export const CHIPS_DATE_FORMAT = 'DD/MM/yyyy HH:mm';
+
+
 export const PAGES: SelectItem[] = [
   { label: "Tipo di lavorazione", value: "/admin/settings/works", icon: "pi pi-list" },
   { label: "Tipo di Appuntamento", value: "/admin/settings/appointment-type", icon: "pi pi-list" },
