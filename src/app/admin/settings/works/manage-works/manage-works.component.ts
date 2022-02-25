@@ -18,6 +18,7 @@ export class ManageWorksComponent implements OnInit {
   error: string;
   loading: boolean;
   public cols: any[];
+  public filters: any[];
   public columnOptions: any[];
   public selectedColumns: any[];
   nameFilter: string;
@@ -30,7 +31,7 @@ export class ManageWorksComponent implements OnInit {
   public base_path: string;
   basePath: string;
   pageOfItems: Array<any>;
-
+  searchWrapper: boolean = false;
 
   @ViewChild('dt', { static: true }) dt: Table;
 
@@ -43,6 +44,11 @@ export class ManageWorksComponent implements OnInit {
     this.cols = [
       { field: 'name', header: 'Nome', index: 1 },
       { field: 'description', header: 'Descrizione', index: 2 }
+    ];
+
+    this.filters = [
+      { field: this.nameFilter, header: 'Nome', index: 1 },
+      { field: this.descriptionFilter, header: 'Descrizione', index: 2 }
     ];
 
     this.exportColumns = this.cols.map(col => ({
@@ -103,6 +109,7 @@ exportPdf() {
     this.nameFilter = '';
     this.descriptionFilter = '';
     this.load();
+    
   }
   
   onChangePage(pageOfItems: Array<any>) {
@@ -113,6 +120,7 @@ exportPdf() {
 public handlePageChange(event): void {
   this.page = event;
   this.load();
+
 }
 
   public selectionItemForFilter(e) {
@@ -126,12 +134,6 @@ public handlePageChange(event): void {
       e.value.pop();
     }
   }
-
-
-  
-  editProduct(work: Works) {
-    this.work = {...work};
-}
 
 
 getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
@@ -166,6 +168,7 @@ getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
 
 
 load(): void {
+  
   const params = this.getRequestParams(
     this.nameFilter,
     this.descriptionFilter,
@@ -175,11 +178,13 @@ load(): void {
   this.worksService.getAllListNew(params).subscribe((pData) => {
     this.works = pData;
     this.count = this.worksService.size;
+    
   });
 }
 
 private onChange(item: string): void {
   this.load();
+  
 }
 
 

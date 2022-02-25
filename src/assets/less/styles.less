@@ -449,14 +449,20 @@ p a {
 .filter-tag {
   background-color: #efefef;
   border-radius: 6px;
-  padding: 2px 8px;
+  padding: 2px 0px 2px 8px;
   margin-right: 6px;
+  color: @ness_color_2;
 
   .close {
-    background-color: #172c49;
+    background-color: @ness_color_2;
+    border-radius: 0px 5px 5px 0px;
+    width: 8px;
+    padding: 2px 6px;
+    height: 8px;
 
     i {
-      color: #FFF;
+      color: #FFF !important;
+      font-size: 11px;
     }
   }
 }
