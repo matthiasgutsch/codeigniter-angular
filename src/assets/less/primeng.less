@@ -117,7 +117,7 @@
 .p-button {
   color: @white !important;
   background: #ddd;
-  border: 1px solid #ddd;
+  border: 0px solid #ddd !important;
   padding: 0.4rem 0.5rem;
   font-size: 14px;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
@@ -173,12 +173,12 @@
   color: @ness_color_2 !important;
   background: @white;
   border-radius: @radius;
-  border: 1px solid @white !important;
+  border: 0px solid @white !important;
   &:hover {
     color: @white !important;
     background: darken(@ness_color_2, 20%) !important;
     border-radius: @radius;
-    border: 1px solid @ness_color_2 !important;
+    border: 0px solid @ness_color_2 !important;
   }
 }
 
@@ -202,12 +202,12 @@
   color: @white !important;
   background: @red;
   border-radius: @radius;
-  border: 1px solid @red !important;
+  border: 0px solid @red !important;
   &:hover {
     color: @ness_color_2;
     background: darken(@red, 20%) !important;
     border-radius: @radius;
-    border: 1px solid @red !important;
+    border: 0px solid @red !important;
   }
 }
 
@@ -215,12 +215,12 @@
   color: @white !important;
   background: @ness_color_2;
   border-radius: @radius;
-  border: 1px solid @ness_color_2 !important;
+  border: 0px solid @ness_color_2 !important;
   &:hover {
     color: @ness_color_2 !important;
     background: @white !important;
     border-radius: @radius;
-    border: 1px solid @ness_color_2 !important;
+    border: 0px solid @ness_color_2 !important;
   }
 }
 
@@ -228,12 +228,12 @@
   color: @white !important;
   background: #5c6b84;
   border-radius: @radius;
-  border: 1px solid #5c6b84 !important;
+  border: 0px solid #5c6b84 !important;
   &:hover {
     color: @ness_color_2;
     background: darken(@red, 20%) !important;
     border-radius: @radius;
-    border: 1px solid @red !important;
+    border: 0px solid @red !important;
   }
 }
 
@@ -246,12 +246,12 @@
   color: @white !important;
   background: @ness_color_2;
   border-radius: @radius;
-  border: 1px solid @ness_color_2 !important;
+  border: 0px solid @ness_color_2 !important;
   &:hover {
     color: @white;
     background: @ness_color_2 !important;
     border-radius: @radius;
-    border: 1px solid @ness_color_2 !important;
+    border: 0px solid @ness_color_2 !important;
   }
 }
 
@@ -259,20 +259,36 @@
   color: @white;
   background: @green;
   border-radius: @radius;
-  border: 1px solid @green !important;
+  border: 0px solid @green !important;
   &:hover {
     color: @ness_color_2;
     background: darken(@green, 20%) !important;
     border-radius: @radius;
-    border: 1px solid @green !important;
+    border: 0px solid @green !important;
   }
 }
+
+
+.p-button.p-button-secondary, .p-buttonset.p-button-secondary > .p-button, .p-splitbutton.p-button-secondary > .p-button {
+  color: @white;
+  background: @green;
+  border-radius: @radius;
+  border: 0px solid @green !important;
+  &:hover {
+    color: @ness_color_2;
+    background: darken(@green, 20%) !important;
+    border-radius: @radius;
+    border: 0px solid @green !important;
+  }
+}
+
+
 
 .p-button.p-button-info, .p-buttonset.p-button-info > .p-button, .p-splitbutton.p-button-info > .p-button {
   color: @white;
   background: @ness_color_6;
   border-radius: @radius;
-  border: 1px solid @ness_color_6 !important;
+  border: 0px solid @ness_color_6 !important;
   &:hover {
     color: @ness_color_2;
     background: darken(@ness_color_6, 20%) !important;
@@ -284,7 +300,7 @@
 .p-button.p-button-primary, .p-buttonset.p-button-primary > .p-button, .p-splitbutton.p-button-primary > .p-button {
   color: @white !important;
   background: @ness_color_3;
-  border: 1px solid @ness_color_3 !important;
+  border: 0px solid @ness_color_3 !important;
   border-radius: @radius;
 }
 

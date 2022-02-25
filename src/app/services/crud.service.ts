@@ -1,8 +1,8 @@
 
 import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams, HttpResponse } from '@angular/common/http';
 import { CrudOperations } from './crud-operations.interface';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Billings } from '../models/billings';
 import { Task } from '../models/tasks';
 import { Orders } from '../models/orders';
@@ -16,6 +16,7 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   loginError: string;
   username: string;
   user_id: number;
+  size: number;
 
   password: string;
   first_name: string;
@@ -31,10 +32,62 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
   
+
+  getParams(params: HttpParams, pars: any): HttpParams {
+    if (pars.name) {
+      params = params.append('name', pars.name);
+    }
+    if (pars.description) {
+      params = params.append('description', pars.description);
+    }
+    params = params.append('_start', pars.page);
+    if (pars.size) {
+      params = params.append('_limit', pars.size);
+    }
+    return params;
+  }
+
+  public find(id: string): Observable<T> {
+    return this._http.get<T>(this._base + '/' + id).pipe(
+      map((res) => {
+        const t: any = res as any; // json();
+        return t;
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+
   getAllList() {
     return this._http.get<T>(this._base + '/').pipe(
       catchError(this.handleError)
     );
+  }
+
+
+
+  
+
+
+
+  public getAllListNew(pars: any): Observable<T[]> {
+    let params = new HttpParams();
+    const userId = this.currentUser.user_id;
+    params = this.getParams(params, pars);
+    return this._http
+      .get<HttpResponse<T[]>>(this._base + '/list_user/' + userId, {
+        observe: 'response',
+        params,
+      })
+      .pipe(
+        map((res) => {
+          this.size =
+            res.headers.get('x-total-count') != null ? +res.headers.get('x-total-count') : 0;
+          const ts: any = res.body;
+          return ts;
+        }),
+        catchError(this.handleError)
+      );
   }
 
 
@@ -214,12 +267,6 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
 
-
-  find(id: ID) {
-    return this._http.get<T>(this._base + 'appointments/' + id).pipe(
-      catchError(this.handleError)
-    );
-  }
 
 
   skills(id: ID) {

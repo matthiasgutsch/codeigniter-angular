@@ -127,6 +127,7 @@ import { ManageProductsVariationsComponent } from './products/manage-products-va
 import { ProductsVariationsFormComponent } from './products/products-variations-form/products-variations-form.component';
 import { ManagePurchaseOrdersComponent } from './purchase-orders/manage-purchase-orders/manage-purchase-orders.component';
 import { PurchaseOrdersFormComponent } from './purchase-orders/purchase-orders-form/purchase-orders-form.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -222,6 +223,7 @@ import { PurchaseOrdersFormComponent } from './purchase-orders/purchase-orders-f
     NgxSpinnerModule,
     KnobModule,
     InputTextareaModule,
+    NgxPaginationModule,
     DragDropModule,
     SplitButtonModule,
     ToastModule,

@@ -75,17 +75,12 @@ h1, h2, h3, h1 span, h2 span, h3 span {
     margin: 4px 0px 4px 0px;
     font-size: 25px;
   }
-
-  
-
 }
-
 
 .show-mobile {
   display: none;
   visibility: hidden;
 }
-
 
 .pull-right {
   float: right;
@@ -105,7 +100,6 @@ a:hover {
   text-decoration: none;
 }
 
-
 .overlay-scroll-content {
   height: 400px;
   overflow: hidden;
@@ -121,37 +115,34 @@ body {
 }
 
 p.small {
-font-size: 12px;
-padding: 0px;
-line-height: 14px;
-margin: 0px;
-margin-top: 2px;
+  font-size: 12px;
+  padding: 0px;
+  line-height: 14px;
+  margin: 0px;
+  margin-top: 2px;
 }
+
 p.detail {
   font-size: 13px;
   padding: 0px;
   line-height: 14px;
   margin: 0px;
-  margin-top: 4px !important; 
-
+  margin-top: 4px !important;
   i {
     font-size: 13px;
     color: @ness_color_3;
   }
-  }
+}
 
+p a {
+  color: @ness_color_3;
+}
 
-  p a {
-    color: @ness_color_3;
-  }
-
-
-  .table-responsive {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-
-  }
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
 
 .header {
   background-color: @red;
@@ -210,9 +201,6 @@ p.detail {
   }
 }
 
-
-
-
 .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
   background: fade(@ness_color_2, 20%);
   border-color: fade(@ness_color_2, 20%);
@@ -226,7 +214,6 @@ p.detail {
   background: url(src/assets/images/background.png);
   background-repeat: no-repeat;
   background-size: cover;
-
   .img-banner {
     width: 240px;
   }
@@ -271,7 +258,6 @@ p.detail {
       line-height: 40px;
       color: @white;
       text-align: center;
-
       i {
         margin-right: 5px;
       }
@@ -289,7 +275,6 @@ p.detail {
     list-style: none;
     padding: 0px;
     display: inline-block;
-
     margin: 0px;
     padding-top: 80px;
     li {
@@ -314,9 +299,7 @@ p.detail {
           visibility: hidden !important;
           transition: visibility 0.1s;
         }
-        &:hover {
-         
-        }
+        &:hover {}
         i {
           float: left;
           font-size: 20px;
@@ -326,7 +309,6 @@ p.detail {
           margin-right: 20px;
           text-align: center;
           border: 1px solid transparent;
-
         }
         &:hover {
           i {
@@ -358,9 +340,7 @@ p.detail {
     }
   }
 
-
   
-
   ul.settings-menu {
     list-style: none;
     padding: 0px;
@@ -389,9 +369,7 @@ p.detail {
           visibility: hidden !important;
           transition: visibility 0.1s;
         }
-        &:hover {
-         
-        }
+        &:hover {}
         i {
           float: left;
           font-size: 20px;
@@ -401,7 +379,6 @@ p.detail {
           margin-right: 20px;
           text-align: center;
           border: 1px solid transparent;
-
         }
         &:hover {
           i {
@@ -464,12 +441,68 @@ p.detail {
   }
 }
 
+.item-size {
+  padding: 5px 0px;
+
+}
+
+.filter-tag {
+  background-color: #efefef;
+  border-radius: 6px;
+  padding: 2px 8px;
+  margin-right: 6px;
+
+  .close {
+    background-color: #172c49;
+
+    i {
+      color: #FFF;
+    }
+  }
+}
+
+ul.ngx-pagination {
+  margin: 0 auto;
+  width: 100%;
+  padding: 10px 0px;
+  text-align: center;
+
+  li {
+    border-radius: 4px;
+    height: 30px !important;
+    line-height: 30px !important;
+
+    &.current {
+      background: @ness_color_3;
+      border-radius: 4px;
+      height: 30px;
+      color: #fefefe;
+      cursor: default;
+      padding: 0px 9px !important;
+
+  }
+
+  a {
+    padding: 0px 9px !important;
+
+  }
+
+  :hover {
+    background: @ness_color_2;
+    border-radius: 4px;
+    color: #fefefe;
+    cursor: default;
+    
+}
+
+  }
+}
+
 
 ul.nav-menu-mobile {
   list-style: none;
   padding: 0px;
   display: inline-block;
-
   margin: 0px;
   padding-top: 0px;
   li {
@@ -491,12 +524,9 @@ ul.nav-menu-mobile {
       transition: 0.3s;
       span {
         float: left;
-       
         transition: visibility 0.1s;
       }
-      &:hover {
-       
-      }
+      &:hover {}
       i {
         float: left;
         font-size: 20px;
@@ -506,7 +536,6 @@ ul.nav-menu-mobile {
         margin-right: 20px;
         text-align: center;
         border: 1px solid transparent;
-
       }
       &:hover {
         i {
@@ -539,31 +568,26 @@ ul.nav-menu-mobile {
 }
 
 .top-main-wrapper {
-
-background-color: @white;
-margin-bottom: 20px;
-padding: 10px 20px 10px 20px;
-border-bottom: 1px solid #dee2e6;
-border-top: 1px solid #dee2e6;
-
+  background-color: @white;
+  margin-bottom: 20px;
+  padding: 10px 20px 10px 20px;
+  border-bottom: 1px solid #dee2e6;
+  border-top: 1px solid #dee2e6;
   .dash-header {
     padding: 0px;
     margin: 0px;
   }
-
   .dash-title {
     padding-bottom: 0px;
-
     h3 {
       padding: 0px;
       margin: 4px 0px 4px 0px;
       font-size: 20px;
+    }
   }
-  }
-
   .p-field {
     margin-bottom: 0rem;
-}
+  }
 }
 
 #main {
@@ -571,14 +595,10 @@ border-top: 1px solid #dee2e6;
   margin-left: 70px;
   padding: 0px;
   padding-top: 60px;
-
   .main-inner {
     padding: 0px 20px 30px 20px;
-    
-    
     &.with-sidebar {
       margin-right: 70px;
-
     }
   }
   &.open {
@@ -603,7 +623,6 @@ hr.full {
   &.yes {
     background-color: @red;
   }
-
   &.no {
     background-color: @green;
   }
@@ -663,14 +682,13 @@ hr.full {
       }
       .support-tag {
         margin-right: 5px;
-
       }
     }
   }
 }
 
 .button_outer {
-  background: fade(@ness_color_2,10%);
+  background: fade(@ness_color_2, 10%);
   border-radius: @radius;
   text-align: center;
   height: 50px;
@@ -678,7 +696,7 @@ hr.full {
   display: inline-block;
   transition: .2s;
   position: relative;
-  border: 2px dotted fade(@ness_color_2,30%);
+  border: 2px dotted fade(@ness_color_2, 30%);
   overflow: hidden;
 }
 
@@ -721,7 +739,6 @@ hr.full {
   width: 100%;
   max-width: 50%;
   height: 100%;
-
   .alert.alert-danger {
     background-color: @red;
     margin-bottom: 10px;
@@ -729,15 +746,13 @@ hr.full {
     color: @white;
     border-radius: @radius;
   }
-
   .login-box-inner {
     padding: 30px 20px;
     width: 50%;
     margin: 0 auto;
     margin-top: 30%;
-
     h1 {
-      span  {
+      span {
         font-family: "Circular";
         font-weight: normal;
       }
@@ -749,7 +764,6 @@ hr.full {
   max-height: 700px;
   overflow: hidden;
   overflow-y: auto;
-
   .p-timeline-event {
     min-height: auto !important;
   }
@@ -760,8 +774,6 @@ hr.full {
     height: 1rem;
     background-color: #ffffff;
   }
-
- 
 }
 
 .support-tag {
@@ -806,7 +818,6 @@ hr.full {
         margin: 0px;
         font-size: 20px;
       }
-
       hr {
         border: 0px;
         border-bottom: 1px solid #ccc;
@@ -815,26 +826,22 @@ hr.full {
   }
 }
 
-
 .blu-box {
-
   .p-card {
     background: fade(@ness_color_2, 90%);
     color: @text-color;
     box-shadow: none;
     border-radius: @radius;
     border: 1px solid #dee2e6;
-    border-left: 5px solid fade(@ness_color_2,90%);
+    border-left: 5px solid fade(@ness_color_2, 90%);
     margin-bottom: 20px;
     .p-card-body {
       padding: 15px;
       .p-card-content {
         padding: 0px;
         color: @white;
-
         label.legend {
-          color: fade(@white,40%);
-
+          color: fade(@white, 40%);
         }
         h3 {
           padding: 0px 0px 0px 0px;
@@ -842,7 +849,6 @@ hr.full {
           font-size: 20px;
           color: @white;
         }
-  
         hr {
           border: 0px;
           border-bottom: 1px solid #ccc;
@@ -850,15 +856,12 @@ hr.full {
       }
     }
   }
-
 }
-
 
 .well {
   border-radius: @radius;
   padding: 10px 10px;
-  background-color: fade(@ness_color_3,6%);
-
+  background-color: fade(@ness_color_3, 6%);
   p {
     margin: 0px;
     padding: 0px;
@@ -892,18 +895,12 @@ hr.full {
 
 .dash-header {
   padding: 30px 0px 0px 0px;
-
-
   .p-card {
-  .p-field{
-    margin: 0px !important;
-
+    .p-field {
+      margin: 0px !important;
+    }
   }
-
 }
-}
-
-
 
 .sidebar-inner {
   height: calc(100% - 61px);
@@ -914,14 +911,12 @@ hr.full {
   right: 0px;
   background-color: @white;
   border-left: 1px solid #dee2e6;
-
   overflow-x: hidden;
   transition: 0.1s;
   padding-top: 0px;
   padding-left: 20px;
   padding-right: 20px;
 }
-
 
 .sidebar-main {
   height: 100%;
@@ -1042,10 +1037,6 @@ hr.full {
     }
   }
 }
-
-
-
-
 
 .img-responsive {
   display: block;
@@ -1185,37 +1176,34 @@ hr.full {
   color: #ffffff;
 }
 
-
 .billings-list {
-
   width: 100%;
   border: 0px;
   border-spacing: 0px;
-
-thead {
+  thead {
+    tr {
+      th {
+        background-color: @background;
+        text-align: left;
+        padding: 7px 10px;
+        font-size: 13px;
+      }
+    }
+  }
   tr {
-    th {
-      background-color: @background;
-      text-align: left;
-      padding: 7px 10px;
-      font-size: 13px;
+    td {
+      border-top: 1px solid #ccc;
+      padding: 10px 10px;
+      h4 {
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
     }
   }
-}
-tr {
-  td {
-    border-top: 1px solid #ccc;
-    padding: 10px 10px;
-
-    h4 {
-      margin-top: 10px;
-      margin-bottom: 10px;
-    }
-  }
-}
 }
 
 .mb-0 {
   margin-bottom: 0px;
 }
+
 @import "media.less";
