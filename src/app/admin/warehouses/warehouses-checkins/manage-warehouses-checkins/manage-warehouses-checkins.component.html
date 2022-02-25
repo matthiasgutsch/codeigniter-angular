@@ -1,53 +1,37 @@
-
- <p-overlayPanel #op>
+<p-overlayPanel #op>
     <ng-template pTemplate>
-        <div class="p-col-12">
-        
-            <div class="p-field p-grid" *ngFor="let col of cols" [ngSwitch]="col.field">
-                <div class="p-col-12">
 
+        <div class="p-field p-grid">
+            <div class="p-col-12">
 
-                    <p-dropdown *ngSwitchCase="'project_id'" placeholder="Scegli" [showClear]="true" optionLabel="title"
-                    optionValue="id" [options]="projects" [style]="{'width':'100%'}"
-                    (onChange)="dt.filter($event.value, col.field, 'equals')">
-                </p-dropdown>
-
-
-                <p-dropdown *ngSwitchCase="'employee_id'" placeholder="Scegli" [showClear]="true" optionLabel="username"
-                optionValue="id" [options]="employees" [style]="{'width':'100%'}"
-                (onChange)="dt.filter($event.value, col.field, 'equals')">
-            </p-dropdown>
-
-
-              
-             
-                    <input *ngSwitchCase="'date_from'" [ngModel]="dt.filters['date_from']? dt.filters['date_from'].value : ''" 
-                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
-             
-
-
-                    <input *ngSwitchCase="'date_to'" [ngModel]="dt.filters['date_to']? dt.filters['date_to'].value : ''" 
-                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
-
-
-                 
-
+                <input type="text" [style]="{ width: '100%' }" pInputText [(ngModel)]="nameFilter" placeholder="Name" />
             </div>
-                </div>
-
-                <div class="p-grid">
-                <div class="p-col-12">
-
-                    <button pButton pRipple label="reset ricerca"
-                    class="p-button p-button-primary btn-block"  (click)="dt.reset()" ></button>
-                        </div>
-                    </div>
+        </div>
+        <div class="p-field p-grid">
+            <div class="p-col-12">
+                <input type="text" [style]="{ width: '100%' }" pInputText [(ngModel)]="descriptionFilter"
+                    placeholder="Descrizione" />
             </div>
-            
+        </div>
 
-            
+        <div class="p-field p-grid">
+            <div class="p-col-12">
+                <button pButton type="submit" icon="pi pi-search" class="p-button p-button-primary btn-block"
+                    label="cerca" (click)="load()">
+                </button>
+            </div>
+        </div>
+        <div class="p-field p-grid">
+
+            <div class="p-col-12">
+                <button pButton type="reset" icon="pi pi-times" class="p-button p-button-secondary btn-block"
+                    label="reset" (click)="reset()">
+                </button>
+            </div>
+        </div>
+
     </ng-template>
-</p-overlayPanel> 
+</p-overlayPanel>
 
 <div class="top-main-wrapper">
 
@@ -65,6 +49,15 @@
                     <button pButton pRipple icon="pi pi-plus" (click)="createTimesheets()" label="Aggiungi"
                         class="p-button p-button-primary p-mr-2 pull-right"></button>
                       
+                        <button type="text" pButton label="Filter" icon="pi pi-filter"
+                        class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
+
+                        <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta"
+                        (click)="exportPdf()" class="p-button-options p-mr-2 pull-right"
+                        tooltipPosition="bottom"></button>
+
+                        <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta XLS" (click)="exportExcel()"
+                        class="p-button-options p-mr-2 pull-right" tooltipPosition="bottom"></button>
                 </div>
             </div>
         </div>
@@ -88,10 +81,8 @@
                     <div class="p-field p-grid">
                         <div class="p-col-12 p-md-12">
 
-                <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()"
-                class="p-button-options p-mr-2 pull-right" tooltipPosition="bottom"></button>
-                <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta XLS" (click)="exportExcel()"
-                class="p-button-options p-mr-2 pull-right" tooltipPosition="bottom"></button>
+
+           
 
 
                 <!-- <button type="text" pButton label="Filter"  icon="pi pi-filter" class="p-button p-button-options p-mr-2 pull-right" (click)="op.toggle($event)"></button> -->
@@ -99,9 +90,10 @@
                     </div>
                 </div>
                 
-                <p-table #dt [columns]="cols" [responsive]="true"   [value]="warehouseCheckins" [globalFilterFields]="['name', 'description']"
-                    currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true"
-                    [rows]="15" [showCurrentPageReport]="true" [totalRecords]="totalRecords">
+                <div *ngFor=" let warehouseCheckin of warehouseCheckins  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
+
+                <p-table #dt [columns]="cols" [responsive]="true"   [value]="warehouseCheckins" [paginator]="false"
+                    [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords">
 
                     <ng-template pTemplate="header" let-columns>
                         <tr>
@@ -177,6 +169,14 @@
                         </tr>
                     </ng-template>
                 </p-table>
+                <div class="p-grid">
+
+                    <div class="p-col-12 p-md-12">
+                        <pagination-controls previousLabel="Prev" nextLabel="Next" responsive="true"
+                            (pageChange)="handlePageChange($event)">
+                        </pagination-controls>
+                    </div>
+                </div>
 
             </p-card>
         </div>

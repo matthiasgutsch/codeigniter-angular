@@ -10,6 +10,7 @@ export const LOCATIONS_API = environment.baseUrl + APP_API + "locations";
 
 
 export const PARAM_WORKS_PATH = '/admin/settings/works/'
+export const PARAM_CHECKINS_PATH = '/admin/checkins/'
 
 export const FISCAL_CODE_VALIDATOR_REGEX =
   /^([A-Za-z]{6}[0-9lmnpqrstuvLMNPQRSTUV]{2}[abcdehlmprstABCDEHLMPRST]{1}[0-9lmnpqrstuvLMNPQRSTUV]{2}[A-Za-z]{1}[0-9lmnpqrstuvLMNPQRSTUV]{3}[A-Za-z]{1})$/g;
