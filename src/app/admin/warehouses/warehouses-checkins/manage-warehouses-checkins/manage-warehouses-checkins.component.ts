@@ -247,12 +247,12 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
     }
     if (searchTitle) {
       params[`name`] = searchTitle;
-      path += adder + 'name=' + searchTitle;
+      path += adder + 'date_from=' + searchTitle;
       adder = '&';
     }
     if (categoryTitle) {
       params[`description`] = categoryTitle;
-      path += adder + 'description=' + categoryTitle;
+      path += adder + 'date_to=' + categoryTitle;
       adder = '&';
     }
     if (pageSize) {
