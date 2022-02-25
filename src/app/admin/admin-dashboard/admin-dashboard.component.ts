@@ -105,6 +105,9 @@ export class AdminDashboardComponent implements OnInit {
   chartsCountDataTotal: string;
   data1 = [];
   data2 = [];
+  count = 0;
+  pageSize = 5;
+  page = 1;
 
   trackByFn(index, item) {
     return item.id;
@@ -191,6 +194,23 @@ export class AdminDashboardComponent implements OnInit {
 
 
 
+  getRequestParams(page, pageSize): any {
+    // tslint:disable-next-line:prefer-const
+    const params = {};
+    let adder = '?';
+    if (page) {
+      params[`page`] = page - 1;
+      adder + 'page=' + (page - 1);
+      adder = '&';
+    }
+    if (pageSize) {
+      params[`size`] = pageSize;
+      adder + 'size=' + pageSize;
+    }
+    
+    return params;
+    
+  }
 
   ngAfterViewInit() {
     this.canvas = this.mychart.nativeElement;
@@ -275,8 +295,14 @@ export class AdminDashboardComponent implements OnInit {
 
 
   getLastWarehouseCheckins() {
-    this.warehousesCheckinsService.getAllListbyUser().subscribe(data => {
-      this.warehouseCheckins = Object.values(data).slice(0,3);
+    const params = this.getRequestParams(
+      this.page,
+      this.pageSize
+    );
+    this.warehousesCheckinsService.getAllListNew(params).subscribe((pData) => {      
+      this.warehouseCheckins = pData;
+      this.count = this.warehousesCheckinsService.size;
+      
     });
   }
 
