@@ -115,7 +115,11 @@ export class ProductsVariationsFormComponent implements OnInit {
   skillsValues: any = [];
   warehouseMovements: any = [];
   productName: any;
-  
+  page = 1;
+  count = 0;
+  pageSize = 10;
+  pageSizes = [5, 10, 15];
+
   trackByFn(index, item) {
     return item.id;
   }
@@ -148,6 +152,26 @@ export class ProductsVariationsFormComponent implements OnInit {
     this.status = STATUS_PRODUCTS;
     this.stateOptions = STATE_LIST;
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+  }
+
+
+  getRequestParams(page, pageSize): any {
+    // tslint:disable-next-line:prefer-const
+    const params = {};
+    let adder = '?';
+    if (page) {
+      params[`page`] = page - 1;
+      adder + 'page=' + (page - 1);
+      adder = '&';
+    }
+    if (pageSize) {
+      params[`size`] = pageSize;
+      adder + 'size=' + pageSize;
+    }
+    window.history.replaceState({}, '');
+
+    return params;
+
   }
 
   ngOnInit() {
@@ -206,9 +230,7 @@ export class ProductsVariationsFormComponent implements OnInit {
     });
 
 
-    this.warehousesCheckinsService.warehouse_movement_by_product(+id).subscribe(value => {
-      this.warehouseMovements = value;
-    });
+    this.load();
 
 
     if (id) {
@@ -281,6 +303,20 @@ export class ProductsVariationsFormComponent implements OnInit {
 
   }
 
+
+  load(): void {
+    const id = this.route.snapshot.paramMap.get("id");
+    const params = this.getRequestParams(
+      this.page,
+      this.pageSize
+    );
+    this.warehousesCheckinsService.warehouse_movement_by_product(params, +id).subscribe((pData) => {
+      this.warehouseMovements = pData;
+      this.count = this.warehousesCheckinsService.size;
+
+    });
+  }
+
   initSkill() {
     var formArray = this.fb.array([]);
     const id = this.route.snapshot.paramMap.get("id");
@@ -308,6 +344,17 @@ export class ProductsVariationsFormComponent implements OnInit {
   }
 
    
+  public handlePageChange(event): void {
+    const id = this.route.snapshot.paramMap.get("id");
+
+    this.page = event;
+    this.load();
+  
+  }
+  
+
+
+
   private createSkillFormGroup(skill:any): FormGroup{
     return new FormGroup({'qty':new FormControl(skill.qty),'price':new FormControl(skill.price)})
   }

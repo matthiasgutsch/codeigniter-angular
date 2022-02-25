@@ -76,6 +76,29 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
 
 
 
+
+  
+  public warehouse_movement_by_product(pars: any, id: ID): Observable<T[]> {
+    let params = new HttpParams();
+    const userId = this.currentUser.user_id;
+    params = this.getParams(params, pars);
+    return this._http
+      .get<HttpResponse<T[]>>(this._base + '/warehouse_movement_by_product/' + id + '/' + userId, {
+        observe: 'response',
+        params,
+      })
+      .pipe(
+        map((res) => {
+          this.size =
+            res.headers.get('x-total-count') != null ? +res.headers.get('x-total-count') : 0;
+          const ts: any = res.body;
+          return ts;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+
   public getAllListNew(pars: any): Observable<T[]> {
     let params = new HttpParams();
     const userId = this.currentUser.user_id;
@@ -232,14 +255,6 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
 
 
 
-  warehouse_movement_by_product(id: ID) {
-    const userId = this.currentUser.user_id;
-    return this._http.get<T>(this._base + '/warehouse_movement_by_product/' + id + '/' + userId).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  
   
 
   count_total_permissions_timesheets_employee(id: ID) {
