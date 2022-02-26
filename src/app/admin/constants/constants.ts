@@ -13,6 +13,8 @@ export const PARAM_WORKS_PATH = '/admin/settings/works/'
 export const PARAM_CHECKINS_PATH = '/admin/checkins/'
 export const PARAM_TIMESHEETS_PATH = '/admin/timesheets/'
 export const PARAM_BILLINGS_PATH = '/admin/billings/'
+export const PARAM_ORDERS_PATH = '/admin/orders/'
+export const PARAM_EMPLOYEE_TIMESHEETS_PATH =  '/employee/timesheets/'
 export const PARAM_PRODUCTS_PATH = '/admin/products/'
 
 export const FISCAL_CODE_VALIDATOR_REGEX =

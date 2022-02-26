@@ -182,10 +182,6 @@ employeeFilter: string;
     }));
 
       this.spinner.hide();
-
-
-
-
   }
 
 

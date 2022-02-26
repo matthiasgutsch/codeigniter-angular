@@ -13,6 +13,7 @@ import { jsPDF } from "jspdf";
 import { NgxSpinnerService } from "ngx-spinner";
 import { Orders } from 'src/app/models/orders';
 import { OrdersService } from 'src/app/services/orders.service';
+import { PARAM_BILLINGS_PATH, PARAM_ORDERS_PATH } from '../../constants/constants';
 
 @Component({
   selector: "app-manage-orders",
@@ -39,7 +40,16 @@ export class ManageOrdersComponent implements OnInit {
   exportColumns: any[];
   _selectedColumns: any[];
 
-  
+  page = 1;
+  count = 0;
+  pageSize = 10;
+  pageSizes = [5, 10, 15];
+  public base_path: string;
+  basePath: string;
+  pageOfItems: Array<any>;
+  searchWrapper: boolean = false;
+  nameFilter: string;
+  descriptionFilter: string;
   @ViewChild("content", { static: false }) content: ElementRef;
   currentUser: any;
 
@@ -68,13 +78,7 @@ export class ManageOrdersComponent implements OnInit {
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     const userId = this.currentUser.user_id;
-
-    
-
-
     this.spinner.show();
-    this.ordersService.getAllListbyUser().subscribe(data => {
-      this.orders = data;
       this.cols = [
         { field: "category_id", header: "Cliente" },
         { field: 'client.username',  header: 'Nome Cliente'  },
@@ -87,13 +91,92 @@ export class ManageOrdersComponent implements OnInit {
       }));
       this.getComuni();
       this.getClients();
-
+      this.load();
       this.spinner.hide();
-    });
-
    
 
   }
+
+
+
+  getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
+    // tslint:disable-next-line:prefer-const
+    let path = PARAM_ORDERS_PATH;
+    const params = {};
+    let adder = '?';
+    if (page) {
+      params[`page`] = page - 1;
+      path += adder + 'page=' + (page - 1);
+      adder = '&';
+    }
+    if (searchTitle) {
+      params[`name`] = searchTitle;
+      path += adder + 'date_from=' + searchTitle;
+      adder = '&';
+    }
+    if (categoryTitle) {
+      params[`description`] = categoryTitle;
+      path += adder + 'date_to=' + categoryTitle;
+      adder = '&';
+    }
+    if (pageSize) {
+      params[`size`] = pageSize;
+      path += adder + 'size=' + pageSize;
+    }
+    window.history.replaceState({}, '', path);
+
+    return params;
+
+  }
+
+  
+  load(): void {
+
+    const params = this.getRequestParams(
+      this.nameFilter,
+      this.descriptionFilter,
+      this.page,
+      this.pageSize
+    );
+    this.ordersService.getAllListNew(params).subscribe((pData) => {
+      this.orders = pData;
+      this.count = this.ordersService.size;
+
+    });
+  }
+
+  handlePageSizeChange(event): void {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.load();
+  }
+
+  reset(): void {
+    this.nameFilter = '';
+    this.descriptionFilter = '';
+    this.load();
+    
+  }
+  
+  public handlePageChange(event): void {
+    this.page = event;
+    this.load();
+  
+  }
+  
+
+
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+}
+
+  private onChange(item: string): void {
+    this.load();
+
+  }
+
+
 
     getClients() {
     const userId = this.currentUser.user_id;

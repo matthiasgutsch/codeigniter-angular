@@ -126,6 +126,30 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
 
+
+  public find_timesheets_employee(pars: any, id: ID): Observable<T[]> {
+    let params = new HttpParams();
+    const userId = this.currentUser.user_id;
+    params = this.getParams(params, pars);
+    return this._http
+      .get<HttpResponse<T[]>>(this._base + '/timesheets_by_employee/' + id + '/' + userId, {
+        observe: 'response',
+        params,
+      })
+      .pipe(
+        map((res) => {
+          this.size =
+            res.headers.get('x-total-count') != null ? +res.headers.get('x-total-count') : 0;
+          const ts: any = res.body;
+          return ts;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+
+
+
   getAllListbyUser() {
     const userId = this.currentUser.user_id;
     return this._http.get<T>(this._base + '/user/' + userId).pipe(
@@ -244,12 +268,7 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     );
   }
 
-  find_timesheets_employee(id: ID) {
-    const userId = this.currentUser.user_id;
-    return this._http.get<T>(this._base + '/timesheets_by_employee/' + id + '/' + userId).pipe(
-      catchError(this.handleError)
-    );
-  }
+
 
 
   timesheets_by_employee_calendar(id: ID) {

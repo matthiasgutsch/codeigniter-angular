@@ -55,23 +55,19 @@ export class EmployeesTimesheetsComponent implements OnInit {
   work: Works;
   calendarOptions: any;
   blogForm: FormGroup;
-
   locations: any = [];
   location: Locations;
   cols: any[];
   colsData: any[];
-
   exportColumns: any[];
   _selectedColumns: any[];
   selectedWorks: any[];
   selectedSkills: any[];
   brands: any = [];
   brand: Brand;
-
   tags: any = [];
   tag: Tags;
   pageTitle: string;
-
   selectedBrands: Brand;
   loading: boolean;
   currentIndex = 1;
@@ -101,29 +97,33 @@ export class EmployeesTimesheetsComponent implements OnInit {
   project: Projects;
   vacationsCount: any;
   permissionsCount: any;
-
   showDialog() {
     this.productDialog = true;
   }
 
   myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en');
-
   trackByFn(index, item) {
     return item.id;
   }
-
   selectedTimesheetsType = '1';
-
   startDate: Date;
   bsValue: Date = new Date();
   tues = new Date();
-
   weekNo: number;
   timesheetCountTotalEmployee: Timesheets;
-
   employees: any = [];
   employee: Employees;
-
+  page = 1;
+  count = 0;
+  pageSize = 10;
+  pageSizes = [5, 10, 15];
+  public base_path: string;
+  basePath: string;
+  pageOfItems: Array<any>;
+  searchWrapper: boolean = false;
+  nameFilter: string;
+  descriptionFilter: string;
+  employeeFilter: string;
 
   @ViewChild("dt", { static: false }) public dt: Table;
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
@@ -162,8 +162,6 @@ export class EmployeesTimesheetsComponent implements OnInit {
 
     const id = this.route.snapshot.paramMap.get("id");
 
-    this.getTimesheetsEmployee(+id);
-
 
     this.employees = {
       id: this.route.snapshot.params['id'],
@@ -172,6 +170,8 @@ export class EmployeesTimesheetsComponent implements OnInit {
     this.employeesService.getId(this.employees.id).subscribe(value => {
       this.employee = value;
     });
+
+    this.load();
 
     this.cols = [
       { field: "date_from", header: "Da" },
@@ -193,21 +193,108 @@ export class EmployeesTimesheetsComponent implements OnInit {
 
     this.getVacationsCountEmployee(+id);
     this.getPermissionsCountEmployee(+id);
-
     this.spinner.hide();
 
   }
 
-  getTimesheetsEmployee(id) {
-    this.timesheetsService.find_timesheets_employee(+id).subscribe(data => {
-      this.timesheets = data;
-      this.timesheetsService.count_total_timesheets_employee(+id).subscribe(
+
+  getRequestParams(searchTitle, categoryTitle, employeeTitle, page, pageSize): any {
+    // tslint:disable-next-line:prefer-const
+    let path = '/admin/employee/timesheets/' + this.employees.id;
+    const params = {};
+    let adder = '?';
+    if (page) {
+      params[`page`] = page - 1;
+      path += adder + 'page=' + (page - 1);
+      adder = '&';
+    }
+    if (searchTitle) {
+      params[`name`] = searchTitle;
+      path += adder + 'date_from=' + searchTitle;
+      adder = '&';
+    }
+    if (categoryTitle) {
+      params[`description`] = categoryTitle;
+      path += adder + 'date_to=' + categoryTitle;
+      adder = '&';
+    }
+
+    if (pageSize) {
+      params[`size`] = pageSize;
+      path += adder + 'size=' + pageSize;
+    }
+    window.history.replaceState({}, '', path);
+
+    return params;
+
+  }
+
+  load(): void {
+    const params = this.getRequestParams(
+      this.nameFilter,
+      this.descriptionFilter,
+      this.employeeFilter,
+      this.page,
+      this.pageSize
+    );
+    this.timesheetsService.find_timesheets_employee(params, this.employees.id).subscribe((pData) => {
+      this.timesheets = pData;
+      this.count = this.timesheetsService.size;
+
+      this.timesheetsService.count_total_timesheets_employee(this.employees.id).subscribe(
         (data: Timesheets) => this.timesheetCountTotalEmployee = data,
         error => this.error = error
       );
 
     });
-  };
+  }
+
+  handlePageSizeChange(event): void {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.load();
+  }
+
+  reset(): void {
+    this.nameFilter = '';
+    this.descriptionFilter = '';
+    this.employeeFilter = '';
+
+    this.load();
+    
+  }
+  
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+}
+
+  private onChange(item: string): void {
+    this.load();
+
+  }
+
+
+
+  public handlePageChange(event): void {
+    this.page = event;
+    this.load();
+  
+  }
+
+
+  public selectionItemForFilter(e) {
+    const colsTempor = e.value;
+    colsTempor.sort(function (a, b) {
+      return a.index - b.index;
+    });
+    this.cols = [];
+    this.cols = colsTempor;
+    if (e.value.length > 10) {
+      e.value.pop();
+    }
+  }
+  
 
   createTimesheets(employee: Employees) {
     this.productDialogAdd = true;
@@ -436,7 +523,7 @@ export class EmployeesTimesheetsComponent implements OnInit {
           } else {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
             this.productDialogAdd = false;
-            this.getTimesheetsEmployee(this.employee.id);
+            this.load();
             this.getVacationsCountEmployee(this.employee.id);
             this.getPermissionsCountEmployee(this.employee.id);
           }
@@ -451,7 +538,7 @@ export class EmployeesTimesheetsComponent implements OnInit {
           } else {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
             this.productDialogAdd = false;
-            this.getTimesheetsEmployee(this.employee.id);
+            this.load();
             this.getVacationsCountEmployee(+id);
             this.getPermissionsCountEmployee(+id);
           }
@@ -478,7 +565,7 @@ export class EmployeesTimesheetsComponent implements OnInit {
             console.log(res);
             this.ngOnInit();
             this.messageService.add({ key: 'myKey1', severity: 'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo' });
-            this.getTimesheetsEmployee(this.employee.id);
+            this.load();
           },
           error => this.error = error
         );
