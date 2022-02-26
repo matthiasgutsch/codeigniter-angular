@@ -53,7 +53,7 @@ export class ManageBillingsComponent implements OnInit {
   nameFilter: string;
   descriptionFilter: string;
 
-  
+
   @ViewChild("content", { static: false }) content: ElementRef;
   currentUser: any;
 
@@ -162,6 +162,14 @@ export class ManageBillingsComponent implements OnInit {
     this.load();
     
   }
+  
+  public handlePageChange(event): void {
+    this.page = event;
+    this.load();
+  
+  }
+  
+
   
   onChangePage(pageOfItems: Array<any>) {
     // update current page of items

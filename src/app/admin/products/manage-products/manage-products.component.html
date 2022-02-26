@@ -100,15 +100,27 @@
 <div class="p-fluid">
     <div class="p-field p-grid">
         <div class="p-col-12 p-md-12">
-
+          
             <p-card>
                 <div class="filter-options">
 
-                <div class="p-field p-grid">
-                    <div class="p-col-12 p-md-12">
-               
+                    <div class="p-field p-grid">
+
+                        <div class="p-col-12 p-md-8">
+                            <div class="item-size pull-left">
+                                <span class="filter-tag" *ngIf="nameFilter" >Nome: {{nameFilter}} <span class="close"><i class="pi pi-times"  (click)="reset()"></i></span> </span>
+                                <span class="filter-tag" *ngIf="descriptionFilter">Descrizione: {{descriptionFilter}} <span class="close"><i class="pi pi-times" (click)="reset()"></i></span> </span>
+                                <span class="filter-tag" *ngIf="codeFilter">Codice: {{codeFilter}} <span class="close"><i class="pi pi-times" (click)="reset()"></i></span> </span>
+                                <span class="filter-tag" *ngIf="codeIntFilter">Codice Intì.: {{codeIntFilter}} <span class="close"><i class="pi pi-times" (click)="reset()"></i></span> </span>
+                                <span class="filter-tag" *ngIf="brandFilter">Brand: {{brandFilter}} <span class="close"><i class="pi pi-times" (click)="reset()"></i></span> </span>
+
+                            </div>
+                        </div>
+
+                        <div class="p-col-12 p-md-4">
+                          <span class="pull-right">{{count}} Items</span>  
+                        </div>
                     </div>
-                </div>
                 </div>
 
                 <div *ngFor=" let product of products  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
