@@ -23,7 +23,7 @@ import { ProductsService } from 'src/app/services/products.service';
 import { Products } from 'src/app/models/products';
 import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brands.service';
-import { STATUS_PRODUCTS } from '../../constants/constants';
+import { PARAM_PRODUCTS_PATH, STATUS_PRODUCTS } from '../../constants/constants';
 import { Table } from 'primeng/table';
 import { NgxSpinnerService } from "ngx-spinner";
 import { TagsService } from 'src/app/services/tags.service';
@@ -89,6 +89,21 @@ export class ManageProductsComponent implements OnInit {
   technical_data: Technical_data;
   skills:  any[] = [];
   batches: any[];
+
+  page = 1;
+  count = 0;
+  pageSize = 10;
+  pageSizes = [5, 10, 15];
+  public base_path: string;
+  basePath: string;
+  pageOfItems: Array<any>;
+  searchWrapper: boolean = false;
+  nameFilter: string;
+  codeFilter: string;
+
+  descriptionFilter: string;
+
+
   showDialog() {
     this.productDialog = true;
 }
@@ -127,8 +142,8 @@ trackByFn(index, item) {
     const userId = this.currentUser.user_id;
     this.spinner.show();
 
-    this.productsService.getAllListbyUser().subscribe(data => {
-      this.products = data;
+    this.load();
+
       this.cols = [
         { field: "title", header: "titolo" },
         { field: "code", header: "Codice" },
@@ -152,22 +167,104 @@ trackByFn(index, item) {
         { field: "description", header: "Codice" },
   
       ];
+
       this._selectedColumns = this.cols;
       this.exportColumns = this.cols.map(col => ({
         title: col.header,
         dataKey: col.field
       }));
+
       this.getTags();
       this.getCategories();
       this.getBrands();
       this.getTechnicalData();
       this.spinner.hide();
 
-    });
-
 
   }
 
+
+  getRequestParams(searchTitle, categoryTitle, codeTitle, page, pageSize): any {
+    // tslint:disable-next-line:prefer-const
+    let path = PARAM_PRODUCTS_PATH;
+    const params = {};
+    let adder = '?';
+    if (page) {
+      params[`page`] = page - 1;
+      path += adder + 'page=' + (page - 1);
+      adder = '&';
+    }
+    if (searchTitle) {
+      params[`name`] = searchTitle;
+      path += adder + 'name=' + searchTitle;
+      adder = '&';
+    }
+    if (categoryTitle) {
+      params[`description`] = categoryTitle;
+      path += adder + 'description=' + categoryTitle;
+      adder = '&';
+    }
+
+    if (codeTitle) {
+      params[`code`] = codeTitle;
+      path += adder + 'code=' + codeTitle;
+      adder = '&';
+    }
+
+    if (pageSize) {
+      params[`size`] = pageSize;
+      path += adder + 'size=' + pageSize;
+    }
+    window.history.replaceState({}, '', path);
+
+    return params;
+
+  }
+
+  reset(): void {
+    this.nameFilter = '';
+    this.descriptionFilter = '';
+    this.codeFilter = '';
+    this.load();
+    
+  }
+
+  load(): void {
+
+    const params = this.getRequestParams(
+      this.nameFilter,
+      this.descriptionFilter,
+      this.codeFilter,
+
+      this.page,
+      this.pageSize
+    );
+    this.productsService.getAllListNew(params).subscribe((pData) => {
+      this.products = pData;
+      this.count = this.productsService.size;
+
+    });
+  }
+
+
+
+  public handlePageChange(event): void {
+    this.page = event;
+    this.load();
+  
+  }
+  
+    public selectionItemForFilter(e) {
+      const colsTempor = e.value;
+      colsTempor.sort(function (a, b) {
+        return a.index - b.index;
+      });
+      this.cols = [];
+      this.cols = colsTempor;
+      if (e.value.length > 10) {
+        e.value.pop();
+      }
+    }
 
   getBrands() {
   this.brandService.getAllListbyUser().subscribe(
