@@ -106,7 +106,7 @@ export class AdminDashboardComponent implements OnInit {
   data1 = [];
   data2 = [];
   count = 0;
-  pageSize = 5;
+  pageSize = 3;
   page = 1;
 
   trackByFn(index, item) {
