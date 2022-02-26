@@ -52,6 +52,9 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     if (pars.dateFrom) {
       params = params.append('date_from', pars.dateFrom);
     }
+    if (pars.employee) {
+      params = params.append('employee', pars.employee);
+    }
     if (pars.dateTo) {
       params = params.append('date_to', pars.dateTo);
     }

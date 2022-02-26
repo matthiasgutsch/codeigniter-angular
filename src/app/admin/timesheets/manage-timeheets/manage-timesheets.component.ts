@@ -124,6 +124,7 @@ pageOfItems: Array<any>;
 searchWrapper: boolean = false;
 nameFilter: string;
 descriptionFilter: string;
+employeeFilter: string;
 
 
 @ViewChild("dt", { static: false }) public dt: Table;
@@ -207,7 +208,7 @@ descriptionFilter: string;
       }
     }
 
-  getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
+  getRequestParams(searchTitle, categoryTitle, employeeTitle, page, pageSize): any {
     // tslint:disable-next-line:prefer-const
     let path = PARAM_TIMESHEETS_PATH;
     const params = {};
@@ -227,6 +228,12 @@ descriptionFilter: string;
       path += adder + 'date_to=' + categoryTitle;
       adder = '&';
     }
+
+    if (employeeTitle) {
+      params[`employee`] = employeeTitle;
+      path += adder + 'employee=' + employeeTitle;
+      adder = '&';
+    }
     if (pageSize) {
       params[`size`] = pageSize;
       path += adder + 'size=' + pageSize;
@@ -243,6 +250,7 @@ descriptionFilter: string;
     const params = this.getRequestParams(
       this.nameFilter,
       this.descriptionFilter,
+      this.employeeFilter,
       this.page,
       this.pageSize
     );
@@ -261,6 +269,8 @@ descriptionFilter: string;
   reset(): void {
     this.nameFilter = '';
     this.descriptionFilter = '';
+    this.employeeFilter = '';
+
     this.load();
     
   }

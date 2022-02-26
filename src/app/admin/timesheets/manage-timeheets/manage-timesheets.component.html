@@ -1,43 +1,53 @@
-<p-overlayPanel #op>
+<p-sidebar [(visible)]="filterSidebar" #op position="right">
     <ng-template pTemplate>
         <div class="p-col-12">
 
-            <div class="p-field p-grid" *ngFor="let col of cols" [ngSwitch]="col.field">
+            <div class="p-field p-grid">
                 <div class="p-col-12">
+    
+                    <input type="text" [style]="{ width: '100%' }" pInputText [(ngModel)]="nameFilter" placeholder="Name" />
+                </div>
+            </div>
+            <div class="p-field p-grid">
+                <div class="p-col-12">
+                    <input type="text" [style]="{ width: '100%' }" pInputText [(ngModel)]="descriptionFilter"
+                        placeholder="Descrizione" />
+                </div>
+            </div>
 
-                    <p-dropdown *ngSwitchCase="'project_id'" placeholder="Scegli" [showClear]="true" optionLabel="title"
-                        optionValue="id" [options]="projects" [style]="{'width':'100%'}"
-                        (onChange)="dt.filter($event.value, col.field, 'equals')">
-                    </p-dropdown>
 
-                    <p-dropdown *ngSwitchCase="'employee_id'" placeholder="Scegli" [showClear]="true"
-                        optionLabel="username" optionValue="id" [options]="employees" [style]="{'width':'100%'}"
-                        (onChange)="dt.filter($event.value, col.field, 'equals')">
-                    </p-dropdown>
+            <div class="p-field p-grid">
+                <div class="p-col-12">
+            <p-dropdown [options]="employees" [virtualScroll]="true" filter="true"
+            [showClear]="true" placeholder="Scegli" [(ngModel)]="employeeFilter" [style]="{ width: '100%' }"
+            optionLabel="username" optionValue="id">
 
-                    <input *ngSwitchCase="'date_from'"
-                        [ngModel]="dt.filters['date_from']? dt.filters['date_from'].value : ''"
-                        placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }"
-                        (input)="dt.filter($event.target.value, col.field, 'contains')">
+            </p-dropdown>
 
-                    <input *ngSwitchCase="'date_to'" [ngModel]="dt.filters['date_to']? dt.filters['date_to'].value : ''"
-                        placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }"
-                        (input)="dt.filter($event.target.value, col.field, 'contains')">
 
                 </div>
             </div>
 
-            <div class="p-grid">
+            <div class="p-field p-grid">
                 <div class="p-col-12">
-
-                    <button pButton pRipple label="reset ricerca" class="p-button p-button-primary btn-block"
-                        (click)="dt.reset()"></button>
+                    <button pButton type="submit" icon="pi pi-search" class="p-button p-button-primary btn-block"
+                        label="cerca" (click)="load()">
+                    </button>
                 </div>
             </div>
+            <div class="p-field p-grid">
+    
+                <div class="p-col-12">
+                    <button pButton type="reset" icon="pi pi-times" class="p-button p-button-secondary btn-block"
+                        label="reset" (click)="reset()">
+                    </button>
+                </div>
+            </div>
+    
         </div>
 
     </ng-template>
-</p-overlayPanel>
+</p-sidebar>
 
 <div class="top-main-wrapper">
 
@@ -61,7 +71,7 @@
                         tooltipPosition="bottom"></button>
 
                     <button type="text" pButton label="Filter" icon="pi pi-filter"
-                        class="p-button p-button-options p-mr-2 pull-right" (click)="op.toggle($event)"></button>
+                        class="p-button p-button-options p-mr-2 pull-right" (click)="filterSidebar = true"></button>
 
                 </div>
             </div>
@@ -90,6 +100,10 @@
                                                     class="close"><i class="pi pi-times" (click)="reset()"></i></span>
                                             </span>
                                             <span class="filter-tag" *ngIf="descriptionFilter">{{descriptionFilter}}
+                                                <span class="close"><i class="pi pi-times" (click)="reset()"></i></span>
+                                            </span>
+
+                                            <span class="filter-tag" *ngIf="employeeFilter">{{employeeFilter}}
                                                 <span class="close"><i class="pi pi-times" (click)="reset()"></i></span>
                                             </span>
                                         </div>
@@ -159,12 +173,12 @@
 
                                         <td>
                                             <i class="pi pi-calendar"></i>
-                                            {{timesheet.date_from | date:'d-MM-yyyy hh:mm'}}
+                                            {{timesheet.date_from}}
 
                                         </td>
 
                                         <td><i class="pi pi-calendar"></i>
-                                            {{timesheet.date_to | date:'d-MM-yyyy hh:mm'}}
+                                            {{timesheet.date_to}}
                                         </td>
 
                                         <td width="50">
@@ -175,8 +189,8 @@
                                             </app-initials-avatar>
                                         </td>
 
-                                        <td> {{ getEmployeeItem(timesheet.employee_id)?.username }}</td>
-                                        <td> {{ getProjectItem(timesheet.project_id)?.title }}</td>
+                                        <td> {{ timesheet.employee.username }}</td>
+                                        <td> {{ timesheet.project.title }}</td>
 
                                         <td class="action">
 
