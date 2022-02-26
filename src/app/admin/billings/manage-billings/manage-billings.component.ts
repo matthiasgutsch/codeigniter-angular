@@ -22,6 +22,7 @@ import { PARAM_BILLINGS_PATH, PARAM_CHECKINS_PATH } from '../../constants/consta
 export class ManageBillingsComponent implements OnInit {
 
   billings: any = [];
+  billingsAll: any = [];
   billing: Billings;
   categories: any = [];
   category: Category;

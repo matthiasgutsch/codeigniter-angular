@@ -80,12 +80,6 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
 
-
-  
-
-
-
-
   
   public warehouse_movement_by_product(pars: any, id: ID): Observable<T[]> {
     let params = new HttpParams();
