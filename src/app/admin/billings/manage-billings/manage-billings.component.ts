@@ -13,6 +13,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { Billings } from 'src/app/models/billings';
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import { PARAM_BILLINGS_PATH, PARAM_CHECKINS_PATH } from '../../constants/constants';
 
 @Component({
   selector: "app-manage-billings",
@@ -41,7 +42,18 @@ export class ManageBillingsComponent implements OnInit {
   statuses: any[];
   @Input() exportable: boolean = true;
 
+  page = 1;
+  count = 0;
+  pageSize = 10;
+  pageSizes = [5, 10, 15];
+  public base_path: string;
+  basePath: string;
+  pageOfItems: Array<any>;
+  searchWrapper: boolean = false;
+  nameFilter: string;
+  descriptionFilter: string;
 
+  
   @ViewChild("content", { static: false }) content: ElementRef;
   currentUser: any;
 
@@ -73,10 +85,9 @@ export class ManageBillingsComponent implements OnInit {
     const userId = this.currentUser.user_id;
 
     this.spinner.show();
+    this.load();
 
-    this.billingsService.getAllListbyUser().subscribe(data => {
-      this.billings = data;
-        this.cols = [
+    this.cols = [
           { field: 'is_paid', header: 'Stato' },
           { field: 'client.username',  header: 'Nome Cliente'  },
           { field: 'number', header: 'Numero Fattura' },
@@ -89,9 +100,76 @@ export class ManageBillingsComponent implements OnInit {
       this.getComuni();
       this.getClients();
       this.spinner.hide();
-    });
+  
+  }
 
-   
+
+  getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
+    // tslint:disable-next-line:prefer-const
+    let path = PARAM_BILLINGS_PATH;
+    const params = {};
+    let adder = '?';
+    if (page) {
+      params[`page`] = page - 1;
+      path += adder + 'page=' + (page - 1);
+      adder = '&';
+    }
+    if (searchTitle) {
+      params[`name`] = searchTitle;
+      path += adder + 'date_from=' + searchTitle;
+      adder = '&';
+    }
+    if (categoryTitle) {
+      params[`description`] = categoryTitle;
+      path += adder + 'date_to=' + categoryTitle;
+      adder = '&';
+    }
+    if (pageSize) {
+      params[`size`] = pageSize;
+      path += adder + 'size=' + pageSize;
+    }
+    window.history.replaceState({}, '', path);
+
+    return params;
+
+  }
+
+  
+  load(): void {
+
+    const params = this.getRequestParams(
+      this.nameFilter,
+      this.descriptionFilter,
+      this.page,
+      this.pageSize
+    );
+    this.billingsService.getAllListNew(params).subscribe((pData) => {
+      this.billings = pData;
+      this.count = this.billingsService.size;
+
+    });
+  }
+
+  handlePageSizeChange(event): void {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.load();
+  }
+
+  reset(): void {
+    this.nameFilter = '';
+    this.descriptionFilter = '';
+    this.load();
+    
+  }
+  
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+}
+
+  private onChange(item: string): void {
+    this.load();
 
   }
 

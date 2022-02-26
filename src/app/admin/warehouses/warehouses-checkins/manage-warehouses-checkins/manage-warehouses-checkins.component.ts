@@ -281,7 +281,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
     });
   }
 
-  andlePageSizeChange(event): void {
+  handlePageSizeChange(event): void {
     this.pageSize = event.target.value;
     this.page = 1;
     this.load();

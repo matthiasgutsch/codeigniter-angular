@@ -11,6 +11,7 @@ export const LOCATIONS_API = environment.baseUrl + APP_API + "locations";
 
 export const PARAM_WORKS_PATH = '/admin/settings/works/'
 export const PARAM_CHECKINS_PATH = '/admin/checkins/'
+export const PARAM_BILLINGS_PATH = '/admin/billings/'
 export const PARAM_PRODUCTS_PATH = '/admin/products/'
 
 export const FISCAL_CODE_VALIDATOR_REGEX =
