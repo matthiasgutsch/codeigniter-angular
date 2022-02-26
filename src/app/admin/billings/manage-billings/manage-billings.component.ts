@@ -170,7 +170,7 @@ export class ManageBillingsComponent implements OnInit {
   }
   
 
-  
+
   onChangePage(pageOfItems: Array<any>) {
     // update current page of items
     this.pageOfItems = pageOfItems;
@@ -214,9 +214,7 @@ export class ManageBillingsComponent implements OnInit {
     formData.set('is_paid', '0');
       this.billingsService.billingStatus(formData, billing.id).subscribe(
         (res) => {
-          this.billingsService.getAllListbyUser().subscribe(data => {
-            this.billings = data;
-          });
+          this.load();
         },
         (error) => (this.error = error)
       );
@@ -227,9 +225,7 @@ export class ManageBillingsComponent implements OnInit {
     formData.set('is_paid', '1');
       this.billingsService.billingStatus(formData, billing.id).subscribe(
         (res) => {
-          this.billingsService.getAllListbyUser().subscribe(data => {
-            this.billings = data;
-          });
+          this.load();
         },
         (error) => (this.error = error)
       );
