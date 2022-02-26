@@ -203,7 +203,7 @@
                             </tr>
                         </thead>
                         <tr *ngFor="let entry of selectedSkills | keys">
-                            <td>{{entry.value.description}}</td>
+                            <td><strong>{{entry.value.description.code}}</strong><br>{{entry.value.description.description}}</td>
                             <td>{{entry.value.price}}</td>
                             <td>{{entry.value.qty}}</td>
                             <td> {{entry.value.qty * entry.value.price | currency :'EUR':'symbol':'1.2-2'}}</td>
