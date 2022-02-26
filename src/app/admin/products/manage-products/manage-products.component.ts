@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppointmentsService } from '../../../services/appointments.service';
 import { Blog } from '../../../models/blog';
-import {ConfirmationService, SelectItem} from 'primeng/api';
+import { ConfirmationService, SelectItem } from 'primeng/api';
 import { CategoryService } from '../../../services/categories.service';
 import { Category } from '../../../models/category';
-import {MessageService} from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
 import { ComuniService } from 'src/app/services/comuni.service';
@@ -16,7 +16,7 @@ import { Locations } from 'src/app/models/locations';
 import { Employees } from 'src/app/models/employees';
 import { EmployeesService } from 'src/app/services/employees.service';
 import { Appointments } from 'src/app/models/appointments';
-import {formatDate} from '@angular/common';
+import { formatDate } from '@angular/common';
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { ProductsService } from 'src/app/services/products.service';
@@ -66,7 +66,6 @@ export class ManageProductsComponent implements OnInit {
   selectedBrands: Brand;
   loading: boolean;
   currentIndex = 1;
-
   productsData: any = [];
   products: any = [];
   product: Products;
@@ -78,7 +77,7 @@ export class ManageProductsComponent implements OnInit {
   private id: number;
   clients: any = [];
   client: Clients;
-  productDialog:boolean = false;
+  productDialog: boolean = false;
   works_id: any;
   category_id: any;
   status: any;
@@ -87,9 +86,8 @@ export class ManageProductsComponent implements OnInit {
   productsVariation: ProductsVariations;
   technical_datas: any = [];
   technical_data: Technical_data;
-  skills:  any[] = [];
+  skills: any[] = [];
   batches: any[];
-
   page = 1;
   count = 0;
   pageSize = 10;
@@ -99,30 +97,30 @@ export class ManageProductsComponent implements OnInit {
   pageOfItems: Array<any>;
   searchWrapper: boolean = false;
   nameFilter: string;
-  codeFilter: string;
-
   descriptionFilter: string;
-
+  codeFilter: string;
+  codeIntFilter: string;
+  brandFilter: string;
 
   showDialog() {
     this.productDialog = true;
-}
+  }
 
-myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en')  ;
+  myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en');
 
-trackByFn(index, item) {
-  return item.id;
-}
+  trackByFn(index, item) {
+    return item.id;
+  }
 
 
 
-@ViewChild("dt", { static: false }) public dt: Table;
+  @ViewChild("dt", { static: false }) public dt: Table;
 
   constructor(
     private clientsService: ClientsService,
     private productsService: ProductsService,
     private worksService: WorksService,
-    private locationsService: LocationsService, 
+    private locationsService: LocationsService,
     private messageService: MessageService,
     private employeesService: EmployeesService,
     private comuniService: ComuniService,
@@ -130,11 +128,11 @@ trackByFn(index, item) {
     private tagsService: TagsService,
     private technicalDataService: TechnicalDataService,
     private spinner: NgxSpinnerService,
-    private categoryService: CategoryService, 
+    private categoryService: CategoryService,
     private productsVariationsService: ProductsVariationsService,
-    private confirmationService: ConfirmationService,) { 
-      this.status = STATUS_PRODUCTS;
-      this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    private confirmationService: ConfirmationService,) {
+    this.status = STATUS_PRODUCTS;
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
   }
 
@@ -144,47 +142,47 @@ trackByFn(index, item) {
 
     this.load();
 
-      this.cols = [
-        { field: "title", header: "titolo" },
-        { field: "code", header: "Codice" },
-        { field: "code_int", header: "Codice interno" },
+    this.cols = [
+      { field: "title", header: "titolo" },
+      { field: "code", header: "Codice" },
+      { field: "code_int", header: "Codice interno" },
 
-        { field: "status", header: "Status" },
-        { field: "brand_id", header: "Brand" }
-      ];
+      { field: "status", header: "Status" },
+      { field: "brand_id", header: "Brand" }
+    ];
 
-      this.colsVariations = [
-        { field: "title", header: "titolo" },
-        { field: "code", header: "Codice" },
-        { field: "code_int", header: "Codice interno" },
-        { field: "price", header: "Prezzo" },
-        { field: "pieces", header: "Disponibili" }
-      ];
-    
-      
-      this.colsData = [
-        { field: "title", header: "titolo" },
-        { field: "description", header: "Codice" },
-  
-      ];
+    this.colsVariations = [
+      { field: "title", header: "titolo" },
+      { field: "code", header: "Codice" },
+      { field: "code_int", header: "Codice interno" },
+      { field: "price", header: "Prezzo" },
+      { field: "pieces", header: "Disponibili" }
+    ];
 
-      this._selectedColumns = this.cols;
-      this.exportColumns = this.cols.map(col => ({
-        title: col.header,
-        dataKey: col.field
-      }));
 
-      this.getTags();
-      this.getCategories();
-      this.getBrands();
-      this.getTechnicalData();
-      this.spinner.hide();
+    this.colsData = [
+      { field: "title", header: "titolo" },
+      { field: "description", header: "Codice" },
+
+    ];
+
+    this._selectedColumns = this.cols;
+    this.exportColumns = this.cols.map(col => ({
+      title: col.header,
+      dataKey: col.field
+    }));
+
+    this.getTags();
+    this.getCategories();
+    this.getBrands();
+    this.getTechnicalData();
+    this.spinner.hide();
 
 
   }
 
 
-  getRequestParams(searchTitle, categoryTitle, codeTitle, page, pageSize): any {
+  getRequestParams(searchTitle, categoryTitle, codeTitle, codeIntTitle, brandTitle, page, pageSize): any {
     // tslint:disable-next-line:prefer-const
     let path = PARAM_PRODUCTS_PATH;
     const params = {};
@@ -211,6 +209,19 @@ trackByFn(index, item) {
       adder = '&';
     }
 
+    if (codeIntTitle) {
+      params[`code_int`] = codeIntTitle;
+      path += adder + 'code_int=' + codeIntTitle;
+      adder = '&';
+    }
+
+
+    if (brandTitle) {
+      params[`brand`] = brandTitle;
+      path += adder + 'brand=' + brandTitle;
+      adder = '&';
+    }
+ 
     if (pageSize) {
       params[`size`] = pageSize;
       path += adder + 'size=' + pageSize;
@@ -225,8 +236,10 @@ trackByFn(index, item) {
     this.nameFilter = '';
     this.descriptionFilter = '';
     this.codeFilter = '';
+    this.codeIntFilter = '';
+    this.brandFilter = '';
     this.load();
-    
+
   }
 
   load(): void {
@@ -235,14 +248,14 @@ trackByFn(index, item) {
       this.nameFilter,
       this.descriptionFilter,
       this.codeFilter,
-
+      this.codeIntFilter,
+      this.brandFilter,
       this.page,
       this.pageSize
     );
     this.productsService.getAllListNew(params).subscribe((pData) => {
       this.products = pData;
       this.count = this.productsService.size;
-
     });
   }
 
@@ -251,34 +264,34 @@ trackByFn(index, item) {
   public handlePageChange(event): void {
     this.page = event;
     this.load();
-  
+
   }
-  
-    public selectionItemForFilter(e) {
-      const colsTempor = e.value;
-      colsTempor.sort(function (a, b) {
-        return a.index - b.index;
-      });
-      this.cols = [];
-      this.cols = colsTempor;
-      if (e.value.length > 10) {
-        e.value.pop();
-      }
+
+  public selectionItemForFilter(e) {
+    const colsTempor = e.value;
+    colsTempor.sort(function (a, b) {
+      return a.index - b.index;
+    });
+    this.cols = [];
+    this.cols = colsTempor;
+    if (e.value.length > 10) {
+      e.value.pop();
     }
+  }
 
   getBrands() {
-  this.brandService.getAllListbyUser().subscribe(
-    (data: Brand) => this.brands = data,
-    error => this.error = error
-  );
+    this.brandService.getAllListbyUser().subscribe(
+      (data: Brand) => this.brands = data,
+      error => this.error = error
+    );
   }
 
 
   getTechnicalData() {
-  this.technicalDataService.getAllListbyUser().subscribe(
-    (data: Technical_data) => (this.technical_datas = data),
-    (error) => (this.error = error)
-  );
+    this.technicalDataService.getAllListbyUser().subscribe(
+      (data: Technical_data) => (this.technical_datas = data),
+      (error) => (this.error = error)
+    );
   }
 
 
@@ -290,23 +303,19 @@ trackByFn(index, item) {
   }
 
   getCategories() {
-
-  this.categoryService.getAllListbyUser().subscribe(
-    (data: Category) => this.categories = data,
-    error => this.error = error
+    this.categoryService.getAllListbyUser().subscribe(
+      (data: Category) => this.categories = data,
+      error => this.error = error
     );
   }
 
 
-  clear(table: any) 
-  {
-    
-      //  THIS DOES NOT WORK!!   Filter stops working after clearing
-      table.clear();
-      
-	} 
-    
- 
+  clear(table: any) {
+    table.clear();
+
+  }
+
+
 
   getBrandItem(brand_id: string, id: string) {
     return this.brands.find(item => item.id === brand_id);
@@ -335,50 +344,41 @@ trackByFn(index, item) {
     return this.works.find(item => item.id === works_id);
   }
 
-  
+
   view(product: Products) {
-    this.product = {...this.product};
+    this.product = { ...this.product };
     this.productDialog = true;
-}
+  }
 
 
 
-edit(product: Products) {
-  this.spinner.show();
+  edit(product: Products) {
+    this.spinner.show();
+    this.product = { ...product };
+    this.selectedSkills = JSON.parse("" + this.product.skills + "");
 
-  this.product = { ...product };
-  
-  this.selectedSkills = JSON.parse("" + this.product.skills + "");
+    this.productsVariationsService.getProductsVariations(this.product.id).subscribe(data => {
+      this.productsVariations = data;
+      this.selectedSkillsVariations = JSON.parse("" + this.productsVariation.skills + "");
+    });
+    this.productDialog = true;
+    this.spinner.hide();
 
-  this.productsVariationsService.getProductsVariations(this.product.id).subscribe(data => {
-    this.productsVariations = data;
-    this.selectedSkillsVariations = JSON.parse("" + this.productsVariation.skills + "");
-
-
-   
-
-  });
-  this.productDialog = true;
-  this.spinner.hide();
-
-}
+  }
 
 
+  exportPdf() {
+    // const doc = new jsPDF();
+    const doc = new jsPDF('l', 'pt', 'A4');
+    doc['autoTable'](this.exportColumns, this.products);
+    // doc.autoTable(this.exportColumns, this.products);
+    doc.save("prodotti.pdf");
+  }
 
 
-
-exportPdf() {
-  // const doc = new jsPDF();
-  const doc = new jsPDF('l','pt','A4');
-  doc['autoTable'](this.exportColumns, this.products);
-  // doc.autoTable(this.exportColumns, this.products);
-  doc.save("prodotti.pdf");
-}
-
-
-hideDialog() {
-  this.productDialog = false;
-}
+  hideDialog() {
+    this.productDialog = false;
+  }
 
   onDelete(id: number, title: string) {
 
@@ -391,16 +391,16 @@ hideDialog() {
           res => {
             console.log(res);
             this.ngOnInit();
-            this.messageService.add({key: 'myKey1', severity:'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo'});
+            this.messageService.add({ key: 'myKey1', severity: 'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo' });
 
           },
           error => this.error = error
         );
       },
-     
-  });
 
-   
+    });
+
+
   }
 
 }

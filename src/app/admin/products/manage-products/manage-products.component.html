@@ -22,6 +22,25 @@
                 </div>
             </div>
 
+            <div class="p-field p-grid">
+                <div class="p-col-12">
+                    <input type="text" [style]="{ width: '100%' }" pInputText [(ngModel)]="codeIntFilter"
+                        placeholder="Codice interno" />
+                </div>
+            </div>
+
+
+            <div class="p-field p-grid">
+                <div class="p-col-12">
+            <p-dropdown [options]="brands" [virtualScroll]="true" filter="true"
+            [showClear]="true" placeholder="Scegli" [(ngModel)]="brandFilter" [style]="{ width: '100%' }"
+            optionLabel="name" optionValue="name">
+
+            </p-dropdown>
+
+
+                </div>
+            </div>
 
             <div class="p-field p-grid">
                 <div class="p-col-12">
