@@ -146,8 +146,6 @@ export class ManageProductsComponent implements OnInit {
       { field: "title", header: "titolo" },
       { field: "code", header: "Codice" },
       { field: "code_int", header: "Codice interno" },
-
-      { field: "status", header: "Status" },
       { field: "brand_id", header: "Brand" }
     ];
 

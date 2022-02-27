@@ -132,30 +132,41 @@
                     <ng-template pTemplate="header" let-columns>
                         <tr>
                             <th width="50px"></th>
-                            <th *ngFor="let col of cols">
-                                {{col.header}}
-                            </th>
+                            <th width="350px">Titolo</th>
+                            <th>Codice</th>
+                            <th>Codice interno</th>
+                            <th>Brand</th>
                             <th width="200"></th>
                         </tr>
 
                     </ng-template>
-                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <ng-template pTemplate="body" let-rowData let-product>
                         <tr>
-                            <td *ngIf="rowData.image"><img [src]="rowData.image"
-                                    [routerLink]="['/admin/products/edit', rowData.id]" class="img-responsive"></td>
-                            <td *ngFor="let col of cols" [ngSwitch]="col.field">
-                                {{rowData[col.field]}}
+                            <td *ngIf="product.image"><img [src]="rowData.image"
+                                    [routerLink]="['/admin/products/edit', product.id]" class="img-responsive"></td>
+                            <td>
+                                {{product.title}}
 
                                 
+                            </td>
+                            <td>
+                                {{product.code}}
+                            </td>
+                            <td>
+                                {{product.code_int}}
+                            </td>
+
+                            <td>
+                                {{product.brand_id}}
                             </td>
 
                             <td class="action">
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
-                                    [routerLink]="['/admin/products/edit', rowData.id]"></button>
+                                    [routerLink]="['/admin/products/edit', product.id]"></button>
                                 <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
-                                    (click)="edit(rowData)"></button>
+                                    (click)="edit(product)"></button>
                                 <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
-                                    (click)="onDelete(rowData.id)"></button>
+                                    (click)="onDelete(product.id)"></button>
                             </td>
                         </tr>
                     </ng-template>
