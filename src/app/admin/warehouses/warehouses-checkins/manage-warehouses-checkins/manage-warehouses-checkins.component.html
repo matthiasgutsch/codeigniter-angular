@@ -358,7 +358,15 @@
                         </div>
             </div>
             </p-card>
-    
+        <p-card>
+                <ngx-barcode6
+                [bc-format]="EAN-13"
+                [bc-height]="32"
+                [bc-value]="warehouseCheckin.id + warehouseCheckin.created_at"
+                [bc-display-value]="true"
+              >
+              </ngx-barcode6>
+        </p-card>
             </div>
     </ng-template>
 

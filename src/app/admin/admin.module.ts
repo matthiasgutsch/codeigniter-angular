@@ -52,7 +52,7 @@ import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
 import {TooltipModule} from 'primeng/tooltip';
 import {MultiSelectModule} from 'primeng/multiselect';
-
+import { NgxBarcode6Module } from "ngx-barcode6";
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import * as $ from 'jquery';
 import { ManageAppointmentsComponent } from './appointments/manage-appointments/manage-appointments.component';
@@ -218,12 +218,14 @@ import { ManageWarehousesCheckoutsComponent } from './warehouses/warehouse-check
     TableModule,
     MessagesModule,
     SumPipeModule,
+    NgxBarcode6Module,
     TooltipModule,
     InputNumberModule,
     SelectButtonModule,
     ProgressBarModule,
     NgxSpinnerModule,
     KnobModule,
+   
     InputTextareaModule,
     NgxPaginationModule,
     DragDropModule,

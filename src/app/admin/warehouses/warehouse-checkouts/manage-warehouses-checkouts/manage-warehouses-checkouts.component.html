@@ -39,7 +39,7 @@
     
             <div class="p-field p-grid">
                 <div class="p-col-12 p-md-6">
-                    <h3>Maggazzino / Ingresso</h3>         
+                    <h3>Maggazzino / Uscita</h3>         
     
                 </div>
                 <div class="p-col-12 p-md-6">
@@ -91,9 +91,9 @@
                     </div>
                 </div>
                 
-                <div *ngFor=" let warehouseCheckin of warehouseCheckins  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
+                <div *ngFor=" let warehouseCheckout of warehouseCheckouts  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
 
-                <p-table #dt [columns]="cols" [responsive]="true"   [value]="warehouseCheckins" [paginator]="false"
+                <p-table #dt [columns]="cols" [responsive]="true"   [value]="warehouseCheckouts" [paginator]="false"
                     [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords">
 
                     <ng-template pTemplate="header" let-columns>
@@ -123,48 +123,48 @@
                         </tr>
 
                     </ng-template>
-                    <ng-template pTemplate="body" let-warehouseCheckin>
+                    <ng-template pTemplate="body" let-warehouseCheckout>
                         <tr>
 
                             <td>
-                                <i class="pi pi-calendar"></i> {{warehouseCheckin.created_at}}
+                                <i class="pi pi-calendar"></i> {{warehouseCheckout.created_at}}
  
                              </td>
                             <td>
 
-                                <p-tag severity="default" [value]="warehouseCheckin.pieces + ' pezzi'"></p-tag>
+                                <p-tag severity="default" [value]="warehouseCheckout.pieces + ' pezzi'"></p-tag>
 
                             </td>
-                            <td><p-tag severity="success" [value]="warehouseCheckin.boxes + ' colli'"></p-tag>
+                            <td><p-tag severity="success" [value]="warehouseCheckout.boxes + ' colli'"></p-tag>
                             </td>
                         
 
                   
 
                             <td>
-                               <!-- {{ getWarehouseItem(warehouseCheckin.project_id)?.title }}-->
+                               <!-- {{ getWarehouseItem(warehouseCheckout.project_id)?.title }}-->
 
-                                {{warehouseCheckin.warehouse_id.title}}</td>
+                                {{warehouseCheckout.warehouse_id.title}}</td>
 
-                                <td> <img *ngIf="warehouseCheckin.image" class="img-responsive" src="{{ warehouseCheckin.image}}"></td>
+                                <td> <img *ngIf="warehouseCheckout.image" class="img-responsive" src="{{ warehouseCheckout.image}}"></td>
                            <td>  
                                
-                            <p class="small"><strong>{{ warehouseCheckin.product.code_int}}</strong></p> 
-                            <p class="small" *ngIf="warehouseCheckin.supplier_id">{{ warehouseCheckin.supplier_id.company_name}}</p></td>
+                            <p class="small"><strong>{{ warehouseCheckout.product.code_int}}</strong></p> 
+                            <p class="small" *ngIf="warehouseCheckout.supplier_id">{{ warehouseCheckout.supplier_id.company_name}}</p></td>
                        
 
                             <td class="action">
                         
                               <!--   <button pButton pRipple icon="pi pi-pencil"
                                 class="p-button p-button-success p-mr-2"
-                                (click)="editItem(warehouseCheckin)"></button> -->
+                                (click)="editItem(warehouseCheckout)"></button> -->
                                 
                                 <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
-                                    (click)="view(warehouseCheckin)"></button>
+                                    (click)="view(warehouseCheckout)"></button>
           
 
                                     <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
-                                    (click)="onDelete(warehouseCheckin.id)"></button>
+                                    (click)="onDelete(warehouseCheckout.id)"></button>
                                 
                             </td>
                         </tr>
@@ -298,11 +298,13 @@
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'50vw'}">
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
-            <p-tag [value]="warehouseCheckin.id" severity="success" class="p-mr-2"></p-tag> <p-tag [value]="warehouseCheckin.created_at"></p-tag><br><br>
+            <p-tag [value]="warehouseCheckout.id" severity="success" class="p-mr-2"></p-tag> <p-tag [value]="warehouseCheckout.created_at"></p-tag><br><br>
             <h3>Dettaglio Ingresso Magazzino</h3>
 
+
+         
             <hr class="full">
-            <p-card header="{{warehouseCheckin.warehouse_id.title}}">
+            <p-card header="{{warehouseCheckout.warehouse_id.title}}">
                 <div class="p-grid">
                     <div class="p-col-12 p-md-8">
                         Pezzi registrati entrata<br>
@@ -310,7 +312,7 @@
 
                     </div>
                     <div class="p-col-12 p-md-4">
-                        <p-tag [value]="warehouseCheckin.pieces" severity="success" class="p-mr-2 pull-right"></p-tag>
+                        <p-tag [value]="warehouseCheckout.pieces" severity="success" class="p-mr-2 pull-right"></p-tag>
 
                     </div>
 
@@ -342,23 +344,32 @@
                     <div class="p-grid">
                         <div class="p-col-2 p-md-2">
 
-                <img *ngIf="warehouseCheckin.image" class="img-responsive" src="{{ warehouseCheckin.image}}">
+                <img *ngIf="warehouseCheckout.image" class="img-responsive" src="{{ warehouseCheckout.image}}">
                         </div>
                         <div class="p-col-10 p-md-10">
 
-                <h3>{{ warehouseCheckin.product.title}}</h3>
-                <p [innerHTML]="warehouseCheckin.product.description"></p>
-                <p class="small">{{ warehouseCheckin.product.code_int}} - {{ warehouseCheckin.product.code}}</p>
+                <h3>{{ warehouseCheckout.product.title}}</h3>
+                <p [innerHTML]="warehouseCheckout.product.description"></p>
+                <p class="small">{{ warehouseCheckout.product.code_int}} - {{ warehouseCheckout.product.code}}</p>
                     
                 <div class="clearfix"></div>
                 <br>
                 <button pButton pRipple icon="pi pi-pencil" label="modifica"
                 class="p-button p-button-primary p-mr-2"
-                [routerLink]="['/admin/products-variation/edit', warehouseCheckin.product.product_id, warehouseCheckin.product.id ]"></button>
+                [routerLink]="['/admin/products-variation/edit', warehouseCheckout.product.product_id, warehouseCheckout.product.id ]"></button>
                         </div>
             </div>
             </p-card>
     
+            <p-card>
+                <ngx-barcode6
+                [bc-format]="EAN-13"
+                [bc-height]="32"
+                [bc-value]="warehouseCheckout.id + warehouseCheckout.created_at"
+                [bc-display-value]="true"
+              >
+              </ngx-barcode6>
+            </p-card>
             </div>
     </ng-template>
 

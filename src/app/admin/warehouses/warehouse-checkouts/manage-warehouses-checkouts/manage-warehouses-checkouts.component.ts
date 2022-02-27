@@ -36,8 +36,7 @@ import { Projects } from 'src/app/models/projects';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import * as FileSaver from 'file-saver';
-import { WarehouseCheckins } from 'src/app/models/warehouse_checkins';
-import { WarehousesCheckinsService } from 'src/app/services/warehouses_checkins.service';
+import { WarehousesCheckoutsService } from 'src/app/services/warehouses_checkouts.service';
 import { WarehousesService } from 'src/app/services/warehouses.service';
 import { Warehouses } from 'src/app/models/warehouses';
 import { ProductsVariationsService } from 'src/app/services/products_variations.service';
@@ -46,6 +45,7 @@ import { SuppliersService } from 'src/app/services/suppliers.service';
 import { ProductsVariations } from 'src/app/models/products_variations';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
+import { WarehouseCheckouts } from 'src/app/models/warehouse_checkouts';
 
 @Component({
   selector: 'app-manage-warehouses-checkouts',
@@ -78,8 +78,8 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
   currentIndex = 1;
   displayEvent: any;
   productsData: any = [];
-  warehouseCheckins: any = [];
-  warehouseCheckin: WarehouseCheckins;
+  warehouseCheckouts: any = [];
+  warehouseCheckout: WarehouseCheckouts;
   date: Date;
   skillsArray: any = [];
   categories: any = [];
@@ -137,6 +137,8 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
   nameFilter: string;
   descriptionFilter: string;
 
+
+  
   showDialog() {
     this.productDialog = true;
   }
@@ -151,7 +153,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
   @ViewChild("dt", { static: false }) public dt: Table;
 
   constructor(
-    private warehousesCheckinsService: WarehousesCheckinsService,
+    private warehousesCheckoutsService: WarehousesCheckoutsService,
     private suppliersService: SuppliersService,
     private messageService: MessageService,
     private warehousesService: WarehousesService,
@@ -281,9 +283,9 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.warehousesCheckinsService.getAllListNew(params).subscribe((pData) => {
-      this.warehouseCheckins = pData;
-      this.count = this.warehousesCheckinsService.size;
+    this.warehousesCheckoutsService.getAllListNew(params).subscribe((pData) => {
+      this.warehouseCheckouts = pData;
+      this.count = this.warehousesCheckoutsService.size;
 
     });
   }
@@ -315,13 +317,13 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
 
 
 
-  editItem(warehouseCheckin: WarehouseCheckins) {
-    this.warehouseCheckin = { ...warehouseCheckin };
-    const id = warehouseCheckin.id;
+  editItem(warehouseCheckout: WarehouseCheckouts) {
+    this.warehouseCheckout = { ...warehouseCheckout };
+    const id = warehouseCheckout.id;
 
     if (id) {
       this.pageTitle = "Modifica Ingresso Magazzino";
-      this.warehousesCheckinsService.getId(+id).subscribe((res) => {
+      this.warehousesCheckoutsService.getId(+id).subscribe((res) => {
         this.blogForm.patchValue({
           warehouse_id: res.warehouse_id,
           supplier_id: res.supplier_id,
@@ -495,10 +497,10 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
 
 
 
-  view(warehouseCheckin: WarehouseCheckins) {
-    this.warehouseCheckin = { ...warehouseCheckin };
+  view(warehouseCheckout: WarehouseCheckouts) {
+    this.warehouseCheckout = { ...warehouseCheckout };
 
-    const id = this.warehouseCheckin.product_id;
+    const id = this.warehouseCheckout.product_id;
 
     this.productsVariationsService.getId(+id).subscribe((res) => { 
       this.product = res;
@@ -512,7 +514,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
   exportPdf() {
     // const doc = new jsPDF();
     const doc = new jsPDF('l', 'pt', 'A4');
-    doc['autoTable'](this.exportColumns, this.warehouseCheckins);
+    doc['autoTable'](this.exportColumns, this.warehouseCheckouts);
     // doc.autoTable(this.exportColumns, this.products);
     doc.save("timesheets.pdf");
   }
@@ -521,7 +523,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
 
   exportExcel() {
     import("xlsx").then(xlsx => {
-      const worksheet = xlsx.utils.json_to_sheet(this.warehouseCheckins);
+      const worksheet = xlsx.utils.json_to_sheet(this.warehouseCheckouts);
       const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
       const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
       this.saveAsExcelFile(excelBuffer, "timesheets");
@@ -545,7 +547,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
     this.productsVariationsService.getId(+id).subscribe(data => {
       this.productsVariation = data;
       this.pieces = this.productsVariation.pieces;
-      this.updateProductQuantity = +this.pieces + +this.blogForm.get("pieces").value;
+      this.updateProductQuantity = +this.pieces - +this.blogForm.get("pieces").value;
       formData.append('pieces', this.updateProductQuantity);
 
       this.productsVariationsService.update_quantity(formData, +id).subscribe({
@@ -575,7 +577,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
     const id = this.blogForm.get("id").value;
 
     if (id) {
-      this.warehousesCheckinsService.update(formData, +id).subscribe(
+      this.warehousesCheckoutsService.update(formData, +id).subscribe(
         (res) => {
           if (res.status == "error") {
             this.uploadError = res.message;
@@ -588,7 +590,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
         (error) => (this.error = error)
       );
     } else {
-      this.warehousesCheckinsService.create(formData).subscribe(
+      this.warehousesCheckoutsService.create(formData).subscribe(
         (res) => {
           if (res.status === "error") {
             this.uploadError = res.message;
@@ -618,7 +620,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.warehousesCheckinsService.delete(+id).subscribe(
+        this.warehousesCheckoutsService.delete(+id).subscribe(
           res => {
             console.log(res);
             this.ngOnInit();
