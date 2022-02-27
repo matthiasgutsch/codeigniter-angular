@@ -73,11 +73,27 @@
 
             <p-card>
 
-         
+                <div class="filter-options">
 
-                <div *ngFor=" let client of clients  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
+                    <div class="p-field p-grid">
 
-                <p-table #dt [columns]="cols" [value]="clients"  [responsive]="true"  [paginator]="false" [rows]="10">
+                        <div class="p-col-12 p-md-8">
+                            <div class="item-size pull-left">
+                                <span class="filter-tag" *ngIf="nameFilter" >Nome: {{nameFilter}} <span class="close"><i class="pi pi-times"  (click)="reset()"></i></span> </span>
+                                <span class="filter-tag" *ngIf="descriptionFilter">Cognome: {{descriptionFilter}} <span class="close"><i class="pi pi-times" (click)="reset()"></i></span> </span>
+                            
+                            </div>
+                        </div>
+
+                        <div class="p-col-12 p-md-4">
+                          <span class="pull-right">{{count}} Items</span>  
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngFor=" let employee of employees  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
+
+                <p-table #dt [columns]="cols" [value]="employees"  [responsive]="true"  [paginator]="false" [rows]="10">
     
                     <ng-template pTemplate="header" let-columns>
                         <tr>

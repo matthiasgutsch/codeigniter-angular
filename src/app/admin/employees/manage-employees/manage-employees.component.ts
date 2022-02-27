@@ -12,6 +12,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { NgxSpinnerService } from "ngx-spinner";
 import { PARAM_EMPLOYEES_PATH, PARAM_PRODUCTS_PATH } from '../../constants/constants';
+import { Employees } from 'src/app/models/employees';
 
 
 @Component({
@@ -19,8 +20,8 @@ import { PARAM_EMPLOYEES_PATH, PARAM_PRODUCTS_PATH } from '../../constants/const
   templateUrl: './manage-employees.component.html'
 })
 export class ManageEmployeesComponent implements OnInit {
-  clients: any = [];
-  client: Clients;
+  employees: any = [];
+  employee: Employees;
   categories: any = [];
   category: Category;
   error: string;
@@ -99,7 +100,7 @@ export class ManageEmployeesComponent implements OnInit {
 
 
 
-  getRequestParams(searchTitle, categoryTitle, codeTitle, codeIntTitle, brandTitle, page, pageSize): any {
+  getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
     // tslint:disable-next-line:prefer-const
     let path = PARAM_EMPLOYEES_PATH;
     const params = {};
@@ -117,25 +118,6 @@ export class ManageEmployeesComponent implements OnInit {
     if (categoryTitle) {
       params[`description`] = categoryTitle;
       path += adder + 'description=' + categoryTitle;
-      adder = '&';
-    }
-
-    if (codeTitle) {
-      params[`code`] = codeTitle;
-      path += adder + 'code=' + codeTitle;
-      adder = '&';
-    }
-
-    if (codeIntTitle) {
-      params[`code_int`] = codeIntTitle;
-      path += adder + 'code_int=' + codeIntTitle;
-      adder = '&';
-    }
-
-
-    if (brandTitle) {
-      params[`brand`] = brandTitle;
-      path += adder + 'brand=' + brandTitle;
       adder = '&';
     }
 
@@ -164,14 +146,11 @@ export class ManageEmployeesComponent implements OnInit {
     const params = this.getRequestParams(
       this.nameFilter,
       this.descriptionFilter,
-      this.codeFilter,
-      this.codeIntFilter,
-      this.brandFilter,
       this.page,
       this.pageSize
     );
     this.employeesService.getAllListNew(params).subscribe((pData) => {
-      this.clients = pData;
+      this.employees = pData;
       this.count = this.employeesService.size;
     });
   }
@@ -205,12 +184,12 @@ export class ManageEmployeesComponent implements OnInit {
 
 
   getCategoryItem(category_id: string, id: string) {
-    return this.clients.find(item => item.id === category_id);
+    return this.employees.find(item => item.id === category_id);
   }
 
 
-  edit(client: Clients) {
-    this.client = { ...client };
+  edit(employee: Employees) {
+    this.employee = { ...employee };
     this.productDialog = true;
   }
 
@@ -222,7 +201,7 @@ export class ManageEmployeesComponent implements OnInit {
   exportPdf() {
     // const doc = new jsPDF();
     const doc = new jsPDF('l', 'pt', 'A4');
-    doc['autoTable'](this.exportColumns, this.clients);
+    doc['autoTable'](this.exportColumns, this.employees);
     // doc.autoTable(this.exportColumns, this.products);
     doc.save("clients.pdf");
   }
