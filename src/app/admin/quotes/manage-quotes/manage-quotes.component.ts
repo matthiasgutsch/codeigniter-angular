@@ -14,6 +14,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { Billings } from 'src/app/models/billings';
 import { Quotes } from 'src/app/models/quotes';
 import { QuotesService } from 'src/app/services/quotes.service';
+import { PARAM_BILLINGS_PATH, PARAM_QUOTES_PATH } from '../../constants/constants';
 
 @Component({
   selector: "app-manage-quotes",
@@ -52,6 +53,17 @@ export class ManageQuotesComponent implements OnInit {
     return item.id;
   }
 
+  page = 1;
+  count = 0;
+  pageSize = 10;
+  pageSizes = [5, 10, 15];
+  public base_path: string;
+  basePath: string;
+  pageOfItems: Array<any>;
+  searchWrapper: boolean = false;
+  nameFilter: string;
+  descriptionFilter: string;
+
   constructor(
     private clientsService: ClientsService,
     private quotesService: QuotesService,
@@ -60,22 +72,14 @@ export class ManageQuotesComponent implements OnInit {
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,
     private spinner: NgxSpinnerService,
-  ) {
-
-
-  }
+  ) {}
 
   ngOnInit() {
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     const userId = this.currentUser.user_id;
 
-    
-
-
     this.spinner.show();
-    this.quotesService.getAllListbyUser().subscribe(data => {
-      this.quotes = data;
       this.cols = [
         { field: "category_id", header: "Cliente" },
         { field: "id", header: "Numero Fattura" },
@@ -87,11 +91,85 @@ export class ManageQuotesComponent implements OnInit {
       }));
       this.getComuni();
       this.getClients();
-
       this.spinner.hide();
-    });
+  }
 
-   
+
+
+  getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
+    // tslint:disable-next-line:prefer-const
+    let path = PARAM_QUOTES_PATH;
+    const params = {};
+    let adder = '?';
+    if (page) {
+      params[`page`] = page - 1;
+      path += adder + 'page=' + (page - 1);
+      adder = '&';
+    }
+    if (searchTitle) {
+      params[`name`] = searchTitle;
+      path += adder + 'date_from=' + searchTitle;
+      adder = '&';
+    }
+    if (categoryTitle) {
+      params[`description`] = categoryTitle;
+      path += adder + 'date_to=' + categoryTitle;
+      adder = '&';
+    }
+    if (pageSize) {
+      params[`size`] = pageSize;
+      path += adder + 'size=' + pageSize;
+    }
+    window.history.replaceState({}, '', path);
+
+    return params;
+
+  }
+
+  
+  load(): void {
+
+    const params = this.getRequestParams(
+      this.nameFilter,
+      this.descriptionFilter,
+      this.page,
+      this.pageSize
+    );
+    this.quotesService.getAllListNew(params).subscribe((pData) => {
+      this.quotes = pData;
+      this.count = this.quotesService.size;
+
+    });
+  }
+
+  handlePageSizeChange(event): void {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.load();
+  }
+
+  reset(): void {
+    this.nameFilter = '';
+    this.descriptionFilter = '';
+    this.load();
+    
+  }
+  
+  public handlePageChange(event): void {
+    this.page = event;
+    this.load();
+  
+  }
+  
+
+
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+}
+
+  private onChange(item: string): void {
+    this.load();
 
   }
 
