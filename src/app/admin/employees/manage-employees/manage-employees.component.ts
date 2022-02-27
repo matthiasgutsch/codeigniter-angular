@@ -11,6 +11,7 @@ import { Comuni } from 'src/app/models/comuni';
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { NgxSpinnerService } from "ngx-spinner";
+import { PARAM_EMPLOYEES_PATH, PARAM_PRODUCTS_PATH } from '../../constants/constants';
 
 
 @Component({
@@ -29,7 +30,20 @@ export class ManageEmployeesComponent implements OnInit {
   _selectedColumns: any[];
   loading: boolean;
   totalRecords: string;
-  currentUser: any ;
+  currentUser: any;
+  page = 1;
+  count = 0;
+  pageSize = 10;
+  pageSizes = [5, 10, 15];
+  public base_path: string;
+  basePath: string;
+  pageOfItems: Array<any>;
+  searchWrapper: boolean = false;
+  nameFilter: string;
+  descriptionFilter: string;
+  codeFilter: string;
+  codeIntFilter: string;
+  brandFilter: string;
 
   private category_id: number;
   private id: number;
@@ -52,7 +66,7 @@ export class ManageEmployeesComponent implements OnInit {
     private comuniService: ComuniService,
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,) {
-      const doc = new jsPDF();
+    const doc = new jsPDF();
 
   }
 
@@ -60,29 +74,127 @@ export class ManageEmployeesComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     const userId = this.currentUser.user_id;
 
-   
+
 
     this.spinner.show();
-    this.employeesService.getAllListbyUser().subscribe(data => {
-      this.clients = data;
-      this.cols = [
-        { field: "name", header: "Nome" },
-        { field: "surname", header: "Cognome" },
+    this.load();
 
-        { field: "date", header: "Data di nascità" },
-  
-      ];
-      this._selectedColumns = this.cols;
-      this.exportColumns = this.cols.map(col => ({
-        title: col.header,
-        dataKey: col.field
-      }));
-      this.getComuni();
-      this.spinner.hide();
-    });
+    this.cols = [
+      { field: "name", header: "Nome" },
+      { field: "surname", header: "Cognome" },
+
+      { field: "date", header: "Data di nascità" },
+
+    ];
+    this._selectedColumns = this.cols;
+    this.exportColumns = this.cols.map(col => ({
+      title: col.header,
+      dataKey: col.field
+    }));
+    this.getComuni();
+    this.spinner.hide();
 
   }
 
+
+
+
+  getRequestParams(searchTitle, categoryTitle, codeTitle, codeIntTitle, brandTitle, page, pageSize): any {
+    // tslint:disable-next-line:prefer-const
+    let path = PARAM_EMPLOYEES_PATH;
+    const params = {};
+    let adder = '?';
+    if (page) {
+      params[`page`] = page - 1;
+      path += adder + 'page=' + (page - 1);
+      adder = '&';
+    }
+    if (searchTitle) {
+      params[`name`] = searchTitle;
+      path += adder + 'name=' + searchTitle;
+      adder = '&';
+    }
+    if (categoryTitle) {
+      params[`description`] = categoryTitle;
+      path += adder + 'description=' + categoryTitle;
+      adder = '&';
+    }
+
+    if (codeTitle) {
+      params[`code`] = codeTitle;
+      path += adder + 'code=' + codeTitle;
+      adder = '&';
+    }
+
+    if (codeIntTitle) {
+      params[`code_int`] = codeIntTitle;
+      path += adder + 'code_int=' + codeIntTitle;
+      adder = '&';
+    }
+
+
+    if (brandTitle) {
+      params[`brand`] = brandTitle;
+      path += adder + 'brand=' + brandTitle;
+      adder = '&';
+    }
+
+    if (pageSize) {
+      params[`size`] = pageSize;
+      path += adder + 'size=' + pageSize;
+    }
+    window.history.replaceState({}, '', path);
+
+    return params;
+
+  }
+
+  reset(): void {
+    this.nameFilter = '';
+    this.descriptionFilter = '';
+    this.codeFilter = '';
+    this.codeIntFilter = '';
+    this.brandFilter = '';
+    this.load();
+
+  }
+
+  load(): void {
+
+    const params = this.getRequestParams(
+      this.nameFilter,
+      this.descriptionFilter,
+      this.codeFilter,
+      this.codeIntFilter,
+      this.brandFilter,
+      this.page,
+      this.pageSize
+    );
+    this.employeesService.getAllListNew(params).subscribe((pData) => {
+      this.clients = pData;
+      this.count = this.employeesService.size;
+    });
+  }
+
+
+
+  public handlePageChange(event): void {
+    this.page = event;
+    this.load();
+
+  }
+
+  public selectionItemForFilter(e) {
+    const colsTempor = e.value;
+    colsTempor.sort(function (a, b) {
+      return a.index - b.index;
+    });
+    this.cols = [];
+    this.cols = colsTempor;
+    if (e.value.length > 10) {
+      e.value.pop();
+    }
+  }
 
   getComuni() {
     this.comuniService.getAllList().subscribe(
@@ -109,7 +221,7 @@ export class ManageEmployeesComponent implements OnInit {
 
   exportPdf() {
     // const doc = new jsPDF();
-    const doc = new jsPDF('l','pt','A4');
+    const doc = new jsPDF('l', 'pt', 'A4');
     doc['autoTable'](this.exportColumns, this.clients);
     // doc.autoTable(this.exportColumns, this.products);
     doc.save("clients.pdf");

@@ -16,6 +16,7 @@ export const PARAM_BILLINGS_PATH = '/admin/billings/'
 export const PARAM_ORDERS_PATH = '/admin/orders/'
 export const PARAM_EMPLOYEE_TIMESHEETS_PATH =  '/employee/timesheets/'
 export const PARAM_PRODUCTS_PATH = '/admin/products/'
+export const PARAM_EMPLOYEES_PATH = '/admin/employees/'
 
 export const FISCAL_CODE_VALIDATOR_REGEX =
   /^([A-Za-z]{6}[0-9lmnpqrstuvLMNPQRSTUV]{2}[abcdehlmprstABCDEHLMPRST]{1}[0-9lmnpqrstuvLMNPQRSTUV]{2}[A-Za-z]{1}[0-9lmnpqrstuvLMNPQRSTUV]{3}[A-Za-z]{1})$/g;

@@ -1,49 +1,42 @@
-<p-overlayPanel #op>
+<p-sidebar [(visible)]="filterSidebar" #op position="right">
     <ng-template pTemplate>
         <div class="p-col-12">
-        
-            <div class="p-field p-grid" *ngFor="let col of cols" [ngSwitch]="col.field">
+
+            <div class="p-field p-grid">
                 <div class="p-col-12">
-
-                    <input *ngSwitchCase="'name'" [ngModel]="dt.filters['name']? dt.filters['name'].value : ''" 
-                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
-             
-                    <input *ngSwitchCase="'surname'" [ngModel]="dt.filters['surname']? dt.filters['surname'].value : ''" 
-                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
-             
-
-
-                    <input *ngSwitchCase="'date'" [ngModel]="dt.filters['date']? dt.filters['date'].value : ''" 
-                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
-
-
-                    <input *ngSwitchCase="'phone'" [ngModel]="dt.filters['phone']? dt.filters['phone'].value : ''" 
-                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
-
-
-                    <input *ngSwitchCase="'city'" [ngModel]="dt.filters['city']? dt.filters['city'].value : ''" 
-                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
-
-
-                    <input *ngSwitchCase="'fiscalcode'" [ngModel]="dt.filters['fiscalcode']? dt.filters['fiscalcode'].value : ''" 
-                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
-
-            </div>
+    
+                    <input type="text" [style]="{ width: '100%' }" pInputText [(ngModel)]="nameFilter" placeholder="Nome" />
                 </div>
-
-                <div class="p-grid">
-                <div class="p-col-12">
-
-                    <button pButton pRipple label="reset ricerca"
-                    class="p-button p-button-primary btn-block"  (click)="dt.reset()" ></button>
-                        </div>
-                    </div>
             </div>
-            
-
-            
+            <div class="p-field p-grid">
+                <div class="p-col-12">
+                    <input type="text" [style]="{ width: '100%' }" pInputText [(ngModel)]="descriptionFilter"
+                        placeholder="Cognome" />
+                </div>
+            </div>
+    
+          
+            <div class="p-field p-grid">
+                <div class="p-col-12">
+                    <button pButton type="submit" icon="pi pi-search" class="p-button p-button-primary btn-block"
+                        label="cerca" (click)="load()">
+                    </button>
+                </div>
+            </div>
+            <div class="p-field p-grid">
+    
+                <div class="p-col-12">
+                    <button pButton type="reset" icon="pi pi-times" class="p-button p-button-secondary btn-block"
+                        label="reset" (click)="reset()">
+                    </button>
+                </div>
+            </div>
+    
+        </div>
+        
     </ng-template>
-</p-overlayPanel>
+</p-sidebar>
+
 <div class="top-main-wrapper">
     <div class="dash-header">
         <div class="dash-title">
@@ -56,7 +49,7 @@
     
                     <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/employees/create']" label="Aggiungi" class="p-button p-button-primary -mr-2  pull-right"></button>
                 <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()" class="p-button-warning p-mr-2 pull-right"  tooltipPosition="bottom"></button>
-                <button type="text" pButton label="Filter"  icon="pi pi-filter" class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
+                <button type="text" pButton label="Filter"  icon="pi pi-filter" class="p-button p-button-secondary p-mr-2 pull-right" (click)="filterSidebar = true"></button>
     
                 </div>
             </div>
@@ -82,8 +75,9 @@
 
          
 
+                <div *ngFor=" let client of clients  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
 
-                <p-table #dt [columns]="cols" [value]="clients" [globalFilterFields]="['name', 'description']"  [responsive]="true" currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
+                <p-table #dt [columns]="cols" [value]="clients"  [responsive]="true"  [paginator]="false" [rows]="10">
     
                     <ng-template pTemplate="header" let-columns>
                         <tr>
@@ -131,7 +125,14 @@
                     </ng-template>
                 </p-table> 
 
+                <div class="p-grid">
 
+                    <div class="p-col-12 p-md-12">
+                        <pagination-controls previousLabel="Prev" nextLabel="Next" responsive="true"
+                            (pageChange)="handlePageChange($event)">
+                        </pagination-controls>
+                    </div>
+                </div>
               
             </p-card>
         </div>
