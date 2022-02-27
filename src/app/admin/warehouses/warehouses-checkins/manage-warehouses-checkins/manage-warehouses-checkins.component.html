@@ -298,7 +298,7 @@
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'50vw'}">
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
-            <p-tag [value]="warehouseCheckin.id" severity="success" class="p-mr-2"></p-tag> <p-tag [value]="warehouseCheckin.created_at | date:'d-MM-yyyy hh:mm'"></p-tag><br><br>
+            <p-tag [value]="warehouseCheckin.id" severity="success" class="p-mr-2"></p-tag> <p-tag [value]="warehouseCheckin.created_at"></p-tag><br><br>
             <h3>Dettaglio Ingresso Magazzino</h3>
 
             <hr class="full">
