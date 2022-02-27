@@ -24,6 +24,8 @@ import { Appointment_type } from 'src/app/models/appointment_type';
 import { AppointmentTypeService } from 'src/app/services/appointment_type.service';
 import { CalendarComponent } from 'ng-fullcalendar';
 import { LazyLoadEvent } from 'primeng/api';
+import { PARAM_APPOINTMENTS_PATH, PARAM_BILLINGS_PATH } from '../../constants/constants';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-appointments',
@@ -75,6 +77,20 @@ export class ManageAppointmentsComponent implements OnInit {
 
   myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en');
 
+
+  page = 1;
+  count = 0;
+  pageSize = 10;
+  pageSizes = [5, 10, 15];
+  public base_path: string;
+  basePath: string;
+  pageOfItems: Array<any>;
+  searchWrapper: boolean = false;
+  nameFilter: string;
+  descriptionFilter: string;
+
+
+  
   trackByFn(index, item) {
     return item.id;
   }
@@ -90,6 +106,8 @@ export class ManageAppointmentsComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private employeesService: EmployeesService,
     private comuniService: ComuniService,
+    private router: Router,
+    private route: ActivatedRoute,
     private appointmentTypeService: AppointmentTypeService,
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,) {
@@ -112,15 +130,106 @@ export class ManageAppointmentsComponent implements OnInit {
 
   ngOnInit() {
     const userId = this.currentUser.user_id;
-    this.appointmentsService.getAllListbyUser().subscribe(data => {
-      this.appointments = data;
+
+
+    this.basePath = window.location.pathname;
+    if (this.route.snapshot.queryParamMap.has('page')) {
+      this.page = +this.route.snapshot.queryParamMap.get('page');
+    }
+    if (this.route.snapshot.queryParamMap.has('size')) {
+      this.pageSize = +this.route.snapshot.queryParamMap.get('size');
+    }
+    if (this.route.snapshot.queryParamMap.has('name')) {
+      this.nameFilter = this.route.snapshot.queryParamMap.get('name');
+    }
+    if (this.route.snapshot.queryParamMap.has('description')) {
+      this.descriptionFilter = this.route.snapshot.queryParamMap.get('description');
+    }
+    
       this.getClients();
       this.getWorks();
       this.getAppointmentType();
-    });
+      this.load();
   }
 
 
+
+  getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
+    // tslint:disable-next-line:prefer-const
+    let path = PARAM_APPOINTMENTS_PATH;
+    const params = {};
+    let adder = '?';
+    if (page) {
+      params[`page`] = page - 1;
+      path += adder + 'page=' + (page - 1);
+      adder = '&';
+    }
+    if (searchTitle) {
+      params[`name`] = searchTitle;
+      path += adder + 'date_from=' + searchTitle;
+      adder = '&';
+    }
+    if (categoryTitle) {
+      params[`description`] = categoryTitle;
+      path += adder + 'date_to=' + categoryTitle;
+      adder = '&';
+    }
+    if (pageSize) {
+      params[`size`] = pageSize;
+      path += adder + 'size=' + pageSize;
+    }
+    window.history.replaceState({}, '', path);
+
+    return params;
+
+  }
+
+  
+  load(): void {
+
+    const params = this.getRequestParams(
+      this.nameFilter,
+      this.descriptionFilter,
+      this.page,
+      this.pageSize
+    );
+    this.appointmentsService.getAllListNew(params).subscribe((pData) => {
+      this.appointments = pData;
+      this.count = this.appointmentsService.size;
+
+    });
+  }
+
+  handlePageSizeChange(event): void {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.load();
+  }
+
+  reset(): void {
+    this.nameFilter = '';
+    this.descriptionFilter = '';
+    this.load();
+    
+  }
+  
+  public handlePageChange(event): void {
+    this.page = event;
+    this.load();
+  
+  }
+  
+
+
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+}
+
+  private onChange(item: string): void {
+    this.load();
+
+  }
 
 
 
