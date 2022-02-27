@@ -65,6 +65,7 @@ import { ManageProductsVariationsComponent } from './products/manage-products-va
 import { ProductsVariationsFormComponent } from './products/products-variations-form/products-variations-form.component';
 import { ManagePurchaseOrdersComponent } from './purchase-orders/manage-purchase-orders/manage-purchase-orders.component';
 import { PurchaseOrdersFormComponent } from './purchase-orders/purchase-orders-form/purchase-orders-form.component';
+import { ManageWarehousesCheckoutsComponent } from './warehouses/warehouse-checkouts/manage-warehouses-checkouts/manage-warehouses-checkouts.component';
 
 const routes: Routes = [
   {
@@ -108,8 +109,7 @@ const routes: Routes = [
 
 
           { path: "checkins", component: ManageWarehousesCheckinsComponent },
-          { path: "checkins/create", component: WarehousesCheckinsFormComponent },
-          { path: "checkins/edit/:id",component: WarehousesCheckinsFormComponent,},
+          { path: "checkouts", component: ManageWarehousesCheckoutsComponent },
 
           { path: "billings", component: ManageBillingsComponent },
           { path: "billings/edit/:id",component: BillingsFormComponent,},
