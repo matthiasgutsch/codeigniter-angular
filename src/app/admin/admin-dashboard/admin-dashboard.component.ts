@@ -52,7 +52,7 @@ export class AdminDashboardComponent implements OnInit {
   events: any;
   appointments: any = [];
   appointment: Appointments;
-  appointmentsToday: any = [];
+  appointmentsToday:  any = [];
   locations: any = [];
   location: Locations;
 
@@ -108,14 +108,18 @@ export class AdminDashboardComponent implements OnInit {
   count = 0;
   pageSize = 3;
   page = 1;
+  myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en');
+  searchDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
 
   trackByFn(index, item) {
     return item.id;
   }
 
-  myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en');
   myMonth = formatDate(new Date(), 'dd/MM/yyyy', 'en');
-
+  nameFilter: string;
+  descriptionFilter: string;
+  dateFromFilter: string;
+  dateToFilter: string;
   currentDate: moment.Moment = moment();
   currentTime: string = moment().format(' MMMM YYYY');
 
@@ -151,6 +155,7 @@ export class AdminDashboardComponent implements OnInit {
   ngOnInit() {
 
     const userId = this.currentUser.user_id;
+
 
 
     this.appointmentsService.getAllListbyUser().subscribe(data => {
@@ -194,7 +199,7 @@ export class AdminDashboardComponent implements OnInit {
 
 
 
-  getRequestParams(page, pageSize): any {
+  getRequestParams(page, searchTitle, categoryTitle, pageSize): any {
     // tslint:disable-next-line:prefer-const
     const params = {};
     let adder = '?';
@@ -203,10 +208,21 @@ export class AdminDashboardComponent implements OnInit {
       adder + 'page=' + (page - 1);
       adder = '&';
     }
+    if (searchTitle) {
+      params[`name`] = searchTitle;
+      adder + 'date_from=' + searchTitle;
+      adder = '&';
+    }
+    if (categoryTitle) {
+      params[`description`] = categoryTitle;
+      adder + 'date_to=' + categoryTitle;
+      adder = '&';
+    }
     if (pageSize) {
       params[`size`] = pageSize;
       adder + 'size=' + pageSize;
     }
+    
     
     return params;
     
@@ -296,6 +312,8 @@ export class AdminDashboardComponent implements OnInit {
 
   getLastWarehouseCheckins() {
     const params = this.getRequestParams(
+      this.nameFilter,
+      this.descriptionFilter,
       this.page,
       this.pageSize
     );
@@ -432,11 +450,18 @@ export class AdminDashboardComponent implements OnInit {
 
 
   getAppointmentsToday() {
-    const userId = this.currentUser.user_id;
-    this.appointmentsService.getToday(+userId).subscribe(
-      (data: Appointments) => this.appointmentsToday = data,
-      error => this.error = error
+    const params = this.getRequestParams(
+      this.page,
+      this.nameFilter = formatDate(new Date(), 'yyyy-MM-dd 00:00', 'en'),
+      this.descriptionFilter = formatDate(new Date(), 'yyyy-MM-dd 23:59', 'en'),
+      this.pageSize
+      
     );
+    this.appointmentsService.getAllListNew(params).subscribe((pData) => {      
+      this.appointmentsToday = pData;
+      this.count = this.appointmentsService.size;
+      
+    });
   }
 
 
