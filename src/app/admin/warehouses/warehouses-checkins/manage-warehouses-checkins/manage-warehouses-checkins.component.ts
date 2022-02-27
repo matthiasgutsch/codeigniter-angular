@@ -45,6 +45,7 @@ import { Suppliers } from 'src/app/models/suppliers';
 import { SuppliersService } from 'src/app/services/suppliers.service';
 import { ProductsVariations } from 'src/app/models/products_variations';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-manage-warehouses-checkins',
@@ -107,6 +108,11 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   project: Projects;
   employees: any = [];
   employee: Employees;
+
+  products: any = [];
+  product: Products;
+
+
   pageTitle: string;
   warehouses: any = [];
   warehouse: Warehouses;
@@ -156,6 +162,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private router: Router,
     private route: ActivatedRoute,
+    private productsService: ProductsService,
     private categoryService: CategoryService,
     private projectsService: ProjectsService,
     private confirmationService: ConfirmationService,) {
@@ -491,6 +498,12 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   view(warehouseCheckin: WarehouseCheckins) {
     this.warehouseCheckin = { ...warehouseCheckin };
 
+    const id = this.warehouseCheckin.product_id;
+
+    this.productsVariationsService.getId(+id).subscribe((res) => { 
+      this.product = res;
+    });
+    
     this.productDialog = true;
   }
 
