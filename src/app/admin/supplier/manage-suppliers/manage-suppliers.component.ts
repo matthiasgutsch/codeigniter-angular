@@ -10,6 +10,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { NgxSpinnerService } from "ngx-spinner";
 import { SuppliersService } from 'src/app/services/suppliers.service';
+import { PARAM_CLIENTS_PATH, PARAM_SUPPLIERS_PATH } from '../../constants/constants';
 
 
 @Component({
@@ -29,6 +30,19 @@ export class ManageSuppliersComponent implements OnInit {
   loading: boolean;
   totalRecords: string;
   currentUser: any ;
+  page = 1;
+  count = 0;
+  pageSize = 10;
+  pageSizes = [5, 10, 15];
+  public base_path: string;
+  basePath: string;
+  pageOfItems: Array<any>;
+  searchWrapper: boolean = false;
+  nameFilter: string;
+  descriptionFilter: string;
+  codeFilter: string;
+  codeIntFilter: string;
+  brandFilter: string;
 
   private category_id: number;
   private id: number;
@@ -62,8 +76,7 @@ export class ManageSuppliersComponent implements OnInit {
    
 
     this.spinner.show();
-    this.suppliersService.getAllListbyUser().subscribe(data => {
-      this.suppliers = data;
+    this.load();
       this.cols = [
         { field: "company_name", header: "Nome Fornitore" },
 
@@ -79,8 +92,88 @@ export class ManageSuppliersComponent implements OnInit {
       }));
       this.getComuni();
       this.spinner.hide();
-    });
 
+
+  }
+
+
+
+
+
+
+  getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
+    // tslint:disable-next-line:prefer-const
+    let path = PARAM_SUPPLIERS_PATH;
+    const params = {};
+    let adder = '?';
+    if (page) {
+      params[`page`] = page - 1;
+      path += adder + 'page=' + (page - 1);
+      adder = '&';
+    }
+    if (searchTitle) {
+      params[`name`] = searchTitle;
+      path += adder + 'name=' + searchTitle;
+      adder = '&';
+    }
+    if (categoryTitle) {
+      params[`description`] = categoryTitle;
+      path += adder + 'description=' + categoryTitle;
+      adder = '&';
+    }
+
+    if (pageSize) {
+      params[`size`] = pageSize;
+      path += adder + 'size=' + pageSize;
+    }
+    window.history.replaceState({}, '', path);
+
+    return params;
+
+  }
+
+  reset(): void {
+    this.nameFilter = '';
+    this.descriptionFilter = '';
+    this.codeFilter = '';
+    this.codeIntFilter = '';
+    this.brandFilter = '';
+    this.load();
+
+  }
+
+  load(): void {
+
+    const params = this.getRequestParams(
+      this.nameFilter,
+      this.descriptionFilter,
+      this.page,
+      this.pageSize
+    );
+    this.suppliersService.getAllListNew(params).subscribe((pData) => {
+      this.suppliers = pData;
+      this.count = this.suppliersService.size;
+    });
+  }
+
+
+
+  public handlePageChange(event): void {
+    this.page = event;
+    this.load();
+
+  }
+
+  public selectionItemForFilter(e) {
+    const colsTempor = e.value;
+    colsTempor.sort(function (a, b) {
+      return a.index - b.index;
+    });
+    this.cols = [];
+    this.cols = colsTempor;
+    if (e.value.length > 10) {
+      e.value.pop();
+    }
   }
 
 
