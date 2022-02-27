@@ -80,6 +80,7 @@ export class ManageQuotesComponent implements OnInit {
     const userId = this.currentUser.user_id;
 
     this.spinner.show();
+      this.load();
       this.cols = [
         { field: "category_id", header: "Cliente" },
         { field: "id", header: "Numero Fattura" },
