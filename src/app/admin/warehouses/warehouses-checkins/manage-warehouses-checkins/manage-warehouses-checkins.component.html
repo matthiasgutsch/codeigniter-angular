@@ -98,6 +98,7 @@
 
                     <ng-template pTemplate="header" let-columns>
                         <tr>
+                            <th  width="100"></th>
                             <th  width="200">
                                 Entrata
                             </th>
@@ -125,7 +126,7 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-warehouseCheckin>
                         <tr>
-
+                            <td><p-tag severity="success" value="Entrata"></p-tag></td>
                             <td>
                                 <i class="pi pi-calendar"></i> {{warehouseCheckin.created_at}}
  
@@ -135,7 +136,7 @@
                                 <p-tag severity="default" [value]="warehouseCheckin.pieces + ' pezzi'"></p-tag>
 
                             </td>
-                            <td><p-tag severity="success" [value]="warehouseCheckin.boxes + ' colli'"></p-tag>
+                            <td><p-tag severity="default" [value]="warehouseCheckin.boxes + ' colli'"></p-tag>
                             </td>
                         
 
@@ -362,7 +363,7 @@
                 <ngx-barcode6
                 [bc-format]="EAN-13"
                 [bc-height]="32"
-                [bc-value]="warehouseCheckin.id + warehouseCheckin.created_at"
+                [bc-value]="warehouseCheckin.product.code"
                 [bc-display-value]="true"
               >
               </ngx-barcode6>

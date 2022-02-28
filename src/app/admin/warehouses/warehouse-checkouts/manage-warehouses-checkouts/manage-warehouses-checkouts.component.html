@@ -98,6 +98,8 @@
 
                     <ng-template pTemplate="header" let-columns>
                         <tr>
+                            <th  width="100"></th>
+
                             <th  width="200">
                                 Entrata
                             </th>
@@ -125,6 +127,7 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-warehouseCheckout>
                         <tr>
+                            <td><p-tag severity="danger" value="Uscita"></p-tag></td>
 
                             <td>
                                 <i class="pi pi-calendar"></i> {{warehouseCheckout.created_at}}
@@ -135,7 +138,7 @@
                                 <p-tag severity="default" [value]="warehouseCheckout.pieces + ' pezzi'"></p-tag>
 
                             </td>
-                            <td><p-tag severity="success" [value]="warehouseCheckout.boxes + ' colli'"></p-tag>
+                            <td><p-tag severity="default" [value]="warehouseCheckout.boxes + ' colli'"></p-tag>
                             </td>
                         
 
@@ -299,7 +302,7 @@
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
             <p-tag [value]="warehouseCheckout.id" severity="success" class="p-mr-2"></p-tag> <p-tag [value]="warehouseCheckout.created_at"></p-tag><br><br>
-            <h3>Dettaglio Ingresso Magazzino</h3>
+            <h3>Dettaglio Uscita Magazzino</h3>
 
 
          
@@ -365,7 +368,7 @@
                 <ngx-barcode6
                 [bc-format]="EAN-13"
                 [bc-height]="32"
-                [bc-value]="warehouseCheckout.id + warehouseCheckout.created_at"
+                [bc-value]="warehouseCheckout.product.code"
                 [bc-display-value]="true"
               >
               </ngx-barcode6>
