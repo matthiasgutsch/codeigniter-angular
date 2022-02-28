@@ -1,4 +1,4 @@
-<p-overlayPanel #op>
+<p-sidebar #op  [(visible)]="displayFilter" position="right" [style]="{width:'100%', 'max-width':'360px'}">
     <ng-template pTemplate>
 
         <div class="p-field p-grid">
@@ -31,7 +31,7 @@
         </div>
 
     </ng-template>
-</p-overlayPanel>
+</p-sidebar>
 
 <div class="top-main-wrapper">
     <div class="dash-header">
@@ -45,11 +45,11 @@
                     <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/settings/works/create']"
                         label="Aggiungi" class="p-button p-button-primary p-mr-2 pull-right"></button>
                     <button type="text" pButton label="Filter" icon="pi pi-filter"
-                        class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
+                        class="p-button p-button-secondary p-mr-2 pull-right"  (click)="displayFilter = true"></button>
 
-                        <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta"
+                       <!-- <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta"
                         (click)="exportPdf()" class="p-button-options p-mr-2 pull-right"
-                        tooltipPosition="bottom"></button>
+                        tooltipPosition="bottom"></button>-->
                 </div>
             </div>
 

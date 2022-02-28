@@ -281,7 +281,7 @@
                                     </ng-template>
                                     <ng-template pTemplate="body" let-warehouseMovement>
                                         <tr>
-                                            <td><p-tag severity="success" value="Entrata"></p-tag>
+                                            <td><p-tag severity="success" *ngIf="warehouseMovement.type === '1'" value="Entrata"></p-tag>
                                             </td>
                                             <td>
                                               {{warehouseMovement.created_at}}
