@@ -13,6 +13,23 @@
 
         <div class="p-field p-grid">
             <div class="p-col-12">
+        <p-dropdown [options]="clients" [virtualScroll]="true" filter="true"
+                                        [required]="true" [showClear]="true" placeholder="Scegli"
+                                        [style]="{ width: '100%' }" [(ngModel)]="clientFilter"
+                                        optionLabel="username" optionValue="id">
+                                        <ng-template let-option pTemplate="item">
+
+                                            <strong>{{option.name}} {{option.surname}}</strong><br>
+                                            <span>{{option.address}} - {{option.zip}} {{option.city}}</span>
+
+                                        </ng-template>
+
+                                    </p-dropdown>
+            </div>
+        </div>
+
+        <div class="p-field p-grid">
+            <div class="p-col-12">
                 <button pButton type="submit" icon="pi pi-search" class="p-button p-button-primary btn-block"
                     label="cerca" (click)="load()">
                 </button>
@@ -71,6 +88,8 @@
                             <div class="item-size pull-left">
                                 <span class="filter-tag" *ngIf="nameFilter" >{{nameFilter}} <span class="close"><i class="pi pi-times"  (click)="reset()"></i></span> </span>
                                 <span class="filter-tag" *ngIf="descriptionFilter">{{descriptionFilter}} <span class="close"><i class="pi pi-times" (click)="reset()"></i></span> </span>
+                                <span class="filter-tag" *ngIf="clientFilter">{{clientFilter}} <span class="close"><i class="pi pi-times" (click)="reset()"></i></span> </span>
+
                             </div>
                         </div>
 

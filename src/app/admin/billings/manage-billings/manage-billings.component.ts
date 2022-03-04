@@ -53,7 +53,7 @@ export class ManageBillingsComponent implements OnInit {
   searchWrapper: boolean = false;
   nameFilter: string;
   descriptionFilter: string;
-
+  clientFilter: string;
 
   @ViewChild("content", { static: false }) content: ElementRef;
   currentUser: any;
@@ -105,7 +105,7 @@ export class ManageBillingsComponent implements OnInit {
   }
 
 
-  getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
+  getRequestParams(searchTitle, categoryTitle, clientTitle, page, pageSize): any {
     // tslint:disable-next-line:prefer-const
     let path = PARAM_BILLINGS_PATH;
     const params = {};
@@ -125,6 +125,11 @@ export class ManageBillingsComponent implements OnInit {
       path += adder + 'date_to=' + categoryTitle;
       adder = '&';
     }
+    if (clientTitle) {
+      params[`client`] = clientTitle;
+      path += adder + 'client=' + clientTitle;
+      adder = '&';
+    }
     if (pageSize) {
       params[`size`] = pageSize;
       path += adder + 'size=' + pageSize;
@@ -141,6 +146,7 @@ export class ManageBillingsComponent implements OnInit {
     const params = this.getRequestParams(
       this.nameFilter,
       this.descriptionFilter,
+      this.clientFilter,
       this.page,
       this.pageSize
     );
@@ -160,6 +166,8 @@ export class ManageBillingsComponent implements OnInit {
   reset(): void {
     this.nameFilter = '';
     this.descriptionFilter = '';
+    this.clientFilter = '';
+
     this.load();
     
   }
