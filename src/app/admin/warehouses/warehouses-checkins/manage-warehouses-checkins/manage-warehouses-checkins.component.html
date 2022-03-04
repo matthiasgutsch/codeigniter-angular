@@ -234,22 +234,22 @@
                         <label>Prodotto</label>
                     </div>
                     <div class="p-col-12 p-md-12">
+                        
                         <p-dropdown [options]="productsVariations" filterBy="title,code,code_int" [virtualScroll]="true" filter="true" [required]="true"
                             [showClear]="true" placeholder="Cerca per Codice, titolo, Codice interno" [style]="{ width: '100%' }"  [(ngModel)]="selectedProduct"
                             formControlName="product_id" optionLabel="title" optionValue="id">
                             <ng-template let-option pTemplate="item">
-                                <div class="p-grid">
-                                    <div class="p-col-3">
-                                        {{option.title}} 
+                           <div class="p-grid">
+                                    <div class="p-col-6">
+                                       <strong>{{option.title}} </strong> 
                                     </div>
-                                    <div class="p-col-3">
-                                        {{option.code}}
-                                    </div>
-                                    <div class="p-col-3">
+                                
+                                    <div class="p-col-6">
+                                        {{option.code}}<br>
                                         {{option.code_int}}
                                     </div>
                                 </div>
-                          
+                         
                             </ng-template>
                         </p-dropdown>
                     </div>

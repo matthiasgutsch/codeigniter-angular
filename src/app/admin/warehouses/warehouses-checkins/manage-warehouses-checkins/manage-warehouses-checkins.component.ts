@@ -111,6 +111,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
 
   products: any = [];
   product: Products;
+  options = [];
 
 
   pageTitle: string;
@@ -493,7 +494,14 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
 
 
 
-
+  filterMethod(event) {
+    this.productsVariationsService.getAllListbyUser().subscribe(
+      res => {
+			const result = (<any>res).filter(option => option.title.includes(event.query));
+			console.log(result);
+			this.options = result;
+		});
+	}
 
   view(warehouseCheckin: WarehouseCheckins) {
     this.warehouseCheckin = { ...warehouseCheckin };
