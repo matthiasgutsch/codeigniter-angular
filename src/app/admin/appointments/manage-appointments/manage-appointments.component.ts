@@ -146,7 +146,7 @@ export class ManageAppointmentsComponent implements OnInit {
       this.descriptionFilter = this.route.snapshot.queryParamMap.get('description');
     }
     
-      this.getClients();
+      //this.getClients();
       this.getWorks();
       this.getAppointmentType();
       this.load();
