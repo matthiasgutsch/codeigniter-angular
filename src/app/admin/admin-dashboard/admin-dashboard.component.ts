@@ -181,12 +181,14 @@ export class AdminDashboardComponent implements OnInit {
         eventLimit: false,
         timeFormat: 'HH:mm',
         weekNumbers: false,
+        
         header: {
           right: 'prev,next',
           left: 'title',
 
         },
         events: data,
+        eventRender: (v,el) => {console.log(v, el)},
         locale: 'it',
         timezone: 'UTC',
         selectable: true,
@@ -530,6 +532,14 @@ export class AdminDashboardComponent implements OnInit {
     this.displayEvent = model;
     this.productDialog = true;
 
+  }
+
+  eventRender(event) {
+    const html = `<div>
+      <div><i class="pi pi-clock"></i> ${event.event.time}</div>
+      <div><strong>${event.event.title}</strong></div>
+    </div>`;
+    event.element.html(html)
   }
 
   dayClick(event) {

@@ -1,31 +1,25 @@
-<div class="main-inner">
-<div class="dash-header">
-    <div class="dash-title">
+<div class="top-main-wrapper">
 
-        <div class="p-field p-grid">
-            <div class="p-col-12 p-md-12">
-                <div class="welcome-banner">
-                    <div class="p-field p-grid">
- 
-                    <div class="p-col-12 p-md-12">
-                        <h3>Benvenuto, {{currentUser.first_name}} {{currentUser.last_name}}</h3>
-                        <span>{{myDate }}</span><br><br>
-                        <div class="clearfix"></div>
-                        <button pButton pRipple icon="pi pi-calendar-plus" label="Appuntamento" [routerLink]="['/admin/appointments/create']"
-                        routerLinkActive="active" class="p-button p-button-white p-mr-2"></button>
-      
-                        <button pButton pRipple icon="pi pi-users" label="Cliente" [routerLink]="['/admin/clients/create']"
-                        routerLinkActive="active" class="p-button p-button-white"></button>
-      
-                    </div>
-                
+    <div class="dash-header">
+        <div class="dash-title">
+
+            <div class="p-field p-grid">
+                <div class="p-col-6 p-md-6">
+                    <h3>Dashboard</h3>
+                </div>
+                <div class="p-col-6 p-md-6">
+                   
+
                 </div>
             </div>
-            </div>
-        </div>
 
+        </div>
     </div>
 </div>
+
+
+<div class="main-inner">
+
 <div class="p-grid">
 
     <div class="p-col-12 p-md-12">
@@ -135,7 +129,8 @@
                     <div *ngIf="calendarOptions">
                         <ng-fullcalendar #ucCalendar [options]="calendarOptions"
                             (eventClick)="eventClick($event.detail)"
-                            (dayClick)="dayClick($event.detail)">
+                            (dayClick)="dayClick($event.detail)"
+                            (eventRender)="eventRender($event.detail)">
                         </ng-fullcalendar>
                     </div>
 
