@@ -357,7 +357,7 @@ onSubmitAdd(task: Task, index) {
 
   deleteTask(event, task: Task, index) {
     this.confirmationService.confirm({
-      message: 'Are you sure want to delete it = ' + event.title,
+      message: 'Sei sicuro di volerlo cancellare = ' + event.title,
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {

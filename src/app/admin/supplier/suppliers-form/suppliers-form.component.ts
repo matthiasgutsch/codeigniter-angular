@@ -273,7 +273,7 @@ export class SuppliersFormComponent implements OnInit {
   onDelete(id: number, title: string) {
 
     this.confirmationService.confirm({
-      message: 'Are you sure want to delete',
+      message: 'Sei sicuro di volerlo cancellare',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {

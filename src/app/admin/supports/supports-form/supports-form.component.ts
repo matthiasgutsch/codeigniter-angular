@@ -141,7 +141,7 @@ export class SupportsFormComponent implements OnInit {
   onDelete(id: number, title: string) {
 
     this.confirmationService.confirm({
-      message: 'Are you sure want to delete it = ' + id,
+      message: 'Sei sicuro di volerlo cancellare = ' + id,
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
