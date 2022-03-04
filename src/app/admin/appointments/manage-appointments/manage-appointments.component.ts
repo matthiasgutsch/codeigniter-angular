@@ -146,7 +146,6 @@ export class ManageAppointmentsComponent implements OnInit {
       this.descriptionFilter = this.route.snapshot.queryParamMap.get('description');
     }
     
-      //this.getClients();
       this.getWorks();
       this.getAppointmentType();
       this.load();
@@ -232,24 +231,6 @@ export class ManageAppointmentsComponent implements OnInit {
   }
 
 
-
-  getClients() {
-    const userId = this.currentUser.user_id;
-    this.clientsService.getAllListbyUser().subscribe(
-      (data: Clients) => this.clients = data,
-      error => this.error = error
-    );
-
-  }
-
-  getEmployees() {
-    const userId = this.currentUser.user_id;
-    this.employeesService.getAllList().subscribe(
-      (data: Employees) => this.employees = data,
-      error => this.error = error
-    );
-  }
-
   getWorks() {
     this.worksService.getAllListbyUser().subscribe(
       (data: Works) => this.works = data,
@@ -261,14 +242,6 @@ export class ManageAppointmentsComponent implements OnInit {
     const userId = this.currentUser.user_id;
     this.locationsService.getAllList().subscribe(
       (data: Locations) => this.locations = data,
-      error => this.error = error
-    );
-  }
-
-  getComuni() {
-    const userId = this.currentUser.user_id;
-    this.comuniService.getAllList().subscribe(
-      (data: Comuni) => this.comuni = data,
       error => this.error = error
     );
   }
