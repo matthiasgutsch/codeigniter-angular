@@ -23,7 +23,7 @@ import { ProductsService } from 'src/app/services/products.service';
 import { Projects } from 'src/app/models/projects';
 import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brands.service';
-import { STATUS_PRODUCTS } from '../../constants/constants';
+import { PARAM_PROJECTS_PATH, PARAM_SUPPORTS_PATH, STATUS_PRODUCTS } from '../../constants/constants';
 import { Table } from 'primeng/table';
 import { NgxSpinnerService } from "ngx-spinner";
 import { TagsService } from 'src/app/services/tags.service';
@@ -92,6 +92,16 @@ myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en')  ;
 trackByFn(index, item) {
   return item.id;
 }
+page = 1;
+count = 0;
+pageSize = 10;
+pageSizes = [5, 10, 15];
+public base_path: string;
+basePath: string;
+pageOfItems: Array<any>;
+searchWrapper: boolean = false;
+nameFilter: string;
+descriptionFilter: string;
 
 
 
@@ -120,8 +130,7 @@ trackByFn(index, item) {
     const userId = this.currentUser.user_id;
     this.spinner.show();
 
-    this.projectsService.getAllListbyUser().subscribe(data => {
-      this.projects = data;
+  
       this.cols = [
         { field: "title", header: "Nome Progetto" },
         { field: "status", header: "Status" },
@@ -145,13 +154,93 @@ trackByFn(index, item) {
       this.getCategories();
       this.getBrands();
       this.getTechnicalData();
+      this.load();
       this.spinner.hide();
 
-    });
+
 
 
   }
 
+
+
+
+  getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
+    // tslint:disable-next-line:prefer-const
+    let path = PARAM_PROJECTS_PATH;
+    const params = {};
+    let adder = '?';
+    if (page) {
+      params[`page`] = page - 1;
+      path += adder + 'page=' + (page - 1);
+      adder = '&';
+    }
+    if (searchTitle) {
+      params[`name`] = searchTitle;
+      path += adder + 'date_from=' + searchTitle;
+      adder = '&';
+    }
+    if (categoryTitle) {
+      params[`description`] = categoryTitle;
+      path += adder + 'date_to=' + categoryTitle;
+      adder = '&';
+    }
+    if (pageSize) {
+      params[`size`] = pageSize;
+      path += adder + 'size=' + pageSize;
+    }
+    window.history.replaceState({}, '', path);
+
+    return params;
+
+  }
+
+  
+  load(): void {
+
+    const params = this.getRequestParams(
+      this.nameFilter,
+      this.descriptionFilter,
+      this.page,
+      this.pageSize
+    );
+    this.projectsService.getAllListNew(params).subscribe((pData) => {
+      this.projects = pData;
+      this.count = this.projectsService.size;
+
+    });
+  }
+
+  handlePageSizeChange(event): void {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.load();
+  }
+
+  reset(): void {
+    this.nameFilter = '';
+    this.descriptionFilter = '';
+    this.load();
+    
+  }
+  
+  public handlePageChange(event): void {
+    this.page = event;
+    this.load();
+  
+  }
+  
+
+
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+}
+
+  private onChange(item: string): void {
+    this.load();
+
+  }
 
   getBrands() {
   this.brandService.getAllListbyUser().subscribe(

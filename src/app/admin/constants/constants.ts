@@ -22,6 +22,7 @@ export const PARAM_EMPLOYEES_PATH = '/admin/employees/'
 export const PARAM_CLIENTS_PATH = '/admin/clients/'
 export const PARAM_SUPPLIERS_PATH = '/admin/suppliers/'
 export const PARAM_SUPPORTS_PATH = '/admin/support/'
+export const PARAM_PROJECTS_PATH = '/admin/projects/'
 
 export const PARAM_APPOINTMENTS_PATH = '/admin/appointments/'
 
