@@ -171,10 +171,10 @@ export class AdminDashboardComponent implements OnInit {
       this.getAppointmentsCount();
       this.getWorks();
       this.getProjects();
-
       this.getChartsCount();
       this.getChartsCountNone();
       this.getSupports();
+      
       this.calendarOptions = {
         editable: true,
         eventLimit: false,
@@ -457,27 +457,6 @@ export class AdminDashboardComponent implements OnInit {
   }
 
 
-
-
-
-  getCategoryItem(category_id: string, id: string) {
-    return this.clients.find(item => item.id === category_id);
-  }
-
-
-  getComuniItem(province: string, id: string) {
-    return this.comuni.find(item => item.id === province);
-  }
-
-  getEmployeeItem(employee_id: string, id: string) {
-    return this.employees.find(item => item.id === employee_id);
-  }
-
-
-
-  getLocationItem(location_id: string, id: string) {
-    return this.locations.find(item => item.id === location_id);
-  }
 
 
 
