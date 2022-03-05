@@ -174,12 +174,12 @@
 
                         <td width="50">
                             <app-initials-avatar (click)="editProduct(appointment)"
-                                firstName="{{ getCategoryItem(appointment.category_id)?.name | slice:0:1}}"
-                                lastName="{{ getCategoryItem(appointment.category_id)?.surname | slice:0:1}}">
+                                firstName="{{ appointment.client.name | slice:0:1}}"
+                                lastName="{{ appointment.client.surname | slice:0:1}}">
                             </app-initials-avatar>
                         </td>
-                        <td> {{ getCategoryItem(appointment.category_id)?.name }}
-                            {{ getCategoryItem(appointment.category_id)?.surname }}</td>
+                        <td> {{ appointment.client.name }}
+                            {{ appointment.client.surname }}</td>
 
                         <td>{{appointment.title}}</td>
                     </tr>
@@ -337,8 +337,8 @@
 
                         <h3>{{displayEvent.event.title}}</h3>
 
-                        {{ getLocationItem(displayEvent.event.location_id)?.name }}
-                        <br> {{ getEmployeeItem(displayEvent.event.employee_id)?.name }}
+                        {{ displayEvent.event.client.name }}
+                        <br> {{ displayEvent.event.client.surname }}
 
                         <p [innerHTML]="displayEvent.event.description"></p>
 
@@ -363,17 +363,17 @@
         <div class="p-col-12 p-md-12">
 
             <p-card>
-                <strong>{{ getCategoryItem(displayEvent.event.category_id)?.name }}
-                    {{ getCategoryItem(displayEvent.event.category_id)?.surname }}</strong>
+                <strong>{{ displayEvent.event.client.name }}
+                    {{ displayEvent.event.client.surname }}</strong>
 
-                <p>{{ getCategoryItem(displayEvent.event.category_id)?.address }}<br>
-                    {{ getCategoryItem(displayEvent.event.category_id)?.zip }} -
-                    {{ getCategoryItem(displayEvent.event.category_id)?.city }}
-                    ({{ getCategoryItem(displayEvent.event.category_id)?.province }})<br>
+                <p>{{ displayEvent.event.client.address }}<br>
+                    {{ displayEvent.event.client.zip }} -
+                    {{ displayEvent.event.client.city }}
+                    ({{ displayEvent.event.client.province }})<br>
                 </p>
                 <hr>
-                <p>{{ getCategoryItem(displayEvent.event.category_id)?.phone }}<br>
-                    {{ getCategoryItem(displayEvent.event.category_id)?.email }}</p>
+                <p>{{ displayEvent.event.client.phone }}<br>
+                    {{ displayEvent.event.client.email }}</p>
                 <div class="clearfix"></div>
                 <div class="clearfix"></div><br>
 

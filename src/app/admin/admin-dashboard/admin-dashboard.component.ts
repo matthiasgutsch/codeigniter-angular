@@ -162,7 +162,6 @@ export class AdminDashboardComponent implements OnInit {
       this.spinner.show();
 
       this.getClientsCount();
-      this.getClients();
       this.getProductsCount();
       this.getBillingsCountTotal();
       this.getBillingsCountTotalNotPaid();
@@ -390,15 +389,6 @@ export class AdminDashboardComponent implements OnInit {
     );
   }
 
-
-
-  getClients() {
-    this.clientsService.getAllListbyUser().subscribe(data => {
-      this.clients = data;
-      error => this.error = error
-    });
-  }
-
   getWorks() {
     this.worksService.getAllListbyUser().subscribe(
       (data: Works) => this.works = data,
@@ -523,7 +513,8 @@ export class AdminDashboardComponent implements OnInit {
         employee_id: model.event.employee_id,
         allDay: model.event.allDay,
         description: model.event.description,
-        category_id: model.event.category_id
+        category_id: model.event.category_id,
+        client: model.event.client
 
         // other params
       },
