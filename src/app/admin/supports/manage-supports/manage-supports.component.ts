@@ -22,6 +22,7 @@ import "jspdf-autotable";
 import { NgxSpinnerService } from "ngx-spinner";
 import { SupportsService } from 'src/app/services/supports.service';
 import { Supports } from 'src/app/models/supports';
+import { PARAM_APPOINTMENTS_PATH, PARAM_SUPPORTS_PATH } from '../../constants/constants';
 
 @Component({
   selector: 'app-manage-supports',
@@ -66,7 +67,18 @@ export class ManageSupportsComponent implements OnInit {
     return item.id;
   }
 
+  page = 1;
+  count = 0;
+  pageSize = 10;
+  pageSizes = [5, 10, 15];
+  public base_path: string;
+  basePath: string;
+  pageOfItems: Array<any>;
+  searchWrapper: boolean = false;
+  nameFilter: string;
+  descriptionFilter: string;
 
+  
   constructor(
     private clientsService: ClientsService,
     private supportsService: SupportsService,
@@ -97,10 +109,89 @@ export class ManageSupportsComponent implements OnInit {
 
   ngOnInit() {
 
-    this.getSupports();
-    
+    this.load();
 
   }
+
+
+
+  getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
+    // tslint:disable-next-line:prefer-const
+    let path = PARAM_SUPPORTS_PATH;
+    const params = {};
+    let adder = '?';
+    if (page) {
+      params[`page`] = page - 1;
+      path += adder + 'page=' + (page - 1);
+      adder = '&';
+    }
+    if (searchTitle) {
+      params[`name`] = searchTitle;
+      path += adder + 'date_from=' + searchTitle;
+      adder = '&';
+    }
+    if (categoryTitle) {
+      params[`description`] = categoryTitle;
+      path += adder + 'date_to=' + categoryTitle;
+      adder = '&';
+    }
+    if (pageSize) {
+      params[`size`] = pageSize;
+      path += adder + 'size=' + pageSize;
+    }
+    window.history.replaceState({}, '', path);
+
+    return params;
+
+  }
+
+  
+  load(): void {
+
+    const params = this.getRequestParams(
+      this.nameFilter,
+      this.descriptionFilter,
+      this.page,
+      this.pageSize
+    );
+    this.supportsService.getAllListNew(params).subscribe((pData) => {
+      this.supports = pData;
+      this.count = this.supportsService.size;
+
+    });
+  }
+
+  handlePageSizeChange(event): void {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.load();
+  }
+
+  reset(): void {
+    this.nameFilter = '';
+    this.descriptionFilter = '';
+    this.load();
+    
+  }
+  
+  public handlePageChange(event): void {
+    this.page = event;
+    this.load();
+  
+  }
+  
+
+
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+}
+
+  private onChange(item: string): void {
+    this.load();
+
+  }
+
 
   getCategoryItem(category_id: string, id: string) {
     return this.clients.find(item => item.id === category_id);
@@ -132,13 +223,6 @@ export class ManageSupportsComponent implements OnInit {
   }
 
  
-  getSupports() {
-    this.supportsService.getAllListbyUser().subscribe(
-      (data: Supports) => this.supports = data,
-      error => this.error = error
-    );
-  }
-
 
 
 
