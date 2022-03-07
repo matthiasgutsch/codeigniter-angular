@@ -95,6 +95,7 @@
     
                     <ng-template pTemplate="header" let-columns>
                         <tr>
+                            <th width="120"></th>
                             <th width="50"></th>
                             <th *ngFor="let col of cols">
                                 {{col.header}} 
@@ -105,6 +106,11 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-rowData let-columns="columns">
                         <tr>
+                            <td>
+                              <p-tag severity="success" *ngIf="rowData['is_active'] === '1'">Attivo</p-tag>  
+                              <p-tag severity="danger" *ngIf="rowData['is_active'] === '0'">Non Attivo</p-tag>  
+
+                            </td>
                             <td>
                                 <app-initials-avatar firstName="{{ rowData['name'] | slice:0:1}}" lastName="{{ rowData['surname'] | slice:0:1}}"></app-initials-avatar>
 
