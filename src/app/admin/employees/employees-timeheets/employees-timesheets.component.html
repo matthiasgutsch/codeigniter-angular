@@ -350,9 +350,8 @@
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'400px'}">
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">
-            <p-tag [value]="timesheet.id"></p-tag>
             <h3>Dettaglio Timesheet</h3>
-            <p>{{timesheet.created_at | date:'d-MM-yyyy' }} | {{timesheet.created_at | date:'hh:mm' }}</p>
+            <p><p-tag [value]="timesheet.id"></p-tag> {{timesheet.created_at | date:'d-MM-yyyy' }} | {{timesheet.created_at | date:'hh:mm' }}</p>
             <hr class="full">
             <div class="p-grid">
                 <div class="p-col-4">
@@ -364,6 +363,7 @@
                         class="p-button p-button-primary btn-block"></button>
                 </div>
             </div>
+            <br>
             <div class="p-grid">
                 <div class="p-col-4">
                     Uscita
@@ -374,7 +374,13 @@
                         class="p-button p-button-success btn-block"></button>
                 </div>
             </div>
-
+            <br>
+            <hr class="full">
+            <div class="p-grid">
+                <div class="p-col-12">
+                    {{ getProjectItem(timesheet.project_id)?.title }}
+                </div>
+            </div>
         </div>
     </ng-template>
 
