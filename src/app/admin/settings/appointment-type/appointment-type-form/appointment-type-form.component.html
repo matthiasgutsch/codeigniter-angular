@@ -1,11 +1,29 @@
-<div class="dash-header">
-    <div class="p-fluid">
 
-    </div>
-</div>
 
 <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
 
+    <div class="top-main-wrapper">
+
+        <div class="dash-header">
+            <div class="dash-title">
+        
+                <div class="p-field p-grid">
+                    <div class="p-col-12 p-md-6">
+                        <h3>{{pageTitle}}</h3>
+                    </div>
+                    <div class="p-col-12 p-md-6">
+                     
+                        <button pButton pRipple label="salva" class="p-button p-button-success p-mr-2 pull-right"
+                        type="submit" [disabled]="!categoryForm.valid"></button>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-inner">
+    
     <div class="p-fluid">
         <div class="p-field p-grid">
             <div class="p-col-12 p-md-9">
@@ -13,17 +31,6 @@
                 <p-card>
                     <div class class="blog-form">
 
-                        <div class="p-field p-grid">
-                            <div class="p-col-10 p-md-10">
-                                <h3>{{pageTitle}}</h3>
-                            </div>
-                            <div class="p-col-2 p-md-2">
-
-                                <button pButton pRipple label="salva" class="p-button p-button-success p-mr-2"
-                                    type="submit" [disabled]="!categoryForm.valid"></button>
-
-                            </div>
-                        </div>
 
                         <div class="p-fluid">
                             <div class="p-field p-grid">
@@ -79,5 +86,6 @@
             </div>
         </div>
 
+    </div>
     </div>
 </form>

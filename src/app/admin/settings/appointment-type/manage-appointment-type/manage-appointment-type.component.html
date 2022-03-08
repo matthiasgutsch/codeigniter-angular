@@ -1,35 +1,24 @@
-<p-overlayPanel #op>
-    <ng-template pTemplate>
-        <div class="p-col-12">
-        
-                <div class="p-field p-grid" *ngFor="let col of cols" >
-                    <div class="p-col-12">
 
-                    <input placeholder="{{col.header}}" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-            </div>
+<div class="top-main-wrapper">
+
+    <div class="dash-header">
+        <div class="dash-title">
+
+            <div class="p-field p-grid">
+                <div class="p-col-6 p-md-6">
+                    <h3>{{pageTitle}}</h3>
+                </div>
+                <div class="p-col-6 p-md-6">
+                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/settings/appointment-type/create']" label="Aggiungi" class="p-button p-button-primary p-mr-2 pull-right"></button> 
+
+
                 </div>
             </div>
-    </ng-template>
-</p-overlayPanel>
 
-
-<div class="dash-header">
-    <div class="p-fluid">
-        <div class="p-field p-grid">
-            <div class="p-col-8 p-md-8">
-        <h3>{{title}}</h3>
-            </div>
-            <div class="p-col-4 p-md-4">
-    
-                <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/settings/appointment-type/create']" label="Aggiungi" class="p-button p-button-primary p-mr-2 pull-right"></button> 
-                <button type="text" pButton label="Filter"  icon="pi pi-filter" class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
-    
-    </div>
         </div>
     </div>
 </div>
-
-<div class="p-fluid">
+<div class="main-inner">
     <div class="p-field p-grid">
         <div class="p-col-12 p-md-12">
 
@@ -72,8 +61,7 @@
 
 </p-card>
         </div></div></div>
-
-
+        
 
 
         <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" #cd>

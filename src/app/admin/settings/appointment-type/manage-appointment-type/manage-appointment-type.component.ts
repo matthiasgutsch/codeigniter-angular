@@ -12,7 +12,7 @@ import { AppointmentTypeService } from 'src/app/services/appointment_type.servic
   templateUrl: './manage-appointment-type.component.html'
 })
 export class ManageAppointmentTypeComponent implements OnInit {
-  title = 'Tipo di Appuntamento';
+  pageTitle = 'Tipo di Appuntamento';
   appointment_type: Appointment_type;
   appointment_typ: Appointment_type;
   error: string;
