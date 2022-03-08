@@ -224,6 +224,12 @@ export class ManageBillingsComponent implements OnInit {
       this.billingsService.billingStatus(formData, billing.id).subscribe(
         (res) => {
           this.load();
+          this.messageService.add({
+            key: "myKey1",
+            severity: "success",
+            summary: "Attenzione",
+            detail: "Aggiornato con success",
+          });
         },
         (error) => (this.error = error)
       );
@@ -235,6 +241,12 @@ export class ManageBillingsComponent implements OnInit {
       this.billingsService.billingStatus(formData, billing.id).subscribe(
         (res) => {
           this.load();
+          this.messageService.add({
+            key: "myKey1",
+            severity: "success",
+            summary: "Attenzione",
+            detail: "Aggiornato con success",
+          });
         },
         (error) => (this.error = error)
       );

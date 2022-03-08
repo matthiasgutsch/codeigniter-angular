@@ -302,9 +302,15 @@
 
 .p-button.p-button-primary, .p-buttonset.p-button-primary > .p-button, .p-splitbutton.p-button-primary > .p-button {
   color: @white !important;
-  background: @ness_color_3;
+  background: #282d35;
   border: 0px solid @ness_color_3 !important;
   border-radius: @radius;
+
+  &:hover {
+    color: @white;
+    background: @ness_color_3 !important;
+    border: 0px solid @green !important;
+  }
 }
 
 .p-dialog-footer {
