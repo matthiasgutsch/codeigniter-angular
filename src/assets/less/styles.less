@@ -233,7 +233,7 @@ p a {
   z-index: 1;
   top: 0;
   left: 0;
-  background: #172c49;
+  background: #282d35;
   overflow-x: hidden;
   transition: 0.1s;
   padding-top: 0px;
@@ -511,6 +511,8 @@ ul.nav-menu-mobile {
   display: inline-block;
   margin: 0px;
   padding-top: 0px;
+  
+  overflow-y: auto !important;
   li {
     list-style-type: none;
     float: left;
@@ -731,9 +733,7 @@ hr.full {
 
 .login-wrap {
   height: 100vh;
-  background: url(src/assets/images/background.png);
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: @background;
   position: relative;
 }
 
