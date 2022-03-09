@@ -1,0 +1,362 @@
+<form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+
+
+    <div class="top-main-wrapper">
+        <div class="dash-header">
+            <div class="dash-title">
+    
+                <div class="p-field p-grid">
+                    <div class="p-col-12 p-md-4">
+                        <h3>{{pageTitle}}</h3>
+                    </div>
+                    <div class="p-col-12 p-md-8">
+                        <button pButton pRipple icon="pi pi-save" [disabled]="!blogForm.valid" label="Salva"
+                            class="p-button pull-right p-button-success"></button>
+    
+                        <button pButton pRipple icon="pi pi-save" (click)="generatePDF('download')" type="button" label="Genera PDF"
+                            class="p-button p-button-primary pull-right p-mr-2"></button>
+    
+                            <button pButton pRipple icon="pi pi-print" type="button" label="Stampa"
+                            (click)="generatePDF('print')" class="p-button p-button-primary pull-right p-mr-2"></button>
+    
+                        <button pButton pRipple *ngIf="numberAppointments > 0"
+                            [routerLink]="['/admin/appointments/edit', numberAppointments]" label="Visualizza Appuntamento"
+                            class="p-button p-button-secondary  pull-right p-mr-2"></button>
+    
+                            <button pButton pRipple *ngIf="numberOrders > 0"
+                                [routerLink]="['/admin/orders/edit', numberOrders]" label="Visualizza Ordine"
+                                class="p-button p-button-secondary  pull-right p-mr-2"></button>
+    
+    
+                            <button pButton pRipple type="button"
+                            (click)="editFormItems()" label="Modifica"
+                                class="p-button p-button-success  pull-right p-mr-2"></button>
+                      
+    
+                             
+            
+        
+                            
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+
+    </div>
+    <div class="main-inner">
+
+    
+
+    <div class="p-fluid">
+
+        <div class="p-field p-grid">
+            <div class="p-col-12 p-md-4">
+
+                <p-card>
+
+                    <div class="blog-form">
+
+                        <div class="p-field p-grid">
+                            <div class="p-col-12 p-md-12">
+                                <h3>Informazioni</h3> 
+                            </div>
+                       
+                        </div>
+                        <hr class="full">
+
+
+                        
+                        <div class="p-fluid">
+                            <div class="p-field p-grid">
+                          
+                                <div class="p-col-12 p-md-12">
+
+                                    <p-selectButton [options]="billingOptions" formControlName="title" optionLabel="label" optionValue="value"></p-selectButton>
+
+
+                              
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-fluid">
+
+                            <div class="p-field p-grid">
+                                <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Numero Fattura<span
+                                        class="required">*</span></label>
+                                <div class="p-col-12 p-md-12">
+
+                                    <input type="text" pInputText formControlName="number"  (keyup)="changedNumber($event)">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-fluid">
+
+                            <div class="p-field p-grid">
+                                <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Data di Emissione<span
+                                        class="required">*</span></label>
+                                <div class="p-col-12 p-md-12">
+
+                                    <p-calendar (onBlur)="changeTime($event)" formControlName="date" dataType="string"
+                                        [(ngModel)]="dateAppointments" dateFormat="yy-mm-dd" appendTo="body">
+                                    </p-calendar>
+
+                                </div>
+                            </div>
+                        </div>
+
+                     
+
+                        <div class="p-fluid">
+                            <div class="p-field p-grid">
+                                <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Cliente <span
+                                        class="required">*</span></label>
+                                <div class="p-col-12 p-md-12">
+                                    <p-dropdown [options]="clients" [virtualScroll]="true" filter="true"
+                                        [required]="true" [showClear]="true" placeholder="Scegli"
+                                        [style]="{ width: '100%' }" [(ngModel)]="categoryAppointments"
+                                        formControlName="category_id" optionLabel="username" optionValue="id">
+                                        <ng-template let-option pTemplate="item">
+
+                                            <strong>{{option.name}} {{option.surname}}</strong><br>
+                                            <span>{{option.address}} - {{option.zip}} {{option.city}}</span>
+
+                                        </ng-template>
+
+                                    </p-dropdown>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-fluid">
+                            <div class="p-field p-grid">
+                                <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Nota <span
+                                        class="required">*</span></label>
+                                <div class="p-col-12 p-md-12">
+
+                                    <textarea pInputTextarea formControlName="description"
+                                        (keyup)="changed($event)"></textarea>
+
+                                </div>
+                            </div>
+                        </div>
+
+                       
+
+                        <div class="form-group form-row">
+                            <label class="col-md-3"></label>
+                            <div class="col-md-9">
+                                <input type="hidden" formControlName="id">
+                                <input type="hidden" value="{{idAppointments}}" *ngIf="idAppointments"
+                                    formControlName="appointment_id">
+                                <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </p-card>
+            </div>
+
+            <div class="p-col-12 p-md-8">
+
+                <p-card class="blu-box">
+                    <div class="p-grid">
+
+                        <div class="p-col-12 p-md-6">
+                            <h1 class="no-margin">Fattura {{idBilling}}/{{dateAppointments | date:'yyyy'}}</h1>
+                        </div>
+                        <div class="p-col-12 p-md-6">
+                            <p-tag value="{{dateAppointments | date:'dd/MM/yyyy'}}" class="pull-right"></p-tag>
+
+                            <p-tag severity="success" *ngIf="is_paid === '1'" (click)="closeBilling(id)" value="Pagata"
+                            class="pull-right  p-mr-2"></p-tag>
+                        <p-tag severity="danger" *ngIf="is_paid === '0'" (click)="openBilling(id)" value="non pagata"
+                            class="pull-right  p-mr-2"></p-tag>
+                        </div>
+
+                    </div>
+                </p-card>
+                
+                <p-card>
+                    <div #reportContent id="editor">
+
+                        <div class="p-fluid">
+
+                            
+
+
+                            <div class="p-field p-grid">
+
+                                <div class="p-col-12 p-md-6" *ngIf="getCategoryItem">
+                                    <h3>Cliente</h3>
+
+                                    {{ getCategoryItem(categoryAppointments)?.username }}<br>{{ getCategoryItem(categoryAppointments)?.zip }}
+                                    - {{ getCategoryItem(categoryAppointments)?.city }} <br>
+                                    {{ getCategoryItem(categoryAppointments)?.phone }}
+
+                                </div>
+
+                                <div class="p-col-12 p-md-6" *ngIf="company">
+                                    <h3>Intestatario</h3>
+
+                                    {{company.name}}<br>
+                                    {{company.address}}<br>
+                                    {{company.zip}} - {{company.city}}<br>
+                                    {{company.fiscalcode}}<br>
+                                    {{company.fiscalnumber}}<br>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <hr class="full">
+                        <div class="p-fluid">
+                            <div class="p-field p-grid">
+
+                                <div class="p-col-12 p-md-12">
+                                    <h3 *ngIf="descriptionBillings">Note</h3>
+
+                        
+                                    <p [innerHTML]="descriptionBillings"></p>
+
+                                </div>
+                            </div>
+
+                            <div class="p-field p-grid">
+
+                                <div class="p-col-12 p-md-8">
+                                    <h3>Lavorazione</h3>
+                                </div>
+                                <div class="p-col-12 p-md-4">
+
+                                    <button pButton pRipple icon="pi pi-save" *ngIf="!editForm"  type="button" label="Aggiungi"
+                                        class="p-button pull-right p-button-success" (click)="addQuantity()"></button>
+                                </div>
+                            </div>
+
+                            <table formArrayName="skills" class="billings-list" cdkDropList (cdkDropListDropped)="drop($event)">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Descrizione</th>
+
+                                        <th>Qantità</th>
+                                        <th>Prezzo Cad.</th>
+                                        <th>Totale</th>
+                                        <th></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let quantity of skills.controls; let i=index" [formGroupName]="i">
+
+                                        <td width="20px" cdkDrag>{{i + 1}}. </td>
+                                    <td>
+                                      
+                                        <p-autoComplete *ngIf="!editForm" (input)="itemsChanged()"  formControlName="description" [suggestions]="filteredProductsVariations" (completeMethod)="filterCountry($event)" field="code" [minLength]="1">
+                                            <ng-template let-productsVariation pTemplate="item">
+                                                <div class="p-grid">
+                                                <div class="p-col">{{productsVariation.code}}</div>
+                                                <div class="p-col">{{productsVariation.title}} </div>
+                                                <div class="p-col">{{productsVariation.description}}</div>
+                                              </div>
+                                            </ng-template>
+
+
+                                        </p-autoComplete>
+
+
+
+                              
+
+                                            <span *ngIf="editForm"><strong>{{blogForm.get('skills').value[this.i].description.code}}</strong> {{blogForm.get('skills').value[this.i].description.title}}<br>{{blogForm.get('skills').value[this.i].description.description}}</span>
+
+
+                                    </td>
+                                    <td width="150px">
+                                        <input type="text" *ngIf="!editForm" [style]="{ width: '100%' }" pInputText formControlName="qty"
+                                            (input)="itemsChanged()">
+
+                                           <span *ngIf="editForm">{{blogForm.get('skills').value[this.i].qty}}</span>
+                                    </td>
+                                    <td width="150px">
+
+
+                                        <p-inputNumber *ngIf="!editForm" [style]="{ width: '100%' }"  formControlName="price" (ngModelChange)="itemsChanged()" inputId="locale-us" mode="decimal" locale="en-US" [minFractionDigits]="2">
+                                        </p-inputNumber>
+          
+                                        
+                                            <span *ngIf="editForm">{{blogForm.get('skills').value[this.i].price  | currency :'EUR':'symbol':'1.2-2' }}</span>
+                                    </td>
+
+                                    <td width="150px">
+                                        <input type="hidden" formControlName="itemTotal" [id]="'txtitemTotalControl'+i"
+                                            [value]="blogForm.get('skills').value[this.i].qty * blogForm.get('skills').value[this.i].price"
+                                            pInputText disabled />
+                                        {{blogForm.get('skills').value[this.i].qty * blogForm.get('skills').value[this.i].price | currency :'EUR':'symbol':'1.2-2'}}
+                                    </td>
+
+                                    <td width="60">
+                                        <button (click)="removeQuantity(i)" *ngIf="!editForm"  class="p-button p-button-danger p-mr-2"><i
+                                                class="pi pi-trash"></i></button>
+                                    </td>
+
+
+                                    
+                                </tr>
+
+                                    
+                                <tr>
+                                    <td colspan="4">
+                                       Total senza Iva
+                                    </td>
+
+                                    <td>
+                                       <h4>
+                                            {{subTotal | currency :'EUR':'symbol':'1.2-2'}}</h4>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" *ngIf="company">
+                                        Valore Iva ({{company.fiscaltype}} %)
+                                    </td>
+                                    <td>{{vat | currency :'EUR':'symbol':'1.2-2'}}</td>
+                                    <td></td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="4">
+                                        Totale
+                                    </td>
+                                    <td>
+                                        <h3>
+                                            {{grandTotal | currency :'EUR':'symbol':'1.2-2'}}</h3>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                            </table>
+                     
+                            <br><br>
+
+                        </div>
+                    </div>
+                </p-card>
+
+            </div>
+        </div>
+
+    </div>
+    </div>
+</form>
+
+
+<p-toast key="myKey1"></p-toast>

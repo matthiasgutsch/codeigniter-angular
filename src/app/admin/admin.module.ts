@@ -129,7 +129,8 @@ import { ManagePurchaseOrdersComponent } from './purchase-orders/manage-purchase
 import { PurchaseOrdersFormComponent } from './purchase-orders/purchase-orders-form/purchase-orders-form.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ManageWarehousesCheckoutsComponent } from './warehouses/warehouse-checkouts/manage-warehouses-checkouts/manage-warehouses-checkouts.component';
-
+import { TransportDocumentFormComponent } from './transport-document/transport-document-form/transport-document-form.component';
+import { ManageTransportDocumentComponent } from './transport-document/transport-document-billings/manage-transport-document.component';
 @NgModule({
   declarations: [
     ManageProjectsComponent,
@@ -139,7 +140,9 @@ import { ManageWarehousesCheckoutsComponent } from './warehouses/warehouse-check
     ManageSuppliersComponent,
     SuppliersFormComponent,
     PurchaseOrdersFormComponent,
+    ManageTransportDocumentComponent,
     ManagePurchaseOrdersComponent,
+    TransportDocumentFormComponent,
     WarehousesFormComponent,
     ManageProductsVariationsComponent,
     ProductsVariationsFormComponent,

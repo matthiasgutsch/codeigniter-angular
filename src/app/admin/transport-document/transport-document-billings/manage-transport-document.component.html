@@ -1,0 +1,282 @@
+<p-sidebar [(visible)]="filterSidebar" #op position="right">
+    <ng-template pTemplate>
+        <div class="p-field p-grid">
+            <div class="p-col-12">
+                <p-calendar [(ngModel)]="nameFilter" [style]="{ width: '100%' }" placeholder="Data da" dateFormat="yy-mm-dd" dataType="string" inputId="dateformat"></p-calendar>
+            </div>
+        </div>
+        <div class="p-field p-grid">
+            <div class="p-col-12">
+                <p-calendar [(ngModel)]="descriptionFilter" [style]="{ width: '100%' }" placeholder="Data a" dateFormat="yy-mm-dd" dataType="string" inputId="dateformat"></p-calendar>
+            </div>
+        </div>
+
+        <div class="p-field p-grid">
+            <div class="p-col-12">
+        <p-dropdown [options]="clients" [virtualScroll]="true" filter="true"
+                                        [required]="true" [showClear]="true" placeholder="Scegli"
+                                        [style]="{ width: '100%' }" [(ngModel)]="clientFilter"
+                                        optionLabel="username" optionValue="id">
+                                        <ng-template let-option pTemplate="item">
+
+                                            <strong>{{option.name}} {{option.surname}}</strong><br>
+                                            <span>{{option.address}} - {{option.zip}} {{option.city}}</span>
+
+                                        </ng-template>
+
+                                    </p-dropdown>
+            </div>
+        </div>
+
+        <div class="p-field p-grid">
+            <div class="p-col-12">
+                <button pButton type="submit" icon="pi pi-search" class="p-button p-button-primary btn-block"
+                    label="cerca" (click)="load()">
+                </button>
+            </div>
+        </div>
+        <div class="p-field p-grid">
+
+            <div class="p-col-12">
+                <button pButton type="reset" icon="pi pi-times" class="p-button p-button-secondary btn-block"
+                    label="reset" (click)="reset()">
+                </button>
+            </div>
+        </div>
+    </ng-template>
+</p-sidebar>
+
+<div class="top-main-wrapper">
+
+    <div class="dash-header">
+        <div class="dash-title">
+    
+            <div class="p-field p-grid">
+                <div class="p-col-10 p-md-6">
+                    <h3>Fatture</h3>
+                </div>
+                <div class="p-col-2 p-md-6">
+    
+                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/billings/create']" label="Aggiungi"
+                        class="p-button p-button-primary pull-right"></button>
+    
+                        <button type="text" pButton label="Filter" icon="pi pi-filter"
+                        class="p-button p-button-options p-mr-2 pull-right" (click)="filterSidebar = true"></button>
+
+                       <!-- <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()"
+                        class="p-button-options p-mr-2 pull-right"  tooltipPosition="bottom"></button>-->
+    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-inner">
+
+
+<div class="p-fluid">
+    <div class="p-field p-grid">
+        <div class="p-col-12 p-md-12">
+
+            <p-card>
+
+                <div class="filter-options">
+
+                    <div class="p-field p-grid">
+
+                        <div class="p-col-12 p-md-8">
+                            <div class="item-size pull-left">
+                                <span class="filter-tag" *ngIf="nameFilter" >{{nameFilter}} <span class="close"><i class="pi pi-times"  (click)="reset()"></i></span> </span>
+                                <span class="filter-tag" *ngIf="descriptionFilter">{{descriptionFilter}} <span class="close"><i class="pi pi-times" (click)="reset()"></i></span> </span>
+                                <span class="filter-tag" *ngIf="clientFilter">{{clientFilter}} <span class="close"><i class="pi pi-times" (click)="reset()"></i></span> </span>
+
+                            </div>
+                        </div>
+
+                        <div class="p-col-12 p-md-4">
+                          <span class="pull-right">{{count}} Items</span>  
+                        </div>
+                    </div>
+                </div>
+                    <div *ngFor=" let billing of billings  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
+
+                    <p-table #dt [value]="billings" [responsive]="true" [paginator]="false" [rows]="15">
+
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th width="100px">Stato</th>
+
+                            <th width="80px">Numero
+
+                            </th>
+                            <th>Data emissione</th>
+                            <th width="50"></th>
+
+                            <th>Cliente</th>
+                            <th>Residente</th>
+
+                            <th>Prezzo</th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-billing>
+                        <tr>
+                            <td>
+                                <p-tag severity="success" *ngIf="billing.is_paid === '1'"
+                                    (click)="closeBilling(billing)" value="Pagata" class="p-mr-2"></p-tag>
+                                <p-tag severity="danger" *ngIf="billing.is_paid === '0'" (click)="openBilling(billing)"
+                                    value="non pagata" class="p-mr-2"></p-tag>
+                            </td>
+                            <td>{{billing.number}}/{{billing.date | date:'yyyy'}}</td>
+
+                            <td><i class="pi pi-calendar"></i> {{billing.date | date:'dd-MM-yyyy'}}
+                            </td>
+
+                            <td width="50">
+
+                                <app-initials-avatar
+                                    [routerLink]="['/admin/clients/edit', billing.client.id]"
+                                    firstName="{{ billing.client.name | slice:0:1}}"
+                                    lastName="{{ billing.client.surname | slice:0:1}}">
+                                </app-initials-avatar>
+
+                            </td>
+
+                            <td>
+                                {{billing.client.username}}
+                            </td>
+
+                            <td>{{
+                                billing.client.zip }} - {{
+                                billing.client.city }}</td>
+                            <td>
+                                <p-tag [value]="billing.total | currency :'EUR':'symbol':'1.2-2'"></p-tag></td>
+
+                            <td class="action">
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
+                                    [routerLink]="['/admin/billings/edit', billing.id]"></button>
+                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
+                                    (click)="edit(billing)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
+                                    (click)="onDelete(billing.id)"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+
+                <div class="p-grid">
+
+                    <div class="p-col-12 p-md-12">
+                        <pagination-controls previousLabel="Prev" nextLabel="Next" responsive="true"
+                            (pageChange)="handlePageChange($event)">
+                        </pagination-controls>
+                    </div>
+                </div>
+
+            </p-card>
+        </div>
+
+    </div>
+</div>
+
+</div>
+<p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'60em'}">
+    <ng-template pTemplate="content">
+
+        <div id="content" #content>
+
+            <div class="p-col-12 p-md-12">
+                <p-card>
+                    <app-initials-avatar class="pull-right"
+                        [routerLink]="['/admin/clients/edit', billing.client.id]"
+                        firstName="{{ billing.client.name | slice:0:1}}"
+                        lastName="{{ billing.client.surname | slice:0:1}}"></app-initials-avatar>
+
+                    <h3>Dettaglio Fattura {{billing.number}}/{{billing.date | date:'yyyy'}}</h3>
+                    <p-tag severity="default" value="{{billing.date}}" class="p-mr-2"></p-tag>
+
+                    <p-tag severity="success" *ngIf="billing.is_paid === '1'" class="p-mr-2" value="Pagata"
+                        class="p-mr-2"></p-tag>
+                    <p-tag severity="danger" *ngIf="billing.is_paid === '0'" class="p-mr-2" value="non pagata"
+                        class="p-mr-2"></p-tag>
+
+                    <hr class="full">
+
+                    <strong>{{ billing.client.username }}</strong><br>
+                    {{ billing.client.address }} -
+                    {{ billing.client.zip }} {{ billing.client.city }}
+                    <br>
+                    {{ billing.client.phone }}
+
+                </p-card>
+                <p-card>
+
+                    <table class="billings-list">
+                        <thead>
+                            <tr>
+                                <th>Descrizione</th>
+                                <th>Prezzo</th>
+                                <th>qty</th>
+                                <th>Totale</th>
+
+                            </tr>
+                        </thead>
+                        <tr *ngFor="let entry of selectedSkills | keys">
+                            <td><strong>{{entry.value.description.code}}</strong><br>{{entry.value.description.description}}</td>
+                            <td>{{entry.value.price}}</td>
+                            <td>{{entry.value.qty}}</td>
+                            <td> {{entry.value.qty * entry.value.price | currency :'EUR':'symbol':'1.2-2'}}</td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="3">
+                                Total senza Iva
+                            </td>
+
+                            <td>
+                                <h4>
+                                    {{billing.subtotal | currency :'EUR':'symbol':'1.2-2'}}</h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                Valore Iva
+                            </td>
+                            <td>{{billing.vat | currency :'EUR':'symbol':'1.2-2'}}</td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="3">
+                                Totale
+                            </td>
+                            <td>
+                                <h3>
+                                    {{billing.total | currency :'EUR':'symbol':'1.2-2'}}</h3>
+                            </td>
+                        </tr>
+
+                    </table>
+                    <button pButton pRipple icon="pi pi-pencil" label="modifica"
+                        class="p-button p-button-success p-mr-2"
+                        [routerLink]="['/admin/billings/edit', billing.id]"></button>
+                </p-card>
+            </div>
+        </div>
+    </ng-template>
+
+</p-sidebar>
+
+{{error}}
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" #cd>
+
+    <p-footer>
+        <button type="button" pButton icon="fa fa-close" class="p-button p-button-danger p-mr-2" label="No"
+            (click)="cd.reject()"></button>
+        <button type="button" pButton icon="fa fa-check" class="p-button p-button-success p-mr-2" label="Si"
+            (click)="cd.accept()"></button>
+    </p-footer>
+
+</p-confirmDialog>
+
+<p-toast key="myKey1"></p-toast>

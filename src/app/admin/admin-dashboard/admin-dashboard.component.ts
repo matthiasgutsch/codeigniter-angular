@@ -508,7 +508,9 @@ export class AdminDashboardComponent implements OnInit {
     const html = `<div>
       <div><i class="pi pi-clock"></i> ${event.event.time}</div>
       <hr classs="small">
-      <div><strong>${event.event.title}</strong></div>
+      <div><strong>${event.event.client.name}</strong></div>
+    <div><strong>${event.event.client.surname}</strong></div>
+
     </div>`;
     event.element.html(html)
   }

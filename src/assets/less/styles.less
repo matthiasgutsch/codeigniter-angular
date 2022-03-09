@@ -576,11 +576,11 @@ ul.nav-menu-mobile {
 }
 
 .top-main-wrapper {
-  background-color: @white;
+  background-color: transparent;
   margin-bottom: 20px;
-  padding: 10px 20px 10px 20px;
-  border-bottom: 1px solid #dee2e6;
-  border-top: 1px solid #dee2e6;
+  padding: 20px 20px 0px 20px;
+  border-bottom: 0px solid #dee2e6;
+  border-top: 0px solid #dee2e6;
   .dash-header {
     padding: 0px;
     margin: 0px;
@@ -642,6 +642,7 @@ hr.full {
   position: fixed;
   width: 100%;
   z-index: 1000;
+  box-shadow: @shadow;
   .openbtn {
     font-size: 22px;
     cursor: pointer;
@@ -1132,6 +1133,9 @@ hr.full {
   color: @white;
   padding: 5px;
 
+  hr {
+    border-color: @white !important;
+  }
   i {
     font-size: 13px;
   }

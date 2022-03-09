@@ -66,6 +66,8 @@ import { ProductsVariationsFormComponent } from './products/products-variations-
 import { ManagePurchaseOrdersComponent } from './purchase-orders/manage-purchase-orders/manage-purchase-orders.component';
 import { PurchaseOrdersFormComponent } from './purchase-orders/purchase-orders-form/purchase-orders-form.component';
 import { ManageWarehousesCheckoutsComponent } from './warehouses/warehouse-checkouts/manage-warehouses-checkouts/manage-warehouses-checkouts.component';
+import { TransportDocumentFormComponent } from './transport-document/transport-document-form/transport-document-form.component';
+import { ManageTransportDocumentComponent } from './transport-document/transport-document-billings/manage-transport-document.component';
 
 const routes: Routes = [
   {
@@ -127,6 +129,12 @@ const routes: Routes = [
           { path: "orders", component: ManageOrdersComponent },
           { path: "orders/edit/:id",component: OrdersFormComponent,},
           { path: "orders/create", component: OrdersFormComponent },
+
+
+          { path: "transport-documents", component: ManageTransportDocumentComponent },
+          { path: "transport-documents/edit/:id",component: TransportDocumentFormComponent,},
+          { path: "transport-documents/create", component: TransportDocumentFormComponent },
+
 
           { path: "quotes", component: ManageQuotesComponent },
           { path: "quotes/edit/:id",component: QuotesFormComponent,},
