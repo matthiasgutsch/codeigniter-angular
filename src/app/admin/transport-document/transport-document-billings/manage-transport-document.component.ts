@@ -13,7 +13,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { Billings } from 'src/app/models/billings';
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import { PARAM_BILLINGS_PATH, PARAM_CHECKINS_PATH } from '../../constants/constants';
+import { PARAM_BILLINGS_PATH, PARAM_CHECKINS_PATH, PARAM_TRANSPORT_DOCUMENTS_PATH } from '../../constants/constants';
 
 @Component({
   selector: "app-manage-transport-document",
@@ -107,7 +107,7 @@ export class ManageTransportDocumentComponent implements OnInit {
 
   getRequestParams(searchTitle, categoryTitle, clientTitle, page, pageSize): any {
     // tslint:disable-next-line:prefer-const
-    let path = PARAM_BILLINGS_PATH;
+    let path = PARAM_TRANSPORT_DOCUMENTS_PATH;
     const params = {};
     let adder = '?';
     if (page) {
