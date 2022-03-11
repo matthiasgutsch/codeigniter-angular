@@ -68,6 +68,8 @@ import { PurchaseOrdersFormComponent } from './purchase-orders/purchase-orders-f
 import { ManageWarehousesCheckoutsComponent } from './warehouses/warehouse-checkouts/manage-warehouses-checkouts/manage-warehouses-checkouts.component';
 import { TransportDocumentFormComponent } from './transport-document/transport-document-form/transport-document-form.component';
 import { ManageTransportDocumentComponent } from './transport-document/transport-document-billings/manage-transport-document.component';
+import { ManageWarehousesMovementsComponent } from './warehouses-movements/manage-warehouses-movements/manage-warehouses-movements.component';
+import { WarehousesMovementsFormComponent } from './warehouses-movements/warehouses-movements-form/warehouses-movements-form.component';
 
 const routes: Routes = [
   {
@@ -97,6 +99,11 @@ const routes: Routes = [
           { path: "timesheets", component: ManageTimesheetsComponent },
           { path: "timesheets/create", component: TimesheetsFormComponent },
           { path: "timesheets/edit/:id",component: TimesheetsFormComponent,},
+
+
+          { path: "warehouse-movements", component: ManageWarehousesMovementsComponent },
+          { path: "warehouse-movements/create", component: WarehousesMovementsFormComponent },
+          { path: "warehouse-movements/edit/:id",component: WarehousesMovementsFormComponent,},
 
 
           { path: "projects", component: ManageProjectsComponent },

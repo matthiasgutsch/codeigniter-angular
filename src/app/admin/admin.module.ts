@@ -131,11 +131,18 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ManageWarehousesCheckoutsComponent } from './warehouses/warehouse-checkouts/manage-warehouses-checkouts/manage-warehouses-checkouts.component';
 import { TransportDocumentFormComponent } from './transport-document/transport-document-form/transport-document-form.component';
 import { ManageTransportDocumentComponent } from './transport-document/transport-document-billings/manage-transport-document.component';
+import { ManageWarehousesMovementsComponent } from './warehouses-movements/manage-warehouses-movements/manage-warehouses-movements.component';
+import { WarehousesMovementsFormComponent } from './warehouses-movements/warehouses-movements-form/warehouses-movements-form.component';
+
+
+
 @NgModule({
   declarations: [
     ManageProjectsComponent,
     ProjectsFormComponent,   
     AdminDashboardComponent,
+    ManageWarehousesMovementsComponent,
+    WarehousesMovementsFormComponent,
     ManageWarehousesComponent,
     ManageSuppliersComponent,
     SuppliersFormComponent,
