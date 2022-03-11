@@ -10,6 +10,7 @@ export const LOCATIONS_API = environment.baseUrl + APP_API + "locations";
 
 
 export const PARAM_WORKS_PATH = '/admin/settings/works/'
+export const PARAM_WAREHOUSES_PATH = '/admin/settings/warehouses/'
 export const PARAM_CHECKINS_PATH = '/admin/checkins/'
 export const PARAM_CHECKOUTS_PATH = '/admin/checkouts/'
 export const PARAM_TIMESHEETS_PATH = '/admin/timesheets/'

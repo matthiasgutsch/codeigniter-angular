@@ -26,6 +26,8 @@ import { CalendarComponent } from 'ng-fullcalendar';
 import { LazyLoadEvent } from 'primeng/api';
 import { WarehousesService } from 'src/app/services/warehouses.service';
 import { Warehouses } from 'src/app/models/warehouses';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PARAM_WAREHOUSES_PATH, PARAM_WORKS_PATH } from 'src/app/admin/constants/constants';
 
 @Component({
   selector: 'app-manage-warehouses',
@@ -74,7 +76,17 @@ export class ManageWarehousesComponent implements OnInit {
     this.productDialog = true;
   }
   currentUser: any;
+  nameFilter: string;
+  descriptionFilter: string;
+  page = 1;
+  count = 0;
+  pageSize = 10;
+  pageSizes = [5, 10, 15];
+  public base_path: string;
+  basePath: string;
+  pageOfItems: Array<any>;
 
+  
   myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en');
 
   trackByFn(index, item) {
@@ -84,124 +96,142 @@ export class ManageWarehousesComponent implements OnInit {
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
   constructor(
-    private clientsService: ClientsService,
-    private appointmentsService: AppointmentsService,
-    private worksService: WorksService,
     private locationsService: LocationsService,
     private messageService: MessageService,
+    private router: Router,
+    private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
     private employeesService: EmployeesService,
-    private comuniService: ComuniService,
     private warehousesService: WarehousesService,
-    private categoryService: CategoryService,
     private confirmationService: ConfirmationService,) {
 
 
     this.cols = [
-      { field: "date", header: "Data" },
       { field: "title", header: "titolo" },
+      { field: "descriprion", header: "Descrizione" },
+
       { field: "category_id", header: "Cliente" }
 
     ];
-
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     this._selectedColumns = this.cols;
     this.exportColumns = this.cols.map(col => ({
       title: col.header,
       dataKey: col.field
     }));
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    
   }
 
   ngOnInit() {
+
+
+    this.basePath = window.location.pathname;
+    if (this.route.snapshot.queryParamMap.has('page')) {
+      this.page = +this.route.snapshot.queryParamMap.get('page');
+    }
+    if (this.route.snapshot.queryParamMap.has('size')) {
+      this.pageSize = +this.route.snapshot.queryParamMap.get('size');
+    }
+    if (this.route.snapshot.queryParamMap.has('name')) {
+      this.nameFilter = this.route.snapshot.queryParamMap.get('name');
+    }
+    if (this.route.snapshot.queryParamMap.has('description')) {
+      this.descriptionFilter = this.route.snapshot.queryParamMap.get('description');
+    }
+
+    this.load();
+
+
     const userId = this.currentUser.user_id;
-    this.warehousesService.getAllListbyUser().subscribe(data => {
-      this.warehouses = data;
-      this.getClients();
-      this.getWorks();
+  }
+
+  handlePageSizeChange(event): void {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.load();
+  }
+
+  reset(): void {
+    this.nameFilter = '';
+    this.descriptionFilter = '';
+    this.load();
+    
+  }
+  
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+}
+
+public handlePageChange(event): void {
+  this.page = event;
+  this.load();
+
+}
+
+  public selectionItemForFilter(e) {
+    const colsTempor = e.value;
+    colsTempor.sort(function (a, b) {
+      return a.index - b.index;
     });
+    this.cols = [];
+    this.cols = colsTempor;
+    if (e.value.length > 10) {
+      e.value.pop();
+    }
   }
 
 
-
-
-
-  getClients() {
-    const userId = this.currentUser.user_id;
-    this.clientsService.getAllListbyUser().subscribe(
-      (data: Clients) => this.clients = data,
-      error => this.error = error
-    );
-
+getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
+  // tslint:disable-next-line:prefer-const
+  let path = PARAM_WAREHOUSES_PATH;
+  const params = {};
+  let adder = '?';
+  if (page) {
+    params[`page`] = page - 1;
+    path += adder + 'page=' + (page - 1);
+    adder = '&';
   }
-
-  getEmployees() {
-    const userId = this.currentUser.user_id;
-    this.employeesService.getAllList().subscribe(
-      (data: Employees) => this.employees = data,
-      error => this.error = error
-    );
+  if (searchTitle) {
+    params[`name`] = searchTitle;
+    path += adder + 'name=' + searchTitle;
+    adder = '&';
   }
-
-  getWorks() {
-    this.worksService.getAllListbyUser().subscribe(
-      (data: Works) => this.works = data,
-      error => this.error = error
-    );
+  if (categoryTitle) {
+    params[`description`] = categoryTitle;
+    path += adder + 'description=' + categoryTitle;
+    adder = '&';
   }
-
-  getLocations() {
-    const userId = this.currentUser.user_id;
-    this.locationsService.getAllList().subscribe(
-      (data: Locations) => this.locations = data,
-      error => this.error = error
-    );
+  if (pageSize) {
+    params[`size`] = pageSize;
+    path += adder + 'size=' + pageSize;
   }
-
-  getComuni() {
-    const userId = this.currentUser.user_id;
-    this.comuniService.getAllList().subscribe(
-      (data: Comuni) => this.comuni = data,
-      error => this.error = error
-    );
-  }
-
-  getCategories() {
-    const userId = this.currentUser.user_id;
-    this.categoryService.getAllList().subscribe(
-      (data: Category) => this.categories = data,
-      error => this.error = error
-    );
-  }
+  window.history.replaceState({}, '', path);
+  
+  return params;
+  
+}
 
 
-  getCategoryItem(category_id: string, id: string) {
-    return this.clients.find(item => item.id === category_id);
-  }
+load(): void {
+  
+  const params = this.getRequestParams(
+    this.nameFilter,
+    this.descriptionFilter,
+    this.page,
+    this.pageSize
+  );
+  this.warehousesService.getAllListNew(params).subscribe((pData) => {
+    this.warehouses = pData;
+    this.count = this.warehousesService.size;
+    
+  });
+}
 
-
-
-
-  getEmployeeItem(employee_id: string, id: string) {
-    return this.employees.find(item => item.id === employee_id);
-  }
-
-
-
-  getLocationItem(location_id: string, id: string) {
-    return this.locations.find(item => item.id === location_id);
-  }
-
-
-
-  getWorksItem(works_id: string, id: string) {
-    return this.works.find(item => item.id === works_id);
-  }
-
-
-  getComuniItem(category_id: string, id: string) {
-    return this.comuni.find(item => item.id === category_id);
-  }
-
+private onChange(item: string): void {
+  this.load();
+  
+}
 
   editProduct(warehouse: Warehouses) {
     this.warehouse = { ...warehouse };
@@ -209,52 +239,9 @@ export class ManageWarehousesComponent implements OnInit {
     this.productDialog = true;
   }
 
-
-  exportPdf() {
-    // const doc = new jsPDF();
-    const doc = new jsPDF('l', 'pt', 'A4');
-    doc['autoTable'](this.exportColumns, this.warehouses);
-    // doc.autoTable(this.exportColumns, this.products);
-    doc.save("appointments.pdf");
-  }
-
-
-  showCalendar() {
-    this.calendarDialog = true;
-
-  }
-
-  clickButton(model: any) {
-    this.displayEvent = model;
-
-  }
-  eventClick(model: any) {
-    model = {
-      event: {
-        id: model.event.id,
-        start: model.event.start,
-        title: model.event.title,
-        works_id: model.event.works_id.split(','),
-        location_id: model.event.location_id,
-        employee_id: model.event.employee_id,
-        allDay: model.event.allDay,
-        description: model.event.description,
-        category_id: model.event.category_id
-
-        // other params
-      },
-      duration: {}
-    }
-    this.displayEvent = model;
-    this.productDialog = true;
-
-  }
-
-  dayClick(event) {
-    console.log('dayClick', event);
-  }
-
-
+ 
+ 
+  
   hideDialog() {
     this.productDialog = false;
   }
