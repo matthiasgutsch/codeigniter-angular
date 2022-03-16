@@ -309,6 +309,19 @@ export class AdminDashboardComponent implements OnInit {
 
   }
 
+  getProjects() {
+    const params = this.getRequestParams(
+      this.nameFilter = '',
+      this.descriptionFilter = '',
+      this.page = 1,
+      this.pageSize = 2
+    );
+    this.projectsService.getAllListNew(params).subscribe((pData) => {      
+      this.projects = pData;
+      this.count = this.projectsService.size;
+      
+    });
+  }
 
 
   getLastWarehouseCheckins() {
@@ -325,19 +338,21 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
-  getProjects() {
-    this.projectsService.getAllListbyUser().subscribe(data => {
-      this.projects = Object.values(data).slice(0,2);
+
+  getSupports() {
+    const params = this.getRequestParams(
+      this.nameFilter = '',
+      this.descriptionFilter = '',
+      this.page = 1,
+      this.pageSize = 3
+    );
+    this.supportsService.getAllListNew(params).subscribe((pData) => {      
+      this.supports = pData;
+      this.count = this.supportsService.size;
+      
     });
   }
 
-  getSupports() {
-    const userId = this.currentUser.user_id;
-    this.supportsService.getActive(+userId).subscribe(
-      (data: Supports) => this.supports = data,
-      error => this.error = error
-    );
-  }
 
 
 
