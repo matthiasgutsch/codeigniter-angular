@@ -664,15 +664,15 @@ hr.full {
   .logo-wrapper {
     float: left;
     margin-left: 0px;
-    top: 10px;
+    top: 8px;
     position: relative;
-    height: 20px;
+    height: 30px;
     padding-right: 15px;
     border-left: 0px solid #ccc;
     font-size: 26px;
     font-weight: bold;
     img {
-      height: 20px;
+      height: 30px;
     }
 
 
@@ -750,18 +750,34 @@ hr.full {
 
 .login-wrap {
   height: 100vh;
-  background-color: @ness_color_2;
+  background-color: @ness_color_3;
   position: relative;
 }
 
 .login-box {
   position: absolute;
   right: 0px;
-  box-shadow: @shadow;
-  background-color: #FFF;
+  background: #fafafa url(src/assets/images/bg.svg);
+  background-size: 200%;
+  background-position: top right;
   width: 100%;
   max-width: 50%;
   height: 100%;
+
+  .logo-wrapper {
+    float: left;
+    margin-left: 0px;
+    top: 8px;
+    height: 50px;
+    border-left: 0px solid #ccc;
+    margin-bottom: 30px;
+    img {
+      height: 50px;
+    }
+
+  }
+
+
   .alert.alert-danger {
     background-color: @red;
     margin-bottom: 10px;
@@ -770,10 +786,30 @@ hr.full {
     border-radius: @radius;
   }
   .login-box-inner {
-    padding: 30px 20px;
+    padding: 40px 40px;
     width: 70%;
+    background-color: #FFF;
+    box-shadow: @shadow;
     margin: 0 auto;
     margin-top: 30%;
+    border-radius: @radius;
+
+    input {
+      width: 100%;
+      line-height: 2;
+      border-radius: @radius;
+    }
+
+    button {
+      width: 100%;
+    display: block;
+    border: none;
+    border-radius: @radius;
+    color: white;
+    height: 40px;
+    background-color: @ness_color_4;
+
+    }
     h1 {
       span {
         font-family: "Circular";
