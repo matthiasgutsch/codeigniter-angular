@@ -151,6 +151,27 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
 
+  public getAllTimesheetsbyProject(pars: any, id: ID): Observable<T[]> {
+    let params = new HttpParams();
+    const userId = this.currentUser.user_id;
+    params = this.getParams(params, pars);
+    return this._http
+      .get<HttpResponse<T[]>>(this._base + '/timesheets_by_project/' + id + '/' + userId, {
+        observe: 'response',
+        params,
+      })
+      .pipe(
+        map((res) => {
+          this.size =
+            res.headers.get('x-total-count') != null ? +res.headers.get('x-total-count') : 0;
+          const ts: any = res.body;
+          return ts;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+
 
 
   getAllListbyUser() {
@@ -167,12 +188,7 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     );
   }
 
-  getAllTimesheetsbyProject(id: number) {
-    const userId = this.currentUser.user_id;
-    return this._http.get<T>(this._base + '/timesheets_by_project/' + id + '/' + userId).pipe(
-      catchError(this.handleError)
-    );
-  }
+
 
   count() {
     const userId = this.currentUser.user_id;

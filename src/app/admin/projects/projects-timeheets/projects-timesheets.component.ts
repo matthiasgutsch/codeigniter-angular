@@ -23,7 +23,7 @@ import { TimesheetsService } from 'src/app/services/timesheets.service';
 import { Products } from 'src/app/models/products';
 import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brands.service';
-import { STATUS_PRODUCTS } from '../../constants/constants';
+import { PARAM_CHECKINS_PATH, PARAM_PROJECTS_TIMESHEET_PATH, STATUS_PRODUCTS } from '../../constants/constants';
 import { Table } from 'primeng/table';
 import { NgxSpinnerService } from "ngx-spinner";
 import { TagsService } from 'src/app/services/tags.service';
@@ -111,6 +111,19 @@ weekNo: number;
 projects: any = [];
 project: Projects;
 
+
+page = 1;
+count = 0;
+pageSize = 10;
+pageSizes = [5, 10, 15];
+public base_path: string;
+basePath: string;
+pageOfItems: Array<any>;
+searchWrapper: boolean = false;
+nameFilter: string;
+descriptionFilter: string;
+
+
 @ViewChild("dt", { static: false }) public dt: Table;
 @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
@@ -142,39 +155,35 @@ project: Projects;
     const yearMonth = dateObj.getUTCFullYear() + '-' + (dateObj.getUTCMonth() + 1);
 
     const userId = this.currentUser.user_id;
-    this.spinner.show();
    
 
+    this.basePath = window.location.pathname;
+    if (this.route.snapshot.queryParamMap.has('page')) {
+      this.page = +this.route.snapshot.queryParamMap.get('page');
+    }
+    if (this.route.snapshot.queryParamMap.has('size')) {
+      this.pageSize = +this.route.snapshot.queryParamMap.get('size');
+    }
+    if (this.route.snapshot.queryParamMap.has('name')) {
+      this.nameFilter = this.route.snapshot.queryParamMap.get('name');
+    }
+    if (this.route.snapshot.queryParamMap.has('description')) {
+      this.descriptionFilter = this.route.snapshot.queryParamMap.get('description');
+    }
+
+
     const id = this.route.snapshot.paramMap.get("id");
-
     this.projectsService.getId(+id).subscribe((res) => {
-
       this.project = res;
-
-    });
-
-    this.timesheetsService.getAllTimesheetsbyProject(+id).subscribe(data => {
-      this.timesheets = data;
-      this.getEmployees();
-
-      this.spinner.hide();
+      this.load(+id);
 
     });
 
 
+
   }
 
 
-  getEmployeeItem(employee_id: string, id: string) {
-    return this.employees.find((item) => item.id === employee_id);
-  }
-
-  getBrands() {
-  this.brandService.getAllListbyUser().subscribe(
-    (data: Brand) => this.brands = data,
-    error => this.error = error
-  );
-  }
 
 
 
@@ -227,13 +236,101 @@ project: Projects;
 
   clear(table: any) 
   {
-    
-      //  THIS DOES NOT WORK!!   Filter stops working after clearing
-      table.clear();
-      
+          table.clear();
 	} 
     
  
+
+
+  public handlePageChange(event): void {
+    this.page = event;
+    this.load(this.id);
+  
+  }
+  
+    public selectionItemForFilter(e) {
+      const colsTempor = e.value;
+      colsTempor.sort(function (a, b) {
+        return a.index - b.index;
+      });
+      this.cols = [];
+      this.cols = colsTempor;
+      if (e.value.length > 10) {
+        e.value.pop();
+      }
+    }
+
+  getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
+    // tslint:disable-next-line:prefer-const
+    let path = '/admin/projects/timesheets/' + this.project.id;
+    const params = {};
+    let adder = '?';
+    if (page) {
+      params[`page`] = page - 1;
+      path += adder + 'page=' + (page - 1);
+      adder = '&';
+    }
+    if (searchTitle) {
+      params[`name`] = searchTitle;
+      path += adder + 'date_from=' + searchTitle;
+      adder = '&';
+    }
+    if (categoryTitle) {
+      params[`description`] = categoryTitle;
+      path += adder + 'date_to=' + categoryTitle;
+      adder = '&';
+    }
+    if (pageSize) {
+      params[`size`] = pageSize;
+      path += adder + 'size=' + pageSize;
+    }
+    window.history.replaceState({}, '', path);
+
+    return params;
+
+  }
+
+
+  load(id): void {
+
+
+    const params = this.getRequestParams(
+      this.nameFilter,
+      this.descriptionFilter,
+      this.page,
+      this.pageSize
+    );
+    this.timesheetsService.getAllTimesheetsbyProject(params, id).subscribe((pData) => {
+      this.timesheets = pData;
+      this.count = this.timesheetsService.size;
+
+    });
+  }
+
+  handlePageSizeChange(event): void {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.load(this.id);
+  }
+
+  reset(): void {
+    this.nameFilter = '';
+    this.descriptionFilter = '';
+    this.load(this.id);
+    
+  }
+  
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+}
+
+  private onChange(item: string): void {
+    this.load(this.id);
+
+  }
+
+
   getEmployees() {
     this.employeesService.getAllListbyUser().subscribe(
       (data: Employees) => (this.employees = data),

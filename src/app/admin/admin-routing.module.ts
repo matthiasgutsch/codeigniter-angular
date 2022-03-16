@@ -214,7 +214,7 @@ const routes: Routes = [
 
           { path: "tasks", component: TasksComponent },
           { path: "projects/task/:project_id", component: TasksComponent },
-          { path: "projects/timesheet/:id", component: ProjectsTimesheetsComponent },
+          { path: "projects/timesheets/:id", component: ProjectsTimesheetsComponent },
           { path: "projects/productivity/:id", component: ProjectsProductivityComponent },
 
           { path: "wordpress-orders", component: ManageWordpressOrdersComponent },
