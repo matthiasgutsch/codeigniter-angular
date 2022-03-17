@@ -85,14 +85,14 @@
 
                             <td width="50">
                                 <app-initials-avatar
-                                    firstName="{{ getTechnicalDataItem(timesheet.employee_id)?.name | slice:0:1}}"
-                                    lastName="{{ getTechnicalDataItem(timesheet.employee_id)?.surname | slice:0:1}}">
+                                    firstName="{{  timesheet.employee.name | slice:0:1}}"
+                                    lastName="{{  timesheet.employee.surname | slice:0:1}}">
                                 </app-initials-avatar>
                             </td>
                             <td>
 
-                                {{ getTechnicalDataItem(timesheet.employee_id)?.name }}
-                                {{ getTechnicalDataItem(timesheet.employee_id)?.surname }}
+                                {{ timesheet.employee.name }}
+                                {{ timesheet.employee.surname }}
                             </td>
 
                             <td class="action">
