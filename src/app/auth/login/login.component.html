@@ -1,57 +1,55 @@
 <section class="login-wrap mtb-40">
-    <div class="login-box" *ngIf="!error">
+  <div class="login-box" *ngIf="!error">
 
-      <div class="login-box-inner">
+    <div class="login-box-inner">
 
-       
-          <div class="p-field">
+      <div class="p-grid">
+        <div class="p-col-12">
+          <img src="../../../assets/images/logo.png" class="logo-wrapper">
+        </div>
+      </div>
+      <div class="p-grid" *ngIf="loginError">
+        <div class="p-col-12">
 
-            <img src="../../../assets/images/logo.png" class="logo-wrapper">
-          </div>
-          <div class="alert alert-danger" *ngIf="loginError">
+          <div class="alert alert-danger">
             {{loginError}}
           </div>
-          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <div class="p-fluid">
-
-              <div class="p-field">
-
-              
-              <input type="text" pInputText  formControlName="username" class="form-control" placeholder="Username" required>
-              <div *ngIf="username.invalid && (username.dirty || username.touched)" class="error">
-                <div *ngIf="username.errors">
-                  Username is required.
-                </div>
-              </div>
-            </div>
-            <div class="p-field">
-              <input type="password"  pInputText  formControlName="password" class="form-control" placeholder="Password" required>
-              <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error">
-                <div *ngIf="password.errors">
-                  Password is required.
-                </div>
-              </div>
-            </div>
-            <div class="p-field">
-              <button
-              pButton
-              pRipple
-              label="login"
-              class="p-button p-button-primary btn-block"
-              [disabled]="!loginForm.valid"
-              ></button>
-            </div>
-            </div>
-          </form>
         </div>
-     
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="p-fluid">
+
+          <div class="p-field">
+
+            <input type="text" pInputText formControlName="username" class="form-control" placeholder="Username"
+              required>
+            <div *ngIf="username.invalid && (username.dirty || username.touched)" class="error">
+              <div *ngIf="username.errors">
+                Username is required.
+              </div>
+            </div>
+          </div>
+          <div class="p-field">
+            <input type="password" pInputText formControlName="password" class="form-control" placeholder="Password"
+              required>
+            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error">
+              <div *ngIf="password.errors">
+                Password is required.
+              </div>
+            </div>
+          </div>
+          <div class="p-field">
+            <button pButton pRipple label="login" class="p-button p-button-primary btn-block"
+              [disabled]="!loginForm.valid"></button>
+          </div>
+        </div>
+      </form>
+    </div>
 
     <div class="service-error" *ngIf="error">
       <h1>{{error.errorTitle}}</h1>
       <h3>{{error.errorDesc}}</h3>
     </div>
 
-       
-
-    
-    </div></section>
+  </div>
+</section>
