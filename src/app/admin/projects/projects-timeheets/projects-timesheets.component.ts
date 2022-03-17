@@ -175,7 +175,7 @@ descriptionFilter: string;
     const id = this.route.snapshot.paramMap.get("id");
     this.projectsService.getId(+id).subscribe((res) => {
       this.project = res;
-      this.load(+id);
+      this.load();
 
     });
 
@@ -244,7 +244,7 @@ descriptionFilter: string;
 
   public handlePageChange(event): void {
     this.page = event;
-    this.load(this.id);
+    this.load();
   
   }
   
@@ -291,7 +291,7 @@ descriptionFilter: string;
   }
 
 
-  load(id): void {
+  load(): void {
 
 
     const params = this.getRequestParams(
@@ -300,7 +300,7 @@ descriptionFilter: string;
       this.page,
       this.pageSize
     );
-    this.timesheetsService.getAllTimesheetsbyProject(params, id).subscribe((pData) => {
+    this.timesheetsService.getAllTimesheetsbyProject(params, this.project.id).subscribe((pData) => {
       this.timesheets = pData;
       this.count = this.timesheetsService.size;
 
@@ -310,13 +310,13 @@ descriptionFilter: string;
   handlePageSizeChange(event): void {
     this.pageSize = event.target.value;
     this.page = 1;
-    this.load(this.id);
+    this.load();
   }
 
   reset(): void {
     this.nameFilter = '';
     this.descriptionFilter = '';
-    this.load(this.id);
+    this.load();
     
   }
   
@@ -326,7 +326,7 @@ descriptionFilter: string;
 }
 
   private onChange(item: string): void {
-    this.load(this.id);
+    this.load();
 
   }
 
