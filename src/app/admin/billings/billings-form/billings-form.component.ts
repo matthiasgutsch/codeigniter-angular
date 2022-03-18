@@ -274,6 +274,7 @@ export class BillingsFormComponent implements OnInit {
       }
   
       this.filteredProductsVariations = filtered;
+      
     }
 
     

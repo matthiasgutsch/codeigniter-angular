@@ -260,19 +260,21 @@
                                         <td width="20px" cdkDrag>{{i + 1}}. </td>
                                     <td>
                                       
-                                        <p-autoComplete *ngIf="!editForm" (input)="itemsChanged()"  formControlName="description" [suggestions]="filteredProductsVariations" (completeMethod)="filterCountry($event)" field="code" [minLength]="1">
+                                        <p-autoComplete *ngIf="!editForm" (input)="itemsChanged()" [dropdown]="true"  formControlName="description" [suggestions]="filteredProductsVariations" (completeMethod)="filterCountry($event)" field="code" [minLength]="1">
                                             <ng-template let-productsVariation pTemplate="item">
                                                 <div class="p-grid">
                                                 <div class="p-col">{{productsVariation.code}}</div>
                                                 <div class="p-col">{{productsVariation.title}} </div>
                                                 <div class="p-col">{{productsVariation.description}}</div>
+                                                <div class="p-col">{{productsVariation.price}}</div>
+
                                               </div>
                                             </ng-template>
 
 
                                         </p-autoComplete>
 
-
+                                            
 
                               
 
