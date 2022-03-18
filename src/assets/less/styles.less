@@ -233,7 +233,7 @@ p a {
   z-index: 1;
   top: 0;
   left: 0;
-  background: #0D152E;
+  background: #071c4d;
   overflow-x: hidden;
   transition: 0.1s;
   padding-top: 0px;
@@ -788,19 +788,21 @@ hr.full {
 
 .login-wrap {
   height: 100vh;
-  background-color: @ness_color_2;
+  background: @ness_color_2 url(src/assets/images/page-header-bg.svg)no-repeat right bottom;
   position: relative;
 }
 
 .login-box {
-  position: absolute;
-  right: 0px;
-  background: #fafafa url(src/assets/images/bg.svg);
-  background-size: 200%;
-  background-position: top right;
+  background-size: 100%;
   width: 100%;
-  max-width: 50%;
+  max-width: 500px;
   height: 100%;
+  position: absolute;
+  width: 600px;
+  left: 50%;
+  margin-left: -300px;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 8%);
+  border-radius: 6px;
 
   .logo-wrapper {
     float: left;
@@ -824,8 +826,8 @@ hr.full {
     border-radius: @radius;
   }
   .login-box-inner {
-    padding: 40px 40px;
-    width: 50%;
+    padding: 30px 30px;
+    width: 100%;
     background-color: #FFF;
     box-shadow: @shadow;
     margin: 0 auto;
