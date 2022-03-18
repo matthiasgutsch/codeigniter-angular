@@ -579,10 +579,13 @@ ul.nav-menu-mobile {
 
   .p-card {
     background-color: @ness_color_2;
-    color: @white;
+    color: fade(@white,60%);
 
+    .p-card-body {
+      padding: 25px;
     h4 {
       color: @white;
+    }
     }
   }
 }
