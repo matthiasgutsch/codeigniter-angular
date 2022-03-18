@@ -9,6 +9,8 @@
                         <h3>{{pageTitle}}</h3>
                     </div>
                     <div class="p-col-12 p-md-8">
+
+                        
                         <button pButton pRipple icon="pi pi-save" [disabled]="!blogForm.valid" label="Salva"
                             class="p-button pull-right p-button-success"></button>
     
@@ -30,6 +32,9 @@
                                 <button pButton pRipple type="button"
                                 (click)="editFormItems()" label="Modifica"
                                     class="p-button p-button-success  pull-right p-mr-2"></button>
+
+                                    <button pButton pRipple icon="pi pi-chevron-left" [routerLink]="['/admin/orders/']"
+                                    label="Torna indietro" class="p-button p-button-goback pull-right p-mr-2"></button>
     
                     </div>
                 </div>
