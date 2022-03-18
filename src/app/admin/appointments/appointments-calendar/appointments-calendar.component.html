@@ -9,7 +9,8 @@
                 </div>
                 <div class="p-col-6 p-md-6">
                    
-
+                    <button pButton pRipple [routerLink]="['/admin/appointments']"
+                    label="Torna indietro" class="p-button p-button-primary p-mr-2 pull-right"></button>
                 </div>
             </div>
 
@@ -22,311 +23,26 @@
 
 <div class="p-grid">
 
+
     <div class="p-col-12 p-md-12">
-
-        <div class="p-field p-grid">
-
-            <div class="p-col-12 p-md-3">
-
-                <p-card>
-
-                    <div class="p-grid">
-                        <div class="p-col-6 p-md-6">
-
-                            <h4 class="mb-0">Clienti</h4>
-                            Totale: {{clientsCount}}
-
-                        </div>
-
-                        <div class="p-col-6 p-md-6">
-
-                            <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']"
-                                routerLinkActive="active" class="p-button p-button-success pull-right"></button>
-
-                            <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/clients']"
-                                routerLinkActive="active" class="p-button p-button-primary pull-right p-mr-2"></button>
-
-                        </div>
-                    </div>
-                </p-card>
-            </div>
-            <div class="p-col-12 p-md-3">
-
-                <p-card>
-
-                    <div class="p-grid">
-                        <div class="p-col-6 p-md-6">
-                            <h4 class="mb-0">Appuntamenti</h4>
-                            Totale: {{appointmentsCount}}
-
-                        </div>
-                        <div class="p-col-6 p-md-6">
-
-                            <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']"
-                                routerLinkActive="active" class="p-button p-button-success pull-right"></button>
-                            <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/appointments']"
-                                routerLinkActive="active" class="p-button p-button-primary p-mr-2 pull-right"></button>
-                        </div>
-                    </div>
-                </p-card>
-
-            </div>
-
-            <div class="p-col-12 p-md-3">
-
-                <p-card>
-
-                    <div class="p-grid">
-                        <div class="p-col-6 p-md-6">
-                            <h4 class="mb-0">Fatturazione</h4>
-                            {{billingsCountTotal | currency :'EUR':'symbol':'1.2-2'}} <strong></strong>
-
-                            <!-- <span class="red" *ngIf="billingsCountTotalNotPaid > 0"> ({{billingsCountTotalNotPaid |  currency :'EUR':'symbol':'1.2-2'}})</span> -->
-                        </div>
-                        <div class="p-col-6 p-md-6">
-
-                            <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/billings/create']"
-                                routerLinkActive="active" class="p-button p-button-success pull-right"></button>
-                            <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/billings']"
-                                routerLinkActive="active" class="p-button p-button-primary p-mr-2 pull-right"></button>
-                        </div>
-                    </div>
-                </p-card>
-            </div>
-            <div class="p-col-12 p-md-3">
-
-                <p-card>
-
-                    <div class="p-grid">
-                        <div class="p-col-6 p-md-6">
-
-                            <h4 class="mb-0">Prodotti</h4>
-                            Totale: {{productsCount}}
-
-                        </div>
-
-                        <div class="p-col-6 p-md-6">
-
-                            <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/products/create']"
-                                routerLinkActive="active" class="p-button p-button-success pull-right"></button>
-                            <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/products']"
-                                routerLinkActive="active" class="p-button p-button-primary pull-right p-mr-2"></button>
-                        </div>
-                    </div>
-                </p-card>
-
-            </div>
-        </div>
-
-    </div>
-
-    <div class="p-col-12 p-md-6">
         <p-card>
 
-            <p-tabView class="responsive-tab-view">
-                <p-tabPanel header="Calendario">
-
-                    <div *ngIf="calendarOptions">
-                        <ng-fullcalendar #ucCalendar [options]="calendarOptions"
-                            (eventClick)="eventClick($event.detail)"
-                            (dayClick)="dayClick($event.detail)"
-                            (eventRender)="eventRender($event.detail)">
-                        </ng-fullcalendar>
-                    </div>
-
-                </p-tabPanel>
-
-                <p-tabPanel header="Report Fatturazione mensile">
-                    <canvas id="myChart" width="600" height="350" #mychart></canvas>
-
-                </p-tabPanel>
-
-            </p-tabView>
-
+            <div *ngIf="calendarOptions">
+                <ng-fullcalendar #ucCalendar [options]="calendarOptions"
+                    (eventClick)="eventClick($event.detail)"
+                    (dayClick)="dayClick($event.detail)"
+                    (eventRender)="eventRender($event.detail)">
+                </ng-fullcalendar>
+            </div>
         </p-card>
     </div>
 
-    <div class="p-col-12 p-md-6">
-
-        <p-card>
-
-            <div class="p-field p-grid">
-                <div class="p-col-12 p-md-8">
-                   
-                    <h3>Appuntamenti Oggi</h3>
-                </div>
-                <div class="p-col-12 p-md-4">
-
-                <button pButton pRipple icon="pi pi-plus" label="aggiungi"
-                class="p-button p-button-add p-mr-2 pull-right"
-                [routerLink]="['/admin/appointments/create']"></button>
-                </div>
-            </div>
-            <hr class="full">
-
-            <p-table #dt1 [value]="appointmentsToday" [responsive]="true" [paginator]="false" [rows]="10">
-
-                <ng-template pTemplate="body" let-appointment>
-                    <tr>
-                        <td width="100">
-                            <p-tag value="{{appointment.time}}" severity="warning"></p-tag>
-                        </td>
-
-                        <td width="50">
-                            <app-initials-avatar (click)="editProduct(appointment)"
-                                firstName="{{ appointment.client.name | slice:0:1}}"
-                                lastName="{{ appointment.client.surname | slice:0:1}}">
-                            </app-initials-avatar>
-                        </td>
-                        <td> {{ appointment.client.name }}
-                            {{ appointment.client.surname }}</td>
-
-                        <td>{{appointment.title}}</td>
-                    </tr>
-                </ng-template>
-            </p-table>
-
-        </p-card>
-
-
-        <p-card>
-
-            <div class="p-field p-grid">
-
-                <div class="p-col-12 p-md-12">
-
-                    <p-tabView class="responsive-tab-view">
-                        <p-tabPanel header="Ultimi Movimenti Magazzino">
-
-                            <p-table #dt1 [value]="warehouseCheckins" [responsive]="true" [paginator]="false" [rows]="10">
-
-                                <ng-template pTemplate="body" let-warehouseCheckin>
-                                    <tr>
-
-                                        <td width="200">
-                                            <i class="pi pi-calendar"></i> {{warehouseCheckin.created_at}}
-                                         </td>
-                                   
-                                 
-            
-                              
-            
-                                        <td>
-                                            <p-tag severity="default" [value]="warehouseCheckin.pieces + ' pezzi'" class="p-mr-2"></p-tag>
-                                            <p-tag severity="success" [value]="warehouseCheckin.boxes + ' colli'"></p-tag></td>
-            
-                                            <td width="80"> <img *ngIf="warehouseCheckin.image" class="img-responsive" src="{{ warehouseCheckin.image}}"></td>
-                                       <td>  
-                                           
-                                        <p class="small"><strong>{{ warehouseCheckin.product.code_int}}</strong></p> 
-                                        <p class="small" *ngIf="warehouseCheckin.supplier_id">{{ warehouseCheckin.supplier_id.company_name}}</p></td>
-                                   
-                                   
-                                    </tr>
-                                </ng-template>
-                            </p-table>
-
-                        </p-tabPanel>
-                    </p-tabView>
-                </div>
-            </div>
-                
-        </p-card>
-
-        <p-card>
-
-            <div class="p-field p-grid">
-
-                <div class="p-col-12 p-md-12">
-
-                    <p-tabView class="responsive-tab-view">
-                        <p-tabPanel header="Progetti">
-                            <p-table #dt1 [value]="projects" [responsive]="true" [paginator]="false" [rows]="10">
-
-                                <ng-template pTemplate="body" let-project>
-                                    <tr>
-
-                                        <td width="50">
-                                            <app-initials-avatar firstName="{{project.code_int | slice: 0:1}}"
-                                                lastName="{{project.code_int | slice: 1:2}}">
-                                            </app-initials-avatar>
-                                        </td>
-
-                                        <td>
-
-                                            <strong>{{project.title}}</strong>
-                                            <div class="clearifix"></div>
-                                            <p class="detail">
-                                            <i class="pi pi-calendar"></i> {{project.date_from}} al {{project.date_to}}
-                                            </p>
-                                        </td>
-
-                                        <td width="120"><i class="pi pi-clock"></i> {{project.time}}</td>
-
-                                        <td>
-
-                                            <button pButton pRipple icon="pi pi-chart-line"
-                                                class="p-button p-button-secondary p-mr-2"
-                                                [routerLink]="['/admin/projects/productivity/', project.id]"></button>
-
-                                            <button pButton pRipple icon="pi pi-clock"
-                                                class="p-button p-button-primary p-mr-2"
-                                                [routerLink]="['/admin/projects/timesheet/', project.id]"></button>
-
-                                            <button pButton pRipple icon="pi pi-clone"
-                                                class="p-button p-button-warning p-mr-2"
-                                                [routerLink]="['/admin/projects/task/', project.id]"></button>
-
-                                            <button pButton pRipple icon="pi pi-pencil"
-                                                class="p-button p-button-success p-mr-2"
-                                                [routerLink]="['/admin/projects/edit/', project.id]"></button>
-                                        </td>
-                                    </tr>
-                                </ng-template>
-                            </p-table>
-
-                        </p-tabPanel>
-
-                        <p-tabPanel header="Helpdesk">
-
-                            <p-table #dt1 [value]="supports" [responsive]="true" [paginator]="false" [rows]="10">
-
-                                <ng-template pTemplate="body" let-support>
-                                    <tr>
-
-                                        <td width="200">
-
-                                            <p-tag severity="success" *ngIf="support.is_active === '1'"
-                                                value="Ticket aperto" class="p-mr-2"></p-tag>
-                                            <p-tag severity="danger" *ngIf="support.is_active === '0'"
-                                                value="Ticket chiuso" class="p-mr-2"></p-tag>
-
-                                            <p-tag value="{{support.date | date: 'dd/MM/yyyy' }}" severity="warning">
-                                            </p-tag>
-                                        </td>
-
-                                        <td>{{support.title}}</td>
-
-                                        <td width="60">
-                                            <button pButton pRipple icon="pi pi-eye"
-                                                class="p-button p-button-primary p-mr-2"
-                                                [routerLink]="['/admin/support', support.id]"></button>
-                                        </td>
-                                    </tr>
-                                </ng-template>
-                            </p-table>
-                        </p-tabPanel>
-
-                    </p-tabView>
-
-                </div>
-
-            </div>
-
-        </p-card>
-    </div>
+  
 </div>
 </div>
+
+<!-- <canvas id="myChart" width="600" height="350" #mychart></canvas> -->
+
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'50%'}">
     <ng-template pTemplate="content">
         <div class="p-col-12 p-md-12">

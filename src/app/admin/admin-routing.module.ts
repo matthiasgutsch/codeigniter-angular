@@ -70,6 +70,7 @@ import { TransportDocumentFormComponent } from './transport-document/transport-d
 import { ManageTransportDocumentComponent } from './transport-document/transport-document-billings/manage-transport-document.component';
 import { ManageWarehousesMovementsComponent } from './warehouses-movements/manage-warehouses-movements/manage-warehouses-movements.component';
 import { WarehousesMovementsFormComponent } from './warehouses-movements/warehouses-movements-form/warehouses-movements-form.component';
+import { AppointmentsCalendarComponent } from './appointments/appointments-calendar/appointments-calendar.component';
 
 const routes: Routes = [
   {
@@ -113,8 +114,7 @@ const routes: Routes = [
           { path: "appointments", component: ManageAppointmentsComponent },
           { path: "appointments/create", component: AppointmentsFormComponent },
           { path: "appointments/edit/:id",component: AppointmentsFormComponent,},
-
-
+          { path: "appointments/calendar", component: AppointmentsCalendarComponent },
 
 
           { path: "checkins", component: ManageWarehousesCheckinsComponent },

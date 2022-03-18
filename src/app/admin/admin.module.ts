@@ -133,6 +133,7 @@ import { TransportDocumentFormComponent } from './transport-document/transport-d
 import { ManageTransportDocumentComponent } from './transport-document/transport-document-billings/manage-transport-document.component';
 import { ManageWarehousesMovementsComponent } from './warehouses-movements/manage-warehouses-movements/manage-warehouses-movements.component';
 import { WarehousesMovementsFormComponent } from './warehouses-movements/warehouses-movements-form/warehouses-movements-form.component';
+import { AppointmentsCalendarComponent } from './appointments/appointments-calendar/appointments-calendar.component';
 
 
 
@@ -151,6 +152,7 @@ import { WarehousesMovementsFormComponent } from './warehouses-movements/warehou
     ManagePurchaseOrdersComponent,
     TransportDocumentFormComponent,
     WarehousesFormComponent,
+    AppointmentsCalendarComponent,
     ManageProductsVariationsComponent,
     ProductsVariationsFormComponent,
     AdminComponent,
