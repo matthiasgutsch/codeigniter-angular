@@ -97,21 +97,16 @@ trackByFn(index, item) {
 @ViewChild("dt", { static: false }) public dt: Table;
 
   constructor(
-    private clientsService: ClientsService,
     private productsService: ProductsService,
-    private worksService: WorksService,
-    private locationsService: LocationsService, 
     private messageService: MessageService,
-    private employeesService: EmployeesService,
-    private comuniService: ComuniService,
     private brandService: BrandService,
     private tagsService: TagsService,
     private technicalDataService: TechnicalDataService,
     private spinner: NgxSpinnerService,
     private categoryService: CategoryService, 
     private confirmationService: ConfirmationService,) { 
-      this.status = STATUS_PRODUCTS;
-      this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    this.status = STATUS_PRODUCTS;
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
   }
 

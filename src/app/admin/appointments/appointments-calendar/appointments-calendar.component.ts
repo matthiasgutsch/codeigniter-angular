@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
-import { BlogService } from '../../services/blog.service';
-import { Blog } from '../../models/blog';
+import { BlogService } from '../../../services/blog.service';
+import { Blog } from '../../../models/blog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DASHBOARD, PAGES, TYPE_LIST } from '../constants/constants';
+import { DASHBOARD, PAGES, TYPE_LIST } from '../../constants/constants';
 import { CategoryService } from 'src/app/services/categories.service';
 import { Category } from 'src/app/models/category';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -43,10 +43,10 @@ import { WarehousesCheckinsService } from 'src/app/services/warehouses_checkins.
 moment.locale('it')
 
 @Component({
-  selector: 'app-admin-dashboard',
-  templateUrl: './admin-dashboard.component.html'
+  selector: 'app-appointments-calendar',
+  templateUrl: './appointments-calendar.component.html'
 })
-export class AdminDashboardComponent implements OnInit {
+export class AppointmentsCalendarComponent implements OnInit {
 
   calendarOptions: any;
   events: any;
@@ -65,10 +65,6 @@ export class AdminDashboardComponent implements OnInit {
   clientsCount: any;
   supports: any = [];
   support: Supports;
-
-  products: any = [];
-  product: Products;
-
   productsCount: any;
   error: string;
   blogForm: FormGroup;
@@ -131,10 +127,11 @@ export class AdminDashboardComponent implements OnInit {
 
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
-  constructor(
+  constructor(private blogService: BlogService,
     private clientsService: ClientsService,
     private appointmentsService: AppointmentsService,
     private billingsService: BillingsService,
+    private chartsService: ChartsService,
     private spinner: NgxSpinnerService,
     private fb: FormBuilder,
     private projectsService: ProjectsService,
@@ -159,6 +156,11 @@ export class AdminDashboardComponent implements OnInit {
 
     const userId = this.currentUser.user_id;
 
+
+
+    this.appointmentsService.getAllListbyUser().subscribe(data => {
+      this.spinner.show();
+
       this.getClientsCount();
       this.getProductsCount();
       this.getBillingsCountTotal();
@@ -169,10 +171,31 @@ export class AdminDashboardComponent implements OnInit {
       this.getAppointmentsCount();
       this.getWorks();
       this.getProjects();
+      this.getChartsCount();
+      this.getChartsCountNone();
       this.getSupports();
-      this.getProducts();
+      
+      this.calendarOptions = {
+        editable: true,
+        eventLimit: false,
+        timeFormat: 'HH:mm',
+        weekNumbers: false,
+        
+        header: {
+          right: 'prev,next',
+          left: 'title',
 
-    
+        },
+        events: data,
+        eventRender: (v,el) => {console.log(v, el)},
+        locale: 'it',
+        timezone: 'UTC',
+        selectable: true,
+      };
+      this.spinner.hide();
+
+    });
+
   }
 
 
@@ -206,7 +229,85 @@ export class AdminDashboardComponent implements OnInit {
     
   }
 
-  
+  ngAfterViewInit() {
+    this.canvas = this.mychart.nativeElement;
+
+    this.ctx = this.canvas.getContext('2d');
+
+    let myChart = new Chart(this.ctx, {
+      type: 'line',
+
+      data: {
+        datasets: [{
+          type: 'line',
+          backgroundColor: "rgba(99, 162, 241,0.4)",
+          borderColor: "rgb(99, 162, 241, 0.8)",
+          fill: false,
+          label: 'Fatturato',
+          data: this.data1,
+          steppedLine: false,
+        },
+        {
+          type: 'line',
+          backgroundColor: "rgba(255, 99, 71,0.4)",
+          borderColor: "rgb(255, 99, 71, 0.8)",
+          fill: false,
+          label: 'Non incassato',
+          data: this.data2,
+          steppedLine: false,
+        }
+        ]
+      },
+      options: {
+        responsive: true,
+        title: {
+          display: false,
+          text: 'Fatturato',
+        },
+        scales: {
+          xAxes: [{
+            type: 'linear',
+            position: 'bottom',
+
+            tooltips: {
+              mode: 'index',
+              intersect: true,
+              callbacks: {
+                label: function (tooltipItem) {
+                  return tooltipItem.yLabel;
+                }
+              }
+            },
+
+            ticks: {
+              beginAtZero: false,
+              max: 12,
+              min: 1,
+              stepSize: 1
+            },
+
+
+          }],
+          yAxes: [{
+            type: 'linear',
+            ticks: {
+              userCallback: function (tick) {
+                return tick.toString() + '€';
+              }
+            },
+
+
+            scaleLabel: {
+              labelString: 'Höhe',
+              display: false
+            }
+          }]
+        }
+      }
+    });
+
+
+  }
 
   getProjects() {
     const params = this.getRequestParams(
@@ -242,7 +343,7 @@ export class AdminDashboardComponent implements OnInit {
     const params = this.getRequestParams(
       this.nameFilter = '',
       this.descriptionFilter = '',
-      this.page = 0,
+      this.page = 1,
       this.pageSize = 3
     );
     this.supportsService.getAllListNew(params).subscribe((pData) => {      
@@ -253,19 +354,47 @@ export class AdminDashboardComponent implements OnInit {
   }
 
 
-  getProducts() {
-    const params = this.getRequestParams(
-      this.nameFilter = '',
-      this.descriptionFilter = '',
-      this.page = 0,
-      this.pageSize = 3
-    );
-   this.productsService.getAllListNew(params).subscribe((pData) => {
-      this.products = pData;
-      this.count = this.productsService.size;
+
+
+
+  getChartsCount() {
+
+    this.chartsService.countCharts().subscribe(data => {
+      this.chartsCount = data;
+      var StringifyData = JSON.stringify(this.chartsCount)
+      this.chartsCount.forEach((item, index) => {
+        var obj;
+        obj = {
+          x: item.x,
+          y: item.y,
+        }
+        this.data1.push(obj)
+      });
+
+      console.log(this.chartsCountData)
+      error => this.error = error
     });
   }
 
+
+  getChartsCountNone() {
+
+    this.chartsService.countChartsNone().subscribe(data => {
+      this.chartsCountNone = data;
+      var StringifyData = JSON.stringify(this.chartsCountNone)
+      this.chartsCountNone.forEach((item, index) => {
+        var obj;
+        obj = {
+          x: item.x,
+          y: item.y,
+        }
+        this.data2.push(obj)
+      });
+
+      console.log(this.chartsCountData)
+      error => this.error = error
+    });
+  }
 
   getClientsCount() {
     const userId = this.currentUser.user_id;
