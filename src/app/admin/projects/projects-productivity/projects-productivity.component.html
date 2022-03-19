@@ -5,7 +5,7 @@
 
             <div class="p-field p-grid" *ngIf="project">
                 <div class="p-col-12 p-md-6">
-                    <h3>{{project.title}} / {{project.code_int}}</h3>
+                    <h3>Dettaglio Progetto</h3>
 
                 </div>
                 <div class="p-col-12 p-md-6">
@@ -31,10 +31,15 @@
 <div class="main-inner">
 
     <div class="p-fluid">
-        <div class="p-field p-grid">
+       
+            <div class="p-field p-grid">
 
             <div class="p-col-12 p-md-7">
+                <p-card class="blu-box">
 
+                    <h3>{{project.title}} / {{project.code_int}}</h3>
+                    <p>{{project.date_from}} - {{project.date_to}}</p>
+                    </p-card>
                 <p-card>
                     <p-tabView class="responsive-tab-view">
                         <p-tabPanel header="Produttività / Progetto">
