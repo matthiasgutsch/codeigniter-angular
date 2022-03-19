@@ -1,141 +1,161 @@
+<div class="top-main-wrapper">
 
-    <div class="top-main-wrapper">
+    <div class="dash-header">
+        <div class="dash-title">
 
-        <div class="dash-header">
-            <div class="dash-title">
-        
-                <div class="p-field p-grid" *ngIf="project">
-                    <div class="p-col-12 p-md-6">
-                        <h3 >{{project.title}} / {{project.code_int}}</h3>
-        
-                    </div>
-                    <div class="p-col-12 p-md-6">
-                
-        
-                        <button type="button" pButton pRipple label="tasks" icon="pi pi-clone" class="p-button p-button-warning pull-right  p-mr-2"
+            <div class="p-field p-grid" *ngIf="project">
+                <div class="p-col-12 p-md-6">
+                    <h3>{{project.title}} / {{project.code_int}}</h3>
+
+                </div>
+                <div class="p-col-12 p-md-6">
+
+                    <button type="button" pButton pRipple label="tasks" icon="pi pi-clone"
+                        class="p-button p-button-primary pull-right  p-mr-2"
                         [routerLink]="['/admin/projects/task/', project.id]"></button>
-        
-                        <button type="button" pButton pRipple label="Timesheets" icon="pi pi-clone" class="p-button p-button-primary pull-right  p-mr-2"
-                        [routerLink]="['/admin/projects/timesheet/', project.id]"></button>
-        
-                        <button type="button" pButton pRipple label="Torna indietro" class="p-button p-button-secondary pull-right  p-mr-2"
+
+                    <button type="button" pButton pRipple label="Timesheets" icon="pi pi-clone"
+                        class="p-button p-button-primary pull-right  p-mr-2"
+                        [routerLink]="['/admin/projects/timesheets/', project.id]"></button>
+
+                    <button type="button" pButton pRipple label="Torna indietro"
+                        class="p-button p-button-options pull-right  p-mr-2"
                         [routerLink]="['/admin/projects/']"></button>
-                  
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 <div class="main-inner">
-  
 
     <div class="p-fluid">
         <div class="p-field p-grid">
 
-            <div class="p-col-12 p-md-6">
+            <div class="p-col-12 p-md-7">
 
                 <p-card>
-
-                    <div class="p-grid">
-                        <div class="p-col-12 p-md-8">
-                        <h3>Produttività /  Progetto</h3>
-                        
-                    </div>                        <div class="p-col-12 p-md-4">
-                      
-                        <p-progressBar  [value]="getTotalPercent()"></p-progressBar>
-                        </div>
-                    </div>
-                    <br>
+                    <p-tabView class="responsive-tab-view">
+                        <p-tabPanel header="Produttività / Progetto">
+               
+   
                     <div class="table-responsive">
-                    <table class="billings-list">
+                        <table class="billings-list">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Prezzo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Importo pianificato</td>
+                                <td>{{price | currency :'EUR':'symbol':'1.2-2'}}</td>
 
-                        <tr>
-                            <td>Importo pianificato</td>
-                            <td>{{price | currency :'EUR':'symbol':'1.2-2'}}</td>
+                            </tr>
+                            <tr>
+                                <td>Gia consumato</td>
+                                <td>{{getTotal() | currency :'EUR':'symbol':'1.2-2'}}</td>
 
-                        </tr>
-                        <tr>
-                            <td>Gia consumato</td>
-                            <td>{{getTotal() | currency :'EUR':'symbol':'1.2-2'}}</td>
-                            
-                        </tr>
-                        
+                            </tr>
 
-                        <tr>
-                            <td><strong>Importo Rimanente</strong></td>
-                            <td><strong>{{price - getTotal() | currency :'EUR':'symbol':'1.2-2'}}</strong></td>
+                            <tr>
+                                <td><strong>Importo Rimanente</strong></td>
+                                <td><strong>{{price - getTotal() | currency :'EUR':'symbol':'1.2-2'}}</strong></td>
 
-                        </tr>
-                        
-                       
-                    </table>
+                            </tr>
+                        </tbody>
+                        </table>
 
-                </div>
+                    </div>
+                        </p-tabPanel>
+                    </p-tabView>
                 </p-card>
 
-
                 <p-card>
-                    <h3>Timesheet / Progetto</h3>
-                    <div class="table-responsive">
+                    <p-tabView class="responsive-tab-view">
+                        <p-tabPanel header="Timesheet / Progetto">
+                            <div class="table-responsive">
 
-                    <table class="billings-list" *ngIf="timesheetsEmployee.length > 0">
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th>Dipendente</th>
-                            <th>Prezzo/h</th>
+                                <table class="billings-list" *ngIf="timesheetsEmployee.length > 0">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Dipendente</th>
+                                            <th>Prezzo/h</th>
 
-                            <th>Importo</th>
-                            <th>Ore</th>
+                                            <th>Importo</th>
+                                            <th>Ore</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                        <tr *ngFor="let entry of timesheetsEmployee">
-                            <td width="50"> 
-                                <app-initials-avatar [routerLink]="['/admin/employees/edit/', entry.id]"
-                                firstName="{{ getTechnicalDataItem(entry.id)?.name | slice:0:1}}"
-                                lastName="{{ getTechnicalDataItem(entry.id)?.surname | slice:0:1}}">
-                            </app-initials-avatar>
-                            </td>
-                            <td> 
-                                {{ getTechnicalDataItem(entry.id)?.username }}
-                                </td>
-                                <td>
-                                    <p-tag [value]="getTechnicalDataItem(entry.id)?.contract | currency :'EUR':'symbol':'1.2-2'"></p-tag>
-                                </td>
-                            <td>
-                                {{entry.value * getTechnicalDataItem(entry.id)?.contract | currency :'EUR':'symbol':'1.2-2'}}
-                                </td>
-                                <td><i class="pi pi-clock"></i> {{entry.value}}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"> Totali</td>
-                    
-                            <td>{{getTotal() | currency :'EUR':'symbol':'1.2-2'}}</td>
-                            <td><i class="pi pi-clock"></i> {{getTotalHours()}}</td>
+                                        <tr *ngFor="let entry of timesheetsEmployee">
+                                            <td width="50">
+                                                <app-initials-avatar [routerLink]="['/admin/employees/edit/', entry.id]"
+                                                    firstName="{{ getTechnicalDataItem(entry.id)?.name | slice:0:1}}"
+                                                    lastName="{{ getTechnicalDataItem(entry.id)?.surname | slice:0:1}}">
+                                                </app-initials-avatar>
+                                            </td>
+                                            <td>
+                                                {{ getTechnicalDataItem(entry.id)?.username }}
+                                            </td>
+                                            <td>
+                                                <p-tag
+                                                    [value]="getTechnicalDataItem(entry.id)?.contract | currency :'EUR':'symbol':'1.2-2'">
+                                                </p-tag>
+                                            </td>
+                                            <td>
+                                                {{entry.value * getTechnicalDataItem(entry.id)?.contract | currency :'EUR':'symbol':'1.2-2'}}
+                                            </td>
+                                            <td><i class="pi pi-clock"></i> {{entry.value}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3"> Totali</td>
 
-                        </tr>
-                    </tbody>
-                    </table>
-                    </div>
+                                            <td>{{getTotal() | currency :'EUR':'symbol':'1.2-2'}}</td>
+                                            <td><i class="pi pi-clock"></i> {{getTotalHours()}}</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </p-tabPanel>
+                    </p-tabView>
+                    <h3></h3>
+
                 </p-card>
 
             </div>
 
-            <div class="p-col-12 p-md-6">
-               
-                <p-card>
-                    <h3>Produttività /  Ore</h3>
-                    <div>
-                    <canvas id="myChart" width="600" height="350" #mychart></canvas>
+            <div class="p-col-12 p-md-5">
+                <div class="p-grid">
+                    <div class="p-col-12 p-md-6">
+
+                        <p-card class="progress-project">
+                           <div class="number">{{getTotalHours()}}</div> 
+                            Ore lavorate
+                        </p-card>
+                    </div>
+
+                    <div class="p-col-12 p-md-6">
+
+                        <p-card class="complete-project">
+                            <div class="number">{{getTotalPercent()}}%</div>
+                            Completato
+                        </p-card>
+                    </div>
                 </div>
 
+                <p-card>
+                    <h3>Produttività / Ore</h3>
+                    <div>
+                        <canvas id="myChart" width="600" height="350" #mychart></canvas>
+                    </div>
+
                 </p-card>
-               
-       
 
             </div>
 
@@ -143,13 +163,15 @@
 
     </div>
 </div>
-    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" #cd>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" #cd>
 
-        <p-footer>
-            <button type="button" pButton icon="fa fa-close" class="p-button p-button-danger p-mr-2" label="No" (click)="cd.reject()"></button>
-            <button type="button" pButton icon="fa fa-check" class="p-button p-button-success p-mr-2" label="Si" (click)="cd.accept()"></button>
-        </p-footer>
-    
-    </p-confirmDialog>
+    <p-footer>
+        <button type="button" pButton icon="fa fa-close" class="p-button p-button-danger p-mr-2" label="No"
+            (click)="cd.reject()"></button>
+        <button type="button" pButton icon="fa fa-check" class="p-button p-button-success p-mr-2" label="Si"
+            (click)="cd.accept()"></button>
+    </p-footer>
+
+</p-confirmDialog>
 
 <p-toast key="myKey1"></p-toast>
