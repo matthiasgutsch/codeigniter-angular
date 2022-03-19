@@ -69,6 +69,10 @@ export class AdminDashboardComponent implements OnInit {
   products: any = [];
   product: Products;
 
+  billings: any = [];
+  billing: Billings;
+
+
   productsCount: any;
   error: string;
   blogForm: FormGroup;
@@ -171,6 +175,7 @@ export class AdminDashboardComponent implements OnInit {
       this.getProjects();
       this.getSupports();
       this.getProducts();
+      this.getBillings();
 
     
   }
@@ -266,6 +271,19 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
+
+  getBillings() {
+    const params = this.getRequestParams(
+      this.nameFilter = '',
+      this.descriptionFilter = '',
+      this.page = 0,
+      this.pageSize = 3
+    );
+   this.billingsService.getAllListNew(params).subscribe((pData) => {
+      this.billings = pData;
+      this.count = this.billingsService.size;
+    });
+  }
 
   getClientsCount() {
     const userId = this.currentUser.user_id;

@@ -337,11 +337,13 @@
                                             <div class="p-grid clearfix">
                                                 <div class="p-col-12 p-md-10">
                                                     <strong>{{appointment.title}}</strong><br>
-                                                    <i class="pi pi-calendar"></i> {{appointment.date}}
+                                                    <p class="detail"><i class="pi pi-calendar"></i> {{appointment.date}}</p> 
+
                                                 </div>
+                                 
                                                 <div class="p-col-12 p-md-2">
                                                     <button pButton pRipple icon="pi pi-pencil"
-                                                        class="p-button p-button-success p-mr-2"
+                                                        class="p-button p-button-small p-button-success pull-right"
                                                         [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
 
                                                 </div>
@@ -370,11 +372,11 @@
                                             <div class="p-col-12 p-md-10">
                                                 <strong>Fattura
                                                     {{billing.number}}/{{billing.date | date:'yyyy'}}</strong><br>
-                                                <i class="pi pi-calendar"></i> {{billing.date}}
+                                                <p class="detail"><i class="pi pi-calendar"></i> {{billing.date}}</p> 
                                             </div>
                                             <div class="p-col-12 p-md-2">
                                                 <button pButton pRipple type="button" icon="pi pi-pencil"
-                                                    class="p-button p-button-success p-mr-2"
+                                                    class="p-button p-button-success p-button-small pull-right"
                                                     [routerLink]="['/admin/billings/edit', billing.id]"></button>
 
                                             </div>

@@ -132,17 +132,25 @@
     color: @white;
   }
 
+  
+  &.p-button-icon-only {
+    width: auto !important;
+    padding: 0.4rem 0.4rem !important;
+  }
+
   &.p-button-small {
     padding: 0.25rem 0.4rem;
     font-size: 0.75rem;
     height: 26px;
     border-radius: 3px !important;
+
+    &.p-button-icon-only {
+        .p-button-icon {
+          font-size: 12px !important;
+        }
+    }
   }
 
-  &.p-button-icon-only {
-    width: auto !important;
-    padding: 0.4rem 0.4rem !important;
-  }
 }
 
 .p-datatable .p-datatable-thead > tr > th {

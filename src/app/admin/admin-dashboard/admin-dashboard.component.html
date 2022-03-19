@@ -245,7 +245,63 @@
         </p-card>
 
 
-        
+        <p-card>
+
+            <div class="p-field p-grid">
+
+                <div class="p-col-12 p-md-12">
+
+                    <p-tabView class="responsive-tab-view">
+                        <p-tabPanel header="Ultime Fatture">
+
+                            <p-table #dt1 [value]="billings" [responsive]="true" [paginator]="false" [rows]="10">
+
+                                <<ng-template pTemplate="body" let-billing>
+                                    <tr>
+                                        <td width="100">
+                                            <p-tag severity="success" *ngIf="billing.is_paid === '1'"
+                                                 value="Pagata" class="p-mr-2"></p-tag>
+                                            <p-tag severity="danger" *ngIf="billing.is_paid === '0'" 
+                                                value="non pagata" class="p-mr-2"></p-tag>
+                                        </td>
+                                        <td width="150px">{{billing.number}}/{{billing.date | date:'yyyy'}}
+                                            <p class="detail"><i class="pi pi-calendar"></i> {{billing.date | date:'dd-MM-yyyy'}} </p>
+
+                                        </td>
+            
+                                  
+            
+                                        <td width="50">
+            
+                                            <app-initials-avatar
+                                                [routerLink]="['/admin/clients/edit', billing.client.id]"
+                                                firstName="{{ billing.client.name | slice:0:1}}"
+                                                lastName="{{ billing.client.surname | slice:0:1}}">
+                                            </app-initials-avatar>
+            
+                                        </td>
+            
+                                        <td>
+                                            {{billing.client.username}}
+                                        </td>
+            
+                           
+                                        <td>
+                                            <p-tag [value]="billing.total | currency :'EUR':'symbol':'1.2-2'"></p-tag></td>
+            
+                                        <td>
+                                            <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
+                                            [routerLink]="['/admin/billings/edit', billing.id]"></button>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+
+                        </p-tabPanel>
+                    </p-tabView>
+                </div>
+            </div>
+        </p-card>
 
         <p-card>
 
