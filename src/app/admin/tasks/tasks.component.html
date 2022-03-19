@@ -5,7 +5,7 @@
     
             <div class="p-field p-grid">
                 <div class="p-col-12 p-md-6">
-                    <h3>Tasks / {{project.title}}</h3>
+                    <h3>Tasks Progetto</h3>
                    <!-- <p-progressBar [value]="donePriorityTasks.length / (lowPriorityTasks.length + mediumPriorityTasks.length + highPriorityTasks.length + donePriorityTasks.length) * 100 | number: '1.0-0'"></p-progressBar>
     -->
                 </div>
@@ -15,14 +15,14 @@
                         task</button>
     
         
-                        <button type="button" pButton pRipple label="Produttivita" icon="pi pi-chart-line" class="p-button p-button-secondary pull-right  p-mr-2"
+                        <button type="button" pButton pRipple label="Produttivita" icon="pi pi-chart-line" class="p-button p-button-primary pull-right  p-mr-2"
                         [routerLink]="['/admin/projects/productivity/', project.id]"></button>
     
     
                     <button type="button" pButton pRipple label="Timesheets" icon="pi pi-clone" class="p-button p-button-primary pull-right  p-mr-2"
                     [routerLink]="['/admin/projects/timesheets/', project.id]"></button>
     
-                    <button type="button" pButton pRipple label="Torna indietro" class="p-button p-button-secondary pull-right  p-mr-2"
+                    <button type="button" pButton pRipple label="Torna indietro" class="p-button p-button-options pull-right  p-mr-2"
                     [routerLink]="['/admin/projects/']"></button>
     
           
@@ -39,7 +39,11 @@
 
 <div class="p-field p-grid">
     <div class="p-col-12 p-md-12">
+        <p-card class="blu-box">
 
+            <h3>{{project.title}} / {{project.code_int}}</h3>
+            <p>{{project.date_from}} - {{project.date_to}}</p>
+            </p-card>
         <p-card>
             <div class="p-field p-grid" [ngBusy]="[busy, busy1, busy2]">
 
