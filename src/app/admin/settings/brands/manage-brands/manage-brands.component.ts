@@ -4,6 +4,8 @@ import {ConfirmationService} from 'primeng/api';
 import { WorksService } from 'src/app/services/works.service';
 import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brands.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PARAM_BRANDS_PATH, PARAM_TAGS_PATH } from 'src/app/admin/constants/constants';
 
 @Component({
   selector: 'app-manage-brands',
@@ -11,7 +13,7 @@ import { BrandService } from 'src/app/services/brands.service';
 })
 export class ManageBrandsComponent implements OnInit {
   title = 'Brands';
-  brands: Brand;
+  brands: Array<any> = [];
   brand: Brand;
   error: string;
   public cols: any[];
@@ -19,8 +21,21 @@ export class ManageBrandsComponent implements OnInit {
   public selectedColumns: any[];
   currentUser: any;
 
+  nameFilter: string;
+  descriptionFilter: string;
+  page = 1;
+  count = 0;
+  pageSize = 10;
+  pageSizes = [5, 10, 15];
+  public base_path: string;
+  basePath: string;
+  pageOfItems: Array<any>;
+  searchWrapper: boolean = false;
 
-  constructor(private brandsService: BrandService, private confirmationService: ConfirmationService,) {
+  constructor(private brandsService: BrandService, 
+    private router: Router,
+    private route: ActivatedRoute,
+    private confirmationService: ConfirmationService,) {
 
     this.cols = [
       { field: 'name', header: 'Nome', index: 1 },
@@ -41,12 +56,109 @@ export class ManageBrandsComponent implements OnInit {
   ngOnInit() {
     const userId = this.currentUser.user_id;
     
-    this.brandsService.getAllListbyUser().subscribe(
-      (data: Brand) => this.brands = data,
-      error => this.error = error
-    );
+
+    this.basePath = window.location.pathname;
+    if (this.route.snapshot.queryParamMap.has('page')) {
+      this.page = +this.route.snapshot.queryParamMap.get('page');
+    }
+    if (this.route.snapshot.queryParamMap.has('size')) {
+      this.pageSize = +this.route.snapshot.queryParamMap.get('size');
+    }
+    if (this.route.snapshot.queryParamMap.has('name')) {
+      this.nameFilter = this.route.snapshot.queryParamMap.get('name');
+    }
+    if (this.route.snapshot.queryParamMap.has('description')) {
+      this.descriptionFilter = this.route.snapshot.queryParamMap.get('description');
+    }
+
+    this.load();
+
+
   }
 
+
+
+
+
+
+  handlePageSizeChange(event): void {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.load();
+  }
+
+  reset(): void {
+    this.nameFilter = '';
+    this.descriptionFilter = '';
+    this.load();
+
+  }
+
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+  }
+
+  public handlePageChange(event): void {
+    this.page = event;
+    this.load();
+
+  }
+
+
+
+  getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
+    // tslint:disable-next-line:prefer-const
+    let path = PARAM_BRANDS_PATH;
+    const params = {};
+    let adder = '?';
+    if (page) {
+      params[`page`] = page - 1;
+      path += adder + 'page=' + (page - 1);
+      adder = '&';
+    }
+    if (searchTitle) {
+      params[`name`] = searchTitle;
+      path += adder + 'name=' + searchTitle;
+      adder = '&';
+    }
+    if (categoryTitle) {
+      params[`description`] = categoryTitle;
+      path += adder + 'description=' + categoryTitle;
+      adder = '&';
+    }
+    if (pageSize) {
+      params[`size`] = pageSize;
+      path += adder + 'size=' + pageSize;
+    }
+    window.history.replaceState({}, '', path);
+
+    return params;
+
+  }
+
+
+  load(): void {
+
+    const params = this.getRequestParams(
+      this.nameFilter,
+      this.descriptionFilter,
+      this.page,
+      this.pageSize
+    );
+    this.brandsService.getAllListNew(params).subscribe((pData) => {
+      this.brands = pData;
+      this.count = this.brandsService.size;
+
+    });
+  }
+
+
+
+  private onChange(item: string): void {
+    this.load();
+
+  }
 
   public selectionItemForFilter(e) {
     const colsTempor = e.value;
