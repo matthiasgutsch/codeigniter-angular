@@ -147,7 +147,7 @@
 
                     <div class="p-col-12 p-md-6">
 
-                        <p-card class="complete-project" [ngClass]="getTotalPercent() > 50 ? 'orange' : 'white' ">
+                        <p-card class="complete-project" [ngClass]="getTotalPercent() > 90 ? 'green' : getTotalPercent() > 50 ? 'orange' : 'white' ">
                             <div class="number">{{getTotalPercent()}}%</div>
                             Completato 
                             
