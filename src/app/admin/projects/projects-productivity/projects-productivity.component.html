@@ -60,7 +60,7 @@
 
                             </tr>
 
-                            <tr>
+                            <tr> 
                                 <td><strong>Importo Rimanente</strong></td>
                                 <td><strong>{{price - getTotal() | currency :'EUR':'symbol':'1.2-2'}}</strong></td>
 
@@ -142,9 +142,10 @@
 
                     <div class="p-col-12 p-md-6">
 
-                        <p-card class="complete-project">
+                        <p-card class="complete-project" [ngClass]="getTotalPercent() > 50 ? 'orange' : 'white' ">
                             <div class="number">{{getTotalPercent()}}%</div>
-                            Completato
+                            Completato 
+                            
                         </p-card>
                     </div>
                 </div>

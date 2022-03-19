@@ -482,19 +482,16 @@ ul.ngx-pagination {
     }
     &.disabled {
       background-color: transparent !important;
-
       span {
-      &:hover {
-        background: transparent !important;
-        color: @ness_color_1;
-
+        &:hover {
+          background: transparent !important;
+          color: @ness_color_1;
+        }
       }
-    }
     }
     a {
       padding: 0px 9px !important;
       min-width: 30px;
-
     }
     :hover {
       background: @ness_color_2;
@@ -511,7 +508,6 @@ ul.nav-menu-mobile {
   display: inline-block;
   margin: 0px;
   padding-top: 0px;
-  
   overflow-y: auto !important;
   li {
     list-style-type: none;
@@ -576,16 +572,14 @@ ul.nav-menu-mobile {
 }
 
 .featured-card {
-
   .p-card {
     background-color: @ness_color_2;
-    color: fade(@white,60%);
-
+    color: fade(@white, 60%);
     .p-card-body {
       padding: 25px;
-    h4 {
-      color: @white;
-    }
+      h4 {
+        color: @white;
+      }
     }
   }
 }
@@ -613,7 +607,6 @@ ul.nav-menu-mobile {
   }
 }
 
-
 .title-main-wrapper {
   background-color: #FFF;
   margin-bottom: 20px;
@@ -636,6 +629,7 @@ ul.nav-menu-mobile {
     margin-bottom: 0rem;
   }
 }
+
 #main {
   transition: margin-left 0.1s;
   margin-left: 70px;
@@ -712,22 +706,19 @@ hr.full {
     img {
       height: 30px;
     }
-
-
-.color-dot {
-  color: @white;
-  text-transform: uppercase;
-  font-size:10px;
-  background-color: @ness_color_3;
-  padding: 3px;
-  border-radius: 4px;
-  position: relative;
-  padding-left: 5px;
-  padding-right: 5px;
-  top: -3px;
-  margin-left: 3px;
-}
-
+    .color-dot {
+      color: @white;
+      text-transform: uppercase;
+      font-size: 10px;
+      background-color: @ness_color_3;
+      padding: 3px;
+      border-radius: 4px;
+      position: relative;
+      padding-left: 5px;
+      padding-right: 5px;
+      top: -3px;
+      margin-left: 3px;
+    }
   }
   .user-menu {
     list-style: none;
@@ -803,7 +794,6 @@ hr.full {
   margin-left: -300px;
   box-shadow: 0 2px 5px rgb(0 0 0 / 8%);
   border-radius: 6px;
-
   .logo-wrapper {
     float: left;
     margin-left: 0px;
@@ -814,10 +804,7 @@ hr.full {
     img {
       height: 50px;
     }
-
   }
-
-
   .alert.alert-danger {
     background-color: @red;
     margin-bottom: 10px;
@@ -833,23 +820,20 @@ hr.full {
     margin: 0 auto;
     margin-top: 50%;
     border-radius: @radius;
-
     input {
       width: 100%;
       line-height: 2;
       height: 45px;
       border-radius: @radius;
     }
-
     button {
       width: 100%;
-    display: block;
-    border: none;
-    border-radius: @radius;
-    color: white;
-    height: 40px;
-    background-color: @ness_color_4;
-
+      display: block;
+      border: none;
+      border-radius: @radius;
+      color: white;
+      height: 40px;
+      background-color: @ness_color_4;
     }
     h1 {
       span {
@@ -892,7 +876,7 @@ hr.full {
 .color-dot {
   color: @white;
   text-transform: uppercase;
-  font-size:10px;
+  font-size: 10px;
   background-color: @ness_color_3;
   padding: 3px;
   border-radius: 4px;
@@ -1182,7 +1166,6 @@ hr.full {
 }
 
 .p-timeline-event-content {
-
   .p-card {
     background-color: #f3f5f9;
     color: #282d35;
@@ -1190,25 +1173,17 @@ hr.full {
     border-radius: 6px;
     border: 0px solid #dee2e6;
     margin-bottom: 10px;
-
     .p-card-content {
-
       border: 0px;
     }
     .p-card-body {
       padding: 12px 15px;
       border: 0px;
     }
+  }
 }
-
-  
-}
-
-
-
 
 .progress-project {
-
   .p-card {
     background-color: @white;
     color: @ness_color_2;
@@ -1216,56 +1191,59 @@ hr.full {
     border-radius: 6px;
     border: 1px solid #dee2e6;
     margin-bottom: 20px;
-
     .p-card-content {
-
       border: 0px;
     }
     .p-card-body {
       padding: 40px 15px;
       border: 0px;
       text-align: center;
-
       .number {
         font-size: 40px;
         font-weight: 600;
       }
     }
-}
-
-  
+  }
 }
 
 .complete-project {
-
   .p-card {
-    background-color: @yellow;
     color: @white;
     box-shadow: none;
     border-radius: 6px;
     border: 0px solid #dee2e6;
     margin-bottom: 20px;
-
     .p-card-content {
-
       border: 0px;
     }
     .p-card-body {
       padding: 40px 15px;
       border: 0px;
       text-align: center;
-
       .number {
         font-size: 40px;
         font-weight: 600;
       }
     }
-}
+  }
 
+  &.orange {
+    .p-card {
+    background-color: @yellow;
+    border: 1px solid @yellow !important;
+
+    }
+   }
+
+  &.white {
+    .p-card {
+    background-color: @red;
+    color: @white !important;
+    border: 1px solid #dee2e6 !important;
+    }
+  }
   
 }
-
-
 
 .homepage-wrapper {
   .information-box {
@@ -1295,7 +1273,6 @@ hr.full {
   border: 1px solid @ness_color_3;
   color: @white;
   padding: 5px;
-
   hr {
     border-color: @white !important;
   }
