@@ -49,10 +49,10 @@
                 </div>
                 <div class="p-col-12 p-md-6">
                     <button pButton pRipple icon="pi pi-plus" (click)="createTimesheets()" label="Aggiungi"
-                        class="p-button p-button-primary pull-right"></button>
+                        class="p-button p-button-success pull-right"></button>
 
                     <button type="button" pButton pRipple label="tasks" icon="pi pi-clone"
-                        class="p-button p-button-warning pull-right  p-mr-2"
+                        class="p-button p-button-primary pull-right  p-mr-2"
                         [routerLink]="['/admin/employee/task/', employee.id]"></button>
 
                     <button type="button" pButton pRipple label="modifica Dipendente" icon="pi pi-pencil"
@@ -60,7 +60,7 @@
                         [routerLink]="['/admin/employees/edit/', employee.id]"></button>
 
                     <button type="button" pButton pRipple label="Torna indietro"
-                        class="p-button p-button-secondary pull-right  p-mr-2"
+                        class="p-button p-button-options pull-right  p-mr-2"
                         [routerLink]="['/admin/employees/']"></button>
 
                 </div>
@@ -71,7 +71,7 @@
 </div>
 <div class="main-inner">
 
-    <p-card *ngIf="employee">
+    <p-card *ngIf="employee" class="blu-box">
 
         <div class="p-grid">
             <div class="p-col">

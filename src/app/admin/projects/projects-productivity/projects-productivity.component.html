@@ -92,7 +92,7 @@
 
                                             <th>Importo</th>
                                             <th>Ore</th>
-
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -116,13 +116,20 @@
                                                 {{entry.value * getTechnicalDataItem(entry.id)?.contract | currency :'EUR':'symbol':'1.2-2'}}
                                             </td>
                                             <td><i class="pi pi-clock"></i> {{entry.value}}</td>
+
+                                            <td width="120">
+                                                <button type="button" pButton pRipple label="Timesheets"
+                                                class="p-button p-button-primary pull-right  p-mr-2"
+                                                [routerLink]="['/admin/employee/timesheets/', entry.id]"></button>
+                                                
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td colspan="3"> Totali</td>
 
-                                            <td>{{getTotal() | currency :'EUR':'symbol':'1.2-2'}}</td>
-                                            <td><i class="pi pi-clock"></i> {{getTotalHours()}}</td>
-
+                                            <td><strong>{{getTotal() | currency :'EUR':'symbol':'1.2-2'}}</strong></td>
+                                            <td><strong><i class="pi pi-clock"></i> {{getTotalHours()}}</strong></td>
+                                            <td></td>
                                         </tr>
                                     </tbody>
                                 </table>
