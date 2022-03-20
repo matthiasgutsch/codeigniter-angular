@@ -229,8 +229,8 @@ export class ProjectsProductivityComponent implements OnInit {
           label: '',
           data: this.data1,
           lineTension: 0,
-          backgroundColor: 'rgba(255, 83, 83, 0.7)',
-          borderColor: 'rgba(60, 160, 220, 0.8)'
+          backgroundColor: 'rgba(65, 111, 244, 0.7)',
+          borderColor: 'rgba(65, 111, 244, 0.8)'
         }]
       },
       options: {
