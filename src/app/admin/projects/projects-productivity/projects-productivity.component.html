@@ -31,49 +31,49 @@
 <div class="main-inner">
 
     <div class="p-fluid">
-       
-            <div class="p-field p-grid">
+
+        <div class="p-field p-grid">
 
             <div class="p-col-12 p-md-7">
                 <p-card class="blu-box">
 
                     <h3>{{project.title}} / {{project.code_int}}</h3>
                     <p>{{project.date_from}} - {{project.date_to}}</p>
-                    </p-card>
+                </p-card>
                 <p-card>
                     <p-tabView class="responsive-tab-view">
                         <p-tabPanel header="Produttività / Progetto">
-               
-   
-                    <div class="table-responsive">
-                        <table class="billings-list">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Prezzo</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>Importo pianificato</td>
-                                <td>{{price | currency :'EUR':'symbol':'1.2-2'}}</td>
 
-                            </tr>
-                            <tr>
-                                <td>Gia consumato</td>
-                                <td>{{getTotal() | currency :'EUR':'symbol':'1.2-2'}}</td>
+                            <div class="table-responsive">
+                                <table class="billings-list">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Prezzo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Importo pianificato</td>
+                                            <td>{{price | currency :'EUR':'symbol':'1.2-2'}}</td>
 
-                            </tr>
+                                        </tr>
+                                        <tr>
+                                            <td>Gia consumato</td>
+                                            <td>{{getTotal() | currency :'EUR':'symbol':'1.2-2'}}</td>
 
-                            <tr> 
-                                <td><strong>Importo Rimanente</strong></td>
-                                <td><strong>{{price - getTotal() | currency :'EUR':'symbol':'1.2-2'}}</strong></td>
+                                        </tr>
 
-                            </tr>
-                        </tbody>
-                        </table>
+                                        <tr>
+                                            <td><strong>Importo Rimanente</strong></td>
+                                            <td><strong>{{price - getTotal() | currency :'EUR':'symbol':'1.2-2'}}</strong>
+                                            </td>
 
-                    </div>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
                         </p-tabPanel>
                     </p-tabView>
                 </p-card>
@@ -129,7 +129,6 @@
                             </div>
                         </p-tabPanel>
                     </p-tabView>
-                    <h3></h3>
 
                 </p-card>
 
@@ -140,26 +139,28 @@
                     <div class="p-col-12 p-md-6">
 
                         <p-card class="progress-project">
-                           <div class="number">{{getTotalHours()}}</div> 
+                            <div class="number">{{getTotalHours()}}</div>
                             Ore lavorate
                         </p-card>
                     </div>
 
                     <div class="p-col-12 p-md-6">
 
-                        <p-card class="complete-project" [ngClass]="getTotalPercent() > 90 ? 'green' : getTotalPercent() > 50 ? 'orange' : 'white' ">
+                        <p-card class="complete-project"
+                            [ngClass]="getTotalPercent() > 90 ? 'volumio' : getTotalPercent() > 50 ? 'orange' : 'green' ">
                             <div class="number">{{getTotalPercent()}}%</div>
-                            Completato 
-                            
+                            Importo Consumato
+
                         </p-card>
                     </div>
                 </div>
 
                 <p-card>
-                    <h3>Produttività / Ore</h3>
-                    <div>
-                        <canvas id="myChart" width="600" height="350" #mychart></canvas>
-                    </div>
+                    <p-tabView>
+                        <p-tabPanel header="Produttività / Ore">
+                            <canvas id="myChart" width="600" height="350" #mychart></canvas>
+                        </p-tabPanel>
+                    </p-tabView>
 
                 </p-card>
 

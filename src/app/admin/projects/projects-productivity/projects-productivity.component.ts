@@ -243,36 +243,25 @@ export class ProjectsProductivityComponent implements OnInit {
           }
          },
         maintainAspectRatio: false,
-        tooltips: {
-          mode: 'x-axis',
-          intersect: false,
-          enabled: true,
-        },
-        hover: {mode: null},
+       
         scales: {
           xAxes: [{
+            beginAtZero: false,
             type: 'time',
+            stacked: false,
             time: {
-              displayFormats: {
-                'millisecond': 'MMM DD',
-                'second': 'MMM DD',
-                'minute': 'MMM DD',
-                'hour': 'MMM DD',
-                'day': 'MMM DD',
-                'week': 'MMM DD',
-                'month': 'MMM DD',
-                'quarter': 'MMM DD',
-                'year': 'MMM DD',
-              }
+              tooltipFormat: 'DD/MM/YY',
+              unit: 'month',
+              displayFormats: {'month': 'MM/YY'},
             },
-            distribution: 'linear',
+            distribution: 'left',
             scaleLabel: {
-              labelString: 'Giornate',
+              labelString: 'Mese',
               display: true,
             },
             ticks: {
-              source: 'auto'
-            },
+              beginAtZero: true
+            }
           }],
           yAxes: [{
             ticks: {
