@@ -162,6 +162,7 @@ export class AdminDashboardComponent implements OnInit {
   ngOnInit() {
 
     const userId = this.currentUser.user_id;
+    this.spinner.show();
 
       this.getClientsCount();
       this.getProductsCount();
@@ -176,6 +177,8 @@ export class AdminDashboardComponent implements OnInit {
       this.getSupports();
       this.getProducts();
       this.getBillings();
+      this.spinner.hide();
+
 
     
   }
