@@ -242,13 +242,16 @@ export class ProjectsProductivityComponent implements OnInit {
             boxWidth: 0,
           }
          },
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
        
         scales: {
           xAxes: [{
-            beginAtZero: false,
+            gridLines: {
+              offsetGridLines: true,
+              drawOnChartArea: true
+
+          },
             type: 'time',
-            stacked: false,
             time: {
               tooltipFormat: 'DD/MM/YY',
               unit: 'month',
@@ -259,9 +262,7 @@ export class ProjectsProductivityComponent implements OnInit {
               labelString: 'Mese',
               display: true,
             },
-            ticks: {
-              beginAtZero: true
-            }
+         
           }],
           yAxes: [{
             ticks: {
