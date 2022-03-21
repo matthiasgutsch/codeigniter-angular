@@ -14,6 +14,10 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { Orders } from 'src/app/models/orders';
 import { OrdersService } from 'src/app/services/orders.service';
 import { PurchaseOrdersService } from 'src/app/services/purchase_orders.service';
+import { PARAM_BILLINGS_PATH, PARAM_PURCHASE_ORDERS_PATH } from '../../constants/constants';
+import { Purchase_orders } from 'src/app/models/purchase_orders';
+import { Suppliers } from 'src/app/models/suppliers';
+import { SuppliersService } from 'src/app/services/suppliers.service';
 
 @Component({
   selector: "app-manage-purchase-orders",
@@ -21,8 +25,11 @@ import { PurchaseOrdersService } from 'src/app/services/purchase_orders.service'
 })
 export class ManagePurchaseOrdersComponent implements OnInit {
 
-  orders: any = [];
-  order: Orders;
+  purchaseOrders: any = [];
+  purchaseOrder: Orders;
+
+  suppliers: any = [];
+  supplier: Suppliers;
   categories: any = [];
   category: Category;
   error: string;
@@ -43,7 +50,17 @@ export class ManagePurchaseOrdersComponent implements OnInit {
   
   @ViewChild("content", { static: false }) content: ElementRef;
   currentUser: any;
-
+  page = 1;
+  count = 0;
+  pageSize = 10;
+  pageSizes = [5, 10, 15];
+  public base_path: string;
+  basePath: string;
+  pageOfItems: Array<any>;
+  searchWrapper: boolean = false;
+  nameFilter: string;
+  descriptionFilter: string;
+  clientFilter: string;
   showDialog() {
     this.productDialog = true;
   }
@@ -53,7 +70,7 @@ export class ManagePurchaseOrdersComponent implements OnInit {
   }
 
   constructor(
-    private clientsService: ClientsService,
+    private supplierService: SuppliersService,
     private purchaseOrdersService: PurchaseOrdersService,
     private messageService: MessageService,
     private comuniService: ComuniService,
@@ -74,8 +91,7 @@ export class ManagePurchaseOrdersComponent implements OnInit {
 
 
     this.spinner.show();
-    this.purchaseOrdersService.getAllListbyUser().subscribe(data => {
-      this.orders = data;
+
       this.cols = [
         { field: "category_id", header: "Cliente" },
         { field: 'client.username',  header: 'Nome Cliente'  },
@@ -87,19 +103,107 @@ export class ManagePurchaseOrdersComponent implements OnInit {
         dataKey: col.field
       }));
       this.getComuni();
-      this.getClients();
-
+      this.getSuppliers();
+      this.load();
       this.spinner.hide();
-    });
+
 
    
 
   }
 
-    getClients() {
+
+
+
+  getRequestParams(searchTitle, categoryTitle, clientTitle, page, pageSize): any {
+    // tslint:disable-next-line:prefer-const
+    let path = PARAM_PURCHASE_ORDERS_PATH;
+    const params = {};
+    let adder = '?';
+    if (page) {
+      params[`page`] = page - 1;
+      path += adder + 'page=' + (page - 1);
+      adder = '&';
+    }
+    if (searchTitle) {
+      params[`name`] = searchTitle;
+      path += adder + 'date_from=' + searchTitle;
+      adder = '&';
+    }
+    if (categoryTitle) {
+      params[`description`] = categoryTitle;
+      path += adder + 'date_to=' + categoryTitle;
+      adder = '&';
+    }
+    if (clientTitle) {
+      params[`client`] = clientTitle;
+      path += adder + 'client=' + clientTitle;
+      adder = '&';
+    }
+    if (pageSize) {
+      params[`size`] = pageSize;
+      path += adder + 'size=' + pageSize;
+    }
+    window.history.replaceState({}, '', path);
+
+    return params;
+
+  }
+
+  
+  load(): void {
+
+    const params = this.getRequestParams(
+      this.nameFilter,
+      this.descriptionFilter,
+      this.clientFilter,
+      this.page,
+      this.pageSize
+    );
+    this.purchaseOrdersService.getAllListNew(params).subscribe((pData) => {
+      this.purchaseOrders = pData;
+      this.count = this.purchaseOrdersService.size;
+
+    });
+  }
+
+  handlePageSizeChange(event): void {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.load();
+  }
+
+  reset(): void {
+    this.nameFilter = '';
+    this.descriptionFilter = '';
+    this.clientFilter = '';
+
+    this.load();
+    
+  }
+  
+  public handlePageChange(event): void {
+    this.page = event;
+    this.load();
+  
+  }
+  
+
+
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+}
+
+  private onChange(item: string): void {
+    this.load();
+
+  }
+  
+    getSuppliers() {
     const userId = this.currentUser.user_id;
-    this.clientsService.getAllListbyUser().subscribe(
-      (data: Clients) => this.clients = data,
+    this.supplierService.getAllListbyUser().subscribe(
+      (data: Suppliers) => this.suppliers = data,
       error => this.error = error
     );
   
@@ -125,9 +229,9 @@ export class ManagePurchaseOrdersComponent implements OnInit {
   
 
 
-edit(order: Orders) {
-  this.order = { ...order};
-  this.selectedSkills = JSON.parse("" + this.order.skills + "");
+edit(purchaseOrder: Purchase_orders) {
+  this.purchaseOrder = { ...purchaseOrder};
+  this.selectedSkills = JSON.parse("" + this.purchaseOrder.skills + "");
   this.productDialog = true;
 }
 

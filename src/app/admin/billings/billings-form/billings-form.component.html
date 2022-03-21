@@ -263,11 +263,11 @@
                                         <p-autoComplete *ngIf="!editForm" (input)="itemsChanged()" [dropdown]="true"  formControlName="description" [suggestions]="filteredProductsVariations" (completeMethod)="filterCountry($event)" field="code" [minLength]="1">
                                             <ng-template let-productsVariation pTemplate="item">
                                                 <div class="p-grid">
-                                                <div class="p-col">{{productsVariation.code}}</div>
-                                                <div class="p-col">{{productsVariation.title}} </div>
-                                                <div class="p-col">{{productsVariation.description}}</div>
-                                                <div class="p-col">{{productsVariation.price}}</div>
-
+                                                <div class="p-col-12"><strong>{{productsVariation.code}}</strong></div>
+                                                <div class="p-col-12">{{productsVariation.title}} - 
+                                                    {{productsVariation.description}}</div>
+                                                <div class="p-col-12"><p-tag [value]="productsVariation.price  | currency :'EUR':'symbol':'1.2-2'"></p-tag></div>
+                                                    <div class="p-col-12"><hr class="small"></div>
                                               </div>
                                             </ng-template>
 

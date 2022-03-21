@@ -21,6 +21,8 @@ export const PARAM_WAREHOUSE_MOVEMENTS_PATH = '/admin/warehouse-movements/'
 export const PARAM_CHECKOUTS_PATH = '/admin/checkouts/'
 export const PARAM_TIMESHEETS_PATH = '/admin/timesheets/'
 export const PARAM_BILLINGS_PATH = '/admin/billings/'
+export const PARAM_PURCHASE_ORDERS_PATH = '/admin/purchase-orders/'
+
 export const PARAM_TRANSPORT_DOCUMENTS_PATH = '/admin/transport-documents/'
 export const PARAM_QUOTES_PATH = '/admin/quotes/'
 export const PARAM_ORDERS_PATH = '/admin/orders/'

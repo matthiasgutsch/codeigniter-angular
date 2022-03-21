@@ -1,41 +1,51 @@
-
-<p-overlayPanel #op>
+<p-sidebar [(visible)]="filterSidebar" #op position="right">
     <ng-template pTemplate>
-        <div class="p-col-12">
-
-            <div class="p-field p-grid" *ngFor="let col of cols" [ngSwitch]="col.field">
-                <div class="p-col-12">
-
-                    <p-dropdown *ngSwitchCase="'client.username'" filter="true" [required]="true" placeholder="Cliente"
-                    [showClear]="true" optionLabel="username" optionValue="username" [options]="clients"
-                    [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')">
-
-                    <ng-template let-option pTemplate="item">
-
-                        {{option.username}}
-
-                    </ng-template>
-
-                    </p-dropdown>
-
-                    <input *ngSwitchCase="'id'" [ngModel]="dt.filters['id']? dt.filters['id'].value : ''" 
-                    placeholder="{{col.header}}" pInputText type="text" [style]="{ width: '100%' }" (input)="dt.filter($event.target.value, col.field, 'contains')">
-
-
-                </div>
-
+        <div class="p-field p-grid">
+            <div class="p-col-12">
+                <p-calendar [(ngModel)]="nameFilter" [style]="{ width: '100%' }" placeholder="Data da" dateFormat="yy-mm-dd" dataType="string" inputId="dateformat"></p-calendar>
             </div>
+        </div>
+        <div class="p-field p-grid">
+            <div class="p-col-12">
+                <p-calendar [(ngModel)]="descriptionFilter" [style]="{ width: '100%' }" placeholder="Data a" dateFormat="yy-mm-dd" dataType="string" inputId="dateformat"></p-calendar>
+            </div>
+        </div>
 
-            <div class="p-grid">
-                <div class="p-col-12">
+        <div class="p-field p-grid">
+            <div class="p-col-12">
+        <p-dropdown [options]="suppliers" [virtualScroll]="true" filter="true"
+                                        [required]="true" [showClear]="true" placeholder="Scegli"
+                                        [style]="{ width: '100%' }" [(ngModel)]="clientFilter"
+                                        optionLabel="username" optionValue="id">
+                                        <ng-template let-option pTemplate="item">
 
-                    <button pButton pRipple label="reset ricerca" class="p-button p-button-primary btn-block"
-                        (click)="dt.reset()"></button>
-                </div>
+                                            <strong>{{option.name}} {{option.surname}}</strong><br>
+                                            <span>{{option.address}} - {{option.zip}} {{option.city}}</span>
+
+                                        </ng-template>
+
+                                    </p-dropdown>
+            </div>
+        </div>
+
+        <div class="p-field p-grid">
+            <div class="p-col-12">
+                <button pButton type="submit" icon="pi pi-search" class="p-button p-button-primary btn-block"
+                    label="cerca" (click)="load()">
+                </button>
+            </div>
+        </div>
+        <div class="p-field p-grid">
+
+            <div class="p-col-12">
+                <button pButton type="reset" icon="pi pi-times" class="p-button p-button-secondary btn-block"
+                    label="reset" (click)="reset()">
+                </button>
             </div>
         </div>
     </ng-template>
-</p-overlayPanel>
+</p-sidebar>
+
 
 <div class="top-main-wrapper">
 
@@ -53,6 +63,8 @@
     
      
     
+                    <button type="text" pButton label="Filter" icon="pi pi-filter"
+                    class="p-button p-button-options p-mr-2 pull-right" (click)="filterSidebar = true"></button>
                 </div>
             </div>
         </div>
@@ -72,15 +84,25 @@
                 <div class="filter-options">
 
                     <div class="p-field p-grid">
-                        <div class="p-col-12 p-md-12">
 
-                            
-                            <button type="text" pButton label="Filter" icon="pi pi-filter"
-                            class="p-button p-button-options p-mr-2 pull-right" (click)="op.toggle($event)"></button>
+                        <div class="p-col-12 p-md-8">
+                            <div class="item-size pull-left">
+                                <span class="filter-tag" *ngIf="nameFilter" >{{nameFilter}} <span class="close"><i class="pi pi-times"  (click)="reset()"></i></span> </span>
+                                <span class="filter-tag" *ngIf="descriptionFilter">{{descriptionFilter}} <span class="close"><i class="pi pi-times" (click)="reset()"></i></span> </span>
+                                <span class="filter-tag" *ngIf="clientFilter">{{clientFilter}} <span class="close"><i class="pi pi-times" (click)="reset()"></i></span> </span>
+
+                            </div>
+                        </div>
+
+                        <div class="p-col-12 p-md-4">
+                          <span class="pull-right">{{count}} Items</span>  
                         </div>
                     </div>
                 </div>
-                <p-table #dt [value]="orders" [responsive]="true"  [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="15" [showCurrentPageReport]="true" [loading]="loading" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="true">
+                <div
+                *ngFor=" let purchaseOrder of purchaseOrders  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index">
+            </div>
+                <p-table #dt [value]="purchaseOrders" [responsive]="true"  [paginator]="false" [rows]="15">
                    
                     <ng-template pTemplate="header">
                         <tr>
@@ -128,6 +150,15 @@
                         </tr>
                     </ng-template>
                 </p-table>
+
+                <div class="p-grid">
+
+                    <div class="p-col-12 p-md-12">
+                        <pagination-controls previousLabel="Prev" nextLabel="Next" responsive="true"
+                            (pageChange)="handlePageChange($event)">
+                        </pagination-controls>
+                    </div>
+                </div>
             </p-card>
         </div>
 
