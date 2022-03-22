@@ -50,7 +50,8 @@
                         <button type="text" pButton label="Filter" icon="pi pi-filter"
                         class="p-button p-button-options p-mr-2 pull-right"  (click)="displayFilter = true"></button>
 
-
+                        <button type="button" pButton pRipple label="Torna indietro" class="p-button p-button-goback pull-right  p-mr-2"
+                        [routerLink]="['/admin/settings/']"></button>
                        <!-- <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta"
                         (click)="exportPdf()" class="p-button-options p-mr-2 pull-right"
                         tooltipPosition="bottom"></button>-->

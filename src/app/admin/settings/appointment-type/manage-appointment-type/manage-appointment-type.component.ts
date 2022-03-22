@@ -7,7 +7,7 @@ import { TagsService } from 'src/app/services/tags.service';
 import { Appointment_type } from 'src/app/models/appointment_type';
 import { AppointmentTypeService } from 'src/app/services/appointment_type.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PARAM_WORKS_PATH } from 'src/app/admin/constants/constants';
+import { PARAM_APPOINTMENT_TYPE_PATH, PARAM_WORKS_PATH } from 'src/app/admin/constants/constants';
 
 @Component({
   selector: 'app-manage-appointment-type',
@@ -104,7 +104,7 @@ public handlePageChange(event): void {
 
 getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
   // tslint:disable-next-line:prefer-const
-  let path = PARAM_WORKS_PATH;
+  let path = PARAM_APPOINTMENT_TYPE_PATH;
   const params = {};
   let adder = '?';
   if (page) {
