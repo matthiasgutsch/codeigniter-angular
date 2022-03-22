@@ -1,4 +1,40 @@
 
+<p-sidebar #op  [(visible)]="displayFilter" position="right" [style]="{width:'100%', 'max-width':'360px'}">
+    <ng-template pTemplate>
+
+        <div class="p-field p-grid">
+            <div class="p-col-12">
+
+                <input type="text" [style]="{ width: '100%' }" pInputText [(ngModel)]="nameFilter" placeholder="Nome" />
+            </div>
+        </div>
+        <div class="p-field p-grid">
+            <div class="p-col-12">
+                <input type="text" [style]="{ width: '100%' }" pInputText [(ngModel)]="descriptionFilter"
+                    placeholder="Descrizione" />
+            </div>
+        </div>
+
+        <div class="p-field p-grid">
+            <div class="p-col-12">
+                <button pButton type="submit" icon="pi pi-search" class="p-button p-button-primary btn-block"
+                    label="cerca" (click)="load()">
+                </button>
+            </div>
+        </div>
+        <div class="p-field p-grid">
+
+            <div class="p-col-12">
+                <button pButton type="reset" icon="pi pi-times" class="p-button p-button-secondary btn-block"
+                    label="reset" (click)="reset()">
+                </button>
+            </div>
+        </div>
+
+    </ng-template>
+</p-sidebar>
+
+
 <div class="top-main-wrapper">
 
     <div class="dash-header">
@@ -10,7 +46,11 @@
                 </div>
                 <div class="p-col-6 p-md-6">
                     <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/settings/appointment-type/create']" label="Aggiungi" class="p-button p-button-primary p-mr-2 pull-right"></button> 
+                    <button type="text" pButton label="Filter" icon="pi pi-filter"
+                    class="p-button p-button-secondary p-mr-2 pull-right"  (click)="displayFilter = true"></button>
 
+                    <button type="button" pButton pRipple label="Torna indietro" class="p-button p-button-goback pull-right  p-mr-2"
+                    [routerLink]="['/admin/settings/works']"></button>
 
                 </div>
             </div>
@@ -25,14 +65,28 @@
      
 <p-card>
    
+    <div class="filter-options">
+
+        <div class="p-field p-grid">
+
+            <div class="p-col-12 p-md-8">
+                <div class="item-size pull-left">
+                    <span class="filter-tag" *ngIf="nameFilter" >{{nameFilter}} <span class="close"><i class="pi pi-times"  (click)="reset()"></i></span> </span>
+                    <span class="filter-tag" *ngIf="descriptionFilter">{{descriptionFilter}} <span class="close"><i class="pi pi-times" (click)="reset()"></i></span> </span>
+                </div>
+            </div>
+
+            <div class="p-col-12 p-md-4">
+              <span class="pull-right">{{count}} Items</span>  
+            </div>
+        </div>
+    </div>
+        <div
+            *ngFor=" let appointment_typ of appointment_type  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index">
+        </div>
 
 
-    
-       <!-- <p-multiSelect [options]="columnOptions" [showToggleAll]="false" (onChange)="selectionItemForFilter($event)" [(ngModel)]="cols" maxSelectedLabels="{0} columns selected">
-        </p-multiSelect>-->
-
-
-    <p-table #dt [columns]="cols" [value]="appointment_type" [globalFilterFields]="['name', 'description']" currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
+    <p-table #dt [columns]="cols" [value]="appointment_type" [paginator]="false" [rows]="10">
 
     <ng-template pTemplate="header" let-columns>
         <tr>
@@ -58,7 +112,14 @@
 </p-table> 
 
 
+<div class="p-grid">
 
+    <div class="p-col-12 p-md-12">
+        <pagination-controls previousLabel="Prev" nextLabel="Next" responsive="true"
+            (pageChange)="handlePageChange($event)">
+        </pagination-controls>
+    </div>
+</div>
 </p-card>
         </div></div></div>
         
