@@ -86,24 +86,24 @@
 
         <div class="p-grid">
             <div class="p-col">
-                Numero Dipendente<br>
+                <label class="legend">Numero Dipendente</label> <br>
                 <strong>{{employee.fiscalnumber}}</strong>
             </div>
             <div class="p-col">
-                Indirizzo<br>
+                <label class="legend">Indirizzo</label><br>
 
                 <strong>{{employee.address}} - {{employee.city}}</strong>
             </div>
 
             <div class="p-col">
-                <div class="p-field p-grid">
+                <div class="p-grid">
                     <div class="p-col">
-                        Permessi Goduti<br>
+                        <label class="legend">Permessi Goduti</label><br>
 
                         <strong>{{permissionsCount}} </strong>
                     </div>
                     <div class="p-col">
-                        Permessi Maturati<br>
+                        <label class="legend">Permessi Maturati</label><br>
 
                         <strong>{{employee.permissions}} </strong>
                     </div>
@@ -111,14 +111,14 @@
 
             </div>
             <div class="p-col">
-                <div class="p-field p-grid">
+                <div class="p-grid">
                     <div class="p-col">
-                        Ferie Goduti<br>
+                        <label class="legend">Ferie Goduti</label><br>
 
                         <strong>{{vacationsCount}} </strong>
                     </div>
                     <div class="p-col">
-                        Ferie Maturati<br>
+                        <label class="legend">Ferie Maturati</label><br>
 
                         <strong>{{employee.vacations}} </strong>
                     </div>
@@ -147,7 +147,7 @@
                             </div>
     
                             <div class="p-col-12 p-md-4">
-                              <span class="pull-right">{{count}} Items</span>  
+                              <span class="count-item pull-right">{{count}} Items</span>  
                             </div>
                         </div>
                     </div>
