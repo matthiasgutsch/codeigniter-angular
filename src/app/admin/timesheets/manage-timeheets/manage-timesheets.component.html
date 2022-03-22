@@ -4,14 +4,12 @@
 
             <div class="p-field p-grid">
                 <div class="p-col-12">
-    
-                    <input type="text" [style]="{ width: '100%' }" pInputText [(ngModel)]="nameFilter" placeholder="Name" />
+                    <p-calendar [(ngModel)]="nameFilter" [style]="{ width: '100%' }" placeholder="Data da" dateFormat="yy-mm-dd" dataType="string" inputId="dateformat"></p-calendar>
                 </div>
             </div>
             <div class="p-field p-grid">
                 <div class="p-col-12">
-                    <input type="text" [style]="{ width: '100%' }" pInputText [(ngModel)]="descriptionFilter"
-                        placeholder="Descrizione" />
+                    <p-calendar [(ngModel)]="descriptionFilter" [style]="{ width: '100%' }" placeholder="Data a" dateFormat="yy-mm-dd" dataType="string" inputId="dateformat"></p-calendar>
                 </div>
             </div>
 
