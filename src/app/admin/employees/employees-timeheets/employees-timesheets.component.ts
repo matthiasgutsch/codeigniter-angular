@@ -219,6 +219,12 @@ export class EmployeesTimesheetsComponent implements OnInit {
       adder = '&';
     }
 
+    if (employeeTitle) {
+      params[`project_id`] = employeeTitle;
+      path += adder + 'project_id=' + employeeTitle;
+      adder = '&';
+    }
+
     if (pageSize) {
       params[`size`] = pageSize;
       path += adder + 'size=' + pageSize;

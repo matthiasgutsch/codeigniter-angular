@@ -15,9 +15,9 @@
 
             <div class="p-field p-grid">
                 <div class="p-col-12">
-            <p-dropdown [options]="employees" [virtualScroll]="true" filter="true"
+            <p-dropdown [options]="projects" [virtualScroll]="true" filter="true"
             [showClear]="true" placeholder="Scegli" [(ngModel)]="employeeFilter" [style]="{ width: '100%' }"
-            optionLabel="username" optionValue="id">
+            optionLabel="title" optionValue="id">
 
             </p-dropdown>
 
@@ -141,7 +141,7 @@
                                 <div class="item-size pull-left">
                                     <span class="filter-tag" *ngIf="nameFilter" >{{nameFilter}} <span class="close"><i class="pi pi-times"  (click)="reset()"></i></span> </span>
                                     <span class="filter-tag" *ngIf="descriptionFilter">{{descriptionFilter}} <span class="close"><i class="pi pi-times" (click)="reset()"></i></span> </span>
-                                    <span class="filter-tag" *ngIf="clientFilter">{{clientFilter}} <span class="close"><i class="pi pi-times" (click)="reset()"></i></span> </span>
+                                    <span class="filter-tag" *ngIf="employeeFilter">{{employeeFilter}} <span class="close"><i class="pi pi-times" (click)="reset()"></i></span> </span>
     
                                 </div>
                             </div>
