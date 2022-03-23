@@ -86,10 +86,7 @@
                         *ngFor=" let warehouse of warehouses  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index">
                     </div>
                 <p-table #dt [value]="warehouses" [pageLinks]="3" [responsive]="true"
-                    [globalFilterFields]="['title','status','category.name']" [paginator]="true" [rows]="15"
-                    [showCurrentPageReport]="true"
-                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                    [totalRecords]="true">
+                    [paginator]="false" [rows]="15">
 
                     <ng-template pTemplate="header">
                         <tr>
