@@ -125,7 +125,9 @@ searchWrapper: boolean = false;
 nameFilter: string;
 descriptionFilter: string;
 employeeFilter: string;
-
+typeFilter: string;
+projectFilter: string;
+timesheetsType: any;
 
 @ViewChild("dt", { static: false }) public dt: Table;
 @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
@@ -180,7 +182,7 @@ employeeFilter: string;
       title: col.header,
       dataKey: col.field
     }));
-
+      this.timesheetsType = TIMESHEETS_TYPE;
       this.spinner.hide();
   }
 
@@ -204,7 +206,7 @@ employeeFilter: string;
       }
     }
 
-  getRequestParams(searchTitle, categoryTitle, employeeTitle, page, pageSize): any {
+  getRequestParams(searchTitle, categoryTitle, employeeTitle, typeTitle, projectTitle, page, pageSize): any {
     // tslint:disable-next-line:prefer-const
     let path = PARAM_TIMESHEETS_PATH;
     const params = {};
@@ -230,6 +232,18 @@ employeeFilter: string;
       path += adder + 'employee=' + employeeTitle;
       adder = '&';
     }
+
+    if (typeTitle) {
+      params[`type`] = typeTitle;
+      path += adder + 'type=' + typeTitle;
+      adder = '&';
+    }
+    if (projectTitle) {
+      params[`project_id`] = projectTitle;
+      path += adder + 'project_id=' + projectTitle;
+      adder = '&';
+    }
+
     if (pageSize) {
       params[`size`] = pageSize;
       path += adder + 'size=' + pageSize;
@@ -247,6 +261,8 @@ employeeFilter: string;
       this.nameFilter,
       this.descriptionFilter,
       this.employeeFilter,
+      this.typeFilter,
+      this.projectFilter,
       this.page,
       this.pageSize
     );
@@ -266,7 +282,8 @@ employeeFilter: string;
     this.nameFilter = '';
     this.descriptionFilter = '';
     this.employeeFilter = '';
-
+    this.typeFilter = '';
+    this.projectFilter = '';
     this.load();
     
   }

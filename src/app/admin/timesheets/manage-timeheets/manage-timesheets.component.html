@@ -13,11 +13,23 @@
                 </div>
             </div>
 
+            <div class="p-field p-grid">
+                <div class="p-col-12">
+            <p-dropdown [options]="timesheetsType" [virtualScroll]="true" filter="true"
+            [showClear]="true" placeholder="Tipo" [(ngModel)]="typeFilter" [style]="{ width: '100%' }"
+            optionLabel="label" optionValue="value">
+
+            </p-dropdown>
+
+
+                </div>
+            </div>
+
 
             <div class="p-field p-grid">
                 <div class="p-col-12">
             <p-dropdown [options]="employees" [virtualScroll]="true" filter="true"
-            [showClear]="true" placeholder="Scegli" [(ngModel)]="employeeFilter" [style]="{ width: '100%' }"
+            [showClear]="true" placeholder="Dipendente" [(ngModel)]="employeeFilter" [style]="{ width: '100%' }"
             optionLabel="username" optionValue="id">
 
             </p-dropdown>
@@ -25,6 +37,19 @@
 
                 </div>
             </div>
+
+            <div class="p-field p-grid">
+                <div class="p-col-12">
+            <p-dropdown [options]="projects" [virtualScroll]="true" filter="true"
+            [showClear]="true" placeholder="Progetti" [(ngModel)]="projectFilter" [style]="{ width: '100%' }"
+            optionLabel="title" optionValue="id">
+
+            </p-dropdown>
+
+
+                </div>
+            </div>
+
 
             <div class="p-field p-grid">
                 <div class="p-col-12">
@@ -102,6 +127,13 @@
                                             </span>
 
                                             <span class="filter-tag" *ngIf="employeeFilter">{{employeeFilter}}
+                                                <span class="close"><i class="pi pi-times" (click)="reset()"></i></span>
+                                            </span>
+
+                                            <span class="filter-tag" *ngIf="typeFilter">{{typeFilter}}
+                                                <span class="close"><i class="pi pi-times" (click)="reset()"></i></span>
+                                            </span>
+                                            <span class="filter-tag" *ngIf="projectFilter">{{projectFilter}}
                                                 <span class="close"><i class="pi pi-times" (click)="reset()"></i></span>
                                             </span>
                                         </div>
