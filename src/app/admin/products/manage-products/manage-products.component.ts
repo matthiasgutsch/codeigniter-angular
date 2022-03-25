@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AppointmentsService } from '../../../services/appointments.service';
 import { Blog } from '../../../models/blog';
 import { ConfirmationService, SelectItem } from 'primeng/api';
@@ -136,10 +136,18 @@ export class ManageProductsComponent implements OnInit {
 
   }
 
+
+  @ViewChild("myinput") myInputField: ElementRef;
+    ngAfterViewInit() {
+    this.myInputField.nativeElement.focus();
+    }
+
+
   ngOnInit() {
     const userId = this.currentUser.user_id;
     this.spinner.show();
 
+    
     this.load();
 
     this.cols = [
@@ -236,7 +244,7 @@ export class ManageProductsComponent implements OnInit {
     this.codeIntFilter = '';
     this.brandFilter = '';
     this.load();
-
+    this.ngAfterViewInit();
   }
 
   load(): void {

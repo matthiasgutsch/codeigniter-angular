@@ -416,6 +416,24 @@
 }
 
 
+.truncate {
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item {
+  margin: 0;
+  padding: 15px;
+  border: 0 none;
+  color: #495057;
+  background: transparent;
+  transition: box-shadow 0.2s;
+  border-radius: 0;
+  border-bottom: 1px solid #ccc;
+}
+
+
 /* checkbox */
 .p-tag {
   height: 26px;
@@ -470,6 +488,8 @@
   top: 0;
   min-width: 500px !important;
 }
+
+
 
 /* table */
 
@@ -753,3 +773,38 @@ body .ui-panel .ui-panel-titlebar {
 body .ui-panel .ui-panel-titlebar:hover {
     cursor: grab !important;
   }
+  .p-inputtext {
+
+    height: 36px;
+  }
+
+
+  .p-inputtextarea {
+    height: 150px;
+  }
+
+  .p-inputgroup-addon:first-child, .p-inputgroup button:first-child, .p-inputgroup input:first-child {
+    border-radius: 0px !important;
+    border-top-left-radius: 6px !important;
+    border-bottom-left-radius: 6px !important;
+  }
+  
+
+.p-inputgroup .p-button.p-button-primary {
+  color: #ffffff !important;
+  background: #416ff4;
+  border: 1px solid #416ff4 !important;
+  border-radius: 0px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.p-inputgroup-addon:last-child, .p-inputgroup button:last-child, .p-inputgroup input:last-child {
+  border-radius: 0px !important;
+  border-top-right-radius: 6px !important;
+  border-bottom-right-radius: 6px !important;
+  padding-right:20px !important;
+  border-radius: 0px 6px 6px 0px !important;
+  padding-left: 10px;
+}
+

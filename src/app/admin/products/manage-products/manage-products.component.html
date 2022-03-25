@@ -75,10 +75,30 @@
         <div class="dash-title">
     
             <div class="p-field p-grid">
-                <div class="p-col-6 p-md-6">
+                <div class="p-col-4 p-md-4">
                     <h3>Prodotti</h3>
                 </div>
-                <div class="p-col-6 p-md-6">
+                <div class="p-col-8 p-md-8">
+                    <div class="p-grid">
+
+                    <div class="p-col">
+
+                        <div class="p-inputgroup pull-right">
+                            <input type="text" [style]="{ width: '100%' }" pInputText [(ngModel)]="codeFilter"
+                            placeholder="Barcode" #myinput /> 
+                            <button pButton type="reset" icon="pi pi-times" class="p-button-primary"
+                            (click)="reset()">
+                        </button>
+                            <button pButton type="submit"  class="p-button-primary"
+                            label="cerca" (click)="load()"></button>     
+                        </div>
+
+
+                  
+                        
+                    </div>
+                    <div class="p-col">
+
                     <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/products/create']" label="Aggiungi"
                         class="p-button p-button-primary p-mr-2 pull-right"></button>
 
@@ -86,7 +106,8 @@
                         class="p-button-options p-mr-2 pull-right"  tooltipPosition="bottom"></button>
                          <button type="text" pButton label="Filter" icon="pi pi-filter"
                         class="p-button p-button-options p-mr-2 pull-right" (click)="filterSidebar = true"></button>
-                   
+                    </div>
+                </div>
                 </div>
             </div>
         </div>

@@ -147,6 +147,8 @@ export class BillingsFormComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     this.typeList = TYPE_LIST;
     this.billingOptions = BILLING_LIST;
+    //this.editForm = ! this.editForm;
+
   }
 
   @ViewChild('reportContent') reportContent: ElementRef;
