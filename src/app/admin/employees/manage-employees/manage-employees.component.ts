@@ -83,6 +83,7 @@ export class ManageEmployeesComponent implements OnInit {
     this.cols = [
       { field: "name", header: "Nome" },
       { field: "surname", header: "Cognome" },
+      { field: "fiscalnumber", header: "Codice Cliente" },
 
       { field: "date", header: "Data di nascità" },
 

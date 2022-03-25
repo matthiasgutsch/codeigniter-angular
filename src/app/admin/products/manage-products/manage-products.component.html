@@ -218,6 +218,7 @@
                             <th *ngFor="let col of colsVariations">
                                 {{col.header}}
                             </th>
+                            <th></th>
                             <th width="50px"></th>
 
                         </tr>
@@ -231,6 +232,10 @@
                                 {{rowData[col.field]}}
 
                                 
+                            </td>
+                            <td>
+                               <p-tag severity="success" *ngIf="rowData.pieces > 0" [value]="rowData.pieces"></p-tag> 
+
                             </td>
                             <td>
                                 <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
