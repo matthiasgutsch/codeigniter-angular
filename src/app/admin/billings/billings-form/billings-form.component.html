@@ -13,22 +13,22 @@
                             class="p-button pull-right p-button-success"></button>
 
                         <button pButton pRipple icon="pi pi-save" (click)="generatePDF('download')" type="button"
-                            label="Genera PDF" class="p-button p-button-primary pull-right p-mr-2"></button>
+                            label="Genera PDF" class="p-button p-button-options pull-right p-mr-2"></button>
 
                         <button pButton pRipple icon="pi pi-print" type="button" label="Stampa"
-                            (click)="generatePDF('print')" class="p-button p-button-primary pull-right p-mr-2"></button>
+                            (click)="generatePDF('print')" class="p-button p-button-options pull-right p-mr-2"></button>
 
                         <button pButton pRipple *ngIf="numberAppointments > 0"
                             [routerLink]="['/admin/appointments/edit', numberAppointments]"
                             label="Visualizza Appuntamento"
-                            class="p-button p-button-secondary  pull-right p-mr-2"></button>
+                            class="p-button p-button-options  pull-right p-mr-2"></button>
 
                         <button pButton pRipple *ngIf="numberOrders > 0"
                             [routerLink]="['/admin/orders/edit', numberOrders]" label="Visualizza Ordine"
-                            class="p-button p-button-secondary  pull-right p-mr-2"></button>
+                            class="p-button p-button-options  pull-right p-mr-2"></button>
 
                         <button pButton pRipple type="button" (click)="editFormItems()" label="Modifica"
-                            class="p-button p-button-success  pull-right p-mr-2"></button>
+                            class="p-button p-button-primary  pull-right p-mr-2"></button>
 
                     </div>
                 </div>
