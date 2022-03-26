@@ -160,8 +160,6 @@ export class ManageProductsComponent implements OnInit {
     this.colsVariations = [
       { field: "title", header: "titolo" },
       { field: "code", header: "Codice" },
-      { field: "code_int", header: "Codice interno" },
-      { field: "price", header: "Prezzo" },
     ];
 
 

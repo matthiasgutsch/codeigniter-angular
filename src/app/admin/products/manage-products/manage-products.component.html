@@ -75,21 +75,21 @@
         <div class="dash-title">
     
             <div class="p-field p-grid">
-                <div class="p-col-4 p-md-4">
+                <div class="p-col-6 p-md-6">
                     <h3>Prodotti</h3>
                 </div>
-                <div class="p-col-8 p-md-8">
+                <div class="p-col-6 p-md-6">
                     <div class="p-grid">
 
                     <div class="p-col">
 
                         <div class="p-inputgroup pull-right">
                             <input type="text" [style]="{ width: '100%' }" pInputText [(ngModel)]="codeFilter"
-                            placeholder="Barcode" #myinput /> 
+                            placeholder="Barcode" #myinput (keyup)="load($event)" />
                             <button pButton type="reset" icon="pi pi-times" class="p-button-primary"
                             (click)="reset()">
                         </button>
-                            <button pButton type="submit"  class="p-button-primary"
+                            <button pButton type="submit"  class="p-button-options"
                             label="cerca" (click)="load()"></button>     
                         </div>
 
@@ -97,18 +97,20 @@
                   
                         
                     </div>
-                    <div class="p-col">
+       
 
-                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/products/create']" label="Aggiungi"
-                        class="p-button p-button-primary p-mr-2 pull-right"></button>
+                
 
-                        <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()"
-                        class="p-button-options p-mr-2 pull-right"  tooltipPosition="bottom"></button>
+                        <!-- <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()"
+                        class="p-button-options p-mr-2 pull-right"  tooltipPosition="bottom"></button> -->
                          <button type="text" pButton label="Filter" icon="pi pi-filter"
                         class="p-button p-button-options p-mr-2 pull-right" (click)="filterSidebar = true"></button>
+
+                        <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/products/create']" label="Aggiungi"
+                        class="p-button p-button-primary p-mr-4 pull-right"></button>
                     </div>
                 </div>
-                </div>
+             
             </div>
         </div>
     </div>
@@ -235,18 +237,23 @@
 
                     <ng-template pTemplate="header" let-columns>
                         <tr>
-                            <th width="50px"></th>
+                            <th width="40px"></th>
+                            <th width="70px"></th>
                             <th *ngFor="let col of colsVariations">
                                 {{col.header}}
                             </th>
-                            <th></th>
+                            <th>Prezzo</th>
+                            <th>Disponibilità</th>
                             <th width="50px"></th>
 
                         </tr>
 
                     </ng-template>
                     <ng-template pTemplate="body" let-rowData let-columns="columns">
-                        <tr>
+                        <tr  [ngClass]="rowData.is_active == 1 ? '' : 'red' ">
+                            <td>  <p-tag value="Si" severity="success" *ngIf="rowData.is_active == 1"></p-tag>
+                                <p-tag value="No" severity="danger" *ngIf="rowData.is_active == 0"></p-tag></td>
+                                
                             <td *ngIf="rowData.image"><img [src]="rowData.image"
                                     [routerLink]="['/admin/products-variation/edit',rowData.product_id, rowData.id]" class="img-responsive"></td>
                             <td *ngFor="let col of colsVariations" [ngSwitch]="col.field">
@@ -254,8 +261,13 @@
 
                                 
                             </td>
+
                             <td>
-                               <p-tag severity="success" *ngIf="rowData.pieces > 0" [value]="rowData.pieces"></p-tag> 
+                                {{rowData.price | currency :'EUR':'symbol':'1.2-2'}}
+                             </td>
+
+                            <td>
+                               <p-tag severity="default" *ngIf="rowData.pieces > 0" [value]="rowData.pieces"></p-tag> 
 
                             </td>
                             <td>

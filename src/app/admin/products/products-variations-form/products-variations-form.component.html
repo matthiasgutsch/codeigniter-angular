@@ -96,30 +96,30 @@
                                         </div>
                                     </div>
 
-                                    <div class="p-fluid">
+                                   <div class="p-fluid">
 
-                                        <div class="p-field p-grid">
-                                            <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Prezzo Listino<span
-                                                    class="required">*</span></label>
-                                            <div class="p-col-12 p-md-10">
-                                                <div class="p-grid">
-                                                    <div class="p-col-12 p-md-5">
-                                                        <input type="text" [style]="{ width: '100%' }" pInputText
-                                                            formControlName="price">
-                                                    </div>
-                                                    <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Prezzo Fornitore<span
-                                                            class="required">*</span></label>
-                                                    <div class="p-col-4 p-md-5">
-
-                                                        <input type="text" [style]="{ width: '100%' }" pInputText
-                                                            formControlName="price_extra">
-                                                    </div>
-
+                                    <div class="p-field p-grid">
+                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Prezzo Listino<span
+                                                class="required">*</span></label>
+                                        <div class="p-col-12 p-md-10">
+                                            <div class="p-grid">
+                                                <div class="p-col-12 p-md-5">
+                                                    <p-inputNumber type="text" [style]="{ width: '100%' }"
+                                                        formControlName="price" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
+                                                </div>
+                                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Prezzo Fornitore<span
+                                                        class="required">*</span></label>
+                                                <div class="p-col-4 p-md-5">
+                                                    <p-inputNumber type="text" [style]="{ width: '100%' }"
+                                                    formControlName="price_extra" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
+                                                  
                                                 </div>
 
                                             </div>
+
                                         </div>
                                     </div>
+                                </div>
 
                                     <div class="p-fluid">
 
