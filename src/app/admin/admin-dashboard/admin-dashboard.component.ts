@@ -221,7 +221,7 @@ export class AdminDashboardComponent implements OnInit {
       this.nameFilter = '',
       this.descriptionFilter = '',
       this.page = 1,
-      this.pageSize = 2
+      this.pageSize = 3
     );
     this.projectsService.getAllListNew(params).subscribe((pData) => {      
       this.projects = pData;
@@ -251,7 +251,7 @@ export class AdminDashboardComponent implements OnInit {
       this.nameFilter = '',
       this.descriptionFilter = '',
       this.page = 0,
-      this.pageSize = 3
+      this.pageSize = 4
     );
     this.supportsService.getAllListNew(params).subscribe((pData) => {      
       this.supports = pData;
@@ -266,7 +266,7 @@ export class AdminDashboardComponent implements OnInit {
       this.nameFilter = '',
       this.descriptionFilter = '',
       this.page = 0,
-      this.pageSize = 3
+      this.pageSize = 4
     );
    this.productsService.getAllListNew(params).subscribe((pData) => {
       this.products = pData;
@@ -280,7 +280,7 @@ export class AdminDashboardComponent implements OnInit {
       this.nameFilter = '',
       this.descriptionFilter = '',
       this.page = 0,
-      this.pageSize = 3
+      this.pageSize = 4
     );
    this.billingsService.getAllListNew(params).subscribe((pData) => {
       this.billings = pData;

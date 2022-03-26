@@ -573,7 +573,7 @@ ul.nav-menu-mobile {
 
 .featured-card {
   .p-card {
-    background-color: @ness_color_2;
+    background-color: #2b3762;
     color: fade(@white, 60%);
     .p-card-body {
       padding: 25px;
@@ -590,6 +590,11 @@ ul.nav-menu-mobile {
   padding: 20px 20px 0px 20px;
   border-bottom: 0px solid #dee2e6;
   border-top: 0px solid #dee2e6;
+
+  &.with-sidebar {
+    margin-right: 420px;
+  }
+
   .dash-header {
     padding: 0px;
     margin: 0px;
@@ -638,7 +643,7 @@ ul.nav-menu-mobile {
   .main-inner {
     padding: 0px 20px 30px 20px;
     &.with-sidebar {
-      margin-right: 70px;
+      margin-right: 420px;
     }
   }
   &.open {
@@ -674,8 +679,8 @@ hr.full {
   position: fixed;
   width: 100%;
   z-index: 1000;
-  box-shadow: @shadow;
-  .openbtn {
+  border-bottom: 1px solid #dee2e6;
+    .openbtn {
     font-size: 22px;
     cursor: pointer;
     background-color: @white;
@@ -1013,6 +1018,29 @@ hr.full {
   padding-right: 20px;
 }
 
+
+
+.sidebar-inside {
+  height: 100%;
+  width: 420px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0px;
+  background-color: @white;
+  overflow-x: hidden;
+  transition: 0.1s;
+  padding-top: 68px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-left: 1px solid #dee2e6;
+
+  h3 {
+    padding: 0px;
+    margin: 0px;
+    margin-bottom: 0px;
+  }
+}
 .sidebar-main {
   height: 100%;
   width: 260px;
