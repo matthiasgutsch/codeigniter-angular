@@ -1,5 +1,5 @@
 <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
-    <div class="top-main-wrapper">
+    <div class="top-main-wrapper with-sidebar">
     <div class="dash-header">
         <div class="dash-title">
 
@@ -20,11 +20,81 @@
     </div>
 </div>
 
-<div class="main-inner">
+<div class="sidebar-inside">
+    <p-tabView class="responsive-tab-view">
+
+        <p-tabPanel header="Elenco Appuntamenti">
+            <div class="blog-form">
+
+                <div *ngIf="!appointments || hasNoSelectedAppointments()">
+                    <p-message severity="info" text="Non ci sono Appuntamenti"></p-message>
+                </div>
+
+                <p-timeline [value]="appointments">
+
+                    <ng-template pTemplate="content" let-appointment>
+
+                        <p-card>
+                            <div class="p-grid clearfix">
+                                <div class="p-col-12 p-md-10">
+                                    <strong>{{appointment.title}}</strong><br>
+                                    <p class="detail"><i class="pi pi-calendar"></i> {{appointment.date}}</p> 
+
+                                </div>
+                 
+                                <div class="p-col-12 p-md-2">
+                                    <button pButton pRipple icon="pi pi-pencil"
+                                        class="p-button p-button-small p-button-success pull-right"
+                                        [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
+
+                                </div>
+                            </div>
+
+                        </p-card>
+                    </ng-template>
+                </p-timeline>
+
+            </div>
+
+        </p-tabPanel>
+
+        <p-tabPanel header="Elenco Fatture">
+
+            <div *ngIf="!billings || hasNoSelectedBillings()">
+                <p-message severity="info" text="Non ci sono Fatture"></p-message>
+            </div>
+
+            <p-timeline [value]="billings">
+
+                <ng-template pTemplate="content" let-billing>
+
+                    <p-card>
+                        <div class="p-grid">
+                            <div class="p-col-12 p-md-10">
+                                <strong>Fattura
+                                    {{billing.number}}/{{billing.date | date:'yyyy'}}</strong><br>
+                                <p class="detail"><i class="pi pi-calendar"></i> {{billing.date}}</p> 
+                            </div>
+                            <div class="p-col-12 p-md-2">
+                                <button pButton pRipple type="button" icon="pi pi-pencil"
+                                    class="p-button p-button-success p-button-small pull-right"
+                                    [routerLink]="['/admin/billings/edit', billing.id]"></button>
+
+                            </div>
+                        </div>
+                    </p-card>
+                </ng-template>
+            </p-timeline>
+        </p-tabPanel>
+
+    </p-tabView>
+
+</div>
+<div class="main-inner with-sidebar">
 
     <div class="p-fluid">
         <div class="p-field p-grid">
-            <div class="p-col-12 p-md-7">
+            <div class="p-col-12 p-md-12">
 
                     <p-card>
 
@@ -316,81 +386,7 @@
 
             </div>
         
-            <div class="p-col-12 p-md-5">
-
-                <p-card>
-
-                    <p-tabView class="responsive-tab-view">
-
-                        <p-tabPanel header="Elenco Appuntamenti">
-                            <div class="blog-form">
-
-                                <div *ngIf="!appointments || hasNoSelectedAppointments()">
-                                    <p-message severity="info" text="Non ci sono Appuntamenti"></p-message>
-                                </div>
-
-                                <p-timeline [value]="appointments">
-
-                                    <ng-template pTemplate="content" let-appointment>
-
-                                        <p-card>
-                                            <div class="p-grid clearfix">
-                                                <div class="p-col-12 p-md-10">
-                                                    <strong>{{appointment.title}}</strong><br>
-                                                    <p class="detail"><i class="pi pi-calendar"></i> {{appointment.date}}</p> 
-
-                                                </div>
-                                 
-                                                <div class="p-col-12 p-md-2">
-                                                    <button pButton pRipple icon="pi pi-pencil"
-                                                        class="p-button p-button-small p-button-success pull-right"
-                                                        [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
-
-                                                </div>
-                                            </div>
-
-                                        </p-card>
-                                    </ng-template>
-                                </p-timeline>
-
-                            </div>
-
-                        </p-tabPanel>
-
-                        <p-tabPanel header="Elenco Fatture">
-
-                            <div *ngIf="!billings || hasNoSelectedBillings()">
-                                <p-message severity="info" text="Non ci sono Fatture"></p-message>
-                            </div>
-
-                            <p-timeline [value]="billings">
-
-                                <ng-template pTemplate="content" let-billing>
-
-                                    <p-card>
-                                        <div class="p-grid">
-                                            <div class="p-col-12 p-md-10">
-                                                <strong>Fattura
-                                                    {{billing.number}}/{{billing.date | date:'yyyy'}}</strong><br>
-                                                <p class="detail"><i class="pi pi-calendar"></i> {{billing.date}}</p> 
-                                            </div>
-                                            <div class="p-col-12 p-md-2">
-                                                <button pButton pRipple type="button" icon="pi pi-pencil"
-                                                    class="p-button p-button-success p-button-small pull-right"
-                                                    [routerLink]="['/admin/billings/edit', billing.id]"></button>
-
-                                            </div>
-                                        </div>
-                                    </p-card>
-                                </ng-template>
-                            </p-timeline>
-                        </p-tabPanel>
-
-                    </p-tabView>
-
-                </p-card>
- 
-            </div></div></div></div></form>
+            </div></div></div></form>
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" #cd>
 
     <p-footer>
