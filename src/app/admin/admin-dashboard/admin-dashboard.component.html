@@ -29,16 +29,31 @@
         <div *ngFor="let appointment of appointmentsToday">
             
             <p-card (click)="editProduct(appointment)">
+                <div class="p-grid">
+                    <div class="p-col-2">
+                    <div class="icon">
+                        <i class="pi pi-calendar"></i>
 
-                <app-initials-avatar
-                firstName="{{ appointment.client.name | slice:0:1}}"
-                lastName="{{ appointment.client.surname | slice:0:1}}">
-            </app-initials-avatar>
-            {{ appointment.client.name }}
-            {{ appointment.client.surname }}
-            <div class="clearfix"></div>
-            <p-tag value="{{appointment.time}}" severity="warning"></p-tag>
-            {{appointment.title}}
+                    </div>
+                </div>
+
+                <div class="p-col-7">
+                  
+                {{ appointment.client.name }}
+                {{ appointment.client.surname }}
+
+                <div class="clearfix"></div>
+                <p><strong>{{appointment.title}}</strong></p>
+
+                </div>
+
+                <div class="p-col-2">
+                    <p-tag value="{{appointment.time}}" severity="info"></p-tag>
+                </div>
+
+                </div>
+            
+    
           
             </p-card>
            
