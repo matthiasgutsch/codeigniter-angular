@@ -71,7 +71,7 @@
                 <div class="p-grid">
                     <div class="p-col-fixed 50">
                     <div class="icon">
-                        <i class="pi pi-calendar"></i>
+                        <i class="pi pi-info-circle"></i>
 
                     </div>
                 </div>
@@ -109,7 +109,7 @@
 
             <div class="p-col-12 p-md-4">
 
-                <p-card class="featured-card">
+                <p-card class="featured-card"  [routerLink]="['/admin/clients']">
 
                     <div class="p-grid">
                         <div class="p-col-12">
@@ -118,19 +118,16 @@
                         </div>
 
                     </div>
-                        <div class="p-col-6 p-md-6">
+                        <div class="p-col-6 p-md-8">
                             <h4 class="mb-0">Clienti</h4>
                             Totale: {{clientsCount}}
 
                         </div>
 
-                        <div class="p-col-6 p-md-6">
+                        <div class="p-col-6 p-md-4">
 
                             <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']"
                                 routerLinkActive="active" class="p-button p-button-success pull-right"></button>
-
-                            <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/clients']"
-                                routerLinkActive="active" class="p-button p-button-primary pull-right p-mr-2"></button>
 
                         </div>
                     </div>
@@ -138,7 +135,7 @@
             </div>
             <div class="p-col-12 p-md-4">
 
-                <p-card class="featured-card">
+                <p-card class="featured-card" [routerLink]="['/admin/appointments']">
 
                     <div class="p-grid">
                         <div class="p-col-12">
@@ -148,17 +145,15 @@
 
                     </div>
 
-                        <div class="p-col-6 p-md-6">
+                        <div class="p-col-6 p-md-8">
                             <h4 class="mb-0">Appuntamenti</h4>
                             Totale: {{appointmentsCount}}
 
                         </div>
-                        <div class="p-col-6 p-md-6">
+                        <div class="p-col-6 p-md-4">
 
                             <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']"
                                 routerLinkActive="active" class="p-button p-button-success pull-right"></button>
-                            <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/appointments']"
-                                routerLinkActive="active" class="p-button p-button-primary p-mr-2 pull-right"></button>
                         </div>
                     </div>
                 </p-card>
@@ -167,7 +162,7 @@
 
             <div class="p-col-12 p-md-4">
 
-                <p-card class="featured-card">
+                <p-card class="featured-card" [routerLink]="['/admin/billings']">
 
                     <div class="p-grid">
                         <div class="p-col-12">
@@ -177,18 +172,17 @@
 
                     </div>
 
-                        <div class="p-col-6 p-md-6">
+                        <div class="p-col-6 p-md-8">
                             <h4 class="mb-0">Fatturazione</h4>
                             {{billingsCountTotal | currency :'EUR':'symbol':'1.2-2'}} <strong></strong>
 
                             <!-- <span class="red" *ngIf="billingsCountTotalNotPaid > 0"> ({{billingsCountTotalNotPaid |  currency :'EUR':'symbol':'1.2-2'}})</span> -->
                         </div>
-                        <div class="p-col-6 p-md-6">
+                        <div class="p-col-6 p-md-4">
 
                             <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/billings/create']"
                                 routerLinkActive="active" class="p-button p-button-success pull-right"></button>
-                            <button pButton pRipple icon="pi pi-list" [routerLink]="['/admin/billings']"
-                                routerLinkActive="active" class="p-button p-button-primary p-mr-2 pull-right"></button>
+
                         </div>
                     </div>
                 </p-card>
