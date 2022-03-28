@@ -233,7 +233,7 @@ p a {
   z-index: 1;
   top: 0;
   left: 0;
-  background: #2b3762;
+  background: @ness_color_2;
   overflow-x: hidden;
   transition: 0.1s;
   padding-top: 0px;
@@ -503,18 +503,20 @@ ul.nav-menu-mobile {
 
 .featured-card {
   .p-card {
-    background-color: #2b3762;
-    color: fade(@white, 60%);
+    background-color: @white;
+    color:  @ness_color_2;
+    border: 1px solid @ness_color_3;
     .p-card-body {
       padding: 25px;
       h4 {
-        color: @white;
+        color: @ness_color_2;
       }
 
       .icon-container {
         margin-bottom: 10px;
         i {
           font-size: 30px;
+          color: @ness_color_3;
         }
       }
     }
@@ -887,7 +889,7 @@ hr.full {
 
 .blu-box {
   .p-card {
-    background: #2b3762;
+    background: @ness_color_2;
     color: @text-color;
     box-shadow: none;
     border-radius: @radius;
