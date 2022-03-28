@@ -277,7 +277,7 @@ p a {
     display: inline-block;
     margin: 0px;
     padding-top: 80px;
-    padding: 80px 20px 0px 20px;
+    padding: 75px 15px 0px 15px;
     li {
       list-style-type: none;
       float: left;
@@ -294,7 +294,7 @@ p a {
         line-height: 46px;
         height: 46px;
         margin-right: 10px;
-        margin-left: 10px;
+        margin-left: 5px;
         text-align: center;
       }
 
@@ -342,7 +342,9 @@ p a {
             visibility: hidden !important;
           }
           &:hover {}
-          i {}
+          i {
+            margin: 0px !important;
+          }
         }
       }
     }
@@ -357,10 +359,13 @@ p a {
             visibility: visible !important;
           }
           &:hover {}
-          i {}
+          i {
+          }
         }
       }
     }
+
+   
   }
 }
 
@@ -504,6 +509,13 @@ ul.nav-menu-mobile {
       padding: 25px;
       h4 {
         color: @white;
+      }
+
+      .icon-container {
+        margin-bottom: 10px;
+        i {
+          font-size: 30px;
+        }
       }
     }
   }
@@ -1097,6 +1109,8 @@ hr.full {
         }
       }
     }
+
+    
   }
 }
 

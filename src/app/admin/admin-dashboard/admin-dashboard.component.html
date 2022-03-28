@@ -112,8 +112,13 @@
                 <p-card class="featured-card">
 
                     <div class="p-grid">
-                        <div class="p-col-6 p-md-6">
+                        <div class="p-col-12">
+                            <div class="icon-container">
+                        <i tooltipposition="right" class="pi pi-users"></i>
+                        </div>
 
+                    </div>
+                        <div class="p-col-6 p-md-6">
                             <h4 class="mb-0">Clienti</h4>
                             Totale: {{clientsCount}}
 
@@ -136,6 +141,13 @@
                 <p-card class="featured-card">
 
                     <div class="p-grid">
+                        <div class="p-col-12">
+                            <div class="icon-container">
+                        <i tooltipposition="right" class="pi pi-calendar-plus"></i>
+                        </div>
+
+                    </div>
+
                         <div class="p-col-6 p-md-6">
                             <h4 class="mb-0">Appuntamenti</h4>
                             Totale: {{appointmentsCount}}
@@ -158,6 +170,13 @@
                 <p-card class="featured-card">
 
                     <div class="p-grid">
+                        <div class="p-col-12">
+                            <div class="icon-container">
+                        <i tooltipposition="right" class="pi pi-credit-card"></i>
+                        </div>
+
+                    </div>
+
                         <div class="p-col-6 p-md-6">
                             <h4 class="mb-0">Fatturazione</h4>
                             {{billingsCountTotal | currency :'EUR':'symbol':'1.2-2'}} <strong></strong>
