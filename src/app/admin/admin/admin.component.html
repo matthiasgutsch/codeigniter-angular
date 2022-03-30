@@ -48,7 +48,7 @@
 
 </p-overlayPanel>
 
-  <div class="sidebar"  id="mySidebar" [ngClass]=" flag ? 'close' : 'open'">
+  <div class="sidebar"  id="mySidebar" [ngClass]=" flag ? 'open' : 'close'">
  
 
   <ul class="nav-menu">
@@ -126,7 +126,7 @@
 </div>
 
 
-<div id="main" [ngClass]=" flag ? 'open' : 'close'">  
+<div id="main" [ngClass]=" flag ? 'close' : 'open'">  
 
           <router-outlet></router-outlet>
       </div>
