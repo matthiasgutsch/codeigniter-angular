@@ -13,6 +13,10 @@
                     class="p-button p-button-success p-mr-2 pull-right"
                     [disabled]="!blogForm.valid"></button>
 
+
+                    <button type="button" pButton pRipple icon="pi pi-chevron-left" label="Torna indietro"
+                    class="p-button p-button-back pull-right  p-mr-2"
+                    [routerLink]="['/admin/clients/']"></button>
                 </div>
             </div>
 
@@ -79,7 +83,7 @@
                                 <button pButton pRipple type="button" icon="pi pi-pencil"
                                     class="p-button p-button-success p-button-small pull-right"
                                     [routerLink]="['/admin/billings/edit', billing.id]"></button>
-
+                              
                             </div>
                         </div>
                     </p-card>
