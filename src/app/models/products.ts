@@ -20,6 +20,7 @@ export class Products {
     price: string;
     price_extra: string;
     data: JSON;
+    pieces: string;
     status: StringMap;
     skills: ISkill[];
 }

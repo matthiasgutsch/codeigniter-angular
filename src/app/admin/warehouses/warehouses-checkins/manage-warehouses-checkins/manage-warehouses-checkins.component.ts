@@ -169,6 +169,21 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
     private confirmationService: ConfirmationService,) {
     this.status = STATUS_PRODUCTS;
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+
+
+    this.pageTitle = "Aggiungi Prodotti / Magazzino";
+
+    this.blogForm = this.fb.group({
+      id: [""],
+      warehouse_id: ["", Validators.required],
+      product_id: ["", Validators.required],
+      supplier_id: ["", Validators.required],
+      pieces: ["", Validators.required],
+      boxes: ["", Validators.required],
+      user_id: [this.currentUser.user_id],
+    });
+
+    
   }
 
   ngOnInit() {
@@ -351,23 +366,6 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
     this.productDialogAdd = true;
   }
 
-  createTimesheets() {
-    this.productDialogAdd = true;
-
-    this.pageTitle = "Aggiungi Prodotti / Magazzino";
-
-    this.blogForm = this.fb.group({
-      id: [""],
-      warehouse_id: ["", Validators.required],
-      product_id: ["", Validators.required],
-      supplier_id: ["", Validators.required],
-      pieces: ["", Validators.required],
-      boxes: ["", Validators.required],
-      user_id: [this.currentUser.user_id],
-    });
-
-
-  }
 
   getProductsVariations() {
     this.productsVariationsService.getAllListbyUser().subscribe(
@@ -561,6 +559,8 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
           if (response.error) {
           } else {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Conferma', detail: 'Quantita aggiornata con successo' });
+            this.ngOnInit();
+            this.blogForm.reset();
           }
         },
       });
@@ -604,7 +604,6 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
             this.updateQuantity(formData);
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
             this.productDialogAdd = false;
-            this.ngOnInit();
 
           }
         },
