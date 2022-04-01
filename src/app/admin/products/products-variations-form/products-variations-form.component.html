@@ -267,13 +267,15 @@
                                                 Data
                                             </th>
                 
-                                            <th>
+                                            <th width="100px">
                                                 Pezzi
                                             </th>
-                                            <th>
+                                            <th width="100px">
                                                 Colli
                                             </th>
-
+                                            <th>
+                                                Fornitore
+                                            </th>
                                             <th>
                                                 Maggazzino
                                             </th>
@@ -290,14 +292,17 @@
                 
                                             </td>
                                             <td>
-                                                {{warehouseMovement.pieces}}
+                                               <p-tag severity="default" [value]="warehouseMovement.pieces"></p-tag>
 
                                               </td>
                                               <td>
                                                 {{warehouseMovement.boxes}}
 
                                               </td>
+                                              <td>
+                                                {{warehouseMovement.supplier.company_name}}
 
+                                              </td>
                                               <td>
                                                 {{warehouseMovement.warehouse_id.title}}
 
