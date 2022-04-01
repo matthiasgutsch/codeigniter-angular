@@ -528,10 +528,14 @@ ul.nav-menu-mobile {
   .p-card {
     margin-bottom: 10px;
     border: 0px;
+    box-shadow: none;
+    border-radius: @radius;
   }
   .p-card-body {
     background-color: #f3f5f9;
     border: 0px;
+    border-radius: @radius;
+
   }
   .icon {
     background-color: @white;
@@ -893,7 +897,7 @@ hr.full {
 .p-card {
   background: #ffffff;
   color: @text-color;
-  box-shadow: none;
+  box-shadow: @shadow;
   border-radius: @radius;
   border: 1px solid #dee2e6;
   margin-bottom: 20px;
@@ -914,6 +918,46 @@ hr.full {
   }
 }
 
+
+.projects {
+  .p-card {
+    background: @ness_color_2;
+    color: @text-color;
+    border-radius: @radius;
+    border: 0px solid #dee2e6;
+    border-left: 8px solid fade(@ness_color_3, 90%);
+    margin-bottom: 20px;
+    background-color: @white;
+    color:  @ness_color_2;
+    border: 0px solid fade(@ness_color_2,20%);
+    .p-card-body {
+      padding: 20px;
+      .p-card-content {
+
+        h4 {
+          margin-bottom: 0px;
+          height: 30px;
+        }
+        padding: 0px;
+        color: @ness_color_2;
+        label.legend {
+          color: @ness_color_3;
+          font-weight: normal;
+        }
+        h3 {
+          padding: 0px 0px 0px 0px;
+          margin: 0px;
+          font-size: 20px;
+          color: @ness_color_2;
+        }
+        hr {
+          border: 0px;
+          border-bottom: 1px solid #ccc;
+        }
+      }
+    }
+  }
+}
 .blu-box {
   .p-card {
     background: @ness_color_2;

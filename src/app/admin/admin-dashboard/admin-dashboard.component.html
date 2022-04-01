@@ -315,71 +315,48 @@
        
 
      
+        <h3>Progetti</h3>
+        <div class="p-field p-grid">
 
-        <p-card>
+        <div *ngFor="let project of projects" class="p-col-4">
+            <p-card class="projects">
+                <div class="p-grid">
+           
+                    <div class="p-col-12 p-md-12">
 
-            <div class="p-field p-grid">
+                        <h4>{{project.title}}</h4>
+                        <div class="clearifix"></div>
+                        <p class="detail">
+                        <i class="pi pi-calendar"></i> {{project.date_from}} al {{project.date_to}}
+                        </p>
+                        <hr class="small">
 
-                <div class="p-col-12 p-md-12">
+                    </div>
+                    <div class="p-col-12 p-md-12">
 
-                    <p-tabView class="responsive-tab-view">
-                        <p-tabPanel header="Progetti">
-                            <p-table #dt1 [value]="projects" [responsive]="true" [paginator]="false" [rows]="10">
+                        <button pButton pRipple icon="pi pi-chart-line"
+                            class="p-button p-button-options p-mr-2"
+                            [routerLink]="['/admin/projects/productivity/', project.id]"></button>
 
-                                <ng-template pTemplate="body" let-project>
-                                    <tr>
+                        <button pButton pRipple icon="pi pi-clock"
+                            class="p-button p-button-options p-mr-2"
+                            [routerLink]="['/admin/projects/timesheets/', project.id]"></button>
 
-                                        <td width="50">
-                                            <app-initials-avatar firstName="{{project.code_int | slice: 0:1}}"
-                                                lastName="{{project.code_int | slice: 1:2}}">
-                                            </app-initials-avatar>
-                                        </td>
+                        <button pButton pRipple icon="pi pi-clone"
+                            class="p-button p-button-options p-mr-2"
+                            [routerLink]="['/admin/projects/task/', project.id]"></button>
 
-                                        <td>
-
-                                            <strong>{{project.title}}</strong>
-                                            <div class="clearifix"></div>
-                                            <p class="detail">
-                                            <i class="pi pi-calendar"></i> {{project.date_from}} al {{project.date_to}}
-                                            </p>
-                                        </td>
-
-                                        <td width="120"><i class="pi pi-clock"></i> {{project.time}}</td>
-
-                                        <td width="200">
-
-                                            <button pButton pRipple icon="pi pi-chart-line"
-                                                class="p-button p-button-options p-mr-2"
-                                                [routerLink]="['/admin/projects/productivity/', project.id]"></button>
-
-                                            <button pButton pRipple icon="pi pi-clock"
-                                                class="p-button p-button-options p-mr-2"
-                                                [routerLink]="['/admin/projects/timesheets/', project.id]"></button>
-
-                                            <button pButton pRipple icon="pi pi-clone"
-                                                class="p-button p-button-options p-mr-2"
-                                                [routerLink]="['/admin/projects/task/', project.id]"></button>
-
-                                            <button pButton pRipple icon="pi pi-pencil"
-                                                class="p-button p-button-success p-mr-2"
-                                                [routerLink]="['/admin/projects/edit/', project.id]"></button>
-                                        </td>
-                                    </tr>
-                                </ng-template>
-                            </p-table>
-
-                        </p-tabPanel>
-
-                       
-
-                    </p-tabView>
-
+                        <button pButton pRipple icon="pi pi-pencil"
+                            class="p-button p-button-success p-mr-2"
+                            [routerLink]="['/admin/projects/edit/', project.id]"></button>
                 </div>
-
-            </div>
-
-        </p-card>
+                </div>
+            </p-card>
+        </div>
+        </div>
     </div>
+
+ 
 </div>
 </div>
 <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'50%'}">
