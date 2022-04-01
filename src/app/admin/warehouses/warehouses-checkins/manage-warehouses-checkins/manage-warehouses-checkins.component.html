@@ -215,7 +215,7 @@
                 <div *ngFor=" let warehouseCheckin of warehouseCheckins  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
 
                 <p-table #dt [columns]="cols" [responsive]="true"   [value]="warehouseCheckins" [paginator]="false"
-                    [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords">
+                    [rows]="10" [totalRecords]="totalRecords">
 
                     <ng-template pTemplate="header" let-columns>
                         <tr>
@@ -235,9 +235,7 @@
                             <th>
                                 Warehouse
                             </th>
-                            <th width="70">
-                                
-                            </th>
+                    
                             <th>
                                 Prodotti
                             </th>
@@ -268,7 +266,6 @@
 
                                 {{warehouseCheckin.warehouse_id.title}}</td>
 
-                                <td> <img *ngIf="warehouseCheckin.image" class="img-responsive" src="{{ warehouseCheckin.image}}"></td>
                            <td>  
                                
                             <p class="small"><strong>{{ warehouseCheckin.product.code_int}}</strong></p> 
