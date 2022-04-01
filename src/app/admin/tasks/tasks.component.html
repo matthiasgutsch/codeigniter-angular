@@ -39,7 +39,7 @@
 
 <div class="p-field p-grid">
     <div class="p-col-12 p-md-12">
-        <p-card class="blu-box">
+        <p-card class="blu-box" *ngIf="project">
 
             <h3>{{project.title}} / {{project.code_int}}</h3>
             <p>{{project.date_from}} - {{project.date_to}}</p>
