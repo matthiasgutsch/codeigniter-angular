@@ -62,34 +62,6 @@
 
         </p-tabPanel>
 
-        <p-tabPanel header="Elenco Fatture">
-
-            <div *ngIf="!billings || hasNoSelectedBillings()">
-                <p-message severity="info" text="Non ci sono Fatture"></p-message>
-            </div>
-
-            <p-timeline [value]="billings">
-
-                <ng-template pTemplate="content" let-billing>
-
-                    <p-card>
-                        <div class="p-grid">
-                            <div class="p-col-12 p-md-10">
-                                <strong>Fattura
-                                    {{billing.number}}/{{billing.date | date:'yyyy'}}</strong><br>
-                                <p class="detail"><i class="pi pi-calendar"></i> {{billing.date}}</p> 
-                            </div>
-                            <div class="p-col-12 p-md-2">
-                                <button pButton pRipple type="button" icon="pi pi-pencil"
-                                    class="p-button p-button-success p-button-small pull-right"
-                                    [routerLink]="['/admin/billings/edit', billing.id]"></button>
-                              
-                            </div>
-                        </div>
-                    </p-card>
-                </ng-template>
-            </p-timeline>
-        </p-tabPanel>
 
     </p-tabView>
 
@@ -333,7 +305,36 @@
                                     </table>
 
                                 </p-tabPanel>
-
+                               
+                        
+                                <p-tabPanel header="Elenco Fatture">
+                        
+                                    <div *ngIf="!billings || hasNoSelectedBillings()">
+                                        <p-message severity="info" text="Non ci sono Fatture"></p-message>
+                                    </div>
+                        
+                                    <p-timeline [value]="billings">
+                        
+                                        <ng-template pTemplate="content" let-billing>
+                        
+                                            <p-card>
+                                                <div class="p-grid">
+                                                    <div class="p-col-12 p-md-10">
+                                                        <strong>Fattura
+                                                            {{billing.number}}/{{billing.date | date:'yyyy'}}</strong><br>
+                                                        <p class="detail"><i class="pi pi-calendar"></i> {{billing.date}}</p> 
+                                                    </div>
+                                                    <div class="p-col-12 p-md-2">
+                                                        <button pButton pRipple type="button" icon="pi pi-pencil"
+                                                            class="p-button p-button-success pull-right"
+                                                            [routerLink]="['/admin/billings/edit', billing.id]"></button>
+                                                      
+                                                    </div>
+                                                </div>
+                                            </p-card>
+                                        </ng-template>
+                                    </p-timeline>
+                                </p-tabPanel>
                                 <p-tabPanel header="Allegati">
 
                                     <div class="p-fluid">
@@ -365,6 +366,7 @@
 
                                 </p-tabPanel>
 
+                                
                             </p-tabView>
 
                             <div class="form-group form-row">
