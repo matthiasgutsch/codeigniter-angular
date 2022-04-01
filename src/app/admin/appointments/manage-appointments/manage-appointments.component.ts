@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppointmentsService } from '../../../services/appointments.service';
 import { Blog } from '../../../models/blog';
-import { ConfirmationService, SelectItem } from 'primeng/api';
+import { ConfirmationService, PrimeNGConfig, SelectItem } from 'primeng/api';
 import { CategoryService } from '../../../services/categories.service';
 import { Category } from '../../../models/category';
 import { MessageService } from 'primeng/api';
@@ -24,7 +24,7 @@ import { Appointment_type } from 'src/app/models/appointment_type';
 import { AppointmentTypeService } from 'src/app/services/appointment_type.service';
 import { CalendarComponent } from 'ng-fullcalendar';
 import { LazyLoadEvent } from 'primeng/api';
-import { PARAM_APPOINTMENTS_PATH, PARAM_BILLINGS_PATH } from '../../constants/constants';
+import { LANG_IT, PARAM_APPOINTMENTS_PATH, PARAM_BILLINGS_PATH } from '../../constants/constants';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -110,6 +110,7 @@ export class ManageAppointmentsComponent implements OnInit {
     private route: ActivatedRoute,
     private appointmentTypeService: AppointmentTypeService,
     private categoryService: CategoryService,
+    public primengConfig: PrimeNGConfig,
     private confirmationService: ConfirmationService,) {
 
 
@@ -126,6 +127,8 @@ export class ManageAppointmentsComponent implements OnInit {
       dataKey: col.field
     }));
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    this.primengConfig.setTranslation(LANG_IT);
+
   }
 
   ngOnInit() {

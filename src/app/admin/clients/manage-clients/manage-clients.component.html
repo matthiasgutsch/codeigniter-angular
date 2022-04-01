@@ -1,7 +1,6 @@
 <p-sidebar [(visible)]="filterSidebar" #op position="right">
     <ng-template pTemplate>
         <div class="p-col-12">
-
             <div class="p-field p-grid">
                 <div class="p-col-12">
     
@@ -17,21 +16,19 @@
     
           
             <div class="p-field p-grid">
-                <div class="p-col-12">
-                    <button pButton type="submit" icon="pi pi-search" class="p-button p-button-primary btn-block"
-                        label="cerca" (click)="load()">
-                    </button>
+                <div class="p-col-6">
+                    <button pButton type="reset" class="p-button p-button-secondary btn-block"
+                    label="annulla" (click)="reset()">
+                </button>
                 </div>
-            </div>
-            <div class="p-field p-grid">
     
-                <div class="p-col-12">
-                    <button pButton type="reset" icon="pi pi-times" class="p-button p-button-secondary btn-block"
-                        label="reset" (click)="reset()">
-                    </button>
+                <div class="p-col-6">
+                    <button pButton type="submit" class="p-button p-button-primary btn-block"
+                    label="cerca" (click)="load()">
+                </button>
                 </div>
-            </div>
     
+            </div>
         </div>
         
     </ng-template>

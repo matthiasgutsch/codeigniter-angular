@@ -1,10 +1,11 @@
 import { Component, NgZone, OnInit } from '@angular/core';
-import { PAGES } from '../constants/constants';
+import { LANG_IT, PAGES } from '../constants/constants';
 import { NgxSpinnerService } from "ngx-spinner";
 import { SupportsService } from 'src/app/services/supports.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { formatDate } from '@angular/common';
 import { Subject } from 'rxjs';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-admin',
@@ -36,10 +37,12 @@ export class AdminComponent implements OnInit {
   constructor(  private spinner: NgxSpinnerService,
     private supportsService: SupportsService,
     private authService: AuthService,
+    public primengConfig: PrimeNGConfig,
     private zone: NgZone
     ) { 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     //console.log(this.currentUser);
+    this.primengConfig.setTranslation(LANG_IT);
 
 
     this.pages = PAGES;

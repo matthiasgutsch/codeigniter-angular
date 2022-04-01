@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Blog } from '../../../models/blog';
-import {ConfirmationService} from 'primeng/api';
+import {ConfirmationService, PrimeNGConfig} from 'primeng/api';
 import { CategoryService } from '../../../services/categories.service';
 import { Category } from '../../../models/category';
 import {MessageService} from 'primeng/api';
@@ -13,7 +13,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { Billings } from 'src/app/models/billings';
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import { PARAM_BILLINGS_PATH, PARAM_CHECKINS_PATH } from '../../constants/constants';
+import { LANG_IT, PARAM_BILLINGS_PATH, PARAM_CHECKINS_PATH } from '../../constants/constants';
 
 @Component({
   selector: "app-manage-billings",
@@ -73,10 +73,12 @@ export class ManageBillingsComponent implements OnInit {
     private comuniService: ComuniService,
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,
+    public primengConfig: PrimeNGConfig,
     private spinner: NgxSpinnerService,
   ) {
 
     this.statuses = [{label: 'Pagato', value: '1'},{label: 'Non Pagato', value: '0'}]
+    this.primengConfig.setTranslation(LANG_IT);
 
   }
 

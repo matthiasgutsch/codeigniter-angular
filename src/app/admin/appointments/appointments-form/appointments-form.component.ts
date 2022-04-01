@@ -9,7 +9,7 @@ import { FormControl } from '@angular/forms';
 import { CategoryService } from '../../../services/categories.service';
 import { ConfirmationService, MessageService, SelectItem } from "primeng/api";
 import * as moment from 'moment';
-import { TYPE_LIST, STATE_LIST} from '../../constants/constants';
+import { TYPE_LIST, STATE_LIST, LANG_IT} from '../../constants/constants';
 import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
 import { Location } from '@angular/common';
@@ -25,6 +25,7 @@ import { BillingsService } from 'src/app/services/billings.service';
 import { Billings } from 'src/app/models/billings';
 import { AppointmentTypeService } from 'src/app/services/appointment_type.service';
 import { Appointment_type } from 'src/app/models/appointment_type';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: "app-appointments-form",
@@ -42,32 +43,25 @@ export class AppointmentsFormComponent implements OnInit {
   id: number
   appointments: Appointments;
   appointment: any;
-
   categories: any = [];
   category: Category;
-
   works: any = [];
   work: Works;
-
   checked: boolean = true;
   selectedValue: string;
   stateOptions: any[];
-
   blogForm: FormGroup;
   typeList: any[];
   clients: any = [];
   client: Clients;
   arrString: string;
-
   employees: any = [];
   employee: Employees;
-
   description: any;
   selectedWorks: SelectItem[] = [];
   selectedWorks2: SelectItem[];
   locations: any = [];
   location: Locations;
-  
   cities: Blog[];
   format1: string = "";
   format2: string = "";
@@ -98,6 +92,7 @@ export class AppointmentsFormComponent implements OnInit {
     private messageService: MessageService,
     private clientsService: ClientsService,
     private billingsService: BillingsService,
+    public primengConfig: PrimeNGConfig,
     private _location: Location,
     private locationsService: LocationsService,
     private worksService: WorksService,
@@ -113,14 +108,12 @@ export class AppointmentsFormComponent implements OnInit {
     this.typeList = TYPE_LIST;
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     this.stateOptions = STATE_LIST;
-
+    this.primengConfig.setTranslation(LANG_IT);
   }
 
+
   ngOnInit() {
-
     this.getselectedWorks;
-    
-
     this.appointmentTypeService.getAllListbyUser().subscribe(
       (data: Appointment_type) => (this.appointment_type = data),
       (error) => (this.error = error)
