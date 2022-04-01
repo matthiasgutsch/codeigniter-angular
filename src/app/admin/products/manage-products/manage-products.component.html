@@ -267,7 +267,8 @@
 
                             <td>
                                <p-tag severity="default" *ngIf="rowData.pieces > 0" [value]="rowData.pieces"></p-tag> 
-
+                               <p-tag severity="default" *ngIf="rowData.pieces == 0 || ''" value="0"></p-tag> 
+                               <p-tag severity="danger" *ngIf="rowData.pieces < 0" [value]="rowData.pieces"></p-tag> 
                             </td>
                             <td>
                                 <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
