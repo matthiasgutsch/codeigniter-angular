@@ -211,7 +211,7 @@
                                             <p-tag severity="success" *ngIf="billing.is_paid === '1'"
                                                  value="Pagata" class="p-mr-2"></p-tag>
                                             <p-tag severity="danger" *ngIf="billing.is_paid === '0'" 
-                                                value="non pagata" class="p-mr-2"></p-tag>
+                                                value="Aperta" class="p-mr-2"></p-tag>
                                         </td>
                                         <td width="150px">{{billing.number}}/{{billing.date | date:'yyyy'}}
                                             <p class="detail"><i class="pi pi-calendar"></i> {{billing.date | date:'dd-MM-yyyy'}} </p>
@@ -342,9 +342,7 @@
                             class="p-button p-button-secondary p-mr-2"
                             [routerLink]="['/admin/projects/timesheets/', project.id]"></button>
 
-                        <button pButton pRipple icon="pi pi-clone" label="tasks"
-                            class="p-button p-button-warning p-mr-2"
-                            [routerLink]="['/admin/projects/task/', project.id]"></button>
+
 
                 </div>
                 </div>

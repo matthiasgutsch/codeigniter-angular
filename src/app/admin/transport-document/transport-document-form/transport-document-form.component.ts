@@ -607,7 +607,7 @@ export class TransportDocumentFormComponent implements OnInit {
           if (res.status == "error") {
             this.uploadError = res.message;
           } else {
-            this.messageService.add({ key: 'myKey1', severity: 'warn', summary: 'Informazioni', detail: 'Fattura Non Pagata' });
+            this.messageService.add({ key: 'myKey1', severity: 'warn', summary: 'Informazioni', detail: 'Fattura Aperta' });
             this.ngOnInit();
           }
         },
