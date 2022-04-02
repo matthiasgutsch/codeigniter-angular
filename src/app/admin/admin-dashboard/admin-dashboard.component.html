@@ -67,29 +67,26 @@
 
             <div *ngFor="let support of supports">
 
-            <p-card class="appointment-card" [routerLink]="['/admin/support', support.id]">
+            <p-card class="helpdesk-card" [routerLink]="['/admin/support', support.id]">
                 <div class="p-grid">
-                    <div class="p-col-fixed 50">
-                    <div class="icon">
-                        <i class="pi pi-info-circle"></i>
-
-                    </div>
-                </div>
-
-
+                   
                 <div class="p-col">
-                    {{support.title}}
-                    <div class="clearfix"></div>
-                <p-tag severity="success" *ngIf="support.is_active === '1'"
-                value="Ticket aperto" class="p-mr-2"></p-tag>
-            <p-tag severity="danger" *ngIf="support.is_active === '0'"
-                value="Ticket chiuso" class="p-mr-2"></p-tag>
+                   <strong>{{support.title}}</strong>
 
-                <p-tag value="{{support.date | date: 'dd/MM/yyyy' }}" severity="warning">
-                </p-tag>
+                    <p class="detail"><i class="pi pi-calendar"></i> {{support.date | date: 'dd/MM/yyyy' }}</p>
+                    <div class="clearfix"></div>
+               
+
+               
 
                 </div>
+                <div class="p-col-fixed 20">
 
+                    <p-tag severity="success" *ngIf="support.is_active === '1'"
+                    value="Ticket aperto" class="p-mr-2"></p-tag>
+                <p-tag severity="danger" *ngIf="support.is_active === '0'"
+                    value="Ticket chiuso" class="p-mr-2"></p-tag>
+                    </div>
                 </div>
 
             </p-card>

@@ -532,22 +532,69 @@ ul.nav-menu-mobile {
     border-radius: @radius;
   }
   .p-card-body {
-    background-color: #f3f5f9;
+    background-color: @background;
     border: 0px;
     border-radius: @radius;
+    border: 1px solid #dee2e6;
 
   }
   .icon {
-    background-color: @white;
-    color: @ness_color_3;
+    background-color: @ness_color_3;
+    color: @white;
     height: 44px;
-    line-height: 44px;
+    line-height: 48px;
     width: 44px;
     border-radius: @radius;
     text-align: center;
+
+    i {
+      font-size: 20px;
+    }
   }
 
 }
+
+
+.helpdesk-card {
+
+  .p-card {
+    margin-bottom: 10px;
+    border: 0px;
+    box-shadow: none;
+    border-radius: @radius;
+  }
+  .p-card-body {
+    background-color: @white;
+    border: 0px;
+    border-radius: @radius;
+    border: 1px solid fade(@ness_color_2,20%);
+    border-left: 6px solid fade(@ness_color_2,20%);
+    transition: .2s;
+
+
+    &:hover {
+      border: 1px solid @ness_color_3;
+      border-left: 6px solid @ness_color_3;
+
+    }
+  }
+  .icon {
+    background-color: @ness_color_3;
+    color: @white;
+    height: 44px;
+    line-height: 48px;
+    width: 44px;
+    border-radius: @radius;
+    text-align: center;
+
+    i {
+      font-size: 20px;
+    }
+  }
+
+}
+
+
 
 .top-main-wrapper {
   background-color: transparent;
@@ -1246,8 +1293,8 @@ hr.full {
 
 .p-timeline-event-content {
   .p-card {
-    background-color: #f3f5f9;
-    color: #282d35;
+    background-color: @background;
+    color: @ness_color_2;
     box-shadow: none;
     border-radius: 6px;
     border: 0px solid #dee2e6;
