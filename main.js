@@ -13,13 +13,8 @@ const {app, BrowserWindow} = require('electron')
         }
       })
 
-      mainWindow.loadURL(
-        url.format({
-          pathname: path.join(__dirname, `/dist/index.html`),
-          protocol: "file:",
-          slashes: true
-        })
-      );
+      mainWindow.loadURL(`https://demo.modocloud.it/`);
+
       // Open the DevTools.
       mainWindow.webContents.openDevTools()
 
