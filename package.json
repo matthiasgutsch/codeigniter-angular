@@ -68,6 +68,7 @@
     "codelyzer": "^6.0.0",
     "electron": "^18.0.1",
     "electron-installer-dmg": "^3.0.0",
+    "electron-packager": "^15.4.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~4.2.1",
     "jspdf": "^1.4.1",
