@@ -1,6 +1,7 @@
 {
   "name": "angular-codeigniter-blog",
   "version": "0.0.0",
+  "description": "your app description",
   "main": "main.js",
   "scripts": {
     "ng": "ng",
@@ -10,7 +11,36 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start:electron": "electron .",
-    "electron:build": "ng build && electron-builder build --publish=never"
+    "electron:build": "electron-builder build --publish=never",
+    "dist": "build"
+  },
+
+  "build": {
+    "appId": "com.example.app",
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "squirrel",
+      "icon": "build/icon.ico"
+    }
   },
   "private": true,
   "dependencies": {
