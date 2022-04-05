@@ -33,6 +33,13 @@ import { OrdersService } from 'src/app/services/orders.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
+import { formatDate } from "@angular/common";
+
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+
 @Component({
   selector: "app-quotes-form",
   templateUrl: "./quotes-form.component.html",
@@ -80,6 +87,7 @@ export class QuotesFormComponent implements OnInit {
   subTotal: any;
   vat: any;
   grandTotal: any;
+  additionalDetails: string;
 
   cities: Blog[];
   format1: string = "";
@@ -110,6 +118,8 @@ export class QuotesFormComponent implements OnInit {
   fiscaltype: any = [];
   pages: any;
   editForm: boolean = true;
+  dateAppointments: string;
+  contactNo: number;
 
   
   trackByFn(index, item) {
@@ -208,7 +218,6 @@ export class QuotesFormComponent implements OnInit {
         this.grandTotal = res.total;
         this.vat = res.vat;
         this.subTotal = res.subtotal;
-
         this.numberQuotes = res.quotes_id;
 
         this.works_idQuotes = res.works_id.split(',');
@@ -325,7 +334,176 @@ export class QuotesFormComponent implements OnInit {
   }
 
 
+  generatePDF(action = 'open') {
+    const format = 'dd/MM/yyyy';
+    const formatYear = 'yyyy';
   
+    const locale = 'en-US';
+  
+    const formattedDate = formatDate(this.dateQuotes, format, locale);
+    const formattedDateYear = formatDate(this.dateQuotes, formatYear, locale);
+  
+    let docDefinition = {
+      layout: 'headerLineOnly', // optional
+  
+      
+      content: [
+  
+        {
+          "canvas": [{
+            "lineColor": "gray",
+            "type": "line",
+            "x1": 0,
+            "y1": 0,
+            "x2": 515,
+            "y2": 0,
+            "lineWidth": 1
+          }]
+        },
+  
+        {
+          text: '' + this.company.name + '',
+          fontSize: 12,
+          alignment: 'left',
+          margin: [0, 20 ,0, 0],        
+  
+          bold: true,
+  
+          color: '#111'
+        },
+        {
+          text: '' + this.company.address + ' ' + this.company.zip + ' ' + this.company.city + '',
+          fontSize: 12,
+          alignment: 'left',
+          color: '#111'
+        },
+        {
+          text: '' + this.company.fiscalcode + ' ' + this.company.fiscalnumber + '',
+          fontSize: 12,
+          alignment: 'left',
+          color: '#111'
+        },
+        {
+          text: 'Cliente',
+          bold: true,
+          margin: [0, 20 ,0, 0],        
+  
+        },
+        {
+  
+          columns: [
+            [
+              {
+                text: this.getCategoryItem(this.categoryQuotes, '222')?.username},
+              { text: this.getCategoryItem(this.categoryQuotes, '222')?.address },
+              { text: this.getCategoryItem(this.categoryQuotes, '222')?.zip + ' ' + this.getCategoryItem(this.categoryQuotes, '222')?.city },
+              { text: this.getCategoryItem(this.categoryQuotes, '222')?.fiscalcode + ' ' + this.getCategoryItem(this.categoryQuotes, '222')?.fiscalnumber },
+              { text: this.contactNo }
+            ],
+            [
+              {
+                text: 'Data: '+ formattedDate +'',
+                alignment: 'right',
+                
+              },
+              { 
+                text: 'Numero Preventivo: ' + this.idQuotes + '/'+ formattedDateYear + '',
+                bold: true,
+                alignment: 'right',
+                
+              }
+            ]
+          ]
+        },
+      
+        {
+          text: 'Note',
+          bold: true,
+          margin: [0, 20 ,0, 0],        
+  
+        },
+        {
+          text: this.descriptionQuotes,
+          fontSize: 12,
+        },
+        {
+          text: 'Dettagli Preventivo',
+          style: 'sectionHeader'
+        },
+        
+        { layout: 'lightHorizontalLines',
+          table: {
+            headerRows: 1,
+  
+            widths: ['*', 'auto', 'auto', 'auto'],
+            body: [
+              ['Posizione', 'Qty', 'Prezzo', 'Totale'],
+              ...this.skillsValues.map(p => ([p.description, p.qty, p.price, (p.price*p.qty).toFixed(2)])),
+              [{text: 'Totale senza Iva', colSpan: 3}, {}, {}, (Math.round(this.subTotal * 100) / 100).toFixed(2)],
+              [{text: 'Iva (' + this.company.fiscaltype + '%)', colSpan: 3}, {}, {}, (Math.round(this.vat * 100) / 100).toFixed(2)],
+              [{bold: true, fontSize: 14, text: 'Totale', colSpan: 3}, {}, {}, (Math.round(this.grandTotal * 100) / 100).toFixed(2)]
+            ]
+          }
+        },
+        {
+            text: this.additionalDetails,
+            margin: [0, 0 ,0, 25]          
+        },
+       
+        {
+          "canvas": [{
+            "lineColor": "gray",
+            "type": "line",
+            "x1": 0,
+            "y1": 0,
+            "x2": 200,
+            "y2": 0,
+            "lineWidth": 1
+          }]
+        },
+  
+        {
+          columns: [
+            //[{ qr: `${this.description}`, fit: '50' }],
+            [{ text: 'Firma', 
+            alignment: 'left', 
+            italics: false,
+            margin: [0, 5 ,15, 0]          
+          }],
+          ]
+        },
+        {
+          text: 'Condizioni',
+          fontSize: 12,
+          bold: true,
+          margin: [0, 25 ,15, 0]          
+  
+        },
+        {
+          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
+            fontSize: 9,
+  
+        }
+      ],
+      styles: {
+        sectionHeader: {
+          bold: true,
+          decoration: 'underline',
+          fontSize: 14,
+          margin: [0, 15,0, 15]          
+        }
+      }
+    };
+  
+    if(action==='download'){
+      pdfMake.createPdf(docDefinition).download('Preventivo-' + this.idQuotes + '.pdf');
+    }else if(action === 'print'){
+      pdfMake.createPdf(docDefinition).print();      
+    }else{
+      pdfMake.createPdf(docDefinition).open();      
+    }
+  
+  }
 
   removeImageFile() {
     this.imagePath = "";
