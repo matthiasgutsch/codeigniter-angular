@@ -12,13 +12,13 @@
   <script>
     function toggleNav() {
         var element = document.getElementById("mySidebar");
-        if (element.className == "sidebar-main close") {
-            element.className = "sidebar-main open";
-            document.getElementById("main").className = "close";
-  
-        } else {
+        if (element.className == "sidebar-main open") {
             element.className = "sidebar-main close";
             document.getElementById("main").className = "open";
+  
+        } else {
+            element.className = "sidebar-main open";
+            document.getElementById("main").className = "close";
   
         }
     }
