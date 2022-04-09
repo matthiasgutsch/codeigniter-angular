@@ -11,7 +11,7 @@ import { FormControl } from '@angular/forms';
 import { CategoryService } from '../../../../services/categories.service';
 import { ConfirmationService, MessageService, SelectItem } from "primeng/api";
 import * as moment from 'moment';
-import { FISCAL_CODE_VALIDATOR_REGEX, PAGES, SEX_LIST } from '../../../constants/constants';
+import { BUSINESS_STATE_LIST, FISCAL_CODE_VALIDATOR_REGEX, PAGES, SEX_LIST, STATE_LIST } from '../../../constants/constants';
 import { ComuniService } from 'src/app/services/comuni.service';
 import { Comuni } from 'src/app/models/comuni';
 import {Location} from '@angular/common';
@@ -38,13 +38,13 @@ export class CompanyFormComponent implements OnInit {
 
   companies: Company;
   company: Company;
-  
+  stateOptions: any;
   categories: any = [];
   category: Category;
   checked: boolean = true;
   selectedValue: string;
   comuni: Comuni;
-
+  businessStateOptions: any[]; 
   blogForm: FormGroup;
   typeList: any[];
   items: any = [];
@@ -80,6 +80,8 @@ export class CompanyFormComponent implements OnInit {
     if (this.date) {
       this.selectedDate = new Date(this.date);
     }
+    this.businessStateOptions = BUSINESS_STATE_LIST;
+    this.stateOptions = STATE_LIST;
     this.items = [];
     this.typeList = SEX_LIST;
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');

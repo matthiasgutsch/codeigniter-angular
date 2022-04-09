@@ -1,10 +1,29 @@
-<section class="cmspage mtb-40">
-  <div class="container">
-    <div class="error-404">
-      <h1>404</h1>
-      <h2>There is nothing here!</h2>
-      <p>Sorry, the page you were looking for in this blog does not exist.</p>
-      <button (click)="gotoHome()" class="btn btn-danger">Go to Home</button>
-    </div>
+
+
+
+<section class="login-wrap mtb-40">
+  <div class="login-box" *ngIf="!error">
+
+    <div class="login-box-inner">
+
+      <div class="p-grid">
+        <div class="p-col-12">
+         <h1>404</h1>
+         <h2>There is nothing here!</h2>
+         <p>Sorry, the page you were looking for in this blog does not exist.</p>
+        </div>
+      </div>
+      <div class="p-grid" *ngIf="loginError">
+        <div class="p-col-12">
+
+          <div class="alert alert-danger">
+            {{loginError}}
+          </div>
+        </div>
+      </div>
+     
+            <button class="p-button p-button-primary btn-block"
+            (click)="gotoHome()">Go to Home</button>
+          </div>
   </div>
 </section>
