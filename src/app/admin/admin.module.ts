@@ -133,6 +133,8 @@ import { ManageTransportDocumentComponent } from './transport-document/transport
 import { ManageWarehousesMovementsComponent } from './warehouses-movements/manage-warehouses-movements/manage-warehouses-movements.component';
 import { WarehousesMovementsFormComponent } from './warehouses-movements/warehouses-movements-form/warehouses-movements-form.component';
 import { AppointmentsCalendarComponent } from './appointments/appointments-calendar/appointments-calendar.component';
+import { ManageDocumentsComponent } from './documents/manage-documents/manage-documents.component';
+import { DocumentsFormComponent } from './documents/documents-form/documents-form.component';
 
 
 
@@ -144,6 +146,8 @@ import { AppointmentsCalendarComponent } from './appointments/appointments-calen
     ManageWarehousesMovementsComponent,
     WarehousesMovementsFormComponent,
     ManageWarehousesComponent,
+    ManageDocumentsComponent,
+    DocumentsFormComponent,
     ManageSuppliersComponent,
     SuppliersFormComponent,
     PurchaseOrdersFormComponent,

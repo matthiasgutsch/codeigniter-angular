@@ -1,0 +1,235 @@
+<p-sidebar [(visible)]="filterSidebar" #op position="right">
+    <ng-template pTemplate>
+        <div class="p-field p-grid">
+            <div class="p-col-12">
+                <p-calendar [(ngModel)]="nameFilter" [style]="{ width: '100%' }" placeholder="Data da" dateFormat="yy-mm-dd" dataType="string" inputId="dateformat"></p-calendar>
+            </div>
+        </div>
+        <div class="p-field p-grid">
+            <div class="p-col-12">
+                <p-calendar [(ngModel)]="descriptionFilter" [style]="{ width: '100%' }" placeholder="Data a" dateFormat="yy-mm-dd" dataType="string" inputId="dateformat"></p-calendar>
+            </div>
+        </div>
+
+          <div class="p-field p-grid">
+            <div class="p-col-6">
+                <button pButton type="reset" class="p-button p-button-secondary btn-block"
+                label="annulla" (click)="reset()">
+            </button>
+            </div>
+
+            <div class="p-col-6">
+                <button pButton type="submit" class="p-button p-button-primary btn-block"
+                label="cerca" (click)="load()">
+            </button>
+            </div>
+
+        </div>
+    </ng-template>
+</p-sidebar>
+<div class="top-main-wrapper">
+
+
+    <div class="dash-header">
+        <div class="dash-title">
+    
+            <div class="p-field p-grid">
+                <div class="p-col-10 p-md-6">
+                    <h3>Ordini</h3>
+                </div>
+                <div class="p-col-2 p-md-6">
+                   
+                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/orders/create']" label="Aggiungi" class="p-button p-button-primary pull-right"></button>
+    
+                    <button type="text" pButton label="Filter" icon="pi pi-filter"
+                    class="p-button p-button-options p-mr-2 pull-right" (click)="filterSidebar = true"></button>
+    
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<div class="main-inner">
+
+
+
+<div class="p-fluid">
+    <div class="p-field p-grid">
+        <div class="p-col-12 p-md-12">
+
+            <p-card>
+                <div class="filter-options">
+
+                    <div class="p-field p-grid">
+
+                        <div class="p-col-12 p-md-8">
+                            <div class="item-size pull-left">
+                                <span class="filter-tag" *ngIf="nameFilter" >{{nameFilter}} <span class="close"><i class="pi pi-times"  (click)="reset()"></i></span> </span>
+                                <span class="filter-tag" *ngIf="descriptionFilter">{{descriptionFilter}} <span class="close"><i class="pi pi-times" (click)="reset()"></i></span> </span>
+                            </div>
+                        </div>
+
+                        <div class="p-col-12 p-md-4">
+                          <span class="count-item pull-right">{{count}} Items</span>  
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngFor=" let order of orders  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
+
+                <p-table #dt [value]="orders" [responsive]="true" [paginator]="false">
+                   
+                    <ng-template pTemplate="header">
+                        <tr>
+
+                            <th width="80px">Numero
+
+                            </th>
+                            <th>Data emissione</th>
+                            <th width="50"></th>
+
+                            <th>Cliente</th>
+                            <th>Residente</th>
+
+                            <th>Prezzo</th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-order>
+                        <tr>
+                            <td>{{order.id}}</td>
+
+                            <td><i class="pi pi-calendar"></i> {{order.created_at}}
+                            </td>
+
+                            <td width="50">
+
+                                <app-initials-avatar  [routerLink]="['/admin/clients/edit', order.client.id]" firstName="{{ order.client.name | slice:0:1}}" lastName="{{ order.client.surname | slice:0:1}}"></app-initials-avatar>
+
+                               
+                            </td>
+
+                            <td>
+
+                                {{ order.client.name }}
+                                {{ order.client.surname }}
+                            </td>
+
+                            <td>{{
+                                order.client.zip }} - {{order.client.city }}</td>
+                            <td><p-tag [value]="order.total | currency :'EUR':'symbol':'1.2-2'"></p-tag></td>
+
+
+                            <td class="action">
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/orders/edit', order.id]"></button>
+                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2" (click)="edit(order)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(order.id)"></button>
+
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+
+                <div class="p-grid">
+
+                    <div class="p-col-12 p-md-12">
+                        <pagination-controls previousLabel="Prev" nextLabel="Next" responsive="true"
+                            (pageChange)="handlePageChange($event)">
+                        </pagination-controls>
+                    </div>
+                </div>
+
+            </p-card>
+        </div>
+
+        
+    </div>
+</div>
+</div>
+<p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'60em'}">
+    <ng-template pTemplate="content">
+   
+<div id="content" #content>
+
+    <div class="p-col-12 p-md-12">
+        <p-card>
+            <app-initials-avatar class="pull-right"  [routerLink]="['/admin/clients/edit', order.client.id]" firstName="{{ order.client.name | slice:0:1}}" lastName="{{ order.client.surname | slice:0:1}}"></app-initials-avatar>
+
+            <h3>Dettaglio Ordine {{order.id}}</h3>
+            <p-tag severity="default" value="{{order.date}}"></p-tag>
+            <hr class="full">
+
+                <strong>{{ order.client.username }}</strong><br>
+                {{ order.client.address }} - {{ order.client.zip }} {{ order.client.city }} <br>
+                {{ order.client.phone }}
+
+        </p-card>
+<p-card>
+       
+    <table class="billings-list">
+        <thead>
+            <tr>
+                <th>Descrizione</th>
+                <th>Prezzo</th>
+                <th>qty</th>
+                <th>Totale</th>
+
+            </tr>
+        </thead>
+        <tr *ngFor="let entry of selectedSkills | keys">           
+            <td>{{entry.value.description}}</td>  <td>{{entry.value.price}}</td> <td>{{entry.value.qty}}</td><td> {{entry.value.qty * entry.value.price | currency :'EUR':'symbol':'1.2-2'}}</td>
+          </tr>
+   
+             <tr>
+                                    <td colspan="3">
+                                       Total senza Iva
+                                    </td>
+
+                                    <td>
+                                       <h4>
+                                            {{order.subtotal | currency :'EUR':'symbol':'1.2-2'}}</h4>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        Valore Iva
+                                    </td>
+                                    <td>{{order.vat | currency :'EUR':'symbol':'1.2-2'}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="3">
+                                        Totale
+                                    </td>
+                                    <td>
+                                        <h3>
+                                            {{order.total | currency :'EUR':'symbol':'1.2-2'}}</h3>
+                                    </td>
+                                </tr>
+                        
+        </table>
+                                <button pButton pRipple icon="pi pi-pencil" label="modifica" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/billings/edit', order.id]"></button>
+                            </p-card>
+    </div>
+</div>
+    </ng-template>
+
+</p-sidebar>
+
+
+
+{{error}}
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" #cd>
+
+    <p-footer>
+        <button type="button" pButton icon="fa fa-close" class="p-button p-button-danger p-mr-2" label="No" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="fa fa-check" class="p-button p-button-success p-mr-2" label="Si" (click)="cd.accept()"></button>
+    </p-footer>
+
+</p-confirmDialog>
+
+<p-toast key="myKey1"></p-toast>
