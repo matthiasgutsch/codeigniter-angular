@@ -28,6 +28,8 @@ export const PARAM_PURCHASE_ORDERS_PATH = '/admin/purchase-orders/'
 export const PARAM_TRANSPORT_DOCUMENTS_PATH = '/admin/transport-documents/'
 export const PARAM_QUOTES_PATH = '/admin/quotes/'
 export const PARAM_ORDERS_PATH = '/admin/orders/'
+export const PARAM_DOCUMENTS_PATH = '/admin/documents/'
+
 export const PARAM_EMPLOYEE_TIMESHEETS_PATH =  '/employee/timesheets/'
 export const PARAM_PRODUCTS_PATH = '/admin/products/'
 export const PARAM_EMPLOYEES_PATH = '/admin/employees/'

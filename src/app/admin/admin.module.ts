@@ -10,7 +10,8 @@ import { AdminComponent } from './admin/admin.component';
 import { ManageCategoriesComponent } from './settings/category/manage-categories/manage-categories.component';
 import { NgxSpinnerService } from "ngx-spinner";
 import {InputNumberModule} from 'primeng/inputnumber';
-
+import {TreeModule} from 'primeng/tree';
+import {TreeNode} from 'primeng/api';
 import { ManageClientsComponent } from './clients/manage-clients/manage-clients.component';
 import { ClientsFormComponent } from './clients/clients-form/clients-form.component';
 import {TabViewModule} from 'primeng/tabview';
@@ -135,6 +136,7 @@ import { WarehousesMovementsFormComponent } from './warehouses-movements/warehou
 import { AppointmentsCalendarComponent } from './appointments/appointments-calendar/appointments-calendar.component';
 import { ManageDocumentsComponent } from './documents/manage-documents/manage-documents.component';
 import { DocumentsFormComponent } from './documents/documents-form/documents-form.component';
+import {TreeDragDropService} from 'primeng/api';
 
 
 
@@ -233,6 +235,7 @@ import { DocumentsFormComponent } from './documents/documents-form/documents-for
     MessagesModule,
     SumPipeModule,
     NgxBarcode6Module,
+    TreeModule,
     TooltipModule,
     InputNumberModule,
     SelectButtonModule,
@@ -280,7 +283,7 @@ import { DocumentsFormComponent } from './documents/documents-form/documents-for
       backdrop: true
   }))
   ],
-  providers: [ConfirmationService, MessageService, SumPipeModule,  NgxSpinnerService]
+  providers: [ConfirmationService, TreeDragDropService, MessageService, SumPipeModule,  NgxSpinnerService]
 })
 export class AdminModule { }
 

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { OrdersService } from '../../../services/orders.service';
 import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -47,7 +47,9 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export class OrdersFormComponent implements OnInit {
   @ViewChild("myInput", { static: false }) myInputVariable: ElementRef;
 
-  pageTitle: string;
+  @Input() pageTitle: string;
+
+
   error: string;
   uploadError: string;
   imagePath: any;

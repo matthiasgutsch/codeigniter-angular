@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Blog } from '../../../models/blog';
-import {ConfirmationService} from 'primeng/api';
+import { ConfirmationService, TreeNode } from 'primeng/api';
 import { CategoryService } from '../../../services/categories.service';
 import { Category } from '../../../models/category';
-import {MessageService} from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { Clients } from 'src/app/models/clients';
 import { ClientsService } from 'src/app/services/clients.service';
 import { ComuniService } from 'src/app/services/comuni.service';
@@ -13,7 +13,7 @@ import { jsPDF } from "jspdf";
 import { NgxSpinnerService } from "ngx-spinner";
 import { Orders } from 'src/app/models/orders';
 import { OrdersService } from 'src/app/services/orders.service';
-import { PARAM_BILLINGS_PATH, PARAM_ORDERS_PATH } from '../../constants/constants';
+import { PARAM_BILLINGS_PATH, PARAM_DOCUMENTS_PATH, PARAM_ORDERS_PATH } from '../../constants/constants';
 
 @Component({
   selector: "app-manage-documents",
@@ -33,7 +33,7 @@ export class ManageDocumentsComponent implements OnInit {
   comuni: any = [];
   productDialog: boolean = false;
   selectedSkills: any[];
-  skills:  any[] = [];
+  skills: any[] = [];
   skillsArray: any = [];
 
   cols: any[];
@@ -52,6 +52,7 @@ export class ManageDocumentsComponent implements OnInit {
   descriptionFilter: string;
   @ViewChild("content", { static: false }) content: ElementRef;
   currentUser: any;
+  files: TreeNode[];
 
   showDialog() {
     this.productDialog = true;
@@ -71,7 +72,55 @@ export class ManageDocumentsComponent implements OnInit {
     private spinner: NgxSpinnerService,
   ) {
 
-
+    this.files =
+      [
+        {
+          "label": "Documents",
+          "data": "Documents Folder",
+          "expandedIcon": "pi pi-folder-open",
+          "collapsedIcon": "pi pi-folder",
+          "children": [{
+            "label": "Work",
+            "data": "Work Folder",
+            "expandedIcon": "pi pi-folder-open",
+            "collapsedIcon": "pi pi-folder",
+            "children": [{ "label": "Expenses.doc", "icon": "pi pi-file", "data": "Expenses Document" }, { "label": "Resume.doc", "icon": "pi pi-file", "data": "Resume Document" }]
+          },
+          {
+            "label": "Home",
+            "data": "Home Folder",
+            "expandedIcon": "pi pi-folder-open",
+            "collapsedIcon": "pi pi-folder",
+            "children": [{ "label": "Invoices.txt", "icon": "pi pi-file", "data": "Invoices for this month" }]
+          }]
+        },
+        {
+          "label": "Pictures",
+          "data": "Pictures Folder",
+          "expandedIcon": "pi pi-folder-open",
+          "collapsedIcon": "pi pi-folder",
+          "children": [
+            { "label": "barcelona.jpg", "icon": "pi pi-image", "data": "Barcelona Photo" },
+            { "label": "logo.jpg", "icon": "pi pi-file", "data": "PrimeFaces Logo" },
+            { "label": "primeui.png", "icon": "pi pi-image", "data": "PrimeUI Logo" }]
+        },
+        {
+          "label": "Movies",
+          "data": "Movies Folder",
+          "expandedIcon": "pi pi-folder-open",
+          "collapsedIcon": "pi pi-folder",
+          "children": [{
+            "label": "Al Pacino",
+            "data": "Pacino Movies",
+            "children": [{ "label": "Scarface", "icon": "pi pi-video", "data": "Scarface Movie" }, { "label": "Serpico", "icon": "pi pi-file-video", "data": "Serpico Movie" }]
+          },
+          {
+            "label": "Robert De Niro",
+            "data": "De Niro Movies",
+            "children": [{ "label": "Goodfellas", "icon": "pi pi-video", "data": "Goodfellas Movie" }, { "label": "Untouchables", "icon": "pi pi-video", "data": "Untouchables Movie" }]
+          }]
+        }
+      ]
   }
 
   ngOnInit() {
@@ -79,21 +128,21 @@ export class ManageDocumentsComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     const userId = this.currentUser.user_id;
     this.spinner.show();
-      this.cols = [
-        { field: "category_id", header: "Cliente" },
-        { field: 'client.username',  header: 'Nome Cliente'  },
-        { field: "id", header: "Numero Fattura" },
-      ];
-      this._selectedColumns = this.cols;
-      this.exportColumns = this.cols.map(col => ({
-        title: col.header,
-        dataKey: col.field
-      }));
-      this.getComuni();
-      this.getClients();
-      this.load();
-      this.spinner.hide();
-   
+    this.cols = [
+      { field: "category_id", header: "Cliente" },
+      { field: 'client.username', header: 'Nome Cliente' },
+      { field: "id", header: "Numero Fattura" },
+    ];
+    this._selectedColumns = this.cols;
+    this.exportColumns = this.cols.map(col => ({
+      title: col.header,
+      dataKey: col.field
+    }));
+    this.getComuni();
+    this.getClients();
+    this.load();
+    this.spinner.hide();
+
 
   }
 
@@ -101,7 +150,7 @@ export class ManageDocumentsComponent implements OnInit {
 
   getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
     // tslint:disable-next-line:prefer-const
-    let path = PARAM_ORDERS_PATH;
+    let path = PARAM_DOCUMENTS_PATH;
     const params = {};
     let adder = '?';
     if (page) {
@@ -129,7 +178,7 @@ export class ManageDocumentsComponent implements OnInit {
 
   }
 
-  
+
   load(): void {
 
     const params = this.getRequestParams(
@@ -155,21 +204,21 @@ export class ManageDocumentsComponent implements OnInit {
     this.nameFilter = '';
     this.descriptionFilter = '';
     this.load();
-    
+
   }
-  
+
   public handlePageChange(event): void {
     this.page = event;
     this.load();
-  
+
   }
-  
+
 
 
   onChangePage(pageOfItems: Array<any>) {
     // update current page of items
     this.pageOfItems = pageOfItems;
-}
+  }
 
   private onChange(item: string): void {
     this.load();
@@ -178,20 +227,20 @@ export class ManageDocumentsComponent implements OnInit {
 
 
 
-    getClients() {
+  getClients() {
     const userId = this.currentUser.user_id;
     this.clientsService.getAllListbyUser().subscribe(
       (data: Clients) => this.clients = data,
       error => this.error = error
     );
-  
-    }
-  
-    getComuni() {
-  this.comuniService.getAllList().subscribe(
-    (data: Comuni) => (this.comuni = data),
-    (error) => (this.error = error)
-  );
+
+  }
+
+  getComuni() {
+    this.comuniService.getAllList().subscribe(
+      (data: Comuni) => (this.comuni = data),
+      (error) => (this.error = error)
+    );
 
   }
 
@@ -204,14 +253,14 @@ export class ManageDocumentsComponent implements OnInit {
     return this.comuni.find((item) => item.id === category_id);
   }
 
-  
 
 
-edit(order: Orders) {
-  this.order = { ...order};
-  this.selectedSkills = JSON.parse("" + this.order.skills + "");
-  this.productDialog = true;
-}
+
+  edit(order: Orders) {
+    this.order = { ...order };
+    this.selectedSkills = JSON.parse("" + this.order.skills + "");
+    this.productDialog = true;
+  }
 
 
 
