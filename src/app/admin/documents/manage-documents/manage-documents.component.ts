@@ -131,12 +131,12 @@ export class ManageDocumentsComponent implements OnInit {
     this.doSomething(event.node);
 }
 
-  onExpand(event) {
-    this.doSomething(event.node);
-  }
-  
+
   doSomething(node) {
-    console.log("do something with node '" + node.key + "'");
+    const id = node.key
+    this.ordersService.getId(+id).subscribe((res) => {
+      console.log("do something with node '" +  + "'");
+    })
   }
 
   getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
