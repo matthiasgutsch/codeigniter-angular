@@ -135,8 +135,51 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
 
+  public getAllListDocuments(pars: any, id: ID): Observable<T[]> {
+    let params = new HttpParams();
+    const userId = this.currentUser.user_id;
+    params = this.getParams(params, pars);
+    return this._http
+      .get<HttpResponse<T[]>>(this._base + '/list_user/' + id + '/' + userId, {
+        observe: 'response',
+        params,
+      })
+      .pipe(
+        map((res) => {
+          this.size =
+            res.headers.get('x-total-count') != null ? +res.headers.get('x-total-count') : 0;
+          const ts: any = res.body;
+          return ts;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+
+
+
 
   public find_timesheets_employee(pars: any, id: ID): Observable<T[]> {
+    let params = new HttpParams();
+    const userId = this.currentUser.user_id;
+    params = this.getParams(params, pars);
+    return this._http
+      .get<HttpResponse<T[]>>(this._base + '/timesheets_by_employee/' + id + '/' + userId, {
+        observe: 'response',
+        params,
+      })
+      .pipe(
+        map((res) => {
+          this.size =
+            res.headers.get('x-total-count') != null ? +res.headers.get('x-total-count') : 0;
+          const ts: any = res.body;
+          return ts;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+  public find_documents(pars: any, id: ID): Observable<T[]> {
     let params = new HttpParams();
     const userId = this.currentUser.user_id;
     params = this.getParams(params, pars);

@@ -15,6 +15,8 @@ import { Orders } from 'src/app/models/orders';
 import { OrdersService } from 'src/app/services/orders.service';
 import { PARAM_BILLINGS_PATH, PARAM_DOCUMENTS_PATH, PARAM_ORDERS_PATH } from '../../constants/constants';
 import { Billings } from 'src/app/models/billings';
+import { DocumentsService } from 'src/app/services/documents.service';
+import { Documents } from 'src/app/models/documents';
 
 @Component({
   selector: "app-manage-documents",
@@ -24,6 +26,11 @@ export class ManageDocumentsComponent implements OnInit {
 
   orders: any = [];
   order: Orders;
+
+  documents: any = [];
+  document: Documents;
+
+
   categories: any = [];
   category: Category;
   error: string;
@@ -69,6 +76,7 @@ export class ManageDocumentsComponent implements OnInit {
     private ordersService: OrdersService,
     private messageService: MessageService,
     private comuniService: ComuniService,
+    private documentsService: DocumentsService,
     private categoryService: CategoryService,
     private billingsService: BillingsService,
     private confirmationService: ConfirmationService,
@@ -152,10 +160,18 @@ export class ManageDocumentsComponent implements OnInit {
   doSomething(node) {
     const id = node.key
 
-    this.billingsService.find_billing_client(+id).subscribe(
-      (data: Billings) => (this.billings = data),
-      (error) => (this.error = error)
+    const params = this.getRequestParams(
+      this.nameFilter,
+      this.descriptionFilter,
+      this.page,
+      this.pageSize
     );
+    
+    this.documentsService.getAllListDocuments(params, +id).subscribe((pData) => {
+      this.documents = pData;
+      this.count = this.documentsService.size;
+
+    });
   }
 
 
@@ -167,7 +183,7 @@ export class ManageDocumentsComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.ordersService.getAllListNew(params).subscribe((pData) => {
+    this.documentsService.getAllListDocuments(params, 102).subscribe((pData) => {
       this.orders = pData;
       this.count = this.ordersService.size;
 

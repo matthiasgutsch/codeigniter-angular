@@ -88,9 +88,9 @@
                         </div>
                     </div>
                 </div>
-                <div *ngFor=" let billing of billings  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
+                <div *ngFor=" let document of documents  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
 
-                <p-table #dt [value]="billings" [responsive]="true" [paginator]="false">
+                <p-table #dt [value]="documents" [responsive]="true" [paginator]="false">
                    
                     <ng-template pTemplate="header">
                         <tr>
@@ -104,21 +104,21 @@
                             <th></th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-billing>
+                    <ng-template pTemplate="body" let-document>
                         <tr>
-                            <td>{{billing.id}}</td>
+                            <td>{{document.id}}</td>
 
                             <td><strong>Fattura
-                                {{billing.number}}/{{billing.date | date:'yyyy'}}</strong></td>
+                                {{document.number}}/{{document.date | date:'yyyy'}}</strong></td>
                             <td>
-                            <p class="detail"><i class="pi pi-calendar"></i> {{billing.date}}</p> 
+                            <p class="detail"><i class="pi pi-calendar"></i> {{document.date}}</p> 
                             </td>
 
 
                             <td>
                                 <button pButton pRipple type="button" icon="pi pi-pencil"
                                                             class="p-button p-button-success pull-right"
-                                                            [routerLink]="['/admin/billings/edit', billing.id]"></button>
+                                                            [routerLink]="['/admin/documents/edit', document.id]"></button>
                             </td>
 
                         </tr>
