@@ -78,7 +78,7 @@ export class ManageDocumentsComponent implements OnInit {
       [
         {
           "label": "Documents",
-          "key": "22",
+          "key": "102",
           "data": "Documents Folder",
           "expandedIcon": "pi pi-folder-open",
           "collapsedIcon": "pi pi-folder",
