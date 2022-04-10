@@ -88,57 +88,39 @@
                         </div>
                     </div>
                 </div>
-                <div *ngFor=" let order of orders  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
+                <div *ngFor=" let billing of billings  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
 
-                <p-table #dt [value]="orders" [responsive]="true" [paginator]="false">
+                <p-table #dt [value]="billings" [responsive]="true" [paginator]="false">
                    
                     <ng-template pTemplate="header">
                         <tr>
 
-                            <th width="80px">Numero
-
-                            </th>
+                         
                             <th>Data emissione</th>
-                            <th width="50"></th>
 
                             <th>Cliente</th>
-                            <th>Residente</th>
 
                             <th>Prezzo</th>
                             <th></th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-order>
+                    <ng-template pTemplate="body" let-billing>
                         <tr>
-                            <td>{{order.id}}</td>
+                            <td>{{billing.id}}</td>
 
-                            <td><i class="pi pi-calendar"></i> {{order.created_at}}
+                            <td><strong>Fattura
+                                {{billing.number}}/{{billing.date | date:'yyyy'}}</strong></td>
+                            <td>
+                            <p class="detail"><i class="pi pi-calendar"></i> {{billing.date}}</p> 
                             </td>
 
-                            <td width="50">
-
-                                <app-initials-avatar  [routerLink]="['/admin/clients/edit', order.client.id]" firstName="{{ order.client.name | slice:0:1}}" lastName="{{ order.client.surname | slice:0:1}}"></app-initials-avatar>
-
-                               
-                            </td>
 
                             <td>
-
-                                {{ order.client.name }}
-                                {{ order.client.surname }}
+                                <button pButton pRipple type="button" icon="pi pi-pencil"
+                                                            class="p-button p-button-success pull-right"
+                                                            [routerLink]="['/admin/billings/edit', billing.id]"></button>
                             </td>
 
-                            <td>{{
-                                order.client.zip }} - {{order.client.city }}</td>
-                            <td><p-tag [value]="order.total | currency :'EUR':'symbol':'1.2-2'"></p-tag></td>
-
-
-                            <td class="action">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/orders/edit', order.id]"></button>
-                                <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2" (click)="edit(order)"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(order.id)"></button>
-
-                            </td>
                         </tr>
                     </ng-template>
                 </p-table>

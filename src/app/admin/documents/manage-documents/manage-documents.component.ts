@@ -14,6 +14,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { Orders } from 'src/app/models/orders';
 import { OrdersService } from 'src/app/services/orders.service';
 import { PARAM_BILLINGS_PATH, PARAM_DOCUMENTS_PATH, PARAM_ORDERS_PATH } from '../../constants/constants';
+import { Billings } from 'src/app/models/billings';
 
 @Component({
   selector: "app-manage-documents",
@@ -39,7 +40,7 @@ export class ManageDocumentsComponent implements OnInit {
   cols: any[];
   exportColumns: any[];
   _selectedColumns: any[];
-
+  billings:  any = [];
   page = 1;
   count = 0;
   pageSize = 10;
@@ -69,6 +70,7 @@ export class ManageDocumentsComponent implements OnInit {
     private messageService: MessageService,
     private comuniService: ComuniService,
     private categoryService: CategoryService,
+    private billingsService: BillingsService,
     private confirmationService: ConfirmationService,
     private spinner: NgxSpinnerService,
   ) {
@@ -76,7 +78,7 @@ export class ManageDocumentsComponent implements OnInit {
       [
         {
           "label": "Documents",
-          "key": "1",
+          "key": "22",
           "data": "Documents Folder",
           "expandedIcon": "pi pi-folder-open",
           "collapsedIcon": "pi pi-folder",
@@ -86,11 +88,26 @@ export class ManageDocumentsComponent implements OnInit {
             "key": "2",
             "expandedIcon": "pi pi-folder-open",
             "collapsedIcon": "pi pi-folder",
-            "children": []
+            "children": [{
+              "label": "Work",
+              "data": "Work Folder",
+              "key": "2",
+              "expandedIcon": "pi pi-folder-open",
+              "collapsedIcon": "pi pi-folder",
+              "children": []
+            },
+            {
+              "label": "Home",
+              "key": "121",
+              "data": "Home Folder",
+              "expandedIcon": "pi pi-folder-open",
+              "collapsedIcon": "pi pi-folder",
+              "children": []
+            }]
           },
           {
             "label": "Home",
-            "key": "3",
+            "key": "102",
             "data": "Home Folder",
             "expandedIcon": "pi pi-folder-open",
             "collapsedIcon": "pi pi-folder",
@@ -134,10 +151,29 @@ export class ManageDocumentsComponent implements OnInit {
 
   doSomething(node) {
     const id = node.key
-    this.ordersService.getId(+id).subscribe((res) => {
-      console.log("do something with node '" +  + "'");
-    })
+
+    this.billingsService.find_billing_client(+id).subscribe(
+      (data: Billings) => (this.billings = data),
+      (error) => (this.error = error)
+    );
   }
+
+
+  load(): void {
+
+    const params = this.getRequestParams(
+      this.nameFilter,
+      this.descriptionFilter,
+      this.page,
+      this.pageSize
+    );
+    this.ordersService.getAllListNew(params).subscribe((pData) => {
+      this.orders = pData;
+      this.count = this.ordersService.size;
+
+    });
+  }
+
 
   getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
     // tslint:disable-next-line:prefer-const
@@ -163,27 +199,12 @@ export class ManageDocumentsComponent implements OnInit {
       params[`size`] = pageSize;
       path += adder + 'size=' + pageSize;
     }
-    window.history.replaceState({}, '', path);
 
     return params;
 
   }
 
 
-  load(): void {
-
-    const params = this.getRequestParams(
-      this.nameFilter,
-      this.descriptionFilter,
-      this.page,
-      this.pageSize
-    );
-    this.ordersService.getAllListNew(params).subscribe((pData) => {
-      this.orders = pData;
-      this.count = this.ordersService.size;
-
-    });
-  }
 
   handlePageSizeChange(event): void {
     this.pageSize = event.target.value;
