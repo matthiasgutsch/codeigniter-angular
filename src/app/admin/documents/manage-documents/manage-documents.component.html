@@ -61,6 +61,17 @@
         <div class="p-col-12 p-md-4">
 
             <p-card>
+            
+                <p-tree [value]="files"  filter="true" [draggableNodes]="true" [droppableNodes]="true" draggableScope="self" droppableScope="self"></p-tree>
+
+  
+
+            </p-card>
+        </div>
+
+        <div class="p-col-12 p-md-8">
+
+            <p-card>
                 <div class="filter-options">
 
                     <div class="p-field p-grid">
@@ -77,17 +88,6 @@
                         </div>
                     </div>
                 </div>
-                <p-tree [value]="files" [draggableNodes]="true" [droppableNodes]="true" draggableScope="self" droppableScope="self"></p-tree>
-
-  
-
-            </p-card>
-        </div>
-
-        <div class="p-col-12 p-md-8">
-
-            <p-card>
-
                 <div *ngFor=" let order of orders  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
 
                 <p-table #dt [value]="orders" [responsive]="true" [paginator]="false">
