@@ -221,7 +221,7 @@ export class AdminDashboardComponent implements OnInit {
       this.nameFilter = '',
       this.descriptionFilter = '',
       this.page = 1,
-      this.pageSize = 3
+      this.pageSize = 2
     );
     this.projectsService.getAllListNew(params).subscribe((pData) => {      
       this.projects = pData;

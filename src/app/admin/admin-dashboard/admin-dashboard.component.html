@@ -312,10 +312,10 @@
        
 
      
-        <h3>Progetti</h3>
+        <h3>Ultimi Progetti</h3>
         <div class="p-field p-grid">
 
-        <div *ngFor="let project of projects" class="p-col-4">
+        <div *ngFor="let project of projects" class="p-col-6">
             <p-card class="projects">
                 <div class="p-grid">
            
@@ -335,7 +335,7 @@
                             class="p-button p-button-primary p-mr-2"
                             [routerLink]="['/admin/projects/productivity/', project.id]"></button>
 
-                        <button pButton pRipple icon="pi pi-clock" label="HR"
+                        <button pButton pRipple icon="pi pi-clock" label="Timesheet"
                             class="p-button p-button-secondary p-mr-2"
                             [routerLink]="['/admin/projects/timesheets/', project.id]"></button>
 
