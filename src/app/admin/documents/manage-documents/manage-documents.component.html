@@ -62,7 +62,7 @@
 
             <p-card>
             
-                <p-tree [value]="files"  filter="true" [draggableNodes]="true" [droppableNodes]="true" draggableScope="self" droppableScope="self"></p-tree>
+                <p-tree [value]="files" selectionMode="single" (onNodeSelect)="nodeSelect($event)"  (onNodeExpand)=onExpand($event) [propagateSelectionUp]="false" [propagateSelectionDown]="false"  filter="true" [draggableNodes]="true" [droppableNodes]="true" draggableScope="self" droppableScope="self"></p-tree>
 
   
 
