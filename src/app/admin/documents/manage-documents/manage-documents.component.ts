@@ -62,6 +62,7 @@ export class ManageDocumentsComponent implements OnInit {
   currentUser: any;
   files: TreeNode[];
   loading = true;
+  nodeTitle: any;
 
   showDialog() {
     this.productDialog = true;
@@ -124,7 +125,6 @@ export class ManageDocumentsComponent implements OnInit {
         },
       ]
 
-      this.doSomething(this.files[0]);
       this.loading = false;
 
   }
@@ -144,9 +144,7 @@ export class ManageDocumentsComponent implements OnInit {
       title: col.header,
       dataKey: col.field
     }));
-    this.getComuni();
-    this.getClients();
-    this.load();
+    this.doSomething(this.files[0]);
     this.spinner.hide();
 
 
@@ -158,8 +156,8 @@ export class ManageDocumentsComponent implements OnInit {
 
 
   doSomething(node) {
-    const id = node.key
-
+    const id = node.key;
+    this.nodeTitle = node.label;
     const params = this.getRequestParams(
       this.nameFilter,
       this.descriptionFilter,
@@ -177,6 +175,8 @@ export class ManageDocumentsComponent implements OnInit {
 
   load(): void {
 
+    
+    
     const params = this.getRequestParams(
       this.nameFilter,
       this.descriptionFilter,
