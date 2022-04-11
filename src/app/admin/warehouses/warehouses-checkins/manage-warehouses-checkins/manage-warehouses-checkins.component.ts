@@ -495,9 +495,9 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   filterMethod(event) {
     this.productsVariationsService.getAllListbyUser().subscribe(
       res => {
-			const result = (<any>res).filter(option => option.title.includes(event.query));
+			const result = (<any>res).filter(productsVariation => productsVariation.code.includes(event.query));
 			console.log(result);
-			this.options = result;
+			this.productsVariations = result;
 		});
 	}
 
@@ -569,6 +569,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
 
   }
 
+  
 
   onSubmit() {
     const formData = new FormData();
