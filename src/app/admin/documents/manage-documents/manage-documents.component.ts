@@ -146,8 +146,6 @@ export class ManageDocumentsComponent implements OnInit {
     }));
     this.load(this.files[0]);
     this.spinner.hide();
-
-
   }
 
   nodeSelect(event) {

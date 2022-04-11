@@ -144,6 +144,12 @@ p a {
   overflow-x: auto;
 }
 
+.primary-color {
+  i {
+    color: @ness_color_3;
+  }
+}
+
 .header {
   background-color: @red;
   padding: 0px 20px;
@@ -297,8 +303,6 @@ p a {
         margin-left: 5px;
         text-align: center;
       }
-
-
       a {
         text-decoration: none;
         font-size: 15px;
@@ -312,7 +316,6 @@ p a {
           visibility: hidden !important;
           transition: visibility 0.1s;
         }
-      
         &:hover {
           background-color: transparent;
           border-radius: @radius;
@@ -326,12 +329,10 @@ p a {
           color: @white;
           height: 46px;
           line-height: 46px;
-
         }
       }
     }
   }
-  
   &.open {
     width: 70px;
     ul {
@@ -359,13 +360,10 @@ p a {
             visibility: visible !important;
           }
           &:hover {}
-          i {
-          }
+          i {}
         }
       }
     }
-
-   
   }
 }
 
@@ -504,14 +502,13 @@ ul.nav-menu-mobile {
 .featured-card {
   .p-card {
     background-color: @white;
-    color:  @ness_color_2;
+    color: @ness_color_2;
     border: 1px solid @ness_color_3;
     .p-card-body {
       padding: 25px;
       h4 {
         color: @ness_color_2;
       }
-
       .icon-container {
         margin-bottom: 10px;
         i {
@@ -524,7 +521,6 @@ ul.nav-menu-mobile {
 }
 
 .appointment-card {
-
   .p-card {
     margin-bottom: 10px;
     border: 0px;
@@ -536,7 +532,6 @@ ul.nav-menu-mobile {
     border: 0px;
     border-radius: @radius;
     border: 1px solid #dee2e6;
-
   }
   .icon {
     background-color: @ness_color_3;
@@ -546,17 +541,13 @@ ul.nav-menu-mobile {
     width: 44px;
     border-radius: @radius;
     text-align: center;
-
     i {
       font-size: 20px;
     }
   }
-
 }
 
-
 .helpdesk-card {
-
   .p-card {
     margin-bottom: 10px;
     border: 0px;
@@ -567,15 +558,12 @@ ul.nav-menu-mobile {
     background-color: @white;
     border: 0px;
     border-radius: @radius;
-    border: 1px solid fade(@ness_color_2,20%);
-    border-left: 6px solid fade(@ness_color_2,20%);
+    border: 1px solid fade(@ness_color_2, 20%);
+    border-left: 6px solid fade(@ness_color_2, 20%);
     transition: .2s;
-
-
     &:hover {
       border: 1px solid @ness_color_3;
       border-left: 6px solid @ness_color_3;
-
     }
   }
   .icon {
@@ -586,15 +574,11 @@ ul.nav-menu-mobile {
     width: 44px;
     border-radius: @radius;
     text-align: center;
-
     i {
       font-size: 20px;
     }
   }
-
 }
-
-
 
 .top-main-wrapper {
   background-color: transparent;
@@ -602,19 +586,14 @@ ul.nav-menu-mobile {
   padding: 20px 20px 0px 20px;
   border-bottom: 0px solid #dee2e6;
   border-top: 0px solid #dee2e6;
-
   &.with-sidebar {
-
     &.left {
       margin-left: 450px;
     }
-
     &.right {
       margin-right: 450px;
     }
   }
-
-
   .dash-header {
     padding: 0px;
     margin: 0px;
@@ -663,33 +642,27 @@ ul.nav-menu-mobile {
   .main-inner {
     padding: 0px 20px 30px 20px;
     &.with-sidebar {
-
-
-    &.left {
-      margin-left: 450px;
+      &.left {
+        margin-left: 450px;
+      }
+      &.right {
+        margin-right: 450px;
+      }
     }
-
-    &.right {
-      margin-right: 450px;
-    }
-  }
   }
   &.open {
     margin-left: 220px;
-
     .sidebar-inside.left {
       left: 220px;
       border-right: 1px solid #dee2e6;
-     }
+    }
   }
   &.close {
     margin-left: 70px;
-
     .sidebar-inside.left {
       left: 70px;
       border-right: 1px solid #dee2e6;
-  }
-
+    }
   }
 }
 
@@ -719,7 +692,7 @@ hr.full {
   width: 100%;
   z-index: 1000;
   border-bottom: 1px solid #dee2e6;
-    .openbtn {
+  .openbtn {
     font-size: 22px;
     cursor: pointer;
     background-color: @white;
@@ -862,7 +835,6 @@ hr.full {
     background-color: #FFF;
     box-shadow: @shadow;
     margin: 0 auto;
-  
     margin-top: 50%;
     border-radius: @radius;
     input {
@@ -965,7 +937,6 @@ hr.full {
   }
 }
 
-
 .projects {
   .p-card {
     background: @ness_color_2;
@@ -975,20 +946,19 @@ hr.full {
     border-left: 8px solid fade(@ness_color_3, 90%);
     margin-bottom: 20px;
     background-color: @white;
-    color:  @ness_color_2;
-    border: 0px solid fade(@ness_color_2,20%);
-    border-left: 6px solid fade(@ness_color_2,20%);
+    color: @ness_color_2;
+    border: 0px solid fade(@ness_color_2, 20%);
+    border-left: 6px solid fade(@ness_color_2, 20%);
     .p-card-body {
       padding: 20px;
       .p-card-content {
-
         h4 {
           margin-bottom: 10px;
         }
         padding: 0px;
         color: @ness_color_2;
         label.legend {
-          color: fade(@ness_color_2,60%);
+          color: fade(@ness_color_2, 60%);
           font-weight: normal;
         }
         h3 {
@@ -1007,10 +977,10 @@ hr.full {
 }
 
 .count-item {
-font-size: 12px;
-background-color: @background;
-padding: 0.4rem 0.5rem;
-border-radius: @radius;
+  font-size: 12px;
+  background-color: @background;
+  padding: 0.4rem 0.5rem;
+  border-radius: @radius;
 }
 
 .blu-box {
@@ -1023,7 +993,7 @@ border-radius: @radius;
     border-left: 8px solid fade(@ness_color_3, 90%);
     margin-bottom: 20px;
     background-color: @white;
-    color:  @ness_color_2;
+    color: @ness_color_2;
     border: 1px solid @ness_color_3;
     .p-card-body {
       padding: 15px;
@@ -1031,7 +1001,7 @@ border-radius: @radius;
         padding: 0px;
         color: @ness_color_2;
         label.legend {
-          color: fade(@ness_color_2,60%);
+          color: fade(@ness_color_2, 60%);
           font-weight: normal;
         }
         h3 {
@@ -1107,11 +1077,7 @@ border-radius: @radius;
   padding-top: 0px;
   padding-left: 20px;
   padding-right: 20px;
-
-  
 }
-
-
 
 .sidebar-inside {
   height: 100%;
@@ -1125,25 +1091,21 @@ border-radius: @radius;
   padding-top: 68px;
   padding-left: 20px;
   padding-right: 20px;
-
   &.right {
     right: 0px;
     border-left: 1px solid #dee2e6;
-
   }
-
   &.left {
     left: 220px;
     border-right: 1px solid #dee2e6;
-
   }
-
   h3 {
     padding: 0px;
     margin: 0px;
     margin-bottom: 0px;
   }
 }
+
 .sidebar-main {
   height: 100%;
   width: 260px;
@@ -1261,8 +1223,6 @@ border-radius: @radius;
         }
       }
     }
-
-    
   }
 }
 
@@ -1360,31 +1320,25 @@ border-radius: @radius;
       }
     }
   }
-
   &.orange {
     .p-card {
-    background-color: @yellow;
-    border: 1px solid @yellow !important;
-
-    }
-   }
-
-   &.green {
-    .p-card {
-    background-color: @green;
-    border: 1px solid @green !important;
-
-    }
-   }
-
-  &.white {
-    .p-card {
-    background-color: @red;
-    color: @white !important;
-    border: 1px solid #dee2e6 !important;
+      background-color: @yellow;
+      border: 1px solid @yellow !important;
     }
   }
-  
+  &.green {
+    .p-card {
+      background-color: @green;
+      border: 1px solid @green !important;
+    }
+  }
+  &.white {
+    .p-card {
+      background-color: @red;
+      color: @white !important;
+      border: 1px solid #dee2e6 !important;
+    }
+  }
 }
 
 .homepage-wrapper {
