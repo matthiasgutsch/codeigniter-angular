@@ -144,18 +144,20 @@ export class ManageDocumentsComponent implements OnInit {
       title: col.header,
       dataKey: col.field
     }));
-    this.doSomething(this.files[0]);
+    this.load(this.files[0]);
     this.spinner.hide();
 
 
   }
 
   nodeSelect(event) {
-    this.doSomething(event.node);
+    this.load(event.node);
 }
 
 
-  doSomething(node) {
+  load(node): void {
+
+    
     const id = node.key;
     this.nodeTitle = node.label;
     const params = this.getRequestParams(
@@ -168,24 +170,6 @@ export class ManageDocumentsComponent implements OnInit {
     this.documentsService.getAllListDocuments(params, +id).subscribe((pData) => {
       this.documents = pData;
       this.count = this.documentsService.size;
-
-    });
-  }
-
-
-  load(): void {
-
-    
-    
-    const params = this.getRequestParams(
-      this.nameFilter,
-      this.descriptionFilter,
-      this.page,
-      this.pageSize
-    );
-    this.documentsService.getAllListDocuments(params, 102).subscribe((pData) => {
-      this.orders = pData;
-      this.count = this.ordersService.size;
 
     });
   }
@@ -222,22 +206,22 @@ export class ManageDocumentsComponent implements OnInit {
 
 
 
-  handlePageSizeChange(event): void {
+  handlePageSizeChange(event, node): void {
     this.pageSize = event.target.value;
     this.page = 1;
-    this.load();
+    this.load(node);
   }
 
-  reset(): void {
+  reset(node): void {
     this.nameFilter = '';
     this.descriptionFilter = '';
-    this.load();
+    this.load(node);
 
   }
 
-  public handlePageChange(event): void {
+  public handlePageChange(event,node): void {
     this.page = event;
-    this.load();
+    this.load(node);
 
   }
 
@@ -248,8 +232,8 @@ export class ManageDocumentsComponent implements OnInit {
     this.pageOfItems = pageOfItems;
   }
 
-  private onChange(item: string): void {
-    this.load();
+  private onChange(item: string, node): void {
+    this.load(node);
 
   }
 
