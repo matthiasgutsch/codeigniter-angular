@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AppointmentsService } from '../../../../services/appointments.service';
 import { Blog } from '../../../../models/blog';
 import { ConfirmationService, SelectItem } from 'primeng/api';
@@ -46,6 +46,7 @@ import { SuppliersService } from 'src/app/services/suppliers.service';
 import { ProductsVariations } from 'src/app/models/products_variations';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
+import { AutoComplete } from 'primeng/autocomplete';
 
 @Component({
   selector: 'app-manage-warehouses-checkins',
@@ -186,6 +187,14 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
     
   }
 
+
+  @ViewChild("myinput") myInputField: ElementRef;
+    ngAfterViewInit() {
+    this.myInputField.nativeElement.focus();
+    }
+    @ViewChild('autoCompleteObject') private autoCompleteObject: AutoComplete ;
+
+    
   ngOnInit() {
 
     const dateObj = new Date();
