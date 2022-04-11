@@ -188,10 +188,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   }
 
 
-  @ViewChild("myinput") myInputField: ElementRef;
-    ngAfterViewInit() {
-    this.myInputField.nativeElement.focus();
-    }
+
     @ViewChild('autoCompleteObject') private autoCompleteObject: AutoComplete ;
 
     
@@ -502,7 +499,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
 
 
   filterMethod(event) {
-    this.productsVariationsService.getAllListbyUser().subscribe(
+    this.productsVariationsService.find(event.query).subscribe(
       res => {
 			const result = (<any>res).filter(productsVariation => productsVariation.code.includes(event.query));
 			console.log(result);
