@@ -70,7 +70,6 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   selectedEmployee: any[];
   selectedSupplier: any[];
   selectedSkills: any[];
-  brands: any = [];
   brand: Brand;
   tags: any = [];
   tag: Tags;
@@ -118,7 +117,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   pageTitle: string;
   warehouses: any = [];
   warehouse: Warehouses;
-  productsVariations: any = [];
+  productsVariations: string[];
   updateProductQuantity: any;
   productsVariation: ProductsVariations;
   pieces: string;
@@ -138,6 +137,9 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   searchWrapper: boolean = false;
   nameFilter: string;
   descriptionFilter: string;
+  brands: string[] = ['100000','100001','100002','Ford','Honda','Jaguar','Mercedes','Renault','Volvo','VW'];
+    
+  filteredBrands: any[];
 
   showDialog() {
     this.productDialog = true;
@@ -202,7 +204,6 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
     this.getEmployees();
     this.getWarehouses();
     this.getSuppliers();
-    this.getProductsVariations();
 
 
 
@@ -373,11 +374,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   }
 
 
-  getProductsVariations() {
-    this.productsVariationsService.getAllListbyUser().subscribe(
-      (data: ProductsVariations) => this.productsVariations = data,
-    );
-  }
+
 
   getWarehouses() {
     this.warehousesService.getAllListbyUser().subscribe(
@@ -469,10 +466,6 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
 
 
 
-  getBrandItem(brand_id: string, id: string) {
-    return this.brands.find(item => item.id === brand_id);
-  }
-
   getCategoryItem(category_id: string, id: string) {
     return this.categories.find(item => item.id === category_id);
   }
@@ -497,15 +490,19 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   }
 
 
+ 
 
-  filterMethod(event) {
+
+
+  filterBrands(event) {
     this.productsVariationsService.find(event.query).subscribe(
       res => {
 			const result = (<any>res).filter(productsVariation => productsVariation.code.includes(event.query));
 			console.log(result);
 			this.productsVariations = result;
 		});
-	}
+}
+
 
   view(warehouseCheckin: WarehouseCheckins) {
     this.warehouseCheckin = { ...warehouseCheckin };

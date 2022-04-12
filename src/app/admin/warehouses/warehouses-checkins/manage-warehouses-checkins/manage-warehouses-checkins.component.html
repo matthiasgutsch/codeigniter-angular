@@ -115,38 +115,37 @@
                     </div>
                     <div class="p-col-12 p-md-12">
                         
-                        <p-autoComplete
-                            [suggestions]="productsVariations"
-                            (completeMethod)="filterMethod($event)"
-                            [dropdown]="true"
-                            field="code"
-                            #autoCompleteObject
-                            [autofocus]="true"
-                            placeholder="Cerca per Codice, titolo, Codice interno"
-                            [style]="{ width: '100%' }"
-                            [multiple]="false"
-                            [forceSelection]="true"
-                            [minLength]="3">
-                        
+
+
+                        <p-autoComplete formControlName="product_id" 
+                        placeholder="Cerca per Codice, titolo, Codice interno"
+                        [style]="{ width: '100%' }"
+                        [dropdown]="true"
+                        field="id"
+
+                        [suggestions]="productsVariations" (completeMethod)="filterBrands($event)" [size]="30" [minLength]="1">
+                       
+                       
                             <ng-template let-option pTemplate="item">
                                 <div class="p-grid">
-                                         <div class="p-col-6">
+                                         <div class="p-col-12">
                                             <strong>{{option.title}} </strong> 
                                          </div>
                                      
-                                         <div class="p-col-6">
+                                         <div class="p-col-12">
                                              {{option.code}}<br>
                                              {{option.code_int}}
                                          </div>
                                      </div>
                               
                                  </ng-template>
-                                
-                                </p-autoComplete>
 
+                        </p-autoComplete>
 
     
-                       
+
+
+
                     </div>
                 </div>
 
