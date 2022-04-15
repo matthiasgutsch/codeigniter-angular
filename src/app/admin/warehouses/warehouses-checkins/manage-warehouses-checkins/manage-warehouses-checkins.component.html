@@ -116,36 +116,38 @@
                     <div class="p-col-12 p-md-12">
                         
 
-
-                        <p-autoComplete formControlName="product_id" 
+                        <p-autoComplete
+                        [dropdown]="true" 
                         placeholder="Cerca per Codice, titolo, Codice interno"
                         [style]="{ width: '100%' }"
-                        [dropdown]="true"
-                        field="id"
-
-                        [suggestions]="productsVariations" (completeMethod)="filterBrands($event)" [size]="30" [minLength]="1">
+                        [suggestions]="filteredProductsVariations"
+                        (completeMethod)="filterCountry($event)" field="id"
+                        [minLength]="1">
+                        <ng-template let-productsVariation pTemplate="item">
+                            <div class="p-grid">
+                                <div class="p-col-9">
+                                    <strong>{{productsVariation.code}}</strong><br>
+                                    {{productsVariation.title}} -
+                                    <p class="truncate">{{productsVariation.description}}
+                                    </p>
+                                </div>
+                                <div class="p-col-3">
+                                    <div class="p-grid">
+                                        <div class="p-col-12">
+                                            <p-tag class="pull-right"
+                                            [value]="productsVariation.price  | currency :'EUR':'symbol':'1.2-2'">
+                                        </p-tag>
+                                    </div>
+                                    <div class="p-col-12 p-mt-2">
+                                       <p class="pull-right"><strong>{{productsVariation.pieces}}</strong> pz</p>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-autoComplete>
                        
-                       
-                            <ng-template let-option pTemplate="item">
-                                <div class="p-grid">
-                                         <div class="p-col-12">
-                                            <strong>{{option.title}} </strong> 
-                                         </div>
-                                     
-                                         <div class="p-col-12">
-                                             {{option.code}}<br>
-                                             {{option.code_int}}
-                                         </div>
-                                     </div>
-                              
-                                 </ng-template>
-
-                        </p-autoComplete>
-
-    
-
-
-
+                       <input type="text" pInputText [(ngModel)]="dataSelect" formControlName="product_id">
                     </div>
                 </div>
 

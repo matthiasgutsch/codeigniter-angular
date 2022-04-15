@@ -117,10 +117,13 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   pageTitle: string;
   warehouses: any = [];
   warehouse: Warehouses;
-  productsVariations: string[];
   updateProductQuantity: any;
-  productsVariation: ProductsVariations;
   pieces: string;
+
+  filteredProductsVariations: any = [];
+  productsVariations: any = [];
+  productsVariation: ProductsVariations;
+
 
   startDate: Date;
   bsValue: Date = new Date();
@@ -140,6 +143,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   brands: string[] = ['100000','100001','100002','Ford','Honda','Jaguar','Mercedes','Renault','Volvo','VW'];
     
   filteredBrands: any[];
+  dataSelect: string;
 
   showDialog() {
     this.productDialog = true;
@@ -491,6 +495,28 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
 
 
  
+
+
+
+
+    filterCountry(event) {
+      this.productsVariationsService.find(event.query).subscribe(data => {
+        this.productsVariations = data
+
+      //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+      let filtered: any[] = [];
+      let query = event.query;
+      for (let i = 0; i < this.productsVariations.length; i++) {
+        let productsVariation = this.productsVariations[i];
+        if (productsVariation.code.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+          filtered.push(productsVariation);
+        }
+      }
+  
+      this.filteredProductsVariations = filtered;
+      this.dataSelect = this.filteredProductsVariations.map(t=>t.id)[0];
+    }	)};
+
 
 
 
