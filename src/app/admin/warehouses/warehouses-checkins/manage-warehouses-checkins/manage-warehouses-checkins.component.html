@@ -123,6 +123,7 @@
                         [suggestions]="filteredProductsVariations"
                         (completeMethod)="filterCountry($event)" field="id"
                         (onSelect)="change($event)"
+                        (onClear)="dataSelect = null"
                         [ngModelOptions]="{standalone: true}"
                         [(ngModel)]="dataSelect"
                         [minLength]="1">
@@ -171,13 +172,12 @@
 
                     </div>
                 </div>
-
+                
                 <div class="form-group form-row">
                     <label class="col-md-3"></label>
                     <div class="col-md-9">
                         <input type="hidden" formControlName="id">
                         <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
-                        {{currentUser.user_id}}
                     </div>
                 </div>
 
