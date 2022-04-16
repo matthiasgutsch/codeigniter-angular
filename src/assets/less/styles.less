@@ -1374,23 +1374,34 @@ hr.full {
 }
 
 .fc .fc-view-container .fc-event {
-  background: fade(@ness_color_3,90%);
+  background: fade(@white,90%);
   box-shadow: @shadow;
-  border: 1px solid @ness_color_3;
-  color: @white;
-  padding: 5px;
+  border: 1px solid #dee2e6;
+  border-left: 6px solid @ness_color_3;
+  color: @ness_color_2;
+  padding: 10px;
   hr {
-    border-color: @white !important;
+    border-color: @ness_color_3 !important;
   }
   i {
     font-size: 13px;
   }
   .fc-title {
     a {
-      color: @white !important;
+      color: @ness_color_3 !important;
     }
   }
 }
+
+.fc .fc-view-container .fc-event .event-time {
+
+  background: fade(@ness_color_3,20%);
+  border-radius: 6px;
+  padding: 5px 8px;
+  margin-bottom: 5px;
+
+}
+
 
 .fc .fc-toolbar .fc-button {
   color: @ness_color_2;

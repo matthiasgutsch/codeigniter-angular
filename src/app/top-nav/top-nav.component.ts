@@ -13,21 +13,20 @@ export class TopNavComponent implements OnInit {
 
   items: MenuItem[];
   activeItem: MenuItem;
-  @ViewChild('menuItems') menu: MenuItem[];
 
+  @ViewChild('menuItems') menu: MenuItem[];
   
   constructor(private titleService: Title, private authService: AuthService) { }
 
   ngOnInit() {
 
     this.items = [
-      {label: 'Clienti', icon: 'pi pi-fw pi-home', routerLink: '/admin/clients/'},
+      {label: 'Clienti', icon: 'pi pi-fw pi pi-users', routerLink: '/admin/clients/'},
       {label: 'Appuntamenti', icon: 'pi pi-fw pi pi-calendar-plus', routerLink: '/admin/appointments/'},
       {label: 'Calendario', icon: 'pi pi-fw pi-calendar', routerLink: '/admin/appointments/calendar'},
   ];
 
   this.activeItem = this.items[0];
-
 
   }
 
@@ -37,7 +36,7 @@ export class TopNavComponent implements OnInit {
     this.titleService.setTitle(title);
   }
 
-  activateMenu(){
+  activateMenu() {
     this.activeItem =this.menu['activeItem'];
  }
 
