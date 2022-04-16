@@ -70,11 +70,11 @@
                 <div
                     *ngFor=" let project of projects  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index" class="p-col-12 p-md-4">
 
-                    <p-card>
+                    <p-card class="projects">
                         <p-tag value="{{project.price | currency :'EUR':'symbol':'1.2-2'}}">
 
                         </p-tag>
-                        <h3 class="p-mt-2">{{project.title}}</h3>
+                        <h4>{{project.title}}</h4>
                         <div class="clearifix"></div>
                         <p class="detail"><i class="pi pi-clock"></i> {{project.time}} - <i class="pi pi-map"></i> {{project.code_int}} - <i class="pi pi-calendar"></i> {{project.date_from}} al {{project.date_to}}
                     </p>
