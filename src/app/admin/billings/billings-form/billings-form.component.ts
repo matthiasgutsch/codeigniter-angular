@@ -60,8 +60,7 @@ export class BillingsFormComponent implements OnInit {
   category: Category;
   works: any = [];
   work: Works;
-  productsVariations: any = [];
-  productsVariation: ProductsVariations;
+
   checked: boolean = true;
   selectedValue: string;
   typeList: any[];
@@ -101,7 +100,8 @@ export class BillingsFormComponent implements OnInit {
   numberAppointments: number;
   numberOrders: number;
   filteredProductsVariations: any[];
-
+  productsVariations: any = [];
+  productsVariation: ProductsVariations;
   currentUser: any;
   public dataValues: object;
   addForm: FormGroup;
