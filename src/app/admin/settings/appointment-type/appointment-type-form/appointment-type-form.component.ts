@@ -69,7 +69,7 @@ export class AppointmentTypeFormComponent implements OnInit {
     if (id) {
 
 
-      this.pageTitle = 'Modifica Tipo di lavorazione';
+      this.pageTitle = 'Modifica Tipo di appuntamento';
       this.appointmentTypeService.getId(+id).subscribe(
         res => {
           this.categoryForm.patchValue({
