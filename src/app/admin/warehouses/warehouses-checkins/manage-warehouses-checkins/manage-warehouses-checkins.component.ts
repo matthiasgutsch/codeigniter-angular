@@ -140,10 +140,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   searchWrapper: boolean = false;
   nameFilter: string;
   descriptionFilter: string;
-  brands: string[] = ['100000','100001','100002','Ford','Honda','Jaguar','Mercedes','Renault','Volvo','VW'];
-    
-  filteredBrands: any[];
-  dataSelect: any;
+      dataSelect: any;
   dataSelectTrue: number;
   showDialog() {
     this.productDialog = true;
@@ -599,8 +596,13 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
           } else {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Conferma', detail: 'Quantita aggiornata con successo' });
             this.ngOnInit();
-            this.blogForm.reset();
-            this.dataSelect = null;
+            this.dataSelect = '';
+            this.blogForm.controls['warehouse_id'].reset();
+            this.blogForm.controls['supplier_id'].reset();
+            this.blogForm.controls['product_id'].reset();
+            this.blogForm.controls['pieces'].reset();
+            this.blogForm.controls['boxes'].reset();
+            formData.append('user_id', this.currentUser.user_id);
           }
         },
       });
