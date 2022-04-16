@@ -334,14 +334,20 @@
                     </div>
                     <div class="p-col-12 p-md-12">
 
-                        <button pButton pRipple icon="pi pi-chart-line" label="Produttività"
-                            class="p-button p-button-primary p-mr-2"
-                            [routerLink]="['/admin/projects/productivity/', project.id]"></button>
 
-                        <button pButton pRipple icon="pi pi-clock" label="Timesheet"
-                            class="p-button p-button-secondary p-mr-2"
-                            [routerLink]="['/admin/projects/timesheets/', project.id]"></button>
+                        <button pButton pRipple  icon="pi pi-chart-line" label="Produttività" class="p-button p-button-primary p-mr-2"
+                        [routerLink]="['/admin/projects/productivity/', project.id]"></button>
+                            
+                        
+                            <button pButton pRipple  icon="pi pi-clock" label="HR" class="p-button p-button-options p-mr-2"
+                            [routerLink]="['/admin/projects/timesheets/', project.id]"></button>  
+    
+                            <button pButton pRipple  icon="pi pi-clone" label="Tasks" class="p-button p-button-options p-mr-2"
+                            [routerLink]="['/admin/projects/task/', project.id]"></button>
 
+                            
+
+                        
 
 
                 </div>
