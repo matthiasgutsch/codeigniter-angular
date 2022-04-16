@@ -65,98 +65,42 @@
     <div class="p-field p-grid">
         <div class="p-col-12 p-md-12">
 
-            <p-card>
 
-                <div class="filter-options">
-
-                    <div class="p-field p-grid">
-
-                        <div class="p-col-12 p-md-8">
-                            <div class="item-size pull-left">
-                                <span class="filter-tag" *ngIf="nameFilter">{{nameFilter}} <span class="close"><i
-                                            class="pi pi-times" (click)="reset()"></i></span> </span>
-                                <span class="filter-tag" *ngIf="descriptionFilter">{{descriptionFilter}} <span
-                                        class="close"><i class="pi pi-times" (click)="reset()"></i></span> </span>
-                            </div>
-                        </div>
-
-                        <div class="p-col-12 p-md-4">
-                            <span class="count-item pull-right">{{count}} Items</span>
-                        </div>
-                    </div>
-                </div>
+                <div class="p-grid">
                 <div
-                    *ngFor=" let project of projects  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index">
-                </div>
-                <p-table #dt [columns]="cols" [responsive]="true"  [value]="projects" [paginator]="false"
-                    [rows]="10">
+                    *ngFor=" let project of projects  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index" class="p-col-12 p-md-4">
 
-                    <ng-template pTemplate="header" let-columns>
-                        <tr>
-                            <th width="50"></th>
- 
-                            <th width="500">Nome Progetto</th>
-                            <th ></th>
+                    <p-card>
+                        <p-tag value="{{project.price | currency :'EUR':'symbol':'1.2-2'}}">
 
-                            <th width="100">Ore</th>
+                        </p-tag>
+                        <h3 class="p-mt-2">{{project.title}}</h3>
+                        <div class="clearifix"></div>
+                        <p class="detail"><i class="pi pi-clock"></i> {{project.time}} - <i class="pi pi-map"></i> {{project.code_int}} - <i class="pi pi-calendar"></i> {{project.date_from}} al {{project.date_to}}
+                    </p>
 
-                            <th  width="160">Importo Progetto</th>
+                    <hr class="small">
 
-                            <th width="100" ></th>
-
-                        </tr>
-
-                    </ng-template>
-                    <ng-template pTemplate="body" let-project>
-                        <tr>
-                           
-                            <td>
-                                <app-initials-avatar
-                                    firstName="{{project.code_int | slice: 0:1}}"
-                                    lastName="{{project.code_int | slice: 1:2}}">
-                                </app-initials-avatar>
-                            </td>
-                            <td>
-
-
-                                <strong>{{project.title}}</strong>
-                                <div class="clearifix"></div>
-                                <p class="detail">
-                                <i class="pi pi-map"></i> {{project.code_int}} - <i class="pi pi-calendar"></i> {{project.date_from}} al {{project.date_to}}
-                            </p>
-                            </td>
-
-                            <td>
-                                <button pButton pRipple  icon="pi pi-chart-line" label="Produttività" class="p-button p-button-secondary p-mr-2"
-                                [routerLink]="['/admin/projects/productivity/', project.id]"></button>
-                                    
-                                
-                                    <button pButton pRipple  icon="pi pi-clock" label="HR" class="p-button p-button-primary p-mr-2"
-                                    [routerLink]="['/admin/projects/timesheets/', project.id]"></button>  
-    
-                                    <button pButton pRipple  icon="pi pi-clone" label="Tasks" class="p-button p-button-warning p-mr-2"
-                                    [routerLink]="['/admin/projects/task/', project.id]"></button>
-                            </td>
-
-                            <td><i class="pi pi-clock"></i> {{project.time}}</td>
-                            
-                            <td><p-tag value="{{project.price | currency :'EUR':'symbol':'1.2-2'}}"></p-tag>
-                     
-                            </td>
-                           
-                          
-                            <td class="action">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
-                                    [routerLink]="['/admin/projects/edit', project.id]"></button>
+                    <button pButton pRipple  icon="pi pi-chart-line" label="Produttività" class="p-button p-button-primary p-mr-2"
+                    [routerLink]="['/admin/projects/productivity/', project.id]"></button>
                         
-                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
-                                    (click)="onDelete(project.id)"></button>
-                           
-                                  
-                                </td>
-                        </tr>
-                    </ng-template>
-                </p-table>
+                    
+                        <button pButton pRipple  icon="pi pi-clock" label="HR" class="p-button p-button-options p-mr-2"
+                        [routerLink]="['/admin/projects/timesheets/', project.id]"></button>  
+
+                        <button pButton pRipple  icon="pi pi-clone" label="Tasks" class="p-button p-button-options p-mr-2"
+                        [routerLink]="['/admin/projects/task/', project.id]"></button>
+
+                        <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
+                        [routerLink]="['/admin/projects/edit', project.id]"></button>
+            
+                    <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
+                        (click)="onDelete(project.id)"></button>
+                    </p-card>
+
+                </div>
+            </div>
+               
                 <div class="p-grid">
 
                     <div class="p-col-12 p-md-12">
@@ -165,7 +109,7 @@
                         </pagination-controls>
                     </div>
                 </div>
-            </p-card>
+       
         </div>
     </div>
 </div>
