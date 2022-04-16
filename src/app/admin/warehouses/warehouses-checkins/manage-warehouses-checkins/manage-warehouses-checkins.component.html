@@ -196,9 +196,9 @@
                 <div *ngFor="let item of filteredProductsVariations" >
 
                     {{item.id}}
-                    {{item.title}}
+                    <h4>{{item.title}}</h4>
                     {{item.description}}
-                    {{item.iamge}}
+                    <img [src]="item.image">
 
                 </div>
 
