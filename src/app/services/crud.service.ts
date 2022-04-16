@@ -75,7 +75,8 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
   public find(id: string): Observable<T> {
-    return this._http.get<T>(this._base + '/find/' + id).pipe(
+    const userId = this.currentUser.user_id;
+    return this._http.get<T>(this._base + '/find/' + id + '/' + userId).pipe(
       map((res) => {
         const t: any = res as any; // json();
         return t;

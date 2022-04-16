@@ -185,7 +185,6 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
       warehouse_id: ["", Validators.required],
       product_id: ["", Validators.required],
       supplier_id: ["", Validators.required],
-      product_id_old: new FormControl,
       pieces: ["", Validators.required],
       boxes: ["", Validators.required],
       user_id: [this.currentUser.user_id],
@@ -615,7 +614,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
     const formData = new FormData();
 
     formData.append("warehouse_id", this.blogForm.get("warehouse_id").value);
-    formData.append('user_id', this.blogForm.get('user_id').value);
+    formData.append('user_id', this.currentUser.user_id);
     formData.append("product_id", this.blogForm.get("product_id").value);
     formData.append("supplier_id", this.blogForm.get("supplier_id").value);
     formData.append("pieces", this.blogForm.get("pieces").value);
@@ -632,6 +631,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
             this.productDialogAdd = false;
             this.ngOnInit();
+            this.blogForm.reset();
           }
         },
         (error) => (this.error = error)
@@ -645,7 +645,8 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
             this.updateQuantity(formData);
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Salvato con sucesso' });
             this.productDialogAdd = false;
-
+            this.ngOnInit();
+            this.blogForm.reset();
           }
         },
         (error) => (this.error = error)

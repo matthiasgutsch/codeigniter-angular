@@ -264,7 +264,6 @@
                             <td>
                                 {{rowData.price | currency :'EUR':'symbol':'1.2-2'}}
                              </td>
-
                             <td>
                                <p-tag severity="default" *ngIf="rowData.pieces > 0" [value]="rowData.pieces"></p-tag> 
                                <p-tag severity="default" *ngIf="rowData.pieces == 0 || ''" value="0"></p-tag> 
