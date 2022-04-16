@@ -137,6 +137,8 @@ import { AppointmentsCalendarComponent } from './appointments/appointments-calen
 import { ManageDocumentsComponent } from './documents/manage-documents/manage-documents.component';
 import { DocumentsFormComponent } from './documents/documents-form/documents-form.component';
 import {TreeDragDropService} from 'primeng/api';
+import {TabMenuModule} from 'primeng/tabmenu';
+import { TopNavComponent } from '../top-nav/top-nav.component';
 
 
 
@@ -195,6 +197,7 @@ import {TreeDragDropService} from 'primeng/api';
     TasksComponent,
     TaskDetailsComponent,
     MomentPipe,
+    TopNavComponent,
     DateValidPipe,
     ManageAppointmentTypeComponent,
     AppointmentTypeFormComponent,
@@ -242,7 +245,7 @@ import {TreeDragDropService} from 'primeng/api';
     ProgressBarModule,
     NgxSpinnerModule,
     KnobModule,
-   
+    TabMenuModule,
     InputTextareaModule,
     NgxPaginationModule,
     DragDropModule,
