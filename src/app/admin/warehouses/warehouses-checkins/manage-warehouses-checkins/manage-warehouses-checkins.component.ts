@@ -34,7 +34,7 @@ import { TechnicalDataService } from 'src/app/services/technical_data.service';
 import 'moment/locale/it'  // without this line it didn't work
 import { Projects } from 'src/app/models/projects';
 import { ProjectsService } from 'src/app/services/projects.service';
-import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormArray, FormControl } from '@angular/forms';
 import * as FileSaver from 'file-saver';
 import { WarehouseCheckins } from 'src/app/models/warehouse_checkins';
 import { WarehousesCheckinsService } from 'src/app/services/warehouses_checkins.service';
@@ -129,7 +129,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   bsValue: Date = new Date();
   tues = new Date();
   weekNo: number;
-
+  inputNum: any;
   page = 1;
   count = 0;
   pageSize = 10;
@@ -143,8 +143,8 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   brands: string[] = ['100000','100001','100002','Ford','Honda','Jaguar','Mercedes','Renault','Volvo','VW'];
     
   filteredBrands: any[];
-  dataSelect: string;
-
+  dataSelect: any;
+  dataSelectTrue: number;
   showDialog() {
     this.productDialog = true;
   }
@@ -185,18 +185,22 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
       warehouse_id: ["", Validators.required],
       product_id: ["", Validators.required],
       supplier_id: ["", Validators.required],
+      product_id_old: new FormControl,
       pieces: ["", Validators.required],
       boxes: ["", Validators.required],
       user_id: [this.currentUser.user_id],
     });
 
-    
   }
 
 
 
     @ViewChild('autoCompleteObject') private autoCompleteObject: AutoComplete ;
 
+    ngAfterContentChecked() {
+      this.dataSelect = this.dataSelect;
+      this.dataSelectTrue = this.dataSelectTrue;
+    }
     
   ngOnInit() {
 
@@ -514,10 +518,17 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
       }
   
       this.filteredProductsVariations = filtered;
-      this.dataSelect = this.filteredProductsVariations.map(t=>t.id)[0];
     }	)};
 
+    
+    change(eventi){
 
+      console.log(this.dataSelect);
+      let obj = this.dataSelect;
+      console.log(obj.id); // 1
+      this.dataSelectTrue = obj.id;
+
+    }
 
 
   filterBrands(event) {
