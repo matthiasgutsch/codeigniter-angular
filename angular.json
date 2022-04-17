@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-codeigniter-blog": {
+    "nexo": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -77,18 +77,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-codeigniter-blog:build"
+            "browserTarget": "nexo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-codeigniter-blog:build:production"
+              "browserTarget": "nexo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-codeigniter-blog:build"
+            "browserTarget": "nexo:build"
           }
         },
         "test": {
@@ -124,15 +124,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular-codeigniter-blog:serve"
+            "devServerTarget": "nexo:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "angular-codeigniter-blog:serve:production"
+              "devServerTarget": "nexo:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "angular-codeigniter-blog"
+  "defaultProject": "nexo"
 }
