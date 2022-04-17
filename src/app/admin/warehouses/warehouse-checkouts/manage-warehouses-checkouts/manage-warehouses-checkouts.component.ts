@@ -46,6 +46,7 @@ import { ProductsVariations } from 'src/app/models/products_variations';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
 import { WarehouseCheckouts } from 'src/app/models/warehouse_checkouts';
+import { AutoComplete } from 'primeng/autocomplete';
 
 @Component({
   selector: 'app-manage-warehouses-checkouts',
@@ -69,7 +70,6 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
   selectedEmployee: any[];
   selectedSupplier: any[];
   selectedSkills: any[];
-  brands: any = [];
   brand: Brand;
   tags: any = [];
   tag: Tags;
@@ -78,7 +78,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
   currentIndex = 1;
   displayEvent: any;
   productsData: any = [];
-  warehouseCheckouts: any = [];
+  WarehouseCheckouts: any = [];
   warehouseCheckout: WarehouseCheckouts;
   date: Date;
   skillsArray: any = [];
@@ -111,21 +111,25 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
 
   products: any = [];
   product: Products;
+  options = [];
 
 
   pageTitle: string;
   warehouses: any = [];
   warehouse: Warehouses;
-  productsVariations: any = [];
   updateProductQuantity: any;
-  productsVariation: ProductsVariations;
   pieces: string;
+
+  filteredProductsVariations: any = [];
+  productsVariations: any = [];
+  productsVariation: ProductsVariations;
+
 
   startDate: Date;
   bsValue: Date = new Date();
   tues = new Date();
   weekNo: number;
-
+  inputNum: any;
   page = 1;
   count = 0;
   pageSize = 10;
@@ -136,9 +140,8 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
   searchWrapper: boolean = false;
   nameFilter: string;
   descriptionFilter: string;
-
-
-  
+      dataSelect: any;
+  dataSelectTrue: number;
   showDialog() {
     this.productDialog = true;
   }
@@ -172,7 +175,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
 
-    this.pageTitle = "Ritira Prodotti / Magazzino";
+    this.pageTitle = "Picking Prodotti / Magazzino";
 
     this.blogForm = this.fb.group({
       id: [""],
@@ -186,6 +189,15 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
 
   }
 
+
+
+    @ViewChild('autoCompleteObject') private autoCompleteObject: AutoComplete ;
+
+    ngAfterContentChecked() {
+      this.dataSelect = this.dataSelect;
+      this.dataSelectTrue = this.dataSelectTrue;
+    }
+    
   ngOnInit() {
 
     const dateObj = new Date();
@@ -196,7 +208,6 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
     this.getEmployees();
     this.getWarehouses();
     this.getSuppliers();
-    this.getProductsVariations();
 
 
 
@@ -298,7 +309,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
       this.pageSize
     );
     this.warehousesCheckoutsService.getAllListNew(params).subscribe((pData) => {
-      this.warehouseCheckouts = pData;
+      this.WarehouseCheckouts = pData;
       this.count = this.warehousesCheckoutsService.size;
 
     });
@@ -368,11 +379,6 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
 
 
 
-  getProductsVariations() {
-    this.productsVariationsService.getAllListbyUser().subscribe(
-      (data: ProductsVariations) => this.productsVariations = data,
-    );
-  }
 
   getWarehouses() {
     this.warehousesService.getAllListbyUser().subscribe(
@@ -464,10 +470,6 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
 
 
 
-  getBrandItem(brand_id: string, id: string) {
-    return this.brands.find(item => item.id === brand_id);
-  }
-
   getCategoryItem(category_id: string, id: string) {
     return this.categories.find(item => item.id === category_id);
   }
@@ -492,7 +494,47 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
   }
 
 
+ 
 
+
+
+
+    filterCountry(event) {
+      this.productsVariationsService.find(event.query).subscribe(data => {
+        this.productsVariations = data
+
+      //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+      let filtered: any[] = [];
+      let query = event.query;
+      for (let i = 0; i < this.productsVariations.length; i++) {
+        let productsVariation = this.productsVariations[i];
+        if (productsVariation.code.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+          filtered.push(productsVariation);
+        }
+      }
+  
+      this.filteredProductsVariations = filtered;
+    }	)};
+
+    
+    change(eventi){
+
+      console.log(this.dataSelect);
+      let obj = this.dataSelect;
+      console.log(obj.id); // 1
+      this.dataSelectTrue = obj.id;
+
+    }
+
+
+  filterBrands(event) {
+    this.productsVariationsService.find(event.query).subscribe(
+      res => {
+			const result = (<any>res).filter(productsVariation => productsVariation.code.includes(event.query));
+			console.log(result);
+			this.productsVariations = result;
+		});
+}
 
 
   view(warehouseCheckout: WarehouseCheckouts) {
@@ -512,7 +554,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
   exportPdf() {
     // const doc = new jsPDF();
     const doc = new jsPDF('l', 'pt', 'A4');
-    doc['autoTable'](this.exportColumns, this.warehouseCheckouts);
+    doc['autoTable'](this.exportColumns, this.WarehouseCheckouts);
     // doc.autoTable(this.exportColumns, this.products);
     doc.save("timesheets.pdf");
   }
@@ -521,7 +563,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
 
   exportExcel() {
     import("xlsx").then(xlsx => {
-      const worksheet = xlsx.utils.json_to_sheet(this.warehouseCheckouts);
+      const worksheet = xlsx.utils.json_to_sheet(this.WarehouseCheckouts);
       const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
       const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
       this.saveAsExcelFile(excelBuffer, "timesheets");
@@ -554,7 +596,13 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
           } else {
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Conferma', detail: 'Quantita aggiornata con successo' });
             this.ngOnInit();
-            this.blogForm.reset();
+            this.dataSelect = '';
+            this.blogForm.controls['warehouse_id'].reset();
+            this.blogForm.controls['supplier_id'].reset();
+            this.blogForm.controls['product_id'].reset();
+            this.blogForm.controls['pieces'].reset();
+            this.blogForm.controls['boxes'].reset();
+            formData.append('user_id', this.currentUser.user_id);
           }
         },
       });
@@ -563,6 +611,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
 
   }
 
+  
 
   onSubmit() {
     const formData = new FormData();

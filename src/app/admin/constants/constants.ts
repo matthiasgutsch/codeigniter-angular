@@ -18,6 +18,7 @@ export const PARAM_BRANDS_PATH = '/admin/settings/brands/'
 export const PARAM_TECHNICAL_DATA_PATH = '/admin/settings/technical-data/'
 export const PARAM_WAREHOUSES_PATH = '/admin/settings/warehouses/'
 export const PARAM_CHECKINS_PATH = '/admin/checkins/'
+
 export const PARAM_WAREHOUSE_MOVEMENTS_PATH = '/admin/warehouse-movements/'
 
 export const PARAM_CHECKOUTS_PATH = '/admin/checkouts/'
