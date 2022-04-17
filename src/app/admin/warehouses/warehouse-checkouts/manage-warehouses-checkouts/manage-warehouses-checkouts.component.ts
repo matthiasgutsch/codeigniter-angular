@@ -78,7 +78,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
   currentIndex = 1;
   displayEvent: any;
   productsData: any = [];
-  WarehouseCheckouts: any = [];
+  warehouseCheckouts: any = [];
   warehouseCheckout: WarehouseCheckouts;
   date: Date;
   skillsArray: any = [];
@@ -309,7 +309,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
       this.pageSize
     );
     this.warehousesCheckoutsService.getAllListNew(params).subscribe((pData) => {
-      this.WarehouseCheckouts = pData;
+      this.warehouseCheckouts = pData;
       this.count = this.warehousesCheckoutsService.size;
 
     });
@@ -554,7 +554,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
   exportPdf() {
     // const doc = new jsPDF();
     const doc = new jsPDF('l', 'pt', 'A4');
-    doc['autoTable'](this.exportColumns, this.WarehouseCheckouts);
+    doc['autoTable'](this.exportColumns, this.warehouseCheckouts);
     // doc.autoTable(this.exportColumns, this.products);
     doc.save("timesheets.pdf");
   }
@@ -563,7 +563,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
 
   exportExcel() {
     import("xlsx").then(xlsx => {
-      const worksheet = xlsx.utils.json_to_sheet(this.WarehouseCheckouts);
+      const worksheet = xlsx.utils.json_to_sheet(this.warehouseCheckouts);
       const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
       const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
       this.saveAsExcelFile(excelBuffer, "timesheets");

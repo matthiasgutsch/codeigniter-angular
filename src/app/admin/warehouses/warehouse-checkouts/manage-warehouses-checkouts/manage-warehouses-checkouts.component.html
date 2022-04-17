@@ -287,9 +287,9 @@
                                         </td>
 
                                         <!--   <td>
-                                {{ getWarehouseItem(warehouseCheckin.project_id)?.title }}
+                                {{ getWarehouseItem(warehouseCheckout.project_id)?.title }}
 
-                                {{warehouseCheckin.warehouse_id.title}}</td>-->
+                                {{warehouseCheckout.warehouse_id.title}}</td>-->
 
                                         <td>
 
@@ -302,15 +302,15 @@
 
                                             <!--   <button pButton pRipple icon="pi pi-pencil"
                                 class="p-button p-button-success p-mr-2"
-                                (click)="editItem(warehouseCheckin)"></button> -->
+                                (click)="editItem(warehouseCheckout)"></button> -->
 
                                             <button pButton pRipple icon="pi pi-eye"
                                                 class="p-button p-button-primary p-mr-2"
-                                                (click)="view(warehouseCheckin)"></button>
+                                                (click)="view(warehouseCheckout)"></button>
 
                                             <button pButton pRipple icon="pi pi-trash"
                                                 class="p-button p-button-danger p-mr-2"
-                                                (click)="onDelete(warehouseCheckin.id)"></button>
+                                                (click)="onDelete(warehouseCheckout.id)"></button>
 
                                         </td>
                                     </tr>
@@ -342,19 +342,19 @@
         <p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'50vw'}">
             <ng-template pTemplate="content">
                 <div class="p-col-12 p-md-12">
-                    <p-tag [value]="warehouseCheckin.id" severity="success" class="p-mr-2"></p-tag>
-                    <p-tag [value]="warehouseCheckin.created_at"></p-tag><br><br>
+                    <p-tag [value]="warehouseCheckout.id" severity="success" class="p-mr-2"></p-tag>
+                    <p-tag [value]="warehouseCheckout.created_at"></p-tag><br><br>
                     <h3>Dettaglio Ingresso Magazzino</h3>
 
                     <hr class="full">
-                    <p-card header="{{warehouseCheckin.warehouse_id.title}}">
+                    <p-card header="{{warehouseCheckout.warehouse_id.title}}">
                         <div class="p-grid">
                             <div class="p-col-12 p-md-8">
-                                Pezzi registrati entrata<br>
+                                Pezzi registrati uscita<br>
 
                             </div>
                             <div class="p-col-12 p-md-4">
-                                <p-tag [value]="warehouseCheckin.pieces" severity="default" class="p-mr-2 pull-right">
+                                <p-tag [value]="warehouseCheckout.pieces" severity="default" class="p-mr-2 pull-right">
                                 </p-tag>
 
                             </div>
@@ -372,7 +372,7 @@
 
                             </div>
                             <div class="p-col-12 p-md-4">
-                                <p-tag [value]="warehouseCheckin.product.pieces" severity="success"
+                                <p-tag [value]="warehouseCheckout.product.pieces" severity="success"
                                     class="p-mr-2 pull-right"></p-tag>
 
                             </div>
@@ -385,26 +385,26 @@
                         <div class="p-grid">
                             <div class="p-col-2 p-md-2">
 
-                                <img *ngIf="warehouseCheckin.image" class="img-responsive"
-                                    src="{{ warehouseCheckin.image}}">
+                                <img *ngIf="warehouseCheckout.image" class="img-responsive"
+                                    src="{{ warehouseCheckout.image}}">
                             </div>
                             <div class="p-col-10 p-md-10">
 
-                                <h3>{{ warehouseCheckin.product.title}}</h3>
-                                <p [innerHTML]="warehouseCheckin.product.description"></p>
-                                <p class="small">{{ warehouseCheckin.product.code_int}} -
-                                    {{ warehouseCheckin.product.code}}</p>
+                                <h3>{{ warehouseCheckout.product.title}}</h3>
+                                <p [innerHTML]="warehouseCheckout.product.description"></p>
+                                <p class="small">{{ warehouseCheckout.product.code_int}} -
+                                    {{ warehouseCheckout.product.code}}</p>
 
                                 <div class="clearfix"></div>
                                 <br>
                                 <button pButton pRipple icon="pi pi-pencil" label="modifica"
                                     class="p-button p-button-primary p-mr-2"
-                                    [routerLink]="['/admin/products-variation/edit', warehouseCheckin.product.product_id, warehouseCheckin.product.id ]"></button>
+                                    [routerLink]="['/admin/products-variation/edit', warehouseCheckout.product.product_id, warehouseCheckout.product.id ]"></button>
                             </div>
                         </div>
                     </p-card>
                     <p-card>
-                        <ngx-barcode6 [bc-format]="EAN-13" [bc-height]="32" [bc-value]="warehouseCheckin.product.code"
+                        <ngx-barcode6 [bc-format]="EAN-13" [bc-height]="32" [bc-value]="warehouseCheckout.product.code"
                             [bc-display-value]="true">
                         </ngx-barcode6>
                     </p-card>
