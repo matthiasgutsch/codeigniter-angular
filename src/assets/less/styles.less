@@ -221,7 +221,7 @@ p a {
   background-repeat: no-repeat;
   background-size: cover;
   .img-banner {
-    width: 220px;
+    width: 200px;
   }
   h3 {
     margin: 0px;
@@ -265,7 +265,7 @@ p a {
       color: @white;
       text-align: center;
       i {
-        margin-right: 5px;
+        margin-right: 2px;
       }
       &.logout {
         background-color: fade(@ness_color_2, 20%);
@@ -351,7 +351,7 @@ p a {
     }
   }
   &.close {
-    width: 220px;
+    width: 200px;
     ul {
       li {
         a {
@@ -639,6 +639,8 @@ ul.nav-menu-mobile {
   margin-left: 70px;
   padding: 0px;
   padding-top: 60px;
+  margin-right: 70px;
+
   .main-inner {
     padding: 0px 20px 30px 20px;
     &.with-sidebar {
@@ -651,9 +653,9 @@ ul.nav-menu-mobile {
     }
   }
   &.open {
-    margin-left: 220px;
+    margin-left: 200px;
     .sidebar-inside.left {
-      left: 220px;
+      left: 200px;
       border-right: 1px solid #dee2e6;
     }
   }
@@ -713,15 +715,19 @@ hr.full {
   .logo-wrapper {
     float: left;
     margin-left: 0px;
-    top: 8px;
+    top: 0px;
+    width: 130px;
     position: relative;
-    height: 30px;
-    padding-right: 15px;
-    border-left: 0px solid #ccc;
+    height: 60px;
+    padding-right: 0px;
+    border-right: 1px solid #dee2e6;
     font-size: 26px;
     font-weight: bold;
     img {
       height: 30px;
+      line-height: 60px;
+      position: relative;
+      top: 15px;
     }
     .color-dot {
       color: @white;
@@ -1081,6 +1087,23 @@ hr.full {
   padding-right: 20px;
 }
 
+.sidebar-small {
+  height: calc(100% - 60px);
+  width: 70px;
+  position: absolute;
+  z-index: 1;
+  top: 60px;
+  right: 0px;
+  background-color: @white;
+  border-left: 1px solid #dee2e6;
+  overflow-x: hidden;
+  transition: 0.1s;
+  padding-top: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+}
+
 .sidebar-inside {
   height: 100%;
   width: 450px;
@@ -1094,11 +1117,11 @@ hr.full {
   padding-left: 20px;
   padding-right: 20px;
   &.right {
-    right: 0px;
+    right: 70px;
     border-left: 1px solid #dee2e6;
   }
   &.left {
-    left: 220px;
+    left: 200px;
     border-right: 1px solid #dee2e6;
   }
   h3 {

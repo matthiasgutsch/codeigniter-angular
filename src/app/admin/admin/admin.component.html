@@ -104,7 +104,7 @@
   </div>
 
   <div class="logo-wrapper" routerLink="/admin">
-   <img src="../../../assets/images/logo.svg" class="logo-wrapper">
+   <img src="../../../assets/images/logo.svg">
   </div>
 
   <div class="user-menu"><ul>
@@ -130,6 +130,10 @@
 <div id="main" [ngClass]=" flag ? 'open' : 'close'">  
 
           <router-outlet></router-outlet>
+      </div>
+
+      <div class="sidebar-small">
+
       </div>
 
       <ngx-spinner
