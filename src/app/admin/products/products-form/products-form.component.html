@@ -253,7 +253,7 @@
 
                             <p-tabPanel header="Varianti" *ngIf="id">
 
-                                <p-table #dt [columns]="cols" [value]="productsVariations" [responsive]="true"  [globalFilterFields]="['name', 'description']"
+                                <p-table #dt [columns]="cols" [value]="productsVariations" [responsive]="false" [resizableColumns]="true" [autoLayout]="true"  [globalFilterFields]="['name', 'description']"
                                 currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true"
                                 [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
             

@@ -107,7 +107,7 @@
 
         <div class="p-grid">
 
-            <div class="p-col-12 p-md-4">
+            <div class="p-col-6 p-md-4">
 
                 <p-card class="featured-card"  [routerLink]="['/admin/clients']">
 
@@ -118,13 +118,13 @@
                         </div>
 
                     </div>
-                        <div class="p-col-6 p-md-8">
+                        <div class="p-col-12 p-md-8">
                             <h4 class="mb-0">Clienti</h4>
                             Totale: {{clientsCount}}
 
                         </div>
 
-                        <div class="p-col-6 p-md-4">
+                        <div class="p-col-12 p-md-4">
 
                             <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']"
                                 routerLinkActive="active" class="p-button p-button-success pull-right"></button>
@@ -133,7 +133,7 @@
                     </div>
                 </p-card>
             </div>
-            <div class="p-col-12 p-md-4">
+            <div class="p-col-6 p-md-4">
 
                 <p-card class="featured-card" [routerLink]="['/admin/appointments']">
 
@@ -145,12 +145,12 @@
 
                     </div>
 
-                        <div class="p-col-6 p-md-8">
+                        <div class="p-col-12 p-md-8">
                             <h4 class="mb-0">Appuntamenti</h4>
                             Totale: {{appointmentsCount}}
 
                         </div>
-                        <div class="p-col-6 p-md-4">
+                        <div class="p-col-12 p-md-4">
 
                             <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/appointments/create']"
                                 routerLinkActive="active" class="p-button p-button-success pull-right"></button>
@@ -160,7 +160,7 @@
 
             </div>
 
-            <div class="p-col-12 p-md-4">
+            <div class="p-col-6 p-md-4">
 
                 <p-card class="featured-card" [routerLink]="['/admin/billings']">
 
@@ -172,13 +172,13 @@
 
                     </div>
 
-                        <div class="p-col-6 p-md-8">
+                        <div class="p-col-12 p-md-8">
                             <h4 class="mb-0">Fatturazione</h4>
                             {{billingsCountTotal | currency :'EUR':'symbol':'1.2-2'}} <strong></strong>
 
                             <!-- <span class="red" *ngIf="billingsCountTotalNotPaid > 0"> ({{billingsCountTotalNotPaid |  currency :'EUR':'symbol':'1.2-2'}})</span> -->
                         </div>
-                        <div class="p-col-6 p-md-4">
+                        <div class="p-col-12 p-md-4">
 
                             <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/billings/create']"
                                 routerLinkActive="active" class="p-button p-button-success pull-right"></button>
@@ -203,7 +203,7 @@
 
                         <p-tabPanel header="Ultime Fatture">
 
-                            <p-table #dt1 [value]="billings" [responsive]="true" [paginator]="false" [rows]="10">
+                            <p-table #dt1 [value]="billings" [responsive]="false" [resizableColumns]="true" [autoLayout]="true" [paginator]="false" [rows]="10">
 
                                 <ng-template pTemplate="body" let-billing>
                                     <tr>
@@ -250,11 +250,11 @@
                         
                         <p-tabPanel header="Ultimi Prodotti">
 
-                            <p-table #dt1 [value]="products" [responsive]="true" [paginator]="false" [rows]="10">
+                            <p-table #dt1 [value]="products" [responsive]="false" [resizableColumns]="true" [autoLayout]="true"  [paginator]="false" [rows]="10">
 
                                 <ng-template pTemplate="body" let-rowData let-product>
                                     <tr>
-                                        <td *ngIf="product.image" width="70px"><img [src]="rowData.image"
+                                        <td *ngIf="product.image" style="width:70px"><img [src]="rowData.image"
                                                 [routerLink]="['/admin/products/edit', product.id]" class="img-responsive"></td>
                                         <td>
                                             <strong>{{product.title}}</strong>
@@ -274,7 +274,7 @@
 
                         <p-tabPanel header="Ultimi Movimenti Magazzino">
 
-                            <p-table #dt1 [value]="warehouseCheckins" [responsive]="true" [paginator]="false" [rows]="10">
+                            <p-table #dt1 [value]="warehouseCheckins" [responsive]="false" [resizableColumns]="true" [autoLayout]="true"  [paginator]="false" [rows]="10">
 
                                 <ng-template pTemplate="body" let-warehouseCheckin>
                                     <tr>
@@ -318,7 +318,7 @@
         <h3>Ultimi Progetti</h3>
         <div class="p-field p-grid">
 
-        <div *ngFor="let project of projects" class="p-col-6">
+        <div *ngFor="let project of projects" class="p-col-12 p-md-6">
             <p-card class="projects">
                 <div class="p-grid">
            

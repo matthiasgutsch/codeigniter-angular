@@ -149,7 +149,7 @@
                 <div *ngFor=" let product of products  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
 
 
-                <p-table #dt [columns]="cols" [value]="products" [responsive]="true"   [paginator]="false"
+                <p-table #dt [columns]="cols" [value]="products" [responsive]="false" [resizableColumns]="true" [autoLayout]="true"   [paginator]="false"
                     [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
 
                     <ng-template pTemplate="header" let-columns>
@@ -231,7 +231,7 @@
             <p-tabView>
           
                 <p-tabPanel header="Variazioni">
-                    <p-table #dt [columns]="colsVariations" [value]="productsVariations" [responsive]="true"  [globalFilterFields]="['name', 'description']"
+                    <p-table #dt [columns]="colsVariations" [value]="productsVariations" [responsive]="false" [resizableColumns]="true" [autoLayout]="true"  [globalFilterFields]="['name', 'description']"
                     currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true"
                     [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
 

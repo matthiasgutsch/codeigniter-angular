@@ -147,7 +147,7 @@
                             </div>
                             <div *ngFor=" let timesheet of timesheets  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
 
-                            <p-table #dt [columns]="cols" [responsive]="true" [value]="timesheets"
+                            <p-table #dt [columns]="cols" [responsive]="false" [resizableColumns]="true" [autoLayout]="true" [value]="timesheets"
                                 [paginator]="false" [rows]="15" [showCurrentPageReport]="true"
                                 [totalRecords]="totalRecords">
 

@@ -89,7 +89,7 @@
                         *ngFor=" let appointment of appointments  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index">
                     </div>
 
-                    <p-table #dt [value]="appointments" [pageLinks]="3" [responsive]="true" [paginator]="false"
+                    <p-table #dt [value]="appointments" [pageLinks]="3"  [responsive]="false" [resizableColumns]="true" [autoLayout]="true"  [paginator]="false"
                         [rows]="15">
 
                         <ng-template pTemplate="header">

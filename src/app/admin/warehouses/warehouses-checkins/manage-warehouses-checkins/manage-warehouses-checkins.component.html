@@ -249,7 +249,7 @@
                                 *ngFor=" let warehouseCheckin of warehouseCheckins  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index">
                             </div>
 
-                            <p-table #dt [columns]="cols" [responsive]="true" [value]="warehouseCheckins"
+                            <p-table #dt [columns]="cols" [responsive]="false" [resizableColumns]="true" [autoLayout]="true" [value]="warehouseCheckins"
                                 [paginator]="false" [rows]="10" [totalRecords]="totalRecords">
 
                                 <ng-template pTemplate="header" let-columns>

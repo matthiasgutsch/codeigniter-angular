@@ -258,7 +258,7 @@
                                 <p-tabPanel header="Movimento Magazzino">
                                     <div *ngFor=" let warehouseMovement of warehouseMovements  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
 
-                                    <p-table #dt [columns]="cols" [responsive]="true"   [value]="warehouseMovements" [globalFilterFields]="['name', 'description']" [paginator]="false"
+                                    <p-table #dt [columns]="cols" [responsive]="false" [resizableColumns]="true" [autoLayout]="true"   [value]="warehouseMovements" [globalFilterFields]="['name', 'description']" [paginator]="false"
                                     [rows]="10">
                 
                                     <ng-template pTemplate="header" let-columns>

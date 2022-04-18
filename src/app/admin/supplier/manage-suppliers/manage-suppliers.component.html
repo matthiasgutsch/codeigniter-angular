@@ -87,7 +87,7 @@
                 </div>
                 <div *ngFor=" let supplier of suppliers  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
 
-                <p-table #dt [columns]="cols" [value]="suppliers" [responsive]="true"  [paginator]="false" [rows]="10">
+                <p-table #dt [columns]="cols" [value]="suppliers" [responsive]="false" [resizableColumns]="true" [autoLayout]="true"  [paginator]="false" [rows]="10">
     
                     <ng-template pTemplate="header" let-columns>
                         <tr>

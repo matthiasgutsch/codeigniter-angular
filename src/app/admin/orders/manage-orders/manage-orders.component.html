@@ -84,7 +84,7 @@
 
                 <div *ngFor=" let order of orders  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
 
-                <p-table #dt [value]="orders" [responsive]="true" [paginator]="false">
+                <p-table #dt [value]="orders" [responsive]="false" [resizableColumns]="true" [autoLayout]="true" [paginator]="false">
                    
                     <ng-template pTemplate="header">
                         <tr>

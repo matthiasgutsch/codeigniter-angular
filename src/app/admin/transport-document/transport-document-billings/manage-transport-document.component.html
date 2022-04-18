@@ -100,7 +100,7 @@
                 </div>
                     <div *ngFor=" let billing of billings  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
 
-                    <p-table #dt [value]="billings" [responsive]="true" [paginator]="false" [rows]="15">
+                    <p-table #dt [value]="billings" [responsive]="false" [resizableColumns]="true" [autoLayout]="true" [paginator]="false" [rows]="15">
 
                     <ng-template pTemplate="header">
                         <tr>

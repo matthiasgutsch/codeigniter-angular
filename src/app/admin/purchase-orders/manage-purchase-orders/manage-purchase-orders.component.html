@@ -101,7 +101,7 @@
                 <div
                 *ngFor=" let purchaseOrder of purchaseOrders  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index">
             </div>
-                <p-table #dt [value]="purchaseOrders" [responsive]="true"  [paginator]="false" [rows]="15">
+                <p-table #dt [value]="purchaseOrders" [responsive]="false" [resizableColumns]="true" [autoLayout]="true"  [paginator]="false" [rows]="15">
                    
                     <ng-template pTemplate="header">
                         <tr>
