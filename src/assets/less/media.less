@@ -89,7 +89,7 @@ margin: 0px;
 }
 
 .p-card .p-card-body {
-    padding: 20px 10px !important;
+    padding: 10px 10px !important;
 }
 
 .p-tabview .p-tabview-panels {
@@ -195,6 +195,84 @@ padding: 10px 0px !important;
     display: none;
     visibility: hidden;
 }
+
+
+
+
+.fc-other-month {
+    background-color: fade(@ness_color_3, 6%) !important;
+  }
+  
+  .fc-day-grid-event {
+    margin: 5px;
+    padding: 0 1px;
+  }
+  
+  .fc-day-number {
+    padding-left: 5px;
+  }
+  
+  .fc .fc-view-container .fc-event {
+    background: fade(@ness_color_3, 90%);
+    box-shadow: @shadow;
+    border: 1px solid #dee2e6;
+    border-left: 0px solid @ness_color_3 !important;
+    color: @white;
+    text-align: center;
+    padding: 0px;
+    padding-top: 3px;
+    hr {
+      border-color: @ness_color_3 !important;
+    }
+    i {
+      font-size: 13px;
+    }
+    .fc-title {
+      a {
+        color: @ness_color_3 !important;
+      }
+    }
+  }
+  
+  .fc .fc-view-container .fc-event .event-time {
+    background: transparent;
+    border-radius: 0px;
+    padding: 3px;
+    margin-bottom: 0px;
+    font-size: 9px;
+  }
+  
+  .fc .fc-view-container .fc-event .event-client-name {
+      display: none;
+      visibility: hidden;
+  }
+  
+  .fc .fc-toolbar .fc-button {
+    color: @ness_color_2;
+    background: transparent;
+    border: 1px solid @ness_color_2;
+    font-size: 1rem;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .fc-icon {
+    display: block;
+    // Icon base
+    &:after {
+      display: inline-block;
+      font-family: "FontAwesome";
+      line-height: 1;
+      font-size: 14px;
+      vertical-align: middle;
+      position: relative;
+      top: -1px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  }
 
 }
 

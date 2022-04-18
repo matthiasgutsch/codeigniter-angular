@@ -522,8 +522,7 @@ export class AppointmentsCalendarComponent implements OnInit {
   eventRender(event) {
     const html = `<div>
       <div class="event-time"><i class="pi pi-clock"></i> ${event.event.time}</div>
-      <div><strong>${event.event.client.name}</strong></div>
-    <div><strong>${event.event.client.surname}</strong></div>
+      <div class="event-client-name"><strong>${event.event.client.name}</strong><br>${event.event.client.surname}</div>
 
     </div>`;
     event.element.html(html)
