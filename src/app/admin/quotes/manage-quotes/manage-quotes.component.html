@@ -82,7 +82,7 @@
 
                 <div *ngFor=" let quote of quotes  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
 
-                <p-table #dt [value]="quotes" [paginator]="false" [rows]="10" [responsive]="true">
+                <p-table #dt [value]="quotes" [paginator]="false" [rows]="10" [responsive]="false" [resizableColumns]="true" [autoLayout]="true" >
                    
                     <ng-template pTemplate="header">
                         <tr>

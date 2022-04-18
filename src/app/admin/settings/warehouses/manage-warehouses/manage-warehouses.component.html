@@ -84,7 +84,7 @@
                     <div
                         *ngFor=" let warehouse of warehouses  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index">
                     </div>
-                <p-table #dt [value]="warehouses" [pageLinks]="3" [responsive]="true"
+                <p-table #dt [value]="warehouses" [pageLinks]="3" [responsive]="false" [resizableColumns]="true" [autoLayout]="true" 
                     [paginator]="false" [rows]="15">
 
                     <ng-template pTemplate="header">
