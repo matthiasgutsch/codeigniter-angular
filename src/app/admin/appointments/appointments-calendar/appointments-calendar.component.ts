@@ -186,6 +186,7 @@ export class AppointmentsCalendarComponent implements OnInit {
           left: 'title',
 
         },
+
         events: data,
         eventRender: (v,el) => {console.log(v, el)},
         locale: 'it',
@@ -229,85 +230,7 @@ export class AppointmentsCalendarComponent implements OnInit {
     
   }
 
-  ngAfterViewInit() {
-    this.canvas = this.mychart.nativeElement;
 
-    this.ctx = this.canvas.getContext('2d');
-
-    let myChart = new Chart(this.ctx, {
-      type: 'line',
-
-      data: {
-        datasets: [{
-          type: 'line',
-          backgroundColor: "rgba(99, 162, 241,0.4)",
-          borderColor: "rgb(99, 162, 241, 0.8)",
-          fill: false,
-          label: 'Fatturato',
-          data: this.data1,
-          steppedLine: false,
-        },
-        {
-          type: 'line',
-          backgroundColor: "rgba(255, 99, 71,0.4)",
-          borderColor: "rgb(255, 99, 71, 0.8)",
-          fill: false,
-          label: 'Non incassato',
-          data: this.data2,
-          steppedLine: false,
-        }
-        ]
-      },
-      options: {
-        responsive: true,
-        title: {
-          display: false,
-          text: 'Fatturato',
-        },
-        scales: {
-          xAxes: [{
-            type: 'linear',
-            position: 'bottom',
-
-            tooltips: {
-              mode: 'index',
-              intersect: true,
-              callbacks: {
-                label: function (tooltipItem) {
-                  return tooltipItem.yLabel;
-                }
-              }
-            },
-
-            ticks: {
-              beginAtZero: false,
-              max: 12,
-              min: 1,
-              stepSize: 1
-            },
-
-
-          }],
-          yAxes: [{
-            type: 'linear',
-            ticks: {
-              userCallback: function (tick) {
-                return tick.toString() + '€';
-              }
-            },
-
-
-            scaleLabel: {
-              labelString: 'Höhe',
-              display: false
-            }
-          }]
-        }
-      }
-    });
-
-
-  }
 
   getProjects() {
     const params = this.getRequestParams(
