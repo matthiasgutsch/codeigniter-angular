@@ -25,6 +25,9 @@ export class TopNavComponent implements OnInit {
       {label: 'Appuntamenti', icon: 'pi pi-fw pi pi-calendar-plus', routerLink: '/admin/appointments/'},
       {label: 'Calendario', icon: 'pi pi-fw pi-calendar', routerLink: '/admin/appointments/calendar'},
       {label: 'Progetti', icon: 'pi pi-fw pi pi-clone', routerLink: '/admin/projects'},
+      {label: 'Fatturazione', icon: 'pi pi-fw ppi pi-credit-card', routerLink: '/admin/billings'},
+      {label: 'Timesheet', icon: 'pi pi-fw ppi pi-clock', routerLink: '/admin/timesheets'},
+
 
   ];
 
