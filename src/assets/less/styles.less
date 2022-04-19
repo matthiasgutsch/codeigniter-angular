@@ -110,7 +110,7 @@ body {
   font-family: "Circular", sans-serif;
   padding: 0px;
   margin: 0px;
-  background-color: @background;
+  background-color: darken(@background,1%);
   color: @text-color;
 }
 
@@ -639,7 +639,7 @@ ul.nav-menu-mobile {
   margin-left: 70px;
   padding: 0px;
   padding-top: 60px;
-  margin-right: 70px;
+  margin-right: 0px;
 
   .main-inner {
     padding: 0px 20px 30px 20px;
@@ -922,9 +922,9 @@ hr.full {
 .p-card {
   background: #ffffff;
   color: @text-color;
-  box-shadow: @shadow;
+  box-shadow: none !important;
   border-radius: @radius;
-  border: 1px solid #dee2e6;
+  border: 0px solid #dee2e6;
   margin-bottom: 20px;
   .p-card-body {
     padding: 15px;
@@ -1087,22 +1087,7 @@ hr.full {
   padding-right: 20px;
 }
 
-.sidebar-small {
-  height: calc(100% - 60px);
-  width: 70px;
-  position: absolute;
-  z-index: 1;
-  top: 60px;
-  right: 0px;
-  background-color: @white;
-  border-left: 1px solid #dee2e6;
-  overflow-x: hidden;
-  transition: 0.1s;
-  padding-top: 0px;
-  padding-left: 20px;
-  padding-right: 20px;
 
-}
 
 .sidebar-inside {
   height: 100%;
@@ -1117,7 +1102,7 @@ hr.full {
   padding-left: 20px;
   padding-right: 20px;
   &.right {
-    right: 70px;
+    right: 0px;
     border-left: 1px solid #dee2e6;
   }
   &.left {
