@@ -33,7 +33,7 @@
 </p-sidebar>
 <app-topnav></app-topnav>
 
-<div class="top-main-wrapper with-sidebar right">
+<div class="top-main-wrapper">
 
     <div class="dash-header">
         <div class="dash-title">
@@ -60,164 +60,169 @@
     </div>
 </div>
 
-<div class="sidebar-inside right">
-
-    <p-tabView class="responsive-tab-view">
-
-        <p-tabPanel header="{{pageTitle}}">
-
-            <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
-
-                <div class="p-field p-grid">
-                    <div class="p-col-12 p-md-12">
-
-                        <label>Maggazzino</label>
-                    </div>
-                    <div class="p-col-12 p-md-12">
-                        <p-dropdown [options]="warehouses" [required]="true" [showClear]="true" placeholder="Scegli"
-                            [style]="{ width: '100%' }" [(ngModel)]="selectedWarehouse" formControlName="warehouse_id"
-                            optionLabel="title" optionValue="id">
-                            <ng-template let-option pTemplate="item">
-                                {{option.title}}
-                            </ng-template>
-                        </p-dropdown>
-                    </div>
-                </div>
-
-                <div class="p-field p-grid">
-                    <div class="p-col-12 p-md-12">
-
-                        <label>Fornitore</label>
-                    </div>
-                    <div class="p-col-12 p-md-12">
-                        <p-dropdown [options]="suppliers" [required]="true" [showClear]="true" placeholder="Scegli"
-                            [style]="{ width: '100%' }" [(ngModel)]="selectedSupplier" formControlName="supplier_id"
-                            optionLabel="company_name" optionValue="id">
-                            <ng-template let-option pTemplate="item">
-                                {{option.company_name}}
-                            </ng-template>
-                        </p-dropdown>
-                    </div>
-                </div>
-
-                <div class="p-field p-grid">
-                    <div class="p-col-12 p-md-12">
-
-                        <label>Prodotto</label>
-                    </div>
-                    <div class="p-col-12 p-md-12">
-
-                        <p-autoComplete [dropdown]="true" placeholder="Cerca per Codice, titolo, Codice interno"
-                            [style]="{ width: '100%' }" [suggestions]="filteredProductsVariations"
-                            (completeMethod)="filterCountry($event)" field="id" (onSelect)="change($event)"
-                            (onClear)="dataSelect = null" [ngModelOptions]="{standalone: true}" [(ngModel)]="dataSelect"
-                            [minLength]="1">
-                            <ng-template let-productsVariation pTemplate="item">
-                                <div class="p-grid">
-                                    <div class="p-col-9">
-                                        <strong>{{productsVariation.code}}</strong><br>
-                                        {{productsVariation.title}} -
-                                        <p class="truncate">{{productsVariation.description}}
-                                        </p>
-                                    </div>
-                                    <div class="p-col-3">
-                                        <div class="p-grid">
-                                            <div class="p-col-12">
-                                                <p-tag class="pull-right"
-                                                    [value]="productsVariation.price  | currency :'EUR':'symbol':'1.2-2'">
-                                                </p-tag>
-                                            </div>
-                                            <div class="p-col-12 p-mt-2">
-                                                <p class="pull-right"><strong>{{productsVariation.pieces}}</strong> pz
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ng-template>
-                        </p-autoComplete>
-
-                        <input type="hidden" pInputText [(ngModel)]="dataSelectTrue" formControlName="product_id">
-                    </div>
-                </div>
-
-                <div class="p-field p-grid">
-                    <div class="p-col-12 p-md-6">
-
-                        <label>Pezzi <span class="required">*</span></label>
-
-                        <input type="text" pInputText [style]="{width:'100%'}" formControlName="pieces" />
-
-                    </div>
-
-                    <div class="p-col-12 p-md-6">
-
-                        <label>Colli <span class="required">*</span></label>
-
-                        <input type="text" pInputText [style]="{width:'100%'}" formControlName="boxes" />
-
-                    </div>
-                </div>
-
-                <div class="form-group form-row">
-                    <label class="col-md-3"></label>
-                    <div class="col-md-9">
-                        <input type="hidden" formControlName="id">
-                        <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
-                    </div>
-                </div>
-
-                <div class="p-field p-grid">
-
-                    <div class="p-col-12 p-md-12">
-
-                        <button pButton pRipple icon="pi pi-save" label="aggiungi prodotto"
-                            class="p-button p-button-success btn-block" [disabled]="!blogForm.valid"></button>
-                    </div>
-                </div>
-
-            </form>
-
-            <div *ngIf="dataSelectTrue">
-                <h4>Prodotto selezionato</h4>
-
-                <p-card>
-                    <div *ngFor="let item of filteredProductsVariations">
-                        <div class="p-grid">
-                            <div class="p-col-4">
-                                <img [src]="item.image" class="img-responsive">
-
-                            </div>
-                            <div class="p-col-8">
-
-                                <strong>{{item.title}}</strong><br>
-                                <p class="detail">Codice: {{item.code}}</p>
-                                <p class="detail">Codice Interno: {{item.code_int}}</p>
-                            </div>
-                        </div>
-                        <div class="p-grid">
-
-                            <div class="p-col-12">
-                                <hr class="small">
-                                <ngx-barcode6 [bc-format]="EAN-13" [bc-height]="32" [bc-width]="2" [bc-value]="item.code"
-                                [bc-display-value]="true" [bc-font-size]="14">
-                            </ngx-barcode6>
-                            </div>
-                        </div>
-                    </div>
-
-                </p-card>
-            </div>
-        </p-tabPanel>
-
-    </p-tabView>
-
-</div>
-
-<div class="main-inner with-sidebar right">
+<div class="main-inner">
 
     <div class="p-field p-grid">
-        <div class="p-col-12 p-md-12">
+
+        <div class="p-col-12 p-md-4">
+            <p-card>
+
+            <p-tabView class="responsive-tab-view">
+
+                <p-tabPanel header="{{pageTitle}}">
+
+                    <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+
+                        <div class="p-field p-grid">
+                            <div class="p-col-12 p-md-12">
+
+                                <label>Maggazzino</label>
+                            </div>
+                            <div class="p-col-12 p-md-12">
+                                <p-dropdown [options]="warehouses" [required]="true" [showClear]="true"
+                                    placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedWarehouse"
+                                    formControlName="warehouse_id" optionLabel="title" optionValue="id">
+                                    <ng-template let-option pTemplate="item">
+                                        {{option.title}}
+                                    </ng-template>
+                                </p-dropdown>
+                            </div>
+                        </div>
+
+                        <div class="p-field p-grid">
+                            <div class="p-col-12 p-md-12">
+
+                                <label>Fornitore</label>
+                            </div>
+                            <div class="p-col-12 p-md-12">
+                                <p-dropdown [options]="suppliers" [required]="true" [showClear]="true"
+                                    placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedSupplier"
+                                    formControlName="supplier_id" optionLabel="company_name" optionValue="id">
+                                    <ng-template let-option pTemplate="item">
+                                        {{option.company_name}}
+                                    </ng-template>
+                                </p-dropdown>
+                            </div>
+                        </div>
+
+                        <div class="p-field p-grid">
+                            <div class="p-col-12 p-md-12">
+
+                                <label>Prodotto</label>
+                            </div>
+                            <div class="p-col-12 p-md-12">
+
+                                <p-autoComplete [dropdown]="true" placeholder="Cerca per Codice, titolo, Codice interno"
+                                    [style]="{ width: '100%' }" [suggestions]="filteredProductsVariations"
+                                    (completeMethod)="filterCountry($event)" field="id" (onSelect)="change($event)"
+                                    (onClear)="dataSelect = null" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]="dataSelect" [minLength]="1">
+                                    <ng-template let-productsVariation pTemplate="item">
+                                        <div class="p-grid">
+                                            <div class="p-col-9">
+                                                <strong>{{productsVariation.code}}</strong><br>
+                                                {{productsVariation.title}} -
+                                                <p class="truncate">{{productsVariation.description}}
+                                                </p>
+                                            </div>
+                                            <div class="p-col-3">
+                                                <div class="p-grid">
+                                                    <div class="p-col-12">
+                                                        <p-tag class="pull-right"
+                                                            [value]="productsVariation.price  | currency :'EUR':'symbol':'1.2-2'">
+                                                        </p-tag>
+                                                    </div>
+                                                    <div class="p-col-12 p-mt-2">
+                                                        <p class="pull-right">
+                                                            <strong>{{productsVariation.pieces}}</strong> pz
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </p-autoComplete>
+
+                                <input type="hidden" pInputText [(ngModel)]="dataSelectTrue"
+                                    formControlName="product_id">
+                            </div>
+                        </div>
+
+                        <div class="p-field p-grid">
+                            <div class="p-col-12 p-md-6">
+
+                                <label>Pezzi <span class="required">*</span></label>
+
+                                <input type="text" pInputText [style]="{width:'100%'}" formControlName="pieces" />
+
+                            </div>
+
+                            <div class="p-col-12 p-md-6">
+
+                                <label>Colli <span class="required">*</span></label>
+
+                                <input type="text" pInputText [style]="{width:'100%'}" formControlName="boxes" />
+
+                            </div>
+                        </div>
+
+                        <div class="form-group form-row">
+                            <label class="col-md-3"></label>
+                            <div class="col-md-9">
+                                <input type="hidden" formControlName="id">
+                                <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
+                            </div>
+                        </div>
+
+                        <div class="p-field p-grid">
+
+                            <div class="p-col-12 p-md-12">
+
+                                <button pButton pRipple icon="pi pi-save" label="aggiungi prodotto"
+                                    class="p-button p-button-success btn-block" [disabled]="!blogForm.valid"></button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <div *ngIf="dataSelectTrue">
+                        <h4>Prodotto selezionato</h4>
+
+                        <p-card>
+                            <div *ngFor="let item of filteredProductsVariations">
+                                <div class="p-grid">
+                                    <div class="p-col-4">
+                                        <img [src]="item.image" class="img-responsive">
+
+                                    </div>
+                                    <div class="p-col-8">
+
+                                        <strong>{{item.title}}</strong><br>
+                                        <p class="detail">Codice: {{item.code}}</p>
+                                        <p class="detail">Codice Interno: {{item.code_int}}</p>
+                                    </div>
+                                </div>
+                                <div class="p-grid">
+
+                                    <div class="p-col-12">
+                                        <hr class="small">
+                                        <ngx-barcode6 [bc-format]="EAN-13" [bc-height]="32" [bc-width]="2"
+                                            [bc-value]="item.code" [bc-display-value]="true" [bc-font-size]="14">
+                                        </ngx-barcode6>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </p-card>
+                    </div>
+                </p-tabPanel>
+
+            </p-tabView>
+            </p-card>
+        </div>
+
+        
+        <div class="p-col-12 p-md-8">
 
             <div class="p-fluid">
                 <div class="p-field p-grid">
@@ -249,8 +254,9 @@
                                 *ngFor=" let warehouseCheckin of warehouseCheckins  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index">
                             </div>
 
-                            <p-table #dt [columns]="cols" [responsive]="false" [resizableColumns]="true" [autoLayout]="true" [value]="warehouseCheckins"
-                                [paginator]="false" [rows]="10" [totalRecords]="totalRecords">
+                            <p-table #dt [columns]="cols" [responsive]="false" [resizableColumns]="true"
+                                [autoLayout]="true" [value]="warehouseCheckins" [paginator]="false" [rows]="10"
+                                [totalRecords]="totalRecords">
 
                                 <ng-template pTemplate="header" let-columns>
                                     <tr>
@@ -330,6 +336,10 @@
                 </div>
             </div>
         </div>
+
+        
+    </div>
+</div>
 
         <p-sidebar [(visible)]="productDialogAdd" position="right" [style]="{width:'50vw'}">
             <ng-template pTemplate="content">
