@@ -75,6 +75,8 @@ import { TypeFormComponent } from './settings/type/type-form/type-form.component
 import { SumPipeModule } from './pipe/sum.pipe';
 import { ShortNumberPipe } from './pipe/short-number.pipe';
 import {SplitButtonModule} from 'primeng/splitbutton';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import { CompanyFormComponent } from './settings/company/company-form/company-form.component';
 import { ProductsFormComponent } from './products/products-form/products-form.component';
@@ -136,6 +138,9 @@ import {TreeDragDropService} from 'primeng/api';
 import {TabMenuModule} from 'primeng/tabmenu';
 import { TopNavComponent } from '../top-nav/top-nav.component';
 
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient);
+}
 
 
 @NgModule({
@@ -277,6 +282,13 @@ import { TopNavComponent } from '../top-nav/top-nav.component';
     AutoCompleteModule,
     SidebarModule,
     NgBusyModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     NgBusyModule.forRoot(new BusyConfig({
       message: 'Loading ...',
       backdrop: true

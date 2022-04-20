@@ -10,6 +10,15 @@
   "pageTitle": "Cancel",
   "edit.company": "Edit Company Informations",
 
+  "active": "Active",
+  "not-active": "Not Active",
+  "go-back": "Back",
+
+
+  "billed": "Billed",
+  "not-billed": "Open",
+
+
   "form.appointment.type": "Type",
   "form.appointment.date": "Date",
   "form.appointment.featured": "Featured",

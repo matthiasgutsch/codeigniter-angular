@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 export class AppComponent {
   flag = true;
 
-  constructor(public route: Router, private spinner: NgxSpinnerService) {
+  constructor(public route: Router, private spinner: NgxSpinnerService, public translate: TranslateService) {
 
 
    }

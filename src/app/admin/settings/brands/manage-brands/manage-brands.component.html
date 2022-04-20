@@ -43,10 +43,10 @@
                 </div>
                 <div class="p-col-12 p-md-8">
                     <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/settings/brands/create']"
-                        label="Aggiungi" class="p-button p-button-primary p-mr-2 pull-right"></button>
+                        label=" {{ 'add' | translate }}" class="p-button p-button-primary p-mr-2 pull-right"></button>
                         <button type="text" pButton label="Filter" icon="pi pi-filter"
                         class="p-button p-button-options p-mr-2 pull-right"  (click)="displayFilter = true"></button>
-                        <button type="button" pButton pRipple label="Torna indietro" class="p-button p-button-back pull-right  p-mr-2"
+                        <button type="button" pButton pRipple label=" {{ 'go-back' | translate }}" class="p-button p-button-back pull-right  p-mr-2"
                         [routerLink]="['/admin/settings/']"></button>
 
                        <!-- <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta"

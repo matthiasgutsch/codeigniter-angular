@@ -19,7 +19,7 @@
                     <div *ngIf="!pages && id" >           
                         <button pButton pRipple icon="pi pi-save" label="Crea Fattura / Ricevuta"  (click)="createBilling()" class="p-button p-button-primary pull-right p-mr-2"></button>
                      </div> 
-                     <button pButton pRipple icon="pi pi-save" label="salva" class="p-button pull-right p-button-success p-mr-2" [disabled]="!blogForm.valid"></button>
+                     <button pButton pRipple icon="pi pi-save" label=" {{ 'save' | translate }}" class="p-button pull-right p-button-success p-mr-2" [disabled]="!blogForm.valid"></button>
 
                 </div>
             </div>

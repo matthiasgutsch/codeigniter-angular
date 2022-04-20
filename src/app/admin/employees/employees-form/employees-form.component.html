@@ -16,7 +16,7 @@
 
     
 
-                        <button pButton pRipple label="Salva" class="p-button p-button-success p-mr-2 pull-right"
+                        <button pButton pRipple label=" {{ 'save' | translate }}" class="p-button p-button-success p-mr-2 pull-right"
                         [disabled]="!blogForm.valid"></button>
 
                         <button type="button" pButton pRipple label="Timesheets" icon="pi pi-clock" class="p-button p-button-primary pull-right  p-mr-2"
@@ -27,7 +27,7 @@
                         class="p-button p-button-warning pull-right  p-mr-2"
                         [routerLink]="['/admin/employee/task/', id]"></button>
 
-                        <button type="button" pButton pRipple label="Torna indietro"
+                        <button type="button" pButton pRipple  label=" {{ 'go-back' | translate }}" 
                         class="p-button p-button-back pull-right  p-mr-2"
                         [routerLink]="['/admin/employees/']"></button>
                     </div>

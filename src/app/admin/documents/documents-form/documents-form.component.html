@@ -34,7 +34,7 @@
                                     class="p-button p-button-success  pull-right p-mr-2"></button>
 
                                     <button pButton pRipple icon="pi pi-chevron-left" [routerLink]="['/admin/orders/']"
-                                    label="Torna indietro" class="p-button p-button-back pull-right p-mr-2"></button>
+                                    label=" {{ 'go-back' | translate }}" class="p-button p-button-back pull-right p-mr-2"></button>
     
                     </div>
                 </div>
@@ -203,7 +203,7 @@
                                 </div>
                                 <div class="p-col-12 p-md-4">
 
-                                    <button pButton pRipple icon="pi pi-save" type="button" label="Aggiungi" *ngIf="!editForm"  
+                                    <button pButton pRipple icon="pi pi-save" type="button" label=" {{ 'add' | translate }}" *ngIf="!editForm"  
                                         class="p-button pull-right p-button-success" (click)="addQuantity()"></button>
                                 </div>
                             </div>

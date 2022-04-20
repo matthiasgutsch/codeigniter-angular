@@ -48,8 +48,8 @@
                 </div>
                 <div class="p-col-6 p-md-6">
     
-                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']" label="Aggiungi" class="p-button p-button-primary -mr-2  pull-right"></button>
-                    <!-- <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta" (click)="exportPdf()" class="p-button-options p-mr-2 pull-right"  tooltipPosition="bottom"></button> -->
+                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']" label=" {{ 'add' | translate }}" class="p-button p-button-primary -mr-2  pull-right"></button>
+                    <!-- <button type="button" pButton pRipple icon="pi pi-file-pdf" labe l="Esporta" (click)="exportPdf()" class="p-button-options p-mr-2 pull-right"  tooltipPosition="bottom"></button> -->
                     <button type="text" pButton label="Filter"  icon="pi pi-filter" class="p-button p-button-options p-mr-2 pull-right" (click)="filterSidebar = true"></button>
       
                 </div>
@@ -108,8 +108,8 @@
                     <ng-template pTemplate="body" let-rowData let-columns="columns">
                         <tr>
                             <td>
-                              <p-tag severity="success" *ngIf="rowData['is_active'] === '1'">Attivo</p-tag>  
-                              <p-tag severity="danger" *ngIf="rowData['is_active'] === '0'">Non Attivo</p-tag>  
+                              <p-tag severity="success" *ngIf="rowData['is_active'] === '1'">{{ 'active' | translate }}</p-tag>  
+                              <p-tag severity="danger" *ngIf="rowData['is_active'] === '0'">{{ 'not-active' | translate }}</p-tag>  
 
                             </td>
                             <td>

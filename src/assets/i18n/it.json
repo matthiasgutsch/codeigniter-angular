@@ -10,6 +10,16 @@
   "cancel": "Cancella",
   "edit.company": "Modifica Dati aziendali",
 
+  "active": "Attivo",
+  "not-active": "Non Attivo",
+  "go-back": "Torna indietro",
+
+
+
+  "billed": "Pagata",
+  "not-billed": "Aperta",
+
+
 
   "add.client": "Aggiungi Cliente",
   "edit.client": "Modifica Cliente",

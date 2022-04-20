@@ -44,11 +44,11 @@
                     <h3>{{pageTitle}}</h3>
                 </div>
                 <div class="p-col-6 p-md-6">
-                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/settings/appointment-type/create']" label="Aggiungi" class="p-button p-button-primary p-mr-2 pull-right"></button> 
+                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/settings/appointment-type/create']" label=" {{ 'add' | translate }}" class="p-button p-button-primary p-mr-2 pull-right"></button> 
                     <button type="text" pButton label="Filter" icon="pi pi-filter"
                     class="p-button p-button-options p-mr-2 pull-right"  (click)="displayFilter = true"></button>
 
-                    <button type="button" pButton pRipple label="Torna indietro" class="p-button p-button-back pull-right  p-mr-2"
+                    <button type="button" pButton pRipple label=" {{ 'go-back' | translate }}" class="p-button p-button-back pull-right  p-mr-2"
                     [routerLink]="['/admin/settings/']"></button>
                 </div>
             </div>

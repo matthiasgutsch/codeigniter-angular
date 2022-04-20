@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { formatDate } from '@angular/common';
 import { Subject } from 'rxjs';
 import { PrimeNGConfig } from 'primeng/api';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-admin',
@@ -38,13 +39,20 @@ export class AdminComponent implements OnInit {
     private supportsService: SupportsService,
     private authService: AuthService,
     public primengConfig: PrimeNGConfig,
+    public translate: TranslateService,
     private zone: NgZone
     ) { 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     //console.log(this.currentUser);
     this.primengConfig.setTranslation(LANG_IT);
 
+    translate.addLangs(['en', 'it']);
+    translate.setDefaultLang('it');
 
+    const browserLang = translate.getBrowserLang();
+    translate.use(browserLang.match(/en|it/) ? browserLang : 'it');
+
+    
     this.pages = PAGES;
 
     localStorage.setItem(

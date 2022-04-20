@@ -25,7 +25,7 @@
                     <button type="button" pButton pRipple label="Timesheets" icon="pi pi-clone" class="p-button p-button-primary pull-right  p-mr-2"
                     [routerLink]="['/admin/projects/timesheets/', project.id]"></button>
     
-                    <button type="button" pButton pRipple label="Torna indietro" class="p-button p-button-back pull-right  p-mr-2"
+                    <button type="button" pButton pRipple label=" {{ 'go-back' | translate }}" class="p-button p-button-back pull-right  p-mr-2"
                     [routerLink]="['/admin/projects/']"></button>
     
           
@@ -200,7 +200,7 @@
             </div>
 
 
-            <button pButton pRipple icon="pi pi-save" label="salva" class="p-button pull-right p-button-success p-mr-2"
+            <button pButton pRipple icon="pi pi-save" label=" {{ 'save' | translate }}" class="p-button pull-right p-button-success p-mr-2"
                 [disabled]="!blogForm.valid"></button>
 
             <div class="form-group form-row">
