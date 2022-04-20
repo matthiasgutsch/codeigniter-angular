@@ -177,7 +177,7 @@
                             <div class="p-col-12 p-md-12">
         
                                 <button pButton pRipple icon="pi pi-save" label="picking prodotto"
-                                    class="p-button p-button-success btn-block" [disabled]="!blogForm.valid"></button>
+                                    class="p-button p-button-primary btn-block" [disabled]="!blogForm.valid"></button>
                             </div>
                         </div>
         
@@ -186,7 +186,6 @@
                     <div *ngIf="dataSelectTrue">
                         <h4>Prodotto selezionato</h4>
         
-                        <p-card>
                             <div *ngFor="let item of filteredProductsVariations">
                                 <div class="p-grid">
                                     <div class="p-col-4">
@@ -211,7 +210,6 @@
                                 </div>
                             </div>
         
-                        </p-card>
                     </div>
                 </p-tabPanel>
         
