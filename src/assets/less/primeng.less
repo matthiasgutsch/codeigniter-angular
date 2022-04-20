@@ -322,14 +322,14 @@
 
 .p-button.p-button-success, .p-buttonset.p-button-success > .p-button, .p-splitbutton.p-button-success > .p-button {
   color: @white;
-  background: @green;
+  background: @ness_color_2;
   border-radius: @radius;
-  border: 1px solid @green !important;
+  border: 1px solid @ness_color_2 !important;
   &:hover {
-    color: @ness_color_2;
-    background: darken(@green, 20%) !important;
+    color: @ness_color_3 !important;
+    background: @white !important;
     border-radius: @radius;
-    border: 1px solid @green !important;
+    border: 1px solid @ness_color_3 !important;
   }
 }
 
@@ -455,13 +455,30 @@
   border-radius: 0px;
 }
 
+.p-inputtext:enabled:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: none !important;
+  border-color: @ness_color_3;
+}
+
+.p-inputtext:enabled:hover {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: none !important;
+  border-color: @ness_color_3;
+}
+.p-dropdown:not(.p-disabled):hover {
+  border-color: @ness_color_3;
+}
+
 
 /* checkbox */
 .p-tag {
   height: 24px;
   background-color: @white;
-  border: 1px solid @ness_color_2;
-  color: @ness_color_2;
+  border: 1px solid @ness_color_3;
+  color: @ness_color_3;
   font-size: 12px;
 }
 
