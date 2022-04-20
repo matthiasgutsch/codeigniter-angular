@@ -108,8 +108,14 @@
 
 <div id="main" [ngClass]=" flag ? 'open' : 'close'">  
   <div class="navbar-top">
+    <div class="p-grid">
+      <div class="p-col-6">
+        <div class="search-wrapper">
+    <input type="text" pInputText placeholder="Cerca" formControlName="surname" />
+  </div>
+</div>
+  <div class="p-col-6">
 
-  
     <div class="user-menu"><ul>
       
       
@@ -124,9 +130,9 @@
       </li>
   
     </ul></div>
-  
+  </div>
      
-  
+  </div>
   </div>
   
           <router-outlet></router-outlet>
