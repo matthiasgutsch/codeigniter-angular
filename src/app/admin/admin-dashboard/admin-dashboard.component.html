@@ -228,8 +228,10 @@
                         <div class="p-grid">
 
                             <div class="p-col-12 p-md-12">
+                                <p-tag value="{{project.price | currency :'EUR':'symbol':'1.2-2'}}">
 
-                                <h4>{{project.title}}</h4>
+                                </p-tag>
+                                <h4 class="p-mt-2">{{project.title}}</h4>
                                 <div class="clearifix"></div>
                                 <p class="detail">
                                     <i class="pi pi-calendar"></i> {{project.date_from}} al {{project.date_to}}
