@@ -158,7 +158,7 @@ p a {
   position: sticky;
   top: 0px;
   line-height: 60px;
-  height: 70px;
+  height: 80px;
   z-index: 100;
   width: 100%;
   h1 {
@@ -221,7 +221,7 @@ p a {
   background-repeat: no-repeat;
   background-size: cover;
   .img-banner {
-    width: 200px;
+    width: 210px;
   }
   h3 {
     margin: 0px;
@@ -234,15 +234,72 @@ p a {
 
 .sidebar {
   height: 100%;
-  width: 70px;
+  width: 80px;
   position: fixed;
-  z-index: 1;
+  z-index: 1001;
   top: 0;
   left: 0;
-  background: @ness_color_2;
+  background: @white;
   overflow-x: hidden;
   transition: 0.1s;
   padding-top: 0px;
+  border-right: 1px solid #dee2e6;
+
+  .openbtn {
+    font-size: 22px;
+    cursor: pointer;
+    background-color: @white;
+    color: @ness_color_3;
+    width: 40px;
+    height: 40px;
+    border: none;
+    text-align: center;
+    line-height: 60px;
+    float: left;
+    margin-left: 20px;
+    border-right: 0px solid #ccc;
+    i {
+      color: @ness_color_2;
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+
+  .logo-wrapper {
+    float: left;
+    margin-left: 0px;
+    top: 3px;
+    width: 130px;
+    position: relative;
+    height: 60px;
+    padding-right: 0px;
+    border-right: 0px solid #dee2e6;
+    font-size: 26px;
+    font-weight: bold;
+    margin-left: 10px;
+    img {
+      height: 30px;
+      line-height: 60px;
+      position: relative;
+      top: 15px;
+    }
+    .color-dot {
+      color: @white;
+      text-transform: uppercase;
+      font-size: 10px;
+      background-color: @ness_color_3;
+      padding: 3px;
+      border-radius: 4px;
+      position: relative;
+      padding-left: 5px;
+      padding-right: 5px;
+      top: -3px;
+      margin-left: 3px;
+    }
+  }
+
+
   .user-menu {
     position: absolute;
     list-style-type: none;
@@ -262,7 +319,7 @@ p a {
       margin-bottom: 10px;
       padding: 0px;
       line-height: 40px;
-      color: @white;
+      color: @ness_color_2;
       text-align: center;
       i {
         margin-right: 2px;
@@ -283,7 +340,7 @@ p a {
     display: inline-block;
     margin: 0px;
     padding-top: 80px;
-    padding: 75px 15px 0px 15px;
+    padding: 15px 15px 0px 15px;
     li {
       list-style-type: none;
       float: left;
@@ -306,7 +363,7 @@ p a {
       a {
         text-decoration: none;
         font-size: 15px;
-        color: @white;
+        color: @ness_color_2;
         display: block;
         text-align: center;
         transition: 0.3s;
@@ -319,7 +376,7 @@ p a {
         &:hover {
           background-color: transparent;
           border-radius: @radius;
-          color: @white;
+          color: @ness_color_3;
           height: 46px;
           line-height: 46px;
         }
@@ -334,9 +391,20 @@ p a {
     }
   }
   &.open {
-    width: 70px;
+    width: 80px;
+
+    .logo-wrapper {
+      display: none !important;
+      visibility: hidden !important;
+    }
+
+  
     ul {
       li {
+
+        i {
+          float: none;
+        }
         a {
           span {
             display: none !important;
@@ -349,9 +417,11 @@ p a {
         }
       }
     }
+
+    
   }
   &.close {
-    width: 200px;
+    width: 210px;
     ul {
       li {
         a {
@@ -636,10 +706,43 @@ ul.nav-menu-mobile {
 
 #main {
   transition: margin-left 0.1s;
-  margin-left: 70px;
+  margin-left: 80px;
   padding: 0px;
   padding-top: 60px;
   margin-right: 0px;
+
+
+
+.navbar-top {
+  height: 60px;
+  background-color: @white;
+  position: fixed;
+  z-index: 1000;
+  top: 0px;
+  border-bottom: 1px solid #dee2e6;
+  width: 100%;
+  
+  .user-menu {
+    list-style: none;
+    float: right;
+    margin-right: 40px;
+    margin-top: 5px;
+    li {
+      list-style-type: none;
+      font-size: 16px;
+      float: left;
+      margin-left: 15px;
+      i {
+        color: fade(@ness_color_2, 40%);
+        margin-right: 5px;
+      }
+      .support-tag {
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
 
   .main-inner {
     padding: 0px 20px 30px 20px;
@@ -653,17 +756,27 @@ ul.nav-menu-mobile {
     }
   }
   &.open {
-    margin-left: 200px;
+    margin-left: 210px;
     .sidebar-inside.left {
-      left: 200px;
+      left: 210px;
       border-right: 1px solid #dee2e6;
     }
+
+    .navbar-top {
+      width: calc(100% - 210px);
+    }
+
+    
   }
   &.close {
-    margin-left: 70px;
+    margin-left: 80px;
     .sidebar-inside.left {
-      left: 70px;
+      left: 80px;
       border-right: 1px solid #dee2e6;
+    }
+
+    .navbar-top {
+      width: calc(100% - 80px);
     }
   }
 }
@@ -687,82 +800,6 @@ hr.full {
   }
 }
 
-.navbar-top {
-  height: 60px;
-  background-color: @white;
-  position: fixed;
-  width: 100%;
-  z-index: 1000;
-  border-bottom: 1px solid #dee2e6;
-  .openbtn {
-    font-size: 22px;
-    cursor: pointer;
-    background-color: @white;
-    color: @ness_color_3;
-    width: 70px;
-    height: 60px;
-    border: none;
-    text-align: center;
-    line-height: 60px;
-    float: left;
-    border-right: 0px solid #ccc;
-    i {
-      color: @ness_color_2;
-      width: 40px;
-      height: 40px;
-    }
-  }
-  .logo-wrapper {
-    float: left;
-    margin-left: 0px;
-    top: 0px;
-    width: 130px;
-    position: relative;
-    height: 60px;
-    padding-right: 0px;
-    border-right: 0px solid #dee2e6;
-    font-size: 26px;
-    font-weight: bold;
-    img {
-      height: 30px;
-      line-height: 60px;
-      position: relative;
-      top: 15px;
-    }
-    .color-dot {
-      color: @white;
-      text-transform: uppercase;
-      font-size: 10px;
-      background-color: @ness_color_3;
-      padding: 3px;
-      border-radius: 4px;
-      position: relative;
-      padding-left: 5px;
-      padding-right: 5px;
-      top: -3px;
-      margin-left: 3px;
-    }
-  }
-  .user-menu {
-    list-style: none;
-    float: right;
-    margin-right: 40px;
-    margin-top: 5px;
-    li {
-      list-style-type: none;
-      font-size: 16px;
-      float: left;
-      margin-left: 15px;
-      i {
-        color: fade(@ness_color_2, 40%);
-        margin-right: 5px;
-      }
-      .support-tag {
-        margin-right: 5px;
-      }
-    }
-  }
-}
 
 .button_outer {
   background: fade(@ness_color_2, 10%);
@@ -1073,7 +1110,7 @@ hr.full {
 
 .sidebar-inner {
   height: calc(100% - 61px);
-  width: 70px;
+  width: 80px;
   position: absolute;
   z-index: 1;
   top: 61px;
@@ -1106,7 +1143,7 @@ hr.full {
     border-left: 1px solid #dee2e6;
   }
   &.left {
-    left: 200px;
+    left: 210px;
     border-right: 1px solid #dee2e6;
   }
   h3 {
@@ -1203,7 +1240,7 @@ hr.full {
     }
   }
   &.open {
-    width: 200px;
+    width: 210px;
     ul {
       li {
         a {

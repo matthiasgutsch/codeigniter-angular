@@ -136,6 +136,27 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
 
+  public getAllListCalendar(pars: any): Observable<T[]> {
+    let params = new HttpParams();
+    const userId = this.currentUser.user_id;
+    params = this.getParams(params, pars);
+    return this._http
+      .get<HttpResponse<T[]>>(this._base + '/calendar/' + userId, {
+        observe: 'response',
+        params,
+      })
+      .pipe(
+        map((res) => {
+          this.size =
+            res.headers.get('x-total-count') != null ? +res.headers.get('x-total-count') : 0;
+          const ts: any = res.body;
+          return ts;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+
   public getAllListDocuments(pars: any, id: ID): Observable<T[]> {
     let params = new HttpParams();
     const userId = this.currentUser.user_id;
@@ -282,12 +303,6 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
 
-
-  getAllListCalendar() {
-    return this._http.get<T>(this._base + 'appointments/calendar/').pipe(
-      catchError(this.handleError)
-    );
-  }
 
   search_client(name: string) {
     return this._http.get<T>(this._base + '/search/?name=' + name).pipe(

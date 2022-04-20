@@ -19,11 +19,7 @@ import { DateValidPipe } from "./pipe/date-valid.pipe";
 import { JoinPipe } from "./pipe/join.pipe";
 import { LimitPipe } from "./pipe/limit.pipe";
 import { KeysPipe } from "./pipe/key.pipe";
-
-
-
 import {InputTextareaModule} from 'primeng/inputtextarea';
-
 import { ManagePagesComponent } from './manage-pages/manage-pages.component';
 import { TableModule } from 'primeng/table';
 import { EditorModule } from 'primeng/editor';

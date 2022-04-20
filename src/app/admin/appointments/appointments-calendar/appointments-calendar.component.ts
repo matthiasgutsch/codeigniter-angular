@@ -156,25 +156,18 @@ export class AppointmentsCalendarComponent implements OnInit {
 
     const userId = this.currentUser.user_id;
 
+    const params = this.getRequestParams(
+      this.nameFilter = '',
+      this.descriptionFilter = '',
+      this.page = 1,
+      this.pageSize = 200
+    );
+    this.appointmentsService.getAllListCalendar(params).subscribe((data) => {      
+      this.projects = data;
+      this.count = this.projectsService.size;
+    
 
 
-    this.appointmentsService.getAllListbyUser().subscribe(data => {
-      this.spinner.show();
-
-      this.getClientsCount();
-      this.getProductsCount();
-      this.getBillingsCountTotal();
-      this.getBillingsCountTotalNotPaid();
-      this.getLastWarehouseCheckins();
-      this.getBillingsCount();
-      this.getAppointmentsToday();
-      this.getAppointmentsCount();
-      this.getWorks();
-      this.getProjects();
-      this.getChartsCount();
-      this.getChartsCountNone();
-      this.getSupports();
-      
       this.calendarOptions = {
         editable: true,
         eventLimit: false,
