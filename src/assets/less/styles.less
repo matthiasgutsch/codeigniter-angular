@@ -221,7 +221,7 @@ p a {
   background-repeat: no-repeat;
   background-size: cover;
   .img-banner {
-    width: 210px;
+    width: 260px;
   }
   h3 {
     margin: 0px;
@@ -229,6 +229,40 @@ p a {
   }
   h1 {
     color: @white;
+  }
+}
+
+.tab-menu {
+  padding: 10px 20px 0px 20px;
+  .p-tabmenu {
+    overflow-y: none !important;
+    overflow: none !important;
+    height: 50px !important; 
+  }
+
+  .p-tabmenu .p-tabmenu-nav {
+    background-color: transparent !important;
+    border: 0px !important;
+    border-bottom-width: 0px !important;
+  }
+
+  p-tabmenu .p-tabmenu-nav .p-tabmenuitem {
+    background-color: transparent !important;
+    border-bottom-width: 0px !important;
+
+  }
+
+  .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link {
+    background-color: transparent !important;
+    border-bottom-width: 0px !important;
+
+  }
+
+  
+
+  .p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link {
+    border-bottom-width: 2px !important;
+
   }
 }
 
@@ -243,25 +277,24 @@ p a {
   overflow-x: hidden;
   transition: 0.1s;
   padding-top: 0px;
-  border-right: 1px solid #dee2e6;
+  border-right: 0px solid #dee2e6;
 
   .openbtn {
     font-size: 22px;
     cursor: pointer;
     background-color: @white;
-    color: @ness_color_3;
-    width: 40px;
-    height: 40px;
+    color: @ness_color_2;
+    width: 80px;
+    height: 70px;
     border: none;
     text-align: center;
-    line-height: 60px;
+    line-height: 70px;
     float: left;
-    margin-left: 20px;
+    margin-left: 0px;
     border-right: 0px solid #ccc;
     i {
       color: @ness_color_2;
-      width: 40px;
-      height: 40px;
+  
     }
   }
 
@@ -269,7 +302,7 @@ p a {
   .logo-wrapper {
     float: left;
     margin-left: 0px;
-    top: 3px;
+    top: 6px;
     width: 130px;
     position: relative;
     height: 60px;
@@ -277,7 +310,7 @@ p a {
     border-right: 0px solid #dee2e6;
     font-size: 26px;
     font-weight: bold;
-    margin-left: 10px;
+    margin-left: 0px;
     img {
       height: 30px;
       line-height: 60px;
@@ -340,7 +373,7 @@ p a {
     display: inline-block;
     margin: 0px;
     padding-top: 80px;
-    padding: 15px 15px 0px 15px;
+    padding: 15px 25px 0px 25px;
     li {
       list-style-type: none;
       float: left;
@@ -398,7 +431,16 @@ p a {
       visibility: hidden !important;
     }
 
-  
+    ul.nav-menu {
+      list-style: none;
+      padding: 0px;
+      display: inline-block;
+      margin: 0px;
+      padding-top: 90px;
+      padding: 15px 15px 0px 15px !important;
+  }
+
+
     ul {
       li {
 
@@ -421,7 +463,7 @@ p a {
     
   }
   &.close {
-    width: 210px;
+    width: 260px;
     ul {
       li {
         a {
@@ -596,12 +638,15 @@ ul.nav-menu-mobile {
     border: 0px;
     box-shadow: none;
     border-radius: @radius;
+    box-shadow: none !important;
   }
   .p-card-body {
-    background-color: @background;
+    background-color: @white;
     border: 0px;
     border-radius: @radius;
     border: 1px solid #dee2e6;
+    box-shadow: none !important;
+
   }
   .icon {
     background-color: @ness_color_3;
@@ -629,11 +674,9 @@ ul.nav-menu-mobile {
     border: 0px;
     border-radius: @radius;
     border: 1px solid fade(@ness_color_2, 20%);
-    border-left: 6px solid fade(@ness_color_2, 20%);
     transition: .2s;
     &:hover {
       border: 1px solid @ness_color_3;
-      border-left: 6px solid @ness_color_3;
     }
   }
   .icon {
@@ -708,25 +751,25 @@ ul.nav-menu-mobile {
   transition: margin-left 0.1s;
   margin-left: 80px;
   padding: 0px;
-  padding-top: 60px;
+  padding-top: 70px;
   margin-right: 0px;
 
 
 
 .navbar-top {
-  height: 60px;
+  height: 70px;
   background-color: @white;
   position: fixed;
   z-index: 1000;
   top: 0px;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 0px solid #dee2e6;
   width: 100%;
   
   .user-menu {
     list-style: none;
     float: right;
     margin-right: 20px;
-    margin-top: 5px;
+    margin-top: 10px;
     li {
       list-style-type: none;
       font-size: 16px;
@@ -756,14 +799,14 @@ ul.nav-menu-mobile {
     }
   }
   &.open {
-    margin-left: 210px;
+    margin-left: 260px;
     .sidebar-inside.left {
-      left: 210px;
+      left: 260px;
       border-right: 1px solid #dee2e6;
     }
 
     .navbar-top {
-      width: calc(100% - 210px);
+      width: calc(100% - 260px);
     }
 
     
@@ -782,7 +825,7 @@ ul.nav-menu-mobile {
 }
 
 .search-wrapper {
-  padding: 10px 20px;
+  padding: 15px 20px;
 
   .p-inputtext {
     background-color: @background;
@@ -970,9 +1013,9 @@ hr.full {
 .p-card {
   background: #ffffff;
   color: @text-color;
-  box-shadow: none !important;
+  box-shadow: @shadow !important;
   border-radius: @radius;
-  border: 1px solid #dee2e6;
+  border: 0px solid #dee2e6;
   margin-bottom: 20px;
   .p-card-body {
     padding: 15px;
@@ -999,12 +1042,10 @@ hr.full {
     color: @text-color;
     border-radius: @radius;
     border: 0px solid #dee2e6;
-    border-left: 8px solid fade(@ness_color_3, 90%);
     margin-bottom: 20px;
     background-color: @white;
     color: @ness_color_2;
     border: 0px solid fade(@ness_color_2, 20%);
-    border-left: 6px solid fade(@ness_color_2, 20%);
     .p-card-body {
       padding: 25px 25px;
       .p-card-content {
@@ -1154,7 +1195,7 @@ hr.full {
     border-left: 1px solid #dee2e6;
   }
   &.left {
-    left: 210px;
+    left: 260px;
     border-right: 1px solid #dee2e6;
   }
   h3 {
@@ -1251,7 +1292,7 @@ hr.full {
     }
   }
   &.open {
-    width: 210px;
+    width: 260px;
     ul {
       li {
         a {
