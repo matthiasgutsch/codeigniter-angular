@@ -2,7 +2,7 @@
 
 <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
 
-    <div class="top-main-wrapper with-sidebar right">
+    <div class="top-main-wrapper">
         <div class="dash-header">
             <div class="dash-title">
 
@@ -22,14 +22,15 @@
 
                         <button pButton pRipple *ngIf="numberAppointments > 0"
                             [routerLink]="['/admin/appointments/edit', numberAppointments]"
-                            label="Visualizza Appuntamento"
+                            label="Visualizza Appuntamento" icon="pi pi-eye"
                             class="p-button p-button-options  pull-right p-mr-2"></button>
 
-                        <button pButton pRipple *ngIf="numberOrders > 0"
+                        <button pButton pRipple *ngIf="numberOrders > 0" icon="pi pi-eye"
                             [routerLink]="['/admin/orders/edit', numberOrders]" label="Visualizza Ordine"
                             class="p-button p-button-options  pull-right p-mr-2"></button>
 
                         <button pButton pRipple type="button" (click)="editFormItems()" label="Modifica"
+                        icon="pi pi-pencil"
                             class="p-button p-button-primary  pull-right p-mr-2"></button>
 
                     </div>
@@ -41,114 +42,114 @@
     </div>
 
 
-    <div class="sidebar-inside right">
-
-
-        <p-tabView class="responsive-tab-view">
-
-            <p-tabPanel header="Informazioni">
-            <div class="blog-form">
-
-                <div class="p-fluid">
-                    <div class="p-field p-grid">
-
-                        <div class="p-col-12 p-md-12">
-
-                            <p-selectButton [options]="billingOptions" formControlName="title"
-                                optionLabel="label" optionValue="value"></p-selectButton>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="p-fluid">
-
-                    <div class="p-field p-grid">
-                        <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Numero Fattura<span
-                                class="required">*</span></label>
-                        <div class="p-col-12 p-md-12">
-
-                            <input type="text" pInputText formControlName="number"
-                                (keyup)="changedNumber($event)">
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="p-fluid">
-
-                    <div class="p-field p-grid">
-                        <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Data di Emissione<span
-                                class="required">*</span></label>
-                        <div class="p-col-12 p-md-12">
-
-                            <p-calendar (onBlur)="changeTime($event)" formControlName="date"
-                                dataType="string" [(ngModel)]="dateAppointments" dateFormat="yy-mm-dd"
-                                appendTo="body">
-                            </p-calendar>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="p-fluid">
-                    <div class="p-field p-grid">
-                        <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Cliente <span
-                                class="required">*</span></label>
-                        <div class="p-col-12 p-md-12">
-                            <p-dropdown [options]="clients" [virtualScroll]="true" filter="true"
-                                [required]="true" [showClear]="true" placeholder="Scegli"
-                                [style]="{ width: '100%' }" [(ngModel)]="categoryAppointments"
-                                formControlName="category_id" optionLabel="username" optionValue="id">
-                                <ng-template let-option pTemplate="item">
-
-                                    <strong>{{option.name}} {{option.surname}}</strong><br>
-                                    <span>{{option.address}} - {{option.zip}} {{option.city}}</span>
-
-                                </ng-template>
-
-                            </p-dropdown>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="p-fluid">
-                    <div class="p-field p-grid">
-                        <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Nota <span
-                                class="required">*</span></label>
-                        <div class="p-col-12 p-md-12">
-
-                            <textarea pInputTextarea formControlName="description"
-                                (keyup)="changed($event)"></textarea>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group form-row">
-                    <label class="col-md-3"></label>
-                    <div class="col-md-9">
-                        <input type="hidden" formControlName="id">
-                        <input type="hidden" value="{{idAppointments}}" *ngIf="idAppointments"
-                            formControlName="appointment_id">
-                        <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
-
-                    </div>
-                </div>
-
-            </div>
-            </p-tabPanel>
-        </p-tabView>
-
-    </div>
-    <div class="main-inner with-sidebar right">
+   
+    <div class="main-inner">
 
         <div class="p-fluid">
 
             <div class="p-field p-grid">
          
-                <div class="p-col-12 p-md-12">
+                <div class="p-col-12 p-md-4">
+
+             <p-card>
+                            <div class="blog-form">
+   
+                   <div class="p-fluid">
+                       <div class="p-field p-grid">
+   
+                           <div class="p-col-12 p-md-12">
+   
+                               <p-selectButton [options]="billingOptions" formControlName="title"
+                                   optionLabel="label" optionValue="value"></p-selectButton>
+   
+                           </div>
+                       </div>
+                   </div>
+   
+                   <div class="p-fluid">
+   
+                       <div class="p-field p-grid">
+                           <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Numero Fattura<span
+                                   class="required">*</span></label>
+                           <div class="p-col-12 p-md-12">
+   
+                               <input type="text" pInputText formControlName="number"
+                                   (keyup)="changedNumber($event)">
+   
+                           </div>
+                       </div>
+                   </div>
+   
+                   <div class="p-fluid">
+   
+                       <div class="p-field p-grid">
+                           <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Data di Emissione<span
+                                   class="required">*</span></label>
+                           <div class="p-col-12 p-md-12">
+   
+                               <p-calendar (onBlur)="changeTime($event)" formControlName="date"
+                                   dataType="string" [(ngModel)]="dateAppointments" dateFormat="yy-mm-dd"
+                                   appendTo="body">
+                               </p-calendar>
+   
+                           </div>
+                       </div>
+                   </div>
+   
+                   <div class="p-fluid">
+                       <div class="p-field p-grid">
+                           <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Cliente <span
+                                   class="required">*</span></label>
+                           <div class="p-col-12 p-md-12">
+                               <p-dropdown [options]="clients" [virtualScroll]="true" filter="true"
+                                   [required]="true" [showClear]="true" placeholder="Scegli"
+                                   [style]="{ width: '100%' }" [(ngModel)]="categoryAppointments"
+                                   formControlName="category_id" optionLabel="username" optionValue="id">
+                                   <ng-template let-option pTemplate="item">
+   
+                                       <strong>{{option.name}} {{option.surname}}</strong><br>
+                                       <span>{{option.address}} - {{option.zip}} {{option.city}}</span>
+   
+                                   </ng-template>
+   
+                               </p-dropdown>
+   
+                           </div>
+                       </div>
+                   </div>
+   
+                   <div class="p-fluid">
+                       <div class="p-field p-grid">
+                           <label class="p-col-12 p-mb-2 p-md-12 p-mb-md-0">Nota <span
+                                   class="required">*</span></label>
+                           <div class="p-col-12 p-md-12">
+   
+                               <textarea pInputTextarea formControlName="description"
+                                   (keyup)="changed($event)"></textarea>
+   
+                           </div>
+                       </div>
+                   </div>
+   
+                   <div class="form-group form-row">
+                       <label class="col-md-3"></label>
+                       <div class="col-md-9">
+                           <input type="hidden" formControlName="id">
+                           <input type="hidden" value="{{idAppointments}}" *ngIf="idAppointments"
+                               formControlName="appointment_id">
+                           <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
+   
+                       </div>
+                   </div>
+   
+               </div>
+      
+            </p-card>
+   
+               </div>
+
+
+                <div class="p-col-12 p-md-8">
 
                     <p-card class="blu-box">
                         <div class="p-grid">
@@ -352,8 +353,9 @@
                     </p-card>
 
                 </div>
-            </div>
 
+             
+            </div>
         </div>
     </div>
 </form>
