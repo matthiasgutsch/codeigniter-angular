@@ -15,6 +15,7 @@ import {TranslateService} from '@ngx-translate/core';
 export class AdminComponent implements OnInit {
 
   currentUser: any ;
+  currentLang: string;
   submitted = false;
   returnUrl: string;
   error: {};
@@ -43,15 +44,16 @@ export class AdminComponent implements OnInit {
     private zone: NgZone
     ) { 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    this.currentLang = this.currentUser.lang;
     //console.log(this.currentUser);
     this.primengConfig.setTranslation(LANG_IT);
 
-    translate.addLangs(['en', 'it']);
-    translate.setDefaultLang('it');
+    translate.addLangs([this.currentLang]);
+    translate.setDefaultLang(this.currentLang);
 
     const browserLang = translate.getBrowserLang();
-    translate.use(browserLang.match(/en|it/) ? browserLang : 'it');
-
+    translate.use(browserLang.match(this.currentLang) ? browserLang : this.currentLang);
+    console.log(this.currentLang);
     
     this.pages = PAGES;
 
