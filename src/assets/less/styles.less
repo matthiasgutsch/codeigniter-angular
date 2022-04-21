@@ -291,6 +291,8 @@ p a {
     padding-right: 0px;
     border-right: 0px solid #dee2e6;
     font-size: 26px;
+    background: url(src/assets/images/logo.svg) no-repeat left center;
+    background-size: 80%;
     font-weight: bold;
     margin-left: 0px;
     img {
@@ -1566,11 +1568,19 @@ hr.full {
   .p-inputswitch {
     float: left;
     margin-bottom: 5px;
+    height: 24px;
+    width: 46px;
     &.p-inputswitch-checked {
       .p-inputswitch-slider {
         background: @ness_color_2 !important;
       }
     }
+  }
+  .p-inputswitch .p-inputswitch-slider:before {
+    height: 16px;
+    width: 16px;
+    left: 5px;
+    margin-top: -8px;
   }
 }
 
@@ -1702,8 +1712,11 @@ body.dark {
     }
 }
 
+  .logo-wrapper {
+    background: url(src/assets/images/logo-white.svg) no-repeat left center;
+    background-size: 80%;
 
-
+  }
 }
 
 @import "media.less";
