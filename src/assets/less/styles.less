@@ -1616,20 +1616,56 @@ body.dark {
   }
   .p-inputtext {
     color: @white;
-    background-color: fade(@white, 10%) !important;
+    background-color: darken(@ness_color_2, 5%);
+    border-color: fade(@white,20%);
   }
   .billings-list thead tr th, .p-datatable .p-datatable-thead > tr > th {
     background-color: darken(@ness_color_2, 5%);
     color: @white !important;
+  }
+  .p-dropdown {
+    background-color: darken(@ness_color_2, 5%);
+    color: @white !important;
+    border-color: fade(@white,20%);
 
   }
 
+  .blu-box .p-card .p-card-body .p-card-content label.legend {
+    color: fade(@white,20%);
+}
 
+
+  a {
+    color: @white;
+}
+
+  .color-switch .description {
+    color: fade(@white,20%);
+}
+
+  .count-item {
+    background-color: darken(@ness_color_2, 5%);
+    color: @white !important;
+}
+  .featured-card .p-card .p-card-body h4 {
+    color: @white !important;
+  }
+  .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+    background: transparent !important;
+    color: @white !important;
+  }
   .p-datatable .p-datatable-tbody > tr > td {
-    border-bottom: 1px solid darken(@ness_color_2,6%);
+    border-bottom: 1px solid darken(@ness_color_2, 6%);
   }
+  .p-multiselect {
+    background-color: darken(@ness_color_2, 5%);
+    border: 1px solid #ced4da;
+    border-color: fade(@white,20%);
 
-
+  }
+  .p-sidebar {
+    background-color: darken(@ness_color_2, 5%);
+  }
   .p-inputtext::placeholder {
     color: fade(@white, 50%);
   }
@@ -1643,10 +1679,31 @@ body.dark {
     border-color: @white;
     color: @white;
   }
-
   .color-switch .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
     background: fade(@white, 20%) !important;
+    
+  }
+
+  .helpdesk-card .p-card-body {
+    background-color: transparent !important;
+    border-color: fade(@white,50%);
+
 }
+
+.p-button.p-button-success, .p-buttonset.p-button-success > .p-button, .p-splitbutton.p-button-success > .p-button {
+  color: @ness_color_2 !important;
+    background: @white !important;
+    border-radius: 7px;
+    border: 1px solid @ness_color_3 !important;
+
+    i {
+      color: @ness_color_3 !important;
+
+    }
+}
+
+
+
 }
 
 @import "media.less";
