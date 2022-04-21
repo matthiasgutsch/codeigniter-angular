@@ -268,7 +268,6 @@ p a {
   .openbtn {
     font-size: 22px;
     cursor: pointer;
-    background-color: @white;
     color: @ness_color_2;
     width: 80px;
     height: 70px;
@@ -1605,31 +1604,48 @@ body.dark {
     border: 1px solid @ness_color_2 !important;
   }
   .p-datatable .p-datatable-tbody > tr {
-    background-color: fade(@white,10%) !important;
+    background-color: fade(@white, 10%) !important;
     color: @white;
   }
   .p-tabview .p-tabview-panels {
     background-color: @ness_color_2 !important;
-    padding: 1rem;
-    border: 0 none;
     color: @white;
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
   }
-  .sidebar .openbtn {
-
-    background-color: @ness_color_2 !important;
+  .blu-box .p-card .p-card-body .p-card-content {
+    color: @white;
+  }
+  .p-inputtext {
+    color: @white;
+    background-color: fade(@white, 10%) !important;
+  }
+  .billings-list thead tr th, .p-datatable .p-datatable-thead > tr > th {
+    background-color: darken(@ness_color_2, 5%);
     color: @white !important;
 
+  }
+
+
+  .p-datatable .p-datatable-tbody > tr > td {
+    border-bottom: 1px solid darken(@ness_color_2,6%);
+  }
+
+
+  .p-inputtext::placeholder {
+    color: fade(@white, 50%);
+  }
+  .sidebar .openbtn {
+    color: @white !important;
     i {
       color: @white;
+    }
   }
-   
-}
-
   .p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link {
     border-color: @white;
     color: @white;
+  }
+
+  .color-switch .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+    background: fade(@white, 20%) !important;
 }
 }
 
