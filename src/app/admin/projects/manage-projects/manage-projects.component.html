@@ -68,7 +68,7 @@
 
                 <div class="p-grid">
                 <div
-                    *ngFor=" let project of projects  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index" class="p-col-12 p-md-4">
+                    *ngFor=" let project of projects  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index" class="p-col-12 p-md-6">
 
                     <p-card class="projects">
                         <p-tag value="{{project.price | currency :'EUR':'symbol':'1.2-2'}}">
