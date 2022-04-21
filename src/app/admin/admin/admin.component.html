@@ -49,6 +49,7 @@
 
 </p-overlayPanel>
 
+<div>
   <div class="sidebar"  id="mySidebar" [ngClass]=" flag ? 'close' : 'open'">
  
     <div class="openbtn hidden-mobile" (click)="flag = !flag">
@@ -101,6 +102,12 @@
     <!-- <li><a routerLink="./reports" routerLinkActive="active" ><i class="pi pi-chart-line" ></i><span>Statistiche</span></a></li> -->
 
   </ul>
+
+
+  <div class="color-switch">
+  <p-inputSwitch onclick="myFunc()"></p-inputSwitch> <div class="description">Dark mode</div>
+</div>
+
 
 </div>
 

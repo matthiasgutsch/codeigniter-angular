@@ -24,6 +24,7 @@ export class AdminComponent implements OnInit {
   user_id: number;
   flag = true;
   display = false;
+  light = true;
 
   password: string;
   first_name: string;

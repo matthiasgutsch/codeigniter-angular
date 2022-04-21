@@ -6,7 +6,7 @@
   <base href="/">
   <meta name="viewport"  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 </head>
-<body>
+<body id="bg-change1" class="normal">
   <app-root></app-root>
 
   <script>
@@ -24,7 +24,17 @@
     }
   </script>
    
- 
+   <script>
+          function myFunc() {
+          var y = document.getElementById("bg-change1").getAttribute("class");
+          if (y === "normal") {
+            y = "dark";
+          } else {
+            y = "normal";
+          }
+          document.getElementById("bg-change1").setAttribute("class",y);
+        }
+  </script>
 
 
   </body>
