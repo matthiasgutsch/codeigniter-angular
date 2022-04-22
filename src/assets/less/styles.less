@@ -349,86 +349,43 @@ p a {
       }
     }
   }
-  ul.nav-menu {
-    list-style: none;
-    padding: 0px;
-    display: inline-block;
-    margin: 0px;
-    padding-top: 80px;
-    padding: 15px 20px 0px 20px;
-    li {
-      list-style-type: none;
-      float: left;
-      width: 100%;
-      padding: 0px;
-      text-align: center;
-      height: 46px;
-      line-height: 46px;
-      &:hover {}
-      i {
-        float: left;
-        font-size: 20px;
-        width: 40px;
-        line-height: 46px;
-        height: 46px;
-        margin-right: 10px;
-        margin-left: 5px;
-        text-align: center;
-      }
-      a {
-        text-decoration: none;
-        font-size: 15px;
-        color: @ness_color_2;
-        display: block;
-        text-align: center;
-        transition: 0.3s;
-        span {
-          float: left;
-          display: none !important;
-          visibility: hidden !important;
-          transition: visibility 0.1s;
-        }
-        &:hover {
-          background-color: transparent;
-          border-radius: @radius;
-          color: @ness_color_3;
-          height: 46px;
-          line-height: 46px;
-        }
-        &.active {
-          background-color: @ness_color_3;
-          border-radius: @radius;
-          color: @white;
-          height: 46px;
-          line-height: 46px;
-        }
-      }
-    }
-  }
   &.open {
     width: 80px;
     .logo-wrapper {
       display: none !important;
       visibility: hidden !important;
     }
-    ul.nav-menu {
-      list-style: none;
-      padding: 0px;
-      display: inline-block;
-      margin: 0px;
-      padding-top: 90px;
-      padding: 15px 15px 0px 15px !important;
+   
+    .p-panelmenu .p-panelmenu-header > a .p-panelmenu-icon {
+      margin-right: 0.5rem;
+      float: right;
+      position: absolute;
+      right: 5px;
+      display: none;
+      visibility: hidden;
+     }
+     .p-panelmenu .p-menuitem-text {
+      line-height: 1;
+      display: none;
+      visibility: hidden;
     }
+    .p-panelmenu {
+      padding: 20px 15px;
+      font-family: "Circular", sans-serif;
+  }
+
+  .color-switch {
+    position: absolute;
+    bottom: 20px;
+    left: 15px;
+}
     ul {
       li {
         i {
           float: none;
         }
         a {
-          span {
-            display: none !important;
-            visibility: hidden !important;
-          }
+         
           &:hover {}
           i {
             margin: 0px !important;
@@ -1256,10 +1213,7 @@ hr.full {
     ul {
       li {
         a {
-          span {
-            display: inherit !important;
-            visibility: visible !important;
-          }
+        
           &:hover {}
           i {}
         }
@@ -1270,13 +1224,12 @@ hr.full {
     width: 0px;
     padding-left: 0px;
     padding-right: 0px;
+
+
     ul {
       li {
         a {
-          span {
-            display: none !important;
-            visibility: hidden !important;
-          }
+        
           &:hover {}
           i {}
         }
@@ -1560,12 +1513,16 @@ hr.full {
 .p-panelmenu {
 
   padding: 20px;
+  font-family: "Circular", sans-serif;
+
 }
 
 
 .p-panelmenu .p-panelmenu-panel:first-child .p-panelmenu-header > a {
   border-top-right-radius: @radius;
   border-top-left-radius: @radius;
+  font-family: "Circular", sans-serif;
+
 }
 
 
@@ -1574,6 +1531,12 @@ hr.full {
   float: right;
   position: absolute;
   right: 5px;
+  
+}
+.p-panelmenu .p-panelmenu-header > a .p-menuitem-icon {
+  margin-right: 0.5rem;
+  width: 20px;
+  text-align: center;
 }
 
 .p-panelmenu .p-panelmenu-header:not(.p-highlight):not(.p-disabled) > a:hover {
@@ -1583,12 +1546,15 @@ hr.full {
   border-radius: @radius;
 }
 
+
 .p-panelmenu .p-panelmenu-header > a {
   padding: 1rem;
+  font-family: "Circular", sans-serif;
+
   border: 0px solid #dee2e6;
   color: @ness_color_2;
   background: @white;
-  font-weight: 600;
+  font-weight: 400;
   border-radius: 3px;
   transition: box-shadow 0.2s;
 }
@@ -1612,6 +1578,12 @@ hr.full {
   border-bottom-left-radius: 0;
   border-radius: @radius;
 }
+
+.p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link a.p-menuitem-link-active {
+  background: #e9ecef;
+  border-color: #dee2e6;
+}
+
 
 
 .color-switch {
