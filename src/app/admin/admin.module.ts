@@ -77,6 +77,7 @@ import { ShortNumberPipe } from './pipe/short-number.pipe';
 import {SplitButtonModule} from 'primeng/splitbutton';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {PanelMenuModule} from 'primeng/panelmenu';
 
 import { CompanyFormComponent } from './settings/company/company-form/company-form.component';
 import { ProductsFormComponent } from './products/products-form/products-form.component';
@@ -264,6 +265,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     EditorModule,
     InputMaskModule,
     CardModule,
+    PanelMenuModule,
     ChipsModule,
     TagModule,
     ConfirmDialogModule,

@@ -1556,6 +1556,64 @@ hr.full {
   }
 }
 
+
+.p-panelmenu {
+
+  padding: 20px;
+}
+
+
+.p-panelmenu .p-panelmenu-panel:first-child .p-panelmenu-header > a {
+  border-top-right-radius: @radius;
+  border-top-left-radius: @radius;
+}
+
+
+.p-panelmenu .p-panelmenu-header > a .p-panelmenu-icon {
+  margin-right: 0.5rem;
+  float: right;
+  position: absolute;
+  right: 5px;
+}
+
+.p-panelmenu .p-panelmenu-header:not(.p-highlight):not(.p-disabled) > a:hover {
+  background: #e9ecef;
+  border-color: #dee2e6;
+  color: #495057;
+  border-radius: @radius;
+}
+
+.p-panelmenu .p-panelmenu-header > a {
+  padding: 1rem;
+  border: 0px solid #dee2e6;
+  color: @ness_color_2;
+  background: @white;
+  font-weight: 600;
+  border-radius: 3px;
+  transition: box-shadow 0.2s;
+}
+
+.p-panelmenu .p-panelmenu-content {
+  padding: 0.25rem 0;
+  border: 0px solid #dee2e6;
+  background: #ffffff;
+  color: @ness_color_2;
+  margin-bottom: 0;
+  border-top: 0;
+  border-radius: 0px !important;
+}
+
+
+.p-panelmenu .p-panelmenu-header.p-highlight > a {
+  background: @ness_color_3;
+  border-color: #dee2e6;
+  color: @white;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-radius: @radius;
+}
+
+
 .color-switch {
   position: absolute;
   bottom: 20px;

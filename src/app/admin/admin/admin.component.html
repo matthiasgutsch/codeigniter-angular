@@ -51,7 +51,8 @@
 
 <div>
   <div class="sidebar"  id="mySidebar" [ngClass]=" flag ? 'close' : 'open'">
- 
+    <div class="p-grid">
+      <div class="p-col-12">
     <div class="openbtn hidden-mobile" (click)="flag = !flag">
       <i class="pi pi-list"></i>
     </div>
@@ -63,28 +64,27 @@
   
     <div class="logo-wrapper" routerLink="/admin">
     </div>
-  
+      </div>
+    </div>
+    <div class="p-grid">
+      <div class="p-col-12">
+
+    <p-panelMenu [model]="items" [style]="{'width':'100%'}"></p-panelMenu>
+      </div>
+
+  </div>
+
   <ul class="nav-menu">
 
-  
-    <li><a routerLink="./" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ><i class="pi pi-inbox" pTooltip="Dashboard" tooltipPosition="right"></i><span>Dashboard</span></a></li>
-    <li><a routerLink="./clients" routerLinkActive="active"><i class="pi pi-users"tooltipPosition="right"></i><span>Clienti</span></a></li>
-    <li><a routerLink="./appointments" routerLinkActive="active" ><i class="pi pi-calendar-plus"></i><span>Appuntamenti</span></a></li>
 
-    <li><a routerLink="./quotes" routerLinkActive="active"><i class="pi pi-briefcase" tooltipPosition="right"></i><span>Preventivi</span></a></li>
-    <li><a routerLink="./orders" routerLinkActive="active"><i class="pi pi-book" tooltipPosition="right"></i><span>Ordini</span></a></li>
-    <!-- <li><a routerLink="./wordpress-orders" routerLinkActive="active"><i class="pi pi-credit-card" tooltipPosition="right"></i><span>Ordini Woo</span></a></li> -->
-    <li><a routerLink="./billings" routerLinkActive="active"><i class="pi pi-credit-card" tooltipPosition="right"></i><span>Fatturazione</span></a></li>
 
+   
 
 
     <li><a routerLink="./products" routerLinkActive="active"><i class="pi pi-shopping-cart" ></i><span>Prodotti</span></a></li>
       <!--<li><a routerLink="./warehouse-movements" routerLinkActive="active"><i class="pi pi-arrow-circle-right" ></i><span>Maggazzino</span></a></li>-->
 
-    <li><a routerLink="./checkins" routerLinkActive="active"><i class="pi pi-arrow-circle-right" ></i><span>Checkin</span></a></li>
-    <li><a routerLink="./checkouts" routerLinkActive="active"><i class="pi pi-arrow-circle-left" ></i><span>Checkout</span></a></li>
 
-    <li><a routerLink="./suppliers" routerLinkActive="active"><i class="pi pi-table" ></i><span>Fornitori</span></a></li>
     <li><a routerLink="./purchase-orders" routerLinkActive="active" (click)="display = false"><i class="pi pi-book" tooltipPosition="right"></i><span>Ordini Fornitori</span></a></li>
     <li><a routerLink="./transport-documents" routerLinkActive="active" (click)="display = false"><i class="pi pi-compass" ></i><span>DDT</span></a></li>
 

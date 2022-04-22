@@ -5,7 +5,7 @@ import { SupportsService } from 'src/app/services/supports.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { formatDate } from '@angular/common';
 import { Subject } from 'rxjs';
-import { PrimeNGConfig } from 'primeng/api';
+import { MenuItem, PrimeNGConfig } from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -25,6 +25,7 @@ export class AdminComponent implements OnInit {
   flag = true;
   display = false;
   light = true;
+  items: MenuItem[];
 
   password: string;
   first_name: string;
@@ -82,6 +83,64 @@ export class AdminComponent implements OnInit {
 
   ngOnInit() {
     
+    this.items = [
+      {
+          label: 'Dashboard',
+          icon: 'pi pi-pw pi-inbox',
+          routerLink: '/admin'
+          
+      },
+      {
+          label: 'ERP',
+          icon: 'pi pi-fw pi-calendar',
+          items: [
+              {label: 'Clienti', icon: 'pi pi-fw pi-user', routerLink: '/admin/clients/'},
+              {label: 'Appuntamenti', icon: 'pi pi-fw pi-calendar-plus', routerLink: '/admin/appointments/'},
+              {label: 'Calendario', icon: 'pi pi-fw pi-calendar', routerLink: '/admin/appointments/calendar/'}
+          ]
+      },
+    
+      {
+        label: 'Commerciale',
+        icon: 'pi pi-fw pi-credit-card',
+        items: [
+            {label: 'Preventivi', icon: 'pi pi-fw pi-briefcase', routerLink: '/admin/quotes/'},
+            {label: 'Ordini', icon: 'pi pi-fw pi-book', routerLink: '/admin/orders/'},
+            {label: 'Fatturazione', icon: 'pi pi-fw pi-credit-card', routerLink: '/admin/billings/'}
+        ]
+    },
+
+    {
+      label: 'Prodotti',
+      icon: 'pi pi-fw pi-pencil',
+      items: [
+          {label: 'Clienti', icon: 'pi pi-fw pi-user', routerLink: '/admin/clients/'},
+          {label: 'Appuntamenti', icon: 'pi pi-fw pi-refresh', routerLink: '/admin/appointments/'}
+      ]
+  },
+
+    {
+      label: 'Magazzino',
+      icon: 'pi pi-fw pi-pencil',
+      items: [
+          {label: 'Checkin', icon: 'pi pi-fw pi-arrow-circle-right', routerLink: '/admin/checkins/'},
+          {label: 'Checkout', icon: 'pi pi-fw pi-arrow-circle-left', routerLink: '/admin/checkouts/'},
+          {label: 'Fornitori', icon: 'pi pi-fw pi-table', routerLink: '/admin/suppliers/'}
+
+      ]
+  },
+ 
+  {
+    label: 'HR',
+    icon: 'pi pi-fw pi-user',
+    items: [
+        {label: 'Checkin', icon: 'pi pi-fw pi-user', routerLink: '/admin/checkins/'},
+        {label: 'Checkout', icon: 'pi pi-fw pi-arrow-circle-left', routerLink: '/admin/checkouts/'}
+    ]
+},
+
+  ];
+
     this.notify$.subscribe(() => {
       localStorage.removeItem('expiredDate');
       this.logout();
