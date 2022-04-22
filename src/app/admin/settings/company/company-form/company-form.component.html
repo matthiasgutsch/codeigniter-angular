@@ -12,9 +12,10 @@
                         <h3>{{pageTitle}}</h3>
                     </div>
                     <div class="p-col-6 p-md-6">
-                        <button pButton pRipple label=" {{ 'save' | translate }}" class="p-button p-button-success p-mr-2 pull-right"></button>
+                        <button pButton pRipple label=" {{ 'save' | translate }}" icon="pi pi-save" class="p-button p-button-success p-mr-2 pull-right"></button>
         
-        
+                        <button pButton pRipple icon="pi pi-chevron-left" [routerLink]="['/admin/settings/']"
+                        label=" {{ 'go-back' | translate }}" class="p-button p-button-back pull-right p-mr-2"></button>
                     </div>
                 </div>
         

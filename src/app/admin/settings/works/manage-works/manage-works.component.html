@@ -37,16 +37,16 @@
         <div class="dash-title">
 
             <div class="p-field p-grid">
-                <div class="p-col-12 p-md-4">
+                <div class="p-col-6 p-md-4">
                     <h3>{{title}}</h3>
                 </div>
-                <div class="p-col-12 p-md-8">
+                <div class="p-col-6 p-md-8">
                     <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/settings/works/create']"
                         label=" {{ 'add' | translate }}" class="p-button p-button-primary p-mr-2 pull-right"></button>
                     <button type="text" pButton label="Filter" icon="pi pi-filter"
                         class="p-button p-button-secondary p-mr-2 pull-right"  (click)="displayFilter = true"></button>
 
-                        <button type="button" pButton pRipple label=" {{ 'go-back' | translate }}" class="p-button p-button-back pull-right  p-mr-2"
+                        <button type="button" pButton pRipple label=" {{ 'go-back' | translate }}" icon="pi pi-chevron-left" class="p-button p-button-back pull-right  p-mr-2"
                         [routerLink]="['/admin/settings/']"></button>
 
                        <!-- <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta"
@@ -88,7 +88,7 @@
                         </div>
 
                         <p-table #dt [columns]="cols" [value]="works" [paginator]="false" [rows]="10"
-                            [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="count">
+                        [responsive]="false" [resizableColumns]="true" [autoLayout]="true">
 
                             <ng-template pTemplate="header" let-columns>
                                 <tr>
