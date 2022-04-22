@@ -1628,6 +1628,38 @@ body.dark {
       color: @white;
     }
   }
+
+  .p-panelmenu .p-panelmenu-header > a {
+    color: @white;
+    background: @ness_color_2;
+
+  }
+
+  .p-panelmenu .p-panelmenu-content {
+
+    color: @white;
+    background: @ness_color_2;
+
+}
+
+.p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:not(.p-disabled):hover {
+  background: darken(@ness_color_2,5%);
+  border-radius: @radius !important;;
+}
+
+.p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:not(.p-disabled):hover .p-menuitem-text {
+  color: @white;
+}
+
+.p-panelmenu .p-panelmenu-header.p-highlight:not(.p-disabled) > a:hover {
+  border-color: @ness_color_3;
+  background:@ness_color_3;
+  color: @white !important;
+}
+
+.p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link .p-menuitem-text {
+  color: @white;
+}
   .p-card {
     background-color: @ness_color_2 !important;
     color: @white !important;
