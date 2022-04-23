@@ -164,10 +164,9 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-rowData let-product>
                         <tr>
-                            <td *ngIf="product.image"><img [src]="rowData.image"
+                            <td *ngIf="product.image" style="width:70px"><img [src]="rowData.image"
                                     [routerLink]="['/admin/products/edit', product.id]" class="img-responsive"></td>
-                            <td>
-                                {{product.title}}
+                            <td>{{product.title}}
 
                                 
                             </td>

@@ -1800,11 +1800,23 @@ body.dark {
     }
 }
 
-  .logo-wrapper {
+
+ .login-box .p-inputtext {
+  color: @ness_color_2;
+  background-color: @white;
+  border: 1px solid  fade(@ness_color_2, 40%) !important;
+}
+
+.login-box .p-inputtext::placeholder {
+  color: fade(@ness_color_2, 50%);
+}
+
+.sidebar  .logo-wrapper {
     background: url(src/assets/images/logo-white.svg) no-repeat left center;
     background-size: 80%;
 
   }
 }
+
 
 @import "media.less";
