@@ -195,7 +195,7 @@ export class ManageAppointmentsComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.appointmentsService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
+    this.appointmentsService.getAllListNew(params).subscribe((pData) => {
       this.appointments = pData;
       this.count = this.appointmentsService.size;
 

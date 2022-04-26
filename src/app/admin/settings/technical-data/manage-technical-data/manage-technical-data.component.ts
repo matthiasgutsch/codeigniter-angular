@@ -153,7 +153,7 @@ export class ManageTechnicalDataComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.technicalDataService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
+    this.technicalDataService.getAllListNew(params).subscribe((pData) => {
       this.technical_data = pData;
       this.count = this.technicalDataService.size;
 

@@ -158,7 +158,7 @@ export class ManageTagsComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.tagsService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
+    this.tagsService.getAllListNew(params).subscribe((pData) => {
       this.tags = pData;
       this.count = this.tagsService.size;
 

@@ -138,7 +138,7 @@ export class ManageOrdersComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.ordersService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
+    this.ordersService.getAllListNew(params).subscribe((pData) => {
       this.orders = pData;
       this.count = this.ordersService.size;
 

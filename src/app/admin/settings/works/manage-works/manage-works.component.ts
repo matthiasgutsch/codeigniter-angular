@@ -177,7 +177,7 @@ load(): void {
     this.page,
     this.pageSize
   );
-  this.worksService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
+  this.worksService.getAllListNew(params).subscribe((pData) => {
     this.works = pData;
     this.count = this.worksService.size;
     

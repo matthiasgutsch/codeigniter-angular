@@ -152,7 +152,7 @@ export class ManageBillingsComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.billingsService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
+    this.billingsService.getAllListNew(params).subscribe((pData) => {
       this.billings = pData;
       this.count = this.billingsService.size;
 

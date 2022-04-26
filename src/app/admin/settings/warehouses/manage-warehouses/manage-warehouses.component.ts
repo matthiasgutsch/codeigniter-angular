@@ -221,7 +221,7 @@ load(): void {
     this.page,
     this.pageSize
   );
-  this.warehousesService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
+  this.warehousesService.getAllListNew(params).subscribe((pData) => {
     this.warehouses = pData;
     this.count = this.warehousesService.size;
     

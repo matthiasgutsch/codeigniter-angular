@@ -144,7 +144,7 @@ load(): void {
     this.page,
     this.pageSize
   );
-  this.appointmentTypeService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
+  this.appointmentTypeService.getAllListNew(params).subscribe((pData) => {
     this.appointment_type = pData;
     this.count = this.appointmentTypeService.size;
     

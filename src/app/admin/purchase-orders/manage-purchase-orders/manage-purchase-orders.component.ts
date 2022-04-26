@@ -160,7 +160,7 @@ export class ManagePurchaseOrdersComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.purchaseOrdersService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
+    this.purchaseOrdersService.getAllListNew(params).subscribe((pData) => {
       this.purchaseOrders = pData;
       this.count = this.purchaseOrdersService.size;
 

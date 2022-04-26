@@ -223,7 +223,7 @@ export class AdminDashboardComponent implements OnInit {
       this.page = 1,
       this.pageSize = 2
     );
-    this.projectsService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {      
+    this.projectsService.getAllListNew(params).subscribe((pData) => {      
       this.projects = pData;
       this.count = this.projectsService.size;
       
@@ -238,7 +238,7 @@ export class AdminDashboardComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.warehousesCheckinsService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {      
+    this.warehousesCheckinsService.getAllListNew(params).subscribe((pData) => {      
       this.warehouseCheckins = pData;
       this.count = this.warehousesCheckinsService.size;
       
@@ -253,7 +253,7 @@ export class AdminDashboardComponent implements OnInit {
       this.page = 0,
       this.pageSize = 4
     );
-    this.supportsService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {      
+    this.supportsService.getAllListNew(params).subscribe((pData) => {      
       this.supports = pData;
       this.count = this.supportsService.size;
       
@@ -268,7 +268,7 @@ export class AdminDashboardComponent implements OnInit {
       this.page = 0,
       this.pageSize = 4
     );
-   this.productsService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
+   this.productsService.getAllListNew(params).subscribe((pData) => {
       this.products = pData;
       this.count = this.productsService.size;
     });
@@ -282,7 +282,7 @@ export class AdminDashboardComponent implements OnInit {
       this.page = 0,
       this.pageSize = 4
     );
-   this.billingsService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
+   this.billingsService.getAllListNew(params).subscribe((pData) => {
       this.billings = pData;
       this.count = this.billingsService.size;
     });
@@ -356,7 +356,7 @@ export class AdminDashboardComponent implements OnInit {
       this.pageSize
       
     );
-    this.appointmentsService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {      
+    this.appointmentsService.getAllListNew(params).subscribe((pData) => {      
       this.appointmentsToday = pData;
       this.count = this.appointmentsService.size;
       

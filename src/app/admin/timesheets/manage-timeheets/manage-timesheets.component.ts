@@ -266,7 +266,7 @@ timesheetsType: any;
       this.page,
       this.pageSize
     );
-    this.timesheetsService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
+    this.timesheetsService.getAllListNew(params).subscribe((pData) => {
       this.timesheets = pData;
       this.count = this.timesheetsService.size;
     });
