@@ -198,7 +198,7 @@
                         firstName="{{ billing.client.name | slice:0:1}}"
                         lastName="{{ billing.client.surname | slice:0:1}}"></app-initials-avatar>
 
-                    <h3>Dettaglio Fattura {{billing.number}}/{{billing.date | date:'yyyy'}}</h3>
+                    <h3>Dettaglio Fattura {{billing.number}}/{{billing.year}}</h3>
                     <p-tag severity="default" value="{{billing.date}}" class="p-mr-2"></p-tag>
 
                     <p-tag severity="success" *ngIf="billing.is_paid === '1'" class="p-mr-2" value="Pagata"

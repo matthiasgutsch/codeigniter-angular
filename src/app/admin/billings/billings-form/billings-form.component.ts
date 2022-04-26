@@ -371,7 +371,7 @@ export class BillingsFormComponent implements OnInit {
           fontSize: 12,
         },
         {
-          text: 'Dettagli Ordine',
+          text: 'Dettagli Fattura',
           style: 'sectionHeader'
         },
         
