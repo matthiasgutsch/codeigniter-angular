@@ -97,7 +97,7 @@
                                 <p-tag severity="danger" *ngIf="support.is_active === '0'" value="Ticket chiuso"
                                     class="p-mr-2"></p-tag>
                             </td>
-                            <td><strong>{{support.date | date:'dd/MM/yyyy'}}</strong><br>
+                            <td><strong>{{support.date}}</strong><br>
 
                             <td> {{support.title}}</td>
 
@@ -132,7 +132,7 @@
             <p-card>
                 <div class="p-grid">
                     <div class="p-col-12 p-md-6">
-                        <strong>{{appointment.date | date:'dd/MM/yyyy HH:mm'}}</strong>
+                        <strong>{{appointment.date}}</strong>
 
                         <h3>{{appointment.title}}</h3>
 
