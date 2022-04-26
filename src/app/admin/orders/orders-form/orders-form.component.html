@@ -17,23 +17,23 @@
                             class="p-button pull-right p-button-success"></button>
     
                             <button pButton pRipple icon="pi pi-save" (click)="generatePDF('download')" type="button"
-                            class="p-button p-button-primary pull-right p-mr-2"></button>
+                            class="p-button p-button-options pull-right p-mr-2"></button>
     
                             <button pButton pRipple icon="pi pi-print" type="button"
-                            (click)="generatePDF('print')" class="p-button p-button-primary pull-right p-mr-2"></button>
+                            (click)="generatePDF('print')" class="p-button p-button-options pull-right p-mr-2"></button>
     
     
                             <button pButton pRipple *ngIf="numberQuotes > 0"
                                 [routerLink]="['/admin/quotes/edit', numberQuotes]" label="Visualizza Preventivo"
                                 class="p-button p-button-secondary  pull-right p-mr-2"></button>
     
-                                <button *ngIf="pages" type="button" pButton pRipple icon="pi pi-save" label="Visualizza Fattura / Ricevuta" [routerLink]="['/admin/billings/edit', pages.id]" class="p-button pull-right p-button-primary p-mr-2"></button>
+                                <button *ngIf="pages" type="button" pButton pRipple icon="pi pi-save" label="Visualizza Fattura / Ricevuta" [routerLink]="['/admin/billings/edit', pages.id]" class="p-button pull-right p-button-options p-mr-2"></button>
             
-                                <button *ngIf="!pages && idOrders > 0" type="button" pButton pRipple icon="pi pi-save" label="Crea Fattura / Ricevuta"  (click)="createBilling()" class="p-button pull-right p-button-primary p-mr-2"></button>
+                                <button *ngIf="!pages && idOrders > 0" type="button" pButton pRipple icon="pi pi-save" label="Crea Fattura / Ricevuta"  (click)="createBilling()" class="p-button pull-right p-button-options p-mr-2"></button>
     
                                 <button pButton pRipple type="button"
                                 (click)="editFormItems()" label="Modifica"
-                                    class="p-button p-button-success  pull-right p-mr-2"></button>
+                                    class="p-button p-button-primary  pull-right p-mr-2"></button>
 
                                     <button pButton pRipple icon="pi pi-chevron-left" [routerLink]="['/admin/orders/']"
                                     label=" {{ 'go-back' | translate }}" class="p-button p-button-back pull-right p-mr-2"></button>
