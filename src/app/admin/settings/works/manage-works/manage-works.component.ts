@@ -34,12 +34,14 @@ export class ManageWorksComponent implements OnInit {
   searchWrapper: boolean = false;
 
   @ViewChild('dt', { static: true }) dt: Table;
+  currentUser: any;
 
   constructor(private worksService: WorksService,
     private router: Router,
     private route: ActivatedRoute,
 
     private confirmationService: ConfirmationService,) {
+      const userId = this.currentUser.user_id;
 
     this.cols = [
       { field: 'name', header: 'Nome', index: 1 },
@@ -175,7 +177,7 @@ load(): void {
     this.page,
     this.pageSize
   );
-  this.worksService.getAllListNew(params).subscribe((pData) => {
+  this.worksService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
     this.works = pData;
     this.count = this.worksService.size;
     

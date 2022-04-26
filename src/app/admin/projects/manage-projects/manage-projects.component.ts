@@ -204,7 +204,7 @@ descriptionFilter: string;
       this.page,
       this.pageSize
     );
-    this.projectsService.getAllListNew(params).subscribe((pData) => {
+    this.projectsService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
       this.projects = pData;
       this.count = this.projectsService.size;
 

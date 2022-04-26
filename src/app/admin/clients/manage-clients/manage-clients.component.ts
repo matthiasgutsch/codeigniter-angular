@@ -151,7 +151,7 @@ export class ManageClientsComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.clientsService.getAllListNew(params).subscribe((pData) => {
+    this.clientsService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
       this.clients = pData;
       this.count = this.clientsService.size;
     });

@@ -27,6 +27,8 @@ export class ManageAppointmentTypeComponent implements OnInit {
   exportColumns: any[];
   page = 1;
   count = 0;
+  currentUser: any;
+
   pageSize = 10;
   pageSizes = [5, 10, 15];
   public base_path: string;
@@ -39,6 +41,7 @@ export class ManageAppointmentTypeComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private confirmationService: ConfirmationService,) {
+      const userId = this.currentUser.user_id;
 
     this.cols = [
       { field: 'name', header: 'Nome', index: 1 },
@@ -141,7 +144,7 @@ load(): void {
     this.page,
     this.pageSize
   );
-  this.appointmentTypeService.getAllListNew(params).subscribe((pData) => {
+  this.appointmentTypeService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
     this.appointment_type = pData;
     this.count = this.appointmentTypeService.size;
     

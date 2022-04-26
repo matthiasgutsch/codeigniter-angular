@@ -308,7 +308,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.warehousesCheckoutsService.getAllListNew(params).subscribe((pData) => {
+    this.warehousesCheckoutsService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
       this.warehouseCheckouts = pData;
       this.count = this.warehousesCheckoutsService.size;
 

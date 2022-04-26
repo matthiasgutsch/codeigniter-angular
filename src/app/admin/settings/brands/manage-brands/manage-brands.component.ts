@@ -146,7 +146,7 @@ export class ManageBrandsComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.brandsService.getAllListNew(params).subscribe((pData) => {
+    this.brandsService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
       this.brands = pData;
       this.count = this.brandsService.size;
 

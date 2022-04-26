@@ -31,11 +31,13 @@ export class ManageTechnicalDataComponent implements OnInit {
   pageOfItems: Array<any>;
   searchWrapper: boolean = false;
   @ViewChild('dt', { static: true }) dt: Table;
+  currentUser: any;
 
   constructor(private technicalDataService: TechnicalDataService, 
     private router: Router,
     private route: ActivatedRoute,
     private confirmationService: ConfirmationService,) {
+      const userId = this.currentUser.user_id;
 
     this.cols = [
       { field: 'name', header: 'Nome', index: 1 },
@@ -151,7 +153,7 @@ export class ManageTechnicalDataComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.technicalDataService.getAllListNew(params).subscribe((pData) => {
+    this.technicalDataService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
       this.technical_data = pData;
       this.count = this.technicalDataService.size;
 

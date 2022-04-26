@@ -150,7 +150,7 @@ export class ManageSuppliersComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.suppliersService.getAllListNew(params).subscribe((pData) => {
+    this.suppliersService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
       this.suppliers = pData;
       this.count = this.suppliersService.size;
     });

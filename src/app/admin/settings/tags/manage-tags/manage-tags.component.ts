@@ -33,11 +33,13 @@ export class ManageTagsComponent implements OnInit {
 
 
   @ViewChild('dt', { static: true }) dt: Table;
+  currentUser: any;
 
   constructor(private tagsService: TagsService,
     private router: Router,
     private route: ActivatedRoute,
     private confirmationService: ConfirmationService,) {
+      const userId = this.currentUser.user_id;
 
     this.cols = [
       { field: 'name', header: 'Nome', index: 1 },
@@ -156,7 +158,7 @@ export class ManageTagsComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.tagsService.getAllListNew(params).subscribe((pData) => {
+    this.tagsService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
       this.tags = pData;
       this.count = this.tagsService.size;
 

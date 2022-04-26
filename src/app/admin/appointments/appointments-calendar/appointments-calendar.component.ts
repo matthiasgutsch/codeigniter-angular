@@ -232,7 +232,7 @@ export class AppointmentsCalendarComponent implements OnInit {
       this.page = 1,
       this.pageSize = 2
     );
-    this.projectsService.getAllListNew(params).subscribe((pData) => {      
+    this.projectsService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {      
       this.projects = pData;
       this.count = this.projectsService.size;
       
@@ -247,7 +247,7 @@ export class AppointmentsCalendarComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.warehousesCheckinsService.getAllListNew(params).subscribe((pData) => {      
+    this.warehousesCheckinsService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {      
       this.warehouseCheckins = pData;
       this.count = this.warehousesCheckinsService.size;
       
@@ -262,7 +262,7 @@ export class AppointmentsCalendarComponent implements OnInit {
       this.page = 1,
       this.pageSize = 3
     );
-    this.supportsService.getAllListNew(params).subscribe((pData) => {      
+    this.supportsService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {      
       this.supports = pData;
       this.count = this.supportsService.size;
       
@@ -380,7 +380,7 @@ export class AppointmentsCalendarComponent implements OnInit {
       this.pageSize
       
     );
-    this.appointmentsService.getAllListNew(params).subscribe((pData) => {      
+    this.appointmentsService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {      
       this.appointmentsToday = pData;
       this.count = this.appointmentsService.size;
       

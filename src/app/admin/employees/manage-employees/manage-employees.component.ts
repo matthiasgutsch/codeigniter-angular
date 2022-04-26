@@ -150,7 +150,7 @@ export class ManageEmployeesComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.employeesService.getAllListNew(params).subscribe((pData) => {
+    this.employeesService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
       this.employees = pData;
       this.count = this.employeesService.size;
     });

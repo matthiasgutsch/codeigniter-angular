@@ -282,7 +282,7 @@ export class ManageWarehousesMovementsComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.warehousesCheckinsService.getAllListNew(params).subscribe((pData) => {
+    this.warehousesCheckinsService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
       this.warehouseCheckins = pData;
       this.count = this.warehousesCheckinsService.size;
 

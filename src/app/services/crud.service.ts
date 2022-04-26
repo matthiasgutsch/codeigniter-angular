@@ -115,9 +115,8 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
 
-  public getAllListNew(pars: any): Observable<T[]> {
+  public getAllListNew(pars: any, userId: number): Observable<T[]> {
     let params = new HttpParams();
-    const userId = this.currentUser.user_id;
     params = this.getParams(params, pars);
     return this._http
       .get<HttpResponse<T[]>>(this._base + '/list_user/' + userId, {

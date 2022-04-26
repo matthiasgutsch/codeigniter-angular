@@ -57,6 +57,7 @@ export class ManageSupportsComponent implements OnInit {
   comuni: any = [];
   productDialog: boolean = false;
   works_id: any;
+  currentUser: any;
   showDialog() {
     this.productDialog = true;
   }
@@ -91,6 +92,7 @@ export class ManageSupportsComponent implements OnInit {
     private categoryService: CategoryService,
     private confirmationService: ConfirmationService,) {
 
+      const userId = this.currentUser.user_id;
 
     this.cols = [
       { field: "date", header: "Data" },
@@ -154,7 +156,7 @@ export class ManageSupportsComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.supportsService.getAllListNew(params).subscribe((pData) => {
+    this.supportsService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
       this.supports = pData;
       this.count = this.supportsService.size;
 

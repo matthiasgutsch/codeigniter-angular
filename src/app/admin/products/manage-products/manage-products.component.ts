@@ -256,7 +256,7 @@ export class ManageProductsComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.productsService.getAllListNew(params).subscribe((pData) => {
+    this.productsService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
       this.products = pData;
       this.count = this.productsService.size;
     });

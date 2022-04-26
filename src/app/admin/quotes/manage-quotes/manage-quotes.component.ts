@@ -136,7 +136,7 @@ export class ManageQuotesComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.quotesService.getAllListNew(params).subscribe((pData) => {
+    this.quotesService.getAllListNew(params, this.currentUser.user_id).subscribe((pData) => {
       this.quotes = pData;
       this.count = this.quotesService.size;
 
