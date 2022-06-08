@@ -2,11 +2,7 @@
 <p-sidebar [(visible)]="display">
   <p-panelMenu [model]="items" routerLinkActive="active"  [multiple]="false" [style]="{'width':'100%'}"></p-panelMenu>
 
-  <ul class="nav-menu-mobile">
-    <li>
-      <a  routerLinkActive="active" (click)="logout()"><i class="pi pi-sign-in"></i> Logout</a>
-    </li>
-  </ul>
+ 
 </p-sidebar>
 <p-overlayPanel #op>
 
@@ -86,11 +82,7 @@
       <li (click)="op.toggle($event)"><i class="pi pi-user"></i>  <span class="hidden-mobile">{{currentUser.first_name}} {{currentUser.last_name}}</span>
       </li><li class="hidden-mobile"> <i class="pi pi-clock"></i> <span class="hidden-mobile">{{myDate }}</span></li>
     
-    
-      <li class="hidden-mobile">
-        <a routerLink="./logout" routerLinkActive="active" (click)="logout()"><i class="pi pi-sign-in"></i> <span class="hidden-mobile">Logout</span></a>
-      </li>
-  
+
     </ul></div>
   </div>
      

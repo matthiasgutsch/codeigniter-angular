@@ -158,6 +158,14 @@ export class AdminComponent implements OnInit {
         routerLink: '/admin/settings/'
       },
 
+      {
+        label: 'Logout',
+        icon: 'pi pi-sign-in',
+        command: (event) => { this.logout(); }
+      },
+
+
+     
 
 
     ];
