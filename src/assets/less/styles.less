@@ -814,22 +814,22 @@ hr.full {
 }
 
 .login-wrap {
+
   height: 100vh;
   background: @ness_color_2 url(src/assets/images/page-header-bg.svg) no-repeat right bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
   position: relative;
 }
 
 .login-box {
-  background-size: 100%;
-  width: 100%;
-  max-width: 500px;
-  height: 100%;
   position: absolute;
-  width: 600px;
-  left: 50%;
-  margin-left: -300px;
-  box-shadow: 0 2px 5px rgb(0 0 0 / 8%);
-  border-radius: 6px;
+  left: 0px;
+  box-shadow: none;
+  background-color: #FFF;
+  width: 100%;
+  max-width: 800px;
+  height: 100%;
   .logo-wrapper {
     float: left;
     margin-left: 0px;
@@ -849,13 +849,11 @@ hr.full {
     border-radius: @radius;
   }
   .login-box-inner {
-    padding: 34px 30px 30px 30px;
-    width: 92%;
-    background-color: #FFF;
-    box-shadow: @shadow;
+    padding: 30px 70px;
+    width: 100%;
+    max-width: 700px;
     margin: 0 auto;
-    margin-top: 50%;
-    border-radius: @radius;
+    margin-top: 30%;
     input {
       width: 100%;
       line-height: 2;
