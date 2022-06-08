@@ -21,6 +21,11 @@
   <div class="sidebar"  id="mySidebar" [ngClass]=" flag ? 'close' : 'open'">
     <div class="p-grid">
       <div class="p-col-12">
+   
+  
+    <div class="logo-wrapper" routerLink="/admin">
+    </div>
+
     <div class="openbtn hidden-mobile" (click)="flag = !flag">
       <i class="pi pi-list"></i>
     </div>
@@ -29,13 +34,11 @@
     <div class="openbtn show-mobile" (click)="display = true">
       <i class="pi pi-list"></i>
     </div>
-  
-    <div class="logo-wrapper" routerLink="/admin">
-    </div>
       </div>
     </div>
     <div class="p-grid">
       <div class="p-col-12">
+        <hr class="line">
 
     <p-panelMenu [model]="items" [multiple]="false" [style]="{'width':'100%'}"></p-panelMenu>
       </div>
