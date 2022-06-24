@@ -6,7 +6,6 @@ export const environment = {
   production: false,
   baseUrl: 'https://demo.api.nexosuite.com',
   supportUrl: 'https://support.api.typopress.it',
-  apiURL: 'https://shop.migustafood.it/wp-json/wc/v3/orders/'
 
 };
 
