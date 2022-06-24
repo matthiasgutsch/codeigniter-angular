@@ -39,7 +39,6 @@ export class ManageTagsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private confirmationService: ConfirmationService,) {
-      const userId = this.currentUser.user_id;
 
     this.cols = [
       { field: 'name', header: 'Nome', index: 1 },
@@ -56,6 +55,11 @@ export class ManageTagsComponent implements OnInit {
   }
 
   ngOnInit() {
+
+
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    const userId = this.currentUser.user_id;
+
 
     this.basePath = window.location.pathname;
     if (this.route.snapshot.queryParamMap.has('page')) {

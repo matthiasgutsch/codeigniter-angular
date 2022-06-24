@@ -11,6 +11,7 @@ export const LOCATIONS_API = environment.baseUrl + APP_API + "locations";
 
 export const PARAM_WORKS_PATH = '/admin/settings/works/'
 export const PARAM_APPOINTMENT_TYPE_PATH = '/admin/settings/appointment-type/'
+export const PARAM_CATEGORIES_PATH = '/admin/settings/categories/'
 
 export const PARAM_TAGS_PATH = '/admin/settings/tags/'
 export const PARAM_BRANDS_PATH = '/admin/settings/brands/'

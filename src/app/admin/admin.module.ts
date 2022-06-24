@@ -113,8 +113,6 @@ import { EmployeesTasksComponent } from './employees/employees-tasks/employees-t
 import { EmployeesTimesheetsComponent } from './employees/employees-timeheets/employees-timesheets.component';
 import { ProjectsProductivityComponent } from './projects/projects-productivity/projects-productivity.component';
 import { ProjectsTimesheetsComponent } from './projects/projects-timeheets/projects-timesheets.component';
-import { ManageWordpressOrdersComponent } from './orders-wordpress/manage-wordpress-orders/manage-wordpress-orders.component';
-import { WordpressOrdersFormComponent } from './orders-wordpress/wordpress-orders-form/wordpress-orders-form.component';
 import { EmployeesTimesheetsCalendarComponent } from './employees/employees-timeheets-calendar/employees-timesheets-calendar.component';
 import { WarehousesFormComponent } from './settings/warehouses/warehouses-form/warehouses-form.component';
 import { ManageWarehousesCheckinsComponent } from './warehouses/warehouses-checkins/manage-warehouses-checkins/manage-warehouses-checkins.component';
@@ -174,9 +172,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ManageClientsComponent,
     InitialsAvatarComponent,
     ClientsFormComponent,
-    ManageWordpressOrdersComponent,
     EmployeesTimesheetsCalendarComponent,
-    WordpressOrdersFormComponent,
     ManageQuotesComponent,
     ProjectsTimesheetsComponent,
     ProjectsProductivityComponent,

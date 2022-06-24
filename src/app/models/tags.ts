@@ -4,7 +4,7 @@ export class Tags {
     category_description: number;
     category_address: string;
     category_region: string;
-
+    category_seo_url: string;
   constructor() {
 
 }
