@@ -11,6 +11,7 @@ import { ComuniService } from '../../../../services/comuni.service';
 import { MessageService, SelectItem } from "primeng/api";
 import * as moment from 'moment';
 import { Comuni } from 'src/app/models/comuni';
+import { STATE_LIST } from 'src/app/admin/constants/constants';
 
 @Component({
   selector: 'app-category-form',
@@ -41,6 +42,7 @@ export class CategoryFormComponent implements OnInit {
   selectedDate: Date;
   date: Date;
   currentUser: any;
+  stateOptions: any[];
 
   constructor(
     private fb: FormBuilder,
@@ -55,7 +57,7 @@ export class CategoryFormComponent implements OnInit {
     }
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-
+    this.stateOptions = STATE_LIST;
   }
 
   ngOnInit() {
@@ -71,13 +73,14 @@ export class CategoryFormComponent implements OnInit {
     if (id) {
 
 
-      this.pageTitle = 'Modifica Tipo di Appuntamento';
+      this.pageTitle = 'Modifica Categoria';
       this.categoryService.getId(+id).subscribe(
         res => {
           this.categoryForm.patchValue({
             category_name: res.category_name,
             category_description: res.category_description,
             category_seo_url: res.category_seo_url,
+            is_active: res.is_active,
             user_id: this.currentUser.user_id,
             id: res.id
           });
@@ -85,7 +88,7 @@ export class CategoryFormComponent implements OnInit {
         }
       );
     } else {
-      this.pageTitle = 'Create Category';
+      this.pageTitle = 'Aggiungi Category';
     }
 
     this.categoryForm = this.fb.group({
@@ -93,7 +96,7 @@ export class CategoryFormComponent implements OnInit {
       category_name: ['', Validators.required],
       category_description: [''],
       category_seo_url: [''],
-
+      is_active: ["0"],
       user_id: [this.currentUser.user_id]
 
     });
@@ -114,7 +117,7 @@ export class CategoryFormComponent implements OnInit {
     formData.append('category_name', this.categoryForm.get('category_name').value);
     formData.append('category_description', this.categoryForm.get('category_description').value);
     formData.append('category_seo_url', this.categoryForm.get('category_seo_url').value);
-
+    formData.append("is_active", this.categoryForm.get("is_active").value);
     formData.append('user_id', this.categoryForm.get('user_id').value);
 
     const id = this.categoryForm.get('id').value;

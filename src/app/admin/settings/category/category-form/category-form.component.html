@@ -87,7 +87,15 @@
             <div class="p-col-4 p-md-4">
 
                 <p-card>
-                fffddf
+                    <div class="p-fluid">
+                        <div class="p-field p-grid">
+                            <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Attivo <span
+                                    class="required">*</span></label>
+                            <div class="p-col-12 p-md-10">
+                                <p-selectButton [options]="stateOptions" formControlName="is_active" optionLabel="label" optionValue="value"></p-selectButton>
+                            </div>
+                        </div>
+                    </div>
                 </p-card>
             </div>
         </div>

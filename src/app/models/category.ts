@@ -3,6 +3,8 @@ export class Category {
   category_name: string;
   category_description: string;
   category_seo_url: string;
+  is_active: boolean;
+
   constructor() {
 
   }
