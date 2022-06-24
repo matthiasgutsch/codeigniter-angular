@@ -91,7 +91,7 @@
                         *ngFor=" let category of categories  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index">
                     </div>
 
-                    <p-table #dt [columns]="cols" [value]="tags" [paginator]="false">
+                    <p-table #dt [columns]="cols" [value]="categories" [paginator]="false">
 
                         <ng-template pTemplate="header" let-columns>
                             <tr>
@@ -110,7 +110,7 @@
 
                                 <td class="action">
                                     <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
-                                        [routerLink]="['/admin/settings/tags/edit', rowData.id]"></button>
+                                        [routerLink]="['/admin/settings/categories/edit', rowData.id]"></button>
                                     <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
                                         (click)="onDelete(rowData.id)"></button>
                                 </td>

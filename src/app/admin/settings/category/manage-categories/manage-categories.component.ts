@@ -4,6 +4,7 @@ import { Category } from '../../../../models/category';
 import { ConfirmationService } from 'primeng/api';
 import { PARAM_CATEGORIES_PATH, PARAM_TAGS_PATH } from 'src/app/admin/constants/constants';
 import { Table } from 'primeng/table';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-categories',
@@ -33,7 +34,12 @@ export class ManageCategoriesComponent implements OnInit {
   @ViewChild('dt', { static: true }) dt: Table;
   currentUser: any;
   
-  constructor(private categoryService: CategoryService, private confirmationService: ConfirmationService,) { 
+  constructor(
+    private categoryService: CategoryService, 
+    private router: Router,
+    private route: ActivatedRoute,
+
+    private confirmationService: ConfirmationService,) { 
 
 
     this.cols = [
@@ -55,6 +61,21 @@ export class ManageCategoriesComponent implements OnInit {
   }
 
   ngOnInit() {
+
+
+    this.basePath = window.location.pathname;
+    if (this.route.snapshot.queryParamMap.has('page')) {
+      this.page = +this.route.snapshot.queryParamMap.get('page');
+    }
+    if (this.route.snapshot.queryParamMap.has('size')) {
+      this.pageSize = +this.route.snapshot.queryParamMap.get('size');
+    }
+    if (this.route.snapshot.queryParamMap.has('name')) {
+      this.nameFilter = this.route.snapshot.queryParamMap.get('name');
+    }
+    if (this.route.snapshot.queryParamMap.has('description')) {
+      this.descriptionFilter = this.route.snapshot.queryParamMap.get('description');
+    }
 
 
     this.load();
