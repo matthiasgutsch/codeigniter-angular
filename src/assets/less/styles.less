@@ -1556,7 +1556,7 @@ hr.line {
   background: #e9ecef;
   border-color: #dee2e6;
   color: #495057;
-  border-radius: @radius;
+  border-radius: @radius !important;
 }
 
 
@@ -1596,6 +1596,28 @@ hr.line {
   background: #e9ecef;
   border-color: #dee2e6;
 }
+
+.p-panelmenu .p-submenu-list {
+
+
+  a {
+  &.p-menuitem-link-active {
+    background: #e9ecef;
+    border-color: #dee2e6;
+    color: #495057;
+    border-radius: @radius !important;
+  }
+
+  &:hover {
+    background: #e9ecef;
+    border-color: #dee2e6;
+    color: #495057;
+    border-radius: @radius !important;
+  }
+  
+}
+}
+
 
 
 
