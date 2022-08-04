@@ -38,7 +38,7 @@
         <div class="p-field p-grid">
 
             <div class="p-col-12 p-md-7">
-                <p-card class="blu-box">
+                <p-card class="blu-box" *ngIf="project">
 
                     <h3>{{project.title}} / {{project.code_int}}</h3>
                     <label class="legend">{{project.date_from}} - {{project.date_to}}</label>
