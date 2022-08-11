@@ -288,7 +288,12 @@
 
                 <p-tabView class="responsive-tab-view">
 
-                    <p-tabPanel header="Appuntamenti Oggi">
+                    <p-tabPanel>
+                        <ng-template pTemplate="header">
+                            
+                            Appuntamenti Oggi
+                        </ng-template>
+
                         <div *ngFor="let appointment of appointmentsToday">
             
                             <p-card (click)="editProduct(appointment)" class="appointment-card">
@@ -326,8 +331,11 @@
             <p-card>
                 <p-tabView class="responsive-tab-view">
             
-                    <p-tabPanel header="Helpdesk">
-            
+                    <p-tabPanel>
+                        <ng-template pTemplate="header">
+                            
+                            Helpdesk
+                        </ng-template>
                         <div *ngFor="let support of supports">
             
                             <p-card class="helpdesk-card" [routerLink]="['/admin/support', support.id]">
