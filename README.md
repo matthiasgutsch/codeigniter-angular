@@ -1,4 +1,4 @@
-# NEXO ERP
+# NEXO ERP OK
 
 
 npm install -g electron-builder --save
