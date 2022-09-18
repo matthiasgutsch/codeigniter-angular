@@ -21,7 +21,7 @@
                         class="p-button p-button-primary pull-right  p-mr-2"
                         [routerLink]="['/admin/projects/timesheets/', project.id]"></button>
 
-                    <button type="button" pButton pRipple  label=" {{ 'go-back' | translate }}" 
+                    <button type="button" pButton pRipple  label=" {{ 'go-back' | translate }}"
                         class="p-button p-button-back pull-right  p-mr-2"
                         [routerLink]="['/admin/projects/']"></button>
 
@@ -124,7 +124,7 @@
                                                 <button type="button" pButton pRipple label="Timesheets"
                                                 class="p-button p-button-primary pull-right  p-mr-2"
                                                 [routerLink]="['/admin/employee/timesheets/', entry.id]"></button>
-                                                
+
                                             </td>
                                         </tr>
                                         <tr>
@@ -157,7 +157,7 @@
                     <div class="p-col-6 p-md-6">
 
                         <p-card class="complete-project"
-                            [ngClass]="getTotalPercent() > 90 ? 'volumio' : getTotalPercent() > 50 ? 'orange' : 'green' ">
+                            [ngClass]="getTotalPercent() > 90 ? 'white' : getTotalPercent() > 50 ? 'orange' : 'green' ">
                             <div class="number">{{getTotalPercent()}}%</div>
                             Importo Consumato
 

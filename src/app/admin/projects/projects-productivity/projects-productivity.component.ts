@@ -243,7 +243,7 @@ export class ProjectsProductivityComponent implements OnInit {
           }
          },
         maintainAspectRatio: true,
-       
+
         scales: {
           xAxes: [{
             gridLines: {
@@ -262,7 +262,7 @@ export class ProjectsProductivityComponent implements OnInit {
               labelString: 'Mese',
               display: true,
             },
-         
+
           }],
           yAxes: [{
             ticks: {
@@ -275,7 +275,7 @@ export class ProjectsProductivityComponent implements OnInit {
           }]
         }
       }
-      
+
 	  });
     myChart.update();
   }
@@ -288,7 +288,7 @@ export class ProjectsProductivityComponent implements OnInit {
   };
 
 
- 
+
   getChartsCount(id) {
 
     this.projectsService.get_projects_timesheets_chart(+id).subscribe(data => {
@@ -318,7 +318,7 @@ export class ProjectsProductivityComponent implements OnInit {
     return total;
   }
 
-  getTotalPercent(price: any) {
+  getTotalPercent(price?: any) {
     let total = 0;
     this.timesheetsEmployee.forEach((item) => {
       total += Number(item.value * this.getTechnicalDataItem(item.id)?.contract);
