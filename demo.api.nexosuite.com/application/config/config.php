@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'https://demo.api.nexosuite.com/';
+$config['base_url'] = ENVIRONMENT !== 'docker' ? 'https://demo.api.nexosuite.com/' : 'http://localhost:8000/';
 
 /*
 |--------------------------------------------------------------------------

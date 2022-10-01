@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'hostname' => ENVIRONMENT != 'docker' ? 'localhost':  'mariadb',
 	'username' => 'eyrafmzx_urcdipco',
-	'password' => 'iM!%m4^WBG21',
+	'password' =>  ENVIRONMENT != 'docker' ? 'iM!%m4^WBG21' : '',
 	'database' => 'eyrafmzx_dbapi33pro',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
