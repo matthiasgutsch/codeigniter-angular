@@ -55,8 +55,9 @@ import { AutoComplete } from 'primeng/autocomplete';
 export class ManageWarehousesCheckinsComponent implements OnInit {
   blogs: Blog;
   blog: Blog;
-
+  displayFilter: boolean;
   works: any = [];
+  totalRecords: string;
   work: Works;
   calendarOptions: any;
   uploadError: string;
@@ -73,6 +74,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   brand: Brand;
   tags: any = [];
   tag: Tags;
+  selectedWarehouse: Warehouses;
   selectedBrands: Brand;
   loading: boolean;
   currentIndex = 1;
@@ -197,7 +199,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
       this.dataSelect = this.dataSelect;
       this.dataSelectTrue = this.dataSelectTrue;
     }
-    
+
   ngOnInit() {
 
     const dateObj = new Date();
@@ -254,9 +256,9 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   public handlePageChange(event): void {
     this.page = event;
     this.load();
-  
+
   }
-  
+
     public selectionItemForFilter(e) {
       const colsTempor = e.value;
       colsTempor.sort(function (a, b) {
@@ -325,9 +327,9 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
     this.nameFilter = '';
     this.descriptionFilter = '';
     this.load();
-    
+
   }
-  
+
   onChangePage(pageOfItems: Array<any>) {
     // update current page of items
     this.pageOfItems = pageOfItems;
@@ -494,7 +496,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   }
 
 
- 
+
 
 
 
@@ -512,11 +514,11 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
           filtered.push(productsVariation);
         }
       }
-  
+
       this.filteredProductsVariations = filtered;
     }	)};
 
-    
+
     change(eventi){
 
       console.log(this.dataSelect);
@@ -542,10 +544,10 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
 
     const id = this.warehouseCheckin.product_id;
 
-    this.productsVariationsService.getId(+id).subscribe((res) => { 
+    this.productsVariationsService.getId(+id).subscribe((res) => {
       this.product = res;
     });
-    
+
     this.productDialog = true;
   }
 
@@ -611,7 +613,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
 
   }
 
-  
+
 
   onSubmit() {
     const formData = new FormData();

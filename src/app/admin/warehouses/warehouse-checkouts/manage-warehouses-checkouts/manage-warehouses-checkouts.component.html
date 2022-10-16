@@ -3,27 +3,23 @@
 
         <div class="p-field p-grid">
             <div class="p-col-12">
-                <p-calendar [(ngModel)]="nameFilter" [style]="{ width: '100%' }" placeholder="Data da"
-                    dateFormat="yy-mm-dd" dataType="string" inputId="dateformat"></p-calendar>
+                <p-calendar [(ngModel)]="nameFilter" [style]="{ width: '100%' }" placeholder="Data da" dateFormat="yy-mm-dd" dataType="string" inputId="dateformat"></p-calendar>
             </div>
         </div>
         <div class="p-field p-grid">
             <div class="p-col-12">
-                <p-calendar [(ngModel)]="descriptionFilter" [style]="{ width: '100%' }" placeholder="Data a"
-                    dateFormat="yy-mm-dd" dataType="string" inputId="dateformat"></p-calendar>
+                <p-calendar [(ngModel)]="descriptionFilter" [style]="{ width: '100%' }" placeholder="Data a" dateFormat="yy-mm-dd" dataType="string" inputId="dateformat"></p-calendar>
             </div>
         </div>
 
         <div class="p-field p-grid">
             <div class="p-col-6">
-                <button pButton type="reset" class="p-button p-button-secondary btn-block" label="annulla"
-                    (click)="reset()">
+                <button pButton type="reset" class="p-button p-button-secondary btn-block" label="annulla" (click)="reset()">
                 </button>
             </div>
 
             <div class="p-col-6">
-                <button pButton type="submit" class="p-button p-button-primary btn-block" label="cerca"
-                    (click)="load()">
+                <button pButton type="submit" class="p-button p-button-primary btn-block" label="cerca" (click)="load()">
                 </button>
             </div>
 
@@ -45,9 +41,8 @@
                 </div>
                 <div class="p-col-12 p-md-6">
 
-                    <button type="text" pButton label="Filter" icon="pi pi-filter"
-                        class="p-button p-button-options p-mr-2 pull-right" (click)="displayFilter = true"></button>
-                    <!-- 
+                    <button type="text" pButton label="Filter" icon="pi pi-filter" class="p-button p-button-options p-mr-2 pull-right" (click)="displayFilter = true"></button>
+                    <!--
                         <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta"
                         (click)="exportPdf()" class="p-button-options p-mr-2 pull-right"
                         tooltipPosition="bottom"></button>
@@ -67,154 +62,136 @@
 
         <div class="p-col-12 p-md-4">
             <p-card>
-            <p-tabView class="responsive-tab-view">
+                <p-tabView class="responsive-tab-view">
 
-                <p-tabPanel header="{{pageTitle}}">
-        
-                    <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
-        
-                        <div class="p-field p-grid">
-                            <div class="p-col-12 p-md-12">
-        
-                                <label>Maggazzino</label>
+                    <p-tabPanel header="{{pageTitle}}">
+
+                        <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+
+                            <div class="p-field p-grid">
+                                <div class="p-col-12 p-md-12">
+
+                                    <label>Maggazzino</label>
+                                </div>
+                                <div class="p-col-12 p-md-12">
+                                    <p-dropdown [options]="warehouses" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedWarehouse" formControlName="warehouse_id" optionLabel="title" optionValue="id">
+                                        <ng-template let-option pTemplate="item">
+                                            {{option.title}}
+                                        </ng-template>
+                                    </p-dropdown>
+                                </div>
                             </div>
-                            <div class="p-col-12 p-md-12">
-                                <p-dropdown [options]="warehouses" [required]="true" [showClear]="true" placeholder="Scegli"
-                                    [style]="{ width: '100%' }" [(ngModel)]="selectedWarehouse" formControlName="warehouse_id"
-                                    optionLabel="title" optionValue="id">
-                                    <ng-template let-option pTemplate="item">
-                                        {{option.title}}
-                                    </ng-template>
-                                </p-dropdown>
+
+                            <div class="p-field p-grid">
+                                <div class="p-col-12 p-md-12">
+
+                                    <label>Fornitore</label>
+                                </div>
+                                <div class="p-col-12 p-md-12">
+                                    <p-dropdown [options]="suppliers" [required]="true" [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }" [(ngModel)]="selectedSupplier" formControlName="supplier_id" optionLabel="company_name" optionValue="id">
+                                        <ng-template let-option pTemplate="item">
+                                            {{option.company_name}}
+                                        </ng-template>
+                                    </p-dropdown>
+                                </div>
                             </div>
-                        </div>
-        
-                        <div class="p-field p-grid">
-                            <div class="p-col-12 p-md-12">
-        
-                                <label>Fornitore</label>
-                            </div>
-                            <div class="p-col-12 p-md-12">
-                                <p-dropdown [options]="suppliers" [required]="true" [showClear]="true" placeholder="Scegli"
-                                    [style]="{ width: '100%' }" [(ngModel)]="selectedSupplier" formControlName="supplier_id"
-                                    optionLabel="company_name" optionValue="id">
-                                    <ng-template let-option pTemplate="item">
-                                        {{option.company_name}}
-                                    </ng-template>
-                                </p-dropdown>
-                            </div>
-                        </div>
-        
-                        <div class="p-field p-grid">
-                            <div class="p-col-12 p-md-12">
-        
-                                <label>Prodotto</label>
-                            </div>
-                            <div class="p-col-12 p-md-12">
-        
-                                <p-autoComplete [dropdown]="true" placeholder="Cerca per Codice, titolo, Codice interno"
-                                    [style]="{ width: '100%' }" [suggestions]="filteredProductsVariations"
-                                    (completeMethod)="filterCountry($event)" field="id" (onSelect)="change($event)"
-                                    (onClear)="dataSelect = null" [ngModelOptions]="{standalone: true}" [(ngModel)]="dataSelect"
-                                    [minLength]="1">
-                                    <ng-template let-productsVariation pTemplate="item">
-                                        <div class="p-grid">
-                                            <div class="p-col-9">
-                                                <strong>{{productsVariation.code}}</strong><br>
-                                                {{productsVariation.title}} -
-                                                <p class="truncate">{{productsVariation.description}}
-                                                </p>
-                                            </div>
-                                            <div class="p-col-3">
-                                                <div class="p-grid">
-                                                    <div class="p-col-12">
-                                                        <p-tag class="pull-right"
-                                                            [value]="productsVariation.price  | currency :'EUR':'symbol':'1.2-2'">
-                                                        </p-tag>
-                                                    </div>
-                                                    <div class="p-col-12 p-mt-2">
-                                                        <p class="pull-right"><strong>{{productsVariation.pieces}}</strong> pz
-                                                        </p>
+
+                            <div class="p-field p-grid">
+                                <div class="p-col-12 p-md-12">
+
+                                    <label>Prodotto</label>
+                                </div>
+                                <div class="p-col-12 p-md-12">
+
+                                    <p-autoComplete [dropdown]="true" placeholder="Cerca per Codice, titolo, Codice interno" [style]="{ width: '100%' }" [suggestions]="filteredProductsVariations" (completeMethod)="filterCountry($event)" field="id" (onSelect)="change($event)" (onClear)="dataSelect = null"
+                                        [ngModelOptions]="{standalone: true}" [(ngModel)]="dataSelect" [minLength]="1">
+                                        <ng-template let-productsVariation pTemplate="item">
+                                            <div class="p-grid">
+                                                <div class="p-col-9">
+                                                    <strong>{{productsVariation.code}}</strong><br> {{productsVariation.title}} -
+                                                    <p class="truncate">{{productsVariation.description}}
+                                                    </p>
+                                                </div>
+                                                <div class="p-col-3">
+                                                    <div class="p-grid">
+                                                        <div class="p-col-12">
+                                                            <p-tag class="pull-right" [value]="productsVariation.price  | currency :'EUR':'symbol':'1.2-2'">
+                                                            </p-tag>
+                                                        </div>
+                                                        <div class="p-col-12 p-mt-2">
+                                                            <p class="pull-right"><strong>{{productsVariation.pieces}}</strong> pz
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </ng-template>
-                                </p-autoComplete>
-        
-                                <input type="hidden" pInputText [(ngModel)]="dataSelectTrue" formControlName="product_id">
+                                        </ng-template>
+                                    </p-autoComplete>
+
+                                    <input type="hidden" pInputText [(ngModel)]="dataSelectTrue" formControlName="product_id">
+                                </div>
                             </div>
-                        </div>
-        
-                        <div class="p-field p-grid">
-                            <div class="p-col-12 p-md-6">
-        
-                                <label>Pezzi <span class="required">*</span></label>
-        
-                                <input type="text" pInputText [style]="{width:'100%'}" formControlName="pieces" />
-        
+
+                            <div class="p-field p-grid">
+                                <div class="p-col-12 p-md-6">
+
+                                    <label>Pezzi <span class="required">*</span></label>
+
+                                    <input type="text" pInputText [style]="{width:'100%'}" formControlName="pieces" />
+
+                                </div>
+
+                                <div class="p-col-12 p-md-6">
+
+                                    <label>Colli <span class="required">*</span></label>
+
+                                    <input type="text" pInputText [style]="{width:'100%'}" formControlName="boxes" />
+
+                                </div>
                             </div>
-        
-                            <div class="p-col-12 p-md-6">
-        
-                                <label>Colli <span class="required">*</span></label>
-        
-                                <input type="text" pInputText [style]="{width:'100%'}" formControlName="boxes" />
-        
+
+                            <div class="form-group form-row">
+                                <label class="col-md-3"></label>
+                                <div class="col-md-9">
+                                    <input type="hidden" formControlName="id">
+                                    <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
+                                </div>
                             </div>
-                        </div>
-        
-                        <div class="form-group form-row">
-                            <label class="col-md-3"></label>
-                            <div class="col-md-9">
-                                <input type="hidden" formControlName="id">
-                                <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
+
+                            <div class="p-field p-grid">
+
+                                <div class="p-col-12 p-md-12">
+
+                                    <button pButton pRipple icon="pi pi-save" label="picking prodotto" class="p-button p-button-primary btn-block" [disabled]="!blogForm.valid"></button>
+                                </div>
                             </div>
-                        </div>
-        
-                        <div class="p-field p-grid">
-        
-                            <div class="p-col-12 p-md-12">
-        
-                                <button pButton pRipple icon="pi pi-save" label="picking prodotto"
-                                    class="p-button p-button-primary btn-block" [disabled]="!blogForm.valid"></button>
-                            </div>
-                        </div>
-        
-                    </form>
-        
-                    <div *ngIf="dataSelectTrue">
-                        <h4>Prodotto selezionato</h4>
-        
+
+                        </form>
+
+                        <div *ngIf="dataSelectTrue">
+                            <h4>Prodotto selezionato</h4>
+
                             <div *ngFor="let item of filteredProductsVariations">
                                 <div class="p-grid">
                                     <div class="p-col-4">
                                         <img [src]="item.image" class="img-responsive">
-        
+
                                     </div>
                                     <div class="p-col-8">
-        
+
                                         <strong>{{item.title}}</strong><br>
                                         <p class="detail">Codice: {{item.code}}</p>
                                         <p class="detail">Codice Interno: {{item.code_int}}</p>
                                     </div>
                                 </div>
-                                <div class="p-grid">
-        
-                                    <div class="p-col-12">
-                                        <hr class="small">
-                                        <ngx-barcode6 [bc-format]="EAN-13" [bc-height]="32" [bc-width]="2" [bc-value]="item.code"
-                                        [bc-display-value]="true" [bc-font-size]="14">
-                                    </ngx-barcode6>
-                                    </div>
-                                </div>
+
                             </div>
-        
-                    </div>
-                </p-tabPanel>
-        
-            </p-tabView>
-        </p-card>
+
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+            </p-card>
         </div>
         <div class="p-col-12 p-md-8">
 
@@ -244,12 +221,10 @@
                                 </div>
                             </div>
 
-                            <div
-                                *ngFor=" let warehouseCheckout of warehouseCheckouts  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index">
+                            <div *ngFor=" let warehouseCheckout of warehouseCheckouts  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index">
                             </div>
 
-                            <p-table #dt [columns]="cols" [responsive]="false" [resizableColumns]="true" [autoLayout]="true" [value]="warehouseCheckouts"
-                                [paginator]="false" [rows]="10" [totalRecords]="totalRecords">
+                            <p-table #dt [columns]="cols" [responsive]="false" [resizableColumns]="true" [autoLayout]="true" [value]="warehouseCheckouts" [paginator]="false" [rows]="10" [totalRecords]="totalRecords">
 
                                 <ng-template pTemplate="header" let-columns>
                                     <tr>
@@ -303,13 +278,9 @@
                                 class="p-button p-button-success p-mr-2"
                                 (click)="editItem(warehouseCheckout)"></button> -->
 
-                                            <button pButton pRipple icon="pi pi-eye"
-                                                class="p-button p-button-primary p-mr-2"
-                                                (click)="view(warehouseCheckout)"></button>
+                                            <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2" (click)="view(warehouseCheckout)"></button>
 
-                                            <button pButton pRipple icon="pi pi-trash"
-                                                class="p-button p-button-danger p-mr-2"
-                                                (click)="onDelete(warehouseCheckout.id)"></button>
+                                            <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(warehouseCheckout.id)"></button>
 
                                         </td>
                                     </tr>
@@ -318,8 +289,7 @@
                             <div class="p-grid">
 
                                 <div class="p-col-12 p-md-12">
-                                    <pagination-controls previousLabel="Prev" nextLabel="Next" responsive="true"
-                                        (pageChange)="handlePageChange($event)">
+                                    <pagination-controls previousLabel="Prev" nextLabel="Next" responsive="true" (pageChange)="handlePageChange($event)">
                                     </pagination-controls>
                                 </div>
                             </div>
@@ -371,8 +341,7 @@
 
                             </div>
                             <div class="p-col-12 p-md-4">
-                                <p-tag [value]="warehouseCheckout.product.pieces" severity="success"
-                                    class="p-mr-2 pull-right"></p-tag>
+                                <p-tag [value]="warehouseCheckout.product.pieces" severity="success" class="p-mr-2 pull-right"></p-tag>
 
                             </div>
 
@@ -384,29 +353,21 @@
                         <div class="p-grid">
                             <div class="p-col-2 p-md-2">
 
-                                <img *ngIf="warehouseCheckout.image" class="img-responsive"
-                                    src="{{ warehouseCheckout.image}}">
+                                <img *ngIf="warehouseCheckout.image" class="img-responsive" src="{{ warehouseCheckout.image}}">
                             </div>
                             <div class="p-col-10 p-md-10">
 
                                 <h3>{{ warehouseCheckout.product.title}}</h3>
                                 <p [innerHTML]="warehouseCheckout.product.description"></p>
-                                <p class="small">{{ warehouseCheckout.product.code_int}} -
-                                    {{ warehouseCheckout.product.code}}</p>
+                                <p class="small">{{ warehouseCheckout.product.code_int}} - {{ warehouseCheckout.product.code}}</p>
 
                                 <div class="clearfix"></div>
                                 <br>
-                                <button pButton pRipple icon="pi pi-pencil" label="modifica"
-                                    class="p-button p-button-primary p-mr-2"
-                                    [routerLink]="['/admin/products-variation/edit', warehouseCheckout.product.product_id, warehouseCheckout.product.id ]"></button>
+                                <button pButton pRipple icon="pi pi-pencil" label="modifica" class="p-button p-button-primary p-mr-2" [routerLink]="['/admin/products-variation/edit', warehouseCheckout.product.product_id, warehouseCheckout.product.id ]"></button>
                             </div>
                         </div>
                     </p-card>
-                    <p-card>
-                        <ngx-barcode6 [bc-format]="EAN-13" [bc-height]="32" [bc-value]="warehouseCheckout.product.code"
-                            [bc-display-value]="true">
-                        </ngx-barcode6>
-                    </p-card>
+
                 </div>
             </ng-template>
 
@@ -416,10 +377,8 @@
         <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" #cd>
 
             <p-footer>
-                <button type="button" pButton icon="fa fa-close" class="p-button p-button-danger p-mr-2" label="No"
-                    (click)="cd.reject()"></button>
-                <button type="button" pButton icon="fa fa-check" class="p-button p-button-success p-mr-2" label="Si"
-                    (click)="cd.accept()"></button>
+                <button type="button" pButton icon="fa fa-close" class="p-button p-button-danger p-mr-2" label="No" (click)="cd.reject()"></button>
+                <button type="button" pButton icon="fa fa-check" class="p-button p-button-success p-mr-2" label="Si" (click)="cd.accept()"></button>
             </p-footer>
 
         </p-confirmDialog>

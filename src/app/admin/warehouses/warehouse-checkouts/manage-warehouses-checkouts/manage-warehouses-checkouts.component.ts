@@ -89,7 +89,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
   clients: any = [];
   client: Clients;
   imagePath: any;
-
+  totalRecords; string;
   suppliers: any = [];
   supplier: Suppliers;
 
@@ -108,11 +108,11 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
   project: Projects;
   employees: any = [];
   employee: Employees;
-
+  displayFilter: boolean;
   products: any = [];
   product: Products;
   options = [];
-
+  selectedWarehouse: Warehouses;
 
   pageTitle: string;
   warehouses: any = [];
@@ -197,7 +197,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
       this.dataSelect = this.dataSelect;
       this.dataSelectTrue = this.dataSelectTrue;
     }
-    
+
   ngOnInit() {
 
     const dateObj = new Date();
@@ -254,9 +254,9 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
   public handlePageChange(event): void {
     this.page = event;
     this.load();
-  
+
   }
-  
+
     public selectionItemForFilter(e) {
       const colsTempor = e.value;
       colsTempor.sort(function (a, b) {
@@ -325,9 +325,9 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
     this.nameFilter = '';
     this.descriptionFilter = '';
     this.load();
-    
+
   }
-  
+
   onChangePage(pageOfItems: Array<any>) {
     // update current page of items
     this.pageOfItems = pageOfItems;
@@ -494,7 +494,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
   }
 
 
- 
+
 
 
 
@@ -512,11 +512,11 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
           filtered.push(productsVariation);
         }
       }
-  
+
       this.filteredProductsVariations = filtered;
     }	)};
 
-    
+
     change(eventi){
 
       console.log(this.dataSelect);
@@ -542,10 +542,10 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
 
     const id = this.warehouseCheckout.product_id;
 
-    this.productsVariationsService.getId(+id).subscribe((res) => { 
+    this.productsVariationsService.getId(+id).subscribe((res) => {
       this.product = res;
     });
-    
+
     this.productDialog = true;
   }
 
@@ -611,7 +611,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
 
   }
 
-  
+
 
   onSubmit() {
     const formData = new FormData();
