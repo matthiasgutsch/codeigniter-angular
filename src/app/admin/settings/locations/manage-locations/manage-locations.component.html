@@ -39,7 +39,7 @@
                     <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/settings/locations/create']" label=" {{ 'add' | translate }}" class="p-button p-button-primary p-mr-2 pull-right"></button>
                     <button type="text" pButton label="Filter" icon="pi pi-filter" class="p-button p-button-secondary p-mr-2 pull-right" (click)="displayFilter = true"></button>
 
-
+                    <button type="button" pButton pRipple label=" {{ 'go-back' | translate }}" class="p-button p-button-back pull-right  p-mr-2" [routerLink]="['/admin/settings/']"></button>
                     <!-- <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta"
                         (click)="exportPdf()" class="p-button-options p-mr-2 pull-right"
                         tooltipPosition="bottom"></button>-->
@@ -58,6 +58,23 @@
             <div class="p-col-12 p-md-12">
 
                 <p-card>
+                    <div class="filter-options">
+
+                        <div class="p-field p-grid">
+
+                            <div class="p-col-12 p-md-8">
+                                <div class="item-size pull-left">
+                                    <span class="filter-tag" *ngIf="nameFilter">{{nameFilter}} <span class="close"><i class="pi pi-times"  (click)="reset()"></i></span> </span>
+                                    <span class="filter-tag" *ngIf="descriptionFilter">{{descriptionFilter}} <span class="close"><i class="pi pi-times" (click)="reset()"></i></span> </span>
+                                </div>
+                            </div>
+
+                            <div class="p-col-12 p-md-4">
+                                <span class="count-item pull-right">{{count}} Items</span>
+                            </div>
+                        </div>
+                    </div>
+
                     <div *ngFor=" let location of locations  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index">
                     </div>
 
