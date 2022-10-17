@@ -17,6 +17,7 @@ export class ManageWorksComponent implements OnInit {
   work: Works;
   error: string;
   loading: boolean;
+  displayFilter: boolean;
   public cols: any[];
   public filters: any[];
   public columnOptions: any[];
@@ -41,7 +42,7 @@ export class ManageWorksComponent implements OnInit {
     private route: ActivatedRoute,
 
     private confirmationService: ConfirmationService,) {
-      const userId = this.currentUser.user_id;
+      this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
     this.cols = [
       { field: 'name', header: 'Nome', index: 1 },
@@ -57,14 +58,14 @@ export class ManageWorksComponent implements OnInit {
       title: col.header,
       dataKey: col.field
     }));
-    
+
     this.columnOptions = [];
     this.selectedColumns = [];
     for (let i = 0; i < this.cols.length; i++) {
       this.columnOptions.push({label: this.cols[i].header, value: this.cols[i]});
     }
 
-    
+
    }
 
   ngOnInit() {
@@ -91,7 +92,7 @@ export class ManageWorksComponent implements OnInit {
     // );
   }
 
-  
+
 
 exportPdf() {
   // const doc = new jsPDF();
@@ -111,9 +112,9 @@ exportPdf() {
     this.nameFilter = '';
     this.descriptionFilter = '';
     this.load();
-    
+
   }
-  
+
   onChangePage(pageOfItems: Array<any>) {
     // update current page of items
     this.pageOfItems = pageOfItems;
@@ -163,14 +164,14 @@ getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
     path += adder + 'size=' + pageSize;
   }
   window.history.replaceState({}, '', path);
-  
+
   return params;
-  
+
 }
 
 
 load(): void {
-  
+
   const params = this.getRequestParams(
     this.nameFilter,
     this.descriptionFilter,
@@ -180,13 +181,13 @@ load(): void {
   this.worksService.getAllListNew(params).subscribe((pData) => {
     this.works = pData;
     this.count = this.worksService.size;
-    
+
   });
 }
 
 private onChange(item: string): void {
   this.load();
-  
+
 }
 
 
@@ -205,10 +206,10 @@ onDelete(id: number, category_name: string) {
         error => this.error = error
         );
       },
-     
+
   });
 
-   
+
   }
 
 }

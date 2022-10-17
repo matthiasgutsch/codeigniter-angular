@@ -1,88 +1,107 @@
-<p-overlayPanel #op>
+<p-sidebar #op [(visible)]="displayFilter" position="right" [style]="{width:'100%', 'max-width':'360px'}">
     <ng-template pTemplate>
-        <div class="p-col-12">
-        
-                <div class="p-field p-grid" *ngFor="let col of cols" >
-                    <div class="p-col-12">
+        <div class="p-field p-grid">
 
-                    <input placeholder="{{col.header}}" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-            </div>
+            <div class="p-col-12" *ngFor="let col of cols">
+                <div class="p-field p-grid">
+                    <div class="p-col-12">
+                        <input placeholder="{{col.header}}" [style]="{ width: '100%' }" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <div class="p-field p-grid">
+            <div class="p-col-6">
+                <button pButton type="reset" class="p-button p-button-secondary btn-block" label="annulla" (click)="reset()">
+            </button>
+            </div>
+
+            <div class="p-col-6">
+                <button pButton type="submit" class="p-button p-button-primary btn-block" label="cerca" (click)="load()">
+            </button>
+            </div>
+
+        </div>
     </ng-template>
-</p-overlayPanel>
+</p-sidebar>
+
+
+<div class="top-main-wrapper">
+    <div class="dash-header">
+        <div class="dash-title">
+
+            <div class="p-field p-grid">
+                <div class="p-col-6 p-md-4">
+                    <h3>{{title}}</h3>
+                </div>
+                <div class="p-col-6 p-md-8">
+                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/settings/locations/create']" label=" {{ 'add' | translate }}" class="p-button p-button-primary p-mr-2 pull-right"></button>
+                    <button type="text" pButton label="Filter" icon="pi pi-filter" class="p-button p-button-secondary p-mr-2 pull-right" (click)="displayFilter = true"></button>
+
+
+                    <!-- <button type="button" pButton pRipple icon="pi pi-file-pdf" label="Esporta"
+                        (click)="exportPdf()" class="p-button-options p-mr-2 pull-right"
+                        tooltipPosition="bottom"></button>-->
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
 
 <div class="main-inner">
 
-<div class="dash-header">
     <div class="p-fluid">
-  
-    </div>
-</div>
+        <div class="p-field p-grid">
+            <div class="p-col-12 p-md-12">
 
-<div class="p-fluid">
-    <div class="p-field p-grid">
-        <div class="p-col-12 p-md-8">
+                <p-card>
 
-     
-<p-card>
-    <div class="p-field p-grid">
-        <div class="p-col-8 p-md-8">
-    <h3>{{title}}</h3>
+
+                    <p-table #dt [columns]="cols" [value]="locations" [globalFilterFields]="['name', 'description']" currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords">
+
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th *ngFor="let col of cols">
+                                    {{col.header}}
+                                </th>
+                                <th width="140"></th>
+                            </tr>
+
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                            <tr>
+                                <td *ngFor="let col of cols">
+                                    {{rowData[col.field]}}
+                                </td>
+
+                                <td class="action">
+                                    <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/settings/locations/edit', rowData.id]"></button>
+                                    <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(rowData.id)"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+
+
+
+                </p-card>
+            </div>
         </div>
-        <div class="p-col-4 p-md-4">
-
-            <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/settings/locations/create']" label=" {{ 'add' | translate }}" class="p-button p-button-primary p-mr-2 pull-right"></button> 
-            <button type="text" pButton label="Filter"  icon="pi pi-filter" class="p-button p-button-secondary p-mr-2 pull-right" (click)="op.toggle($event)"></button>
-
-</div>
     </div>
 
-
-   
-           <!-- <p-multiSelect [options]="columnOptions" [showToggleAll]="false" (onChange)="selectionItemForFilter($event)" [(ngModel)]="cols" maxSelectedLabels="{0} columns selected">
-            </p-multiSelect>-->
-    
-    
-        <p-table #dt [columns]="cols" [value]="locations" [globalFilterFields]="['name', 'description']" currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
-    
-        <ng-template pTemplate="header" let-columns>
-            <tr>
-                <th *ngFor="let col of cols">
-                    {{col.header}} 
-                </th>
-                <th width="140"></th>
-            </tr>
-           
-        </ng-template>
-        <ng-template pTemplate="body" let-rowData let-columns="columns">
-            <tr>
-                <td *ngFor="let col of cols">
-                    {{rowData[col.field]}}
-                </td>
-    
-                <td class="action">
-                    <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2" [routerLink]="['/admin/settings/locations/edit', rowData.id]"></button>
-                    <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2" (click)="onDelete(rowData.id)"></button>
-                </td>
-            </tr>
-        </ng-template>
-    </p-table> 
-
-    
-
-</p-card>
-        </div></div></div>
-
 </div>
 
-        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" #cd>
 
-            <p-footer>
-                <button type="button" pButton icon="fa fa-close" class="p-button p-button-danger p-mr-2" label="No" (click)="cd.reject()"></button>
-                <button type="button" pButton icon="fa fa-check" class="p-button p-button-success p-mr-2" label="Si" (click)="cd.accept()"></button>
-            </p-footer>
-        
-        </p-confirmDialog>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" #cd>
+
+    <p-footer>
+        <button type="button" pButton icon="fa fa-close" class="p-button p-button-danger p-mr-2" label="No" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="fa fa-check" class="p-button p-button-success p-mr-2" label="Si" (click)="cd.accept()"></button>
+    </p-footer>
+
+</p-confirmDialog>
 
 {{error}}

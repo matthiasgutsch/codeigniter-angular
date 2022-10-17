@@ -28,7 +28,7 @@ export class ManageAppointmentTypeComponent implements OnInit {
   page = 1;
   count = 0;
   currentUser: any;
-
+  displayFilter: boolean;
   pageSize = 10;
   pageSizes = [5, 10, 15];
   public base_path: string;
@@ -37,11 +37,11 @@ export class ManageAppointmentTypeComponent implements OnInit {
   searchWrapper: boolean = false;
   @ViewChild('dt', { static: true }) dt: Table;
 
-  constructor(private appointmentTypeService: AppointmentTypeService, 
+  constructor(private appointmentTypeService: AppointmentTypeService,
     private router: Router,
     private route: ActivatedRoute,
     private confirmationService: ConfirmationService,) {
-      const userId = this.currentUser.user_id;
+      this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
     this.cols = [
       { field: 'name', header: 'Nome', index: 1 },
@@ -54,7 +54,7 @@ export class ManageAppointmentTypeComponent implements OnInit {
       this.columnOptions.push({label: this.cols[i].header, value: this.cols[i]});
     }
 
-    
+
    }
 
   ngOnInit() {
@@ -89,9 +89,9 @@ export class ManageAppointmentTypeComponent implements OnInit {
     this.nameFilter = '';
     this.descriptionFilter = '';
     this.load();
-    
+
   }
-  
+
   onChangePage(pageOfItems: Array<any>) {
     // update current page of items
     this.pageOfItems = pageOfItems;
@@ -130,14 +130,14 @@ getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
     path += adder + 'size=' + pageSize;
   }
   window.history.replaceState({}, '', path);
-  
+
   return params;
-  
+
 }
 
 
 load(): void {
-  
+
   const params = this.getRequestParams(
     this.nameFilter,
     this.descriptionFilter,
@@ -147,13 +147,13 @@ load(): void {
   this.appointmentTypeService.getAllListNew(params).subscribe((pData) => {
     this.appointment_type = pData;
     this.count = this.appointmentTypeService.size;
-    
+
   });
 }
 
 private onChange(item: string): void {
   this.load();
-  
+
 }
 
 
@@ -170,7 +170,7 @@ private onChange(item: string): void {
   }
 
 
-  
+
   editProduct(appointment_typ: Appointment_type) {
     this.appointment_typ = {...appointment_typ};
 }
@@ -192,10 +192,10 @@ onDelete(id: number, category_name: string) {
         error => this.error = error
         );
       },
-     
+
   });
 
-   
+
   }
 
 }

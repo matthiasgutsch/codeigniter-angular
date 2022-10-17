@@ -12,6 +12,7 @@ export const LOCATIONS_API = environment.baseUrl + APP_API + "locations";
 export const PARAM_WORKS_PATH = '/admin/settings/works/'
 export const PARAM_APPOINTMENT_TYPE_PATH = '/admin/settings/appointment-type/'
 export const PARAM_CATEGORIES_PATH = '/admin/settings/categories/'
+export const PARAM_LOCATIONS_TYPE_PATH = '/admin/settings/locations/'
 
 export const PARAM_TAGS_PATH = '/admin/settings/tags/'
 export const PARAM_BRANDS_PATH = '/admin/settings/brands/'
@@ -63,7 +64,7 @@ export const PAGES: SelectItem[] = [
 
 
 export const PAGES_PRODUCT: SelectItem[] = [
-  
+
   { label: "Tags", value: "/admin/settings/tags", icon: "pi pi-list" },
   { label: "Marchi / Brands", value: "/admin/settings/brands", icon: "pi pi-list" },
   { label: "Categorie", value: "/admin/settings/categories", icon: "pi pi-list" },
@@ -73,7 +74,7 @@ export const PAGES_PRODUCT: SelectItem[] = [
 ];
 
 export const PAGES_COMPANY: SelectItem[] = [
-  
+
   { label: "Dati aziendali", value: "/admin/settings/company", icon: "pi pi-list" },
 
 
@@ -155,22 +156,22 @@ export const LANG_IT = {
 
 
   export const STATE_LIST = [
-  {label: "Si", value: "1"}, 
+  {label: "Si", value: "1"},
   {label: "No", value: "0"}];
-  
+
 
   export const BILLING_LIST = [
-    {label: "Fattura", value: "Fattura"}, 
+    {label: "Fattura", value: "Fattura"},
     {label: "Ricevuta", value: "Ricevuta"}];
 
 
 
   export const BUSINESS_STATE_LIST = [
-    {label: "Business", value: "1"}, 
+    {label: "Business", value: "1"},
     {label: "Privato", value: "0"}];
 
     export const EMPLOYEE_TYPE_LIST = [
-      {label: "Dipendente", value: "0"}, 
+      {label: "Dipendente", value: "0"},
       {label: "Socio", value: "1"}];
 
 export const SEX_LIST: SelectItem[] = [
