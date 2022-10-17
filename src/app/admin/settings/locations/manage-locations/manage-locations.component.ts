@@ -81,6 +81,12 @@ handlePageSizeChange(event): void {
   this.load();
 }
 
+public handlePageChange(event): void {
+  this.page = event;
+  this.load();
+
+}
+
 reset(): void {
   this.nameFilter = '';
   this.descriptionFilter = '';
