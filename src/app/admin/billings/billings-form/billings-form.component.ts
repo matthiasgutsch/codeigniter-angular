@@ -161,9 +161,9 @@ export class BillingsFormComponent implements OnInit {
 
     this.getProductsVariations();
     this.getselectedWorks;
-  
 
-    
+
+
     this.worksService.getAllListbyUser().subscribe(
       (data: Works) => (this.works = data),
       (error) => (this.error = error)
@@ -180,8 +180,8 @@ export class BillingsFormComponent implements OnInit {
       (data: Company) => (this.company = data),
       (error) => (this.error = error)
     );
-   
- 
+
+
 
     const id = this.route.snapshot.paramMap.get("id");
 
@@ -225,14 +225,14 @@ export class BillingsFormComponent implements OnInit {
           is_paid: res.is_paid,
           total: res.total,
         });
-    
+
         this.id = res.id;
         this.is_paid = res.is_paid;
 
       });
     } else {
       this.pageTitle = "Aggiungi Fattura / Ricevuta";
-      
+
     }
 
     this.blogForm = this.fb.group({
@@ -272,12 +272,12 @@ export class BillingsFormComponent implements OnInit {
           filtered.push(productsVariation);
         }
       }
-  
+
       this.filteredProductsVariations = filtered;
-      
+
     }
 
-    
+
   generatePDF(action = 'open') {
     const format = 'dd/MM/yyyy';
     const formatYear = 'yyyy';
@@ -290,7 +290,20 @@ export class BillingsFormComponent implements OnInit {
     let docDefinition = {
       layout: 'headerLineOnly', // optional
 
-      
+      header: function(currentPage, pageCount, pageSize) {
+        // you can apply any logic and return any valid pdfmake element
+
+        return [
+          { text: '', alignment: (currentPage % 2) ? 'left' : 'left' },
+        ]
+      },
+
+      footer: {
+        columns: [
+          { text: '', alignment: 'right' }
+        ]
+      },
+
       content: [
 
         {
@@ -309,7 +322,7 @@ export class BillingsFormComponent implements OnInit {
           text: '' + this.company.name + '',
           fontSize: 12,
           alignment: 'left',
-          margin: [0, 20 ,0, 0],        
+          margin: [0, 20 ,0, 0],
 
           bold: true,
 
@@ -330,7 +343,7 @@ export class BillingsFormComponent implements OnInit {
         {
           text: 'Cliente',
           bold: true,
-          margin: [0, 20 ,0, 0],        
+          margin: [0, 20 ,0, 0],
 
         },
         {
@@ -348,22 +361,22 @@ export class BillingsFormComponent implements OnInit {
               {
                 text: 'Data: '+ formattedDate +'',
                 alignment: 'right',
-                
+
               },
-              { 
+              {
                 text: 'Numero Fattura: ' + this.idBilling + '/'+ formattedDateYear + '',
                 bold: true,
                 alignment: 'right',
-                
+
               }
             ]
           ]
         },
-      
+
         {
           text: 'Note',
           bold: true,
-          margin: [0, 20 ,0, 0],        
+          margin: [0, 20 ,0, 0],
 
         },
         {
@@ -374,11 +387,11 @@ export class BillingsFormComponent implements OnInit {
           text: 'Dettagli Fattura',
           style: 'sectionHeader'
         },
-        
+
         { layout: 'lightHorizontalLines',
           table: {
             headerRows: 1,
-  
+
             widths: ['*', 'auto', 'auto', 'auto'],
             body: [
               ['Posizione', 'Qty', 'Prezzo', 'Totale'],
@@ -391,9 +404,9 @@ export class BillingsFormComponent implements OnInit {
         },
         {
             text: this.additionalDetails,
-            margin: [0, 0 ,0, 25]          
+            margin: [0, 0 ,0, 25]
         },
-       
+
         {
           "canvas": [{
             "lineColor": "gray",
@@ -409,10 +422,10 @@ export class BillingsFormComponent implements OnInit {
         {
           columns: [
             //[{ qr: `${this.description}`, fit: '50' }],
-            [{ text: 'Firma', 
-            alignment: 'left', 
+            [{ text: 'Firma',
+            alignment: 'left',
             italics: false,
-            margin: [0, 5 ,15, 0]          
+            margin: [0, 5 ,15, 0]
           }],
           ]
         },
@@ -420,7 +433,7 @@ export class BillingsFormComponent implements OnInit {
           text: 'Condizioni',
           fontSize: 12,
           bold: true,
-          margin: [0, 25 ,15, 0]          
+          margin: [0, 25 ,15, 0]
 
         },
         {
@@ -434,7 +447,7 @@ export class BillingsFormComponent implements OnInit {
           bold: true,
           decoration: 'underline',
           fontSize: 14,
-          margin: [0, 15,0, 15]          
+          margin: [0, 15,0, 15]
         }
       }
     };
@@ -442,31 +455,31 @@ export class BillingsFormComponent implements OnInit {
     if(action==='download'){
       pdfMake.createPdf(docDefinition).download('Fattura-' + this.idBilling + '.pdf');
     }else if(action === 'print'){
-      pdfMake.createPdf(docDefinition).print();      
+      pdfMake.createPdf(docDefinition).print();
     }else{
-      pdfMake.createPdf(docDefinition).open();      
+      pdfMake.createPdf(docDefinition).open();
     }
 
   }
 
-  
+
   getselectedWorks() {
     this.selectedWorks = this.works_id.split(',');
     }
-  
-    
+
+
   changed(value){
       this.descriptionBillings = value.target.value
   }
 
   changedNumber(value){
     this.idBilling = value.target.value;
-}  
+}
 
   changeTime(value){
       this.dateAppointments = value.target.value
     }
-    
+
   onSelectedFile(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -484,7 +497,7 @@ export class BillingsFormComponent implements OnInit {
     return this.clients.find((item) => item.id === categoryAppointments);
   }
 
-  
+
   getWorksItem(works_id: string, id: string) {
     return this.works.find(item => item.id === works_id);
   }
@@ -528,16 +541,16 @@ export class BillingsFormComponent implements OnInit {
       qty: [''],
       price: ['']
     })) */
-    
+
 
     return formArray;
   }
 
-   
+
   private createSkillFormGroup(skill:any): FormGroup{
     return new FormGroup({
       'qty':new FormControl(skill.qty),
-      'price':new FormControl(skill.price), 
+      'price':new FormControl(skill.price),
       'itemTotal':new FormControl(skill.itemTotal)
     })
   }
@@ -550,9 +563,9 @@ export class BillingsFormComponent implements OnInit {
   get skills() {
     return this.blogForm.get('skills') as FormArray;
   }
-  
-  
-  
+
+
+
   itemsChanged(): void {
     let total: number = 0;
     for (let t = 0; t < (<FormArray>this.blogForm.get('skills')).length; t++) {
@@ -572,14 +585,14 @@ export class BillingsFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get("id");
     moveItemInArray(this.skillsValues, event.previousIndex, event.currentIndex);
     this.updateSkills(event, id);
-    
+
   }
 
 
   updateSkills(event, id) {
     const formData = new FormData();
     formData.append('skills', JSON.stringify(this.skillsValues));
-    
+
     this.billingsService.update_skills(formData, +id).subscribe({
       next: (response: any) => {
         if (response.error) {
@@ -631,7 +644,7 @@ export class BillingsFormComponent implements OnInit {
         (error) => (this.error = error)
       );
   }
-  
+
   newQuantity(): FormGroup {
     const numberPatern = '^[0-9.,]+$';
     return this.fb.group({
@@ -639,14 +652,14 @@ export class BillingsFormComponent implements OnInit {
       qty: [1, [Validators.required, Validators.pattern(numberPatern)]],
       price: ['', [Validators.required, Validators.pattern(numberPatern)]],
       itemTotal: [''],
-      
+
     })
   }
-   
+
   addQuantity(event) {
     this.skills.push(this.newQuantity());
   }
-   
+
   removeQuantity(i: number): void {
     let totalCostOfItem = this.blogForm.get('skills')?.value[i].qty * this.blogForm.get('skills')?.value[i].price;
     this.subTotal = this.subTotal - totalCostOfItem;
@@ -654,7 +667,7 @@ export class BillingsFormComponent implements OnInit {
     this.grandTotal = this.subTotal + this.vat;
     (<FormArray>this.blogForm.get('skills')).removeAt(i);
   }
-  
+
   get total_sum() {
     return this.itemTotal.reduce((total, fee) => total + fee.balance, 0);
 }
@@ -694,7 +707,7 @@ export class BillingsFormComponent implements OnInit {
           }
         },
         (error) => (this.error = error)
-      ); 
+      );
     } else {
       this.billingsService.create(formData).subscribe(
         (res) => {
