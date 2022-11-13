@@ -1,4 +1,11 @@
-import { Controller, Get, UseGuards, Request } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  UseGuards,
+  Request,
+  ClassSerializerInterceptor,
+  UseInterceptors,
+} from '@nestjs/common';
 import { AccessTokenGuard } from '../auth/guards/accessToken.guard';
 import { UsersService } from './users.service';
 import {
@@ -8,8 +15,6 @@ import {
   ApiHeader,
 } from '@nestjs/swagger';
 import { User } from './user.entity';
-
-type UserWithoutPassword = Omit<User, 'password'>;
 
 @Controller('users')
 export class UsersController {
@@ -25,11 +30,10 @@ export class UsersController {
   })
   @Get('profile')
   @UseGuards(AccessTokenGuard)
-  async profile(@Request() req): Promise<UserWithoutPassword> {
+  @UseInterceptors(ClassSerializerInterceptor)
+  async profile(@Request() req): Promise<User> {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password: _, ...rest } = await this.usersService.findOne(
-      req.user.username,
-    );
-    return rest;
+    const user = await this.usersService.findOne(req.user.username);
+    return new User(user);
   }
 }

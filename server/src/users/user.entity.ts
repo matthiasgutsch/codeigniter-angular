@@ -6,9 +6,13 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class User {
+  constructor(partial: Partial<User>) {
+    Object.assign(this, partial);
+  }
   @ApiProperty({ example: 1, description: 'The Id of user', nullable: false })
   @PrimaryGeneratedColumn()
   id: number;
@@ -21,6 +25,7 @@ export class User {
   @Column({ unique: true })
   username: string;
 
+  @Exclude()
   @ApiProperty({
     example: 'password',
     description: 'The password',
@@ -45,6 +50,7 @@ export class User {
   @Column({ nullable: true, name: 'last_name' })
   lastName?: string;
 
+  @Exclude()
   @ApiProperty({
     example: 'jfksajfa',
     description: 'The refresh token',
