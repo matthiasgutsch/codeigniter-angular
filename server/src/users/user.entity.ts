@@ -46,6 +46,14 @@ export class User {
   lastName?: string;
 
   @ApiProperty({
+    example: 'jfksajfa',
+    description: 'The refresh token',
+    nullable: true,
+  })
+  @Column({ nullable: true, name: 'refresh_token' })
+  refreshToken?: string;
+
+  @ApiProperty({
     example: true,
     description: 'If the user is active',
     nullable: true,

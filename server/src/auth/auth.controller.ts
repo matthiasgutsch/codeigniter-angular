@@ -1,8 +1,11 @@
-import { Body, Controller, Post, UseGuards, Request } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { User } from '../users/user.entity';
+import { User, UserModel } from '../decorators/user.decorator';
+import { User as UserEntity } from '../users/user.entity';
 import { UsersService } from '../users/users.service';
 import { AuthService } from './auth.service';
+import { AccessTokenGuard } from './guards/accessToken.guard';
+import { RefreshTokenGuard } from './guards/refreshToken.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -13,12 +16,24 @@ export class AuthController {
 
   @UseGuards(AuthGuard('local'))
   @Post('login')
-  async login(@Request() resp) {
-    return this.authService.login(resp.user);
+  async login(@User() user: UserModel) {
+    return this.authService.login(user);
   }
 
   @Post('signup')
-  async register(@Body() user: User) {
+  async register(@Body() user: UserEntity) {
     return this.userService.createUser(user);
+  }
+
+  @UseGuards(AccessTokenGuard)
+  @Get('logout')
+  async logout(@User() user: UserModel) {
+    return this.userService.removeRefreshToken(user.username);
+  }
+
+  @UseGuards(RefreshTokenGuard)
+  @Get('refresh')
+  async refreshTokens(@User() user: UserModel & { refreshToken: string }) {
+    return this.authService.refreshTokens(user.username, user.refreshToken);
   }
 }

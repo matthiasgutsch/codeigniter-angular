@@ -51,4 +51,16 @@ export class UsersService {
       }
     }
   }
+
+  async saveRefreshToken(username: string, refreshToken: string) {
+    const hashedRefreshToken = await hash(refreshToken, saltOrRounds);
+    await this.usersRepository.update(
+      { username },
+      { refreshToken: hashedRefreshToken },
+    );
+  }
+
+  async removeRefreshToken(username: string) {
+    await this.usersRepository.update({ username }, { refreshToken: null });
+  }
 }
