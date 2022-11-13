@@ -15,14 +15,12 @@ export class AuthService {
     if (user && (await compare(password, user.password))) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password: _, ...result } = user;
-      console.log('result', result);
       return { ...result };
     }
     return null;
   }
 
   async login(user: any) {
-    console.log('login', user);
     const payload = { username: user.username, id: user.id };
     return {
       access_token: this.jwtService.sign(payload),
