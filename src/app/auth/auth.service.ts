@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { plainToInstance } from "class-transformer";
-import { Subject, Subscription, throwError } from "rxjs";
+import { Subject, throwError } from "rxjs";
 import { catchError, finalize, map } from "rxjs/operators";
 import { environment } from "../../environments/environment";
 import { Tokens, User } from "./auth.type";

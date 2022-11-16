@@ -156,7 +156,7 @@ export class EmployeesTimesheetsComponent implements OnInit {
     const dateObj = new Date();
     const yearMonth = dateObj.getUTCFullYear() + '-' + (dateObj.getUTCMonth() + 1);
 
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.spinner.show();
 
 
@@ -267,9 +267,9 @@ export class EmployeesTimesheetsComponent implements OnInit {
     this.employeeFilter = '';
 
     this.load();
-    
+
   }
-  
+
   onChangePage(pageOfItems: Array<any>) {
     // update current page of items
     this.pageOfItems = pageOfItems;
@@ -285,7 +285,7 @@ export class EmployeesTimesheetsComponent implements OnInit {
   public handlePageChange(event): void {
     this.page = event;
     this.load();
-  
+
   }
 
 
@@ -300,7 +300,7 @@ export class EmployeesTimesheetsComponent implements OnInit {
       e.value.pop();
     }
   }
-  
+
 
   createTimesheets(employee: Employees) {
     this.productDialogAdd = true;
@@ -316,7 +316,7 @@ export class EmployeesTimesheetsComponent implements OnInit {
       hours: ["", Validators.required],
       hours_extra: ["", Validators.required],
       employee_id: [this.employee.id],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
     });
 
 
@@ -325,7 +325,7 @@ export class EmployeesTimesheetsComponent implements OnInit {
 
 
   getVacationsCountEmployee(id) {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.timesheetsService.count_total_vacations_timesheets_employee(id).subscribe(
       (data: Timesheets) => this.vacationsCount = data,
       error => this.error = error
@@ -333,7 +333,7 @@ export class EmployeesTimesheetsComponent implements OnInit {
   }
 
   getPermissionsCountEmployee(id) {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.timesheetsService.count_total_permissions_timesheets_employee(id).subscribe(
       (data: Timesheets) => this.permissionsCount = data,
       error => this.error = error
@@ -456,7 +456,7 @@ export class EmployeesTimesheetsComponent implements OnInit {
           hours: res.hours,
           employee_id: res.employee_id,
           hours_extra: res.hours_extra,
-          user_id: this.currentUser.user_id,
+          user_id: this.currentUser.id,
           id: res.id,
         });
 
@@ -474,7 +474,7 @@ export class EmployeesTimesheetsComponent implements OnInit {
       hours: ["", Validators.required],
       hours_extra: ["", Validators.required],
       employee_id: [this.employee.id],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
     });
 
     this.productDialogAdd = true;

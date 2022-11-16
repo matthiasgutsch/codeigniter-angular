@@ -146,19 +146,19 @@ export class OrdersFormComponent implements OnInit {
 
     this.typeList = TYPE_LIST;
     this.fiscaltype = 0;
-    
+
   }
   @ViewChild('reportContent') reportContent: ElementRef;
 
   ngOnInit() {
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.page = history.state;
 
 
     this.getselectedWorks;
-  
+
 
     this.worksService.getAllListbyUser().subscribe(
       (data: Works) => (this.works = data),
@@ -176,7 +176,7 @@ export class OrdersFormComponent implements OnInit {
       (data: Company) => (this.company = data),
       (error) => (this.error = error)
     );
-   
+
     this.companyService.getId(userId).subscribe(value => {
       this.fiscaltype = this.company.fiscaltype;
     });
@@ -224,7 +224,7 @@ export class OrdersFormComponent implements OnInit {
           category_id: res.category_id,
           order_id: res.order_id,
           works_id: res.works_id.split(','),
-          user_id: this.currentUser.user_id,
+          user_id: this.currentUser.id,
           is_featured: res.is_featured,
           date: res.date,
           id: res.id,
@@ -234,7 +234,7 @@ export class OrdersFormComponent implements OnInit {
           total: res.total,
 
         });
-    
+
 
       });
     } else {
@@ -248,7 +248,7 @@ export class OrdersFormComponent implements OnInit {
       order_id: [""],
       category_id: [""],
       works_id: [""],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
       is_featured: ["0"],
       date: ["", Validators.required],
       skills: this.initSkill(this.skillsValues),
@@ -265,14 +265,14 @@ export class OrdersFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get("id");
     moveItemInArray(this.skillsValues, event.previousIndex, event.currentIndex);
     this.updateSkills(event, id);
-    
+
   }
 
 
   updateSkills(event, id) {
     const formData = new FormData();
     formData.append('skills', JSON.stringify(this.skillsValues));
-    
+
     this.ordersService.update_skills(formData, +id).subscribe({
       next: (response: any) => {
         if (response.error) {
@@ -312,8 +312,8 @@ export class OrdersFormComponent implements OnInit {
   getselectedWorks() {
     this.selectedWorks = this.works_id.split(',');
     }
-  
-    
+
+
   changed(value){
       this.descriptionOrders = value.target.value
     }
@@ -321,7 +321,7 @@ export class OrdersFormComponent implements OnInit {
   changeTime(value){
       this.dateOrders =  new Date();
     }
-    
+
   onSelectedFile(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -350,7 +350,7 @@ export class OrdersFormComponent implements OnInit {
   }
 
 
-  
+
 
   removeImageFile() {
     this.imagePath = "";
@@ -386,16 +386,16 @@ export class OrdersFormComponent implements OnInit {
       qty: [''],
       price: ['']
     })) */
-    
+
 
     return formArray;
   }
 
-   
+
   private createSkillFormGroup(skill:any): FormGroup{
     return new FormGroup({
       'qty':new FormControl(skill.qty),
-      'price':new FormControl(skill.price), 
+      'price':new FormControl(skill.price),
       'itemTotal':new FormControl(skill.itemTotal)
     })
   }
@@ -408,9 +408,9 @@ export class OrdersFormComponent implements OnInit {
   get skills() {
     return this.blogForm.get('skills') as FormArray;
   }
-  
-  
-  
+
+
+
   itemsChanged(): void {
     let total: number = 0;
     for (let t = 0; t < (<FormArray>this.blogForm.get('skills')).length; t++) {
@@ -424,7 +424,7 @@ export class OrdersFormComponent implements OnInit {
 
   }
 
-  
+
   newQuantity(): FormGroup {
     const numberPatern = '^[0-9.,]+$';
     return this.fb.group({
@@ -432,14 +432,14 @@ export class OrdersFormComponent implements OnInit {
       qty: [1, [Validators.required, Validators.pattern(numberPatern)]],
       price: ['', [Validators.required, Validators.pattern(numberPatern)]],
       itemTotal: [''],
-      
+
     })
   }
-   
+
   addQuantity(event) {
     this.skills.push(this.newQuantity());
   }
-   
+
   removeQuantity(i: number): void {
     let totalCostOfItem = this.blogForm.get('skills')?.value[i].qty * this.blogForm.get('skills')?.value[i].price;
     this.subTotal = this.subTotal - totalCostOfItem;
@@ -447,7 +447,7 @@ export class OrdersFormComponent implements OnInit {
     this.grandTotal = this.subTotal + this.vat;
     (<FormArray>this.blogForm.get('skills')).removeAt(i);
   }
-  
+
   get total_sum() {
     return this.itemTotal.reduce((total, fee) => total + fee.balance, 0);
 }
@@ -465,7 +465,7 @@ generatePDF(action = 'open') {
   let docDefinition = {
     layout: 'headerLineOnly', // optional
 
-    
+
     content: [
 
       {
@@ -484,7 +484,7 @@ generatePDF(action = 'open') {
         text: '' + this.company.name + '',
         fontSize: 12,
         alignment: 'left',
-        margin: [0, 20 ,0, 0],        
+        margin: [0, 20 ,0, 0],
 
         bold: true,
 
@@ -505,7 +505,7 @@ generatePDF(action = 'open') {
       {
         text: 'Cliente',
         bold: true,
-        margin: [0, 20 ,0, 0],        
+        margin: [0, 20 ,0, 0],
 
       },
       {
@@ -523,22 +523,22 @@ generatePDF(action = 'open') {
             {
               text: 'Data: '+ formattedDate +'',
               alignment: 'right',
-              
+
             },
-            { 
+            {
               text: 'Numero Ordine: ' + this.idBilling + '/'+ formattedDateYear + '',
               bold: true,
               alignment: 'right',
-              
+
             }
           ]
         ]
       },
-    
+
       {
         text: 'Note',
         bold: true,
-        margin: [0, 20 ,0, 0],        
+        margin: [0, 20 ,0, 0],
 
       },
       {
@@ -549,7 +549,7 @@ generatePDF(action = 'open') {
         text: 'Dettagli Ordine',
         style: 'sectionHeader'
       },
-      
+
       { layout: 'lightHorizontalLines',
         table: {
           headerRows: 1,
@@ -566,9 +566,9 @@ generatePDF(action = 'open') {
       },
       {
           text: this.additionalDetails,
-          margin: [0, 0 ,0, 25]          
+          margin: [0, 0 ,0, 25]
       },
-     
+
       {
         "canvas": [{
           "lineColor": "gray",
@@ -584,10 +584,10 @@ generatePDF(action = 'open') {
       {
         columns: [
           //[{ qr: `${this.description}`, fit: '50' }],
-          [{ text: 'Firma', 
-          alignment: 'left', 
+          [{ text: 'Firma',
+          alignment: 'left',
           italics: false,
-          margin: [0, 5 ,15, 0]          
+          margin: [0, 5 ,15, 0]
         }],
         ]
       },
@@ -595,7 +595,7 @@ generatePDF(action = 'open') {
         text: 'Condizioni',
         fontSize: 12,
         bold: true,
-        margin: [0, 25 ,15, 0]          
+        margin: [0, 25 ,15, 0]
 
       },
       {
@@ -609,7 +609,7 @@ generatePDF(action = 'open') {
         bold: true,
         decoration: 'underline',
         fontSize: 14,
-        margin: [0, 15,0, 15]          
+        margin: [0, 15,0, 15]
       }
     }
   };
@@ -617,9 +617,9 @@ generatePDF(action = 'open') {
   if(action==='download'){
     pdfMake.createPdf(docDefinition).download('Ordine-' + this.idBilling + '.pdf');
   }else if(action === 'print'){
-    pdfMake.createPdf(docDefinition).print();      
+    pdfMake.createPdf(docDefinition).print();
   }else{
-    pdfMake.createPdf(docDefinition).open();      
+    pdfMake.createPdf(docDefinition).open();
   }
 
 }
@@ -663,12 +663,12 @@ createBilling() {
               this.uploadError = res.message;
             } else {
               const currentUrl = this.router.url;
-    
-              
+
+
               this.messageService.add({ key: 'myKey1', severity: 'info', summary: 'Attenzione', detail: 'Futtura / Ricevuta creata con successo' });
               this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
                 this.router.navigate([currentUrl]);
-                
+
             });
             }
           },
@@ -711,7 +711,7 @@ createBilling() {
           }
         },
         (error) => (this.error = error)
-      ); 
+      );
     } else {
       this.ordersService.create(formData).subscribe(
         (res) => {

@@ -136,7 +136,7 @@ timesheetsType: any;
     private clientsService: ClientsService,
     private timesheetsService: TimesheetsService,
     private worksService: WorksService,
-    private locationsService: LocationsService, 
+    private locationsService: LocationsService,
     private messageService: MessageService,
     private employeesService: EmployeesService,
     private comuniService: ComuniService,
@@ -145,9 +145,9 @@ timesheetsType: any;
     private fb: FormBuilder,
     private technicalDataService: TechnicalDataService,
     private spinner: NgxSpinnerService,
-    private categoryService: CategoryService, 
+    private categoryService: CategoryService,
     private projectsService: ProjectsService,
-    private confirmationService: ConfirmationService,) { 
+    private confirmationService: ConfirmationService,) {
       this.status = STATUS_PRODUCTS;
       this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
       this.timesheets_type = TIMESHEETS_TYPE;
@@ -158,7 +158,7 @@ timesheetsType: any;
     const dateObj = new Date();
     const yearMonth = dateObj.getUTCFullYear() + '-' + (dateObj.getUTCMonth() + 1);
 
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.spinner.show();
     this.getProjects();
     this.getEmployees();
@@ -191,9 +191,9 @@ timesheetsType: any;
   public handlePageChange(event): void {
     this.page = event;
     this.load();
-  
+
   }
-  
+
     public selectionItemForFilter(e) {
       const colsTempor = e.value;
       colsTempor.sort(function (a, b) {
@@ -285,9 +285,9 @@ timesheetsType: any;
     this.typeFilter = '';
     this.projectFilter = '';
     this.load();
-    
+
   }
-  
+
   onChangePage(pageOfItems: Array<any>) {
     // update current page of items
     this.pageOfItems = pageOfItems;
@@ -331,7 +331,7 @@ timesheetsType: any;
           hours: res.hours,
           employee_id: res.employee_id,
           hours_extra: res.hours_extra,
-          user_id: this.currentUser.user_id,
+          user_id: this.currentUser.id,
           id: res.id,
         });
 
@@ -349,12 +349,12 @@ timesheetsType: any;
       hours: ["", Validators.required],
       hours_extra: ["", Validators.required],
       employee_id: ["", Validators.required],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
     });
 
     this.productDialogAdd = true;
   }
-  
+
   createTimesheets(employee: Employees) {
     this.productDialogAdd = true;
     this.pageTitle = "Aggiungi Timesheet";
@@ -368,7 +368,7 @@ timesheetsType: any;
       hours: ["", Validators.required],
       hours_extra: ["", Validators.required],
       employee_id: ["", Validators.required],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
     });
 
 
@@ -445,15 +445,15 @@ timesheetsType: any;
   }
 
 
-  clear(table: any) 
+  clear(table: any)
   {
-    
+
       //  THIS DOES NOT WORK!!   Filter stops working after clearing
       table.clear();
-      
-	} 
-    
- 
+
+	}
+
+
 
   getBrandItem(brand_id: string, id: string) {
     return this.brands.find(item => item.id === brand_id);
@@ -482,13 +482,13 @@ timesheetsType: any;
     return this.works.find(item => item.id === works_id);
   }
 
-  
+
 
 
 
 view(timesheet: Timesheets) {
   this.timesheet = { ...timesheet };
-  
+
   this.productDialog = true;
 }
 
@@ -590,10 +590,10 @@ hideDialog() {
           error => this.error = error
         );
       },
-     
+
   });
 
-   
+
   }
 
 }

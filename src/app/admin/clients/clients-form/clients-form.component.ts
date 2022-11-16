@@ -74,7 +74,7 @@ export class ClientsFormComponent implements OnInit {
   cols: any[];
   exportColumns: any[];
   _selectedColumns: any[];
-  businessStateOptions: any[]; 
+  businessStateOptions: any[];
   personal_datas: any = [];
   personal_data: Personal_data;
   personName: string;
@@ -89,7 +89,7 @@ export class ClientsFormComponent implements OnInit {
     private messageService: MessageService,
     private personalDataService: PersonalDataService,
     private categoryService: CategoryService,
-    private comuniService: ComuniService,    
+    private comuniService: ComuniService,
     private _location: Location,
     private appointmentsService: AppointmentsService,
     private billingsService: BillingsService,
@@ -118,7 +118,7 @@ export class ClientsFormComponent implements OnInit {
 
     this.spinner.show();
 
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.getClientList();
 
     this.comuniService.getAllList().subscribe(
@@ -134,11 +134,11 @@ export class ClientsFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get("id");
 
 
-    
+
     if (id) {
       this.pageTitle = "Modifica Cliente";
       this.deleteButton = true;
-      
+
       this.appointmentsService.find_client(+id).subscribe(
         (data: Appointments) => (this.appointments = data),
         (error) => (this.error = error)
@@ -150,7 +150,7 @@ export class ClientsFormComponent implements OnInit {
       );
 
       this.clientsService.getId(+id).subscribe((res) => {
-        if (res.user_id == this.currentUser.user_id) {
+        if (res.user_id == this.currentUser.id) {
         this.blogForm.patchValue({
           name: res.name,
           surname: res.surname,
@@ -165,7 +165,7 @@ export class ClientsFormComponent implements OnInit {
           fiscalcode: res.fiscalcode,
           fiscalnumber: res.fiscalnumber,
           description: res.description,
-          user_id: this.currentUser.user_id,
+          user_id: this.currentUser.id,
           category_id: res.category_id,
           is_featured: res.is_featured,
           is_active: res.is_active,
@@ -206,7 +206,7 @@ export class ClientsFormComponent implements OnInit {
       fiscalnumber: new FormControl(""),
       description: [""],
       is_featured: ["0"],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
       category_id: ["", Validators.required],
       is_active: ["0"],
       image: [""],
@@ -216,11 +216,11 @@ export class ClientsFormComponent implements OnInit {
 
 
   this.spinner.hide();
- 
+
 
 
   }
-  
+
 
   onSelectedFile(event) {
     if (event.target.files.length > 0) {
@@ -252,10 +252,10 @@ export class ClientsFormComponent implements OnInit {
 
 
   removeQuantity(i:number) {
-    
+
     this.skills.removeAt(i);
   }
-  
+
   getCategoryItem(category_id: string, id: string) {
     return this.categories.find((item) => item.id === category_id);
   }
@@ -315,12 +315,12 @@ export class ClientsFormComponent implements OnInit {
       qty: [''],
       price: ['']
     })) */
-    
+
 
     return formArray;
   }
 
-   
+
   private createSkillFormGroup(skill:any): FormGroup{
     return new FormGroup({'qty':new FormControl(skill.qty),'price':new FormControl(skill.price)})
   }
@@ -333,7 +333,7 @@ export class ClientsFormComponent implements OnInit {
   get skills() {
     return this.blogForm.get('skills') as FormArray;
   }
-   
+
 
   newQuantity(): FormGroup {
     return this.fb.group({
@@ -341,11 +341,11 @@ export class ClientsFormComponent implements OnInit {
       price: "",
     })
   }
-   
+
   addQuantity() {
     this.skills.push(this.newQuantity());
   }
-  
+
   removeImageFile() {
     this.imagePath = "";
     console.log(this.myInputVariable.nativeElement.files);
@@ -357,7 +357,7 @@ export class ClientsFormComponent implements OnInit {
     return this.blogForm.get("title");
   }
 
-  
+
 
   get id() {
     return this.blogForm.get("id").value;

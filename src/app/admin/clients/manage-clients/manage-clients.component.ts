@@ -73,13 +73,13 @@ export class ManageClientsComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
 
-   
+
 
     this.spinner.show();
       this.load();
-      
+
       this.cols = [
         { field: "name", header: "Nome" },
         { field: "surname", header: "Cognome" },
@@ -87,7 +87,7 @@ export class ManageClientsComponent implements OnInit {
         { field: "date", header: "Data di nascità" },
         { field: "phone", header: "Cellulare" },
         { field: "city", header: "Indirizzo" }
-  
+
       ];
       this._selectedColumns = this.cols;
       this.exportColumns = this.cols.map(col => ({

@@ -33,13 +33,13 @@ export class ManageCategoriesComponent implements OnInit {
   searchWrapper: boolean = false;
   @ViewChild('dt', { static: true }) dt: Table;
   currentUser: any;
-  
+
   constructor(
-    private categoryService: CategoryService, 
+    private categoryService: CategoryService,
     private router: Router,
     private route: ActivatedRoute,
 
-    private confirmationService: ConfirmationService,) { 
+    private confirmationService: ConfirmationService,) {
 
 
     this.cols = [
@@ -55,7 +55,7 @@ export class ManageCategoriesComponent implements OnInit {
 
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
 
 
   }
@@ -155,7 +155,7 @@ export class ManageCategoriesComponent implements OnInit {
       this.count = this.categoryService.size;
 
     });
-  }   
+  }
 
 
   editProduct(category: Category) {

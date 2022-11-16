@@ -90,7 +90,7 @@ export class ManageAppointmentsComponent implements OnInit {
   descriptionFilter: string;
 
 
-  
+
   trackByFn(index, item) {
     return item.id;
   }
@@ -132,7 +132,7 @@ export class ManageAppointmentsComponent implements OnInit {
   }
 
   ngOnInit() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
 
 
     this.basePath = window.location.pathname;
@@ -148,7 +148,7 @@ export class ManageAppointmentsComponent implements OnInit {
     if (this.route.snapshot.queryParamMap.has('description')) {
       this.descriptionFilter = this.route.snapshot.queryParamMap.get('description');
     }
-    
+
       this.getWorks();
       this.getAppointmentType();
       this.load();
@@ -186,7 +186,7 @@ export class ManageAppointmentsComponent implements OnInit {
 
   }
 
-  
+
   load(): void {
 
     const params = this.getRequestParams(
@@ -212,15 +212,15 @@ export class ManageAppointmentsComponent implements OnInit {
     this.nameFilter = '';
     this.descriptionFilter = '';
     this.load();
-    
+
   }
-  
+
   public handlePageChange(event): void {
     this.page = event;
     this.load();
-  
+
   }
-  
+
 
 
   onChangePage(pageOfItems: Array<any>) {
@@ -242,7 +242,7 @@ export class ManageAppointmentsComponent implements OnInit {
   }
 
   getLocations() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.locationsService.getAllList().subscribe(
       (data: Locations) => this.locations = data,
       error => this.error = error
@@ -250,7 +250,7 @@ export class ManageAppointmentsComponent implements OnInit {
   }
 
   getCategories() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.categoryService.getAllList().subscribe(
       (data: Category) => this.categories = data,
       error => this.error = error

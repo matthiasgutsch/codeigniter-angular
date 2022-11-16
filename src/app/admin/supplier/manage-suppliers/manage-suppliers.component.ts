@@ -71,9 +71,9 @@ export class ManageSuppliersComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
 
-   
+
 
     this.spinner.show();
     this.load();
@@ -83,7 +83,7 @@ export class ManageSuppliersComponent implements OnInit {
         { field: "address", header: "Indirizzo" },
         { field: "phone", header: "Cellulare" },
         { field: "city", header: "Indirizzo" }
-  
+
       ];
       this._selectedColumns = this.cols;
       this.exportColumns = this.cols.map(col => ({

@@ -37,7 +37,7 @@ export class EmployeesTasksComponent implements OnInit {
   @Input() cancel: boolean = false;
   @Input() edit: boolean = false;
 
-  
+
   pageTitle: string;
   error: string;
   uploadError: string;
@@ -59,7 +59,7 @@ export class EmployeesTasksComponent implements OnInit {
   busy2: Subscription;
   subscription: Subscription;
 
-  
+
   clientsList: any = [];
   clientList: Clients;
 
@@ -95,7 +95,7 @@ export class EmployeesTasksComponent implements OnInit {
   cols: any[];
   exportColumns: any[];
   _selectedColumns: any[];
-  businessStateOptions: any[]; 
+  businessStateOptions: any[];
   personal_datas: any = [];
   personal_data: Personal_data;
   personName: string;
@@ -117,7 +117,7 @@ export class EmployeesTasksComponent implements OnInit {
     private messageService: MessageService,
     private personalDataService: PersonalDataService,
     private categoryService: CategoryService,
-    private comuniService: ComuniService,    
+    private comuniService: ComuniService,
     private _location: Location,
     private appointmentsService: AppointmentsService,
     private tasksService: TasksService,
@@ -141,7 +141,7 @@ export class EmployeesTasksComponent implements OnInit {
 
     this.spinner.show();
 
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
 
     this.employees = {
       id:this.route.snapshot.params['id'],
@@ -168,11 +168,11 @@ export class EmployeesTasksComponent implements OnInit {
 
     this.getTasks(id);
     this.spinner.hide();
- 
+
 
 
   }
-  
+
 
   dropDonePriorityTasksList(event: CdkDragDrop<string[]>) {
     event.item.data.priority = 4;
@@ -200,7 +200,7 @@ export class EmployeesTasksComponent implements OnInit {
     const id = event.item.data.id;
     const formData = new FormData();
     formData.set('priority', event.item.data.priority);
-    
+
     this.busy2 = this.tasksService.update_priority_employee(formData, +id).subscribe({
       next: (response: any) => {
         if (response.error) {
@@ -252,7 +252,7 @@ export class EmployeesTasksComponent implements OnInit {
     this.subscription = this.tasksService.find_tasks_employee(+id).subscribe({
     next: (response: any) => {
       if (response.error) {
-        
+
       } else {
         response.forEach((task) => {
           if (task.priority === '4') {
@@ -275,14 +275,14 @@ export class EmployeesTasksComponent implements OnInit {
   this.backupMediumPriorityTasks = this.mediumPriorityTasks;
 
  }
-  
 
 
-  
+
+
   viewItem(task: Task) {
     this.task = { ...task };
     const id = task.id;
-    
+
     this.tasksService.getId(+id).subscribe((data) => {
      this.task = data,
       error => this.error = error
@@ -324,13 +324,13 @@ export class EmployeesTasksComponent implements OnInit {
   }
 
 
-   
+
 
   get title() {
     return this.blogForm.get("title");
   }
 
-  
+
 
   get id() {
     return this.blogForm.get("id").value;

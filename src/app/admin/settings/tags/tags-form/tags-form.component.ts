@@ -75,7 +75,7 @@ export class TagsFormComponent implements OnInit {
             category_name: res.category_name,
             category_description: res.category_description,
             category_seo_url: res.category_seo_url,
-            user_id: this.currentUser.user_id,
+            user_id: this.currentUser.id,
             id: res.id
           });
 
@@ -90,7 +90,7 @@ export class TagsFormComponent implements OnInit {
       category_name: ['', Validators.required],
       category_description: [''],
       category_seo_url: [''],
-      user_id: [this.currentUser.user_id]
+      user_id: [this.currentUser.id]
 
     });
   }

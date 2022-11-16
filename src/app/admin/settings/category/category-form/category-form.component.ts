@@ -81,7 +81,7 @@ export class CategoryFormComponent implements OnInit {
             category_description: res.category_description,
             category_seo_url: res.category_seo_url,
             is_active: res.is_active,
-            user_id: this.currentUser.user_id,
+            user_id: this.currentUser.id,
             id: res.id
           });
 
@@ -97,7 +97,7 @@ export class CategoryFormComponent implements OnInit {
       category_description: [''],
       category_seo_url: [''],
       is_active: ["0"],
-      user_id: [this.currentUser.user_id]
+      user_id: [this.currentUser.id]
 
     });
   }

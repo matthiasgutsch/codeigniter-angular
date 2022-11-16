@@ -41,7 +41,7 @@ export class ManageQuotesComponent implements OnInit {
   exportColumns: any[];
   _selectedColumns: any[];
 
-  
+
   @ViewChild("content", { static: false }) content: ElementRef;
   currentUser: any;
 
@@ -77,7 +77,7 @@ export class ManageQuotesComponent implements OnInit {
   ngOnInit() {
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
 
     this.spinner.show();
       this.load();
@@ -127,7 +127,7 @@ export class ManageQuotesComponent implements OnInit {
 
   }
 
-  
+
   load(): void {
 
     const params = this.getRequestParams(
@@ -153,15 +153,15 @@ export class ManageQuotesComponent implements OnInit {
     this.nameFilter = '';
     this.descriptionFilter = '';
     this.load();
-    
+
   }
-  
+
   public handlePageChange(event): void {
     this.page = event;
     this.load();
-  
+
   }
-  
+
 
 
   onChangePage(pageOfItems: Array<any>) {
@@ -175,14 +175,14 @@ export class ManageQuotesComponent implements OnInit {
   }
 
     getClients() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.clientsService.getAllListbyUser().subscribe(
       (data: Clients) => this.clients = data,
       error => this.error = error
     );
-  
+
     }
-  
+
     getComuni() {
   this.comuniService.getAllList().subscribe(
     (data: Comuni) => (this.comuni = data),
@@ -200,7 +200,7 @@ export class ManageQuotesComponent implements OnInit {
     return this.comuni.find((item) => item.id === category_id);
   }
 
-  
+
 
 
 edit(quote: Quotes) {

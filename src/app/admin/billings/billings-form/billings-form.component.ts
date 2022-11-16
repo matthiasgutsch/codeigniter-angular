@@ -156,7 +156,7 @@ export class BillingsFormComponent implements OnInit {
   ngOnInit() {
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.page = history.state;
 
     this.getProductsVariations();
@@ -214,7 +214,7 @@ export class BillingsFormComponent implements OnInit {
           category_id: res.category_id,
           appointment_id: res.appointment_id,
           works_id: res.works_id.split(','),
-          user_id: this.currentUser.user_id,
+          user_id: this.currentUser.id,
           is_featured: res.is_featured,
           date: res.date,
           id: res.id,
@@ -242,7 +242,7 @@ export class BillingsFormComponent implements OnInit {
       appointment_id: [""],
       category_id: [""],
       works_id: [""],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
       is_featured: ["0"],
       date: ["", Validators.required],
       skills: this.initSkill(this.skillsValues),

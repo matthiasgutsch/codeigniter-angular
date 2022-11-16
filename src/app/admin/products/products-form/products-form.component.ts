@@ -96,13 +96,13 @@ export class ProductsFormComponent implements OnInit {
 
   locations: any = [];
   location: Locations;
-  
+
   cities: Blog[];
   format1: string = "";
   format2: string = "";
   selectedCity: Blog;
   selectedClients: SelectItem[];
-  
+
   selectedDate: Date;
   date: Date;
   works_id: any;
@@ -123,7 +123,7 @@ export class ProductsFormComponent implements OnInit {
     return item.id;
   }
 
- 
+
 
   constructor(
     private fb: FormBuilder,
@@ -153,12 +153,12 @@ export class ProductsFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
 
     this.getselectedWorks;
     this.getselectedCategories;
 
-   
+
 
 
     this.technicalDataService.getAllListbyUser().subscribe(
@@ -209,18 +209,18 @@ export class ProductsFormComponent implements OnInit {
       this.colsData = [
         { field: "title", header: "titolo" },
         { field: "description", header: "Codice" },
-  
+
       ];
 
     });
 
     if (id) {
       this.pageTitle = "Modifica Prodotto";
-      
+
       this.productsService.getId(+id).subscribe((res) => {
 
-        
-        if (res.user_id == this.currentUser.user_id) {
+
+        if (res.user_id == this.currentUser.id) {
         this.blogForm.patchValue({
           title: res.title,
           description: res.description.split(','),
@@ -231,7 +231,7 @@ export class ProductsFormComponent implements OnInit {
           is_featured: res.is_featured,
           is_active: res.is_active,
           code: res.code,
-          user_id: this.currentUser.user_id,
+          user_id: this.currentUser.id,
           description_full: res.description_full,
           code_int: res.code_int,
           price: res.price,
@@ -241,7 +241,7 @@ export class ProductsFormComponent implements OnInit {
           skills: this.skillsValues,
         });
 
-        
+
       }
       else {
         this.router.navigate(['/admin/products']);
@@ -269,12 +269,12 @@ export class ProductsFormComponent implements OnInit {
       is_active: ["0"],
       image: [""],
       code: [""],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
       code_int: [""],
       price: [""],
       price_extra: [""],
       skills: this.initSkill(),
-      
+
   });
 
   }
@@ -300,12 +300,12 @@ export class ProductsFormComponent implements OnInit {
       qty: [''],
       price: ['']
     })) */
-    
+
 
     return formArray;
   }
 
-   
+
   private createSkillFormGroup(skill:any): FormGroup{
     return new FormGroup({'qty':new FormControl(skill.qty),'price':new FormControl(skill.price)})
   }
@@ -318,7 +318,7 @@ export class ProductsFormComponent implements OnInit {
   get skills() {
     return this.blogForm.get('skills') as FormArray;
   }
-   
+
 
   newQuantity(): FormGroup {
     return this.fb.group({
@@ -326,11 +326,11 @@ export class ProductsFormComponent implements OnInit {
       price: "",
     })
   }
-   
+
   addQuantity() {
     this.skills.push(this.newQuantity());
   }
-   
+
   removeQuantity(i:number) {
     this.skills.removeAt(i);
   }
@@ -358,7 +358,7 @@ export class ProductsFormComponent implements OnInit {
     this._location.back();
   }
 
-  
+
 
 
   onSelectedFile(event) {
@@ -392,10 +392,10 @@ export class ProductsFormComponent implements OnInit {
           error => this.error = error
         );
       },
-     
+
   });
 
-   
+
   }
 
   removeImageFile() {

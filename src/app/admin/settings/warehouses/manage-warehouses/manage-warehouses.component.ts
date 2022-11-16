@@ -86,7 +86,7 @@ export class ManageWarehousesComponent implements OnInit {
   basePath: string;
   pageOfItems: Array<any>;
 
-  
+
   myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en');
 
   trackByFn(index, item) {
@@ -119,7 +119,7 @@ export class ManageWarehousesComponent implements OnInit {
       title: col.header,
       dataKey: col.field
     }));
-    
+
   }
 
   ngOnInit() {
@@ -142,7 +142,7 @@ export class ManageWarehousesComponent implements OnInit {
     this.load();
 
 
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
   }
 
   handlePageSizeChange(event): void {
@@ -155,9 +155,9 @@ export class ManageWarehousesComponent implements OnInit {
     this.nameFilter = '';
     this.descriptionFilter = '';
     this.load();
-    
+
   }
-  
+
   onChangePage(pageOfItems: Array<any>) {
     // update current page of items
     this.pageOfItems = pageOfItems;
@@ -207,14 +207,14 @@ getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
     path += adder + 'size=' + pageSize;
   }
   window.history.replaceState({}, '', path);
-  
+
   return params;
-  
+
 }
 
 
 load(): void {
-  
+
   const params = this.getRequestParams(
     this.nameFilter,
     this.descriptionFilter,
@@ -224,13 +224,13 @@ load(): void {
   this.warehousesService.getAllListNew(params).subscribe((pData) => {
     this.warehouses = pData;
     this.count = this.warehousesService.size;
-    
+
   });
 }
 
 private onChange(item: string): void {
   this.load();
-  
+
 }
 
   editProduct(warehouse: Warehouses) {
@@ -239,9 +239,9 @@ private onChange(item: string): void {
     this.productDialog = true;
   }
 
- 
- 
-  
+
+
+
   hideDialog() {
     this.productDialog = false;
   }

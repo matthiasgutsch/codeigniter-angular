@@ -5,6 +5,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { MenuItem, PrimeNGConfig } from "primeng/api";
 import { Subject } from "rxjs";
 import { AuthService } from "src/app/auth/auth.service";
+import { User } from "src/app/auth/auth.type";
 import { SupportsService } from "src/app/services/supports.service";
 import { LANG_IT, PAGES } from "../constants/constants";
 
@@ -13,7 +14,7 @@ import { LANG_IT, PAGES } from "../constants/constants";
   templateUrl: "./admin.component.html",
 })
 export class AdminComponent implements OnInit {
-  currentUser: any;
+  currentUser: User;
   currentLang: string;
   submitted = false;
   returnUrl: string;
@@ -43,9 +44,9 @@ export class AdminComponent implements OnInit {
     private authService: AuthService,
     public primengConfig: PrimeNGConfig,
     public translate: TranslateService,
-    private zone: NgZone
+    private zone: NgZone,
   ) {
-    this.currentUser = JSON.parse(localStorage.getItem("currentUser") || "[]");
+    this.currentUser = this.authService.getUser();
     this.currentLang = this.currentUser.lang;
     //console.log(this.currentUser);
     this.primengConfig.setTranslation(LANG_IT);
@@ -219,7 +220,7 @@ export class AdminComponent implements OnInit {
     });
 
     this.spinner.show();
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.getSupportsCount();
 
     setTimeout(() => {

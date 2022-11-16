@@ -85,7 +85,7 @@ export class ManageBillingsComponent implements OnInit {
   ngOnInit() {
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
 
     this.spinner.show();
     this.load();
@@ -103,7 +103,7 @@ export class ManageBillingsComponent implements OnInit {
       this.getComuni();
       this.getClients();
       this.spinner.hide();
-  
+
   }
 
 
@@ -142,7 +142,7 @@ export class ManageBillingsComponent implements OnInit {
 
   }
 
-  
+
   load(): void {
 
     const params = this.getRequestParams(
@@ -171,15 +171,15 @@ export class ManageBillingsComponent implements OnInit {
     this.clientFilter = '';
 
     this.load();
-    
+
   }
-  
+
   public handlePageChange(event): void {
     this.page = event;
     this.load();
-  
+
   }
-  
+
 
 
   onChangePage(pageOfItems: Array<any>) {
@@ -193,14 +193,14 @@ export class ManageBillingsComponent implements OnInit {
   }
 
     getClients() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.clientsService.getAllListbyUser().subscribe(
       (data: Clients) => this.clients = data,
       error => this.error = error
     );
-  
+
     }
-  
+
     getComuni() {
   this.comuniService.getAllList().subscribe(
     (data: Comuni) => (this.comuni = data),
@@ -218,7 +218,7 @@ export class ManageBillingsComponent implements OnInit {
     return this.comuni.find((item) => item.id === category_id);
   }
 
-  
+
 
   closeBilling(billing: Billings) {
     const formData = new FormData();
@@ -261,7 +261,7 @@ export class ManageBillingsComponent implements OnInit {
     // doc.autoTable(this.exportColumns, this.products);
     doc.save("Fatture_"  + new Date().toLocaleString() + ".pdf");
   }
-  
+
 
 
 edit(billing: Billings) {

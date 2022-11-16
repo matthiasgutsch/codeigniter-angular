@@ -132,7 +132,7 @@ export class ManageDocumentsComponent implements OnInit {
   ngOnInit() {
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.spinner.show();
     this.cols = [
       { field: "category_id", header: "Cliente" },
@@ -155,7 +155,7 @@ export class ManageDocumentsComponent implements OnInit {
 
   load(node): void {
 
-    
+
     const id = node.key;
     this.nodeTitle = node.label;
     const params = this.getRequestParams(
@@ -164,7 +164,7 @@ export class ManageDocumentsComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    
+
     this.documentsService.getAllListDocuments(params, +id).subscribe((pData) => {
       this.documents = pData;
       this.count = this.documentsService.size;
@@ -238,7 +238,7 @@ export class ManageDocumentsComponent implements OnInit {
 
 
   getClients() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.clientsService.getAllListbyUser().subscribe(
       (data: Clients) => this.clients = data,
       error => this.error = error

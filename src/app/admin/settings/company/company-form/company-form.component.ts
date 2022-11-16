@@ -44,7 +44,7 @@ export class CompanyFormComponent implements OnInit {
   checked: boolean = true;
   selectedValue: string;
   comuni: Comuni;
-  businessStateOptions: any[]; 
+  businessStateOptions: any[];
   blogForm: FormGroup;
   typeList: any[];
   items: any = [];
@@ -89,18 +89,18 @@ export class CompanyFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
     this.items = PAGES;
 
 
-  
+
 
     this.comuniService.getAllList().subscribe(
       (data: Comuni) => (this.comuni = data),
       (error) => (this.error = error)
     );
 
-    const id = [this.currentUser.user_id];
+    const id = [this.currentUser.id];
 
     if (id) {
       this.pageTitle = "Dati aziendali";
@@ -121,7 +121,7 @@ export class CompanyFormComponent implements OnInit {
           description: res.description,
           category_id: res.category_id,
           is_featured: res.is_featured,
-          user_id: this.currentUser.user_id,
+          user_id: this.currentUser.id,
           is_active: res.is_active,
           date: res.date,
           fiscaltype: res.fiscaltype,
@@ -157,7 +157,7 @@ export class CompanyFormComponent implements OnInit {
       category_id: ["", Validators.required],
       is_active: ["0"],
       image: [""],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
       date: ["", Validators.required],
     });
   }
@@ -176,7 +176,7 @@ export class CompanyFormComponent implements OnInit {
   }
 
 
-  
+
   getCategoryItem(category_id: string, id: string) {
     return this.categories.find((item) => item.id === category_id);
   }

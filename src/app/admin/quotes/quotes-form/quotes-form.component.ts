@@ -121,7 +121,7 @@ export class QuotesFormComponent implements OnInit {
   dateAppointments: string;
   contactNo: number;
 
-  
+
   trackByFn(index, item) {
     return item.id;
   }
@@ -151,22 +151,22 @@ export class QuotesFormComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
     this.typeList = TYPE_LIST;
-   
-    
+
+
   }
   @ViewChild('reportContent') reportContent: ElementRef;
 
   ngOnInit() {
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.page = history.state;
     const id = this.route.snapshot.paramMap.get("id");
 
     this.spinner.show();
 
     this.getselectedWorks;
-  
+
 
     this.ordersService
     .find_orders_by_quotes_id(+id)
@@ -193,7 +193,7 @@ export class QuotesFormComponent implements OnInit {
       (data: Company) => (this.company = data),
       (error) => (this.error = error)
     );
-   
+
     this.companyService.getId(userId).subscribe(value => {
       this.fiscaltype = this.company.fiscaltype;
     });
@@ -204,7 +204,7 @@ export class QuotesFormComponent implements OnInit {
     });
 
 
- 
+
 
 
     if (id) {
@@ -228,7 +228,7 @@ export class QuotesFormComponent implements OnInit {
           category_id: res.category_id,
           quotes_id: res.quotes_id,
           works_id: res.works_id.split(','),
-          user_id: this.currentUser.user_id,
+          user_id: this.currentUser.id,
           is_featured: res.is_featured,
           date: res.date,
           id: res.id,
@@ -243,7 +243,7 @@ export class QuotesFormComponent implements OnInit {
     } else {
       this.pageTitle = "Aggiungi Preventivo";
 
-      
+
     }
 
     this.blogForm = this.fb.group({
@@ -253,7 +253,7 @@ export class QuotesFormComponent implements OnInit {
       quotes_id: [""],
       category_id: [""],
       works_id: [""],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
       is_featured: ["0"],
       date: ["", Validators.required],
       skills: this.initSkill(this.skillsValues),
@@ -269,7 +269,7 @@ export class QuotesFormComponent implements OnInit {
 
 
 
-  
+
   @ViewChild('content', {static: false}) content: ElementRef;
 
 
@@ -301,8 +301,8 @@ export class QuotesFormComponent implements OnInit {
   getselectedWorks() {
     this.selectedWorks = this.works_id.split(',');
     }
-  
-    
+
+
   changed(value){
       this.descriptionQuotes = value.target.value
     }
@@ -310,7 +310,7 @@ export class QuotesFormComponent implements OnInit {
   changeTime(value){
       this.dateQuotes = value.target.value
     }
-    
+
   onSelectedFile(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -328,7 +328,7 @@ export class QuotesFormComponent implements OnInit {
     return this.clients.find((item) => item.id === categoryAppointments);
   }
 
-  
+
   getWorksItem(works_id: string, id: string) {
     return this.works.find(item => item.id === works_id);
   }
@@ -337,18 +337,18 @@ export class QuotesFormComponent implements OnInit {
   generatePDF(action = 'open') {
     const format = 'dd/MM/yyyy';
     const formatYear = 'yyyy';
-  
+
     const locale = 'en-US';
-  
+
     const formattedDate = formatDate(this.dateQuotes, format, locale);
     const formattedDateYear = formatDate(this.dateQuotes, formatYear, locale);
-  
+
     let docDefinition = {
       layout: 'headerLineOnly', // optional
-  
-      
+
+
       content: [
-  
+
         {
           "canvas": [{
             "lineColor": "gray",
@@ -360,15 +360,15 @@ export class QuotesFormComponent implements OnInit {
             "lineWidth": 1
           }]
         },
-  
+
         {
           text: '' + this.company.name + '',
           fontSize: 12,
           alignment: 'left',
-          margin: [0, 20 ,0, 0],        
-  
+          margin: [0, 20 ,0, 0],
+
           bold: true,
-  
+
           color: '#111'
         },
         {
@@ -386,11 +386,11 @@ export class QuotesFormComponent implements OnInit {
         {
           text: 'Cliente',
           bold: true,
-          margin: [0, 20 ,0, 0],        
-  
+          margin: [0, 20 ,0, 0],
+
         },
         {
-  
+
           columns: [
             [
               {
@@ -404,23 +404,23 @@ export class QuotesFormComponent implements OnInit {
               {
                 text: 'Data: '+ formattedDate +'',
                 alignment: 'right',
-                
+
               },
-              { 
+              {
                 text: 'Numero Preventivo: ' + this.idQuotes + '/'+ formattedDateYear + '',
                 bold: true,
                 alignment: 'right',
-                
+
               }
             ]
           ]
         },
-      
+
         {
           text: 'Note',
           bold: true,
-          margin: [0, 20 ,0, 0],        
-  
+          margin: [0, 20 ,0, 0],
+
         },
         {
           text: this.descriptionQuotes,
@@ -430,11 +430,11 @@ export class QuotesFormComponent implements OnInit {
           text: 'Dettagli Preventivo',
           style: 'sectionHeader'
         },
-        
+
         { layout: 'lightHorizontalLines',
           table: {
             headerRows: 1,
-  
+
             widths: ['*', 'auto', 'auto', 'auto'],
             body: [
               ['Posizione', 'Qty', 'Prezzo', 'Totale'],
@@ -447,9 +447,9 @@ export class QuotesFormComponent implements OnInit {
         },
         {
             text: this.additionalDetails,
-            margin: [0, 0 ,0, 25]          
+            margin: [0, 0 ,0, 25]
         },
-       
+
         {
           "canvas": [{
             "lineColor": "gray",
@@ -461,14 +461,14 @@ export class QuotesFormComponent implements OnInit {
             "lineWidth": 1
           }]
         },
-  
+
         {
           columns: [
             //[{ qr: `${this.description}`, fit: '50' }],
-            [{ text: 'Firma', 
-            alignment: 'left', 
+            [{ text: 'Firma',
+            alignment: 'left',
             italics: false,
-            margin: [0, 5 ,15, 0]          
+            margin: [0, 5 ,15, 0]
           }],
           ]
         },
@@ -476,13 +476,13 @@ export class QuotesFormComponent implements OnInit {
           text: 'Condizioni',
           fontSize: 12,
           bold: true,
-          margin: [0, 25 ,15, 0]          
-  
+          margin: [0, 25 ,15, 0]
+
         },
         {
           text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
             fontSize: 9,
-  
+
         }
       ],
       styles: {
@@ -490,19 +490,19 @@ export class QuotesFormComponent implements OnInit {
           bold: true,
           decoration: 'underline',
           fontSize: 14,
-          margin: [0, 15,0, 15]          
+          margin: [0, 15,0, 15]
         }
       }
     };
-  
+
     if(action==='download'){
       pdfMake.createPdf(docDefinition).download('Preventivo-' + this.idQuotes + '.pdf');
     }else if(action === 'print'){
-      pdfMake.createPdf(docDefinition).print();      
+      pdfMake.createPdf(docDefinition).print();
     }else{
-      pdfMake.createPdf(docDefinition).open();      
+      pdfMake.createPdf(docDefinition).open();
     }
-  
+
   }
 
   removeImageFile() {
@@ -539,16 +539,16 @@ export class QuotesFormComponent implements OnInit {
       qty: [''],
       price: ['']
     })) */
-    
+
 
     return formArray;
   }
 
-   
+
   private createSkillFormGroup(skill:any): FormGroup{
     return new FormGroup({
       'qty':new FormControl(skill.qty),
-      'price':new FormControl(skill.price), 
+      'price':new FormControl(skill.price),
       'itemTotal':new FormControl(skill.itemTotal)
     })
   }
@@ -561,9 +561,9 @@ export class QuotesFormComponent implements OnInit {
   get skills() {
     return this.blogForm.get('skills') as FormArray;
   }
-  
-  
-  
+
+
+
   itemsChanged(): void {
     let total: number = 0;
     for (let t = 0; t < (<FormArray>this.blogForm.get('skills')).length; t++) {
@@ -577,7 +577,7 @@ export class QuotesFormComponent implements OnInit {
 
   }
 
-  
+
   newQuantity(): FormGroup {
     const numberPatern = '^[0-9.,]+$';
     return this.fb.group({
@@ -585,24 +585,24 @@ export class QuotesFormComponent implements OnInit {
       qty: [1, [Validators.required, Validators.pattern(numberPatern)]],
       price: ['', [Validators.required, Validators.pattern(numberPatern)]],
       itemTotal: [''],
-      
+
     })
   }
-   
+
 
 
   drop(event: CdkDragDrop<string[]>) {
     const id = this.route.snapshot.paramMap.get("id");
     moveItemInArray(this.skillsValues, event.previousIndex, event.currentIndex);
     this.updateSkills(event, id);
-    
+
   }
 
 
   updateSkills(event, id) {
     const formData = new FormData();
     formData.append('skills', JSON.stringify(this.skillsValues));
-    
+
     this.quotesService.update_skills(formData, +id).subscribe({
       next: (response: any) => {
         if (response.error) {
@@ -618,11 +618,11 @@ export class QuotesFormComponent implements OnInit {
     });
   }
 
-  
+
   addQuantity(event) {
     this.skills.push(this.newQuantity());
   }
-   
+
   removeQuantity(i: number): void {
     let totalCostOfItem = this.blogForm.get('skills')?.value[i].qty * this.blogForm.get('skills')?.value[i].price;
     this.subTotal = this.subTotal - totalCostOfItem;
@@ -630,7 +630,7 @@ export class QuotesFormComponent implements OnInit {
     this.grandTotal = this.subTotal + this.vat;
     (<FormArray>this.blogForm.get('skills')).removeAt(i);
   }
-  
+
   get total_sum() {
     return this.itemTotal.reduce((total, fee) => total + fee.balance, 0);
 }
@@ -674,12 +674,12 @@ createOrder() {
               this.uploadError = res.message;
             } else {
               const currentUrl = this.router.url;
-    
-              
+
+
               this.messageService.add({ key: 'myKey1', severity: 'info', summary: 'Attenzione', detail: 'Ordine creato con successo' });
               this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
                 this.router.navigate([currentUrl]);
-                
+
             });
             }
           },
@@ -719,7 +719,7 @@ createOrder() {
           }
         },
         (error) => (this.error = error)
-      ); 
+      );
     } else {
       this.quotesService.create(formData).subscribe(
         (res) => {

@@ -67,7 +67,7 @@ export class WarehousesFormComponent implements OnInit {
   selectedWorks2: SelectItem[];
   locations: any = [];
   location: Locations;
-  
+
   cities: Blog[];
   format1: string = "";
   format2: string = "";
@@ -116,16 +116,16 @@ export class WarehousesFormComponent implements OnInit {
 
   ngOnInit() {
 
-    
 
-    const userId = this.currentUser.user_id;
+
+    const userId = this.currentUser.id;
     this.clientsService.getAllListbyUser().subscribe(
       (data: Clients) => (this.clients = data),
       (error) => (this.error = error)
     );
 
 
-  
+
 
     const id = this.route.snapshot.paramMap.get("id");
 
@@ -138,21 +138,21 @@ export class WarehousesFormComponent implements OnInit {
 
       }, err => {
     });
-    
-   
+
+
 
 
     if (id) {
       this.pageTitle = "Modifica Magazzino";
-      
+
       this.warehouesService.getId(+id).subscribe((res) => {
-        if (res.user_id == this.currentUser.user_id) {
+        if (res.user_id == this.currentUser.id) {
         this.blogForm.patchValue({
           title: res.title,
           description: res.description.split(','),
           is_featured: res.is_featured,
           is_active: res.is_active,
-          user_id: this.currentUser.user_id,
+          user_id: this.currentUser.id,
           date: res.date,
           id: res.id,
         });
@@ -177,14 +177,14 @@ export class WarehousesFormComponent implements OnInit {
       title: ["", Validators.required],
       description: [""],
       is_featured: ["0"],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
       is_active: ["0"],
       image: [""],
       date: ["", Validators.required],
     });
   }
 
-  
+
 
 
 

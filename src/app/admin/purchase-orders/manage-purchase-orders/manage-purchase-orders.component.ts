@@ -47,7 +47,7 @@ export class ManagePurchaseOrdersComponent implements OnInit {
   exportColumns: any[];
   _selectedColumns: any[];
 
-  
+
   @ViewChild("content", { static: false }) content: ElementRef;
   currentUser: any;
   page = 1;
@@ -85,9 +85,9 @@ export class ManagePurchaseOrdersComponent implements OnInit {
   ngOnInit() {
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
 
-    
+
 
 
     this.spinner.show();
@@ -108,7 +108,7 @@ export class ManagePurchaseOrdersComponent implements OnInit {
       this.spinner.hide();
 
 
-   
+
 
   }
 
@@ -150,7 +150,7 @@ export class ManagePurchaseOrdersComponent implements OnInit {
 
   }
 
-  
+
   load(): void {
 
     const params = this.getRequestParams(
@@ -179,15 +179,15 @@ export class ManagePurchaseOrdersComponent implements OnInit {
     this.clientFilter = '';
 
     this.load();
-    
+
   }
-  
+
   public handlePageChange(event): void {
     this.page = event;
     this.load();
-  
+
   }
-  
+
 
 
   onChangePage(pageOfItems: Array<any>) {
@@ -199,16 +199,16 @@ export class ManagePurchaseOrdersComponent implements OnInit {
     this.load();
 
   }
-  
+
     getSuppliers() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.supplierService.getAllListbyUser().subscribe(
       (data: Suppliers) => this.suppliers = data,
       error => this.error = error
     );
-  
+
     }
-  
+
     getComuni() {
   this.comuniService.getAllList().subscribe(
     (data: Comuni) => (this.comuni = data),
@@ -226,7 +226,7 @@ export class ManagePurchaseOrdersComponent implements OnInit {
     return this.comuni.find((item) => item.id === category_id);
   }
 
-  
+
 
 
 edit(purchaseOrder: Purchase_orders) {

@@ -32,7 +32,7 @@ export class ManageBrandsComponent implements OnInit {
   pageOfItems: Array<any>;
   searchWrapper: boolean = false;
 
-  constructor(private brandsService: BrandService, 
+  constructor(private brandsService: BrandService,
     private router: Router,
     private route: ActivatedRoute,
     private confirmationService: ConfirmationService,) {
@@ -54,8 +54,8 @@ export class ManageBrandsComponent implements OnInit {
    }
 
   ngOnInit() {
-    const userId = this.currentUser.user_id;
-    
+    const userId = this.currentUser.id;
+
 
     this.basePath = window.location.pathname;
     if (this.route.snapshot.queryParamMap.has('page')) {
@@ -173,7 +173,7 @@ export class ManageBrandsComponent implements OnInit {
   }
 
 
-  
+
   editProduct(brand: Brand) {
     this.brand = {...brand};
 }
@@ -195,10 +195,10 @@ onDelete(id: number, category_name: string) {
         error => this.error = error
         );
       },
-     
+
   });
 
-   
+
   }
 
 }

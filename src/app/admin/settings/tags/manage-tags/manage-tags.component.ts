@@ -58,7 +58,7 @@ export class ManageTagsComponent implements OnInit {
 
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
 
 
     this.basePath = window.location.pathname;

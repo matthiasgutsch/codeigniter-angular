@@ -100,7 +100,7 @@ export class AppointmentsFormComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private router: Router,
     private route: ActivatedRoute,
-    private appointmentTypeService: AppointmentTypeService, 
+    private appointmentTypeService: AppointmentTypeService,
   ) {
     if (this.date) {
       this.selectedDate = new Date(this.date);
@@ -136,19 +136,19 @@ export class AppointmentsFormComponent implements OnInit {
       (error) => (this.error = error)
     );
 
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.clientsService.getAllListbyUser().subscribe(
       (data: Clients) => (this.clients = data),
       (error) => (this.error = error)
     );
 
 
-  
+
 
     const id = this.route.snapshot.paramMap.get("id");
 
 
-    
+
 
     this.billingsService.find_billings_by_appointments(+id).subscribe(
       (data: Billings) => (this.billings = data),
@@ -172,7 +172,7 @@ export class AppointmentsFormComponent implements OnInit {
 
       }, err => {
     });
-    
+
     this.billingsService.find_billings_by_appointments(+id).subscribe(
       (data: Billings) => (this.billings = data),
       (error) => (this.error = error)
@@ -181,9 +181,9 @@ export class AppointmentsFormComponent implements OnInit {
 
     if (id) {
       this.pageTitle = "Modifica Appuntamento";
-      
+
       this.appointmentsService.getId(+id).subscribe((res) => {
-        if (res.user_id == this.currentUser.user_id) {
+        if (res.user_id == this.currentUser.id) {
         this.blogForm.patchValue({
           title: res.title,
           description: res.description.split(','),
@@ -193,7 +193,7 @@ export class AppointmentsFormComponent implements OnInit {
           location_id: res.location_id,
           is_featured: res.is_featured,
           is_active: res.is_active,
-          user_id: this.currentUser.user_id,
+          user_id: this.currentUser.id,
           date: res.date,
           id: res.id,
         });
@@ -221,7 +221,7 @@ export class AppointmentsFormComponent implements OnInit {
       category_id: ["", Validators.required],
       works_id: [""],
       location_id: [""],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
       employee_id: [""],
       is_active: ["0"],
       image: [""],
@@ -229,7 +229,7 @@ export class AppointmentsFormComponent implements OnInit {
     });
   }
 
-  
+
 
 
 
@@ -272,12 +272,12 @@ createBilling() {
               this.uploadError = res.message;
             } else {
               const currentUrl = this.router.url;
-    
-              
+
+
               this.messageService.add({ key: 'myKey1', severity: 'info', summary: 'Attenzione', detail: 'Futtura / Ricevuta creata con successo' });
               this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
                 this.router.navigate([currentUrl]);
-                
+
             });
             }
           },

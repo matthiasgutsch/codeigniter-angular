@@ -93,13 +93,13 @@ export class ProductsVariationsFormComponent implements OnInit {
 
   locations: any = [];
   location: Locations;
-  
+
   cities: Blog[];
   format1: string = "";
   format2: string = "";
   selectedCity: Blog;
   selectedClients: SelectItem[];
-  
+
   selectedDate: Date;
   date: Date;
   works_id: any;
@@ -124,7 +124,7 @@ export class ProductsVariationsFormComponent implements OnInit {
     return item.id;
   }
 
- 
+
 
   constructor(
     private fb: FormBuilder,
@@ -175,12 +175,12 @@ export class ProductsVariationsFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
 
     this.getselectedWorks;
     this.getselectedCategories;
 
-   
+
 
 
     this.technicalDataService.getAllListbyUser().subscribe(
@@ -222,7 +222,7 @@ export class ProductsVariationsFormComponent implements OnInit {
     });
 
 
-   
+
     const id = this.route.snapshot.paramMap.get("id");
 
     this.productsVariationsService.skills(+id).subscribe(value => {
@@ -235,12 +235,12 @@ export class ProductsVariationsFormComponent implements OnInit {
 
     if (id) {
       this.pageTitle = "Modifica Variante";
-      
+
       this.productsVariationsService.getId(+id).subscribe((res) => {
 
         this.productName = res.title;
 
-        if (res.user_id == this.currentUser.user_id) {
+        if (res.user_id == this.currentUser.id) {
         this.blogForm.patchValue({
           title: res.title,
           description: res.description.split(','),
@@ -251,7 +251,7 @@ export class ProductsVariationsFormComponent implements OnInit {
           is_featured: res.is_featured,
           is_active: res.is_active,
           code: res.code,
-          user_id: this.currentUser.user_id,
+          user_id: this.currentUser.id,
           description_full: res.description_full,
           code_int: res.code_int,
           price: res.price,
@@ -262,7 +262,7 @@ export class ProductsVariationsFormComponent implements OnInit {
           skills: this.skillsValues,
         });
 
-        
+
       }
       else {
         this.router.navigate(['/admin/products']);
@@ -292,19 +292,19 @@ export class ProductsVariationsFormComponent implements OnInit {
       is_active: ["0"],
       image: [""],
       code: [""],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
       code_int: [""],
       price: [""],
       product_id: [""],
       price_extra: [""],
       skills: this.initSkill(),
-      
+
   });
 
   }
 
 
-  
+
 
   load(): void {
     const id = this.route.snapshot.paramMap.get("id");
@@ -340,20 +340,20 @@ export class ProductsVariationsFormComponent implements OnInit {
       qty: [''],
       price: ['']
     })) */
-    
+
 
     return formArray;
   }
 
-   
+
   public handlePageChange(event): void {
     const id = this.route.snapshot.paramMap.get("id");
 
     this.page = event;
     this.load();
-  
+
   }
-  
+
 
 
 
@@ -369,7 +369,7 @@ export class ProductsVariationsFormComponent implements OnInit {
   get skills() {
     return this.blogForm.get('skills') as FormArray;
   }
-   
+
 
   newQuantity(): FormGroup {
     return this.fb.group({
@@ -377,11 +377,11 @@ export class ProductsVariationsFormComponent implements OnInit {
       price: "",
     })
   }
-   
+
   addQuantity() {
     this.skills.push(this.newQuantity());
   }
-   
+
   removeQuantity(i:number) {
     this.skills.removeAt(i);
   }
@@ -409,7 +409,7 @@ export class ProductsVariationsFormComponent implements OnInit {
     this._location.back();
   }
 
-  
+
 
 
   onSelectedFile(event) {
@@ -427,7 +427,7 @@ export class ProductsVariationsFormComponent implements OnInit {
 
   changeName(value){
     this.productTitle = value.target.value;
-}  
+}
 
 
 

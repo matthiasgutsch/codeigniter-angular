@@ -73,7 +73,7 @@ export class ManageEmployeesComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
 
 
 

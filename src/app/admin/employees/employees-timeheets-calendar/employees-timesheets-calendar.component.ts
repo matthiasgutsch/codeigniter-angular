@@ -134,7 +134,7 @@ employee: Employees;
     private clientsService: ClientsService,
     private timesheetsService: TimesheetsService,
     private projectsService: ProjectsService,
-    private locationsService: LocationsService, 
+    private locationsService: LocationsService,
     private messageService: MessageService,
     private fb: FormBuilder,
     private employeesService: EmployeesService,
@@ -145,13 +145,13 @@ employee: Employees;
     private tagsService: TagsService,
     private technicalDataService: TechnicalDataService,
     private spinner: NgxSpinnerService,
-    private categoryService: CategoryService, 
-    private confirmationService: ConfirmationService,) { 
+    private categoryService: CategoryService,
+    private confirmationService: ConfirmationService,) {
       this.status = STATUS_PRODUCTS;
       this.timesheets_type = TIMESHEETS_TYPE;
       this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
-      
+
   }
 
   ngOnInit() {
@@ -159,15 +159,15 @@ employee: Employees;
     const dateObj = new Date();
     const yearMonth = dateObj.getUTCFullYear() + '-' + (dateObj.getUTCMonth() + 1);
 
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.spinner.show();
-   
+
 
     const id = this.route.snapshot.paramMap.get("id");
 
       this.timesheetsService.timesheets_by_employee_calendar(+id).subscribe(data => {
         this.timesheets = data;
- 
+
         this.calendarOptions = {
 
           editable: true,
@@ -177,21 +177,21 @@ employee: Employees;
           header: {
             right: 'prev,next',
             left: 'title',
-    
+
           },
-    
+
           events: data,
           locale: 'it',
           timezone: 'UTC',
           selectable: true,
         };
         });
-      
+
 
       this.employees = {
         id:this.route.snapshot.params['id'],
       }
-  
+
       this.employeesService.getId(this.employees.id).subscribe(value => {
         this.employee = value;
       });
@@ -200,21 +200,21 @@ employee: Employees;
         this.projects = data;
       });
 
-    
+
     this.getVacationsCountEmployee(+id);
     this.getPermissionsCountEmployee(+id);
-    
+
     this.spinner.hide();
 
   }
 
-  
+
 
   createTimesheets(employee: Employees) {
     this.productDialogAdd = true;
-    
 
-    
+
+
     this.blogForm = this.fb.group({
       id: [""],
       timesheets_type: ["", Validators.required],
@@ -224,7 +224,7 @@ employee: Employees;
       hours: ["", Validators.required],
       hours_extra: ["", Validators.required],
       employee_id: [this.employee.id],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
     });
 
 
@@ -233,7 +233,7 @@ employee: Employees;
 
 
   getVacationsCountEmployee(id) {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.timesheetsService.count_total_vacations_timesheets_employee(id).subscribe(
       (data: Timesheets) => this.vacationsCount = data,
       error => this.error = error
@@ -241,7 +241,7 @@ employee: Employees;
   }
 
   getPermissionsCountEmployee(id) {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.timesheetsService.count_total_permissions_timesheets_employee(id).subscribe(
       (data: Timesheets) => this.permissionsCount = data,
       error => this.error = error
@@ -311,15 +311,15 @@ employee: Employees;
   }
 
 
-  clear(table: any) 
+  clear(table: any)
   {
-    
+
       //  THIS DOES NOT WORK!!   Filter stops working after clearing
       table.clear();
-      
-	} 
-    
- 
+
+	}
+
+
 
   getBrandItem(brand_id: string, id: string) {
     return this.brands.find(item => item.id === brand_id);
@@ -348,7 +348,7 @@ employee: Employees;
     return this.works.find(item => item.id === works_id);
   }
 
-  
+
 
 
 
@@ -409,7 +409,7 @@ onSubmit() {
       },
       (error) => (this.error = error)
     );
-  
+
 }
 
 
@@ -430,10 +430,10 @@ onSubmit() {
           error => this.error = error
         );
       },
-     
+
   });
 
-   
+
   }
 
 }

@@ -186,7 +186,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
       supplier_id: ["", Validators.required],
       pieces: ["", Validators.required],
       boxes: ["", Validators.required],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
     });
 
   }
@@ -205,7 +205,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
     const dateObj = new Date();
     const yearMonth = dateObj.getUTCFullYear() + '-' + (dateObj.getUTCMonth() + 1);
 
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.spinner.show();
     this.getEmployees();
     this.getWarehouses();
@@ -357,7 +357,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
           product_id: res.product_id,
           pieces: res.pieces,
           boxes: res.boxes,
-          user_id: this.currentUser.user_id,
+          user_id: this.currentUser.id,
           id: res.id,
         });
 
@@ -373,7 +373,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
       supplier_id: ["", Validators.required],
       pieces: ["", Validators.required],
       boxes: ["", Validators.required],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
     });
 
     this.productDialogAdd = true;
@@ -604,7 +604,7 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
             this.blogForm.controls['product_id'].reset();
             this.blogForm.controls['pieces'].reset();
             this.blogForm.controls['boxes'].reset();
-            formData.append('user_id', this.currentUser.user_id);
+            formData.append('user_id', this.currentUser.id);
           }
         },
       });

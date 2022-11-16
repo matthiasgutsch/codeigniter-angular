@@ -142,19 +142,19 @@ export class PurchaseOrdersFormComponent implements OnInit {
 
     this.typeList = TYPE_LIST;
     this.fiscaltype = 0;
-    
+
   }
   @ViewChild('reportContent') reportContent: ElementRef;
 
   ngOnInit() {
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.page = history.state;
 
 
     this.getselectedWorks;
-  
+
 
     this.worksService.getAllListbyUser().subscribe(
       (data: Works) => (this.works = data),
@@ -172,7 +172,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
       (data: Company) => (this.company = data),
       (error) => (this.error = error)
     );
-   
+
     this.companyService.getId(userId).subscribe(value => {
       this.fiscaltype = this.company.fiscaltype;
     });
@@ -214,7 +214,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
         this.dateAppointments = res.date;
 
 
-        
+
 
         this.blogForm.patchValue({
           title: res.title,
@@ -222,7 +222,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
           category_id: res.category_id,
           order_id: res.order_id,
           works_id: res.works_id.split(','),
-          user_id: this.currentUser.user_id,
+          user_id: this.currentUser.id,
           is_featured: res.is_featured,
           date: res.date,
           id: res.id,
@@ -232,7 +232,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
           total: res.total,
 
         });
-    
+
 
       });
     } else {
@@ -246,7 +246,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
       order_id: [""],
       category_id: [""],
       works_id: [""],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
       is_featured: ["0"],
       date: ["", Validators.required],
       skills: this.initSkill(this.skillsValues),
@@ -263,7 +263,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get("id");
     moveItemInArray(this.skillsValues, event.previousIndex, event.currentIndex);
     this.updateSkills(event, id);
-    
+
   }
 
 
@@ -281,7 +281,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
     let docDefinition = {
       layout: 'headerLineOnly', // optional
 
-      
+
       content: [
 
         {
@@ -300,7 +300,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
           text: '' + this.company.name + '',
           fontSize: 12,
           alignment: 'left',
-          margin: [0, 20 ,0, 0],        
+          margin: [0, 20 ,0, 0],
 
           bold: true,
 
@@ -321,7 +321,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
         {
           text: 'Fornitore',
           bold: true,
-          margin: [0, 20 ,0, 0],        
+          margin: [0, 20 ,0, 0],
 
         },
         {
@@ -339,22 +339,22 @@ export class PurchaseOrdersFormComponent implements OnInit {
               {
                 text: 'Data: '+ formattedDate +'',
                 alignment: 'right',
-                
+
               },
-              { 
+              {
                 text: 'ID: ' + this.idBilling + '/'+ formattedDateYear + '',
                 bold: true,
                 alignment: 'right',
-                
+
               }
             ]
           ]
         },
-      
+
         {
           text: 'Note',
           bold: true,
-          margin: [0, 20 ,0, 0],        
+          margin: [0, 20 ,0, 0],
 
         },
         {
@@ -365,11 +365,11 @@ export class PurchaseOrdersFormComponent implements OnInit {
           text: 'Dettagli Ordine Fornitore',
           style: 'sectionHeader'
         },
-        
+
         { layout: 'lightHorizontalLines',
           table: {
             headerRows: 1,
-  
+
             widths: ['*', 'auto', 'auto', 'auto'],
             body: [
               ['Posizione', 'Qty', 'Prezzo', 'Totale'],
@@ -382,9 +382,9 @@ export class PurchaseOrdersFormComponent implements OnInit {
         },
         {
             text: this.additionalDetails,
-            margin: [0, 0 ,0, 25]          
+            margin: [0, 0 ,0, 25]
         },
-       
+
         {
           "canvas": [{
             "lineColor": "gray",
@@ -400,10 +400,10 @@ export class PurchaseOrdersFormComponent implements OnInit {
         {
           columns: [
             //[{ qr: `${this.description}`, fit: '50' }],
-            [{ text: 'Firma', 
-            alignment: 'left', 
+            [{ text: 'Firma',
+            alignment: 'left',
             italics: false,
-            margin: [0, 5 ,15, 0]          
+            margin: [0, 5 ,15, 0]
           }],
           ]
         },
@@ -411,7 +411,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
           text: 'Condizioni',
           fontSize: 12,
           bold: true,
-          margin: [0, 25 ,15, 0]          
+          margin: [0, 25 ,15, 0]
 
         },
         {
@@ -425,7 +425,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
           bold: true,
           decoration: 'underline',
           fontSize: 14,
-          margin: [0, 15,0, 15]          
+          margin: [0, 15,0, 15]
         }
       }
     };
@@ -433,9 +433,9 @@ export class PurchaseOrdersFormComponent implements OnInit {
     if(action==='download'){
       pdfMake.createPdf(docDefinition).download('Ordine Fornitore - Fattura-' + this.idOrders + '.pdf');
     }else if(action === 'print'){
-      pdfMake.createPdf(docDefinition).print();      
+      pdfMake.createPdf(docDefinition).print();
     }else{
-      pdfMake.createPdf(docDefinition).open();      
+      pdfMake.createPdf(docDefinition).open();
     }
 
   }
@@ -444,7 +444,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
   updateSkills(event, id) {
     const formData = new FormData();
     formData.append('skills', JSON.stringify(this.skillsValues));
-    
+
     this.purchaseOrdersService.update_skills(formData, +id).subscribe({
       next: (response: any) => {
         if (response.error) {
@@ -484,8 +484,8 @@ export class PurchaseOrdersFormComponent implements OnInit {
   getselectedWorks() {
     this.selectedWorks = this.works_id.split(',');
     }
-  
-    
+
+
   changed(value){
       this.descriptionOrders = value.target.value
     }
@@ -493,7 +493,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
   changeTime(value){
       this.dateOrders =  new Date();
     }
-    
+
   onSelectedFile(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -522,7 +522,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
   }
 
 
-  
+
 
   removeImageFile() {
     this.imagePath = "";
@@ -558,16 +558,16 @@ export class PurchaseOrdersFormComponent implements OnInit {
       qty: [''],
       price: ['']
     })) */
-    
+
 
     return formArray;
   }
 
-   
+
   private createSkillFormGroup(skill:any): FormGroup{
     return new FormGroup({
       'qty':new FormControl(skill.qty),
-      'price':new FormControl(skill.price), 
+      'price':new FormControl(skill.price),
       'itemTotal':new FormControl(skill.itemTotal)
     })
   }
@@ -580,9 +580,9 @@ export class PurchaseOrdersFormComponent implements OnInit {
   get skills() {
     return this.blogForm.get('skills') as FormArray;
   }
-  
-  
-  
+
+
+
   itemsChanged(): void {
     let total: number = 0;
     for (let t = 0; t < (<FormArray>this.blogForm.get('skills')).length; t++) {
@@ -596,7 +596,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
 
   }
 
-  
+
   newQuantity(): FormGroup {
     const numberPatern = '^[0-9.,]+$';
     return this.fb.group({
@@ -604,14 +604,14 @@ export class PurchaseOrdersFormComponent implements OnInit {
       qty: [1, [Validators.required, Validators.pattern(numberPatern)]],
       price: ['', [Validators.required, Validators.pattern(numberPatern)]],
       itemTotal: [''],
-      
+
     })
   }
-   
+
   addQuantity(event) {
     this.skills.push(this.newQuantity());
   }
-   
+
   removeQuantity(i: number): void {
     let totalCostOfItem = this.blogForm.get('skills')?.value[i].qty * this.blogForm.get('skills')?.value[i].price;
     this.subTotal = this.subTotal - totalCostOfItem;
@@ -619,7 +619,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
     this.grandTotal = this.subTotal + this.vat;
     (<FormArray>this.blogForm.get('skills')).removeAt(i);
   }
-  
+
   get total_sum() {
     return this.itemTotal.reduce((total, fee) => total + fee.balance, 0);
 }
@@ -664,12 +664,12 @@ createBilling() {
               this.uploadError = res.message;
             } else {
               const currentUrl = this.router.url;
-    
-              
+
+
               this.messageService.add({ key: 'myKey1', severity: 'info', summary: 'Attenzione', detail: 'Futtura / Ricevuta creata con successo' });
               this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
                 this.router.navigate([currentUrl]);
-                
+
             });
             }
           },
@@ -712,7 +712,7 @@ createBilling() {
           }
         },
         (error) => (this.error = error)
-      ); 
+      );
     } else {
       this.purchaseOrdersService.create(formData).subscribe(
         (res) => {

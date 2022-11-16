@@ -141,7 +141,7 @@ export class ProjectsFormComponent implements OnInit {
     private projectsService: ProjectsService,
     private skillsService: SkillsService,
     private brandsService: BrandService,
-    private comuniService: ComuniService,    
+    private comuniService: ComuniService,
     private worksService: WorksService,
     private categoryService: CategoryService,
     private spinner: NgxSpinnerService,
@@ -159,7 +159,7 @@ export class ProjectsFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.spinner.show();
 
 
@@ -171,8 +171,8 @@ export class ProjectsFormComponent implements OnInit {
       this.pageTitle = "Modifica Progetto";
       this.projectsService.getId(+id).subscribe((res) => {
 
-        
-        if (res.user_id == this.currentUser.user_id) {
+
+        if (res.user_id == this.currentUser.id) {
           this.blogForm.patchValue({
             title: res.title,
             description: res.description.split(','),
@@ -185,7 +185,7 @@ export class ProjectsFormComponent implements OnInit {
             code: res.code,
             date_from: res.date_from,
             date_to: res.date_to,
-            user_id: this.currentUser.user_id,
+            user_id: this.currentUser.id,
             description_full: res.description_full,
             code_int: res.code_int,
             price: res.price,
@@ -225,14 +225,14 @@ export class ProjectsFormComponent implements OnInit {
       is_active: ["0"],
       image: [""],
       code: [""],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
       code_int: [""],
       price: [""],
       price_extra: [""],
 
     });
 
-    
+
     this.getselectedWorks;
     this.getselectedCategories;
     this.getBrands();
@@ -248,7 +248,7 @@ export class ProjectsFormComponent implements OnInit {
 
 
   getComuni() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.comuniService.getAllList().subscribe(
       (data: Comuni) => this.comuni = data,
       error => this.error = error
@@ -267,7 +267,7 @@ export class ProjectsFormComponent implements OnInit {
   public locationsSum() {
     return this.timesheetsEmployee.map(data => data.id).reduce((a, b) => a + b);
   }
-  
+
   initSkill() {
     var formArray = this.fb.array([]);
     const id = this.route.snapshot.paramMap.get("id");

@@ -39,6 +39,8 @@ import { Projects } from 'src/app/models/projects';
 
 import { WarehouseCheckins } from 'src/app/models/warehouse_checkins';
 import { WarehousesCheckinsService } from 'src/app/services/warehouses_checkins.service';
+import { AuthService } from 'src/app/auth/auth.service';
+import { User } from 'src/app/auth/auth.type';
 
 moment.locale('it')
 
@@ -86,7 +88,7 @@ export class AppointmentsCalendarComponent implements OnInit {
   client: Clients;
   comuni: any = [];
   displayEvent: any;
-  currentUser: any;
+  currentUser: User;
   items: any;
   appointmentsCount: Appointments;
   billingsCount: Billings;
@@ -141,10 +143,11 @@ export class AppointmentsCalendarComponent implements OnInit {
     private warehousesCheckinsService: WarehousesCheckinsService,
     private messageService: MessageService,
     private supportsService: SupportsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private readonly authService: AuthService
   ) {
     this.typeList = TYPE_LIST;
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    this.currentUser = this.authService.getUser();
     this.events = this.appointments;
     this.items = DASHBOARD;
 
@@ -154,7 +157,7 @@ export class AppointmentsCalendarComponent implements OnInit {
 
   ngOnInit() {
 
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
 
     const params = this.getRequestParams(
       this.nameFilter = '',
@@ -162,10 +165,10 @@ export class AppointmentsCalendarComponent implements OnInit {
       this.page = 1,
       this.pageSize = 200
     );
-    this.appointmentsService.getAllListCalendar(params).subscribe((data) => {      
+    this.appointmentsService.getAllListCalendar(params).subscribe((data) => {
       this.projects = data;
       this.count = this.projectsService.size;
-    
+
 
 
       this.calendarOptions = {
@@ -173,7 +176,7 @@ export class AppointmentsCalendarComponent implements OnInit {
         eventLimit: false,
         timeFormat: 'HH:mm',
         weekNumbers: false,
-        
+
         header: {
           right: 'prev,next',
           left: 'title',
@@ -217,10 +220,10 @@ export class AppointmentsCalendarComponent implements OnInit {
       params[`size`] = pageSize;
       adder + 'size=' + pageSize;
     }
-    
-    
+
+
     return params;
-    
+
   }
 
 
@@ -232,10 +235,10 @@ export class AppointmentsCalendarComponent implements OnInit {
       this.page = 1,
       this.pageSize = 2
     );
-    this.projectsService.getAllListNew(params).subscribe((pData) => {      
+    this.projectsService.getAllListNew(params).subscribe((pData) => {
       this.projects = pData;
       this.count = this.projectsService.size;
-      
+
     });
   }
 
@@ -247,10 +250,10 @@ export class AppointmentsCalendarComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.warehousesCheckinsService.getAllListNew(params).subscribe((pData) => {      
+    this.warehousesCheckinsService.getAllListNew(params).subscribe((pData) => {
       this.warehouseCheckins = pData;
       this.count = this.warehousesCheckinsService.size;
-      
+
     });
   }
 
@@ -262,10 +265,10 @@ export class AppointmentsCalendarComponent implements OnInit {
       this.page = 1,
       this.pageSize = 3
     );
-    this.supportsService.getAllListNew(params).subscribe((pData) => {      
+    this.supportsService.getAllListNew(params).subscribe((pData) => {
       this.supports = pData;
       this.count = this.supportsService.size;
-      
+
     });
   }
 
@@ -313,7 +316,7 @@ export class AppointmentsCalendarComponent implements OnInit {
   }
 
   getClientsCount() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.clientsService.count().subscribe(
       (data: Clients) => this.clientsCount = data,
       error => this.error = error
@@ -338,7 +341,7 @@ export class AppointmentsCalendarComponent implements OnInit {
 
 
   getAppointmentsCount() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.appointmentsService.count().subscribe(
       (data: Appointments) => this.appointmentsCount = data,
       error => this.error = error
@@ -346,7 +349,7 @@ export class AppointmentsCalendarComponent implements OnInit {
   }
 
   getBillingsCount() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.billingsService.count().subscribe(
       (data: Billings) => this.billingsCount = data,
       error => this.error = error
@@ -355,7 +358,7 @@ export class AppointmentsCalendarComponent implements OnInit {
 
 
   getBillingsCountTotal() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.billingsService.countTotal(+userId).subscribe(
       (data: Billings) => this.billingsCountTotal = data,
       error => this.error = error
@@ -364,7 +367,7 @@ export class AppointmentsCalendarComponent implements OnInit {
 
 
   getBillingsCountTotalNotPaid() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.billingsService.countTotalNotPaid(+userId).subscribe(
       (data: Billings) => this.billingsCountTotalNotPaid = data,
       error => this.error = error
@@ -378,12 +381,12 @@ export class AppointmentsCalendarComponent implements OnInit {
       this.nameFilter = formatDate(new Date(), 'yyyy-MM-dd 00:00', 'en'),
       this.descriptionFilter = formatDate(new Date(), 'yyyy-MM-dd 23:59', 'en'),
       this.pageSize
-      
+
     );
-    this.appointmentsService.getAllListNew(params).subscribe((pData) => {      
+    this.appointmentsService.getAllListNew(params).subscribe((pData) => {
       this.appointmentsToday = pData;
       this.count = this.appointmentsService.size;
-      
+
     });
   }
 

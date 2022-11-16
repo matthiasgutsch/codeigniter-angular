@@ -176,7 +176,7 @@ export class ManageWarehousesMovementsComponent implements OnInit {
     const dateObj = new Date();
     const yearMonth = dateObj.getUTCFullYear() + '-' + (dateObj.getUTCMonth() + 1);
 
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.spinner.show();
     this.getEmployees();
     this.getWarehouses();
@@ -228,9 +228,9 @@ export class ManageWarehousesMovementsComponent implements OnInit {
   public handlePageChange(event): void {
     this.page = event;
     this.load();
-  
+
   }
-  
+
     public selectionItemForFilter(e) {
       const colsTempor = e.value;
       colsTempor.sort(function (a, b) {
@@ -299,9 +299,9 @@ export class ManageWarehousesMovementsComponent implements OnInit {
     this.nameFilter = '';
     this.descriptionFilter = '';
     this.load();
-    
+
   }
-  
+
   onChangePage(pageOfItems: Array<any>) {
     // update current page of items
     this.pageOfItems = pageOfItems;
@@ -329,7 +329,7 @@ export class ManageWarehousesMovementsComponent implements OnInit {
           product_id: res.product_id,
           pieces: res.pieces,
           boxes: res.boxes,
-          user_id: this.currentUser.user_id,
+          user_id: this.currentUser.id,
           id: res.id,
         });
 
@@ -345,7 +345,7 @@ export class ManageWarehousesMovementsComponent implements OnInit {
       supplier_id: ["", Validators.required],
       pieces: ["", Validators.required],
       boxes: ["", Validators.required],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
     });
 
     this.productDialogAdd = true;
@@ -363,7 +363,7 @@ export class ManageWarehousesMovementsComponent implements OnInit {
       supplier_id: ["", Validators.required],
       pieces: ["", Validators.required],
       boxes: ["", Validators.required],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
     });
 
 
@@ -508,10 +508,10 @@ export class ManageWarehousesMovementsComponent implements OnInit {
 
     const id = this.warehouseCheckin.product_id;
 
-    this.productsVariationsService.getId(+id).subscribe((res) => { 
+    this.productsVariationsService.getId(+id).subscribe((res) => {
       this.product = res;
     });
-    
+
     this.productDialog = true;
   }
 

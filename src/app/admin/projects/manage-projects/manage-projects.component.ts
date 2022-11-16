@@ -111,7 +111,7 @@ descriptionFilter: string;
     private clientsService: ClientsService,
     private projectsService: ProjectsService,
     private worksService: WorksService,
-    private locationsService: LocationsService, 
+    private locationsService: LocationsService,
     private messageService: MessageService,
     private employeesService: EmployeesService,
     private comuniService: ComuniService,
@@ -119,18 +119,18 @@ descriptionFilter: string;
     private tagsService: TagsService,
     private technicalDataService: TechnicalDataService,
     private spinner: NgxSpinnerService,
-    private categoryService: CategoryService, 
-    private confirmationService: ConfirmationService,) { 
+    private categoryService: CategoryService,
+    private confirmationService: ConfirmationService,) {
       this.status = STATUS_PRODUCTS;
       this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
   }
 
   ngOnInit() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.spinner.show();
 
-  
+
       this.cols = [
         { field: "title", header: "Nome Progetto" },
         { field: "status", header: "Status" },
@@ -140,7 +140,7 @@ descriptionFilter: string;
       this.colsData = [
         { field: "title", header: "titolo" },
         { field: "description", header: "Codice" },
-  
+
       ];
       this._selectedColumns = this.cols;
       this.exportColumns = this.cols.map(col => ({
@@ -148,7 +148,7 @@ descriptionFilter: string;
         dataKey: col.field
       }));
 
-    
+
 
       this.getTags();
       this.getCategories();
@@ -195,7 +195,7 @@ descriptionFilter: string;
 
   }
 
-  
+
   load(): void {
 
     const params = this.getRequestParams(
@@ -221,15 +221,15 @@ descriptionFilter: string;
     this.nameFilter = '';
     this.descriptionFilter = '';
     this.load();
-    
+
   }
-  
+
   public handlePageChange(event): void {
     this.page = event;
     this.load();
-  
+
   }
-  
+
 
 
   onChangePage(pageOfItems: Array<any>) {
@@ -274,15 +274,15 @@ descriptionFilter: string;
   }
 
 
-  clear(table: any) 
+  clear(table: any)
   {
-    
+
       //  THIS DOES NOT WORK!!   Filter stops working after clearing
       table.clear();
-      
-	} 
-    
- 
+
+	}
+
+
 
   getBrandItem(brand_id: string, id: string) {
     return this.brands.find(item => item.id === brand_id);
@@ -311,7 +311,7 @@ descriptionFilter: string;
     return this.works.find(item => item.id === works_id);
   }
 
-  
+
   view(project: Projects) {
     this.project = {...this.project};
     this.productDialog = true;
@@ -322,7 +322,7 @@ descriptionFilter: string;
 edit(project: Projects) {
   this.project = { ...project };
 
-  
+
   this.productDialog = true;
 }
 
@@ -360,10 +360,10 @@ hideDialog() {
           error => this.error = error
         );
       },
-     
+
   });
 
-   
+
   }
 
 }

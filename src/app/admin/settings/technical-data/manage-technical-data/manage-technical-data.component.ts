@@ -33,11 +33,11 @@ export class ManageTechnicalDataComponent implements OnInit {
   @ViewChild('dt', { static: true }) dt: Table;
   currentUser: any;
 
-  constructor(private technicalDataService: TechnicalDataService, 
+  constructor(private technicalDataService: TechnicalDataService,
     private router: Router,
     private route: ActivatedRoute,
     private confirmationService: ConfirmationService,) {
-      const userId = this.currentUser.user_id;
+      const userId = this.currentUser.id;
 
     this.cols = [
       { field: 'name', header: 'Nome', index: 1 },
@@ -50,7 +50,7 @@ export class ManageTechnicalDataComponent implements OnInit {
       this.columnOptions.push({label: this.cols[i].header, value: this.cols[i]});
     }
 
-    
+
    }
 
   ngOnInit() {
@@ -71,7 +71,7 @@ export class ManageTechnicalDataComponent implements OnInit {
 
     this.load();
 
-    
+
   }
 
 
@@ -170,7 +170,7 @@ export class ManageTechnicalDataComponent implements OnInit {
 
 
 
-  
+
   editProduct(technical_dat: Technical_data) {
     this.technical_dat = {...technical_dat};
 }
@@ -192,10 +192,10 @@ onDelete(id: number, category_name: string) {
         error => this.error = error
         );
       },
-     
+
   });
 
-   
+
   }
 
 }

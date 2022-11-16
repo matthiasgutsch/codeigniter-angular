@@ -77,7 +77,7 @@ export class WorksFormComponent implements OnInit {
           this.categoryForm.patchValue({
             category_name: res.category_name,
             category_description: res.category_description,
-            user_id: this.currentUser.user_id,
+            user_id: this.currentUser.id,
             id: res.id
           });
 
@@ -91,7 +91,7 @@ export class WorksFormComponent implements OnInit {
       id: [''],
       category_name: ['', Validators.required],
       category_description: [''],
-      user_id: [this.currentUser.user_id]
+      user_id: [this.currentUser.id]
 
     });
   }

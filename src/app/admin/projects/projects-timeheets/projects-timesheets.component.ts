@@ -131,7 +131,7 @@ descriptionFilter: string;
     private clientsService: ClientsService,
     private timesheetsService: TimesheetsService,
     private worksService: WorksService,
-    private locationsService: LocationsService, 
+    private locationsService: LocationsService,
     private messageService: MessageService,
     private employeesService: EmployeesService,
     private comuniService: ComuniService,
@@ -139,11 +139,11 @@ descriptionFilter: string;
     private tagsService: TagsService,
     private technicalDataService: TechnicalDataService,
     private spinner: NgxSpinnerService,
-    private categoryService: CategoryService, 
+    private categoryService: CategoryService,
     private router: Router,
     private projectsService: ProjectsService,
     private route: ActivatedRoute,
-    private confirmationService: ConfirmationService,) { 
+    private confirmationService: ConfirmationService,) {
       this.status = STATUS_PRODUCTS;
       this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
@@ -154,8 +154,8 @@ descriptionFilter: string;
     const dateObj = new Date();
     const yearMonth = dateObj.getUTCFullYear() + '-' + (dateObj.getUTCMonth() + 1);
 
-    const userId = this.currentUser.user_id;
-   
+    const userId = this.currentUser.id;
+
 
     this.basePath = window.location.pathname;
     if (this.route.snapshot.queryParamMap.has('page')) {
@@ -234,20 +234,20 @@ descriptionFilter: string;
   }
 
 
-  clear(table: any) 
+  clear(table: any)
   {
           table.clear();
-	} 
-    
- 
+	}
+
+
 
 
   public handlePageChange(event): void {
     this.page = event;
     this.load();
-  
+
   }
-  
+
     public selectionItemForFilter(e) {
       const colsTempor = e.value;
       colsTempor.sort(function (a, b) {
@@ -317,9 +317,9 @@ descriptionFilter: string;
     this.nameFilter = '';
     this.descriptionFilter = '';
     this.load();
-    
+
   }
-  
+
   onChangePage(pageOfItems: Array<any>) {
     // update current page of items
     this.pageOfItems = pageOfItems;
@@ -370,7 +370,7 @@ descriptionFilter: string;
     this.timesheet = { ...timesheet };
     this.productDialog = true;
   }
-  
+
 
 
 edit(timesheet: Timesheets) {
@@ -413,10 +413,10 @@ hideDialog() {
           error => this.error = error
         );
       },
-     
+
   });
 
-   
+
   }
 
 }

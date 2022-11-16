@@ -103,15 +103,15 @@ trackByFn(index, item) {
     private tagsService: TagsService,
     private technicalDataService: TechnicalDataService,
     private spinner: NgxSpinnerService,
-    private categoryService: CategoryService, 
-    private confirmationService: ConfirmationService,) { 
+    private categoryService: CategoryService,
+    private confirmationService: ConfirmationService,) {
     this.status = STATUS_PRODUCTS;
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
 
   }
 
   ngOnInit() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.spinner.show();
 
     this.productsService.getAllListbyUser().subscribe(data => {
@@ -128,7 +128,7 @@ trackByFn(index, item) {
       this.colsData = [
         { field: "title", header: "titolo" },
         { field: "description", header: "Codice" },
-  
+
       ];
       this._selectedColumns = this.cols;
       this.exportColumns = this.cols.map(col => ({
@@ -179,15 +179,15 @@ trackByFn(index, item) {
   }
 
 
-  clear(table: any) 
+  clear(table: any)
   {
-    
+
       //  THIS DOES NOT WORK!!   Filter stops working after clearing
       table.clear();
-      
-	} 
-    
- 
+
+	}
+
+
 
   getBrandItem(brand_id: string, id: string) {
     return this.brands.find(item => item.id === brand_id);
@@ -216,7 +216,7 @@ trackByFn(index, item) {
     return this.works.find(item => item.id === works_id);
   }
 
-  
+
   view(product: Products) {
     this.product = {...this.product};
     this.productDialog = true;
@@ -226,10 +226,10 @@ trackByFn(index, item) {
 
 edit(product: Products) {
   this.product = { ...product };
-  
+
   this.selectedSkills = JSON.parse("" + this.product.skills + "");
 
-  
+
   this.productDialog = true;
 }
 
@@ -267,10 +267,10 @@ hideDialog() {
           error => this.error = error
         );
       },
-     
+
   });
 
-   
+
   }
 
 }

@@ -144,10 +144,10 @@ export class ManageProductsComponent implements OnInit {
 
 
   ngOnInit() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.spinner.show();
 
-    
+
     this.load();
 
     this.cols = [
@@ -224,7 +224,7 @@ export class ManageProductsComponent implements OnInit {
       path += adder + 'brand=' + brandTitle;
       adder = '&';
     }
- 
+
     if (pageSize) {
       params[`size`] = pageSize;
       path += adder + 'size=' + pageSize;

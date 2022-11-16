@@ -186,7 +186,7 @@ export class ProjectsProductivityComponent implements OnInit {
 
 
   ngOnInit() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
 
 
 
@@ -243,7 +243,7 @@ export class ProjectsProductivityComponent implements OnInit {
           }
          },
         maintainAspectRatio: true,
-       
+
         scales: {
           xAxes: [{
             gridLines: {
@@ -262,7 +262,7 @@ export class ProjectsProductivityComponent implements OnInit {
               labelString: 'Mese',
               display: true,
             },
-         
+
           }],
           yAxes: [{
             ticks: {
@@ -275,7 +275,7 @@ export class ProjectsProductivityComponent implements OnInit {
           }]
         }
       }
-      
+
 	  });
     myChart.update();
   }
@@ -288,7 +288,7 @@ export class ProjectsProductivityComponent implements OnInit {
   };
 
 
- 
+
   getChartsCount(id) {
 
     this.projectsService.get_projects_timesheets_chart(+id).subscribe(data => {

@@ -54,7 +54,7 @@ export class TasksComponent implements OnInit, OnDestroy {
   @Input() cancel: boolean = false;
   @Input() edit: boolean = false;
 
-  
+
   calendarOptions: any;
   events: any;
   appointments: any = [];
@@ -128,7 +128,7 @@ export class TasksComponent implements OnInit, OnDestroy {
   trackByFn(index, item) {
     return item.id;
   }
-  
+
   myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en')  ;
   myMonth = formatDate(new Date(), 'dd/MM/yyyy', 'en')  ;
   valueProcess: number;
@@ -160,7 +160,7 @@ export class TasksComponent implements OnInit, OnDestroy {
     private comuniService: ComuniService,
     private worksService: WorksService,
     private tasksService: TasksService,
-    private locationsService: LocationsService, 
+    private locationsService: LocationsService,
     private employeesService: EmployeesService,
     private categoryService: CategoryService,
     private cd: ChangeDetectorRef,
@@ -176,17 +176,17 @@ export class TasksComponent implements OnInit, OnDestroy {
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
     this.items = DASHBOARD;
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.selectedProducts = [];
-    
+
     }
 
 
   ngOnInit() {
-    
+
     this.spinner.show();
 
-    
+
     this.projects ={
       id:this.route.snapshot.params['project_id'],
     }
@@ -223,7 +223,7 @@ export class TasksComponent implements OnInit, OnDestroy {
       description: [""],
       priority: [""],
       employee_id: [""],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
 
   });
 
@@ -233,7 +233,7 @@ export class TasksComponent implements OnInit, OnDestroy {
 
   deleteFromLocalData(type, index) {
     // This is used to avoid unnecessary API call for getTasks() which will result in better performance
-   
+
       this.donePriorityTasks.splice(index);
       this.backupDonePriorityTasks.splice(index);
       this.highPriorityTasks.splice(index);
@@ -242,7 +242,7 @@ export class TasksComponent implements OnInit, OnDestroy {
       this.backupMediumPriorityTasks.splice(index);
       this.lowPriorityTasks.splice(index);
       this.backupLowPriorityTasks.splice(index);
-      
+
   }
 
 
@@ -301,7 +301,7 @@ onSubmitAdd(task: Task, index) {
   formData.append('user_id', this.blogForm.get('user_id').value);
   formData.append('project_id', this.projects.id);
 
-  
+
     this.tasksService.create(formData).subscribe(
       (res) => {
         if (res.status === "error") {
@@ -319,14 +319,14 @@ onSubmitAdd(task: Task, index) {
 
     changedNumber(value){
     this.task.title = value.item.data.title;
-    }  
+    }
 
     getTasks() {
       this.spinner.show();
       this.subscription = this.tasksService.getAllTasksListbyUser(this.projects.id).subscribe({
       next: (response: any) => {
         if (response.error) {
-          
+
         } else {
           response.forEach((task) => {
             if (task.priority === '4') {
@@ -368,7 +368,7 @@ onSubmitAdd(task: Task, index) {
               this.deleteFromLocalData(task, index);
 
               this.getTasks();
-              
+
             this.messageService.add({key: 'myKey1', severity:'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo'});
           }
         },
@@ -383,16 +383,16 @@ onSubmitAdd(task: Task, index) {
     const id = task.id;
 
     if (id) {
-      
+
       this.tasksService.getId(+id).subscribe((res) => {
-        if (res.user_id == this.currentUser.user_id) {
+        if (res.user_id == this.currentUser.id) {
           this.blogForm.patchValue({
           title: res.title,
           description: res.description,
           priority: res.priority,
           employee_id: res.employee_id,
 
-          user_id: this.currentUser.user_id,
+          user_id: this.currentUser.id,
         });
       }
       else {
@@ -403,14 +403,14 @@ onSubmitAdd(task: Task, index) {
     } else {
 
     }
-    
+
     this.blogForm = this.fb.group({
         id: [""],
         title: ["", Validators.required],
         description: ["", Validators.required],
         priority: ["", Validators.required],
         employee_id: [""],
-        user_id: [this.currentUser.user_id],
+        user_id: [this.currentUser.id],
 
     });
 
@@ -420,7 +420,7 @@ onSubmitAdd(task: Task, index) {
 
 
 
-  
+
   viewItem(task: Task) {
     this.task = { ...task };
     const id = task.id;
@@ -484,7 +484,7 @@ onSubmitAdd(task: Task, index) {
     const id = event.item.data.id;
     const formData = new FormData();
     formData.set('priority', event.item.data.priority);
-    
+
     this.busy2 = this.tasksService.update_priority(formData, +id).subscribe({
       next: (response: any) => {
         if (response.error) {

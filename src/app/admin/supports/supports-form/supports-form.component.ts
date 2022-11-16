@@ -72,7 +72,7 @@ export class SupportsFormComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle(this.title);
 
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
 
 
     const id = this.route.snapshot.paramMap.get("id");
@@ -80,14 +80,14 @@ export class SupportsFormComponent implements OnInit {
 
     if (id) {
       this.supportsService.getId(+id).subscribe((res) => {
-        if (res.user_id == this.currentUser.user_id) {
+        if (res.user_id == this.currentUser.id) {
           this.blogForm.patchValue({
             title: res.title,
             phone: res.phone,
             email: res.email,
             name: res.name,
             sender_id: res.sender_id,
-            user_id: this.currentUser.user_id,
+            user_id: this.currentUser.id,
             ref_id: res.id,
             id: res.id,
             is_active: res.is_active,
@@ -104,7 +104,7 @@ export class SupportsFormComponent implements OnInit {
             (error) => (this.error = error)
           );
 
-          
+
         }
         else {
           this.router.navigate(['/admin/products']);
@@ -113,14 +113,14 @@ export class SupportsFormComponent implements OnInit {
         this.is_active = res.is_active;
 
 
-       
+
 
       });
     } else {
 
     }
 
-    
+
 
 
     this.blogForm = this.fb.group({
@@ -129,10 +129,10 @@ export class SupportsFormComponent implements OnInit {
       phone: [""],
       message: ["", Validators.required],
       name: [this.currentUser.first_name + ' ' + this.currentUser.last_name],
-      sender_id: [this.currentUser.user_id],
+      sender_id: [this.currentUser.id],
       email: [""],
       ref_id: [this.id],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
     });
   }
 
@@ -184,7 +184,7 @@ export class SupportsFormComponent implements OnInit {
             );
             this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Informazioni', detail: 'Richiesta inviata con sucesso' });
             this.blogForm.get('message').reset();
-  
+
           }
         },
         (error) => (this.error = error)
@@ -201,7 +201,7 @@ export class SupportsFormComponent implements OnInit {
             this.router.navigate(['/admin/support']);
             this.getSupportsCount();
 
-  
+
           }
         },
         (error) => (this.error = error)
@@ -263,7 +263,7 @@ export class SupportsFormComponent implements OnInit {
       error => this.error = error
     });
   }
-  
+
   gotoHome() {
     this.router.navigate(['/']);
   }

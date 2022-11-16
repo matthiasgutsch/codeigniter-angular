@@ -1,58 +1,49 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Chart } from 'chart.js';
-import { BlogService } from '../../services/blog.service';
-import { Blog } from '../../models/blog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DASHBOARD, PAGES, TYPE_LIST } from '../constants/constants';
-import { CategoryService } from 'src/app/services/categories.service';
-import { Category } from 'src/app/models/category';
-import { Router, ActivatedRoute } from '@angular/router';
-import { MessageService } from 'primeng/api';
-import { ClientsService } from 'src/app/services/clients.service';
-import { Clients } from 'src/app/models/clients';
-import { ComuniService } from 'src/app/services/comuni.service';
-import { Comuni } from 'src/app/models/comuni';
-import { Appointments } from 'src/app/models/appointments';
-import { AppointmentsService } from 'src/app/services/appointments.service';
-import { CalendarComponent } from 'ng-fullcalendar';
-import * as $ from 'jquery';
-import { formatDate } from '@angular/common';
-import { Locations } from 'src/app/models/locations';
-import { Employees } from 'src/app/models/employees';
-import { WorksService } from 'src/app/services/works.service';
-import { LocationsService } from 'src/app/services/locations.service';
-import { EmployeesService } from 'src/app/services/employees.service';
-import { Works } from 'src/app/models/works';
-import * as moment from 'moment';
-import { ProductsService } from 'src/app/services/products.service';
-import { Products } from 'src/app/models/products';
-import { BillingsService } from 'src/app/services/billings.service';
-import { Billings } from 'src/app/models/billings';
+import { formatDate } from "@angular/common";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import * as moment from "moment";
+import "moment/locale/it"; // without this line it didn't work
+import { CalendarComponent } from "ng-fullcalendar";
 import { NgxSpinnerService } from "ngx-spinner";
-import { ChartsService } from 'src/app/services/charts.service';
-import { Charts } from 'src/app/models/charts';
-import 'moment/locale/it'  // without this line it didn't work
-import { SupportsService } from 'src/app/services/supports.service';
-import { Supports } from 'src/app/models/supports';
-import { ProjectsService } from 'src/app/services/projects.service';
-import { Projects } from 'src/app/models/projects';
+import { MessageService } from "primeng/api";
+import { Appointments } from "src/app/models/appointments";
+import { Billings } from "src/app/models/billings";
+import { Category } from "src/app/models/category";
+import { Clients } from "src/app/models/clients";
+import { Employees } from "src/app/models/employees";
+import { Locations } from "src/app/models/locations";
+import { Products } from "src/app/models/products";
+import { Projects } from "src/app/models/projects";
+import { Supports } from "src/app/models/supports";
+import { Works } from "src/app/models/works";
+import { AppointmentsService } from "src/app/services/appointments.service";
+import { BillingsService } from "src/app/services/billings.service";
+import { ClientsService } from "src/app/services/clients.service";
+import { ProductsService } from "src/app/services/products.service";
+import { ProjectsService } from "src/app/services/projects.service";
+import { SupportsService } from "src/app/services/supports.service";
+import { WorksService } from "src/app/services/works.service";
+import { Blog } from "../../models/blog";
+import { DASHBOARD, TYPE_LIST } from "../constants/constants";
 
-import { WarehouseCheckins } from 'src/app/models/warehouse_checkins';
-import { WarehousesCheckinsService } from 'src/app/services/warehouses_checkins.service';
+import { User } from "src/app/auth/auth.type";
+import { WarehouseCheckins } from "src/app/models/warehouse_checkins";
+import { WarehousesCheckinsService } from "src/app/services/warehouses_checkins.service";
+import { AuthService } from "../../auth/auth.service";
 
-moment.locale('it')
+moment.locale("it");
 
 @Component({
-  selector: 'app-admin-dashboard',
-  templateUrl: './admin-dashboard.component.html'
+  selector: "app-admin-dashboard",
+  templateUrl: "./admin-dashboard.component.html",
 })
 export class AdminDashboardComponent implements OnInit {
-
   calendarOptions: any;
   events: any;
   appointments: any = [];
   appointment: Appointments;
-  appointmentsToday:  any = [];
+  appointmentsToday: any = [];
   locations: any = [];
   location: Locations;
 
@@ -71,7 +62,6 @@ export class AdminDashboardComponent implements OnInit {
 
   billings: any = [];
   billing: Billings;
-
 
   productsCount: any;
   error: string;
@@ -94,7 +84,7 @@ export class AdminDashboardComponent implements OnInit {
   client: Clients;
   comuni: any = [];
   displayEvent: any;
-  currentUser: any;
+  currentUser: User;
   items: any;
   appointmentsCount: Appointments;
   billingsCount: Billings;
@@ -116,22 +106,22 @@ export class AdminDashboardComponent implements OnInit {
   count = 0;
   pageSize = 3;
   page = 1;
-  myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en');
-  searchDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+  myDate = formatDate(new Date(), "dd/MM/yyyy", "en");
+  searchDate = formatDate(new Date(), "yyyy-MM-dd", "en");
 
   trackByFn(index, item) {
     return item.id;
   }
 
-  myMonth = formatDate(new Date(), 'dd/MM/yyyy', 'en');
+  myMonth = formatDate(new Date(), "dd/MM/yyyy", "en");
   nameFilter: string;
   descriptionFilter: string;
   dateFromFilter: string;
   dateToFilter: string;
   currentDate: moment.Moment = moment();
-  currentTime: string = moment().format(' MMMM YYYY');
+  currentTime: string = moment().format(" MMMM YYYY");
 
-  @ViewChild('mychart') mychart;
+  @ViewChild("mychart") mychart;
 
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
@@ -148,88 +138,74 @@ export class AdminDashboardComponent implements OnInit {
     private warehousesCheckinsService: WarehousesCheckinsService,
     private messageService: MessageService,
     private supportsService: SupportsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private readonly authService: AuthService
   ) {
     this.typeList = TYPE_LIST;
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    this.currentUser = authService.getUser();
     this.events = this.appointments;
     this.items = DASHBOARD;
-
-
-
   }
 
   ngOnInit() {
-
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.spinner.show();
 
-      this.getClientsCount();
-      this.getProductsCount();
-      this.getBillingsCountTotal();
-      this.getBillingsCountTotalNotPaid();
-      this.getLastWarehouseCheckins();
-      this.getBillingsCount();
-      this.getAppointmentsToday();
-      this.getAppointmentsCount();
-      this.getWorks();
-      this.getProjects();
-      this.getSupports();
-      this.getProducts();
-      this.getBillings();
-      this.spinner.hide();
-
-
-    
+    this.getClientsCount();
+    this.getProductsCount();
+    this.getBillingsCountTotal();
+    this.getBillingsCountTotalNotPaid();
+    this.getLastWarehouseCheckins();
+    this.getBillingsCount();
+    this.getAppointmentsToday();
+    this.getAppointmentsCount();
+    this.getWorks();
+    this.getProjects();
+    this.getSupports();
+    this.getProducts();
+    this.getBillings();
+    this.spinner.hide();
   }
-
-
 
   getRequestParams(page, searchTitle, categoryTitle, pageSize): any {
     // tslint:disable-next-line:prefer-const
     const params = {};
-    let adder = '?';
+    let adder = "?";
     if (page) {
       params[`page`] = page - 1;
-      adder + 'page=' + (page - 1);
-      adder = '&';
+      adder + "page=" + (page - 1);
+      adder = "&";
     }
     if (searchTitle) {
       params[`name`] = searchTitle;
-      adder + 'date_from=' + searchTitle;
-      adder = '&';
+      adder + "date_from=" + searchTitle;
+      adder = "&";
     }
     if (categoryTitle) {
       params[`description`] = categoryTitle;
-      adder + 'date_to=' + categoryTitle;
-      adder = '&';
+      adder + "date_to=" + categoryTitle;
+      adder = "&";
     }
     if (pageSize) {
       params[`size`] = pageSize;
-      adder + 'size=' + pageSize;
+      adder + "size=" + pageSize;
     }
-    
-    
-    return params;
-    
-  }
 
-  
+    return params;
+  }
 
   getProjects() {
     const params = this.getRequestParams(
-      this.nameFilter = '',
-      this.descriptionFilter = '',
-      this.page = 1,
-      this.pageSize = 2
+      (this.nameFilter = ""),
+      (this.descriptionFilter = ""),
+      (this.page = 1),
+      (this.pageSize = 2)
     );
-    this.projectsService.getAllListNew(params).subscribe((pData) => {      
+    this.projectsService.getAllListNew(params).subscribe((pData) => {
       this.projects = pData;
       this.count = this.projectsService.size;
-      
     });
   }
-
 
   getLastWarehouseCheckins() {
     const params = this.getRequestParams(
@@ -238,147 +214,131 @@ export class AdminDashboardComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.warehousesCheckinsService.getAllListNew(params).subscribe((pData) => {      
+    this.warehousesCheckinsService.getAllListNew(params).subscribe((pData) => {
       this.warehouseCheckins = pData;
       this.count = this.warehousesCheckinsService.size;
-      
     });
   }
-
 
   getSupports() {
     const params = this.getRequestParams(
-      this.nameFilter = '',
-      this.descriptionFilter = '',
-      this.page = 0,
-      this.pageSize = 4
+      (this.nameFilter = ""),
+      (this.descriptionFilter = ""),
+      (this.page = 0),
+      (this.pageSize = 4)
     );
-    this.supportsService.getAllListNew(params).subscribe((pData) => {      
+    this.supportsService.getAllListNew(params).subscribe((pData) => {
       this.supports = pData;
       this.count = this.supportsService.size;
-      
     });
   }
 
-
   getProducts() {
     const params = this.getRequestParams(
-      this.nameFilter = '',
-      this.descriptionFilter = '',
-      this.page = 0,
-      this.pageSize = 4
+      (this.nameFilter = ""),
+      (this.descriptionFilter = ""),
+      (this.page = 0),
+      (this.pageSize = 4)
     );
-   this.productsService.getAllListNew(params).subscribe((pData) => {
+    this.productsService.getAllListNew(params).subscribe((pData) => {
       this.products = pData;
       this.count = this.productsService.size;
     });
   }
 
-
   getBillings() {
     const params = this.getRequestParams(
-      this.nameFilter = '',
-      this.descriptionFilter = '',
-      this.page = 0,
-      this.pageSize = 4
+      (this.nameFilter = ""),
+      (this.descriptionFilter = ""),
+      (this.page = 0),
+      (this.pageSize = 4)
     );
-   this.billingsService.getAllListNew(params).subscribe((pData) => {
+    this.billingsService.getAllListNew(params).subscribe((pData) => {
       this.billings = pData;
       this.count = this.billingsService.size;
     });
   }
 
   getClientsCount() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.clientsService.count().subscribe(
-      (data: Clients) => this.clientsCount = data,
-      error => this.error = error
+      (data: Clients) => (this.clientsCount = data),
+      (error) => (this.error = error)
     );
   }
 
   getWorks() {
     this.worksService.getAllListbyUser().subscribe(
-      (data: Works) => this.works = data,
-      error => this.error = error
+      (data: Works) => (this.works = data),
+      (error) => (this.error = error)
     );
   }
 
-
   getProductsCount() {
-    this.productsService.count().subscribe(data => {
+    this.productsService.count().subscribe((data) => {
       this.productsCount = data;
-      error => this.error = error
+      (error) => (this.error = error);
     });
   }
 
-
-
   getAppointmentsCount() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.appointmentsService.count().subscribe(
-      (data: Appointments) => this.appointmentsCount = data,
-      error => this.error = error
+      (data: Appointments) => (this.appointmentsCount = data),
+      (error) => (this.error = error)
     );
   }
 
   getBillingsCount() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.billingsService.count().subscribe(
-      (data: Billings) => this.billingsCount = data,
-      error => this.error = error
+      (data: Billings) => (this.billingsCount = data),
+      (error) => (this.error = error)
     );
   }
-
 
   getBillingsCountTotal() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.billingsService.countTotal(+userId).subscribe(
-      (data: Billings) => this.billingsCountTotal = data,
-      error => this.error = error
+      (data: Billings) => (this.billingsCountTotal = data),
+      (error) => (this.error = error)
     );
   }
-
 
   getBillingsCountTotalNotPaid() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
     this.billingsService.countTotalNotPaid(+userId).subscribe(
-      (data: Billings) => this.billingsCountTotalNotPaid = data,
-      error => this.error = error
+      (data: Billings) => (this.billingsCountTotalNotPaid = data),
+      (error) => (this.error = error)
     );
   }
-
 
   getAppointmentsToday() {
     const params = this.getRequestParams(
       this.page,
-      this.nameFilter = formatDate(new Date(), 'yyyy-MM-dd 00:00', 'en'),
-      this.descriptionFilter = formatDate(new Date(), 'yyyy-MM-dd 23:59', 'en'),
+      (this.nameFilter = formatDate(new Date(), "yyyy-MM-dd 00:00", "en")),
+      (this.descriptionFilter = formatDate(
+        new Date(),
+        "yyyy-MM-dd 23:59",
+        "en"
+      )),
       this.pageSize
-      
     );
-    this.appointmentsService.getAllListNew(params).subscribe((pData) => {      
+    this.appointmentsService.getAllListNew(params).subscribe((pData) => {
       this.appointmentsToday = pData;
       this.count = this.appointmentsService.size;
-      
     });
   }
 
-
-
-
-
   getWorksItem(works_id: string, id: string) {
-    return this.works.find(item => item.id === works_id);
+    return this.works.find((item) => item.id === works_id);
   }
-
 
   editProduct(appointment: Appointments) {
     this.appointment = { ...appointment };
-    this.selectedWorks = this.appointment.works_id.split(',');
+    this.selectedWorks = this.appointment.works_id.split(",");
     this.appointmentsDialog = true;
   }
-
-
 
   showDialog() {
     this.productDialog = true;
@@ -386,7 +346,6 @@ export class AdminDashboardComponent implements OnInit {
 
   clickButton(model: any) {
     this.displayEvent = model;
-
   }
   eventClick(model: any) {
     model = {
@@ -394,21 +353,20 @@ export class AdminDashboardComponent implements OnInit {
         id: model.event.id,
         start: model.event.start,
         title: model.event.title,
-        works_id: model.event.works_id.split(','),
+        works_id: model.event.works_id.split(","),
         location_id: model.event.location_id,
         employee_id: model.event.employee_id,
         allDay: model.event.allDay,
         description: model.event.description,
         category_id: model.event.category_id,
-        client: model.event.client
+        client: model.event.client,
 
         // other params
       },
-      duration: {}
-    }
+      duration: {},
+    };
     this.displayEvent = model;
     this.productDialog = true;
-
   }
 
   eventRender(event) {
@@ -419,14 +377,10 @@ export class AdminDashboardComponent implements OnInit {
     <div><strong>${event.event.client.surname}</strong></div>
 
     </div>`;
-    event.element.html(html)
+    event.element.html(html);
   }
 
   dayClick(event) {
-    console.log('dayClick', event);
+    console.log("dayClick", event);
   }
-
-
-
-
 }

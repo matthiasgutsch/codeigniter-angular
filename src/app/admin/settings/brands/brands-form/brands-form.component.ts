@@ -45,7 +45,7 @@ export class BrandsFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private brandsService: BrandService, 
+    private brandsService: BrandService,
     private comuniService: ComuniService,
     private messageService: MessageService,
     private router: Router,
@@ -78,7 +78,7 @@ export class BrandsFormComponent implements OnInit {
           this.categoryForm.patchValue({
             category_name: res.category_name,
             category_description: res.category_description,
-            user_id: this.currentUser.user_id,
+            user_id: this.currentUser.id,
             id: res.id
           });
 
@@ -92,7 +92,7 @@ export class BrandsFormComponent implements OnInit {
       id: [''],
       category_name: ['', Validators.required],
       category_description: [''],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
 
     });
   }

@@ -83,13 +83,13 @@ export class WarehousesCheckinsFormComponent implements OnInit {
 
   locations: any = [];
   location: Locations;
-  
+
   cities: Blog[];
   format1: string = "";
   format2: string = "";
   selectedCity: Blog;
   selectedClients: SelectItem[];
-  
+
   selectedDate: Date;
   date: Date;
   works_id: any;
@@ -103,12 +103,12 @@ export class WarehousesCheckinsFormComponent implements OnInit {
   itemForm: FormGroup;
   skillsForm: FormGroup;
   skillsValues: any = [];
-  
+
   trackByFn(index, item) {
     return item.id;
   }
 
- 
+
 
   constructor(
     private fb: FormBuilder,
@@ -137,12 +137,12 @@ export class WarehousesCheckinsFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    const userId = this.currentUser.user_id;
+    const userId = this.currentUser.id;
 
     this.getselectedWorks;
     this.getselectedCategories;
 
-   
+
 
     this.projectsService.getAllListbyUser().subscribe(
       (data: Projects) => (this.projects = data),
@@ -181,11 +181,11 @@ export class WarehousesCheckinsFormComponent implements OnInit {
 
     if (id) {
       this.pageTitle = "Modifica Prodotto";
-      
+
       this.timesheetsService.getId(+id).subscribe((res) => {
 
-        
-        if (res.user_id == this.currentUser.user_id) {
+
+        if (res.user_id == this.currentUser.id) {
         this.blogForm.patchValue({
           title: res.title,
           description: res.description.split(','),
@@ -195,7 +195,7 @@ export class WarehousesCheckinsFormComponent implements OnInit {
           is_featured: res.is_featured,
           is_active: res.is_active,
           code: res.code,
-          user_id: this.currentUser.user_id,
+          user_id: this.currentUser.id,
           description_full: res.description_full,
           code_int: res.code_int,
           price: res.price,
@@ -204,7 +204,7 @@ export class WarehousesCheckinsFormComponent implements OnInit {
           data: res.data,
         });
 
-        
+
       }
       else {
         this.router.navigate(['/admin/products']);
@@ -230,17 +230,17 @@ export class WarehousesCheckinsFormComponent implements OnInit {
       is_active: ["0"],
       image: [""],
       code: [""],
-      user_id: [this.currentUser.user_id],
+      user_id: [this.currentUser.id],
       code_int: [""],
       price: [""],
       price_extra: [""],
-      
+
   });
 
   }
 
 
-  
+
 
   getWorksItem(works_id: string, id: string) {
     return this.works.find(item => item.id === works_id);
@@ -265,7 +265,7 @@ export class WarehousesCheckinsFormComponent implements OnInit {
     this._location.back();
   }
 
-  
+
 
 
   onSelectedFile(event) {
