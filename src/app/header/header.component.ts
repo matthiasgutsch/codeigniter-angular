@@ -20,4 +20,8 @@ export class HeaderComponent implements OnInit {
   setPageTitle(title: string) {
     this.titleService.setTitle(title);
   }
+
+  logout() {
+    this.authService.logout().subscribe();
+  }
 }

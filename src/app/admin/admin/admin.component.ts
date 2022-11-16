@@ -1,19 +1,18 @@
-import { Component, NgZone, OnInit } from '@angular/core';
-import { LANG_IT, PAGES } from '../constants/constants';
+import { formatDate } from "@angular/common";
+import { Component, NgZone, OnInit } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
 import { NgxSpinnerService } from "ngx-spinner";
-import { SupportsService } from 'src/app/services/supports.service';
-import { AuthService } from 'src/app/auth/auth.service';
-import { formatDate } from '@angular/common';
-import { Subject } from 'rxjs';
-import { MenuItem, PrimeNGConfig } from 'primeng/api';
-import { TranslateService } from '@ngx-translate/core';
+import { MenuItem, PrimeNGConfig } from "primeng/api";
+import { Subject } from "rxjs";
+import { AuthService } from "src/app/auth/auth.service";
+import { SupportsService } from "src/app/services/supports.service";
+import { LANG_IT, PAGES } from "../constants/constants";
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html'
+  selector: "app-admin",
+  templateUrl: "./admin.component.html",
 })
 export class AdminComponent implements OnInit {
-
   currentUser: any;
   currentLang: string;
   submitted = false;
@@ -35,17 +34,18 @@ export class AdminComponent implements OnInit {
   firstName = "John";
   lastName = "Doe";
   supportsCount: any;
-  myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en');
+  myDate = formatDate(new Date(), "dd/MM/yyyy", "en");
   notify$ = new Subject();
 
-  constructor(private spinner: NgxSpinnerService,
+  constructor(
+    private spinner: NgxSpinnerService,
     private supportsService: SupportsService,
     private authService: AuthService,
     public primengConfig: PrimeNGConfig,
     public translate: TranslateService,
     private zone: NgZone
   ) {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    this.currentUser = JSON.parse(localStorage.getItem("currentUser") || "[]");
     this.currentLang = this.currentUser.lang;
     //console.log(this.currentUser);
     this.primengConfig.setTranslation(LANG_IT);
@@ -54,124 +54,167 @@ export class AdminComponent implements OnInit {
     translate.setDefaultLang(this.currentLang);
 
     const browserLang = translate.getBrowserLang();
-    translate.use(browserLang.match(this.currentLang) ? browserLang : this.currentLang);
-    console.log(this.currentLang);
+    translate.use(
+      browserLang.match(this.currentLang) ? browserLang : this.currentLang
+    );
 
     this.pages = PAGES;
 
-    localStorage.setItem(
-      'expiredDate',
-      this.addMinutes(new Date(), 60).getTime().toString()
-    );
-    this.zone.runOutsideAngular(() => {
-      const i = setInterval(() => {
-        const expiredDate = +localStorage.getItem('expiredDate');
-        console.log(new Date().getTime() - expiredDate);
+    // localStorage.setItem(
+    //   "expiredDate",
+    //   this.addMinutes(new Date(), 60).getTime().toString()
+    // );
+    // this.zone.runOutsideAngular(() => {
+    //   const i = setInterval(() => {
+    //     const expiredDate = +localStorage.getItem("expiredDate");
+    //     console.log(new Date().getTime() - expiredDate);
 
-        if (new Date().getTime() - expiredDate > 0) {
-          this.zone.run(() => {
-            this.notify$.next();
-          });
-          clearInterval(i);
-        }
-      }, 60000);
-    });
+    //     if (new Date().getTime() - expiredDate > 0) {
+    //       this.zone.run(() => {
+    //         this.notify$.next();
+    //       });
+    //       clearInterval(i);
+    //     }
+    //   }, 60000);
+    // });
   }
 
-
-
-
   ngOnInit() {
-
     this.items = [
       {
-        label: 'Dashboard',
-        icon: 'pi pi-pw pi-inbox',
-        routerLink: '/admin'
-
+        label: "Dashboard",
+        icon: "pi pi-pw pi-inbox",
+        routerLink: "/admin",
       },
       {
-        label: 'ERP',
-        icon: 'pi pi-fw pi-calendar',
+        label: "ERP",
+        icon: "pi pi-fw pi-calendar",
         items: [
-          { label: 'Clienti', icon: 'pi pi-fw pi-user', routerLink: '/admin/clients/' },
-          { label: 'Appuntamenti', icon: 'pi pi-fw pi-calendar-plus', routerLink: '/admin/appointments/' },
-          { label: 'Calendario', icon: 'pi pi-fw pi-calendar', routerLink: '/admin/appointments/calendar/' }
-        ]
+          {
+            label: "Clienti",
+            icon: "pi pi-fw pi-user",
+            routerLink: "/admin/clients/",
+          },
+          {
+            label: "Appuntamenti",
+            icon: "pi pi-fw pi-calendar-plus",
+            routerLink: "/admin/appointments/",
+          },
+          {
+            label: "Calendario",
+            icon: "pi pi-fw pi-calendar",
+            routerLink: "/admin/appointments/calendar/",
+          },
+        ],
       },
 
       {
-        label: 'Commerciale',
-        icon: 'pi pi-fw pi-credit-card',
+        label: "Commerciale",
+        icon: "pi pi-fw pi-credit-card",
         items: [
-          { label: 'Preventivi', icon: 'pi pi-fw pi-briefcase', routerLink: '/admin/quotes/' },
-          { label: 'Ordini', icon: 'pi pi-fw pi-book', routerLink: '/admin/orders/' },
-          { label: 'Fatturazione', icon: 'pi pi-fw pi-credit-card', routerLink: '/admin/billings/' },
-          { label: 'Ordini Fornitori', icon: 'pi pi-fw pi-book', routerLink: '/admin/purchase-orders/' }
-
-        ]
+          {
+            label: "Preventivi",
+            icon: "pi pi-fw pi-briefcase",
+            routerLink: "/admin/quotes/",
+          },
+          {
+            label: "Ordini",
+            icon: "pi pi-fw pi-book",
+            routerLink: "/admin/orders/",
+          },
+          {
+            label: "Fatturazione",
+            icon: "pi pi-fw pi-credit-card",
+            routerLink: "/admin/billings/",
+          },
+          {
+            label: "Ordini Fornitori",
+            icon: "pi pi-fw pi-book",
+            routerLink: "/admin/purchase-orders/",
+          },
+        ],
       },
       {
-        label: 'Prodotti',
-        icon: 'pi pi-fw pi-shopping-cart',
-        routerLink: '/admin/products/'
+        label: "Prodotti",
+        icon: "pi pi-fw pi-shopping-cart",
+        routerLink: "/admin/products/",
       },
 
       {
-        label: 'Magazzino',
-        icon: 'pi pi-fw pi-table',
+        label: "Magazzino",
+        icon: "pi pi-fw pi-table",
         items: [
-          { label: 'Checkin', icon: 'pi pi-fw pi-arrow-circle-right', routerLink: '/admin/checkins/' },
-          { label: 'Checkout', icon: 'pi pi-fw pi-arrow-circle-left', routerLink: '/admin/checkouts/' },
-          { label: 'Fornitori', icon: 'pi pi-fw pi-table', routerLink: '/admin/suppliers/' },
-          { label: 'DDT', icon: 'pi pi-fw pi-compass', routerLink: '/admin/transport-documents/' }
-
-        ]
+          {
+            label: "Checkin",
+            icon: "pi pi-fw pi-arrow-circle-right",
+            routerLink: "/admin/checkins/",
+          },
+          {
+            label: "Checkout",
+            icon: "pi pi-fw pi-arrow-circle-left",
+            routerLink: "/admin/checkouts/",
+          },
+          {
+            label: "Fornitori",
+            icon: "pi pi-fw pi-table",
+            routerLink: "/admin/suppliers/",
+          },
+          {
+            label: "DDT",
+            icon: "pi pi-fw pi-compass",
+            routerLink: "/admin/transport-documents/",
+          },
+        ],
       },
 
       {
-        label: 'HR',
-        icon: 'pi pi-fw pi-user',
+        label: "HR",
+        icon: "pi pi-fw pi-user",
         items: [
-          { label: 'Timesheet', icon: 'pi pi-fw pi-clock', routerLink: '/admin/timesheets/' },
-          { label: 'Dipendenti', icon: 'pi pi-fw pi-user', routerLink: '/admin/employees/' }
-        ]
+          {
+            label: "Timesheet",
+            icon: "pi pi-fw pi-clock",
+            routerLink: "/admin/timesheets/",
+          },
+          {
+            label: "Dipendenti",
+            icon: "pi pi-fw pi-user",
+            routerLink: "/admin/employees/",
+          },
+        ],
       },
       {
-        label: 'Progetti',
-        icon: 'pi pi-fw pi-clone',
-        routerLink: '/admin/projects/'
+        label: "Progetti",
+        icon: "pi pi-fw pi-clone",
+        routerLink: "/admin/projects/",
       },
       {
-        label: 'Documenti',
-        icon: 'pi pi-fw pi-book',
-        routerLink: '/admin/documents/'
+        label: "Documenti",
+        icon: "pi pi-fw pi-book",
+        routerLink: "/admin/documents/",
       },
       {
-        label: 'Helpdesk',
-        icon: 'pi pi-fw pi-info-circle',
-        routerLink: '/admin/support/'
+        label: "Helpdesk",
+        icon: "pi pi-fw pi-info-circle",
+        routerLink: "/admin/support/",
       },
       {
-        label: 'Configurazioni',
-        icon: 'pi pi-fw pi-cog',
-        routerLink: '/admin/settings/'
+        label: "Configurazioni",
+        icon: "pi pi-fw pi-cog",
+        routerLink: "/admin/settings/",
       },
 
       {
-        label: 'Logout',
-        icon: 'pi pi-sign-in',
-        command: (event) => { this.logout(); }
+        label: "Logout",
+        icon: "pi pi-sign-in",
+        command: (event) => {
+          this.logout();
+        },
       },
-
-
-     
-
-
     ];
 
     this.notify$.subscribe(() => {
-      localStorage.removeItem('expiredDate');
+      // localStorage.removeItem("expiredDate");
       this.logout();
     });
 
@@ -184,8 +227,6 @@ export class AdminComponent implements OnInit {
     }, 500);
   }
 
-
-
   public get getInitialsBgColor(): string {
     var s = 30;
     var l = 47;
@@ -195,24 +236,27 @@ export class AdminComponent implements OnInit {
       l = this.getLightnessByName(this.firstName, this.lastName);
     }
 
-    var color = this.stringToHslColor(this.firstName + " " + this.lastName, l, s);
+    var color = this.stringToHslColor(
+      this.firstName + " " + this.lastName,
+      l,
+      s
+    );
     return color;
   }
-
 
   addMinutes(date, minutes) {
     return new Date(date.getTime() + minutes * 60000);
   }
 
   getSupportsCount() {
-    this.supportsService.count().subscribe(data => {
+    this.supportsService.count().subscribe((data) => {
       this.supportsCount = data;
-      error => this.error = error
+      (error) => (this.error = error);
     });
   }
 
   logout() {
-    this.authService.logout();
+    this.authService.logout().subscribe();
   }
 
   getInitialsTextColor(firstName: string, lastName: string): string {
@@ -247,5 +291,4 @@ export class AdminComponent implements OnInit {
     var h = hash % 360;
     return "hsl(" + h + ", " + saturation + "%, " + lightness + "%)";
   }
-
 }

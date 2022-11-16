@@ -1,9 +1,11 @@
-import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Subject, Subscription, throwError, timer } from "rxjs";
-import { map, catchError, takeUntil, take } from "rxjs/operators";
-import { environment } from "../../environments/environment";
+import { Injectable } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { plainToInstance } from "class-transformer";
+import { Subject, Subscription, throwError } from "rxjs";
+import { catchError, finalize, map } from "rxjs/operators";
+import { environment } from "../../environments/environment";
+import { Tokens, User } from "./auth.type";
 
 @Injectable({
   providedIn: "root",
@@ -13,7 +15,7 @@ export class AuthService {
   errorData: {};
   endTime = 20;
   unsubscribe$: Subject<void> = new Subject();
-  timerSubscription: Subscription;
+  // timerSubscription: Subscription;
   minutesDisplay = 0;
   secondsDisplay = 0;
 
@@ -35,7 +37,7 @@ export class AuthService {
         map((tokens) => {
           if (tokens && tokens.accessToken) {
             localStorage.setItem("currentTokens", JSON.stringify(tokens));
-            this.resetTimer();
+            // this.resetTimer();
           }
         }),
         catchError(this.handleError)
@@ -53,19 +55,19 @@ export class AuthService {
     );
   }
 
-  resetTimer(endTime: number = this.endTime) {
-    const interval = 1000;
-    const duration = endTime * 60;
-    this.timerSubscription = timer(0, interval)
-      .pipe(take(duration))
-      .subscribe(
-        (value) => this.render((duration - +value) * interval),
-        (err) => {},
-        () => {
-          this.logout();
-        }
-      );
-  }
+  // resetTimer(endTime: number = this.endTime) {
+  //   const interval = 1000;
+  //   const duration = endTime * 60;
+  //   this.timerSubscription = timer(0, interval)
+  //     .pipe(take(duration))
+  //     .subscribe(
+  //       (value) => this.render((duration - +value) * interval),
+  //       (err) => {},
+  //       () => {
+  //         this.logout();
+  //       }
+  //     );
+  // }
 
   private pad(digit: any) {
     return digit <= 9 ? "0" + digit : digit;
@@ -87,25 +89,51 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    if (localStorage.getItem("currentTokens")) {
+    if (this.getTokens()?.accessToken) {
       return true;
     }
     return false;
   }
 
   getAuthorizationToken() {
-    const currentUser = JSON.parse(localStorage.getItem("currentTokens"));
-    return `Bearer ${currentUser.accessToken}`;
+    const tokens = this.getTokens();
+    return tokens ? `Bearer ${tokens.accessToken}` : "";
   }
 
   getRefreshToken() {
-    const currentUser = JSON.parse(localStorage.getItem("currentTokens"));
-    return `Bearer ${currentUser.refreshToken}`;
+    const tokens = this.getTokens();
+    return tokens ? `Bearer ${tokens.refreshToken}` : "";
   }
 
-  async logout() {
-    localStorage.removeItem("currentUser");
-    this.router.navigate(["/login"]);
+  getTokens(): Tokens | null {
+    try {
+      return plainToInstance(
+        Tokens,
+        JSON.parse(localStorage.getItem("currentTokens"))
+      );
+    } catch (error) {}
+    return null;
+  }
+
+  getUser(): User | null {
+    try {
+      return plainToInstance(
+        User,
+        JSON.parse(localStorage.getItem("currentUser"))
+      );
+    } catch (error) {}
+    return null;
+  }
+
+  logout() {
+    console.log("logout", `${this.serverUrl}/auth/logut`);
+    return this.http.get(`${this.serverUrl}/auth/logut`).pipe(
+      finalize(() => {
+        localStorage.removeItem("currentTokens");
+        localStorage.removeItem("currentUser");
+        this.router.navigate(["/login"]);
+      })
+    );
   }
 
   private handleError(error: HttpErrorResponse) {

@@ -1,14 +1,14 @@
-import { Injectable } from "@angular/core";
 import {
-  HttpEvent,
-  HttpInterceptor,
-  HttpHandler,
-  HttpRequest,
   HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
 } from "@angular/common/http";
-import { AuthService } from "../auth/auth.service";
+import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, throwError } from "rxjs";
-import { catchError, filter, map, switchMap, take } from "rxjs/operators";
+import { catchError, filter, switchMap, take, tap } from "rxjs/operators";
+import { AuthService } from "../auth/auth.service";
 
 const TOKEN_HEADER_KEY = "Authorization";
 @Injectable()
@@ -26,16 +26,19 @@ export class AuthInterceptor implements HttpInterceptor {
     if (this.authService.isLoggedIn()) {
       let authReq = req;
       const authToken = this.authService.getAuthorizationToken();
-
-      console.log(authToken);
-
-        if (authToken != null && !authReq.url.includes("auth/refresh")) {
-          authReq = this.addTokenHeader(req, authToken);
-        }
+      if (authToken != null && !authReq.url.includes("auth/refresh")) {
+        authReq = this.addTokenHeader(req, authToken);
+      }
 
       return next.handle(authReq).pipe(
         catchError((error) => {
           if (
+            error instanceof HttpErrorResponse &&
+            authReq.url.includes("auth/refresh") &&
+            error.status === 401
+          ) {
+            this.authService.logout().subscribe();
+          } else if (
             error instanceof HttpErrorResponse &&
             !authReq.url.includes("auth/signin") &&
             error.status === 401
@@ -57,29 +60,20 @@ export class AuthInterceptor implements HttpInterceptor {
 
       const token = this.authService.getRefreshToken();
 
-
-      console.log(token);
-
       if (token && this.authService.isLoggedIn()) {
         return this.authService.refreshToken(token).pipe(
           switchMap((tokens) => {
             this.isRefreshing = false;
-            if (tokens && tokens.accessToken) {
+            if (tokens?.accessToken) {
               localStorage.setItem("currentTokens", JSON.stringify(tokens));
             }
             const authToken = this.authService.getAuthorizationToken();
             this.refreshTokenSubject.next(authToken);
-            return next.handle(
-              this.addTokenHeader(request, authToken)
-            );
+            return next.handle(this.addTokenHeader(request, authToken));
           }),
           catchError((error) => {
             this.isRefreshing = false;
-
-            if (error.status == "403") {
-            }
-
-            return throwError(() => error);
+            return throwError(error);
           })
         );
       }

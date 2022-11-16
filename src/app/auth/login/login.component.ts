@@ -1,10 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { AuthService } from "../auth.service";
 import { NgxSpinnerService } from "ngx-spinner";
-import { MessagesModule } from "primeng/messages";
-import { MessageModule } from "primeng/message";
+import { AuthService } from "../auth.service";
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -30,7 +28,7 @@ export class LoginComponent implements OnInit {
       password: ["", Validators.required],
     });
 
-    this.authService.logout();
+    this.authService.logout().subscribe();
 
     this.spinner.hide();
   }
@@ -45,16 +43,16 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.authService.login(this.username.value, this.password.value).subscribe(
-      (data) => {
+      () => {
         if (this.authService.isLoggedIn()) {
-          this.authService.getProfile().subscribe((data) => {
+          this.authService.getProfile().subscribe(() => {
             const redirect = this.authService.redirectUrl
               ? this.authService.redirectUrl
               : "/admin";
             this.router.navigate([redirect]);
           });
         } else {
-          this.loginError = "bla Username or password is incorrect.";
+          this.loginError = "Username or password is incorrect.";
         }
       },
       (error) => (this.error = error)
