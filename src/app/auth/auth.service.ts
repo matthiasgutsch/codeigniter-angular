@@ -126,8 +126,7 @@ export class AuthService {
   }
 
   logout() {
-    console.log("logout", `${this.serverUrl}/auth/logut`);
-    return this.http.get(`${this.serverUrl}/auth/logut`).pipe(
+    return this.http.get(`${this.serverUrl}/auth/logout`).pipe(
       finalize(() => {
         localStorage.removeItem("currentTokens");
         localStorage.removeItem("currentUser");
