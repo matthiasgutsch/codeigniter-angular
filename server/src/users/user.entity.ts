@@ -8,7 +8,7 @@ import {
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
 
-@Entity()
+@Entity({ name: 'users' })
 export class User {
   constructor(partial: Partial<User>) {
     Object.assign(this, partial);
@@ -51,11 +51,6 @@ export class User {
   lastName?: string;
 
   @Exclude()
-  @ApiProperty({
-    example: 'jfksajfa',
-    description: 'The refresh token',
-    nullable: true,
-  })
   @Column({ nullable: true, name: 'refresh_token' })
   refreshToken?: string;
 

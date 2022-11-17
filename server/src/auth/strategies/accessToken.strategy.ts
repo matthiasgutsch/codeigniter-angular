@@ -28,6 +28,6 @@ export class AccessTokenStrategy extends PassportStrategy(Strategy, 'jwt') {
       throw new UnauthorizedException();
     }
 
-    return { userId: user.id, username: user.username };
+    return { id: user.id, username: user.username };
   }
 }
