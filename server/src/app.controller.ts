@@ -1,7 +1,6 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AccessTokenGuard } from './auth/guards/accessToken.guard';
-import { User } from './decorators/user.decorator';
 
 @Controller()
 export class AppController {
@@ -21,8 +20,7 @@ export class AppController {
 
   @Get('supports/count/:id')
   @UseGuards(AccessTokenGuard)
-  supports_count(@User() user): number {
-    console.log(user);
+  supports_count(): number {
     return 4;
   }
 

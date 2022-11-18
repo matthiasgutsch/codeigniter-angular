@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { User } from './users/user.entity';
+import { RefreshToken } from './users/refresh-token.entity';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -21,7 +22,7 @@ import { UsersModule } from './users/users.module';
         username: configService.get('MYSQL_USER'),
         password: configService.get('MYSQL_PASSWORD'),
         database: configService.get('MYSQL_DATABASE'),
-        entities: [User],
+        entities: [User, RefreshToken],
         migrations: ['dist/src/db/migrations/*.js'],
         synchronize: true,
       }),

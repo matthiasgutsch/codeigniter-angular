@@ -4,9 +4,11 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
+import { RefreshToken } from './refresh-token.entity';
 
 @Entity({ name: 'users' })
 export class User {
@@ -50,10 +52,6 @@ export class User {
   @Column({ nullable: true, name: 'last_name' })
   lastName?: string;
 
-  @Exclude()
-  @Column({ nullable: true, name: 'refresh_token' })
-  refreshToken?: string;
-
   @ApiProperty({
     example: true,
     description: 'If the user is active',
@@ -76,4 +74,8 @@ export class User {
   })
   @Column({ nullable: false, name: 'lang', default: 'en' })
   lang?: string;
+
+  @Exclude()
+  @OneToMany(() => RefreshToken, (refreshToken) => refreshToken.user)
+  refreshToken: RefreshToken[];
 }

@@ -1,9 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { User } from './user.entity';
-import { BadRequestException } from '@nestjs/common';
 import { hash } from 'bcrypt';
+import * as dayjs from 'dayjs';
+import { Repository } from 'typeorm';
+import { RefreshToken } from './refresh-token.entity';
+import { User } from './user.entity';
+import * as utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
 
 const saltOrRounds = 10;
 
@@ -12,10 +17,25 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
+    @InjectRepository(RefreshToken)
+    private readonly refreshTokenRepository: Repository<RefreshToken>,
+    private readonly configService: ConfigService,
   ) {}
 
-  async findOne(username: string): Promise<User> {
+  async findOneById(id: number): Promise<User> {
+    return this.usersRepository.findOneBy({ id });
+  }
+
+  async findOneByUsername(username: string): Promise<User> {
     return this.usersRepository.findOneBy({ username });
+  }
+
+  async findOneRefreshTokenByUUID(uuid: string): Promise<RefreshToken> {
+    return this.refreshTokenRepository.findOneBy({ uuid });
+  }
+
+  async hashRefreshToken(token: string) {
+    return await hash(token, saltOrRounds);
   }
 
   async createUser(user: User): Promise<{ id: number }> {
@@ -33,7 +53,7 @@ export class UsersService {
     }
     try {
       const { password: strPassword, ...rest } = user;
-      const password = await hash(strPassword, saltOrRounds);
+      const password = await this.hashRefreshToken(strPassword);
       const newUser = await this.usersRepository.save({ ...rest, password });
       return { id: newUser.id };
     } catch (error) {
@@ -52,15 +72,27 @@ export class UsersService {
     }
   }
 
-  async saveRefreshToken(username: string, refreshToken: string) {
-    const hashedRefreshToken = await hash(refreshToken, saltOrRounds);
-    await this.usersRepository.update(
-      { username },
-      { refreshToken: hashedRefreshToken },
-    );
+  async saveRefreshToken(id: number, refreshToken: string, uuid: string) {
+    const user = await this.usersRepository.findOne({
+      where: {
+        id,
+      },
+    });
+    const {
+      groups: { time, unit },
+    } = this.configService
+      .get('JWT_REFRESH_TOKEN_EXPIRES_IN')
+      .match(/(?<time>\d+)(?<unit>[dwMQyhmsms]{1})/);
+    const expires_at = dayjs()
+      .utc()
+      .add(+time, unit as dayjs.ManipulateType)
+      .toISOString()
+      .slice(0, -1);
+    const token = await this.hashRefreshToken(refreshToken);
+    await this.refreshTokenRepository.save({ token, user, expires_at, uuid });
   }
 
-  async removeRefreshToken(username: string) {
-    await this.usersRepository.update({ username }, { refreshToken: null });
+  async removeRefreshToken(uuid: string) {
+    return await this.refreshTokenRepository.delete({ uuid });
   }
 }

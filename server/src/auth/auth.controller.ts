@@ -28,12 +28,16 @@ export class AuthController {
   @UseGuards(AccessTokenGuard)
   @Get('logout')
   async logout(@User() user: UserModel) {
-    return this.userService.removeRefreshToken(user.username);
+    return this.userService.removeRefreshToken(user.uuid);
   }
 
   @UseGuards(RefreshTokenGuard)
   @Get('refresh')
   async refreshTokens(@User() user: UserModel & { refreshToken: string }) {
-    return this.authService.refreshTokens(user.username, user.refreshToken);
+    return this.authService.refreshTokens(
+      user.id,
+      user.refreshToken,
+      user.uuid,
+    );
   }
 }
