@@ -5,6 +5,7 @@ import {
   Column,
   ManyToOne,
   CreateDateColumn,
+  Index,
 } from 'typeorm';
 import { User } from './user.entity';
 
@@ -29,8 +30,8 @@ export class RefreshToken {
   })
   @Column({
     nullable: false,
-    unique: true,
   })
+  @Index({ unique: true })
   uuid: string;
 
   @ApiProperty({
@@ -56,6 +57,7 @@ export class RefreshToken {
     type: 'timestamp',
     nullable: false,
   })
+  @Index()
   expires_at: Date;
 
   @ApiProperty({

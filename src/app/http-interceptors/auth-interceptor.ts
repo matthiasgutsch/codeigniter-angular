@@ -35,7 +35,7 @@ export class AuthInterceptor implements HttpInterceptor {
           if (
             error instanceof HttpErrorResponse &&
             authReq.url.includes("auth/refresh") &&
-            error.status === 401
+            (error.status === 401 || error.status === 403)
           ) {
             this.authService.logout().subscribe();
           } else if (

@@ -83,13 +83,22 @@ export class UsersService {
     } = this.configService
       .get('JWT_REFRESH_TOKEN_EXPIRES_IN')
       .match(/(?<time>\d+)(?<unit>[dwMQyhmsms]{1})/);
-    const expires_at = dayjs()
+    const expires_at = dayjs
       .utc()
       .add(+time, unit as dayjs.ManipulateType)
       .toISOString()
       .slice(0, -1);
     const token = await this.hashRefreshToken(refreshToken);
     await this.refreshTokenRepository.save({ token, user, expires_at, uuid });
+  }
+
+  async deleteOldRefreshToken() {
+    const expires_at = dayjs.utc().toISOString().slice(0, -1);
+    await this.refreshTokenRepository
+      .createQueryBuilder()
+      .delete()
+      .where('expires_at <= :expires_at', { expires_at: expires_at })
+      .execute();
   }
 
   async removeRefreshToken(uuid: string) {

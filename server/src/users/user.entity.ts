@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  Index,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
@@ -24,7 +25,8 @@ export class User {
     description: 'The username',
     nullable: false,
   })
-  @Column({ unique: true })
+  @Column()
+  @Index({ unique: true })
   username: string;
 
   @Exclude()
