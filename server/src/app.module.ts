@@ -4,8 +4,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { User } from './users/user.entity';
+import { Support } from './supports/supports.entity';
+import { SupportsModule } from './supports/supports.module';
 import { RefreshToken } from './users/refresh-token.entity';
+import { User } from './users/user.entity';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -22,7 +24,7 @@ import { UsersModule } from './users/users.module';
         username: configService.get('MYSQL_USER'),
         password: configService.get('MYSQL_PASSWORD'),
         database: configService.get('MYSQL_DATABASE'),
-        entities: [User, RefreshToken],
+        entities: [User, RefreshToken, Support],
         migrations: ['dist/src/db/migrations/*.js'],
         synchronize: true,
       }),
@@ -30,6 +32,7 @@ import { UsersModule } from './users/users.module';
     }),
     AuthModule,
     UsersModule,
+    SupportsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

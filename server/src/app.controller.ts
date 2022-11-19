@@ -18,12 +18,6 @@ export class AppController {
     return 4;
   }
 
-  @Get('supports/count/:id')
-  @UseGuards(AccessTokenGuard)
-  supports_count(): number {
-    return 4;
-  }
-
   // @UseGuards(LocalAuthGuard)
   // @Post('auth/login')
   // async login(@Request() req) {

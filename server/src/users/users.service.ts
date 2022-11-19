@@ -57,7 +57,7 @@ export class UsersService {
       const newUser = await this.usersRepository.save({ ...rest, password });
       return { id: newUser.id };
     } catch (error) {
-      console.log(error);
+      console.warn(error);
       switch (error.code) {
         case 'ER_NO_DEFAULT_FOR_FIELD': {
           throw new BadRequestException({ message: error.sqlMessage });

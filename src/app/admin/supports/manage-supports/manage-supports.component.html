@@ -1,6 +1,7 @@
 
 
 <p-sidebar [(visible)]="filterSidebar" #op position="right">
+
     <ng-template pTemplate>
         <div class="p-field p-grid">
             <div class="p-col-12">
@@ -40,23 +41,23 @@
             <div class="p-field p-grid">
                 <div class="p-col-6 p-md-6">
                     <h3>Helpdesk</h3>
-    
+
                 </div>
-    
+
                 <div class="p-col-6 p-md-6">
                     <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/support/create']"
                         label="Aggiungi Ticket" class="p-button p-button-primary pull-right"></button>
                         <button type="text" pButton label="Filter" icon="pi pi-filter"
                         class="p-button p-button-options p-mr-2 pull-right" (click)="filterSidebar = true"></button>
                 </div>
-    
+
             </div>
         </div>
     </div>
 </div>
 
 <div class="main-inner">
-  
+
 
 <div class="p-fluid">
     <div class="p-field p-grid">
@@ -86,7 +87,7 @@
                 <div
                 *ngFor=" let support of supports  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index">
             </div>
-                <p-table #dt1 [value]="supports" [pageLinks]="3" [responsive]="false" [resizableColumns]="true" [autoLayout]="true" 
+                <p-table #dt1 [value]="supports" [pageLinks]="3" [responsive]="false" [resizableColumns]="true" [autoLayout]="true"
                     [paginator]="false" [rows]="10">
 
                     <ng-template pTemplate="body" let-support>

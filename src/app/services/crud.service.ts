@@ -122,7 +122,7 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     const userId = this.currentUser.id;
     params = this.getParams(params, pars);
     return this._http
-      .get<HttpResponse<T[]>>(this._base + "/list_user/" + userId, {
+      .get<HttpResponse<T[]>>(this._base + "/list_user/", {
         observe: "response",
         params,
       })
@@ -273,9 +273,8 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
   count() {
-    const userId = this.currentUser.id;
     return this._http
-      .get<T>(this._base + "/count/" + userId)
+      .get<T>(this._base + "/count")
       .pipe(catchError(this.handleError));
   }
 

@@ -33,6 +33,7 @@ export class ManageSupportsComponent implements OnInit {
 
   supports: any = [];
   support: Supports;
+  filterSidebar = false;
 
   works: any = [];
   work: Works;
@@ -79,7 +80,7 @@ export class ManageSupportsComponent implements OnInit {
   nameFilter: string;
   descriptionFilter: string;
 
-  
+
   constructor(
     private clientsService: ClientsService,
     private supportsService: SupportsService,
@@ -146,7 +147,7 @@ export class ManageSupportsComponent implements OnInit {
 
   }
 
-  
+
   load(): void {
 
     const params = this.getRequestParams(
@@ -172,15 +173,15 @@ export class ManageSupportsComponent implements OnInit {
     this.nameFilter = '';
     this.descriptionFilter = '';
     this.load();
-    
+
   }
-  
+
   public handlePageChange(event): void {
     this.page = event;
     this.load();
-  
+
   }
-  
+
 
 
   onChangePage(pageOfItems: Array<any>) {
@@ -223,7 +224,7 @@ export class ManageSupportsComponent implements OnInit {
     );
   }
 
- 
+
 
 
 

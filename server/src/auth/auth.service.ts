@@ -23,7 +23,6 @@ export class AuthService {
   }
 
   async login(user: User) {
-    console.log(user);
     await this.usersService.deleteOldRefreshToken();
     const uuid = uuidv4().toString();
     const tokens = await this.getTokens(user.id, user.username, uuid);

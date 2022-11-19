@@ -10,6 +10,7 @@ import {
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
 import { RefreshToken } from './refresh-token.entity';
+import { Support } from 'src/supports/supports.entity';
 
 @Entity({ name: 'users' })
 export class User {
@@ -80,4 +81,8 @@ export class User {
   @Exclude()
   @OneToMany(() => RefreshToken, (refreshToken) => refreshToken.user)
   refreshToken: RefreshToken[];
+
+  @Exclude()
+  @OneToMany(() => Support, (support) => support.user)
+  supports: Support[];
 }
