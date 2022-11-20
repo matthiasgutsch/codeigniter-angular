@@ -73,12 +73,17 @@ export class Support {
   @IsNotEmpty()
   message?: string;
 
+  @Column({
+    nullable: true,
+  })
+  refId?: number;
+
   // @ApiProperty({
   //   example: 1,
   //   description: 'The reference message',
   //   nullable: true,
   // })
-  @ManyToOne(() => Support, (support) => support.ref, { nullable: true })
+  @ManyToOne(() => Support, (support) => support.refs, { nullable: true })
   ref: Support;
 
   @OneToMany(() => Support, (support) => support.ref, { nullable: true })
@@ -108,6 +113,9 @@ export class Support {
   })
   @Column({ default: false, name: 'is_active' })
   isActive: boolean;
+
+  @Column()
+  userId: number;
 
   // @ApiProperty({
   //   example: 1,

@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   ClassSerializerInterceptor,
   Controller,
@@ -48,7 +49,11 @@ export class SupportsController {
   @UseInterceptors(ClassSerializerInterceptor)
   async create(@User() user: UserModel, @Body() support: Support) {
     const resp = await this.supportService.create(user, support);
-    return resp;
+    if (!resp) {
+      throw new BadRequestException();
+    }
+    const id = resp.identifiers.map(({ id }) => id)[0];
+    return { id };
   }
 
   @Put(':id')

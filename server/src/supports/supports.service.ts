@@ -1,9 +1,9 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserModel } from 'src/decorators/user.decorator';
 import { User } from 'src/users/user.entity';
 import { UsersService } from 'src/users/users.service';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { DeleteResult, InsertResult, Repository, UpdateResult } from 'typeorm';
 import { Support } from './supports.entity';
 
 @Injectable()
@@ -27,19 +27,18 @@ export class SupportsService {
       where: {
         id,
       },
-      relations: {
-        user: true,
-      },
+      // relations: {
+      //   user: true,
+      // },
     });
     return result;
   }
 
-  async create(userParam: UserModel, support: Support): Promise<Support> {
-    const user = await this.userService.findOneById(userParam.id);
-    if (!user) {
-      throw new BadRequestException();
-    }
-    const result = await this.supportsRepository.save({ ...support, user });
+  async create(userParam: UserModel, support: Support): Promise<InsertResult> {
+    const result = await this.supportsRepository.insert({
+      ...support,
+      userId: userParam.id,
+    });
     return result;
   }
 
