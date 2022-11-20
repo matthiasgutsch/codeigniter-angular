@@ -1,6 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsEmail, IsNotEmpty, IsPhoneNumber, IsString } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsNumber,
+  IsPhoneNumber,
+  IsString,
+} from 'class-validator';
 import { User } from 'src/users/user.entity';
 import {
   Column,
@@ -73,16 +79,17 @@ export class Support {
   @IsNotEmpty()
   message?: string;
 
+  @ApiProperty({
+    example: 1,
+    description: 'The supports reference',
+    nullable: true,
+  })
   @Column({
     nullable: true,
   })
+  @IsNumber()
   refId?: number;
 
-  // @ApiProperty({
-  //   example: 1,
-  //   description: 'The reference message',
-  //   nullable: true,
-  // })
   @ManyToOne(() => Support, (support) => support.refs, { nullable: true })
   ref: Support;
 
@@ -114,15 +121,14 @@ export class Support {
   @Column({ default: false, name: 'is_active' })
   isActive: boolean;
 
+  // @ApiProperty({
+  //   example: 1,
+  //   description: 'The user id',
+  //   nullable: false,
+  // })
   @Column()
   userId: number;
 
-  // @ApiProperty({
-  //   example: 1,
-  //   description: 'The the id to assosiete user',
-  //   nullable: false,
-  // })
-  // @Exclude()
   @Type(() => User)
   @ManyToOne(() => User, (user) => user.supports)
   user: User;

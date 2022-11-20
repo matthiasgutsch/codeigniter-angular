@@ -7,7 +7,6 @@ async function bootstrap() {
     .setTitle('Nexo')
     .setDescription('The Nexo API description')
     .setVersion('1.0')
-    .addTag('auth', 'users')
     .build();
   const app = await NestFactory.create(AppModule);
   const document = SwaggerModule.createDocument(app, config);

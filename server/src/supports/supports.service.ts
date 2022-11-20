@@ -5,6 +5,13 @@ import { User } from 'src/users/user.entity';
 import { UsersService } from 'src/users/users.service';
 import { DeleteResult, InsertResult, Repository, UpdateResult } from 'typeorm';
 import { Support } from './supports.entity';
+import {
+  // FilterOperator,
+  // Paginate,
+  PaginateQuery,
+  paginate,
+  Paginated,
+} from 'nestjs-paginate';
 
 @Injectable()
 export class SupportsService {
@@ -22,7 +29,7 @@ export class SupportsService {
       .getCount();
   }
 
-  async getOne(id): Promise<Support> {
+  async findOne(id): Promise<Support> {
     const result = await this.supportsRepository.findOne({
       where: {
         id,
@@ -34,6 +41,18 @@ export class SupportsService {
     return result;
   }
 
+  async findAll(query: PaginateQuery): Promise<Paginated<Support>> {
+    return paginate(query, this.supportsRepository, {
+      sortableColumns: ['id'],
+      // nullSort: 'last',
+      searchableColumns: [],
+      defaultSortBy: [['id', 'DESC']],
+      filterableColumns: {
+        // age: [FilterOperator.GTE, FilterOperator.LTE],
+      },
+    });
+  }
+
   async create(userParam: UserModel, support: Support): Promise<InsertResult> {
     const result = await this.supportsRepository.insert({
       ...support,
@@ -43,7 +62,9 @@ export class SupportsService {
   }
 
   async update(id: number, support: Support): Promise<UpdateResult> {
-    const result = await this.supportsRepository.update(id, { ...support });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { user: _0, userId: _1, ...rest } = support;
+    const result = await this.supportsRepository.update(id, { ...rest });
     return result;
   }
 
