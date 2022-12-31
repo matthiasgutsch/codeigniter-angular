@@ -1,11 +1,11 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { ClientsService } from '../../../services/clients.service';
-import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
+import { UntypedFormBuilder, Validators, UntypedFormGroup, UntypedFormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
 import { Clients } from '../../../models/clients';
 import { Category } from '../../../models/category';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { CategoryService } from '../../../services/categories.service';
 import { ConfirmationService, MessageService, SelectItem } from "primeng/api";
 import * as moment from 'moment';
@@ -49,7 +49,7 @@ export class ClientsFormComponent implements OnInit {
   selectedValue: string;
   comuni: Comuni;
 
-  blogForm: FormGroup;
+  blogForm: UntypedFormGroup;
   typeList: any[];
 
   cities: Clients[];
@@ -65,10 +65,10 @@ export class ClientsFormComponent implements OnInit {
   billings: any = [];
   billing: Billings;
   currentUser: any;
-  addForm: FormGroup;
-  rows: FormArray;
-  itemForm: FormGroup;
-  skillsForm: FormGroup;
+  addForm: UntypedFormGroup;
+  rows: UntypedFormArray;
+  itemForm: UntypedFormGroup;
+  skillsForm: UntypedFormGroup;
   skillsValues: any = [];
   stateOptions: any[];
   cols: any[];
@@ -84,7 +84,7 @@ export class ClientsFormComponent implements OnInit {
   }
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private clientsService: ClientsService,
     private messageService: MessageService,
     private personalDataService: PersonalDataService,
@@ -202,8 +202,8 @@ export class ClientsFormComponent implements OnInit {
       region: [""],
       email: ["", Validators.required],
       phone: ["", Validators.required],
-      fiscalcode: new FormControl("",Validators.compose([codFisc])),
-      fiscalnumber: new FormControl(""),
+      fiscalcode: new UntypedFormControl("",Validators.compose([codFisc])),
+      fiscalnumber: new UntypedFormControl(""),
       description: [""],
       is_featured: ["0"],
       user_id: [this.currentUser.user_id],
@@ -321,8 +321,8 @@ export class ClientsFormComponent implements OnInit {
   }
 
    
-  private createSkillFormGroup(skill:any): FormGroup{
-    return new FormGroup({'qty':new FormControl(skill.qty),'price':new FormControl(skill.price)})
+  private createSkillFormGroup(skill:any): UntypedFormGroup{
+    return new UntypedFormGroup({'qty':new UntypedFormControl(skill.qty),'price':new UntypedFormControl(skill.price)})
   }
 
   public addSkill(skill:any){
@@ -331,11 +331,11 @@ export class ClientsFormComponent implements OnInit {
 
 
   get skills() {
-    return this.blogForm.get('skills') as FormArray;
+    return this.blogForm.get('skills') as UntypedFormArray;
   }
    
 
-  newQuantity(): FormGroup {
+  newQuantity(): UntypedFormGroup {
     return this.fb.group({
       qty: "",
       price: "",
@@ -426,7 +426,7 @@ export class ClientsFormComponent implements OnInit {
 
 
 
-export function codFisc(c: FormControl): { [s: string]: boolean } {
+export function codFisc(c: UntypedFormControl): { [s: string]: boolean } {
   if (c.value && !c.value.match(FISCAL_CODE_VALIDATOR_REGEX)) {
     return { invalidCF: true };
   }

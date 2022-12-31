@@ -36,7 +36,7 @@ import 'moment/locale/it'  // without this line it didn't work
 import { Timesheets } from 'src/app/models/timesheets';
 import { Projects } from 'src/app/models/projects';
 import { ProjectsService } from 'src/app/services/projects.service';
-import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
+import { UntypedFormBuilder, Validators, UntypedFormGroup, FormArray } from '@angular/forms';
 import * as FileSaver from 'file-saver';
 
 @Component({
@@ -90,7 +90,7 @@ export class ManageTimesheetsComponent implements OnInit {
   skills:  any[] = [];
   batches: any[];
   productDialogAdd: boolean = false;
-  blogForm: FormGroup;
+  blogForm: UntypedFormGroup;
   projects: any = [];
   project: Projects;
   employees: any = [];
@@ -142,7 +142,7 @@ timesheetsType: any;
     private comuniService: ComuniService,
     private brandService: BrandService,
     private tagsService: TagsService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private technicalDataService: TechnicalDataService,
     private spinner: NgxSpinnerService,
     private categoryService: CategoryService, 

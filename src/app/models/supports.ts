@@ -1,4 +1,3 @@
-import { StringMap } from "@angular/compiler/src/compiler_facade_interface";
 
 export class Supports {
     id: number;
@@ -22,7 +21,7 @@ export class Supports {
     code_int: string;
     files: string;
     data: JSON;
-    status: StringMap;
+    status: string;
     skills: ISkill[];
     sender_id: string;
 }

@@ -34,7 +34,7 @@ import { TechnicalDataService } from 'src/app/services/technical_data.service';
 import 'moment/locale/it'  // without this line it didn't work
 import { Projects } from 'src/app/models/projects';
 import { ProjectsService } from 'src/app/services/projects.service';
-import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
+import { UntypedFormBuilder, Validators, UntypedFormGroup, FormArray } from '@angular/forms';
 import * as FileSaver from 'file-saver';
 import { WarehousesCheckoutsService } from 'src/app/services/warehouses_checkouts.service';
 import { WarehousesService } from 'src/app/services/warehouses.service';
@@ -103,7 +103,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
   skills: any[] = [];
   batches: any[];
   productDialogAdd: boolean = false;
-  blogForm: FormGroup;
+  blogForm: UntypedFormGroup;
   projects: any = [];
   project: Projects;
   employees: any = [];
@@ -162,7 +162,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
     private warehousesService: WarehousesService,
     private employeesService: EmployeesService,
     private tagsService: TagsService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private productsVariationsService: ProductsVariationsService,
     private spinner: NgxSpinnerService,
     private router: Router,

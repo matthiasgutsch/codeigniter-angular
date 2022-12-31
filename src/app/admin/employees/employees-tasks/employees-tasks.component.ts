@@ -5,11 +5,11 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
+import { UntypedFormBuilder, Validators, UntypedFormGroup, UntypedFormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Clients } from '../../../models/clients';
 import { Category } from '../../../models/category';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { CategoryService } from '../../../services/categories.service';
 import { ConfirmationService, MessageService, SelectItem } from "primeng/api";
 import * as moment from 'moment';
@@ -70,7 +70,7 @@ export class EmployeesTasksComponent implements OnInit {
   selectedValue: string;
   comuni: Comuni;
 
-  blogForm: FormGroup;
+  blogForm: UntypedFormGroup;
   typeList: any[];
 
   cities: Clients[];
@@ -86,10 +86,10 @@ export class EmployeesTasksComponent implements OnInit {
   billings: any = [];
   billing: Billings;
   currentUser: any;
-  addForm: FormGroup;
-  rows: FormArray;
-  itemForm: FormGroup;
-  skillsForm: FormGroup;
+  addForm: UntypedFormGroup;
+  rows: UntypedFormArray;
+  itemForm: UntypedFormGroup;
+  skillsForm: UntypedFormGroup;
   skillsValues: any = [];
   stateOptions: any[];
   cols: any[];
@@ -112,7 +112,7 @@ export class EmployeesTasksComponent implements OnInit {
   }
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private employeesService: EmployeesService,
     private messageService: MessageService,
     private personalDataService: PersonalDataService,
@@ -397,7 +397,7 @@ export class EmployeesTasksComponent implements OnInit {
 
 
 
-export function codFisc(c: FormControl): { [s: string]: boolean } {
+export function codFisc(c: UntypedFormControl): { [s: string]: boolean } {
   if (c.value && !c.value.match(FISCAL_CODE_VALIDATOR_REGEX)) {
     return { invalidCF: true };
   }

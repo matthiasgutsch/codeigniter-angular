@@ -1,4 +1,3 @@
-import { StringMap } from "@angular/compiler/src/compiler_facade_interface";
 
 export class WarehouseCheckouts {
     id: number;
@@ -27,7 +26,7 @@ export class WarehouseCheckouts {
     product_id: string;
     warehouse_id: string;
     supplier_id: string;
-    status: StringMap;
+    status: string;
     skills: ISkill[];
 }
 

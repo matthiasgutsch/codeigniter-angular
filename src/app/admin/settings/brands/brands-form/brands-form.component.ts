@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, Validators, UntypedFormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
 import { Blog } from '../../../../models/blog';
@@ -32,7 +32,7 @@ export class BrandsFormComponent implements OnInit {
   checked: boolean = true;
   selectedValue: string;
 
-  categoryForm: FormGroup;
+  categoryForm: UntypedFormGroup;
 
   cities: Blog[];
   format1: string = "";
@@ -44,7 +44,7 @@ export class BrandsFormComponent implements OnInit {
   currentUser: any;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private brandsService: BrandService, 
     private comuniService: ComuniService,
     private messageService: MessageService,

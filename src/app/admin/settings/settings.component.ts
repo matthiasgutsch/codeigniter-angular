@@ -4,7 +4,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { BlogService } from '../../services/blog.service';
 import { Blog } from '../../models/blog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { PAGES_COMPANY, PAGES_PRODUCT, TYPE_LIST } from '../constants/constants';
 import { CategoryService } from 'src/app/services/categories.service';
 import { Category } from 'src/app/models/category';
@@ -30,7 +30,7 @@ export class SettingsComponent implements OnInit {
   events: any;
   appointments: Appointments;
   error: string;
-  blogForm: FormGroup;
+  blogForm: UntypedFormGroup;
   typeList: any;
   settingsPages: any;
   cities: Blog[];
@@ -61,7 +61,7 @@ trackByFn(index, item) {
   constructor(private blogService: BlogService,     
     private clientsService: ClientsService,
     private appointmentsService: AppointmentsService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private comuniService: ComuniService,
     private categoryService: CategoryService, 
     private router: Router,

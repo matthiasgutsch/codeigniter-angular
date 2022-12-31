@@ -1,11 +1,11 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { OrdersService } from '../../../services/orders.service';
-import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
+import { UntypedFormBuilder, Validators, UntypedFormGroup, UntypedFormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
 import { Blog } from '../../../models/blog';
 import { Category } from '../../../models/category';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { CategoryService } from '../../../services/categories.service';
 import { ConfirmationService, MessageService, SelectItem } from "primeng/api";
 import * as moment from 'moment';
@@ -49,7 +49,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
   imagePath: any;
   blogs: Blog;
   blog: Blog;
-  blogForm: FormGroup;
+  blogForm: UntypedFormGroup;
   itemTotal: any
   appointments: Appointments;
   appointment: Appointments;
@@ -99,10 +99,10 @@ export class PurchaseOrdersFormComponent implements OnInit {
   numberOrders: number;
   currentUser: any;
   public dataValues: object;
-  addForm: FormGroup;
-  rows: FormArray;
-  itemForm: FormGroup;
-  skillsForm: FormGroup;
+  addForm: UntypedFormGroup;
+  rows: UntypedFormArray;
+  itemForm: UntypedFormGroup;
+  skillsForm: UntypedFormGroup;
   skillsValues: any = [];
   total: number;
   viewMode = '1';
@@ -120,7 +120,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
   }
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private purchaseOrdersService: PurchaseOrdersService,
     private messageService: MessageService,
     private suppliersService: SuppliersService,
@@ -535,8 +535,8 @@ export class PurchaseOrdersFormComponent implements OnInit {
     return this.blogForm.get("title");
   }
 
-  initSkill(skillsValues: ISkill[]): FormArray {
-    const formArray = new FormArray([]);
+  initSkill(skillsValues: ISkill[]): UntypedFormArray {
+    const formArray = new UntypedFormArray([]);
     const id = this.route.snapshot.paramMap.get("id");
 
     this.purchaseOrdersService.skills(+id).subscribe(
@@ -564,11 +564,11 @@ export class PurchaseOrdersFormComponent implements OnInit {
   }
 
    
-  private createSkillFormGroup(skill:any): FormGroup{
-    return new FormGroup({
-      'qty':new FormControl(skill.qty),
-      'price':new FormControl(skill.price), 
-      'itemTotal':new FormControl(skill.itemTotal)
+  private createSkillFormGroup(skill:any): UntypedFormGroup{
+    return new UntypedFormGroup({
+      'qty':new UntypedFormControl(skill.qty),
+      'price':new UntypedFormControl(skill.price), 
+      'itemTotal':new UntypedFormControl(skill.itemTotal)
     })
   }
 
@@ -578,14 +578,14 @@ export class PurchaseOrdersFormComponent implements OnInit {
 
 
   get skills() {
-    return this.blogForm.get('skills') as FormArray;
+    return this.blogForm.get('skills') as UntypedFormArray;
   }
   
   
   
   itemsChanged(): void {
     let total: number = 0;
-    for (let t = 0; t < (<FormArray>this.blogForm.get('skills')).length; t++) {
+    for (let t = 0; t < (<UntypedFormArray>this.blogForm.get('skills')).length; t++) {
       if (this.blogForm.get('skills')?.value[t].qty != '' && this.blogForm.get('skills')?.value[t].price) {
         total = (this.blogForm.get('skills')?.value[t].qty * this.blogForm.get('skills')?.value[t].price) + total;
       }
@@ -597,7 +597,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
   }
 
   
-  newQuantity(): FormGroup {
+  newQuantity(): UntypedFormGroup {
     const numberPatern = '^[0-9.,]+$';
     return this.fb.group({
       description: [''],
@@ -617,7 +617,7 @@ export class PurchaseOrdersFormComponent implements OnInit {
     this.subTotal = this.subTotal - totalCostOfItem;
     this.vat = this.subTotal / 100 * this.company.fiscaltype;
     this.grandTotal = this.subTotal + this.vat;
-    (<FormArray>this.blogForm.get('skills')).removeAt(i);
+    (<UntypedFormArray>this.blogForm.get('skills')).removeAt(i);
   }
   
   get total_sum() {

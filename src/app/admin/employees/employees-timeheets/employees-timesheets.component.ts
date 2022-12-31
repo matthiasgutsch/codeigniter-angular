@@ -37,7 +37,7 @@ import { Timesheets } from 'src/app/models/timesheets';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { Projects } from 'src/app/models/projects';
-import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
+import { UntypedFormBuilder, Validators, UntypedFormGroup, FormArray } from '@angular/forms';
 
 
 @Component({
@@ -54,7 +54,7 @@ export class EmployeesTimesheetsComponent implements OnInit {
   works: any = [];
   work: Works;
   calendarOptions: any;
-  blogForm: FormGroup;
+  blogForm: UntypedFormGroup;
   locations: any = [];
   location: Locations;
   cols: any[];
@@ -134,7 +134,7 @@ export class EmployeesTimesheetsComponent implements OnInit {
     private projectsService: ProjectsService,
     private locationsService: LocationsService,
     private messageService: MessageService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private employeesService: EmployeesService,
     private router: Router,
     private route: ActivatedRoute,

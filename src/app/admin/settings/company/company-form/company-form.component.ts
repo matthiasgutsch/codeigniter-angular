@@ -1,13 +1,13 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { ClientsService } from '../../../../services/clients.service';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, Validators, UntypedFormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
 import { Clients } from '../../../../models/clients';
 import { Company } from '../../../../models/company';
 
 import { Category } from '../../../../models/category';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { CategoryService } from '../../../../services/categories.service';
 import { ConfirmationService, MessageService, SelectItem } from "primeng/api";
 import * as moment from 'moment';
@@ -45,7 +45,7 @@ export class CompanyFormComponent implements OnInit {
   selectedValue: string;
   comuni: Comuni;
   businessStateOptions: any[]; 
-  blogForm: FormGroup;
+  blogForm: UntypedFormGroup;
   typeList: any[];
   items: any = [];
   cities: Clients[];
@@ -64,7 +64,7 @@ export class CompanyFormComponent implements OnInit {
   }
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private clientsService: ClientsService,
     private messageService: MessageService,
     private companyService: CompanyService,
@@ -144,12 +144,12 @@ export class CompanyFormComponent implements OnInit {
       region: [""],
       email: ["", Validators.required],
       phone: ["", Validators.required],
-      fiscalcode: new FormControl(
+      fiscalcode: new UntypedFormControl(
         "",
         Validators.compose([codFisc])
       ),
       fiscaltype: ["", Validators.required],
-      fiscalnumber: new FormControl(
+      fiscalnumber: new UntypedFormControl(
         ""
       ),
       description: [""],
@@ -268,7 +268,7 @@ export class CompanyFormComponent implements OnInit {
 
 
 
-export function codFisc(c: FormControl): { [s: string]: boolean } {
+export function codFisc(c: UntypedFormControl): { [s: string]: boolean } {
   if (c.value && !c.value.match(FISCAL_CODE_VALIDATOR_REGEX)) {
     return { invalidCF: true };
   }

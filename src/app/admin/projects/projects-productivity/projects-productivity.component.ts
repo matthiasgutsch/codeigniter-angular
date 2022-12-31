@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { AppointmentsService } from '../../../services/appointments.service';
-import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
+import { UntypedFormBuilder, Validators, UntypedFormGroup, UntypedFormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
 import { Chart } from "chart.js";
@@ -80,7 +80,7 @@ export class ProjectsProductivityComponent implements OnInit {
   selectedValue: string;
   products: any = [];
   product: Projects;
-  blogForm: FormGroup;
+  blogForm: UntypedFormGroup;
   typeList: any[];
   status: any[];
   stateOptions: any[];
@@ -126,10 +126,10 @@ export class ProjectsProductivityComponent implements OnInit {
   pages: any;
   currentUser: any;
   fPairs: any;
-  addForm: FormGroup;
-  rows: FormArray;
-  itemForm: FormGroup;
-  skillsForm: FormGroup;
+  addForm: UntypedFormGroup;
+  rows: UntypedFormArray;
+  itemForm: UntypedFormGroup;
+  skillsForm: UntypedFormGroup;
   skillsValues: any = [];
   data1 = [];
   project_id: string;
@@ -151,7 +151,7 @@ export class ProjectsProductivityComponent implements OnInit {
   totalPrice: number;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private timesheetsService: TimesheetsService,
     private technicalDataService: TechnicalDataService,
     private messageService: MessageService,

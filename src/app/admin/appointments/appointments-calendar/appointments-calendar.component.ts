@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 import { BlogService } from '../../../services/blog.service';
 import { Blog } from '../../../models/blog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { DASHBOARD, PAGES, TYPE_LIST } from '../../constants/constants';
 import { CategoryService } from 'src/app/services/categories.service';
 import { Category } from 'src/app/models/category';
@@ -67,7 +67,7 @@ export class AppointmentsCalendarComponent implements OnInit {
   support: Supports;
   productsCount: any;
   error: string;
-  blogForm: FormGroup;
+  blogForm: UntypedFormGroup;
   typeList: any;
   cities: Blog[];
   format1: string = "";
@@ -133,7 +133,7 @@ export class AppointmentsCalendarComponent implements OnInit {
     private billingsService: BillingsService,
     private chartsService: ChartsService,
     private spinner: NgxSpinnerService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private projectsService: ProjectsService,
     private worksService: WorksService,
     private router: Router,
