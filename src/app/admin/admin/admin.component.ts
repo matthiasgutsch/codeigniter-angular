@@ -7,6 +7,7 @@ import { formatDate } from '@angular/common';
 import { Subject } from 'rxjs';
 import { MenuItem, PrimeNGConfig } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
+import { event } from 'jquery';
 
 @Component({
   selector: 'app-admin',
@@ -70,7 +71,7 @@ export class AdminComponent implements OnInit {
 
         if (new Date().getTime() - expiredDate > 0) {
           this.zone.run(() => {
-            this.notify$.next();
+            this.notify$.next(event);
           });
           clearInterval(i);
         }
