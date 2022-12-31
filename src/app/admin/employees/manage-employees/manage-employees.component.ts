@@ -33,6 +33,7 @@ export class ManageEmployeesComponent implements OnInit {
   totalRecords: string;
   currentUser: any;
   page = 1;
+  filterSidebar: boolean;
   count = 0;
   pageSize = 10;
   pageSizes = [5, 10, 15];

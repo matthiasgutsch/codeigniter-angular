@@ -469,7 +469,7 @@ onSubmitAdd(task: Task, index) {
     this.updatePriority(event);
   }
 
-  dropMediumPriorityTasksList(event: CdkDragDrop<string[]>, id) {
+  dropMediumPriorityTasksList(event: CdkDragDrop<string[]>) {
     event.item.data.priority = 2;
     this.updatePriority(event);
   }

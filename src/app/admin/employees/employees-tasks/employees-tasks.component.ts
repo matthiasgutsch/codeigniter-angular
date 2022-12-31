@@ -173,6 +173,13 @@ export class EmployeesTasksComponent implements OnInit {
 
   }
   
+  deleteTask($event) {
+
+  }
+
+  editItem($event) {
+
+  }
 
   dropDonePriorityTasksList(event: CdkDragDrop<string[]>) {
     event.item.data.priority = 4;
@@ -185,7 +192,7 @@ export class EmployeesTasksComponent implements OnInit {
     this.updatePriority(event);
   }
 
-  dropMediumPriorityTasksList(event: CdkDragDrop<string[]>, id) {
+  dropMediumPriorityTasksList(event: CdkDragDrop<string[]>) {
     event.item.data.priority = 2;
     this.updatePriority(event);
   }

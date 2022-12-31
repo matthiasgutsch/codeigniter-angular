@@ -20,6 +20,7 @@ import { PARAM_CLIENTS_PATH, PARAM_EMPLOYEES_PATH } from '../../constants/consta
 })
 export class ManageClientsComponent implements OnInit {
   clients: any = [];
+  filterSidebar: boolean;
   client: Clients;
   categories: any = [];
   category: Category;

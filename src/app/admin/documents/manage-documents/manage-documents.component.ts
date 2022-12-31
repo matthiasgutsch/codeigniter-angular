@@ -26,7 +26,7 @@ export class ManageDocumentsComponent implements OnInit {
 
   orders: any = [];
   order: Orders;
-
+  filterSidebar: boolean;
   documents: any = [];
   document: Documents;
 

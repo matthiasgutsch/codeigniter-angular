@@ -116,7 +116,8 @@ export class DocumentsFormComponent implements OnInit {
   additionalDetails: string;
   idBilling: number;
   contactNo: number;
-
+  idAppointments: number;
+  
   trackByFn(index, item) {
     return item.id;
   }

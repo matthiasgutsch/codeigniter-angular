@@ -46,7 +46,7 @@ import * as FileSaver from 'file-saver';
 export class ManageTimesheetsComponent implements OnInit {
   blogs: Blog;
   blog: Blog;
-
+  totalRecords: string;
   works: any = [];
   work: Works;
   calendarOptions: any;
@@ -96,7 +96,7 @@ export class ManageTimesheetsComponent implements OnInit {
   employees: any = [];
   employee: Employees;
   pageTitle: string;
-
+  filterSidebar: boolean;
   showDialog() {
     this.productDialog = true;
 }
@@ -355,7 +355,7 @@ timesheetsType: any;
     this.productDialogAdd = true;
   }
   
-  createTimesheets(employee: Employees) {
+  createTimesheets() {
     this.productDialogAdd = true;
     this.pageTitle = "Aggiungi Timesheet";
 

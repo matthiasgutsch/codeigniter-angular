@@ -17,10 +17,11 @@ export class ManageBrandsComponent implements OnInit {
   brand: Brand;
   error: string;
   public cols: any[];
+  tags: any[];
   public columnOptions: any[];
   public selectedColumns: any[];
   currentUser: any;
-
+  displayFilter: boolean;
   nameFilter: string;
   descriptionFilter: string;
   page = 1;

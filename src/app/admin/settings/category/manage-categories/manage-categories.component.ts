@@ -17,7 +17,7 @@ export class ManageCategoriesComponent implements OnInit {
 
   categories: any = [];
   category: Category;
-
+  displayFilter: boolean;
   public cols: any[];
   public columnOptions: any[];
   public selectedColumns: any[];

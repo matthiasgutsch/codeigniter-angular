@@ -54,10 +54,11 @@ import { ProductsService } from 'src/app/services/products.service';
 export class ManageWarehousesMovementsComponent implements OnInit {
   blogs: Blog;
   blog: Blog;
-
+  totalRecords: string;
   works: any = [];
   work: Works;
   calendarOptions: any;
+  displayFilter: boolean;
   uploadError: string;
   locations: any = [];
   location: Locations;

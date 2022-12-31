@@ -47,7 +47,7 @@ export class SupportsFormComponent implements OnInit {
   currentUser: any;
   contactForm: UntypedFormGroup;
   uploadError: string;
-
+  pageTitle: string;
   support: Supports;
   supports: Observable<Supports[]>;
   supportsList: any;

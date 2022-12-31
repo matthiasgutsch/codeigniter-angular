@@ -41,7 +41,7 @@ export class ManageWarehousesComponent implements OnInit {
   work: Works;
   events: any;
   virtualDatabase: Appointments[];
-
+  displayFilter: boolean;
   locations: any = [];
   location: Locations;
   cols: any[];

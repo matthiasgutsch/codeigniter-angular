@@ -57,7 +57,7 @@ export class QuotesFormComponent implements OnInit {
   itemTotal: any
   appointments: Appointments;
   appointment: Appointments;
-
+  descriptionAppointments: string;
   quote: Quotes;
   quotes: Quotes;
 
@@ -75,7 +75,7 @@ export class QuotesFormComponent implements OnInit {
   clients: any = [];
   client: Clients;
   arrString: string;
-
+  categoryAppointments;
   employees: any = [];
   employee: Employees;
   skillsArray: any = [];

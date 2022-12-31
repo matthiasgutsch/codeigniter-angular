@@ -200,7 +200,7 @@ export class ProjectsProductivityComponent implements OnInit {
       this.project = res;
       this.id = res.id;
       this.price = res.price;
-      this.getTotalPercent(this.price);
+      this.getTotalPercent();
       this.getEmployees();
       this.getTimesheet_by_project_employee(id);
       this.getTotal();
@@ -318,7 +318,7 @@ export class ProjectsProductivityComponent implements OnInit {
     return total;
   }
 
-  getTotalPercent(price: any) {
+  getTotalPercent() {
     let total = 0;
     this.timesheetsEmployee.forEach((item) => {
       total += Number(item.value * this.getTechnicalDataItem(item.id)?.contract);

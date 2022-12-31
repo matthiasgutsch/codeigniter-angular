@@ -25,7 +25,6 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": false,
             "assets": [
               "src/assets"
             ],
@@ -46,11 +45,12 @@
               
               "node_modules/jquery/dist/jquery.min.js"
             ],
+            "aot": true,
             "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
+            "buildOptimizer": true,
+            "sourceMap": false,
+            "optimization": true,
             "namedChunks": true
           },
           "configurations": {
@@ -61,12 +61,14 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "aot": true,
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
+              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",

@@ -30,7 +30,7 @@ export class ManageTagsComponent implements OnInit {
   basePath: string;
   pageOfItems: Array<any>;
   searchWrapper: boolean = false;
-
+  displayFilter: boolean;
 
   @ViewChild('dt', { static: true }) dt: Table;
   currentUser: any;

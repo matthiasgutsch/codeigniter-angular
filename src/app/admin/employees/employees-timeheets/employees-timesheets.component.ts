@@ -52,6 +52,7 @@ export class EmployeesTimesheetsComponent implements OnInit {
   error: string;
   uploadError: string;
   works: any = [];
+  filterSidebar: boolean;
   work: Works;
   calendarOptions: any;
   blogForm: UntypedFormGroup;

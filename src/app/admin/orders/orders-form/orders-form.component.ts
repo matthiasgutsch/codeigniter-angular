@@ -49,7 +49,7 @@ export class OrdersFormComponent implements OnInit {
 
   @Input() pageTitle: string;
 
-
+  idAppointments: number;
   error: string;
   uploadError: string;
   imagePath: any;

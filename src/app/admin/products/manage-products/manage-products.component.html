@@ -85,7 +85,7 @@
 
                         <div class="p-inputgroup pull-right">
                             <input type="text" [style]="{ width: '100%' }" pInputText [(ngModel)]="codeFilter"
-                            placeholder="Barcode" #myinput (keyup)="load($event)" />
+                            placeholder="Barcode" #myinput (keyup)="load()" />
                             <button pButton type="reset" icon="pi pi-times" class="p-button-primary"
                             (click)="reset()">
                         </button>

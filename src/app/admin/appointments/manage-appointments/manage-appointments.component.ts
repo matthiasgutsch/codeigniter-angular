@@ -34,7 +34,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ManageAppointmentsComponent implements OnInit {
   blogs: Blog;
   blog: Blog;
-
+  filterSidebar: boolean;
   works: any = [];
   work: Works;
   events: any;

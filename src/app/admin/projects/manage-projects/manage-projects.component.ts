@@ -40,7 +40,7 @@ import { ProjectsService } from 'src/app/services/projects.service';
 export class ManageProjectsComponent implements OnInit {
   blogs: Blog;
   blog: Blog;
-
+  filterSidebar: boolean;
   works: any = [];
   work: Works;
 
