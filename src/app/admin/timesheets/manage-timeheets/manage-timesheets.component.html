@@ -221,7 +221,7 @@
                                         </td>
 
                                         <td> {{ timesheet.employee.username }}</td>
-                                        <td> {{ timesheet.project.title }}</td>
+                                        <td> <a [routerLink]="['/admin/projects/productivity/', timesheet.project.id]">{{timesheet.project.title }}</a></td>
 
                                         <td class="action">
 
@@ -408,11 +408,12 @@
                         </div>
                     </div>
 
-                    <hr class="full">
-                    <strong>Cantiere</strong><br>
-                    {{ getProjectItem(timesheet.project_id)?.title }}
-
-                </div>
+                    <br>
+                    Cantiere<br>
+                   
+                    <button pButton pRipple  [routerLink]="['/admin/projects/productivity/', timesheet.project.id]" [label]="getProjectItem(timesheet.project_id)?.title"
+                    class="p-button p-button-options btn-block"></button>
+            </div>
             </ng-template>
 
         </p-sidebar>
