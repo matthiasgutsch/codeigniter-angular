@@ -393,6 +393,7 @@ export class ProductsFormComponent implements OnInit {
             const msg = 'Uploaded the file successfully: ' + file.name;
             this.message.push(msg);
             this.imageInfos = this.productsService.getFiles(this.id);
+            this.previews = [];
           }
         },
         error: (err: any) => {
