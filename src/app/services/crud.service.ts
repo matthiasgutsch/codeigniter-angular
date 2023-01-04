@@ -1,6 +1,6 @@
 
 import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpParams, HttpResponse, HttpRequest } from '@angular/common/http';
 import { CrudOperations } from './crud-operations.interface';
 import { catchError, map } from 'rxjs/operators';
 import { Billings } from '../models/billings';
@@ -438,7 +438,30 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
 
 
 
+  getFiles(id: ID): Observable<any> {
+    const userId = this.currentUser.user_id;
+    return this._http.get<T>(this._base + '/getfiles/' + id + '/' + userId);
+  }
 
+
+
+
+
+  upload(file: File): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+    const userId = this.currentUser.user_id;
+
+    formData.append("product_id", '100081');
+    formData.append('user_id', '1');
+    formData.append('image', file);
+
+    const req = new HttpRequest('POST', `${this._base}/upload/` + userId, formData, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+
+    return this._http.request(req);
+  }
 
   getAppointmentId(id: ID) {
     return this._http.get<T>(this._base + '/id/' + id).pipe(
@@ -503,6 +526,13 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   delete(id: number) {
     const userId = this.currentUser.user_id;
     return this._http.delete(this._base + '/delete/' + id + '/' + userId).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  delete_image(id: number) {
+    const userId = this.currentUser.user_id;
+    return this._http.delete(this._base + '/delete_image/' + id + '/' + userId).pipe(
       catchError(this.handleError)
     );
   }

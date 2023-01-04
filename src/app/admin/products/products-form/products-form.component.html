@@ -2,7 +2,7 @@
 <app-topnav></app-topnav>
 
 
-<form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="blogForm">
 
     <div class="top-main-wrapper">
 
@@ -16,7 +16,7 @@
                     </div>
                     <div class="p-col-4 p-md-6">
                         <button pButton pRipple icon="pi pi-save" label="salva"
-                        class="p-button pull-right p-button-success p-mr-2"
+                        class="p-button pull-right p-button-success p-mr-2" (click)="onSubmit()"
                         [disabled]="!blogForm.valid"></button>
 
                         <button pButton pRipple icon="pi pi-plus" *ngIf="id" [routerLink]="['/admin/products-variation/create', id]" label="Aggiungi variante"
@@ -55,6 +55,10 @@
                     
 
                         <p-tabView class="responsive-tab-view">
+
+
+                           
+
                             <p-tabPanel header="Informazioni">
 
                                 <div class="p-fluid">
@@ -332,6 +336,97 @@
                                         </td>
                                     </tr>
                                 </table>
+                            </p-tabPanel>
+                            <p-tabPanel header="Media">
+
+                                <div *ngFor="let progressInfo of progressInfos" class="mb-2">
+                                    <span>{{ progressInfo.fileName }}</span>
+                                    <p-progressBar [value]="progressInfo.value"></p-progressBar>
+                                    {{ progressInfo.value }}
+
+                                   </div>
+                                  
+                                  <div class="row">
+                                    <div class="col-8">
+                                        <div class="button_outer">
+                                            <div class="btn_upload">
+                                        <input type="file" accept="image/*" multiple (change)="selectFiles($event)" />
+                                        Carica Immagine
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                  
+                                    <div class="col-4">
+                                      <button pButton
+                                      class="p-button p-button-success p-mr-2"
+                                        [disabled]="!selectedFiles"
+                                        (click)="uploadFiles()"
+                                      >
+                                        Upload
+                                      </button>
+                                    </div>
+                                  </div>
+                                  
+                                  <div *ngIf="message.length" class="alert alert-secondary my-3" role="alert">
+                                    <ul *ngFor="let msg of message; let i = index">
+                                      <li>{{ msg }}</li>
+                                    </ul>
+                                  </div>
+
+
+                                  <div *ngFor="let preview of previews">
+                                    <div class="p-grid">
+                                        <div class="p-col-3">
+
+                                        <img [src]="preview" class="preview">
+                                        </div>
+                                    </div>
+
+                                  </div>
+                                  
+                          
+                                  <p-table #dt [columns]="cols" [value]="imageInfos | async" [responsive]="false" [resizableColumns]="true" [autoLayout]="true"  [globalFilterFields]="['name', 'description']"
+                                currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true"
+                                [rows]="10" [showCurrentPageReport]="true">
+            
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th width="50px">id</th>
+
+                                        <th width="100px">image</th>
+                                       
+
+                                        <th>Nome</th>
+                                        <th></th>
+
+                                    </tr>
+            
+                                </ng-template>
+                                <ng-template pTemplate="body" let-image let-columns="columns">
+                                    <tr>
+                                        <td>  {{image.id}}
+            
+                                            
+                                        </td>
+                                        <td>  <img src="{{image.image}}"  class="img-responsive">
+            
+                                            
+                                        </td>
+                                   
+                                        <td>  {{image.image_name}}
+            
+                                            
+                                        </td>
+                                        <td class="action">
+                                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
+                                                (click)="onDeleteImage(this.image.id, this.image.image_name)"></button>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+
+                                    
                             </p-tabPanel>
                         </p-tabView>
 

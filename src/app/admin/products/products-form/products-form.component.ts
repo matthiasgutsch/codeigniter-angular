@@ -33,6 +33,8 @@ import { Technical_data } from 'src/app/models/technical_data';
 import { TechnicalDataService } from 'src/app/services/technical_data.service';
 import { ProductsVariationsService } from 'src/app/services/products_variations.service';
 import { ProductsVariations } from 'src/app/models/products_variations';
+import { Observable } from 'rxjs';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 
 
 export interface fPairs {
@@ -86,7 +88,12 @@ export class ProductsFormComponent implements OnInit {
   technical_data: Technical_data;
 
   tags: any = [];
+  selectedFiles?: FileList;
+  progressInfos: any[] = [];
+  message: string[] = [];
 
+  previews: string[] = [];
+  imageInfos?: Observable<any>;
 
   description: any;
   selectedWorks: SelectItem[] = [];
@@ -157,7 +164,6 @@ export class ProductsFormComponent implements OnInit {
 
     this.getselectedWorks;
     this.getselectedCategories;
-
    
 
 
@@ -219,7 +225,8 @@ export class ProductsFormComponent implements OnInit {
       
       this.productsService.getId(+id).subscribe((res) => {
 
-        
+        this.imageInfos = this.productsService.getFiles(+id);
+
         if (res.user_id == this.currentUser.user_id) {
         this.blogForm.patchValue({
           title: res.title,
@@ -279,6 +286,8 @@ export class ProductsFormComponent implements OnInit {
 
   }
 
+
+
   initSkill() {
     var formArray = this.fb.array([]);
     const id = this.route.snapshot.paramMap.get("id");
@@ -319,6 +328,88 @@ export class ProductsFormComponent implements OnInit {
     return this.blogForm.get('skills') as UntypedFormArray;
   }
    
+
+ 
+
+  selectFiles(event: any): void {
+    this.message = [];
+    this.progressInfos = [];
+    this.selectedFiles = event.target.files;
+
+    this.previews = [];
+    if (this.selectedFiles && this.selectedFiles[0]) {
+      const numberOfFiles = this.selectedFiles.length;
+      for (let i = 0; i < numberOfFiles; i++) {
+        const reader = new FileReader();
+
+        reader.onload = (e: any) => {
+          console.log(e.target.result);
+          this.previews.push(e.target.result);
+        };
+
+        reader.readAsDataURL(this.selectedFiles[i]);
+      }
+    }
+  }
+
+
+  onDeleteImage(id: number, image_name: any) {
+
+    this.confirmationService.confirm({
+      message: 'Sei sicuro di volerlo cancellare = ' + image_name,
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.productsService.delete_image(+id).subscribe(
+          res => {
+            console.log('ok')
+            this.messageService.add({ key: 'myKey1', severity: 'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo' });
+
+          },
+          error => this.error = error,
+        );
+      },
+
+    });
+
+
+  }
+
+
+  upload(idx: number, file: File): void {
+    this.progressInfos[idx] = { value: 0, fileName: file.name };
+
+    if (file) {
+      const id = this.route.snapshot.paramMap.get("id");
+     
+
+      this.productsService.upload(file).subscribe({
+        next: (event: any) => {
+          if (event.type === HttpEventType.UploadProgress) {
+            this.progressInfos[idx].value = Math.round(100 * event.loaded / event.total);
+          } else if (event instanceof HttpResponse) {
+            const msg = 'Uploaded the file successfully: ' + file.name;
+            this.message.push(msg);
+            this.imageInfos = this.productsService.getFiles(this.id);
+          }
+        },
+        error: (err: any) => {
+          this.progressInfos[idx].value = 0;
+          const msg = 'Could not upload the file: ' + file.name;
+          this.message.push(msg);
+        }});
+    }
+  }
+
+  uploadFiles(): void {
+    this.message = [];
+
+    if (this.selectedFiles) {
+      for (let i = 0; i < this.selectedFiles.length; i++) {
+        this.upload(i, this.selectedFiles[i]);
+      }
+    }
+  }
 
   newQuantity(): UntypedFormGroup {
     return this.fb.group({
