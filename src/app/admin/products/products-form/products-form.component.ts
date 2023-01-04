@@ -368,8 +368,9 @@ export class ProductsFormComponent implements OnInit {
           },
           error => this.error = error,
         );
-        this.messageService.add({ key: 'myKey1', severity: 'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo' });
         this.imageInfos = this.productsService.getFiles(this.id);
+        this.messageService.add({ key: 'myKey1', severity: 'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo' });
+
       },
 
     });
@@ -385,7 +386,7 @@ export class ProductsFormComponent implements OnInit {
       const id = this.route.snapshot.paramMap.get("id");
      
 
-      this.productsService.upload(file).subscribe({
+      this.productsService.upload(file, this.id).subscribe({
         next: (event: any) => {
           if (event.type === HttpEventType.UploadProgress) {
             this.progressInfos[idx].value = Math.round(100 * event.loaded / event.total);
@@ -394,6 +395,7 @@ export class ProductsFormComponent implements OnInit {
             this.message.push(msg);
             this.imageInfos = this.productsService.getFiles(this.id);
             this.previews = [];
+            this.progressInfos = [];
           }
         },
         error: (err: any) => {

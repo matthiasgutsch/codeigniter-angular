@@ -342,7 +342,6 @@
                                 <div *ngFor="let progressInfo of progressInfos" class="mb-2">
                                     <span>{{ progressInfo.fileName }}</span>
                                     <p-progressBar [value]="progressInfo.value"></p-progressBar>
-                                    {{ progressInfo.value }}
 
                                    </div>
                                   
@@ -418,6 +417,11 @@
             
                                             
                                         </td>
+                                        <td>  {{image.created_at}}
+            
+                                            
+                                        </td>
+                                        
                                         <td class="action">
                                                 <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
                                                 (click)="onDeleteImage(this.image.id, this.image.image_name)"></button>

@@ -447,11 +447,11 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
 
 
 
-  upload(file: File): Observable<HttpEvent<any>> {
+  upload(file: File, id): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
     const userId = this.currentUser.user_id;
 
-    formData.append("product_id", '100081');
+    formData.append("product_id", id);
     formData.append('user_id', userId);
     formData.append('image', file);
 
