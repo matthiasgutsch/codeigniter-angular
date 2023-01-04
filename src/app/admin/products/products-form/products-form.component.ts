@@ -368,6 +368,8 @@ export class ProductsFormComponent implements OnInit {
           },
           error => this.error = error,
         );
+        this.messageService.add({ key: 'myKey1', severity: 'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo' });
+        this.imageInfos = this.productsService.getFiles(this.id);
       },
 
     });

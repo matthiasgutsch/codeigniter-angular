@@ -452,7 +452,7 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     const userId = this.currentUser.user_id;
 
     formData.append("product_id", '100081');
-    formData.append('user_id', '1');
+    formData.append('user_id', userId);
     formData.append('image', file);
 
     const req = new HttpRequest('POST', `${this._base}/upload/` + userId, formData, {
