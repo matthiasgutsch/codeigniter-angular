@@ -225,7 +225,7 @@ export class ProductsFormComponent implements OnInit {
       
       this.productsService.getId(+id).subscribe((res) => {
 
-        this.imageInfos = this.productsService.getFiles(+id);
+        this.imageInfos = this.productsService.getImages(+id);
 
         if (res.user_id == this.currentUser.user_id) {
         this.blogForm.patchValue({
@@ -364,7 +364,7 @@ export class ProductsFormComponent implements OnInit {
           res => {
             console.log('ok')
             this.messageService.add({ key: 'myKey1', severity: 'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo' });
-            this.imageInfos = this.productsService.getFiles(this.id);
+            this.imageInfos = this.productsService.getImages(this.id);
 
           },
           error => this.error = error,
@@ -393,7 +393,7 @@ export class ProductsFormComponent implements OnInit {
           } else if (event instanceof HttpResponse) {
             const msg = 'Uploaded the file successfully: ' + file.name;
             this.message.push(msg);
-            this.imageInfos = this.productsService.getFiles(this.id);
+            this.imageInfos = this.productsService.getImages(this.id);
             this.previews = [];
             this.progressInfos = [];
 

@@ -438,12 +438,17 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
 
 
 
+  getImages(id: ID): Observable<any> {
+    const userId = this.currentUser.user_id;
+    return this._http.get<T>(this._base + '/getimages/' + id + '/' + userId);
+  }
+
+
+
   getFiles(id: ID): Observable<any> {
     const userId = this.currentUser.user_id;
     return this._http.get<T>(this._base + '/getfiles/' + id + '/' + userId);
   }
-
-
 
 
 
