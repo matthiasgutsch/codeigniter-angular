@@ -1,491 +1,491 @@
-
 <app-topnav></app-topnav>
-
 
 <form [formGroup]="blogForm">
 
     <div class="top-main-wrapper">
 
-
         <div class="dash-header">
             <div class="dash-title">
-        
+
                 <div class="p-field p-grid">
                     <div class="p-col-8 p-md-6">
                         <h3>{{pageTitle}}</h3>
                     </div>
                     <div class="p-col-4 p-md-6">
                         <button pButton pRipple icon="pi pi-save" label="salva"
-                        class="p-button pull-right p-button-success p-mr-2" (click)="onSubmit()"
-                        [disabled]="!blogForm.valid"></button>
+                            class="p-button pull-right p-button-success p-mr-2" (click)="onSubmit()"
+                            [disabled]="!blogForm.valid"></button>
 
-                        <button pButton pRipple icon="pi pi-plus" *ngIf="id" [routerLink]="['/admin/products-variation/create', id]" label="Aggiungi variante"
-                        class="p-button p-button-primary p-mr-2 pull-right"></button>
+                        <button pButton pRipple icon="pi pi-plus" *ngIf="id"
+                            [routerLink]="['/admin/products-variation/create', id]" label="Aggiungi variante"
+                            class="p-button p-button-primary p-mr-2 pull-right"></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="main-inner">
 
-<div class="main-inner">
+        <div class="p-fluid">
+            <div class="p-field p-grid">
 
-    <div class="p-fluid">
-        <div class="p-field p-grid">
+                <div class="p-col-12 p-md-9">
 
-   
+                    <p-card *ngIf="id" class="blu-box">
+                        <div class="p-grid">
+                            <div class="p-col-12">
+                                <label class="legend">Nome Prodotto</label>
+                                <h3>{{productTitle}}</h3>
 
-            <div class="p-col-12 p-md-9">
+                            </div>
 
-                <p-card *ngIf="id" class="blu-box">
-                    <div class="p-grid">
-                        <div class="p-col-12">
-                            <label class="legend">Nome Prodotto</label>
-                            <h3>{{productTitle}}</h3>
-                        
                         </div>
-                        
-                    </div>
-                </p-card>
+                    </p-card>
 
+                    <p-card>
 
-                <p-card>
-                    
-                    <div class="blog-form">
-                    
+                        <div class="blog-form">
 
-                        <p-tabView class="responsive-tab-view">
+                            <p-tabView class="responsive-tab-view">
 
+                                <p-tabPanel header="Informazioni">
 
-                           
+                                    <div class="p-fluid">
 
-                            <p-tabPanel header="Informazioni">
+                                        <div class="p-field p-grid">
+                                            <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Nome Prodotto<span
+                                                    class="required">*</span></label>
+                                            <div class="p-col-12 p-md-10">
 
-                                <div class="p-fluid">
+                                                <input type="text" [style]="{ width: '100%' }" pInputText
+                                                    formControlName="title">
 
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Nome Prodotto<span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-
-                                            <input type="text" [style]="{ width: '100%' }" pInputText
-                                                formControlName="title">
-
-                                            <!-- <input type="text" [style]="{ width: '100%' }" [(ngModel)]="data" value="{{rows.value | json}}" pInputText formControlName="data" >-->
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="p-fluid">
-
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Codice <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-                                            <div class="p-grid">
-                                                <div class="p-col-12 p-md-5">
-                                                    <input type="text" [style]="{ width: '100%' }" pInputText
-                                                        formControlName="code">
-                                                </div>
-                                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Codice interno <span
-                                                        class="required">*</span></label>
-                                                <div class="p-col-4 p-md-5">
-
-                                                    <input type="text" [style]="{ width: '100%' }" pInputText
-                                                        formControlName="code_int">
-                                                </div>
+                                                <!-- <input type="text" [style]="{ width: '100%' }" [(ngModel)]="data" value="{{rows.value | json}}" pInputText formControlName="data" >-->
 
                                             </div>
-
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="p-fluid">
+                                    <div class="p-fluid">
 
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Prezzo Listino<span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-                                            <div class="p-grid">
-                                                <div class="p-col-12 p-md-5">
-                                                    <p-inputNumber type="text" [style]="{ width: '100%' }"
-                                                        formControlName="price" inputId="locale-it" mode="decimal" locale="it-IT"
-                                                        [minFractionDigits]="2"></p-inputNumber>
+                                        <div class="p-field p-grid">
+                                            <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Codice <span
+                                                    class="required">*</span></label>
+                                            <div class="p-col-12 p-md-10">
+                                                <div class="p-grid">
+                                                    <div class="p-col-12 p-md-5">
+                                                        <input type="text" [style]="{ width: '100%' }" pInputText
+                                                            formControlName="code">
+                                                    </div>
+                                                    <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Codice interno <span
+                                                            class="required">*</span></label>
+                                                    <div class="p-col-4 p-md-5">
+
+                                                        <input type="text" [style]="{ width: '100%' }" pInputText
+                                                            formControlName="code_int">
+                                                    </div>
+
                                                 </div>
-                                                <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Prezzo Fornitore<span
-                                                        class="required">*</span></label>
-                                                <div class="p-col-4 p-md-5">
-                                                    <p-inputNumber type="text" [style]="{ width: '100%' }"
-                                                    formControlName="price_extra"  inputId="locale-it" mode="decimal" locale="it-IT"
-                                                    [minFractionDigits]="2"></p-inputNumber>
-                                                  
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="p-fluid">
-
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Marca <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-
-                                            <p-dropdown [options]="brands" [virtualScroll]="true" filter="true"
-                                                [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }"
-                                                formControlName="brand_id" optionLabel="name" optionValue="name">
-
-                                            </p-dropdown>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="p-fluid">
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Categories <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-
-                                            <p-multiSelect [options]="categories" display="chip"
-                                                formControlName="category_id" [(ngModel)]="selectedCategories"
-                                                optionLabel="name" optionValue="id">
-                                            </p-multiSelect>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="p-fluid">
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">In evidenzia <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-
-                                            <p-selectButton [options]="stateOptions" formControlName="is_featured" optionLabel="label" optionValue="value"></p-selectButton>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="p-fluid">
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Attivo <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-                                            <p-selectButton [options]="stateOptions" formControlName="is_active" optionLabel="label" optionValue="value"></p-selectButton>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="p-fluid">
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Status <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-                                            <p-dropdown [options]="status" [virtualScroll]="true" filter="true"
-                                                [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }"
-                                                formControlName="status" optionLabel="label" optionValue="label">
-                                                <ng-template let-option pTemplate="item">
-
-                                                    {{option.label}}
-
-                                                </ng-template>
-
-                                            </p-dropdown>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="p-fluid">
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Descrizione <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-
-
-                                            <input type="text" [style]="{ width: '100%' }" pInputText
-                                            formControlName="description">
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="p-fluid">
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Descrizione Completa <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-
-                                            <textarea pInputTextarea formControlName="description_full" rows="5" cols="30"></textarea>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="p-fluid">
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Tags <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-
-                                            <p-multiSelect [options]="tags" display="chip" formControlName="works_id"
-                                                [(ngModel)]="selectedWorks" optionLabel="name" optionValue="id">
-                                            </p-multiSelect>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group form-row">
-                                    <label class="col-md-3"></label>
-                                    <div class="col-md-9">
-                                        <input type="hidden" formControlName="id">
-                                        <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
-
-                                    </div>
-                                </div>
-
-                            </p-tabPanel>
-
-                           
-
-                            <p-tabPanel header="Varianti" *ngIf="id">
-
-                                <p-table #dt [columns]="cols" [value]="productsVariations" [responsive]="false" [resizableColumns]="true" [autoLayout]="true"  [globalFilterFields]="['name', 'description']"
-                                currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true"
-                                [rows]="10" [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="totalRecords">
-            
-                                <ng-template pTemplate="header" let-columns>
-                                    <tr>
-                                        <th width="50px">Attivo</th>
-
-                                        <th width="50px"></th>
-                                        <th *ngFor="let col of cols">
-                                            {{col.header}}
-                                        </th>
-
-                                        <th width="100"></th>
-                                    </tr>
-            
-                                </ng-template>
-                                <ng-template pTemplate="body" let-rowData let-columns="columns">
-                                    <tr>
-                                        <td>  <p-tag value="Si" severity="success" *ngIf="rowData.is_active == 1"></p-tag>
-                                            <p-tag value="No" severity="danger" *ngIf="rowData.is_active == 0"></p-tag></td>
-                                        <td *ngIf="imagePath"><img [src]="rowData.image" class="img-responsive"></td>
-                                        <td *ngFor="let col of cols" [ngSwitch]="col.field">
-                                            {{rowData[col.field]}}
-            
-                                            
-                                        </td>
-                                   
-
-                                        <td class="action">
-                                            <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
-                                                [routerLink]="['/admin/products-variation/edit/', id ,rowData.id]"></button>
-                                            <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
-                                                (click)="onDelete(rowData.id)"></button>
-                                        </td>
-                                    </tr>
-                                </ng-template>
-                            </p-table>
-                            </p-tabPanel>
-
-                            <p-tabPanel header="Dati tecnici">
-                                <div class="form-group form-row">
-
-                                    <button pButton pRipple icon="pi pi-plus" label="Aggiungi Dati technici"
-                                        class="p-button pull-right p-button-success p-mr-2"
-                                        (click)="addQuantity()"></button>
-
-                                    <button pButton pRipple icon="pi pi-cog" label="Configura Dati technici"
-                                        class="p-button pull-left p-button-primary p-mr-2"
-                                        routerLink="/admin/settings/technical-data"></button>
-                                </div>
-                                <table formArrayName="skills" style="width: 100%">
-
-                                    <tr *ngFor="let quantity of skills.controls; let i=index" [formGroupName]="i">
-                                        <td width="40%">
-
-                                            <p-dropdown [options]="technical_datas" [virtualScroll]="true" filter="true"
-                                                [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }"
-                                                formControlName="qty" optionLabel="name" optionValue="id">
-                                                <ng-template let-option pTemplate="item">
-
-                                                    {{option.name}}
-
-                                                </ng-template>
-
-                                            </p-dropdown>
-
-                                        </td>
-                                        <td>
-
-                                            <input type="text" placeholder="Valore" [style]="{ width: '100%' }"
-                                                pInputText formControlName="price">
-                                        </td>
-                                        <td>
-                                            <button pButton (click)="removeQuantity(i)" icon="pi pi-trash"
-                                                class="p-button p-button-danger p-mr-2"></button>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </p-tabPanel>
-                            <p-tabPanel header="Media">
-
-                                <div *ngFor="let progressInfo of progressInfos" class="mb-2">
-                                    <span>{{ progressInfo.fileName }}</span>
-                                    <p-progressBar [value]="progressInfo.value"></p-progressBar>
-
-                                   </div>
-                                  
-                                  <div class="row">
-                                    <div class="col-8">
-                                        <div class="button_outer">
-                                            <div class="btn_upload">
-                                        <input type="file" accept="image/*" multiple (change)="selectFiles($event)" />
-                                        Carica Immagine
 
                                             </div>
                                         </div>
                                     </div>
-                                  
-                                    <div class="col-4">
-                                      <button pButton
-                                      class="p-button p-button-success p-mr-2"
-                                        [disabled]="!selectedFiles"
-                                        (click)="uploadFiles()"
-                                      >
-                                        Upload
-                                      </button>
-                                    </div>
-                                  </div>
-                                  
-                                  <div *ngIf="message.length" class="alert alert-secondary my-3" role="alert">
-                                    <ul *ngFor="let msg of message; let i = index">
-                                      <li>{{ msg }}</li>
-                                    </ul>
-                                  </div>
 
+                                    <div class="p-fluid">
 
-                                  <div *ngFor="let preview of previews">
-                                    <div class="p-grid">
-                                        <div class="p-col-3">
+                                        <div class="p-field p-grid">
+                                            <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Prezzo Listino<span
+                                                    class="required">*</span></label>
+                                            <div class="p-col-12 p-md-10">
+                                                <div class="p-grid">
+                                                    <div class="p-col-12 p-md-5">
+                                                        <p-inputNumber type="text" [style]="{ width: '100%' }"
+                                                            formControlName="price" inputId="locale-it" mode="decimal"
+                                                            locale="it-IT" [minFractionDigits]="2"></p-inputNumber>
+                                                    </div>
+                                                    <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Prezzo
+                                                        Fornitore<span class="required">*</span></label>
+                                                    <div class="p-col-4 p-md-5">
+                                                        <p-inputNumber type="text" [style]="{ width: '100%' }"
+                                                            formControlName="price_extra" inputId="locale-it"
+                                                            mode="decimal" locale="it-IT" [minFractionDigits]="2">
+                                                        </p-inputNumber>
 
-                                        <img [src]="preview" class="preview">
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
 
-                                  </div>
-                                  
-                          
-                                  <p-table #dt [columns]="cols" [value]="imageInfos | async" [responsive]="false" [resizableColumns]="true" [autoLayout]="true"  [globalFilterFields]="['name', 'description']"
-                                currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items" [paginator]="true"
-                                [rows]="10" [showCurrentPageReport]="true">
-            
-                                <ng-template pTemplate="header">
-                                    <tr>
-                                        <th width="50px">id</th>
+                                    <div class="p-fluid">
 
-                                        <th width="100px">image</th>
-                                       
+                                        <div class="p-field p-grid">
+                                            <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Marca <span
+                                                    class="required">*</span></label>
+                                            <div class="p-col-12 p-md-10">
 
-                                        <th>Nome</th>
-                                        <th>Data</th>
-                                        <th></th>
+                                                <p-dropdown [options]="brands" [virtualScroll]="true" filter="true"
+                                                    [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }"
+                                                    formControlName="brand_id" optionLabel="name" optionValue="name">
 
-                                    </tr>
-            
-                                </ng-template>
-                                <ng-template pTemplate="body" let-image let-columns="columns">
-                                    <tr>
-                                        <td>  {{image.id}}
-            
-                                            
-                                        </td>
-                                        <td>  <img src="{{image.image}}"  class="img-responsive">
-            
-                                            
-                                        </td>
-                                   
-                                        <td>  {{image.image_name}}
-            
-                                            
-                                        </td>
-                                        <td>  {{image.created_at}}
-            
-                                            
-                                        </td>
+                                                </p-dropdown>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-fluid">
+                                        <div class="p-field p-grid">
+                                            <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Categories <span
+                                                    class="required">*</span></label>
+                                            <div class="p-col-12 p-md-10">
+
+                                                <p-multiSelect [options]="categories" display="chip"
+                                                    formControlName="category_id" [(ngModel)]="selectedCategories"
+                                                    optionLabel="name" optionValue="id">
+                                                </p-multiSelect>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-fluid">
+                                        <div class="p-field p-grid">
+                                            <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">In evidenzia <span
+                                                    class="required">*</span></label>
+                                            <div class="p-col-12 p-md-10">
+
+                                                <p-selectButton [options]="stateOptions" formControlName="is_featured"
+                                                    optionLabel="label" optionValue="value"></p-selectButton>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-fluid">
+                                        <div class="p-field p-grid">
+                                            <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Attivo <span
+                                                    class="required">*</span></label>
+                                            <div class="p-col-12 p-md-10">
+                                                <p-selectButton [options]="stateOptions" formControlName="is_active"
+                                                    optionLabel="label" optionValue="value"></p-selectButton>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-fluid">
+                                        <div class="p-field p-grid">
+                                            <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Status <span
+                                                    class="required">*</span></label>
+                                            <div class="p-col-12 p-md-10">
+                                                <p-dropdown [options]="status" [virtualScroll]="true" filter="true"
+                                                    [showClear]="true" placeholder="Scegli" [style]="{ width: '100%' }"
+                                                    formControlName="status" optionLabel="label" optionValue="label">
+                                                    <ng-template let-option pTemplate="item">
+
+                                                        {{option.label}}
+
+                                                    </ng-template>
+
+                                                </p-dropdown>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-fluid">
+                                        <div class="p-field p-grid">
+                                            <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Descrizione <span
+                                                    class="required">*</span></label>
+                                            <div class="p-col-12 p-md-10">
+
+                                                <input type="text" [style]="{ width: '100%' }" pInputText
+                                                    formControlName="description">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-fluid">
+                                        <div class="p-field p-grid">
+                                            <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Descrizione Completa <span
+                                                    class="required">*</span></label>
+                                            <div class="p-col-12 p-md-10">
+
+                                                <textarea pInputTextarea formControlName="description_full" rows="5"
+                                                    cols="30"></textarea>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-fluid">
+                                        <div class="p-field p-grid">
+                                            <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Tags <span
+                                                    class="required">*</span></label>
+                                            <div class="p-col-12 p-md-10">
+
+                                                <p-multiSelect [options]="tags" display="chip"
+                                                    formControlName="works_id" [(ngModel)]="selectedWorks"
+                                                    optionLabel="name" optionValue="id">
+                                                </p-multiSelect>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group form-row">
+                                        <label class="col-md-3"></label>
+                                        <div class="col-md-9">
+                                            <input type="hidden" formControlName="id">
+                                            <input type="hidden" formControlName="user_id"
+                                                value="{{currentUser.user_id}}">
+
+                                        </div>
+                                    </div>
+
+                                </p-tabPanel>
+
+                                <p-tabPanel header="Varianti" *ngIf="id">
+
+                                    <p-table #dt [columns]="cols" [value]="productsVariations" [responsive]="false"
+                                        [resizableColumns]="true" [autoLayout]="true"
+                                        [globalFilterFields]="['name', 'description']"
+                                        currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items"
+                                        [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                                        [loading]="loading" [totalRecords]="totalRecords">
+
+                                        <ng-template pTemplate="header" let-columns>
+                                            <tr>
+                                                <th width="50px">Attivo</th>
+
+                                                <th width="50px"></th>
+                                                <th *ngFor="let col of cols">
+                                                    {{col.header}}
+                                                </th>
+
+                                                <th width="100"></th>
+                                            </tr>
+
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                            <tr>
+                                                <td>
+                                                    <p-tag value="Si" severity="success" *ngIf="rowData.is_active == 1">
+                                                    </p-tag>
+                                                    <p-tag value="No" severity="danger" *ngIf="rowData.is_active == 0">
+                                                    </p-tag>
+                                                </td>
+                                                <td *ngIf="imagePath"><img [src]="rowData.image" class="img-responsive">
+                                                </td>
+                                                <td *ngFor="let col of cols" [ngSwitch]="col.field">
+                                                    {{rowData[col.field]}}
+
+                                                </td>
+
+                                                <td class="action">
+                                                    <button pButton pRipple icon="pi pi-pencil"
+                                                        class="p-button p-button-success p-mr-2"
+                                                        [routerLink]="['/admin/products-variation/edit/', id ,rowData.id]"></button>
+                                                    <button pButton pRipple icon="pi pi-trash"
+                                                        class="p-button p-button-danger p-mr-2"
+                                                        (click)="onDelete(rowData.id)"></button>
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </p-tabPanel>
+
+                                <p-tabPanel header="Dati tecnici">
+                                    <div class="form-group form-row">
+
+                                        <button pButton pRipple icon="pi pi-plus" label="Aggiungi Dati technici"
+                                            class="p-button pull-right p-button-success p-mr-2"
+                                            (click)="addQuantity()"></button>
+
+                                        <button pButton pRipple icon="pi pi-cog" label="Configura Dati technici"
+                                            class="p-button pull-left p-button-primary p-mr-2"
+                                            routerLink="/admin/settings/technical-data"></button>
+                                    </div>
+                                    <table formArrayName="skills" style="width: 100%">
+
+                                        <tr *ngFor="let quantity of skills.controls; let i=index" [formGroupName]="i">
+                                            <td width="40%">
+
+                                                <p-dropdown [options]="technical_datas" [virtualScroll]="true"
+                                                    filter="true" [showClear]="true" placeholder="Scegli"
+                                                    [style]="{ width: '100%' }" formControlName="qty" optionLabel="name"
+                                                    optionValue="id">
+                                                    <ng-template let-option pTemplate="item">
+
+                                                        {{option.name}}
+
+                                                    </ng-template>
+
+                                                </p-dropdown>
+
+                                            </td>
+                                            <td>
+
+                                                <input type="text" placeholder="Valore" [style]="{ width: '100%' }"
+                                                    pInputText formControlName="price">
+                                            </td>
+                                            <td>
+                                                <button pButton (click)="removeQuantity(i)" icon="pi pi-trash"
+                                                    class="p-button p-button-danger p-mr-2"></button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </p-tabPanel>
+                                <p-tabPanel header="Media">
+
+                                    <div *ngFor="let progressInfo of progressInfos" class="mb-2">
+                                        <span>{{ progressInfo.fileName }}</span>
+                                        <p-progressBar [value]="progressInfo.value"></p-progressBar>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="button_outer_big">
+                                                <div class="btn_upload">
+                                                    <input type="file" accept="image/*" multiple
+                                                        (change)="selectFiles($event)" />
+                                                    Carica Immagine
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-4">
+                                            <button pButton class="p-button p-button-success p-mr-2"
+                                                [disabled]="!selectedFiles" (click)="uploadFiles()">
+                                                Upload
+                                            </button>
+                                            <br><br>
+                                        </div>
+                                    </div>
+
+                                    <div *ngIf="message.length" class="alert alert-secondary my-3" role="alert">
+                                        <div *ngFor="let msg of message; let i = index" class="p-message p-message-success">
+                                            <div class="p-message-wrapper">
+                                               <span class="p-message-summary">{{ msg }}</span>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div *ngFor="let preview of previews">
+                                        <div class="p-grid">
+                                            <div class="p-col-2">
+
+                                                <img [src]="preview" class="img-responsive">
+                                            </div>
+                                        </div>
                                         
-                                        <td class="action">
-                                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
-                                                (click)="onDeleteImage(this.image.id, this.image.image_name)"></button>
-                                        </td>
-                                    </tr>
-                                </ng-template>
-                            </p-table>
-
-                                    
-                            </p-tabPanel>
-                        </p-tabView>
-
-                    </div>
-
-                </p-card>
-
-            </div>
-
-            <div class="p-col-12 p-md-3">
-                <p-card>
-
-                    <div class="p-fluid">
-                        <div class="p-field p-grid">
-
-                            <div class="p-col-12 p-md-12">
-                                <div class="button_outer">
-                                    <div class="btn_upload">
-                                        <input #myInput type="file" id="image" (change)="onSelectedFile($event)" />
-                                        Carica Immagine
                                     </div>
-                                </div>
-                                <div [innerHTML]="uploadError" class="error"></div>
-                                <div *ngIf="imagePath">
-                                    <br />
-                                    <span class="image-container">
-                                        <img [src]="imagePath" class="img-responsive">
 
-                                        <button pButton pRipple icon="pi pi-trash"
-                                            class="imgcancel p-button p-button-primary p-mr-2"
-                                            (click)="removeImageFile($event)"></button>
-                                    </span>
+                                    <p-table #dt [columns]="cols" [value]="imageInfos | async" [responsive]="false"
+                                        [resizableColumns]="true" [autoLayout]="true"
+                                        [globalFilterFields]="['name', 'description']"
+                                        currentPageReportTemplate="Visualizza {first} di {last} su {totalRecords} Items"
+                                        [paginator]="true" [rows]="10" [showCurrentPageReport]="true">
+
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th width="50px">id</th>
+
+                                                <th width="100px">image</th>
+
+                                                <th>Nome</th>
+                                                <th>Data</th>
+                                                <th></th>
+
+                                            </tr>
+
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-image let-columns="columns">
+                                            <tr>
+                                                <td> {{image.id}}
+
+                                                </td>
+                                                <td> <img src="{{image.image}}" class="img-responsive">
+
+                                                </td>
+
+                                                <td> {{image.image_name}}
+
+                                                </td>
+                                                <td> {{image.created_at}}
+
+                                                </td>
+
+                                                <td class="action">
+                                                    <button pButton pRipple icon="pi pi-trash"
+                                                        class="p-button p-button-danger p-mr-2"
+                                                        (click)="onDeleteImage(this.image.id, this.image.image_name)"></button>
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+
+                                </p-tabPanel>
+                            </p-tabView>
+
+                        </div>
+
+                    </p-card>
+
+                </div>
+
+                <div class="p-col-12 p-md-3">
+                    <p-card>
+
+                        <div class="p-fluid">
+                            <div class="p-field p-grid">
+
+                                <div class="p-col-12 p-md-12">
+                                    <div class="button_outer">
+                                        <div class="btn_upload">
+                                            <input #myInput type="file" id="image" (change)="onSelectedFile($event)" />
+                                            Carica Immagine
+                                        </div>
+                                    </div>
+                                    <div [innerHTML]="uploadError" class="error"></div>
+                                    <div *ngIf="imagePath">
+                                        <br />
+                                        <span class="image-container">
+                                            <img [src]="imagePath" class="img-responsive">
+
+                                            <button pButton pRipple icon="pi pi-trash"
+                                                class="imgcancel p-button p-button-primary p-mr-2"
+                                                (click)="removeImageFile($event)"></button>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                </p-card>
+                    </p-card>
+
+                </div>
 
             </div>
 
         </div>
-
     </div>
-</div>
 </form>
 
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" #cd>
 
     <p-footer>
-        <button type="button" pButton icon="fa fa-close" class="p-button p-button-danger p-mr-2" label="No" (click)="cd.reject()"></button>
-        <button type="button" pButton icon="fa fa-check" class="p-button p-button-success p-mr-2" label="Si" (click)="cd.accept()"></button>
+        <button type="button" pButton icon="fa fa-close" class="p-button p-button-danger p-mr-2" label="No"
+            (click)="cd.reject()"></button>
+        <button type="button" pButton icon="fa fa-check" class="p-button p-button-success p-mr-2" label="Si"
+            (click)="cd.accept()"></button>
     </p-footer>
 
 </p-confirmDialog>
 
-<p-toast key="myKey1"  position="bottom-right"></p-toast>
+<p-toast key="myKey1" position="bottom-right"></p-toast>

@@ -396,6 +396,11 @@ export class ProductsFormComponent implements OnInit {
             this.imageInfos = this.productsService.getFiles(this.id);
             this.previews = [];
             this.progressInfos = [];
+
+            setTimeout(() => {
+              this.message = [];
+            }, 1500);
+
           }
         },
         error: (err: any) => {
