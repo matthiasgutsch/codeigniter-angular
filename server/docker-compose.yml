@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:alpine3.17
+    container_name: db-pg-nexo-server
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=nexo-pg
+      - POSTGRES_PASSWORD=postgres
