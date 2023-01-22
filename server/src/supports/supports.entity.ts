@@ -4,6 +4,7 @@ import {
   IsEmail,
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsPhoneNumber,
   IsString,
 } from 'class-validator';
@@ -88,6 +89,7 @@ export class Support {
     nullable: true,
   })
   @IsNumber()
+  @IsOptional()
   refId?: number;
 
   @ManyToOne(() => Support, (support) => support.refs, { nullable: true })
