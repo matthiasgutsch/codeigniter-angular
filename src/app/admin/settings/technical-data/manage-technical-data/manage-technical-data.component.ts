@@ -17,6 +17,7 @@ export class ManageTechnicalDataComponent implements OnInit {
   technical_dat: Technical_data;
   error: string;
   loading: boolean;
+  tags: any[];
   public cols: any[];
   public columnOptions: any[];
   public selectedColumns: any[];
@@ -24,6 +25,7 @@ export class ManageTechnicalDataComponent implements OnInit {
   descriptionFilter: string;
   page = 1;
   count = 0;
+  displayFilter: boolean;
   pageSize = 10;
   pageSizes = [5, 10, 15];
   public base_path: string;

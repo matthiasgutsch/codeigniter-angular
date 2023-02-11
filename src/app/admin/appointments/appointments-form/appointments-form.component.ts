@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { AppointmentsService } from '../../../services/appointments.service';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, Validators, UntypedFormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
 import { Blog } from '../../../models/blog';
@@ -50,7 +50,7 @@ export class AppointmentsFormComponent implements OnInit {
   checked: boolean = true;
   selectedValue: string;
   stateOptions: any[];
-  blogForm: FormGroup;
+  blogForm: UntypedFormGroup;
   typeList: any[];
   clients: any = [];
   client: Clients;
@@ -87,7 +87,7 @@ export class AppointmentsFormComponent implements OnInit {
   }
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private appointmentsService: AppointmentsService,
     private messageService: MessageService,
     private clientsService: ClientsService,

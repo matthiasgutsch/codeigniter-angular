@@ -21,7 +21,7 @@ import { PARAM_BILLINGS_PATH, PARAM_QUOTES_PATH } from '../../constants/constant
   templateUrl: "./manage-quotes.component.html",
 })
 export class ManageQuotesComponent implements OnInit {
-
+  filterSidebar: boolean;
   quotes: any = [];
   quote: Quotes;
   categories: any = [];

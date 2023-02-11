@@ -29,6 +29,7 @@ export class ManageSuppliersComponent implements OnInit {
   _selectedColumns: any[];
   loading: boolean;
   totalRecords: string;
+  filterSidebar: boolean;
   currentUser: any ;
   page = 1;
   count = 0;

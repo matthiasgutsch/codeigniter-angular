@@ -30,10 +30,9 @@ import { PARAM_APPOINTMENTS_PATH, PARAM_SUPPORTS_PATH } from '../../constants/co
 })
 export class ManageSupportsComponent implements OnInit {
 
-
+  filterSidebar: boolean;
   supports: any = [];
   support: Supports;
-  filterSidebar = false;
 
   works: any = [];
   work: Works;

@@ -12,10 +12,9 @@ export interface Task {
     employee_id: string;
     assigned_name: string;
   }
-  
+
   export interface User {
     id: string;
     name: string;
     picture: string;
   }
-  

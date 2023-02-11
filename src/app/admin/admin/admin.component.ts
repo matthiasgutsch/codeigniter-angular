@@ -1,13 +1,15 @@
 import { formatDate } from "@angular/common";
 import { Component, NgZone, OnInit } from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
 import { NgxSpinnerService } from "ngx-spinner";
-import { MenuItem, PrimeNGConfig } from "primeng/api";
-import { Subject } from "rxjs";
-import { AuthService } from "src/app/auth/auth.service";
-import { User } from "src/app/auth/auth.type";
-import { SupportsService } from "src/app/services/supports.service";
-import { LANG_IT, PAGES } from "../constants/constants";
+import { SupportsService } from 'src/app/services/supports.service';
+import { AuthService } from 'src/app/auth/auth.service';
+import { Subject } from 'rxjs';
+import { MenuItem, PrimeNGConfig } from 'primeng/api';
+import { TranslateService } from '@ngx-translate/core';
+import { event } from 'jquery';
+import { User } from '../../auth/auth.type';
+import { LANG_IT, PAGES } from '../constants/constants';
+
 
 @Component({
   selector: "app-admin",
@@ -69,10 +71,9 @@ export class AdminComponent implements OnInit {
     //   const i = setInterval(() => {
     //     const expiredDate = +localStorage.getItem("expiredDate");
     //     console.log(new Date().getTime() - expiredDate);
-
     //     if (new Date().getTime() - expiredDate > 0) {
     //       this.zone.run(() => {
-    //         this.notify$.next();
+    //         this.notify$.next(event);
     //       });
     //       clearInterval(i);
     //     }
@@ -251,7 +252,7 @@ export class AdminComponent implements OnInit {
 
   getSupportsCount() {
     this.supportsService.count().subscribe((data) => {
-      this.supportsCount = data;
+      this.supportsCount = (data as any).total;
       (error) => (this.error = error);
     });
   }

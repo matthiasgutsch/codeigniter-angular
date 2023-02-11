@@ -31,12 +31,12 @@ import { Tags } from 'src/app/models/tags';
 import { KeyValue } from '@angular/common';
 import { Technical_data } from 'src/app/models/technical_data';
 import { TechnicalDataService } from 'src/app/services/technical_data.service';
-import { CalendarComponent } from 'ng-fullcalendar';
+import { FullCalendarComponent } from '@fullcalendar/angular';
 import 'moment/locale/it'  // without this line it didn't work
 import { Timesheets } from 'src/app/models/timesheets';
 import { Projects } from 'src/app/models/projects';
 import { ProjectsService } from 'src/app/services/projects.service';
-import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
+import { UntypedFormBuilder, Validators, UntypedFormGroup, FormArray } from '@angular/forms';
 import * as FileSaver from 'file-saver';
 
 @Component({
@@ -46,7 +46,7 @@ import * as FileSaver from 'file-saver';
 export class ManageTimesheetsComponent implements OnInit {
   blogs: Blog;
   blog: Blog;
-
+  totalRecords: string;
   works: any = [];
   work: Works;
   calendarOptions: any;
@@ -90,13 +90,13 @@ export class ManageTimesheetsComponent implements OnInit {
   skills:  any[] = [];
   batches: any[];
   productDialogAdd: boolean = false;
-  blogForm: FormGroup;
+  blogForm: UntypedFormGroup;
   projects: any = [];
   project: Projects;
   employees: any = [];
   employee: Employees;
   pageTitle: string;
-
+  filterSidebar: boolean;
   showDialog() {
     this.productDialog = true;
 }
@@ -130,7 +130,7 @@ projectFilter: string;
 timesheetsType: any;
 
 @ViewChild("dt", { static: false }) public dt: Table;
-@ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
+@ViewChild(FullCalendarComponent) ucCalendar: FullCalendarComponent;
 
   constructor(
     private clientsService: ClientsService,
@@ -142,7 +142,7 @@ timesheetsType: any;
     private comuniService: ComuniService,
     private brandService: BrandService,
     private tagsService: TagsService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private technicalDataService: TechnicalDataService,
     private spinner: NgxSpinnerService,
     private categoryService: CategoryService,
@@ -355,7 +355,7 @@ timesheetsType: any;
     this.productDialogAdd = true;
   }
 
-  createTimesheets(employee: Employees) {
+  createTimesheets() {
     this.productDialogAdd = true;
     this.pageTitle = "Aggiungi Timesheet";
 

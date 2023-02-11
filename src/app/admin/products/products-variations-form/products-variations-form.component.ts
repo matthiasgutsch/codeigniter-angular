@@ -1,11 +1,11 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { AppointmentsService } from '../../../services/appointments.service';
-import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
+import { UntypedFormBuilder, Validators, UntypedFormGroup, UntypedFormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
 import { Blog } from '../../../models/blog';
 import { Category } from '../../../models/category';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { CategoryService } from '../../../services/categories.service';
 import { ConfirmationService, MessageService, SelectItem } from "primeng/api";
 import * as moment from 'moment';
@@ -70,7 +70,7 @@ export class ProductsVariationsFormComponent implements OnInit {
   selectedValue: string;
   products: any = [];
   product: Products;
-  blogForm: FormGroup;
+  blogForm: UntypedFormGroup;
   typeList: any[];
   status: any[];
   stateOptions: any[];
@@ -108,10 +108,10 @@ export class ProductsVariationsFormComponent implements OnInit {
   pages: any;
   currentUser: any;
   fPairs: any;
-  addForm: FormGroup;
-  rows: FormArray;
-  itemForm: FormGroup;
-  skillsForm: FormGroup;
+  addForm: UntypedFormGroup;
+  rows: UntypedFormArray;
+  itemForm: UntypedFormGroup;
+  skillsForm: UntypedFormGroup;
   skillsValues: any = [];
   warehouseMovements: any = [];
   productName: any;
@@ -127,7 +127,7 @@ export class ProductsVariationsFormComponent implements OnInit {
 
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private appointmentsService: AppointmentsService,
     private technicalDataService: TechnicalDataService,
     private messageService: MessageService,
@@ -357,8 +357,8 @@ export class ProductsVariationsFormComponent implements OnInit {
 
 
 
-  private createSkillFormGroup(skill:any): FormGroup{
-    return new FormGroup({'qty':new FormControl(skill.qty),'price':new FormControl(skill.price)})
+  private createSkillFormGroup(skill:any): UntypedFormGroup{
+    return new UntypedFormGroup({'qty':new UntypedFormControl(skill.qty),'price':new UntypedFormControl(skill.price)})
   }
 
   public addSkill(skill:any){
@@ -367,11 +367,11 @@ export class ProductsVariationsFormComponent implements OnInit {
 
 
   get skills() {
-    return this.blogForm.get('skills') as FormArray;
+    return this.blogForm.get('skills') as UntypedFormArray;
   }
 
 
-  newQuantity(): FormGroup {
+  newQuantity(): UntypedFormGroup {
     return this.fb.group({
       qty: "",
       price: "",

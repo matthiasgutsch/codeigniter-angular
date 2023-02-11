@@ -1,4 +1,3 @@
-import { StringMap } from "@angular/compiler/src/compiler_facade_interface";
 
 export class Projects {
     id: number;
@@ -22,7 +21,7 @@ export class Projects {
     data: JSON;
     date_from: string;
     date_to: string;
-    status: StringMap;
+    status: string;
     client_id: string;
     employee_id: string;
     skills: ISkill[];

@@ -22,7 +22,7 @@ import "jspdf-autotable";
 import { NgxSpinnerService } from "ngx-spinner";
 import { Appointment_type } from 'src/app/models/appointment_type';
 import { AppointmentTypeService } from 'src/app/services/appointment_type.service';
-import { CalendarComponent } from 'ng-fullcalendar';
+import { FullCalendarComponent } from '@fullcalendar/angular';
 import { LazyLoadEvent } from 'primeng/api';
 import { LANG_IT, PARAM_APPOINTMENTS_PATH, PARAM_BILLINGS_PATH } from '../../constants/constants';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -34,7 +34,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ManageAppointmentsComponent implements OnInit {
   blogs: Blog;
   blog: Blog;
-
+  filterSidebar: boolean;
   works: any = [];
   work: Works;
   events: any;
@@ -95,7 +95,7 @@ export class ManageAppointmentsComponent implements OnInit {
     return item.id;
   }
 
-  @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
+  @ViewChild(FullCalendarComponent) ucCalendar: FullCalendarComponent;
 
   constructor(
     private clientsService: ClientsService,
@@ -137,16 +137,16 @@ export class ManageAppointmentsComponent implements OnInit {
 
     this.basePath = window.location.pathname;
     if (this.route.snapshot.queryParamMap.has('page')) {
-      this.page = +this.route.snapshot.queryParamMap.get('page');
+      this.page = +this.route.snapshot.queryParamMap.get('page')!;
     }
     if (this.route.snapshot.queryParamMap.has('size')) {
-      this.pageSize = +this.route.snapshot.queryParamMap.get('size');
+      this.pageSize = +this.route.snapshot.queryParamMap.get('size')!;
     }
     if (this.route.snapshot.queryParamMap.has('name')) {
-      this.nameFilter = this.route.snapshot.queryParamMap.get('name');
+      this.nameFilter = this.route.snapshot.queryParamMap.get('name')!;
     }
     if (this.route.snapshot.queryParamMap.has('description')) {
-      this.descriptionFilter = this.route.snapshot.queryParamMap.get('description');
+      this.descriptionFilter = this.route.snapshot.queryParamMap.get('description')!;
     }
 
       this.getWorks();
@@ -156,10 +156,12 @@ export class ManageAppointmentsComponent implements OnInit {
 
 
 
-  getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
+  getRequestParams(searchTitle: string, categoryTitle: string
+    , page: number, pageSize: number
+    ): any {
     // tslint:disable-next-line:prefer-const
     let path = PARAM_APPOINTMENTS_PATH;
-    const params = {};
+    const params: any = {};
     let adder = '?';
     if (page) {
       params[`page`] = page - 1;
@@ -202,7 +204,7 @@ export class ManageAppointmentsComponent implements OnInit {
     });
   }
 
-  handlePageSizeChange(event): void {
+  handlePageSizeChange(event: any): void {
     this.pageSize = event.target.value;
     this.page = 1;
     this.load();
@@ -215,7 +217,7 @@ export class ManageAppointmentsComponent implements OnInit {
 
   }
 
-  public handlePageChange(event): void {
+  public handlePageChange(event: any): void {
     this.page = event;
     this.load();
 
@@ -267,31 +269,31 @@ export class ManageAppointmentsComponent implements OnInit {
 
 
   getCategoryItem(category_id: string, id: string) {
-    return this.clients.find(item => item.id === category_id);
+    return this.clients.find((item: any) => item.id === category_id);
   }
 
 
 
 
   getEmployeeItem(employee_id: string, id: string) {
-    return this.employees.find(item => item.id === employee_id);
+    return this.employees.find((item: any) => item.id === employee_id);
   }
 
 
 
   getLocationItem(location_id: string, id: string) {
-    return this.locations.find(item => item.id === location_id);
+    return this.locations.find((item: any) => item.id === location_id);
   }
 
 
 
   getWorksItem(works_id: string, id: string) {
-    return this.works.find(item => item.id === works_id);
+    return this.works.find((item: any) => item.id === works_id);
   }
 
 
   getComuniItem(category_id: string, id: string) {
-    return this.comuni.find(item => item.id === category_id);
+    return this.comuni.find((item: any) => item.id === category_id);
   }
 
 
@@ -304,7 +306,7 @@ export class ManageAppointmentsComponent implements OnInit {
 
   exportPdf() {
     // const doc = new jsPDF();
-    const doc = new jsPDF('l', 'pt', 'A4');
+    const doc: any = new jsPDF('l', 'pt', 'A4');
     doc['autoTable'](this.exportColumns, this.appointments);
     // doc.autoTable(this.exportColumns, this.products);
     doc.save("appointments.pdf");
@@ -342,7 +344,7 @@ export class ManageAppointmentsComponent implements OnInit {
 
   }
 
-  dayClick(event) {
+  dayClick(event: Event) {
     console.log('dayClick', event);
   }
 

@@ -22,7 +22,7 @@ import "jspdf-autotable";
 import { NgxSpinnerService } from "ngx-spinner";
 import { Appointment_type } from 'src/app/models/appointment_type';
 import { AppointmentTypeService } from 'src/app/services/appointment_type.service';
-import { CalendarComponent } from 'ng-fullcalendar';
+import { FullCalendarComponent } from '@fullcalendar/angular';
 import { LazyLoadEvent } from 'primeng/api';
 import { WarehousesService } from 'src/app/services/warehouses.service';
 import { Warehouses } from 'src/app/models/warehouses';
@@ -41,7 +41,7 @@ export class ManageWarehousesComponent implements OnInit {
   work: Works;
   events: any;
   virtualDatabase: Appointments[];
-
+  displayFilter: boolean;
   locations: any = [];
   location: Locations;
   cols: any[];
@@ -93,7 +93,7 @@ export class ManageWarehousesComponent implements OnInit {
     return item.id;
   }
 
-  @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
+  @ViewChild(FullCalendarComponent) ucCalendar: FullCalendarComponent;
 
   constructor(
     private locationsService: LocationsService,

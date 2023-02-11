@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./page-not-found.component.css']
 })
 export class PageNotFoundComponent implements OnInit {
-
+  error: string;
+  
   constructor(private router: Router) { }
 
   ngOnInit() {

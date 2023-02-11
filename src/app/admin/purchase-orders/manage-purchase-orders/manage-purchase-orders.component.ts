@@ -27,7 +27,7 @@ export class ManagePurchaseOrdersComponent implements OnInit {
 
   purchaseOrders: any = [];
   purchaseOrder: Orders;
-
+  filterSidebar: boolean;
   suppliers: any = [];
   supplier: Suppliers;
   categories: any = [];

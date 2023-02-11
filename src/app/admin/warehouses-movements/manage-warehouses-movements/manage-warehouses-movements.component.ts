@@ -34,7 +34,7 @@ import { TechnicalDataService } from 'src/app/services/technical_data.service';
 import 'moment/locale/it'  // without this line it didn't work
 import { Projects } from 'src/app/models/projects';
 import { ProjectsService } from 'src/app/services/projects.service';
-import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
+import { UntypedFormBuilder, Validators, UntypedFormGroup, FormArray } from '@angular/forms';
 import * as FileSaver from 'file-saver';
 import { WarehouseCheckins } from 'src/app/models/warehouse_checkins';
 import { WarehousesCheckinsService } from 'src/app/services/warehouses_checkins.service';
@@ -54,10 +54,11 @@ import { ProductsService } from 'src/app/services/products.service';
 export class ManageWarehousesMovementsComponent implements OnInit {
   blogs: Blog;
   blog: Blog;
-
+  totalRecords: string;
   works: any = [];
   work: Works;
   calendarOptions: any;
+  displayFilter: boolean;
   uploadError: string;
   locations: any = [];
   location: Locations;
@@ -103,7 +104,7 @@ export class ManageWarehousesMovementsComponent implements OnInit {
   skills: any[] = [];
   batches: any[];
   productDialogAdd: boolean = false;
-  blogForm: FormGroup;
+  blogForm: UntypedFormGroup;
   projects: any = [];
   project: Projects;
   employees: any = [];
@@ -158,7 +159,7 @@ export class ManageWarehousesMovementsComponent implements OnInit {
     private warehousesService: WarehousesService,
     private employeesService: EmployeesService,
     private tagsService: TagsService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private productsVariationsService: ProductsVariationsService,
     private spinner: NgxSpinnerService,
     private router: Router,

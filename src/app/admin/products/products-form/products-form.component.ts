@@ -1,11 +1,11 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { AppointmentsService } from '../../../services/appointments.service';
-import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
+import { UntypedFormBuilder, Validators, UntypedFormGroup, UntypedFormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
 import { Blog } from '../../../models/blog';
 import { Category } from '../../../models/category';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { CategoryService } from '../../../services/categories.service';
 import { ConfirmationService, MessageService, SelectItem } from "primeng/api";
 import * as moment from 'moment';
@@ -33,6 +33,8 @@ import { Technical_data } from 'src/app/models/technical_data';
 import { TechnicalDataService } from 'src/app/services/technical_data.service';
 import { ProductsVariationsService } from 'src/app/services/products_variations.service';
 import { ProductsVariations } from 'src/app/models/products_variations';
+import { Observable } from 'rxjs';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 
 
 export interface fPairs {
@@ -71,7 +73,7 @@ export class ProductsFormComponent implements OnInit {
   productsVariations: any = [];
   productVariations: ProductsVariations;
 
-  blogForm: FormGroup;
+  blogForm: UntypedFormGroup;
   typeList: any[];
   status: any[];
   stateOptions: any[];
@@ -86,7 +88,12 @@ export class ProductsFormComponent implements OnInit {
   technical_data: Technical_data;
 
   tags: any = [];
+  selectedFiles?: FileList;
+  progressInfos: any[] = [];
+  message: string[] = [];
 
+  previews: string[] = [];
+  imageInfos?: Observable<any>;
 
   description: any;
   selectedWorks: SelectItem[] = [];
@@ -111,10 +118,10 @@ export class ProductsFormComponent implements OnInit {
   pages: any;
   currentUser: any;
   fPairs: any;
-  addForm: FormGroup;
-  rows: FormArray;
-  itemForm: FormGroup;
-  skillsForm: FormGroup;
+  addForm: UntypedFormGroup;
+  rows: UntypedFormArray;
+  itemForm: UntypedFormGroup;
+  skillsForm: UntypedFormGroup;
   skillsValues: any = [];
   cols: any[];
   colsData: any[];
@@ -126,7 +133,7 @@ export class ProductsFormComponent implements OnInit {
 
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private appointmentsService: AppointmentsService,
     private technicalDataService: TechnicalDataService,
     private messageService: MessageService,
@@ -157,7 +164,6 @@ export class ProductsFormComponent implements OnInit {
 
     this.getselectedWorks;
     this.getselectedCategories;
-
 
 
 
@@ -219,8 +225,9 @@ export class ProductsFormComponent implements OnInit {
 
       this.productsService.getId(+id).subscribe((res) => {
 
+        this.imageInfos = this.productsService.getImages(+id);
 
-        if (res.user_id == this.currentUser.id) {
+        if (res.user_id == this.currentUser.user_id) {
         this.blogForm.patchValue({
           title: res.title,
           description: res.description.split(','),
@@ -279,6 +286,8 @@ export class ProductsFormComponent implements OnInit {
 
   }
 
+
+
   initSkill() {
     var formArray = this.fb.array([]);
     const id = this.route.snapshot.paramMap.get("id");
@@ -306,8 +315,8 @@ export class ProductsFormComponent implements OnInit {
   }
 
 
-  private createSkillFormGroup(skill:any): FormGroup{
-    return new FormGroup({'qty':new FormControl(skill.qty),'price':new FormControl(skill.price)})
+  private createSkillFormGroup(skill:any): UntypedFormGroup{
+    return new UntypedFormGroup({'qty':new UntypedFormControl(skill.qty),'price':new UntypedFormControl(skill.price)})
   }
 
   public addSkill(skill:any){
@@ -316,11 +325,103 @@ export class ProductsFormComponent implements OnInit {
 
 
   get skills() {
-    return this.blogForm.get('skills') as FormArray;
+    return this.blogForm.get('skills') as UntypedFormArray;
   }
 
 
-  newQuantity(): FormGroup {
+
+
+  selectFiles(event: any): void {
+    this.message = [];
+    this.progressInfos = [];
+    this.selectedFiles = event.target.files;
+
+    this.previews = [];
+    if (this.selectedFiles && this.selectedFiles[0]) {
+      const numberOfFiles = this.selectedFiles.length;
+      for (let i = 0; i < numberOfFiles; i++) {
+        const reader = new FileReader();
+
+        reader.onload = (e: any) => {
+          console.log(e.target.result);
+          this.previews.push(e.target.result);
+        };
+
+        reader.readAsDataURL(this.selectedFiles[i]);
+      }
+    }
+  }
+
+
+  onDeleteImage(id: number, image_name: any) {
+
+    this.confirmationService.confirm({
+      message: 'Sei sicuro di volerlo cancellare = ' + image_name,
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.productsService.delete_image(+id).subscribe(
+          res => {
+            console.log('ok')
+            this.messageService.add({ key: 'myKey1', severity: 'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo' });
+            this.imageInfos = this.productsService.getImages(this.id);
+
+          },
+          error => this.error = error,
+        );
+        this.messageService.add({ key: 'myKey1', severity: 'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo' });
+
+      },
+
+    });
+
+
+  }
+
+
+  upload(idx: number, file: File): void {
+    this.progressInfos[idx] = { value: 0, fileName: file.name };
+
+    if (file) {
+      const id = this.route.snapshot.paramMap.get("id");
+
+
+      this.productsService.upload(file, this.id).subscribe({
+        next: (event: any) => {
+          if (event.type === HttpEventType.UploadProgress) {
+            this.progressInfos[idx].value = Math.round(100 * event.loaded / event.total);
+          } else if (event instanceof HttpResponse) {
+            const msg = 'Uploaded the file successfully: ' + file.name;
+            this.message.push(msg);
+            this.imageInfos = this.productsService.getImages(this.id);
+            this.previews = [];
+            this.progressInfos = [];
+
+            setTimeout(() => {
+              this.message = [];
+            }, 1500);
+
+          }
+        },
+        error: (err: any) => {
+          this.progressInfos[idx].value = 0;
+          const msg = 'Could not upload the file: ' + file.name;
+          this.message.push(msg);
+        }});
+    }
+  }
+
+  uploadFiles(): void {
+    this.message = [];
+
+    if (this.selectedFiles) {
+      for (let i = 0; i < this.selectedFiles.length; i++) {
+        this.upload(i, this.selectedFiles[i]);
+      }
+    }
+  }
+
+  newQuantity(): UntypedFormGroup {
     return this.fb.group({
       qty: "",
       price: "",

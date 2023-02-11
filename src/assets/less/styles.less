@@ -838,6 +838,21 @@ hr.line {
   overflow: hidden;
 }
 
+.button_outer_big {
+  background: fade(@ness_color_2, 10%);
+  border-radius: @radius;
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+  transition: .2s;
+  position: relative;
+  padding: 10px;
+  border: 2px dotted fade(@ness_color_2, 30%);
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+
 .btn_upload {
   padding: 14px 30px 12px;
   color: @ness_color_2;
@@ -1691,6 +1706,9 @@ hr.line {
 body.dark {
   background-color: darken(@ness_color_2, 5%);
   color: @white;
+
+
+
   .sidebar {
     background-color: @ness_color_2 !important;
     border-right: 1px solid darken(@ness_color_2, 5%);
@@ -1750,6 +1768,27 @@ body.dark {
 .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link .p-menuitem-text {
   color: @white;
 }
+
+  .p-panelmenu .p-submenu-list a.p-menuitem-link-active {
+    background: @ness_color_3 !important;
+    border-color: @ness_color_3 !important;
+    color: @white;
+  }
+
+  .top-main-wrapper {
+    background-color: @ness_color_2 !important;
+
+  }
+
+  #main .navbar-top .user-menu li i {
+    color: @ness_color_3 !important;
+}
+
+
+  .sidebar .openbtn i {
+    background-color: @ness_color_2 !important;
+}
+
   .p-card {
     background-color: @ness_color_2 !important;
     color: @white !important;

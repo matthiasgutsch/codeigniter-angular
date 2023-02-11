@@ -1,4 +1,3 @@
-import { StringMap } from "@angular/compiler/src/compiler_facade_interface";
 
 export class Timesheets {
     id: number;
@@ -24,7 +23,7 @@ export class Timesheets {
     data: JSON;
     project_id: string;
     timesheets_type: string;
-    status: StringMap;
+    status: string;
     skills: ISkill[];
     hours: string;
     hours_extra: string;

@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { AppointmentsService } from '../../../../services/appointments.service';
-import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
+import { UntypedFormBuilder, Validators, UntypedFormGroup, UntypedFormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
 import { Blog } from '../../../../models/blog';
@@ -63,7 +63,7 @@ export class WarehousesCheckinsFormComponent implements OnInit {
   selectedValue: string;
   products: any = [];
   product: Products;
-  blogForm: FormGroup;
+  blogForm: UntypedFormGroup;
   typeList: any[];
   projects: any = [];
   stateOptions: any[];
@@ -98,10 +98,10 @@ export class WarehousesCheckinsFormComponent implements OnInit {
   pages: any;
   currentUser: any;
   fPairs: any;
-  addForm: FormGroup;
-  rows: FormArray;
-  itemForm: FormGroup;
-  skillsForm: FormGroup;
+  addForm: UntypedFormGroup;
+  rows: UntypedFormArray;
+  itemForm: UntypedFormGroup;
+  skillsForm: UntypedFormGroup;
   skillsValues: any = [];
 
   trackByFn(index, item) {
@@ -111,7 +111,7 @@ export class WarehousesCheckinsFormComponent implements OnInit {
 
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private appointmentsService: AppointmentsService,
     private technicalDataService: TechnicalDataService,
     private messageService: MessageService,

@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { AppointmentsService } from '../../../services/appointments.service';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, Validators, UntypedFormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
 import { Blog } from '../../../models/blog';
@@ -43,11 +43,11 @@ export class SupportsFormComponent implements OnInit {
   success: any;
   id: number;
   is_active: string;
-  blogForm: FormGroup;
+  blogForm: UntypedFormGroup;
   currentUser: any;
-  contactForm: FormGroup;
+  contactForm: UntypedFormGroup;
   uploadError: string;
-
+  pageTitle: string;
   support: Supports;
   supports: Observable<Supports[]>;
   supportsList: any;
@@ -59,7 +59,7 @@ export class SupportsFormComponent implements OnInit {
     private titleService: Title,
     protected route: ActivatedRoute,
     private supportsService: SupportsService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private _location: Location,

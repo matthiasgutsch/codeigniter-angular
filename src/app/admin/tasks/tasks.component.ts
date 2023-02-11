@@ -6,7 +6,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { BlogService } from '../../services/blog.service';
 import { Blog } from '../../models/blog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { DASHBOARD, PAGES, PRIORITY_LIST, TYPE_LIST } from '../constants/constants';
 import { CategoryService } from 'src/app/services/categories.service';
 import { Category } from 'src/app/models/category';
@@ -18,7 +18,7 @@ import { ComuniService } from 'src/app/services/comuni.service';
 import { Comuni } from 'src/app/models/comuni';
 import { Appointments } from 'src/app/models/appointments';
 import { AppointmentsService } from 'src/app/services/appointments.service';
-import { CalendarComponent } from 'ng-fullcalendar';
+// import { FullCalendarComponent } from '@fullcalendar/angular';
 import * as $ from 'jquery';
 import {formatDate} from '@angular/common';
 import { Locations } from 'src/app/models/locations';
@@ -72,7 +72,7 @@ export class TasksComponent implements OnInit, OnDestroy {
   support: Supports;
   productsCount: any;
   error: string;
-  blogForm: FormGroup;
+  blogForm: UntypedFormGroup;
   typeList: any;
   priorityList: any;
   cities: Blog[];
@@ -156,7 +156,7 @@ export class TasksComponent implements OnInit, OnDestroy {
     private billingsService: BillingsService,
     private chartsService: ChartsService,
     private spinner: NgxSpinnerService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private comuniService: ComuniService,
     private worksService: WorksService,
     private tasksService: TasksService,
@@ -469,7 +469,7 @@ onSubmitAdd(task: Task, index) {
     this.updatePriority(event);
   }
 
-  dropMediumPriorityTasksList(event: CdkDragDrop<string[]>, id) {
+  dropMediumPriorityTasksList(event: CdkDragDrop<string[]>) {
     event.item.data.priority = 2;
     this.updatePriority(event);
   }

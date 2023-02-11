@@ -20,7 +20,7 @@ import { PARAM_BILLINGS_PATH, PARAM_ORDERS_PATH } from '../../constants/constant
   templateUrl: "./manage-orders.component.html",
 })
 export class ManageOrdersComponent implements OnInit {
-
+  filterSidebar: boolean;
   orders: any = [];
   order: Orders;
   categories: any = [];

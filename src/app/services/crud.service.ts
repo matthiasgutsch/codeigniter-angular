@@ -1,16 +1,14 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpParams,
-  HttpResponse,
-} from "@angular/common/http";
-import { plainToInstance } from "class-transformer";
-import { Observable, throwError } from "rxjs";
-import { catchError, map } from "rxjs/operators";
-import { User } from "../auth/auth.type";
-import { Billings } from "../models/billings";
-import { Orders } from "../models/orders";
-import { CrudOperations } from "./crud-operations.interface";
+
+import { Observable, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpParams, HttpResponse, HttpRequest } from '@angular/common/http';
+import { CrudOperations } from './crud-operations.interface';
+import { catchError, map } from 'rxjs/operators';
+import { Billings } from '../models/billings';
+import { Task } from '../models/tasks';
+import { Orders } from '../models/orders';
+import { Quotes } from '../models/quotes';
+import { plainToInstance } from 'class-transformer';
+import { User } from '../auth/auth.type';
 
 export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   currentUser: User;
@@ -450,6 +448,38 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
       .pipe(catchError(this.handleError));
   }
 
+
+
+  getImages(id: ID): Observable<any> {
+    const userId = this.currentUser.id;
+    return this._http.get<T>(this._base + '/getimages/' + id + '/' + userId);
+  }
+
+
+
+  getFiles(id: ID): Observable<any> {
+    const userId = this.currentUser.id;
+    return this._http.get<T>(this._base + '/getfiles/' + id + '/' + userId);
+  }
+
+
+
+  upload(file: File, id): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+    const userId = this.currentUser.id;
+
+    formData.append("product_id", id);
+    formData.append('user_id', userId.toString());
+    formData.append('image', file);
+
+    const req = new HttpRequest('POST', `${this._base}/upload/` + userId, formData, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+
+    return this._http.request(req);
+  }
+
   getAppointmentId(id: ID) {
     return this._http
       .get<T>(this._base + "/id/" + id)
@@ -514,6 +544,14 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
       .delete(this._base + "/delete/" + id + "/" + userId)
       .pipe(catchError(this.handleError));
   }
+
+  delete_image(id: number) {
+    const userId = this.currentUser.id;
+    return this._http.delete(this._base + '/delete_image/' + id + '/' + userId).pipe(
+      catchError(this.handleError)
+    );
+  }
+
 
   save(t: T): Observable<T> {
     return this._http.post<T>(this._base, t);

@@ -31,7 +31,7 @@ import { Tags } from 'src/app/models/tags';
 import { KeyValue } from '@angular/common';
 import { Technical_data } from 'src/app/models/technical_data';
 import { TechnicalDataService } from 'src/app/services/technical_data.service';
-import { CalendarComponent } from 'ng-fullcalendar';
+import { FullCalendarComponent } from '@fullcalendar/angular';
 import 'moment/locale/it'  // without this line it didn't work
 import { Timesheets } from 'src/app/models/timesheets';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -125,7 +125,7 @@ descriptionFilter: string;
 
 
 @ViewChild("dt", { static: false }) public dt: Table;
-@ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
+@ViewChild(FullCalendarComponent) ucCalendar: FullCalendarComponent;
 
   constructor(
     private clientsService: ClientsService,

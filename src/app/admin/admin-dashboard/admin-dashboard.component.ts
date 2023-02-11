@@ -1,31 +1,30 @@
-import { formatDate } from "@angular/common";
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import * as moment from "moment";
-import "moment/locale/it"; // without this line it didn't work
-import { CalendarComponent } from "ng-fullcalendar";
+import { formatDate } from '@angular/common';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FullCalendarComponent } from '@fullcalendar/angular';
+import * as moment from 'moment';
 import { NgxSpinnerService } from "ngx-spinner";
-import { MessageService } from "primeng/api";
-import { Appointments } from "src/app/models/appointments";
-import { Billings } from "src/app/models/billings";
-import { Category } from "src/app/models/category";
-import { Clients } from "src/app/models/clients";
-import { Employees } from "src/app/models/employees";
-import { Locations } from "src/app/models/locations";
-import { Products } from "src/app/models/products";
+import { MessageService } from 'primeng/api';
+import { Appointments } from 'src/app/models/appointments';
+import { Billings } from 'src/app/models/billings';
+import { Category } from 'src/app/models/category';
+import { Clients } from 'src/app/models/clients';
+import { Employees } from 'src/app/models/employees';
+import { Locations } from 'src/app/models/locations';
+import { Products } from 'src/app/models/products';
 import { Projects } from "src/app/models/projects";
 import { Supports } from "src/app/models/supports";
-import { Works } from "src/app/models/works";
-import { AppointmentsService } from "src/app/services/appointments.service";
-import { BillingsService } from "src/app/services/billings.service";
-import { ClientsService } from "src/app/services/clients.service";
-import { ProductsService } from "src/app/services/products.service";
+import { Works } from 'src/app/models/works';
+import { AppointmentsService } from 'src/app/services/appointments.service';
+import { BillingsService } from 'src/app/services/billings.service';
+import { ClientsService } from 'src/app/services/clients.service';
+import { ProductsService } from 'src/app/services/products.service';
 import { ProjectsService } from "src/app/services/projects.service";
 import { SupportsService } from "src/app/services/supports.service";
-import { WorksService } from "src/app/services/works.service";
-import { Blog } from "../../models/blog";
-import { DASHBOARD, TYPE_LIST } from "../constants/constants";
+import { WorksService } from 'src/app/services/works.service';
+import { Blog } from '../../models/blog';
+import { DASHBOARD, TYPE_LIST } from '../constants/constants';
 
 import { User } from "src/app/auth/auth.type";
 import { WarehouseCheckins } from "src/app/models/warehouse_checkins";
@@ -65,7 +64,7 @@ export class AdminDashboardComponent implements OnInit {
 
   productsCount: any;
   error: string;
-  blogForm: FormGroup;
+  blogForm: UntypedFormGroup;
   typeList: any;
   cities: Blog[];
   format1: string = "";
@@ -123,14 +122,14 @@ export class AdminDashboardComponent implements OnInit {
 
   @ViewChild("mychart") mychart;
 
-  @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
+  @ViewChild(FullCalendarComponent) ucCalendar: FullCalendarComponent;
 
   constructor(
     private clientsService: ClientsService,
     private appointmentsService: AppointmentsService,
     private billingsService: BillingsService,
     private spinner: NgxSpinnerService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private projectsService: ProjectsService,
     private worksService: WorksService,
     private router: Router,

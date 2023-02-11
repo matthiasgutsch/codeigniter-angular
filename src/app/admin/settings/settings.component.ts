@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
+// import dayGridPlugin from '@fullcalendar/daygrid';
+// import timeGridPlugin from '@fullcalendar/timegrid';
+// import interactionPlugin from '@fullcalendar/interaction';
 import { BlogService } from '../../services/blog.service';
 import { Blog } from '../../models/blog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { PAGES_COMPANY, PAGES_PRODUCT, TYPE_LIST } from '../constants/constants';
 import { CategoryService } from 'src/app/services/categories.service';
 import { Category } from 'src/app/models/category';
@@ -16,7 +16,7 @@ import { ComuniService } from 'src/app/services/comuni.service';
 import { Comuni } from 'src/app/models/comuni';
 import { Appointments } from 'src/app/models/appointments';
 import { AppointmentsService } from 'src/app/services/appointments.service';
-import { CalendarComponent } from 'ng-fullcalendar';
+import { FullCalendarComponent } from '@fullcalendar/angular';
 import * as $ from 'jquery';
 import { PAGES } from '../constants/constants';
 
@@ -30,7 +30,7 @@ export class SettingsComponent implements OnInit {
   events: any;
   appointments: Appointments;
   error: string;
-  blogForm: FormGroup;
+  blogForm: UntypedFormGroup;
   typeList: any;
   settingsPages: any;
   cities: Blog[];
@@ -56,14 +56,14 @@ trackByFn(index, item) {
   return item.id;
 }
 
-@ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
+@ViewChild(FullCalendarComponent) ucCalendar: FullCalendarComponent;
 
-  constructor(private blogService: BlogService,     
+  constructor(private blogService: BlogService,
     private clientsService: ClientsService,
     private appointmentsService: AppointmentsService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private comuniService: ComuniService,
-    private categoryService: CategoryService, 
+    private categoryService: CategoryService,
     private router: Router,
     private messageService: MessageService,
     private route: ActivatedRoute
@@ -80,7 +80,7 @@ trackByFn(index, item) {
     this.itemsCompany = PAGES_COMPANY;
 
 
-} 
+}
 
-  
+
 }

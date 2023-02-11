@@ -54,7 +54,7 @@ export class ManageProductsVariationsComponent implements OnInit {
   selectedSkills: any[];
   brands: any = [];
   brand: Brand;
-
+  totalRecords: string;
   tags: any = [];
   tag: Tags;
   filterSidebar: boolean = false;
