@@ -1,198 +1,289 @@
-
-
 <p-sidebar [(visible)]="filterSidebar" #op position="right">
+  <ng-template pTemplate>
+    <div class="field grid">
+      <div class="col-12">
+        <p-calendar
+          [(ngModel)]="nameFilter"
+          [style]="{ width: '100%' }"
+          placeholder="Data da"
+          dateFormat="yy-mm-dd"
+          dataType="string"
+          inputId="dateformat"
+        ></p-calendar>
+      </div>
+    </div>
+    <div class="field grid">
+      <div class="col-12">
+        <p-calendar
+          [(ngModel)]="descriptionFilter"
+          [style]="{ width: '100%' }"
+          placeholder="Data a"
+          dateFormat="yy-mm-dd"
+          dataType="string"
+          inputId="dateformat"
+        ></p-calendar>
+      </div>
+    </div>
 
-    <ng-template pTemplate>
-        <div class="p-field p-grid">
-            <div class="p-col-12">
-                <p-calendar [(ngModel)]="nameFilter" [style]="{ width: '100%' }" placeholder="Data da"
-                    dateFormat="yy-mm-dd" dataType="string" inputId="dateformat"></p-calendar>
-            </div>
-        </div>
-        <div class="p-field p-grid">
-            <div class="p-col-12">
-                <p-calendar [(ngModel)]="descriptionFilter" [style]="{ width: '100%' }" placeholder="Data a"
-                    dateFormat="yy-mm-dd" dataType="string" inputId="dateformat"></p-calendar>
-            </div>
-        </div>
+    <div class="field grid">
+      <div class="col-6">
+        <button
+          pButton
+          type="reset"
+          class="button button-secondary btn-block"
+          label="annulla"
+          (click)="reset()"
+        ></button>
+      </div>
 
-          <div class="p-field p-grid">
-            <div class="p-col-6">
-                <button pButton type="reset" class="p-button p-button-secondary btn-block"
-                label="annulla" (click)="reset()">
-            </button>
-            </div>
-
-            <div class="p-col-6">
-                <button pButton type="submit" class="p-button p-button-primary btn-block"
-                label="cerca" (click)="load()">
-            </button>
-            </div>
-
-        </div>
-    </ng-template>
+      <div class="col-6">
+        <button
+          pButton
+          type="submit"
+          class="button button-primary btn-block"
+          label="cerca"
+          (click)="load()"
+        ></button>
+      </div>
+    </div>
+  </ng-template>
 </p-sidebar>
 
 <app-topnav></app-topnav>
 
 <div class="top-main-wrapper">
-    <div class="dash-header">
-        <div class="dash-title">
-            <div class="p-field p-grid">
-                <div class="p-col-6 p-md-6">
-                    <h3>Helpdesk</h3>
-
-                </div>
-
-                <div class="p-col-6 p-md-6">
-                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/support/create']"
-                        label="Aggiungi Ticket" class="p-button p-button-primary pull-right"></button>
-                        <button type="text" pButton label="Filter" icon="pi pi-filter"
-                        class="p-button p-button-options p-mr-2 pull-right" (click)="filterSidebar = true"></button>
-                </div>
-
-            </div>
+  <div class="dash-header">
+    <div class="dash-title">
+      <div class="field grid">
+        <div class="col-6 md:col-6">
+          <h3>Helpdesk</h3>
         </div>
+
+        <div class="col-6 md:col-6">
+          <button
+            pButton
+            pRipple
+            icon="pi pi-plus"
+            [routerLink]="['/admin/support/create']"
+            label="Aggiungi Ticket"
+            class="button button-primary pull-right"
+          ></button>
+          <button
+            type="text"
+            pButton
+            label="Filter"
+            icon="pi pi-filter"
+            class="button button-options mr-2 pull-right"
+            (click)="filterSidebar = true"
+          ></button>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="main-inner">
-
-
-<div class="p-fluid">
-    <div class="p-field p-grid">
-        <div class="p-col-12 p-md-12">
-
-            <p-card>
-
-                <div class="filter-options">
-
-                    <div class="p-field p-grid">
-
-                        <div class="p-col-12 p-md-8">
-                            <div class="item-size pull-left">
-                                <span class="filter-tag" *ngIf="nameFilter">{{nameFilter}} <span class="close"><i
-                                            class="pi pi-times" (click)="reset()"></i></span> </span>
-                                <span class="filter-tag" *ngIf="descriptionFilter">{{descriptionFilter}} <span
-                                        class="close"><i class="pi pi-times" (click)="reset()"></i></span> </span>
-                            </div>
-                        </div>
-
-                        <div class="p-col-12 p-md-4">
-                            <span class="count-item pull-right">{{count}} Items</span>
-                        </div>
-                    </div>
+  <div class="fluid">
+    <div class="field grid">
+      <div class="col-12">
+        <p-card>
+          <div class="filter-options">
+            <div class="field grid">
+              <div class="col-12 md:col-8">
+                <div class="item-size pull-left">
+                  <span class="filter-tag" *ngIf="nameFilter"
+                    >{{ nameFilter }}
+                    <span class="close"
+                      ><i class="pi pi-times" (click)="reset()"></i
+                    ></span>
+                  </span>
+                  <span class="filter-tag" *ngIf="descriptionFilter"
+                    >{{ descriptionFilter }}
+                    <span class="close"
+                      ><i class="pi pi-times" (click)="reset()"></i
+                    ></span>
+                  </span>
                 </div>
+              </div>
 
-                <div
-                *ngFor=" let support of supports  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index">
+              <div class="col-12 md:col-4">
+                <span class="count-item pull-right"
+                  >{{ totalItems }} Items</span
+                >
+              </div>
             </div>
-                <p-table #dt1 [value]="supports" [pageLinks]="3" [responsive]="false" [resizableColumns]="true" [autoLayout]="true"
-                    [paginator]="false" [rows]="10">
+          </div>
 
-                    <ng-template pTemplate="body" let-support>
-                        <tr>
-                            <td>
-                                <p-tag severity="success" *ngIf="support.is_active === '1'" value="Ticket aperto"
-                                    class="p-mr-2"></p-tag>
-                                <p-tag severity="danger" *ngIf="support.is_active === '0'" value="Ticket chiuso"
-                                    class="p-mr-2"></p-tag>
-                            </td>
-                            <td><strong>{{support.date}}</strong><br>
+          <div
+            *ngFor="
+              let support of supports
+                | paginate : { itemsPerPage, currentPage, totalItems };
+              let i = index
+            "
+          ></div>
+          <p-table
+            #dt1
+            [value]="supports"
+            [pageLinks]="3"
+            [responsive]="false"
+            [resizableColumns]="true"
+            [autoLayout]="true"
+            [paginator]="false"
+            [rows]="10"
+          >
+            <ng-template pTemplate="body" let-support>
+              <tr>
+                <td>
+                  <p-tag
+                    severity="success"
+                    *ngIf="support.isActive"
+                    value="Ticket aperto"
+                    class="mr-2"
+                  ></p-tag>
+                  <p-tag
+                    severity="danger"
+                    *ngIf="!support.isActive"
+                    value="Ticket chiuso"
+                    class="mr-2"
+                  ></p-tag>
+                </td>
+                <td>
+                  <strong>{{ support.createdAt }}</strong
+                  ><br />
+                </td>
 
-                            <td> {{support.title}}</td>
+                <td>{{ support.title }}</td>
 
-                            <td class="action">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
-                                    [routerLink]="['/admin/support', support.id]"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
-                                    (click)="onDelete(support.id)"></button>
+                <td class="action">
+                  <button
+                    pButton
+                    pRipple
+                    icon="pi pi-pencil"
+                    class="p-button p-button-success mr-2"
+                    [routerLink]="['/admin/support', support.id]"
+                  ></button>
+                  <button
+                    pButton
+                    pRipple
+                    icon="pi pi-trash"
+                    class="p-button p-button-danger mr-2"
+                    (click)="onDelete(support.id)"
+                  ></button>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
 
-                            </td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-
-                <div class="p-grid">
-
-                    <div class="p-col-12 p-md-12">
-                        <pagination-controls previousLabel="Prev" nextLabel="Next" responsive="true"
-                            (pageChange)="handlePageChange($event)">
-                        </pagination-controls>
-                    </div>
-                </div>
-            </p-card>
-        </div>
-
+          <div class="grid">
+            <div class="col-12">
+              <pagination-controls
+                previousLabel="Prev"
+                nextLabel="Next"
+                responsive="true"
+                (pageChange)="handlePageChange($event)"
+              >
+              </pagination-controls>
+            </div>
+          </div>
+        </p-card>
+      </div>
     </div>
+  </div>
 </div>
-</div>
-<p-sidebar [(visible)]="productDialog" position="right" [style]="{width:'50%'}">
-    <ng-template pTemplate="content">
-        <div class="p-col-12 p-md-12">
-            <p-card>
-                <div class="p-grid">
-                    <div class="p-col-12 p-md-6">
-                        <strong>{{appointment.date}}</strong>
+<p-sidebar
+  [(visible)]="productDialog"
+  position="right"
+  [style]="{ width: '50%' }"
+>
+  <ng-template pTemplate="content">
+    <div class="col-12">
+      <p-card>
+        <div class="grid">
+          <div class="col-12 p-md-6">
+            <strong>{{ appointment.date }}</strong>
 
-                        <h3>{{appointment.title}}</h3>
+            <h3>{{ appointment.title }}</h3>
 
-                        {{ getLocationItem(appointment.location_id)?.name }}
-                        <br> {{ getEmployeeItem(appointment.employee_id)?.name }}
+            {{ getLocationItem(appointment.location_id)?.name }}
+            <br />
+            {{ getEmployeeItem(appointment.employee_id)?.name }}
 
-                        <p [innerHTML]="appointment.description"></p>
-
-                    </div>
-                    <div class="p-col-12 p-md-6">
-
-                        <div *ngFor="let item of selectedWorks">
-                            {{ getWorksItem(item)?.name }}
-                        </div>
-
-                    </div>
-
-                </div>
-                <button pButton pRipple icon="pi pi-pencil" label="modifica Appuntamento"
-                    class="p-button p-button-success p-mr-2"
-                    [routerLink]="['/admin/appointments/edit', appointment.id]"></button>
-
-            </p-card>
+            <p [innerHTML]="appointment.description"></p>
+          </div>
+          <div class="col-12 p-md-6">
+            <div *ngFor="let item of selectedWorks">
+              {{ getWorksItem(item)?.name }}
+            </div>
+          </div>
         </div>
-        <div class="clearfix"></div><br>
+        <button
+          pButton
+          pRipple
+          icon="pi pi-pencil"
+          label="modifica Appuntamento"
+          class="p-button p-button-success mr-2"
+          [routerLink]="['/admin/appointments/edit', appointment.id]"
+        ></button>
+      </p-card>
+    </div>
+    <div class="clearfix"></div>
+    <br />
+    <div class="clearfix"></div>
+    <div class="col-12">
+      <p-card>
+        <strong>{{ getCategoryItem(appointment.category_id)?.name }}</strong>
+
+        <p>
+          {{ getCategoryItem(appointment.category_id)?.address }}<br />
+          {{ getCategoryItem(appointment.category_id)?.zip }} -
+          {{ getCategoryItem(appointment.category_id)?.city }}
+          ({{ getCategoryItem(appointment.category_id)?.province }})<br />
+        </p>
+        <hr />
+        <p>
+          {{ getCategoryItem(appointment.category_id)?.phone }}<br />
+          {{ getCategoryItem(appointment.category_id)?.email }}
+        </p>
         <div class="clearfix"></div>
-        <div class="p-col-12 p-md-12">
-
-            <p-card>
-                <strong>{{ getCategoryItem(appointment.category_id)?.name }}</strong>
-
-                <p>{{ getCategoryItem(appointment.category_id)?.address }}<br>
-                    {{ getCategoryItem(appointment.category_id)?.zip }} -
-                    {{ getCategoryItem(appointment.category_id)?.city }}
-                    ({{ getCategoryItem(appointment.category_id)?.province }})<br>
-                </p>
-                <hr>
-                <p>{{ getCategoryItem(appointment.category_id)?.phone }}<br>
-                    {{ getCategoryItem(appointment.category_id)?.email }}</p>
-                <div class="clearfix"></div>
-                <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente"
-                    class="p-button p-button-primary p-mr-2"
-                    [routerLink]="['/admin/clients/edit', appointment.category_id]"></button>
-            </p-card>
-        </div>
-
-    </ng-template>
-
+        <button
+          pButton
+          pRipple
+          icon="pi pi-pencil"
+          label="Modifica Dati Cliente"
+          class="p-button p-button-primary mr-2"
+          [routerLink]="['/admin/clients/edit', appointment.category_id]"
+        ></button>
+      </p-card>
+    </div>
+  </ng-template>
 </p-sidebar>
 
-{{error}}
+{{ error }}
 
-<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" #cd>
-
-    <p-footer>
-        <button type="button" pButton icon="fa fa-close" class="p-button p-button-danger p-mr-2" label="No" (click)="cd.reject()"></button>
-        <button type="button" pButton icon="fa fa-check" class="p-button p-button-success p-mr-2" label="Si" (click)="cd.accept()"></button>
-    </p-footer>
-
+<p-confirmDialog
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+  #cd
+>
+  <p-footer>
+    <button
+      type="button"
+      pButton
+      icon="fa fa-close"
+      class="p-button p-button-danger mr-2"
+      label="No"
+      (click)="cd.reject()"
+    ></button>
+    <button
+      type="button"
+      pButton
+      icon="fa fa-check"
+      class="p-button p-button-success mr-2"
+      label="Si"
+      (click)="cd.accept()"
+    ></button>
+  </p-footer>
 </p-confirmDialog>
 
 <!-- <ngx-spinner

@@ -1,14 +1,25 @@
+import { Observable, throwError } from "rxjs";
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpEvent,
+  HttpParams,
+  HttpResponse,
+  HttpRequest,
+} from "@angular/common/http";
+import { CrudOperations } from "./crud-operations.interface";
+import { catchError, map } from "rxjs/operators";
+import { Billings } from "../models/billings";
+import { Task } from "../models/tasks";
+import { Orders } from "../models/orders";
+import { Quotes } from "../models/quotes";
+import { User } from "../auth/auth.type";
+import { Paginated } from "../models/generics/paginate";
+import { plainToInstance } from "class-transformer";
 
-import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse, HttpEvent, HttpParams, HttpResponse, HttpRequest } from '@angular/common/http';
-import { CrudOperations } from './crud-operations.interface';
-import { catchError, map } from 'rxjs/operators';
-import { Billings } from '../models/billings';
-import { Task } from '../models/tasks';
-import { Orders } from '../models/orders';
-import { Quotes } from '../models/quotes';
-import { plainToInstance } from 'class-transformer';
-import { User } from '../auth/auth.type';
+interface IPaginated<T> extends Paginated<T> {
+
+}
 
 export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   currentUser: User;
@@ -66,9 +77,9 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     if (pars.dateTo) {
       params = params.append("date_to", pars.dateTo);
     }
-    params = params.append("_start", pars.page);
+    params = params.append("page", pars.page);
     if (pars.size) {
-      params = params.append("_limit", pars.size);
+      params = params.append("limit", pars.size);
     }
     return params;
   }
@@ -120,7 +131,7 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     const userId = this.currentUser.id;
     params = this.getParams(params, pars);
     return this._http
-      .get<HttpResponse<T[]>>(this._base + "/list_user/", {
+      .get<HttpResponse<T[]>>(this._base + "/", {
         observe: "response",
         params,
       })
@@ -135,6 +146,21 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
         }),
         catchError(this.handleError)
       );
+  }
+
+  public getAllListPaginated(pars: any): Observable<Paginated<T>> {
+    let params = new HttpParams();
+    params = this.getParams(params, pars);
+    return (
+      this._http.get <
+      HttpResponse<Paginated<T>>>(this._base + "/", {
+        observe: "response",
+        params,
+      }).pipe(
+        map((res) => plainToInstance(Paginated<T>, res.body)),
+        catchError(this.handleError)
+      )
+    );
   }
 
   public getAllListCalendar(pars: any): Observable<T[]> {
@@ -448,34 +474,33 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
       .pipe(catchError(this.handleError));
   }
 
-
-
   getImages(id: ID): Observable<any> {
     const userId = this.currentUser.id;
-    return this._http.get<T>(this._base + '/getimages/' + id + '/' + userId);
+    return this._http.get<T>(this._base + "/getimages/" + id + "/" + userId);
   }
-
-
 
   getFiles(id: ID): Observable<any> {
     const userId = this.currentUser.id;
-    return this._http.get<T>(this._base + '/getfiles/' + id + '/' + userId);
+    return this._http.get<T>(this._base + "/getfiles/" + id + "/" + userId);
   }
-
-
 
   upload(file: File, id): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
     const userId = this.currentUser.id;
 
     formData.append("product_id", id);
-    formData.append('user_id', userId.toString());
-    formData.append('image', file);
+    formData.append("user_id", userId.toString());
+    formData.append("image", file);
 
-    const req = new HttpRequest('POST', `${this._base}/upload/` + userId, formData, {
-      reportProgress: true,
-      responseType: 'json'
-    });
+    const req = new HttpRequest(
+      "POST",
+      `${this._base}/upload/` + userId,
+      formData,
+      {
+        reportProgress: true,
+        responseType: "json",
+      }
+    );
 
     return this._http.request(req);
   }
@@ -547,11 +572,10 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
 
   delete_image(id: number) {
     const userId = this.currentUser.id;
-    return this._http.delete(this._base + '/delete_image/' + id + '/' + userId).pipe(
-      catchError(this.handleError)
-    );
+    return this._http
+      .delete(this._base + "/delete_image/" + id + "/" + userId)
+      .pipe(catchError(this.handleError));
   }
-
 
   save(t: T): Observable<T> {
     return this._http.post<T>(this._base, t);

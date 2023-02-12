@@ -68,9 +68,9 @@ export class ManageSupportsComponent implements OnInit {
     return item.id;
   }
 
-  page = 1;
-  count = 0;
-  pageSize = 10;
+  currentPage = 1;
+  totalItems = 0;
+  itemsPerPage = 10;
   pageSizes = [5, 10, 15];
   public base_path: string;
   basePath: string;
@@ -117,32 +117,24 @@ export class ManageSupportsComponent implements OnInit {
 
 
   getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
-    // tslint:disable-next-line:prefer-const
-    let path = PARAM_SUPPORTS_PATH;
-    const params = {};
-    let adder = '?';
+    const path = PARAM_SUPPORTS_PATH;
+    const qParmas = new URLSearchParams();
     if (page) {
-      params[`page`] = page - 1;
-      path += adder + 'page=' + (page - 1);
-      adder = '&';
+      qParmas.set("page", page);
     }
     if (searchTitle) {
-      params[`name`] = searchTitle;
-      path += adder + 'date_from=' + searchTitle;
-      adder = '&';
+      qParmas.set("name", searchTitle);
     }
     if (categoryTitle) {
-      params[`description`] = categoryTitle;
-      path += adder + 'date_to=' + categoryTitle;
-      adder = '&';
+      qParmas.set("description", categoryTitle);
     }
     if (pageSize) {
-      params[`size`] = pageSize;
-      path += adder + 'size=' + pageSize;
-    }
-    window.history.replaceState({}, '', path);
 
-    return params;
+      qParmas.set("size", pageSize);
+    }
+    window.history.replaceState({}, '', `${path}?${qParmas.toString()}`);
+
+    return Object.fromEntries(qParmas as any);
 
   }
 
@@ -152,19 +144,21 @@ export class ManageSupportsComponent implements OnInit {
     const params = this.getRequestParams(
       this.nameFilter,
       this.descriptionFilter,
-      this.page,
-      this.pageSize
+      this.currentPage,
+      this.itemsPerPage
     );
-    this.supportsService.getAllListNew(params).subscribe((pData) => {
-      this.supports = pData;
-      this.count = this.supportsService.size;
+    this.supportsService.getAllListPaginated(params).subscribe((pData) => {
+      this.supports = pData.data;
+      this.totalItems = pData.meta.totalItems;
+      this.itemsPerPage = pData.meta.itemsPerPage;
+      // this.currentPage = pData.meta.currentPage;
 
     });
   }
 
   handlePageSizeChange(event): void {
-    this.pageSize = event.target.value;
-    this.page = 1;
+    this.itemsPerPage = event.target.value;
+    this.currentPage = 1;
     this.load();
   }
 
@@ -176,7 +170,7 @@ export class ManageSupportsComponent implements OnInit {
   }
 
   public handlePageChange(event): void {
-    this.page = event;
+    this.currentPage = event;
     this.load();
 
   }
@@ -257,7 +251,6 @@ export class ManageSupportsComponent implements OnInit {
       accept: () => {
         this.supportsService.delete(+id).subscribe(
           res => {
-            console.log(res);
             this.ngOnInit();
             this.messageService.add({ key: 'myKey1', severity: 'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo' });
 
