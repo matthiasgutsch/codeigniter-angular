@@ -22,7 +22,15 @@
           "options": {
             "allowedCommonJsDependencies": [
               "moment",
-              "jspdf-autotable"
+              "jspdf-autotable",
+              "xlsx",
+              "file-saver",
+              "pdfmake",
+              "chart.js",
+              "quill",
+              "rgbcolor",
+              "raf",
+              "core-js"
            ],
             "outputPath": "dist/",
             "index": "src/index.html",
