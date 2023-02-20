@@ -35,7 +35,7 @@ import 'moment/locale/it'  // without this line it didn't work
 import { Projects } from 'src/app/models/projects';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { UntypedFormBuilder, Validators, UntypedFormGroup, FormArray } from '@angular/forms';
-import * as FileSaver from 'file-saver';
+import { saveAs } from 'file-saver';
 import { WarehousesCheckoutsService } from 'src/app/services/warehouses_checkouts.service';
 import { WarehousesService } from 'src/app/services/warehouses.service';
 import { Warehouses } from 'src/app/models/warehouses';
@@ -576,7 +576,7 @@ export class ManageWarehousesCheckoutsComponent implements OnInit {
     const data: Blob = new Blob([buffer], {
       type: EXCEL_TYPE
     });
-    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+    saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
   }
 
 
