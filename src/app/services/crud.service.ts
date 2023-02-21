@@ -17,9 +17,7 @@ import { User } from "../auth/auth.type";
 import { Paginated } from "../models/generics/paginate";
 import { plainToInstance } from "class-transformer";
 
-interface IPaginated<T> extends Paginated<T> {
-
-}
+interface IPaginated<T> extends Paginated<T> {}
 
 export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   currentUser: User;
@@ -151,16 +149,15 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   public getAllListPaginated(pars: any): Observable<Paginated<T>> {
     let params = new HttpParams();
     params = this.getParams(params, pars);
-    return (
-      this._http.get <
-      HttpResponse<Paginated<T>>>(this._base + "/", {
+    return this._http
+      .get<HttpResponse<Paginated<T>>>(this._base + "/", {
         observe: "response",
         params,
-      }).pipe(
+      })
+      .pipe(
         map((res) => plainToInstance(Paginated<T>, res.body)),
         catchError(this.handleError)
-      )
-    );
+      );
   }
 
   public getAllListCalendar(pars: any): Observable<T[]> {
@@ -353,9 +350,7 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
 
   find_tickets_support_id(id: number) {
     const userId = this.currentUser.id;
-    return this._http.get<Billings>(
-      this._base + "/tickets/" + id
-    );
+    return this._http.get<Billings>(this._base + "/tickets/" + id);
   }
 
   find_billings_by_appointments(id: number) {
@@ -510,13 +505,16 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
       .pipe(catchError(this.handleError));
   }
 
-  create(blog, id?: number) {
-    let url =  this._base + "/create";
-    if(id) {
+  createTicket(blog, id?: number) {
+    let url = this._base + "/create";
+    if (id) {
       url += "/" + id;
     }
+    return this._http.post<any>(url, blog).pipe(catchError(this.handleError));
+  }
+  create(blog) {
     return this._http
-      .post<any>(url, blog)
+      .post<any>(this._base, blog)
       .pipe(catchError(this.handleError));
   }
 
@@ -524,6 +522,18 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     const userId = this.currentUser.id;
     return this._http
       .post<any>(this._base + "/update/" + id + "/" + userId, blog)
+      .pipe(catchError(this.handleError));
+  }
+
+  close(id: number) {
+    return this._http
+      .post<any>(this._base + "/close/" + id, {})
+      .pipe(catchError(this.handleError));
+  }
+
+  open(id: number) {
+    return this._http
+      .post<any>(this._base + "/open/" + id, {})
       .pipe(catchError(this.handleError));
   }
 

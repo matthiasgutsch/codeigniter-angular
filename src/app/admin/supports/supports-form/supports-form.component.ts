@@ -26,7 +26,7 @@ export class SupportsFormComponent implements OnInit {
   error = {};
   success: any;
   id: number;
-  is_active: string;
+  is_active: boolean;
   blogForm: UntypedFormGroup;
   currentUser: any;
   contactForm: UntypedFormGroup;
@@ -56,44 +56,47 @@ export class SupportsFormComponent implements OnInit {
 
     this.id = +this.route.snapshot.paramMap.get("id");
 
+    this.is_active = true;
+
     this.blogForm = this.fb.group({
       title: ["", Validators.required],
       phone: [""],
       message: ["", Validators.required],
       name: [this.currentUser.first_name + " " + this.currentUser.last_name],
       sender_id: [this.currentUser.id],
+      is_active: [true],
       email: [""],
-      status: ["0"]
+      status: ["0"],
     });
 
     if (this.id) {
       this.supportsService.getId(this.id).subscribe((res) => {
         // TODO chiedere a Matthias
         // if (res.user_id == this.currentUser.id) {
-          this.blogForm.patchValue({
-            title: res.title,
-            phone: res.phone,
-            email: res.email,
-            name: res.name,
-            sender_id: res.sender_id ?? this.currentUser.id,
-            is_active: res.is_active,
-            data: res.data,
-            status: res.status
-          });
+        this.blogForm.patchValue({
+          title: res.title,
+          phone: res.phone,
+          email: res.email,
+          name: res.name,
+          sender_id: res.sender_id ?? this.currentUser.id,
+          is_active: res.is_active,
+          data: res.data,
+          status: res.status,
+        });
 
-          this.support = res;
-          // this.route.paramMap.subscribe((params) => {
-          //   this.supportsService.getId(+id).subscribe(
-          //     (data) => {
-          //       this.support = data;
-          //     },
-          //     (error) => console.log(error)
-          //   );
-          // });
-          this.supportsService.find_tickets_support_id(this.id).subscribe(
-            (data: Billings) => (this.supportsList = data),
-            (error) => (this.error = error)
-          );
+        this.support = res;
+        // this.route.paramMap.subscribe((params) => {
+        //   this.supportsService.getId(+id).subscribe(
+        //     (data) => {
+        //       this.support = data;
+        //     },
+        //     (error) => console.log(error)
+        //   );
+        // });
+        this.supportsService.find_tickets_support_id(this.id).subscribe(
+          (data: Billings) => (this.supportsList = data),
+          (error) => (this.error = error)
+        );
         // } else {
         //   // this.router.navigate(["/admin/products"]);
         // }
@@ -130,9 +133,8 @@ export class SupportsFormComponent implements OnInit {
   onSubmit() {
     const formData = new FormData();
 
-
     if (this.id) {
-      this.supportsService.create(this.blogForm.value, this.id).subscribe(
+      this.supportsService.createTicket(this.blogForm.value, this.id).subscribe(
         (res) => {
           if (res.status == "error") {
             this.uploadError = res.message;
@@ -153,7 +155,6 @@ export class SupportsFormComponent implements OnInit {
         (error) => (this.error = error)
       );
     } else {
-
       this.supportsService.create(this.blogForm.value).subscribe(
         (res) => {
           if (res.status == "error") {
@@ -175,14 +176,14 @@ export class SupportsFormComponent implements OnInit {
   }
 
   close() {
-    const formData = new FormData();
-    formData.set("is_active", "0");
-
-    this.supportsService.update(formData, this.id).subscribe(
+    this.supportsService.close(this.id).subscribe(
       (res) => {
         if (res.status == "error") {
           this.uploadError = res.message;
         } else {
+          const formData = new FormData();
+          formData.set("is_active", "0");
+
           this.messageService.add({
             key: "myKey1",
             severity: "warn",
@@ -198,13 +199,13 @@ export class SupportsFormComponent implements OnInit {
   }
 
   open() {
-    const formData = new FormData();
-    formData.set("is_active", "1");
-    this.supportsService.update(formData, this.id).subscribe(
+    this.supportsService.open(this.id).subscribe(
       (res) => {
         if (res.status == "error") {
           this.uploadError = res.message;
         } else {
+          const formData = new FormData();
+          formData.set("is_active", "1");
           this.messageService.add({
             key: "myKey1",
             severity: "success",
