@@ -1,35 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { AppointmentsService } from '../../../services/appointments.service';
-import { Blog } from '../../../models/blog';
-import { ConfirmationService, SelectItem } from 'primeng/api';
-import { CategoryService } from '../../../services/categories.service';
-import { Category } from '../../../models/category';
-import { MessageService } from 'primeng/api';
-import { Clients } from 'src/app/models/clients';
-import { ClientsService } from 'src/app/services/clients.service';
-import { ComuniService } from 'src/app/services/comuni.service';
-import { Comuni } from 'src/app/models/comuni';
-import { WorksService } from 'src/app/services/works.service';
-import { Works } from 'src/app/models/works';
-import { LocationsService } from 'src/app/services/locations.service';
-import { Locations } from 'src/app/models/locations';
-import { Employees } from 'src/app/models/employees';
-import { EmployeesService } from 'src/app/services/employees.service';
-import { Appointments } from 'src/app/models/appointments';
-import { formatDate } from '@angular/common';
+import { formatDate } from "@angular/common";
+import { Component, OnInit } from "@angular/core";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { NgxSpinnerService } from "ngx-spinner";
-import { SupportsService } from 'src/app/services/supports.service';
-import { Supports } from 'src/app/models/supports';
-import { PARAM_APPOINTMENTS_PATH, PARAM_SUPPORTS_PATH } from '../../constants/constants';
+import { ConfirmationService, MessageService } from "primeng/api";
+import { Appointments } from "src/app/models/appointments";
+import { Clients } from "src/app/models/clients";
+import { Locations } from "src/app/models/locations";
+import { Supports } from "src/app/models/supports";
+import { Works } from "src/app/models/works";
+import { ClientsService } from "src/app/services/clients.service";
+import { ComuniService } from "src/app/services/comuni.service";
+import { EmployeesService } from "src/app/services/employees.service";
+import { LocationsService } from "src/app/services/locations.service";
+import { SupportsService } from "src/app/services/supports.service";
+import { WorksService } from "src/app/services/works.service";
+import { Category } from "../../../models/category";
+import { CategoryService } from "../../../services/categories.service";
+import { PARAM_SUPPORTS_PATH } from "../../constants/constants";
 
 @Component({
-  selector: 'app-manage-supports',
-  templateUrl: './manage-supports.component.html'
+  selector: "app-manage-supports",
+  templateUrl: "./manage-supports.component.html",
 })
 export class ManageSupportsComponent implements OnInit {
-
   filterSidebar: boolean;
   supports: any = [];
   support: Supports;
@@ -62,7 +56,7 @@ export class ManageSupportsComponent implements OnInit {
     this.productDialog = true;
   }
 
-  myDate = formatDate(new Date(), 'dd/MM/yyyy', 'en');
+  myDate = formatDate(new Date(), "dd/MM/yyyy", "en");
 
   trackByFn(index, item) {
     return item.id;
@@ -79,7 +73,6 @@ export class ManageSupportsComponent implements OnInit {
   nameFilter: string;
   descriptionFilter: string;
 
-
   constructor(
     private clientsService: ClientsService,
     private supportsService: SupportsService,
@@ -90,31 +83,24 @@ export class ManageSupportsComponent implements OnInit {
     private employeesService: EmployeesService,
     private comuniService: ComuniService,
     private categoryService: CategoryService,
-    private confirmationService: ConfirmationService,) {
-
-
+    private confirmationService: ConfirmationService
+  ) {
     this.cols = [
       { field: "date", header: "Data" },
       { field: "title", header: "titolo" },
-      { field: "category_id", header: "Cliente" }
-
+      { field: "category_id", header: "Cliente" },
     ];
 
     this._selectedColumns = this.cols;
-    this.exportColumns = this.cols.map(col => ({
+    this.exportColumns = this.cols.map((col) => ({
       title: col.header,
-      dataKey: col.field
+      dataKey: col.field,
     }));
-
   }
 
   ngOnInit() {
-
     this.load();
-
   }
-
-
 
   getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
     const path = PARAM_SUPPORTS_PATH;
@@ -129,18 +115,14 @@ export class ManageSupportsComponent implements OnInit {
       qParmas.set("description", categoryTitle);
     }
     if (pageSize) {
-
       qParmas.set("size", pageSize);
     }
-    window.history.replaceState({}, '', `${path}?${qParmas.toString()}`);
+    window.history.replaceState({}, "", `${path}?${qParmas.toString()}`);
 
     return Object.fromEntries(qParmas as any);
-
   }
 
-
   load(): void {
-
     const params = this.getRequestParams(
       this.nameFilter,
       this.descriptionFilter,
@@ -152,7 +134,6 @@ export class ManageSupportsComponent implements OnInit {
       this.totalItems = pData.meta.totalItems;
       this.itemsPerPage = pData.meta.itemsPerPage;
       // this.currentPage = pData.meta.currentPage;
-
     });
   }
 
@@ -163,105 +144,87 @@ export class ManageSupportsComponent implements OnInit {
   }
 
   reset(): void {
-    this.nameFilter = '';
-    this.descriptionFilter = '';
+    this.nameFilter = "";
+    this.descriptionFilter = "";
     this.load();
-
   }
 
   public handlePageChange(event): void {
     this.currentPage = event;
     this.load();
-
   }
-
-
 
   onChangePage(pageOfItems: Array<any>) {
     // update current page of items
     this.pageOfItems = pageOfItems;
-}
+  }
 
   private onChange(item: string): void {
     this.load();
-
   }
-
 
   getCategoryItem(category_id: string, id: string) {
-    return this.clients.find(item => item.id === category_id);
+    return this.clients.find((item) => item.id === category_id);
   }
-
 
   getClients() {
-  this.clientsService.getAllList().subscribe(
-    (data: Clients) => this.clients = data,
-    error => this.error = error
-  );
-
+    this.clientsService.getAllList().subscribe(
+      (data: Clients) => (this.clients = data),
+      (error) => (this.error = error)
+    );
   }
-
-
 
   getWorks() {
     this.worksService.getAllList().subscribe(
-      (data: Works) => this.works = data,
-      error => this.error = error
+      (data: Works) => (this.works = data),
+      (error) => (this.error = error)
     );
   }
 
   getLocations() {
     this.locationsService.getAllList().subscribe(
-      (data: Locations) => this.locations = data,
-      error => this.error = error
+      (data: Locations) => (this.locations = data),
+      (error) => (this.error = error)
     );
   }
 
-
-
-
-
-
   editProduct(appointment: Appointments) {
     this.appointment = { ...appointment };
-    this.selectedWorks = this.appointment.works_id.split(',');
+    this.selectedWorks = this.appointment.works_id.split(",");
     this.productDialog = true;
   }
 
-
   exportPdf() {
     // const doc = new jsPDF();
-    const doc = new jsPDF('l', 'pt', 'A4');
-    doc['autoTable'](this.exportColumns, this.appointments);
+    const doc = new jsPDF("l", "pt", "A4");
+    doc["autoTable"](this.exportColumns, this.appointments);
     // doc.autoTable(this.exportColumns, this.products);
     doc.save("appointments.pdf");
   }
-
 
   hideDialog() {
     this.productDialog = false;
   }
 
   onDelete(id: number, title: string) {
-
     this.confirmationService.confirm({
-      message: 'Sei sicuro di volerlo cancellare = ' + id,
-      header: 'Confirmation',
-      icon: 'pi pi-exclamation-triangle',
+      message: "Sei sicuro di volerlo cancellare = " + id,
+      header: "Confirmation",
+      icon: "pi pi-exclamation-triangle",
       accept: () => {
         this.supportsService.delete(+id).subscribe(
-          res => {
+          (res) => {
             this.ngOnInit();
-            this.messageService.add({ key: 'myKey1', severity: 'warn', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo' });
-
+            this.messageService.add({
+              key: "myKey1",
+              severity: "warn",
+              summary: "Attenzione",
+              detail: "Cancellazione avvenuto con successo",
+            });
           },
-          error => this.error = error
+          (error) => (this.error = error)
         );
       },
-
     });
-
-
   }
-
 }

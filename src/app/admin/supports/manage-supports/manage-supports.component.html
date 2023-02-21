@@ -136,19 +136,19 @@
                 <td>
                   <p-tag
                     severity="success"
-                    *ngIf="support.isActive"
+                    *ngIf="support.is_active"
                     value="Ticket aperto"
                     class="mr-2"
                   ></p-tag>
                   <p-tag
                     severity="danger"
-                    *ngIf="!support.isActive"
+                    *ngIf="!support.is_active"
                     value="Ticket chiuso"
                     class="mr-2"
                   ></p-tag>
                 </td>
                 <td>
-                  <strong>{{ support.createdAt }}</strong
+                  <strong>{{ support.created_at | date: 'dd/MM/YYY hh:mm:ss' }}</strong
                   ><br />
                 </td>
 

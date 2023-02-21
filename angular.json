@@ -31,15 +31,13 @@
               "rgbcolor",
               "raf",
               "core-js"
-           ],
+            ],
             "outputPath": "dist/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/assets"
-            ],
+            "assets": ["src/assets"],
             "styles": [
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/saga-blue/theme.css",
@@ -63,6 +61,14 @@
             "namedChunks": true
           },
           "configurations": {
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -70,6 +76,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+
               "aot": true,
               "optimization": true,
               "outputHashing": "all",
@@ -97,8 +104,12 @@
           "configurations": {
             "production": {
               "browserTarget": "nexo:build:production"
+            },
+            "development": {
+              "browserTarget": "nexo:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -113,12 +124,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "assets": ["src/assets"],
+            "styles": ["src/styles.css"],
             "scripts": ["node_modules/jspdf/dist/jspdf.min.js"]
           }
         },

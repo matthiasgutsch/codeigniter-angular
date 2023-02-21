@@ -354,7 +354,7 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   find_tickets_support_id(id: number) {
     const userId = this.currentUser.id;
     return this._http.get<Billings>(
-      this._base + "/tickets_support_id/" + id + "/" + userId
+      this._base + "/tickets/" + id
     );
   }
 
@@ -468,9 +468,8 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
       .pipe(catchError(this.handleError));
   }
   getId(id: ID) {
-    const userId = this.currentUser.id;
     return this._http
-      .get<T>(this._base + "/id/" + id + "/" + userId)
+      .get<T>(this._base + "/" + id)
       .pipe(catchError(this.handleError));
   }
 
@@ -511,10 +510,13 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
       .pipe(catchError(this.handleError));
   }
 
-  create(blog) {
-    const userId = this.currentUser.id;
+  create(blog, id?: number) {
+    let url =  this._base + "/create";
+    if(id) {
+      url += "/" + id;
+    }
     return this._http
-      .post<any>(this._base + "/create/" + userId, blog)
+      .post<any>(url, blog)
       .pipe(catchError(this.handleError));
   }
 

@@ -1,239 +1,268 @@
 <app-topnav></app-topnav>
 
 <div class="top-main-wrapper">
-
   <div class="dash-header">
     <div class="dash-title">
-        <div class="p-field p-grid">
-            <div class="p-col-6 p-md-6">
-        <h3>Ticket {{id}}</h3>
-  
-            </div>
-  
-            <div class="p-col-6 p-md-6">
-              <button pButton pRipple label="chiudi ticket" *ngIf="is_active == '1'" class="p-button p-button-danger pull-right p-mr-2" (click)="close(id)"></button>
-              <button pButton pRipple label="apri ticket" *ngIf="is_active == '0'" class="p-button p-button-primary pull-right p-mr-2" (click)="open(id)"></button>
-      
-            </div>
-  
+      <div class="field grid">
+        <div class="col-6">
+          <h3>Ticket {{ id }}</h3>
         </div>
+        <div class="col-6">
+          <button
+            pButton
+            pRipple
+            label="chiudi ticket"
+            *ngIf="is_active"
+            class="p-button p-button-danger pull-right mr-2"
+            (click)="close(id)"
+          ></button>
+          <button
+            pButton
+            pRipple
+            label="apri ticket"
+            *ngIf="!is_active"
+            class="p-button p-button-primary pull-right mr-2"
+            (click)="open(id)"
+          ></button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-  <div class="main-inner">
-  
+<div class="main-inner">
+  <div class="p-fluid">
+    <div class="field grid">
+      <div class="col-12 md:col-6">
+        <p-card>
+          <div class="field grid" *ngIf="support">
+            <div class="col-12 md:col-9">
+              <p-tag
+                severity="default"
+                value="{{ support.created_at | date: 'dd/MM/YYY hh:mm:ss' }}"
+                class="mr-2"
+              ></p-tag>
 
-<div class="p-fluid">
-  <div class="p-field p-grid">
-    <div class="p-col-12 p-md-6">
+              <p-tag
+                severity="success"
+                *ngIf="is_active"
+                value="Ticket aperto"
+                class="mr-2"
+              ></p-tag>
+              <p-tag
+                severity="danger"
+                *ngIf="!is_active"
+                value="Ticket chiuso"
+                class="mr-2"
+              ></p-tag>
 
-      <p-card>
-
-    
-      
-
-        <div class="p-field p-grid" *ngIf="support">
-          <div class="p-col-12 p-md-9">
-            <p-tag severity="default" value="{{support.date}}" class="p-mr-2"></p-tag>
-
-            <p-tag severity="success"  *ngIf="is_active === '1'" value="Ticket aperto" class="p-mr-2"></p-tag>
-            <p-tag severity="danger" *ngIf="is_active === '0'" value="Ticket chiuso" class="p-mr-2"></p-tag>
-
-
-            <h3>{{support.title}}</h3>
+              <h3>{{ support.title }}</h3>
+            </div>
+            <div class="col-12 md:col-12"></div>
           </div>
-          <div class="p-col-12 p-md-12">
+          <hr class="full" />
 
+          <div *ngIf="support">
+            <br />
+            <p [innerHTML]="support.message"></p>
           </div>
-        </div>
-        <hr class="full">
-
-        <div *ngIf="support">
-          <br>
-          <p [innerHTML]="support.message"></p>
-
-        </div>
-
-      </p-card>
-      <p-card>
-
-        <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
-
-          <div class="p-fluid">
-            <div class="p-field p-grid">
-
-              <div class="p-col-12 p-md-12">
-
-                <div class="blog-form">
-
-                  <div class="p-field p-grid">
-                    <div class="p-col-12 p-md-9">
-                      <h3>{{pageTitle}}</h3>
-                    </div>
-                    
-                  </div>
-                  <hr class="full">
-
-                  <div class="p-fluid">
-
-                    <div class="p-field p-grid">
-                      <label class="p-col-12">Titolo<span class="required">*</span></label>
-                      <div class="p-col-12">
-                        <input type="text" [style]="{ width: '100%' }" pInputText formControlName="title">
-
-                        <!-- <input type="text" [style]="{ width: '100%' }" [(ngModel)]="data" value="{{rows.value | json}}" pInputText formControlName="data" >-->
-
+        </p-card>
+        <p-card>
+          <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+            <div class="p-fluid">
+              <div class="field grid">
+                <div class="col-12 md:col-12">
+                  <div class="blog-form">
+                    <div class="field grid">
+                      <div class="col-12 md:col-9">
+                        <h3>{{ pageTitle }}</h3>
                       </div>
                     </div>
-                  </div>
+                    <hr class="full" />
 
-                  <div class="p-fluid">
+                    <div class="p-fluid">
+                      <div class="field grid">
+                        <label class="col-12"
+                          >Titolo<span class="required">*</span></label
+                        >
+                        <div class="col-12">
+                          <input
+                            type="text"
+                            [style]="{ width: '100%' }"
+                            pInputText
+                            formControlName="title"
+                          />
 
-                    <div class="p-field p-grid">
-                      <label class="p-col-12">Telefono <span class="required">*</span></label>
-                      <div class="p-col-12 p-md-12">
-                        <div class="p-grid">
-                          <div class="p-col-12">
-                            <input type="text" [style]="{ width: '100%' }" pInputText formControlName="phone">
-                          </div>
-
+                          <!-- <input type="text" [style]="{ width: '100%' }" [(ngModel)]="data" value="{{rows.value | json}}" pInputText formControlName="data" >-->
                         </div>
-
                       </div>
                     </div>
-                  </div>
 
-
-                  <div class="p-fluid">
-
-                    <div class="p-field p-grid">
-                      <label class="p-col-12">Email <span class="required">*</span></label>
-                      <div class="p-col-12">
-                        <div class="p-grid">
-                          <div class="p-col-12 p-md-12">
-                            <input type="text" [style]="{ width: '100%' }" pInputText formControlName="email">
+                    <div class="p-fluid">
+                      <div class="field grid">
+                        <label class="col-12"
+                          >Telefono <span class="required">*</span></label
+                        >
+                        <div class="col-12 md:col-12">
+                          <div class="grid">
+                            <div class="col-12">
+                              <input
+                                type="text"
+                                [style]="{ width: '100%' }"
+                                pInputText
+                                formControlName="phone"
+                              />
+                            </div>
                           </div>
-
                         </div>
-
                       </div>
                     </div>
-                  </div>
 
-
-                  <div class="p-fluid">
-
-                    <div class="p-field p-grid">
-                      <label class="p-col-12">Name <span class="required">*</span></label>
-                      <div class="p-col-12">
-                        <div class="p-grid">
-                          <div class="p-col-12 p-md-12">
-                            <input type="text" [style]="{ width: '100%' }" pInputText formControlName="name" disabled >
+                    <div class="p-fluid">
+                      <div class="field grid">
+                        <label class="col-12"
+                          >Email <span class="required">*</span></label
+                        >
+                        <div class="col-12">
+                          <div class="grid">
+                            <div class="col-12 md:col-12">
+                              <input
+                                type="text"
+                                [style]="{ width: '100%' }"
+                                pInputText
+                                formControlName="email"
+                              />
+                            </div>
                           </div>
-
                         </div>
-
                       </div>
                     </div>
-                  </div>
 
-                  <div class="p-fluid">
-
-                    <div class="p-field p-grid">
-                      <label class="p-col-12">Messaggio <span class="required">*</span></label>
-                      <div class="p-col-12">
-                        <div class="p-grid">
-                          <div class="p-col-12 p-md-12">
-
-                            <textarea pInputTextarea formControlName="message" ></textarea>
-
+                    <div class="p-fluid">
+                      <div class="field grid">
+                        <label class="col-12"
+                          >Name <span class="required">*</span></label
+                        >
+                        <div class="col-12">
+                          <div class="grid">
+                            <div class="col-12 md:col-12">
+                              <input
+                                type="text"
+                                [style]="{ width: '100%' }"
+                                pInputText
+                                formControlName="name"
+                                disabled
+                              />
+                            </div>
                           </div>
-
                         </div>
-
                       </div>
                     </div>
-                  </div>
 
-                  <div class="form-group form-row">
-                    <label class="col-md-3"></label>
-                    <div class="col-md-9">
-                      <input type="hidden" formControlName="id">
-                      <input type="hidden" formControlName="ref_id">
-                      <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
-
+                    <div class="p-fluid">
+                      <div class="field grid">
+                        <label class="col-12"
+                          >Messaggio <span class="required">*</span></label
+                        >
+                        <div class="col-12">
+                          <div class="grid">
+                            <div class="col-12 md:col-12">
+                              <textarea
+                                [style]="{ width: 100 }"
+                                pInputTextarea
+                                formControlName="message"
+                              ></textarea>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
 
-                    <div class="p-field p-grid">
+                    <div class="form-group form-row">
+                      <label class="col-md-3"></label>
+                      <div class="col-md-9">
+                        <input type="hidden" formControlName="status" />
+                      </div>
+                    </div>
 
-                  <div class="p-col-12 p-md-12">
-
-                    <button pButton pRipple icon="pi pi-save" label="Invia Richiesta"
-                      class="p-button pull-right p-button-success btn-block" [disabled]="!blogForm.valid || is_active === '0'"></button>
-                  </div>
+                    <div class="field grid">
+                      <div class="col-12 md:col-12">
+                        <button
+                          pButton
+                          pRipple
+                          icon="pi pi-save"
+                          label="Invia Richiesta"
+                          class="p-button pull-right p-button-success btn-block"
+                          [disabled]="!blogForm.valid || !is_active"
+                        ></button>
+                      </div>
+                    </div>
                   </div>
                 </div>
-
               </div>
-
             </div>
+          </form>
+        </p-card>
+      </div>
 
-          </div>
-        </form>
+      <div class="col-12 md:col-6">
+        <p-card>
+          <p-tabView>
+            <p-tabPanel header="Timeline">
+              <div class="blog-form">
+                <p-timeline [value]="supportsList">
+                  <ng-template pTemplate="content" let-item>
+                    <p-card>
+                      <div class="grid">
+                        <div class="col-12 md:col-12">
+                          {{ numbers }}
+                          <p-tag
+                            severity="warning"
+                            value="{{ item.created_at | date: 'dd/MM/YYY hh:mm:ss' }}"
+                            class="mr-2"
+                          ></p-tag>
+                          <p-tag
+                            severity="default"
+                            *ngIf="
+                              item.user.first_name || item.user.last_name;
+                              else elseUsernameBlock
+                            "
+                            value="Inviato da {{ item.user.first_name }} {{
+                              item.user.last_name
+                            }}"
+                          ></p-tag>
+                          <ng-template #elseUsernameBlock>
+                            <p-tag
+                              severity="default"
+                              value="Inviato da {{ item.user.username }}"
+                            ></p-tag>
+                          </ng-template>
 
-      </p-card>
-
-    </div>
-
-    <div class="p-col-12 p-md-6">
-      <p-card>
-
-        <p-tabView>
-          <p-tabPanel header="Timeline">
-            <div class="blog-form">
-
-              <p-timeline [value]="supportsList">
-
-                <ng-template pTemplate="content" let-item>
-
-                  <p-card>
-                    <div class="p-grid">
-
-                      <div class="p-col-12 p-md-12">
-                        {{numbers}}
-                        <p-tag severity="warning" value="{{item.date}}" class="p-mr-2"></p-tag>
-
-                        <p-tag severity="default" *ngIf="item.sender_id !== 'admin'"
-                          value="Inviato da {{currentUser.first_name}} {{currentUser.last_name}}"></p-tag>
-                        <p-tag severity="success" *ngIf="item.sender_id == 'admin'"
-                          value="Ricevuto da {{item.sender_id}}">
-                        </p-tag>
+                          <p-tag
+                            severity="success"
+                            *ngIf="item.sender_id == 'admin'"
+                            value="Ricevuto da {{ item.sender_id }}"
+                          >
+                          </p-tag>
+                        </div>
                       </div>
-                    </div>
-                    <hr class="full">
+                      <hr class="full" />
 
-                    <div class="p-field p-grid">
-
-                      <div class="p-col-12 p-md-12">
-                        <h3> Re: {{item.title}}</h3>
-                        <p [innerHTML]="item.message"></p>
-
-                        
+                      <div class="field grid">
+                        <div class="col-12 md:col-12">
+                          <h3>Re: {{ item.title }}</h3>
+                          <p [innerHTML]="item.message"></p>
+                        </div>
                       </div>
-
-                    </div>
-                  </p-card>
-
-                </ng-template>
-
-              </p-timeline>
-            </div>
-          </p-tabPanel>
-        </p-tabView>
-      </p-card>
+                    </p-card>
+                  </ng-template>
+                </p-timeline>
+              </div>
+            </p-tabPanel>
+          </p-tabView>
+        </p-card>
+      </div>
     </div>
   </div>
-</div></div>
+</div>
 
 <p-toast key="myKey1"></p-toast>
