@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://demo.api.nexosuite.com',
+  baseUrl: 'https://erp.api.nexocdn.com',
   supportUrl: 'https://support.api.typopress.it',
 
 };
