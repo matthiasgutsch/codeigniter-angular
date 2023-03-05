@@ -1,395 +1,434 @@
 <app-topnav></app-topnav>
 <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+  <div class="top-main-wrapper">
+    <div class="dash-header">
+      <div class="dash-title">
+        <div class="p-field p-grid">
+          <div class="p-col-10 p-md-6">
+            <h3>{{ pageTitle }}</h3>
+          </div>
+          <div class="p-col-2 p-md-6">
+            <button
+              pButton
+              pRipple
+              label=" {{ 'save' | translate }}"
+              class="p-button p-button-success p-mr-2 pull-right"
+              [disabled]="!blogForm.valid"
+            ></button>
 
-    <div class="top-main-wrapper">
+            <button
+              type="button"
+              pButton
+              pRipple
+              label="Timesheets"
+              icon="pi pi-clock"
+              class="p-button p-button-primary pull-right p-mr-2"
+              [routerLink]="['/admin/employee/timesheets/', id]"
+            ></button>
 
-        <div class="dash-header">
-            <div class="dash-title">
-        
-                <div class="p-field p-grid">
-                    <div class="p-col-10 p-md-6">
-                        <h3>{{pageTitle}}</h3>
-                    </div>
-                    <div class="p-col-2 p-md-6">
-                       
-                   
+            <button
+              type="button"
+              pButton
+              pRipple
+              label="tasks"
+              icon="pi pi-clone"
+              class="p-button p-button-warning pull-right p-mr-2"
+              [routerLink]="['/admin/employee/task/', id]"
+            ></button>
 
-    
-
-                        <button pButton pRipple label=" {{ 'save' | translate }}" class="p-button p-button-success p-mr-2 pull-right"
-                        [disabled]="!blogForm.valid"></button>
-
-                        <button type="button" pButton pRipple label="Timesheets" icon="pi pi-clock" class="p-button p-button-primary pull-right  p-mr-2"
-                        [routerLink]="['/admin/employee/timesheets/', id]"></button>
-
-
-                        <button type="button" pButton pRipple label="tasks" icon="pi pi-clone"
-                        class="p-button p-button-warning pull-right  p-mr-2"
-                        [routerLink]="['/admin/employee/task/', id]"></button>
-
-                        <button type="button" pButton pRipple  label=" {{ 'go-back' | translate }}" 
-                        class="p-button p-button-back pull-right  p-mr-2"
-                        [routerLink]="['/admin/employees/']"></button>
-                    </div>
-                </div>
-            </div>
+            <button
+              type="button"
+              pButton
+              pRipple
+              label=" {{ 'go-back' | translate }}"
+              class="p-button p-button-back pull-right p-mr-2"
+              [routerLink]="['/admin/employees/']"
+            ></button>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 
-    <div class="main-inner">
-
-   
-
-
-    
-<div class="p-fluid">
-    <div class="p-field p-grid">
-
-
+  <div class="main-inner">
+    <div class="p-fluid">
+      <div class="p-field p-grid">
         <div class="p-col-12 p-md-7">
+          <p-card>
+            <div class="blog-form">
+              <p-tabView>
+                <p-tabPanel header="Informazioni">
+                  <div class="p-fluid">
+                    <div class="p-field p-grid">
+                      <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0"
+                        >Tipo di Dipendente
+                        <span class="required">*</span></label
+                      >
+                      <div class="p-col-12 p-md-10">
+                        <p-selectButton
+                          [options]="businessStateOptions"
+                          formControlName="is_featured"
+                          optionLabel="label"
+                          optionValue="value"
+                        ></p-selectButton>
+                      </div>
+                    </div>
+                  </div>
 
-            <p-card>
-             
-                <div class="blog-form">
+                  <div class="p-fluid">
+                    <div class="p-field p-grid">
+                      <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0"
+                        >Nome <span class="required">*</span></label
+                      >
+                      <div class="p-col-12 p-md-5">
+                        <input
+                          type="text"
+                          pInputText
+                          placeholder="Nome"
+                          formControlName="name"
+                        />
+                      </div>
+                      <div class="p-col-12 p-md-5">
+                        <input
+                          type="text"
+                          pInputText
+                          placeholder="Cognome"
+                          formControlName="surname"
+                        />
+                      </div>
+                    </div>
+                  </div>
 
-                        <p-tabView>
-                            <p-tabPanel header="Informazioni">
+                  <div class="p-fluid">
+                    <div class="p-field p-grid">
+                      <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0"
+                        >Data di nascita <span class="required">*</span></label
+                      >
+                      <div class="p-col-12 p-md-10">
+                        <p-inputMask
+                          mask="99/99/9999"
+                          [(ngModel)]="selectedDate"
+                          formControlName="date"
+                          placeholder="99/99/9999"
+                          slotChar="dd/mm/yyyy"
+                        ></p-inputMask>
+                      </div>
+                    </div>
+                  </div>
 
-                                <div class="p-fluid">
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Tipo di Dipendente <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-                                            
-                                            <p-selectButton [options]="businessStateOptions" formControlName="is_featured" optionLabel="label" optionValue="value"></p-selectButton>
+                  <div class="p-fluid">
+                    <div class="p-field p-grid">
+                      <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0"
+                        >Comune di nascita</label
+                      >
+                      <div class="p-col-12 p-md-10">
+                        <p-dropdown
+                          [options]="comuni"
+                          [virtualScroll]="true"
+                          filter="true"
+                          [required]="true"
+                          [showClear]="true"
+                          placeholder="Scegli"
+                          [style]="{ width: '100%' }"
+                          formControlName="category_id"
+                          optionLabel="name"
+                          optionValue="id"
+                        >
+                          <ng-template let-option pTemplate="item">
+                            {{ option.name }}
+                          </ng-template>
+                        </p-dropdown>
+                      </div>
+                    </div>
+                  </div>
 
-                                  
-                                        </div>
-                                    </div>
-                                </div>
-        
-                                
-                                
-                                <div class="p-fluid">
+                  <hr class="full" />
 
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Nome <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-5">
-                                            <input type="text" pInputText placeholder="Nome"  formControlName="name"/>
-                                        </div>
-                                        <div class="p-col-12 p-md-5">
-
-                                            <input type="text" pInputText placeholder="Cognome"  formControlName="surname"/>
-                                        </div>
-                                    </div>
-                                </div>
-        
-                             
-        
-        
-                                <div class="p-fluid">
-        
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Data di nascita <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-                         <p-inputMask mask="99/99/9999" [(ngModel)]="selectedDate" formControlName="date" placeholder="99/99/9999" slotChar="dd/mm/yyyy"></p-inputMask>
-
-                                           
-        
-                                        </div>
-                                    </div>
-                                </div>
-        
-        
-                                <div class="p-fluid">
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Comune di nascita</label>
-                                        <div class="p-col-12 p-md-10">
-                                            <p-dropdown [options]="comuni" [virtualScroll]="true" filter="true"
-                                            [required]="true" [showClear]="true" placeholder="Scegli"
-                                            [style]="{ width: '100%' }"
-                                            formControlName="category_id" optionLabel="nome"
-                                            optionValue="id">
-                                            <ng-template let-option pTemplate="item">
-                                                {{option.nome}}
-                                            </ng-template>
-                                        </p-dropdown>
-                                        </div>
-                                    </div>
-                                </div>
-        
-                                <hr class="full">
-
-                                <div class="p-fluid">
-        
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Indirizzo <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-                                            <input type="text" pInputText formControlName="address"/>
-        
-                         
-        
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="p-fluid">
-        
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">CAP <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-                                    <div class="p-grid">
-                                        <div class="p-col-12 p-md-3">
-
-                                            <input type="text" pInputText formControlName="zip" />
-                                        </div>
-                                            <div class="p-col-12 p-md-9">
-
-                                            <input type="text" pInputText  formControlName="city"/>
-                                    </div>
-                                    </div>
-        
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="p-field p-grid">
-                                    <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Comune</label>
-                                    <div class="p-col-12 p-md-10">
-                                        <p-dropdown [options]="comuni" [virtualScroll]="true" filter="true" [required]="true" [showClear]="true"
-                                            placeholder="Scegli" [style]="{ width: '100%' }" formControlName="province" optionLabel="nome"
-                                            optionValue="nome">
-                                            <ng-template let-option pTemplate="item">
-                                                {{option.nome}}
-                                            </ng-template>
-                                        </p-dropdown>
-                                    </div>
-                                </div>
-        
-                                
-
-                                <div class="p-fluid">
-
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Email <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-                                            <input type="text" pInputText  formControlName="email"/>
-        
-                         
-        
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="p-fluid">
-                                
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Codice Fiscale </label>
-                                        <div class="p-col-12 p-md-10">
-                                            <input type="text"  placeholder="Codice Fiscale" pInputText formControlName="fiscalcode" />
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="p-fluid">
-                                
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Codice Dipendente</label>
-                                        <div class="p-col-12 p-md-10">
-                                            <input type="text" placeholder="Codice Dipendente" pInputText formControlName="fiscalnumber" />
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                               
-
-                                <div class="p-fluid">
-
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Cellulare <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-                                            <input type="text" pInputText  formControlName="phone"/>
-        
-                         
-        
-                                        </div>
-                                    </div>
-                                </div>
-
-                                
-                                <hr class="full">
-
-                                <div class="p-fluid">
-                                    <div class="p-field p-grid">
-                                        <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Attivo <span
-                                                class="required">*</span></label>
-                                        <div class="p-col-12 p-md-10">
-
-                                            <p-selectButton [options]="stateOptions" formControlName="is_active" optionLabel="label" optionValue="value"></p-selectButton>
-                                        </div>
-                                    </div>
-                                </div>
-                            </p-tabPanel>
-
-                            <p-tabPanel header="Note">
-                                <div class="p-fluid">
-                                    <div class="p-field p-grid">
-                                        <div class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">
-                                        <label class="">Description <span
-                                                class="required">*</span></label>
-                                                </div>
-                                    <div class="p-col-12 p-md-10">
-
-                                    <textarea [rows]="5" [cols]="30" formControlName="description" pInputTextarea [style]="{'height':'160px', 'width':'100%'}" ></textarea>
-
-                                    </div>
-                                    </div>
-                                </div>
-                            </p-tabPanel>
-
-
-                            
-
-
-                            <p-tabPanel header="Allegati">
-                             
-                        
-
-                                <div class="p-fluid">
-                                    <div class="p-field p-grid">
-            
-                                        <div class="p-col-12 p-md-12">
-                                            <div class="button_outer">
-                                            <div class="btn_upload">
-                                            <input #myInput type="file" id="image" (change)="onSelectedFile($event)" />
-                                            Carica Immagine
-            
-                                            </div>
-                                        </div>
-                                            <div [innerHTML]="uploadError" class="error"></div>
-                                            <div *ngIf="imagePath">
-                                                <br />
-                                                <span class="image-container">
-                                                    <img [src]="imagePath" *ngIf="imagePath" width="300px">
-            
-                                                    <button pButton pRipple icon="pi pi-trash"
-                                                        class="imgcancel p-button p-button-primary p-mr-2"
-                                                        (click)="removeImageFile($event)"></button>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                       
-             
-                    </p-tabPanel>
-             
-         
-             
-                </p-tabView>
-
-                       
-
-                        <div class="form-group form-row">
-                            <label class="col-md-3"></label>
-                            <div class="col-md-9">
-                                <input type="hidden" formControlName="id">
-                                <input type="hidden" formControlName="user_id" value="{{currentUser.user_id}}">
-
-                            </div>
+                  <div class="p-fluid">
+                    <div class="p-field p-grid">
+                      <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0"
+                        >Indirizzo <span class="required">*</span></label
+                      >
+                      <div class="p-col-12 p-md-10">
+                        <input
+                          type="text"
+                          pInputText
+                          formControlName="address"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="p-fluid">
+                    <div class="p-field p-grid">
+                      <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0"
+                        >CAP <span class="required">*</span></label
+                      >
+                      <div class="p-col-12 p-md-10">
+                        <div class="p-grid">
+                          <div class="p-col-12 p-md-3">
+                            <input
+                              type="text"
+                              pInputText
+                              formControlName="zip"
+                            />
+                          </div>
+                          <div class="p-col-12 p-md-9">
+                            <input
+                              type="text"
+                              pInputText
+                              formControlName="city"
+                            />
+                          </div>
                         </div>
-                  
-                       
+                      </div>
+                    </div>
+                  </div>
 
+                  <div class="p-field p-grid">
+                    <label class="p-col-12 p-mb-2 p-md-2">Comune</label>
+                    <div class="p-col-12 p-md-10">
+                      <p-dropdown
+                        [options]="comuni"
+                        [virtualScroll]="true"
+                        filter="true"
+                        [required]="true"
+                        [showClear]="true"
+                        placeholder="Scegli"
+                        [style]="{ width: '100%' }"
+                        formControlName="province"
+                        optionLabel="name"
+                        optionValue="name"
+                      >
+                        <ng-template let-option pTemplate="item">
+                          {{ option.name }}
+                        </ng-template>
+                      </p-dropdown>
+                    </div>
+                  </div>
+
+                  <div class="p-fluid">
+                    <div class="p-field p-grid">
+                      <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0"
+                        >Email <span class="required">*</span></label
+                      >
+                      <div class="p-col-12 p-md-10">
+                        <input type="text" pInputText formControlName="email" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="p-fluid">
+                    <div class="p-field p-grid">
+                      <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0"
+                        >Codice Fiscale
+                      </label>
+                      <div class="p-col-12 p-md-10">
+                        <input
+                          type="text"
+                          placeholder="Codice Fiscale"
+                          pInputText
+                          formControlName="fiscalcode"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="p-fluid">
+                    <div class="p-field p-grid">
+                      <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0"
+                        >Codice Dipendente</label
+                      >
+                      <div class="p-col-12 p-md-10">
+                        <input
+                          type="text"
+                          placeholder="Codice Dipendente"
+                          pInputText
+                          formControlName="fiscalnumber"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="p-fluid">
+                    <div class="p-field p-grid">
+                      <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0"
+                        >Cellulare <span class="required">*</span></label
+                      >
+                      <div class="p-col-12 p-md-10">
+                        <input type="text" pInputText formControlName="phone" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr class="full" />
+
+                  <div class="p-fluid">
+                    <div class="p-field p-grid">
+                      <label class="p-col-12 p-mb-2 p-md-2 p-mb-md-0"
+                        >Attivo <span class="required">*</span></label
+                      >
+                      <div class="p-col-12 p-md-10">
+                        <p-selectButton
+                          [options]="stateOptions"
+                          formControlName="is_active"
+                          optionLabel="label"
+                          optionValue="value"
+                        ></p-selectButton>
+                      </div>
+                    </div>
+                  </div>
+                </p-tabPanel>
+
+                <p-tabPanel header="Note">
+                  <div class="p-fluid">
+                    <div class="p-field p-grid">
+                      <div class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">
+                        <label class=""
+                          >Description <span class="required">*</span></label
+                        >
+                      </div>
+                      <div class="p-col-12 p-md-10">
+                        <textarea
+                          [rows]="5"
+                          [cols]="30"
+                          formControlName="description"
+                          pInputTextarea
+                          [style]="{ height: '160px', width: '100%' }"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </p-tabPanel>
+
+                <p-tabPanel header="Allegati">
+                  <div class="p-fluid">
+                    <div class="p-field p-grid">
+                      <div class="p-col-12 p-md-12">
+                        <div class="button_outer">
+                          <div class="btn_upload">
+                            <input
+                              #myInput
+                              type="file"
+                              id="image"
+                              (change)="onSelectedFile($event)"
+                            />
+                            Carica Immagine
+                          </div>
+                        </div>
+                        <div [innerHTML]="uploadError" class="error"></div>
+                        <div *ngIf="imagePath">
+                          <br />
+                          <span class="image-container">
+                            <img
+                              [src]="imagePath"
+                              *ngIf="imagePath"
+                              width="300px"
+                            />
+
+                            <button
+                              pButton
+                              pRipple
+                              icon="pi pi-trash"
+                              class="imgcancel p-button p-button-primary p-mr-2"
+                              (click)="removeImageFile($event)"
+                            ></button>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </p-tabPanel>
+              </p-tabView>
+
+              <div class="form-group form-row">
+                <label class="col-md-3"></label>
+                <div class="col-md-9">
+                  <input type="hidden" formControlName="id" />
+                  <input
+                    type="hidden"
+                    formControlName="user_id"
+                    value="{{ currentUser.user_id }}"
+                  />
                 </div>
-            </p-card>
-
-       
-
+              </div>
+            </div>
+          </p-card>
         </div>
 
         <div class="p-col-12 p-md-5">
-            <p-card>
-                <div class="p-grid">
+          <p-card>
+            <div class="p-grid">
+              <div class="p-col-12 p-md-12">
+                <h3>Contratto</h3>
+              </div>
 
-                    <div class="p-col-12 p-md-12">
-                        <h3>Contratto</h3>
-                    </div>
-
-                    <div class="p-col-12 p-md-12">
-
-                    <hr class="full">
-                    </div>
+              <div class="p-col-12 p-md-12">
+                <hr class="full" />
+              </div>
+            </div>
+            <div class="p-fluid">
+              <div class="p-field p-grid">
+                <label class="p-col-12 p-mb-3 p-md-3 p-mb-md-0"
+                  >Netto / ora <span class="required">*</span></label
+                >
+                <div class="p-col-12 p-md-9">
+                  <input type="text" pInputText formControlName="contract" />
                 </div>
-                <div class="p-fluid">
+              </div>
+            </div>
 
-                    <div class="p-field p-grid">
-                        <label class="p-col-12 p-mb-3 p-md-3 p-mb-md-0">Netto / ora <span
-                                class="required">*</span></label>
-                        <div class="p-col-12 p-md-9">
-                            <input type="text" pInputText  formControlName="contract"/>
-
-         
-
-                        </div>
-                    </div>
+            <div class="p-fluid">
+              <div class="p-field p-grid">
+                <label class="p-col-12 p-mb-3 p-md-3 p-mb-md-0"
+                  >Ferie / ore<span class="required">*</span></label
+                >
+                <div class="p-col-12 p-md-9">
+                  <input type="text" pInputText formControlName="vacations" />
                 </div>
+              </div>
+            </div>
 
-                <div class="p-fluid">
-
-                    <div class="p-field p-grid">
-                        <label class="p-col-12 p-mb-3 p-md-3 p-mb-md-0">Ferie / ore<span
-                                class="required">*</span></label>
-                        <div class="p-col-12 p-md-9">
-                            <input type="text" pInputText  formControlName="vacations"/>
-
-         
-
-                        </div>
-                    </div>
+            <div class="p-fluid">
+              <div class="p-field p-grid">
+                <label class="p-col-12 p-mb-3 p-md-3 p-mb-md-0"
+                  >Permessi / ore<span class="required">*</span></label
+                >
+                <div class="p-col-12 p-md-9">
+                  <input type="text" pInputText formControlName="permissions" />
                 </div>
-
-                <div class="p-fluid">
-
-                    <div class="p-field p-grid">
-                        <label class="p-col-12 p-mb-3 p-md-3 p-mb-md-0">Permessi / ore<span
-                                class="required">*</span></label>
-                        <div class="p-col-12 p-md-9">
-                            <input type="text" pInputText  formControlName="permissions"/>
-
-         
-
-                        </div>
-                    </div>
-                </div>
-            </p-card>
+              </div>
+            </div>
+          </p-card>
         </div>
-
-        
+      </div>
     </div>
-</div>
-    </div>
-    
+  </div>
 </form>
 
-
-<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" #cd>
-
-    <p-footer>
-        <button type="button" pButton icon="fa fa-close" class="p-button p-button-danger p-mr-2" label="No" (click)="cd.reject()"></button>
-        <button type="button" pButton icon="fa fa-check" class="p-button p-button-success p-mr-2" label="Si" (click)="cd.accept()"></button>
-    </p-footer>
-
+<p-confirmDialog
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+  #cd
+>
+  <p-footer>
+    <button
+      type="button"
+      pButton
+      icon="fa fa-close"
+      class="p-button p-button-danger p-mr-2"
+      label="No"
+      (click)="cd.reject()"
+    ></button>
+    <button
+      type="button"
+      pButton
+      icon="fa fa-check"
+      class="p-button p-button-success p-mr-2"
+      label="Si"
+      (click)="cd.accept()"
+    ></button>
+  </p-footer>
 </p-confirmDialog>
-
 
 <p-toast key="myKey1"></p-toast>

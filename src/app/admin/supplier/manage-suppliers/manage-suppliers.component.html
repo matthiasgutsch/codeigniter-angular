@@ -1,181 +1,262 @@
 <p-sidebar [(visible)]="filterSidebar" #op position="right">
-    <ng-template pTemplate>
-        <div class="p-col-12">
-
-            <div class="p-field p-grid">
-                <div class="p-col-12">
-    
-                    <input type="text" [style]="{ width: '100%' }" pInputText [(ngModel)]="nameFilter" placeholder="Nome" />
-                </div>
-            </div>
-            <div class="p-field p-grid">
-                <div class="p-col-12">
-                    <input type="text" [style]="{ width: '100%' }" pInputText [(ngModel)]="descriptionFilter"
-                        placeholder="Cognome" />
-                </div>
-            </div>
-    
-          
-            <div class="p-field p-grid">
-                <div class="p-col-12">
-                    <button pButton type="submit" icon="pi pi-search" class="p-button p-button-primary btn-block"
-                        label="cerca" (click)="load()">
-                    </button>
-                </div>
-            </div>
-            <div class="p-field p-grid">
-    
-                <div class="p-col-12">
-                    <button pButton type="reset" icon="pi pi-times" class="p-button p-button-secondary btn-block"
-                        label="reset" (click)="reset()">
-                    </button>
-                </div>
-            </div>
-    
+  <ng-template pTemplate>
+    <div class="col-12">
+      <div class="p-field p-grid">
+        <div class="col-12">
+          <input
+            type="text"
+            [style]="{ width: '100%' }"
+            pInputText
+            [(ngModel)]="nameFilter"
+            placeholder="Nome"
+          />
         </div>
-        
-    </ng-template>
-</p-sidebar>
+      </div>
+      <div class="p-field p-grid">
+        <div class="col-12">
+          <input
+            type="text"
+            [style]="{ width: '100%' }"
+            pInputText
+            [(ngModel)]="descriptionFilter"
+            placeholder="Cognome"
+          />
+        </div>
+      </div>
 
+      <div class="p-field p-grid">
+        <div class="col-12">
+          <button
+            pButton
+            type="submit"
+            icon="pi pi-search"
+            class="p-button p-button-primary btn-block"
+            label="cerca"
+            (click)="load()"
+          ></button>
+        </div>
+      </div>
+      <div class="p-field p-grid">
+        <div class="col-12">
+          <button
+            pButton
+            type="reset"
+            icon="pi pi-times"
+            class="p-button p-button-secondary btn-block"
+            label="reset"
+            (click)="reset()"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-sidebar>
 
 <div class="top-main-wrapper">
-    <div class="dash-header">
-        <div class="dash-title">
-    
-            <div class="p-field p-grid">
-                <div class="p-col-6 p-md-6">
-                    <h3>Fornitori</h3>
-                </div>
-                <div class="p-col-6 p-md-6">
-    
-                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/admin/clients/create']" label=" {{ 'add' | translate }}" class="p-button p-button-primary -mr-2  pull-right"></button>
-                    <button type="text" pButton label="Filter"  icon="pi pi-filter" class="p-button p-button-options p-mr-2 pull-right" (click)="filterSidebar = true"></button>
-
-                </div>
-            </div>
-    
+  <div class="dash-header">
+    <div class="dash-title">
+      <div class="p-field p-grid">
+        <div class="col-6">
+          <h3>Fornitori</h3>
         </div>
+        <div class="col-6 flex justify-content-end">
+          <button
+            pButton
+            pRipple
+            icon="pi pi-plus"
+            [routerLink]="['/admin/clients/create']"
+            label=" {{ 'add' | translate }}"
+            class="p-button p-button-primary mr-2"
+          ></button>
+          <button
+            type="text"
+            pButton
+            label="Filter"
+            icon="pi pi-filter"
+            class="p-button p-button-options"
+            (click)="filterSidebar = true"
+          ></button>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 <div class="main-inner">
-
-
-
-
-
-<div class="p-fluid">
+  <div class="p-fluid">
     <div class="p-field p-grid">
-        <div class="p-col-12 p-md-12">
-
-            <p-card>
-                <div class="filter-options">
-
-                    <div class="p-field p-grid">
-
-                        <div class="p-col-12 p-md-8">
-                            <div class="item-size pull-left">
-                                <span class="filter-tag" *ngIf="nameFilter" >Nome: {{nameFilter}} <span class="close"><i class="pi pi-times"  (click)="reset()"></i></span> </span>
-                                <span class="filter-tag" *ngIf="descriptionFilter">Cognome: {{descriptionFilter}} <span class="close"><i class="pi pi-times" (click)="reset()"></i></span> </span>
-                            
-                            </div>
-                        </div>
-
-                        <div class="p-col-12 p-md-4">
-                          <span class="count-item pull-right">{{count}} Items</span>  
-                        </div>
-                    </div>
-                </div>
-                <div *ngFor=" let supplier of suppliers  | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: count }; let i = index"></div>
-
-                <p-table #dt [columns]="cols" [value]="suppliers" [responsive]="false" [resizableColumns]="true" [autoLayout]="true"  [paginator]="false" [rows]="10">
-    
-                    <ng-template pTemplate="header" let-columns>
-                        <tr>
-                            <th width="50"></th>
-                            <th *ngFor="let col of cols">
-                                {{col.header}} 
-                            </th>
-                            <th width="200"></th>
-                        </tr>
-                       
-                    </ng-template>
-                    <ng-template pTemplate="body" let-rowData let-columns="columns">
-                        <tr>
-                            <td>
-                                <app-initials-avatar firstName="{{ rowData['company_name'] | slice:0:1}}" lastName="{{ rowData['company_name'] | slice:4:5}}"></app-initials-avatar>
-
-                            </td>
-                            <td *ngFor="let col of cols">
-                                {{rowData[col.field]}}
-                            </td>
-                
-                            <td class="action">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success p-mr-2"
-                                [routerLink]="['/admin/suppliers/edit', rowData.id]"></button>
-                            <button pButton pRipple icon="pi pi-eye" class="p-button p-button-primary p-mr-2"
-                                (click)="edit(rowData)"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-mr-2"
-                                (click)="onDelete(rowData.id)"></button>               
-                            </td>
-                        </tr>
-                    </ng-template>
-                </p-table> 
-
-
-                <div class="p-grid">
-
-                    <div class="p-col-12 p-md-12">
-                        <pagination-controls previousLabel="Prev" nextLabel="Next" responsive="true"
-                            (pageChange)="handlePageChange($event)">
-                        </pagination-controls>
-                    </div>
-                </div>
-              
-            </p-card>
-        </div>
-
-       
-    </div>
-</div>
-
-</div>
-<p-sidebar [(visible)]="productDialog" position="right"  [style]="{width:'50%'}">
-    <ng-template pTemplate="content">
-        <div class="p-col-12 p-md-12">
+      <div class="col-12 md:col-12">
         <p-card>
+          <div class="filter-options">
+            <div class="p-field p-grid">
+              <div class="col-12 md:col-8">
+                <div class="item-size pull-left">
+                  <span class="filter-tag" *ngIf="nameFilter"
+                    >Nome: {{ nameFilter }}
+                    <span class="close"
+                      ><i class="pi pi-times" (click)="reset()"></i
+                    ></span>
+                  </span>
+                  <span class="filter-tag" *ngIf="descriptionFilter"
+                    >Cognome: {{ descriptionFilter }}
+                    <span class="close"
+                      ><i class="pi pi-times" (click)="reset()"></i
+                    ></span>
+                  </span>
+                </div>
+              </div>
 
-            <strong>{{client.name}}</strong>
+              <div class="col-12 md:col-4">
+                <span class="count-item pull-right">{{ count }} Items</span>
+              </div>
+            </div>
+          </div>
+          <div
+            *ngFor="
+              let supplier of suppliers
+                | paginate
+                  : {
+                      itemsPerPage: pageSize,
+                      currentPage: page,
+                      totalItems: count
+                    };
+              let i = index
+            "
+          ></div>
 
-            <p>{{ client.address }}<br> {{ client.zip }} - {{ client.city }} ({{ client.province }})<br>
-            </p>
-            <hr>
-            <p>{{ client.phone }}<br> {{ client.email }}</p>
-            <div class="clearfix"></div><br>
-            <button pButton pRipple icon="pi pi-pencil" label="Modifica Dati Cliente" class="p-button p-button-primary p-mr-2" [routerLink]="['/admin/clients/edit', client.id]"></button>
-   
+          <p-table
+            #dt
+            [columns]="cols"
+            [value]="suppliers"
+            [responsive]="false"
+            [resizableColumns]="true"
+            [autoLayout]="true"
+            [paginator]="false"
+            [rows]="10"
+          >
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th width="50"></th>
+                <th *ngFor="let col of cols">
+                  {{ col.header }}
+                </th>
+                <th width="200"></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+              <tr>
+                <td>
+                  <app-initials-avatar
+                    firstName="{{ rowData['company_name'] | slice : 0 : 1 }}"
+                    lastName="{{ rowData['company_name'] | slice : 4 : 5 }}"
+                  ></app-initials-avatar>
+                </td>
+                <td *ngFor="let col of cols">
+                  {{ rowData[col.field] }}
+                </td>
 
+                <td class="action">
+                  <button
+                    pButton
+                    pRipple
+                    icon="pi pi-pencil"
+                    class="p-button p-button-success p-mr-2"
+                    [routerLink]="['/admin/suppliers/edit', rowData.id]"
+                  ></button>
+                  <button
+                    pButton
+                    pRipple
+                    icon="pi pi-eye"
+                    class="p-button p-button-primary p-mr-2"
+                    (click)="edit(rowData)"
+                  ></button>
+                  <button
+                    pButton
+                    pRipple
+                    icon="pi pi-trash"
+                    class="p-button p-button-danger p-mr-2"
+                    (click)="onDelete(rowData.id)"
+                  ></button>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
 
-       
-    </p-card>    </div>
-    </ng-template>
+          <div class="p-grid">
+            <div class="col-12 md:col-12">
+              <pagination-controls
+                previousLabel="Prev"
+                nextLabel="Next"
+                responsive="true"
+                (pageChange)="handlePageChange($event)"
+              >
+              </pagination-controls>
+            </div>
+          </div>
+        </p-card>
+      </div>
+    </div>
+  </div>
+</div>
+<p-sidebar
+  [(visible)]="productDialog"
+  position="right"
+  [style]="{ width: '50%' }"
+>
+  <ng-template pTemplate="content">
+    <div class="col-12 md:col-12">
+      <p-card>
+        <strong>{{ client.name }}</strong>
 
+        <p>
+          {{ client.address }}<br />
+          {{ client.zip }} - {{ client.city }} ({{ client.province }})<br />
+        </p>
+        <hr />
+        <p>
+          {{ client.phone }}<br />
+          {{ client.email }}
+        </p>
+        <div class="clearfix"></div>
+        <br />
+        <button
+          pButton
+          pRipple
+          icon="pi pi-pencil"
+          label="Modifica Dati Cliente"
+          class="p-button p-button-primary p-mr-2"
+          [routerLink]="['/admin/clients/edit', client.id]"
+        ></button>
+      </p-card>
+    </div>
+  </ng-template>
 </p-sidebar>
 
-
-
-
-<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" #cd>
-
-    <p-footer>
-        <button type="button" pButton icon="fa fa-close" class="p-button p-button-danger p-mr-2" label="No" (click)="cd.reject()"></button>
-        <button type="button" pButton icon="fa fa-check" class="p-button p-button-success p-mr-2" label="Si" (click)="cd.accept()"></button>
-    </p-footer>
-
+<p-confirmDialog
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+  #cd
+>
+  <p-footer>
+    <button
+      type="button"
+      pButton
+      icon="fa fa-close"
+      class="p-button p-button-danger p-mr-2"
+      label="No"
+      (click)="cd.reject()"
+    ></button>
+    <button
+      type="button"
+      pButton
+      icon="fa fa-check"
+      class="p-button p-button-success p-mr-2"
+      label="Si"
+      (click)="cd.accept()"
+    ></button>
+  </p-footer>
 </p-confirmDialog>
 
 <p-toast key="myKey1"></p-toast>
 
-<p-toast key="myKey2">{{error}}</p-toast>
-
-
-
+<p-toast key="myKey2">{{ error }}</p-toast>

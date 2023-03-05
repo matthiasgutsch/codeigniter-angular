@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  // baseUrl: 'https://nexo-server-production.up.railway.app',
   baseUrl: 'http://localhost:3000',
   // baseUrl: 'https://demo.api.nexosuite.com',
   supportUrl: 'https://support.api.typopress.it',

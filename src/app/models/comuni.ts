@@ -1,5 +1,4 @@
 export class Comuni {
-    id: number;
-    nome: string;
-
+  id: number;
+  name: string;
 }

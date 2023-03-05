@@ -100,9 +100,9 @@
                                                     <p-dropdown [options]="comuni" [virtualScroll]="true" filter="true"
                                                         [required]="true" [showClear]="true" placeholder="Scegli"
                                                         [style]="{ width: '100%' }" formControlName="province"
-                                                        optionLabel="nome" optionValue="nome">
+                                                        optionLabel="name" optionValue="name">
                                                         <ng-template let-option pTemplate="item">
-                                                            {{option.nome}}
+                                                            {{option.name}}
                                                         </ng-template>
                                                     </p-dropdown>
                                                 </div>
@@ -149,7 +149,7 @@
                                                 </div>
                                             </div>
 
-                                        
+
 
                                             <div class="p-fluid">
 
@@ -204,10 +204,10 @@
                                                         <p-dropdown [options]="comuni" [virtualScroll]="true"
                                                             filter="true" [required]="true" [showClear]="true"
                                                             placeholder="Scegli" [style]="{ width: '100%' }"
-                                                            formControlName="category_id" optionLabel="nome"
+                                                            formControlName="category_id" optionLabel="name"
                                                             optionValue="id">
                                                             <ng-template let-option pTemplate="item">
-                                                                {{option.nome}}
+                                                                {{option.name}}
                                                             </ng-template>
                                                         </p-dropdown>
                                                     </div>
