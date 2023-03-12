@@ -105,7 +105,7 @@ export class ProjectsFormComponent implements OnInit {
   format2: string = "";
   selectedCity: Blog;
   selectedClients: SelectItem[];
-  comuni: Comuni;
+  comuni: Comuni[] = [];
 
   selectedDate: Date;
   selectedDateFrom: Date;
@@ -250,7 +250,7 @@ export class ProjectsFormComponent implements OnInit {
   getComuni() {
     const userId = this.currentUser.id;
     this.comuniService.getAllList().subscribe(
-      (data: Comuni) => this.comuni = data,
+      (data) => this.comuni = data,
       error => this.error = error
     );
   }

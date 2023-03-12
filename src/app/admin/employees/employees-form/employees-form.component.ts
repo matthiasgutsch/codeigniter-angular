@@ -47,7 +47,7 @@ export class EmployeesFormComponent implements OnInit {
   category: Category;
   checked: boolean = true;
   selectedValue: string;
-  comuni: Comuni;
+  comuni: Comuni[] = [];
 
   blogForm: UntypedFormGroup;
   typeList: any[];
@@ -127,7 +127,7 @@ export class EmployeesFormComponent implements OnInit {
     this.getClientList();
 
     this.comuniService.getAllList().subscribe(
-      (data: Comuni) => (this.comuni = data),
+      (data) => (this.comuni = data),
       (error) => (this.error = error)
     );
 

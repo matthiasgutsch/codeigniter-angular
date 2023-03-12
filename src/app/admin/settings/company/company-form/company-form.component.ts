@@ -43,7 +43,7 @@ export class CompanyFormComponent implements OnInit {
   category: Category;
   checked: boolean = true;
   selectedValue: string;
-  comuni: Comuni;
+  comuni: Comuni[] = [];
   businessStateOptions: any[];
   blogForm: UntypedFormGroup;
   typeList: any[];
@@ -96,7 +96,7 @@ export class CompanyFormComponent implements OnInit {
 
 
     this.comuniService.getAllList().subscribe(
-      (data: Comuni) => (this.comuni = data),
+      (data) => (this.comuni = data),
       (error) => (this.error = error)
     );
 

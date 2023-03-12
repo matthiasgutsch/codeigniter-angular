@@ -40,7 +40,7 @@ export class ManageAppointmentsComponent implements OnInit {
   events: any;
   virtualDatabase: Appointments[];
 
-  locations: any = [];
+  locations: Locations[] = [];
   location: Locations;
   cols: any[];
   exportColumns: any[];
@@ -55,7 +55,7 @@ export class ManageAppointmentsComponent implements OnInit {
   appointments: any = [];
   appointment: Appointments;
   date: Date;
-  categories: any = [];
+  categories: Category[] = [];
   category: Category;
   error: string;
   private category_id: number;
@@ -64,7 +64,7 @@ export class ManageAppointmentsComponent implements OnInit {
   client: Clients;
   appointmenttype: any = [];
   appointment_typ: Appointment_type;
-  comuni: any = [];
+  comuni: Comuni[] = [];
   productDialog: boolean = false;
   calendarDialog: boolean = false;
   loading: boolean;
@@ -246,7 +246,7 @@ export class ManageAppointmentsComponent implements OnInit {
   getLocations() {
     const userId = this.currentUser.id;
     this.locationsService.getAllList().subscribe(
-      (data: Locations) => this.locations = data,
+      (data) => this.locations = data,
       error => this.error = error
     );
   }
@@ -254,7 +254,7 @@ export class ManageAppointmentsComponent implements OnInit {
   getCategories() {
     const userId = this.currentUser.id;
     this.categoryService.getAllList().subscribe(
-      (data: Category) => this.categories = data,
+      (data) => this.categories = data,
       error => this.error = error
     );
   }

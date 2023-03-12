@@ -18,6 +18,7 @@ import { WorksService } from "src/app/services/works.service";
 import { Category } from "../../../models/category";
 import { CategoryService } from "../../../services/categories.service";
 import { PARAM_SUPPORTS_PATH } from "../../constants/constants";
+import { Comuni } from "src/app/models/comuni";
 
 @Component({
   selector: "app-manage-supports",
@@ -28,10 +29,10 @@ export class ManageSupportsComponent implements OnInit {
   supports: any = [];
   support: Supports;
 
-  works: any = [];
+  works: Works[] = [];
   work: Works;
 
-  locations: any = [];
+  locations: Locations[] = [];
   location: Locations;
   cols: any[];
   exportColumns: any[];
@@ -46,9 +47,9 @@ export class ManageSupportsComponent implements OnInit {
   error: string;
   private category_id: number;
   private id: number;
-  clients: any = [];
+  clients: Clients[] = [];
   client: Clients;
-  comuni: any = [];
+  comuni: Comuni[] = [];
   productDialog: boolean = false;
   works_id: any;
   currentUser: any;
@@ -164,26 +165,26 @@ export class ManageSupportsComponent implements OnInit {
   }
 
   getCategoryItem(category_id: string, id: string) {
-    return this.clients.find((item) => item.id === category_id);
+    return this.clients.find((item) => item.id.toString() === category_id);
   }
 
   getClients() {
     this.clientsService.getAllList().subscribe(
-      (data: Clients) => (this.clients = data),
+      (data) => (this.clients = data),
       (error) => (this.error = error)
     );
   }
 
   getWorks() {
     this.worksService.getAllList().subscribe(
-      (data: Works) => (this.works = data),
+      (data) => (this.works = data),
       (error) => (this.error = error)
     );
   }
 
   getLocations() {
     this.locationsService.getAllList().subscribe(
-      (data: Locations) => (this.locations = data),
+      (data) => (this.locations = data),
       (error) => (this.error = error)
     );
   }

@@ -47,7 +47,7 @@ export class SettingsComponent implements OnInit {
   appointmentsDialog: boolean = false;
   clients: any = [];
   client: Clients;
-  comuni: any = [];
+  comuni: Comuni[] = [];
   items: any = [];
   itemsProduct: any = [];
   itemsCompany: any = [];

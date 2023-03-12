@@ -29,7 +29,7 @@ export class LocationsFormComponent implements OnInit {
   locations: Locations;
   location: Locations;
 
-  comuni: Comuni;
+  comuni: Comuni[] = [];
 
   checked: boolean = true;
   selectedValue: string;
@@ -66,7 +66,7 @@ export class LocationsFormComponent implements OnInit {
 
 
     this.comuniService.getAllList().subscribe(
-      (data: Comuni) => this.comuni = data,
+      (data) => this.comuni = data,
       error => this.error = error
     );
 

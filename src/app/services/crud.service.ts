@@ -16,6 +16,7 @@ import { Quotes } from "../models/quotes";
 import { User } from "../auth/auth.type";
 import { Paginated } from "../models/generics/paginate";
 import { plainToInstance } from "class-transformer";
+import { Comuni } from "../models/comuni";
 
 interface IPaginated<T> extends Paginated<T> {}
 
@@ -95,7 +96,7 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
 
   getAllList() {
     return this._http
-      .get<T>(this._base + "/")
+      .get<T[]>(this._base + "/")
       .pipe(catchError(this.handleError));
   }
 

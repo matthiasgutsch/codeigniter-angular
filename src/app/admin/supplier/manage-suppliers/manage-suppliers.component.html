@@ -61,20 +61,20 @@
         </div>
         <div class="col-6 flex justify-content-end">
           <button
-            pButton
-            pRipple
-            icon="pi pi-plus"
-            [routerLink]="['/admin/clients/create']"
-            label=" {{ 'add' | translate }}"
-            class="p-button p-button-primary mr-2"
-          ></button>
-          <button
             type="text"
             pButton
             label="Filter"
             icon="pi pi-filter"
-            class="p-button p-button-options"
+            class="p-button p-button-options mr-2"
             (click)="filterSidebar = true"
+          ></button>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-plus"
+            [routerLink]="['/admin/suppliers/create']"
+            label=" {{ 'add' | translate }}"
+            class="p-button p-button-primary"
           ></button>
         </div>
       </div>

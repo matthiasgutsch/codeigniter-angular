@@ -93,7 +93,7 @@ export class TasksComponent implements OnInit, OnDestroy {
   clients: any = [];
   project_id: string;
   client: Clients;
-  comuni: any = [];
+  comuni: Comuni[] = [];
   displayEvent: any;
   currentUser: any ;
   items: any;

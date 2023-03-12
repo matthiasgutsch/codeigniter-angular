@@ -9,7 +9,7 @@ import { ConfirmationService } from 'primeng/api';
 })
 export class ManageTypeComponent implements OnInit {
   title = 'Tipo di Appuntamento';
-  categories: Category;
+  categories: Category[];
   category: Category;
   error: string;
 
@@ -18,7 +18,7 @@ export class ManageTypeComponent implements OnInit {
 
   ngOnInit() {
     this.categoryService.getAllList().subscribe(
-      (data: Category) => this.categories = data,
+      (data) => this.categories = data,
       error => this.error = error
     );
   }

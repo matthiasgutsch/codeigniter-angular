@@ -66,7 +66,7 @@ export class ManageWarehousesComponent implements OnInit {
   client: Clients;
   appointmenttype: any = [];
   appointment_typ: Appointment_type;
-  comuni: any = [];
+  comuni: Comuni[] = [];
   productDialog: boolean = false;
   calendarDialog: boolean = false;
   loading: boolean;

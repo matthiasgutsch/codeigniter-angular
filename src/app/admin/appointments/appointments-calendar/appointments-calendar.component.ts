@@ -86,7 +86,7 @@ export class AppointmentsCalendarComponent implements OnInit {
   appointmentsDialog: boolean = false;
   clients: any = [];
   client: Clients;
-  comuni: any = [];
+  comuni: Comuni[] = [];
   displayEvent: any;
   currentUser: User;
   items: any;

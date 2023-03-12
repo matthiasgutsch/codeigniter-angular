@@ -30,6 +30,7 @@ import { User } from "src/app/auth/auth.type";
 import { WarehouseCheckins } from "src/app/models/warehouse_checkins";
 import { WarehousesCheckinsService } from "src/app/services/warehouses_checkins.service";
 import { AuthService } from "../../auth/auth.service";
+import { Comuni } from 'src/app/models/comuni';
 
 moment.locale("it");
 
@@ -81,7 +82,7 @@ export class AdminDashboardComponent implements OnInit {
   appointmentsDialog: boolean = false;
   clients: any = [];
   client: Clients;
-  comuni: any = [];
+  comuni: Comuni[] = [];
   displayEvent: any;
   currentUser: User;
   items: any;

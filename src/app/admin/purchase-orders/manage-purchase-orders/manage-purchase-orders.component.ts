@@ -37,7 +37,7 @@ export class ManagePurchaseOrdersComponent implements OnInit {
   private id: number;
   clients: any = [];
   client: Clients;
-  comuni: any = [];
+  comuni: Comuni[] = [];
   productDialog: boolean = false;
   selectedSkills: any[];
   skills:  any[] = [];
@@ -211,7 +211,7 @@ export class ManagePurchaseOrdersComponent implements OnInit {
 
     getComuni() {
   this.comuniService.getAllList().subscribe(
-    (data: Comuni) => (this.comuni = data),
+    (data) => (this.comuni = data),
     (error) => (this.error = error)
   );
 
@@ -223,7 +223,7 @@ export class ManagePurchaseOrdersComponent implements OnInit {
   }
 
   getComuniItem(category_id: string, id: string) {
-    return this.comuni.find((item) => item.id === category_id);
+    return this.comuni.find((item) => item.id.toString() === category_id);
   }
 
 

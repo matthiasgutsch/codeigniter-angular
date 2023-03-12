@@ -25,7 +25,7 @@ export class ManageEmployeesComponent implements OnInit {
   categories: any = [];
   category: Category;
   error: string;
-  comuni: any = [];
+  comuni: Comuni[] = [];
   cols: any[];
   exportColumns: any[];
   _selectedColumns: any[];
@@ -179,7 +179,7 @@ export class ManageEmployeesComponent implements OnInit {
 
   getComuni() {
     this.comuniService.getAllList().subscribe(
-      (data: Comuni) => this.comuni = data,
+      (data) => this.comuni = data,
       error => this.error = error
     );
   }

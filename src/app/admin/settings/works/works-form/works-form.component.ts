@@ -26,7 +26,7 @@ export class WorksFormComponent implements OnInit {
   works: Works;
   work: Works;
 
-  comuni: Comuni;
+  comuni: Comuni[] = [];
 
   checked: boolean = true;
   selectedValue: string;
@@ -62,7 +62,7 @@ export class WorksFormComponent implements OnInit {
 
 
     this.comuniService.getAllList().subscribe(
-      (data: Comuni) => this.comuni = data,
+      (data) => this.comuni = data,
       error => this.error = error
     );
 

@@ -10,22 +10,21 @@
           </div>
           <div class="col-6 md:col-6 flex justify-content-end">
             <button
-              pButton
-              pRipple
-              icon="pi pi-save"
-              label=" {{ 'save' | translate }}"
-              class="p-button p-button-success mr-2"
-              [disabled]="!blogForm.valid"
-            ></button>
-
-            <button
               type="button"
               pButton
               pRipple
               icon="pi pi-chevron-left"
               label=" {{ 'go-back' | translate }}"
-              class="p-button p-button-back"
+              class="p-button p-button-back mr-2"
               [routerLink]="['/admin/clients/']"
+            ></button>
+            <button
+              pButton
+              pRipple
+              icon="pi pi-save"
+              label=" {{ 'save' | translate }}"
+              class="p-button p-button-success"
+              [disabled]="!blogForm.valid"
             ></button>
           </div>
         </div>

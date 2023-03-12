@@ -29,7 +29,7 @@ export class TechnicalDataFormComponent implements OnInit {
   tags: Tags;
   tag: Tags;
 
-  comuni: Comuni;
+  comuni: Comuni[] = [];
 
   checked: boolean = true;
   selectedValue: string;

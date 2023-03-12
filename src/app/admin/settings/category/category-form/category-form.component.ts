@@ -27,7 +27,7 @@ export class CategoryFormComponent implements OnInit {
   categories: Category;
   category: Category;
 
-  comuni: Comuni;
+  comuni: Comuni[] = [];
 
   checked: boolean = true;
   selectedValue: string;
@@ -64,7 +64,7 @@ export class CategoryFormComponent implements OnInit {
 
 
     this.comuniService.getAllList().subscribe(
-      (data: Comuni) => this.comuni = data,
+      (data) => this.comuni = data,
       error => this.error = error
     );
 
