@@ -46,6 +46,12 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     if (pars.name) {
       params = params.append("name", pars.name);
     }
+    if (pars.created_at_lte) {
+      params = params.append("filter.created_at", `$lte:${pars.created_at_lte}T23:59:59.999Z`);
+    }
+    if (pars.created_at_gte) {
+      params = params.append("filter.created_at", `$gte:${pars.created_at_gte}T00:00:00.000Z`);
+    }
     if (pars.description) {
       params = params.append("description", pars.description);
     }

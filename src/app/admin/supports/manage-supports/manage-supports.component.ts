@@ -110,11 +110,12 @@ export class ManageSupportsComponent implements OnInit {
       qParmas.set("page", page);
     }
     if (searchTitle) {
-      qParmas.set("name", searchTitle);
+      qParmas.set("created_at_gte", searchTitle);
     }
     if (categoryTitle) {
-      qParmas.set("description", categoryTitle);
+      qParmas.set("created_at_lte", categoryTitle);
     }
+
     if (pageSize) {
       qParmas.set("size", pageSize);
     }
