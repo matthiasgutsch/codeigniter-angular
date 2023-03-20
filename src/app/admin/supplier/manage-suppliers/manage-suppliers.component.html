@@ -105,7 +105,7 @@
               </div>
 
               <div class="col-12 md:col-4">
-                <span class="count-item pull-right">{{ count }} Items</span>
+                <span class="count-item pull-right">{{ totalItems }} Items</span>
               </div>
             </div>
           </div>
@@ -114,9 +114,9 @@
               let supplier of suppliers
                 | paginate
                   : {
-                      itemsPerPage: pageSize,
-                      currentPage: page,
-                      totalItems: count
+                      itemsPerPage: itemsPerPage,
+                      currentPage: currentPage,
+                      totalItems: totalItems
                     };
               let i = index
             "
@@ -158,21 +158,21 @@
                     pButton
                     pRipple
                     icon="pi pi-pencil"
-                    class="p-button p-button-success p-mr-2"
+                    class="p-button p-button-success mr-2"
                     [routerLink]="['/admin/suppliers/edit', rowData.id]"
                   ></button>
                   <button
                     pButton
                     pRipple
                     icon="pi pi-eye"
-                    class="p-button p-button-primary p-mr-2"
+                    class="p-button p-button-primary mr-2"
                     (click)="edit(rowData)"
                   ></button>
                   <button
                     pButton
                     pRipple
                     icon="pi pi-trash"
-                    class="p-button p-button-danger p-mr-2"
+                    class="p-button p-button-danger mr-2"
                     (click)="onDelete(rowData.id)"
                   ></button>
                 </td>
@@ -222,7 +222,7 @@
           pRipple
           icon="pi pi-pencil"
           label="Modifica Dati Cliente"
-          class="p-button p-button-primary p-mr-2"
+          class="p-button p-button-primary mr-2"
           [routerLink]="['/admin/clients/edit', client.id]"
         ></button>
       </p-card>
@@ -241,7 +241,7 @@
       type="button"
       pButton
       icon="fa fa-close"
-      class="p-button p-button-danger p-mr-2"
+      class="p-button p-button-danger mr-2"
       label="No"
       (click)="cd.reject()"
     ></button>
@@ -249,7 +249,7 @@
       type="button"
       pButton
       icon="fa fa-check"
-      class="p-button p-button-success p-mr-2"
+      class="p-button p-button-success mr-2"
       label="Si"
       (click)="cd.accept()"
     ></button>

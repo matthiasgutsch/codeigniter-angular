@@ -31,6 +31,9 @@ export class ManageSuppliersComponent implements OnInit {
   totalRecords: string;
   filterSidebar: boolean;
   currentUser: any ;
+  currentPage = 1;
+  totalItems = 0;
+  itemsPerPage = 10;
   page = 1;
   count = 0;
   pageSize = 10;
@@ -105,6 +108,25 @@ export class ManageSuppliersComponent implements OnInit {
   getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
     // tslint:disable-next-line:prefer-const
     let path = PARAM_SUPPLIERS_PATH;
+    const qParmas = new URLSearchParams();
+
+    if (page) {
+      qParmas.set("page", page);
+    }
+    if (searchTitle) {
+      qParmas.set("name_ilike", searchTitle);
+    }
+    if (categoryTitle) {
+      qParmas.set("surname_ilike", categoryTitle);
+    }
+
+    if (pageSize) {
+      qParmas.set("size", pageSize);
+    }
+    window.history.replaceState({}, "", `${path}?${qParmas.toString()}`);
+
+    return Object.fromEntries(qParmas as any);
+
     const params = {};
     let adder = '?';
     if (page) {
@@ -118,7 +140,7 @@ export class ManageSuppliersComponent implements OnInit {
       adder = '&';
     }
     if (categoryTitle) {
-      params[`description`] = categoryTitle;
+      params[`filter.surname`] = categoryTitle;
       path += adder + 'description=' + categoryTitle;
       adder = '&';
     }
@@ -151,9 +173,10 @@ export class ManageSuppliersComponent implements OnInit {
       this.page,
       this.pageSize
     );
-    this.suppliersService.getAllListNew(params).subscribe((pData) => {
-      this.suppliers = pData;
-      this.count = this.suppliersService.size;
+    this.suppliersService.getAllListPaginated(params).subscribe((pData) => {
+      this.suppliers = pData.data;
+      this.totalItems = pData.meta.totalItems;
+      this.itemsPerPage = pData.meta.itemsPerPage;
     });
   }
 

@@ -28,6 +28,7 @@ import {
   SEX_LIST,
   STATE_LIST,
 } from "../../constants/constants";
+import * as moment from "moment";
 
 @Component({
   selector: "app-suppliers-form",
@@ -350,35 +351,14 @@ export class SuppliersFormComponent implements OnInit {
   }
 
   onSubmit() {
-    const formData = new FormData();
-    formData.append("name", this.blogForm.get("name").value);
-    formData.append("surname", this.blogForm.get("surname").value);
-    formData.append("company_name", this.blogForm.get("company_name").value);
-    formData.append("city", this.blogForm.get("city").value);
-    formData.append("zip", this.blogForm.get("zip").value);
-    formData.append("address", this.blogForm.get("address").value);
-    formData.append("province", this.blogForm.get("province").value);
-    formData.append("region", this.blogForm.get("region").value);
-    formData.append("email", this.blogForm.get("email").value);
-    formData.append("phone", this.blogForm.get("phone").value);
-    formData.append("fiscalcode", this.blogForm.get("fiscalcode").value);
-    formData.append("fiscalnumber", this.blogForm.get("fiscalnumber").value);
-    formData.append("description", this.blogForm.get("description").value);
-    formData.append("is_featured", this.blogForm.get("is_featured").value);
-    formData.append("category_id", this.blogForm.get("category_id").value);
-    formData.append("user_id", this.blogForm.get("user_id").value);
-    formData.append("is_active", this.blogForm.get("is_active").value);
-    formData.append("image", this.blogForm.get("image").value);
-    formData.append("date", this.blogForm.get("date").value);
-    formData.append(
-      "skills",
-      JSON.stringify(this.blogForm.get("skills").value)
-    );
-
     const id = this.blogForm.get("id").value;
+    const data = structuredClone(this.blogForm.value);
+    data.date = moment(data.date, "DD/MM/YYYY").format("YYYY-MM-DD");
+    data.is_active = data.is_active === "1" ? true : false;
+    delete data.id;
 
     if (id) {
-      this.suppliersService.update(formData, +id).subscribe(
+      this.suppliersService.update(data, +id).subscribe(
         (res) => {
           if (res.status == "error") {
             this.uploadError = res.message;
@@ -396,7 +376,7 @@ export class SuppliersFormComponent implements OnInit {
         (error) => (this.error = error)
       );
     } else {
-      this.suppliersService.create(formData).subscribe(
+      this.suppliersService.create(data).subscribe(
         (res) => {
           if (res.status === "error") {
             this.uploadError = res.message;

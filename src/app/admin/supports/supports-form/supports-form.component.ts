@@ -131,8 +131,6 @@ export class SupportsFormComponent implements OnInit {
   }
 
   onSubmit() {
-    const formData = new FormData();
-
     if (this.id) {
       this.supportsService.createTicket(this.blogForm.value, this.id).subscribe(
         (res) => {
