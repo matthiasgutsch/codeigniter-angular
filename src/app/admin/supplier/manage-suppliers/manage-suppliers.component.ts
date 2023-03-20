@@ -1,21 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { Suppliers } from '../../../models/suppliers';
-import { ConfirmationService } from 'primeng/api';
-import { CategoryService } from '../../../services/categories.service';
-import { Category } from '../../../models/category';
-import { MessageService } from 'primeng/api';
-import { ComuniService } from 'src/app/services/comuni.service';
-import { Comuni } from 'src/app/models/comuni';
+import { Component, OnInit } from "@angular/core";
+import { Suppliers } from "../../../models/suppliers";
+import { ConfirmationService } from "primeng/api";
+import { CategoryService } from "../../../services/categories.service";
+import { Category } from "../../../models/category";
+import { MessageService } from "primeng/api";
+import { ComuniService } from "src/app/services/comuni.service";
+import { Comuni } from "src/app/models/comuni";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { NgxSpinnerService } from "ngx-spinner";
-import { SuppliersService } from 'src/app/services/suppliers.service';
-import { PARAM_CLIENTS_PATH, PARAM_SUPPLIERS_PATH } from '../../constants/constants';
-
+import { SuppliersService } from "src/app/services/suppliers.service";
+import {
+  PARAM_CLIENTS_PATH,
+  PARAM_SUPPLIERS_PATH,
+} from "../../constants/constants";
 
 @Component({
-  selector: 'app-manage-suppliers',
-  templateUrl: './manage-suppliers.component.html'
+  selector: "app-manage-suppliers",
+  templateUrl: "./manage-suppliers.component.html",
 })
 export class ManageSuppliersComponent implements OnInit {
   suppliers: any = [];
@@ -30,7 +32,7 @@ export class ManageSuppliersComponent implements OnInit {
   loading: boolean;
   totalRecords: string;
   filterSidebar: boolean;
-  currentUser: any ;
+  currentUser: any;
   currentPage = 1;
   totalItems = 0;
   itemsPerPage = 10;
@@ -56,11 +58,9 @@ export class ManageSuppliersComponent implements OnInit {
     this.productDialog = true;
   }
 
-
   trackByFn(index, item) {
     return item.id;
   }
-
 
   constructor(
     private suppliersService: SuppliersService,
@@ -68,42 +68,31 @@ export class ManageSuppliersComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private comuniService: ComuniService,
     private categoryService: CategoryService,
-    private confirmationService: ConfirmationService,) {
-      const doc = new jsPDF();
-
+    private confirmationService: ConfirmationService
+  ) {
+    const doc = new jsPDF();
   }
 
   ngOnInit() {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    this.currentUser = JSON.parse(localStorage.getItem("currentUser") || "[]");
     const userId = this.currentUser.id;
-
-
 
     this.spinner.show();
     this.load();
-      this.cols = [
-        { field: "company_name", header: "Nome Fornitore" },
-
-        { field: "address", header: "Indirizzo" },
-        { field: "phone", header: "Cellulare" },
-        { field: "city", header: "Indirizzo" }
-
-      ];
-      this._selectedColumns = this.cols;
-      this.exportColumns = this.cols.map(col => ({
-        title: col.header,
-        dataKey: col.field
-      }));
-      this.getComuni();
-      this.spinner.hide();
-
-
+    this.cols = [
+      { field: "company_name", header: "Nome Fornitore" },
+      { field: "address", header: "Indirizzo" },
+      { field: "phone", header: "Cellulare" },
+      { field: "city", header: "Indirizzo" },
+    ];
+    this._selectedColumns = this.cols;
+    this.exportColumns = this.cols.map((col) => ({
+      title: col.header,
+      dataKey: col.field,
+    }));
+    this.getComuni();
+    this.spinner.hide();
   }
-
-
-
-
-
 
   getRequestParams(searchTitle, categoryTitle, page, pageSize): any {
     // tslint:disable-next-line:prefer-const
@@ -126,47 +115,18 @@ export class ManageSuppliersComponent implements OnInit {
     window.history.replaceState({}, "", `${path}?${qParmas.toString()}`);
 
     return Object.fromEntries(qParmas as any);
-
-    const params = {};
-    let adder = '?';
-    if (page) {
-      params[`page`] = page - 1;
-      path += adder + 'page=' + (page - 1);
-      adder = '&';
-    }
-    if (searchTitle) {
-      params[`name`] = searchTitle;
-      path += adder + 'name=' + searchTitle;
-      adder = '&';
-    }
-    if (categoryTitle) {
-      params[`filter.surname`] = categoryTitle;
-      path += adder + 'description=' + categoryTitle;
-      adder = '&';
-    }
-
-    if (pageSize) {
-      params[`size`] = pageSize;
-      path += adder + 'size=' + pageSize;
-    }
-    window.history.replaceState({}, '', path);
-
-    return params;
-
   }
 
   reset(): void {
-    this.nameFilter = '';
-    this.descriptionFilter = '';
-    this.codeFilter = '';
-    this.codeIntFilter = '';
-    this.brandFilter = '';
+    this.nameFilter = "";
+    this.descriptionFilter = "";
+    this.codeFilter = "";
+    this.codeIntFilter = "";
+    this.brandFilter = "";
     this.load();
-
   }
 
   load(): void {
-
     const params = this.getRequestParams(
       this.nameFilter,
       this.descriptionFilter,
@@ -180,12 +140,9 @@ export class ManageSuppliersComponent implements OnInit {
     });
   }
 
-
-
   public handlePageChange(event): void {
     this.page = event;
     this.load();
-
   }
 
   public selectionItemForFilter(e) {
@@ -200,25 +157,21 @@ export class ManageSuppliersComponent implements OnInit {
     }
   }
 
-
   getComuni() {
     this.comuniService.getAllList().subscribe(
-      (data) => this.comuni = data,
-      error => this.error = error
+      (data) => (this.comuni = data),
+      (error) => (this.error = error)
     );
   }
 
-
   getCategoryItem(category_id: string, id: string) {
-    return this.suppliers.find(item => item.id === category_id);
+    return this.suppliers.find((item) => item.id === category_id);
   }
-
 
   edit(supplier: Suppliers) {
     this.supplier = { ...supplier };
     this.productDialog = true;
   }
-
 
   hideDialog() {
     this.productDialog = false;
@@ -226,38 +179,40 @@ export class ManageSuppliersComponent implements OnInit {
 
   exportPdf() {
     // const doc = new jsPDF();
-    const doc = new jsPDF('l','pt','A4');
-    doc['autoTable'](this.exportColumns, this.suppliers);
+    const doc = new jsPDF("l", "pt", "A4");
+    doc["autoTable"](this.exportColumns, this.suppliers);
     // doc.autoTable(this.exportColumns, this.products);
     doc.save("clients.pdf");
   }
 
-
-
-
   onDelete(id: number, title: string) {
-
     this.confirmationService.confirm({
-      message: 'Sei sicuro di volerlo cancellare',
-      header: 'Confirmation',
-      icon: 'pi pi-exclamation-triangle',
+      message: "Sei sicuro di volerlo cancellare",
+      header: "Confirmation",
+      icon: "pi pi-exclamation-triangle",
       accept: () => {
         this.suppliersService.delete(+id).subscribe(
-          res => {
+          (res) => {
             console.log(res);
             this.ngOnInit();
-            this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Attenzione', detail: 'Cancellazione avvenuto con successo' });
-
+            this.messageService.add({
+              key: "myKey1",
+              severity: "success",
+              summary: "Attenzione",
+              detail: "Cancellazione avvenuto con successo",
+            });
           },
-          error => {
+          (error) => {
             this.error = error;
-            this.messageService.add({ key: 'myKey2', severity: 'warn', summary: 'Attenzione', detail: 'Errore backend' });
-          });
+            this.messageService.add({
+              key: "myKey2",
+              severity: "warn",
+              summary: "Attenzione",
+              detail: "Errore backend",
+            });
+          }
+        );
       },
-
     });
-
-
   }
-
 }
