@@ -13,8 +13,6 @@ import { WorksService } from 'src/app/services/works.service';
 import { Works } from 'src/app/models/works';
 import { LocationsService } from 'src/app/services/locations.service';
 import { Locations } from 'src/app/models/locations';
-import { Employees } from 'src/app/models/employees';
-import { EmployeesService } from 'src/app/services/employees.service';
 import { Appointments } from 'src/app/models/appointments';
 import { formatDate } from '@angular/common';
 import jsPDF from "jspdf";
@@ -108,9 +106,6 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
   blogForm: UntypedFormGroup;
   projects: any = [];
   project: Projects;
-  employees: any = [];
-  employee: Employees;
-
   products: any = [];
   product: Products;
   options = [];
@@ -162,7 +157,6 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
     private suppliersService: SuppliersService,
     private messageService: MessageService,
     private warehousesService: WarehousesService,
-    private employeesService: EmployeesService,
     private tagsService: TagsService,
     private fb: UntypedFormBuilder,
     private productsVariationsService: ProductsVariationsService,
@@ -207,7 +201,6 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
 
     const userId = this.currentUser.user_id;
     this.spinner.show();
-    this.getEmployees();
     this.getWarehouses();
     this.getSuppliers();
 
@@ -388,11 +381,6 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
     );
   }
 
-  getEmployees() {
-    this.employeesService.getAllListbyUser().subscribe(
-      (data: Employees) => this.employees = data,
-    );
-  }
 
 
   getProjectItem(product_id: string, id: string) {
@@ -402,10 +390,6 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
 
   getWarehouseItem(warehouse_id: string, id: string) {
     return this.warehouses.find(item => item.id === warehouse_id);
-  }
-
-  getEmployeeItem(employee_id: string, id: string) {
-    return this.employees.find(item => item.id === employee_id);
   }
 
   clickButton(model: any) {
@@ -547,6 +531,13 @@ export class ManageWarehousesCheckinsComponent implements OnInit {
     this.productsVariationsService.getId(+id).subscribe((res) => {
       this.product = res;
     });
+
+    const supplier_id = this.warehouseCheckin.supplier_id;
+
+    this.suppliersService.getId(+supplier_id).subscribe((res) => {
+      this.supplier = res;
+    });
+
 
     this.productDialog = true;
   }
