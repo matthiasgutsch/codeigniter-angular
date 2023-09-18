@@ -26,11 +26,11 @@ public function list_public_category($user_id)
 		$orderBy = $this->input->get('orderBy');
 		$orderByType = $this->input->get('orderByType');
 		$size = $this->products_model->count_products_category_search_public($user_id, $title, $description, $brand);
-     
+
 		header("Access-Control-Allow-Origin: *");
-		header( "size: $size", TRUE );		
-		//header( "x-total-count: $size", TRUE );	
-		header( "Connection: Keep-Alive" );	
+		header( "size: $size", TRUE );
+		//header( "x-total-count: $size", TRUE );
+		header( "Connection: Keep-Alive" );
 		header("Access-Control-Allow-Headers: authorization, Content-Type, size, x-total-count");
 		header("Access-Control-Request-Headers: GET");
 		header("Access-Control-Expose-Headers: x-total-count");
@@ -48,7 +48,7 @@ public function list_public_category($user_id)
 
 				//$works_id = $this->input->get('works_id');
 				//$category_id = $this->input->get('category_id');
-                
+
 				if ($_limit !== NULL && $_limit > 100)
 				{
 					$_limit = 100;
@@ -63,7 +63,7 @@ public function list_public_category($user_id)
 
 			$posts = array();
 
-			
+
 			$blogs = $this->products_model->get_list_category($user_id, $_start, $_limit, $_sort, $title, $description, $brand, $orderByType, $orderBy);
 
 			foreach($blogs as $blog) {
@@ -93,14 +93,14 @@ public function list_public_category($user_id)
 				);
 			}
 			$total=count($posts);
-			header( "size: $total", TRUE );			
-			header( "x-total-count: $size", TRUE );	
+			header( "size: $total", TRUE );
+			header( "x-total-count: $size", TRUE );
 			$this->output
 				->set_status_header(200)
 				->set_content_type('application/json')
-				->set_output(json_encode($posts)); 
-		
-			
+				->set_output(json_encode($posts));
+
+
 
 	}
 
@@ -123,7 +123,7 @@ public function id_public($id)
 				'variationCost' => $blog->description,
 				'image' => base_url('media/images/'.$blog->image),
 				'is_featured' => $blog->is_featured,
-				'status' => $blog->status,
+				'status' => $b  log->status,
 				'user_id' => $blog->user_id,
 				'category_id' => $blog->category_id,
 				'description_full' => $blog->description_full,
@@ -141,13 +141,13 @@ public function id_public($id)
 				'variationCost' => $blog->price,
 				'qtyTotal' => 0
 			);
-			
+
 
 			$this->output
 				->set_status_header(200)
 				->set_content_type('application/json')
-				->set_output(json_encode($post)); 
-		
+				->set_output(json_encode($post));
+
 	}
 
 
@@ -164,11 +164,11 @@ public function list_public()
 		$orderByType = $this->input->get('orderByType');
 
 		$size = $this->products_model->count_products_search_public($title, $description, $brand, $code);
-     
+
 		header("Access-Control-Allow-Origin: *");
-		header( "size: $size", TRUE );		
-		//header( "x-total-count: $size", TRUE );	
-		header( "Connection: Keep-Alive" );	
+		header( "size: $size", TRUE );
+		//header( "x-total-count: $size", TRUE );
+		header( "Connection: Keep-Alive" );
 		header("Access-Control-Allow-Headers: authorization, Content-Type, size, x-total-count");
 		header("Access-Control-Request-Headers: GET, POST, PUT");
 		header("Access-Control-Expose-Headers: x-total-count");
@@ -187,7 +187,7 @@ public function list_public()
 
 				//$works_id = $this->input->get('works_id');
 				//$category_id = $this->input->get('category_id');
-                
+
 				if ($_limit !== NULL && $_limit > 100)
 				{
 					$_limit = 100;
@@ -202,7 +202,7 @@ public function list_public()
 
 			$posts = array();
 
-			
+
 			$blogs = $this->products_model->get_list_public($_start, $_limit, $_sort, $title, $description, $brand, $code, $orderBy, $orderByType);
 
 			foreach($blogs as $blog) {
@@ -233,14 +233,14 @@ public function list_public()
 				);
 			}
 			$total=count($posts);
-			header( "size: $total", TRUE );			
-			header( "x-total-count: $size", TRUE );	
+			header( "size: $total", TRUE );
+			header( "x-total-count: $size", TRUE );
 			$this->output
 				->set_status_header(200)
 				->set_content_type('application/json')
-				->set_output(json_encode($posts)); 
-		
-			
+				->set_output(json_encode($posts));
+
+
 
 	}
 
@@ -259,7 +259,7 @@ function format_uri( $string, $separator = '-' )
 
 
 	public function products_by_client($id)
-	{	
+	{
 		header("Access-Control-Allow-Origin: *");
 		header("Access-Control-Allow-Headers: authorization, Content-Type");
 
@@ -317,7 +317,7 @@ function format_uri( $string, $separator = '-' )
 		if($isValidToken) {
 
 			$posts = $this->products_model->count_products($id);
-	
+
 		}
 	}
 
@@ -358,7 +358,7 @@ function format_uri( $string, $separator = '-' )
 			$this->output
 				->set_status_header(200)
 				->set_content_type('application/json')
-				->set_output(json_encode($posts)); 
+				->set_output(json_encode($posts));
 		}
 	}
 
@@ -373,11 +373,11 @@ public function list_user($user_id)
 		$brand = $this->input->get('brand');
 
 		$size = $this->products_model->count_products_search($title, $description, $code, $code_int, $brand, $user_id);
-     
+
 		header("Access-Control-Allow-Origin: *");
-		header( "size: $size", TRUE );		
-		//header( "x-total-count: $size", TRUE );	
-		header( "Connection: Keep-Alive" );	
+		header( "size: $size", TRUE );
+		//header( "x-total-count: $size", TRUE );
+		header( "Connection: Keep-Alive" );
 		header("Access-Control-Allow-Headers: authorization, Content-Type, size, x-total-count");
 		header("Access-Control-Request-Headers: GET, POST, PUT");
 		header("Access-Control-Expose-Headers: x-total-count");
@@ -400,7 +400,7 @@ public function list_user($user_id)
 
 				//$works_id = $this->input->get('works_id');
 				//$category_id = $this->input->get('category_id');
-                
+
 				if ($_limit !== NULL && $_limit > 100)
 				{
 					$_limit = 100;
@@ -415,7 +415,7 @@ public function list_user($user_id)
 
 			$posts = array();
 
-			
+
 			if($isValidToken) {
 			$blogs = $this->products_model->get_list($user_id, $_start, $_limit, $_sort, $title, $description, $code, $code_int, $brand);
 
@@ -444,13 +444,13 @@ public function list_user($user_id)
 				);
 			}
 			$total=count($posts);
-			header( "size: $total", TRUE );			
-			header( "x-total-count: $size", TRUE );	
+			header( "size: $total", TRUE );
+			header( "x-total-count: $size", TRUE );
 			$this->output
 				->set_status_header(200)
 				->set_content_type('application/json')
-				->set_output(json_encode($posts)); 
-		
+				->set_output(json_encode($posts));
+
 			}
 
 	}
@@ -496,7 +496,7 @@ public function user($user_id)
 			$this->output
 				->set_status_header(200)
 				->set_content_type('application/json')
-				->set_output(json_encode($posts)); 
+				->set_output(json_encode($posts));
 		}
 	}
 
@@ -541,12 +541,12 @@ public function user($user_id)
 			$this->output
 				->set_status_header(200)
 				->set_content_type('application/json')
-				->set_output(json_encode($posts)); 
-		
+				->set_output(json_encode($posts));
+
 			}
 		}
-	
-	
+
+
 	public function calendar()
 	{
 		header("Access-Control-Allow-Origin: *");
@@ -583,7 +583,7 @@ public function user($user_id)
 			$this->output
 				->set_status_header(200)
 				->set_content_type('application/json')
-				->set_output(json_encode($posts)); 
+				->set_output(json_encode($posts));
 		}
 	}
 
@@ -620,16 +620,16 @@ public function user($user_id)
 				'location_id' => $blog->location_id,
 				'is_active' => $blog->is_active
 			);
-			
+
 
 			$this->output
 				->set_status_header(200)
 				->set_content_type('application/json')
-				->set_output(json_encode($post)); 
+				->set_output(json_encode($post));
 		}
 	}
 
-	
+
 	public function skills($id, $user_id)
 	{
 		header("Access-Control-Allow-Origin: *");
@@ -643,20 +643,20 @@ public function user($user_id)
 
 			$blog = $this->products_model->get_id($id);
 
-			$post = array(			
+			$post = array(
 				$blog->skills
 			);
-			
+
 
 			$this->output
 				->set_status_header(200)
 				->set_content_type('application/json')
-				->set_output($blog->skills); 
+				->set_output($blog->skills);
 		}
 	}
 
 
-	
+
 
 
 
@@ -750,7 +750,7 @@ public function create($user_id)
 			$this->output
 				->set_status_header(200)
 				->set_content_type('application/json')
-				->set_output(json_encode($response)); 
+				->set_output(json_encode($response));
 		}
 	}
 
@@ -812,7 +812,7 @@ public function create($user_id)
 					);
 	            }
 	            else {
-	   
+
 					if($blog->image && file_exists(FCPATH.'media/images/'.$blog->image))
 					{
 						unlink(FCPATH.'media/images/'.$blog->image);
@@ -857,12 +857,12 @@ public function create($user_id)
 			$this->output
 				->set_status_header(200)
 				->set_content_type('application/json')
-				->set_output(json_encode($response)); 
+				->set_output(json_encode($response));
 		}
 	}
 
 
-	
+
 	public function delete($id, $user_id)
 	{
 		header('Access-Control-Allow-Origin: *');
@@ -891,7 +891,7 @@ public function create($user_id)
 			$this->output
 				->set_status_header(200)
 				->set_content_type('application/json')
-				->set_output(json_encode($response)); 
+				->set_output(json_encode($response));
 		}
 	}
 
